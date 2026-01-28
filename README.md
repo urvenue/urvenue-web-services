@@ -2,8 +2,8 @@
 Repository to Update the Plugin: WP Urvenue Webservices 
 With the Wordpress.org rules
 
-=========================
 === UrVenue Web Services ===
+
 Contributors: urvenue
 Tags: hospitality, nightlife, tickets, booking, ticketing, events, calendar
 Requires at least: 5.0.0
