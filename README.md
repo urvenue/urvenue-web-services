@@ -1,2 +1,2 @@
-# wp-webservices-plugin
-UrVenue Web Services Wordpress Plugin
+# wp-urvenue-web-plugin
+Repository for WP Urvenue Webservices Plugin
