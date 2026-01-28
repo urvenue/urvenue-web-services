@@ -1,0 +1,14 @@
+<div>
+    <a href="{itemlink}"><div class="uwsinv-item uws-experiences-item uws-inv-item-{mascode}" data-mastercode="{mascode}">
+        <div class="uwsflyercont uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="The inventorylist API does NOT have any field with images for the items"><img class="uwsimgloading" src="{imgeimage}" alt="{itemname} - Image" onload="this.classList.add('uwsloaded')"></div>
+        <div class="uwsinfo">
+            <div class="uwsname">{itemname}</div>
+            <div class="uwsdets">
+                {ifcomplimentary}<div class="uwscomplimentary"><span>Complimentary</span></div>{/ifcomplimentary}
+                <div class="uvprice">{frontprice}</div>
+                <div class="uwsactduration uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="The items do NOT have a duration field they only field the item has about the time is -arriveby-"><i class="uwsicon-clock"></i> <span>{actduration}</span></div>
+            </div>
+            <div class="uwsdescr">{highlight}</div>
+        </div>
+    </div></a>
+</div>

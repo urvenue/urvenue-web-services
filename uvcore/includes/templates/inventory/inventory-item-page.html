@@ -1,0 +1,49 @@
+<div class="uws-invitem-page uws-inv-item-{mastercode} uws-integration">
+    <div class="uws-invitem-page-columns">
+        <div class="uws-invitem-page-maincol">
+            <div class="uws-breadcrumbs">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li class="uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="Item Category is not in the API"><a href="/">{itemcategory}</a></li>
+                    <li><a href="/">{itemname}</a></li>
+                </ul>
+            </div>
+
+            <h2 class="h1">{itemname}</h2>
+            <div class="uwsbasicdetsbox">
+                <div class="uwsbasicdetsboxinner">
+                    <div class="uvprice">{frontprice}</div>
+                    <div class="uwsactduration uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="inventoryitem API does NOT have a duration field the only field the item has about the time is -arriveby-"><i class="uwsicon-clock"></i> <span>{actduration}</span></div>
+                </div>
+            </div>
+            <div class="uwsdetslist">
+                <ul>
+                    <li class="uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="This in not in the inventoryitem API"><i class="uwsicon-ok"></i> <span>Free Cancellations</span></li>
+                    <li><i class="uwsicon-group"></i> <span>{itemdcapacity}</span></li>
+                    <li class="uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="This in not in the inventoryitem API"><i class="uwsicon-ok"></i> <span>Best Price Guarantee</span></li>
+                    <li class="uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="This in not in the inventoryitem API"><i class="uwsicon-user"></i> <span>12+ Years</span></li>
+                </ul>
+            </div>
+            <div class="uwshighlight">{itemhighlight}</div>
+            <div class="uwsdescr">{itemdescription}</div>
+            <div class="uwsitemextrainfo uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="What is included is not in the inventoryitem API, Maybe it can be added as part of the item description, but the backend does not support formating it is just basic text.">
+                <div class="uwstitle">What’s included in this tour?</div>
+                <ul class="uwsincludedlist">{itemincludedlist}</ul>
+            </div>
+            {ifwhattobring}<div class="uwsitemextrainfo uwsapi-missing-req" data-apimr-title="Not in API" data-apimr-descr="What to bring is not in the inventoryitem API, Maybe it can be added as part of the item description, but the backend does not support formating it is just basic text.">
+                <div class="uwstitle">What to bring</div>
+                <ul class="uwsincludedlist">{itembringlist}</ul>
+            </div>{/ifwhattobring}
+        </div>
+        <div class="uws-invitem-page-controls">
+            <div class="uwsdateselectorbox">
+                <div class="uwstitle">Reserve Your Spot Today!</div>
+                <div class="uwsitemdp uwsdpstyles uwsapi-missing-req" data-apimr-title="New API Needed" data-apimr-descr="We do NOT have an API to find the same of equivalent element on other days, we need a new API to find this item on diferent dates, maybe using itemcode." data-date="{itemdate}" data-maxdate="{itemmaxdate}"></div>
+                <div class="uwsactions">
+                    <a href="javascript:;" class="uws-btn uws-btn-p uws-btn-100 uwsjs-inv-item-select" href='#uvinv-select-{mastercode}' aria-label='Select {itemname}' data-mastercode="{mastercode}">Book Now</a>
+                </div>
+                {uwscredits}
+            </div>
+        </div>
+    </div>
+</div>

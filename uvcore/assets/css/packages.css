@@ -1,0 +1,240 @@
+.uws-packages-list {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: -1.2em;
+    margin-right: -1.2em;
+    margin-bottom: -1.4em;
+}
+
+.uws-packages-list>div {
+    flex: 0 0 33.3333%;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+    margin-bottom: 1.4em;
+}
+
+.uws-packages-agenda-item-default {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.uws-packages-agenda-item-default .uwsflyercont {
+    display: block;
+    position: relative;
+    background-color: var(--uws-flyers-holder-bg);
+}
+
+.uws-packages-agenda-item-default .uwsflyercont img {
+    display: block;
+    width: 100%;
+}
+
+.uws-packages-agenda-item-default .uwsinfo {
+    text-align: left;
+    padding: 2.2em 2.5em;
+    color: var(--uws-main-color);
+    box-shadow: 0 1px 3px var(--uws-dropdown-shadow);
+    background-color: var(--uws-dropdown-bg);
+    border: 1px solid var(--uws-dropdown-border);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwsname {
+    font-size: 1.6em;
+    font-weight: 500;
+    margin-bottom: 0.6em;
+    text-transform: uppercase;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwshighlight:empty {
+    display: none;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwshighlight {
+    font-size: 1.125em;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwsactions .uws-btn {
+    font-size: 1.1em;
+    width: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwsactions {
+    margin-top: 1.8em;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwsdescr:empty {
+    display: none;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwsdescr ul {
+    font-size: 1.125em;
+    line-height: 1.6;
+    font-weight: 500;
+    list-style: disc;
+    padding: 0;
+    margin: 0;
+    padding-left: 1.8em;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwsdescr ul li {
+    margin-bottom: 0.3em;
+}
+
+.uws-packages-agenda-item-default .uwsinfo .uwsdescr ul li:last-child {
+    margin-bottom: 0;
+}
+
+.uws-package-popcont {
+    padding: 2.5em;
+    max-width: 34em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.uws-package-popcont .uwstitle {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.93em;
+    font-weight: bold;
+    margin-bottom: 0.8em;
+    letter-spacing: 0.07em;
+}
+
+.uws-package-popcont .uwsactions {
+    text-align: center;
+    margin-top: 1.8em;
+}
+
+.uws-packagepop-dpcont {
+    position: relative;
+}
+
+.uws-packageppop-notfound-msg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    background: var(--uws-dropdown-bg);
+    transition: all 300ms ease-in-out;
+}
+
+.uws-packageppop-notfound-msg-inner {
+    padding: 1em;
+    max-width: 23em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.uws-package-popcont.uwshaserror .uws-packageppop-notfound-msg {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-packageppop-notfound-msg-inner>span {
+    line-height: 1.5;
+}
+
+.uws-packageppop-notfound-msg .uws-btn {
+    padding: 0.9em;
+}
+
+.uws-package-popcont.uwshaserror .uwsactions {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.uws-package-popcont .uws-loader-uvicon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 150ms ease-in-out;
+}
+
+.uws-package-popcont.uwsloading .uws-loader-uvicon,
+.uws-package-popcont.uwsloading::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-package-popcont::before {
+    position: absolute;
+    display: block;
+    content: " ";
+    background: rgba(22, 27, 71, 0.3);
+    z-index: 20;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    visibility: hidden;
+    outline: 0;
+    transition: all 150ms linear;
+}
+
+.uws-packagepop-dpcont .litepicker .container__days .day-item.is-locked:hover span {
+    box-shadow: none;
+}
+
+/*Responsive*/
+@media(max-width: 1260px) {
+    .uws-packages-agenda-item-default .uwsinfo {
+        padding: 1.2em;
+    }
+
+    .uws-packages-list {
+        margin-left: -1em;
+        margin-right: -1em;
+    }
+
+    .uws-packages-list>div {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+}
+
+@media(max-width: 1100px) {
+    .uws-packages-list>div {
+        flex: 0 0 50%;
+    }
+}
+
+@media(max-width: 750px) {
+    .uws-packages-list>div {
+        flex: 0 0 100%;
+        max-width: 36em;
+    }
+
+    .uws-packages-agenda-item-default .uwsinfo {
+        padding: 1.7em;
+    }
+}

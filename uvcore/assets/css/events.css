@@ -1,0 +1,1531 @@
+/*Events Page Styles*/
+.uws-events-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+    max-width: 100%;
+    min-height: 35px;
+}
+
+.uws-events-controls .uwsfilters a,
+.uws-events-controls .uwsfilters input,
+.uws-events-controls .uwsviews .uws-dropdown-cont>a {
+    display: inline-block;
+    background-color: var(--uws-input-bg);
+    padding: 0.38em .88em;
+    border-radius: 1rem;
+    /* border: 1px solid var(--uws-input-border); */
+    /* text-transform: uppercase; */
+    color: var(--uws-accentcolorcust);
+    max-width: 100%;
+}
+
+.uws-dark .uws-events-controls .uwsfilters a,
+.uws-dark .uws-events-controls .uwsfilters input,
+.uws-dark .uws-events-controls .uwsviews .uws-dropdown-cont>a {
+    color: var(--uws-events-filter-color);
+}
+
+.uws-events-controls .uwsfilters .uws-events-dpinput a {
+    background-color: var(--uws-filters-bg);
+    color: var(--uws-secondary-color);
+}
+
+.uws-integration.uws-dark .uws-events-controls .uwsfilters .uws-events-dpinput a {
+    color: var(--uws-primary-color);
+}
+
+.uws-events-controls .uwsviews .uws-dropdown-cont>a {
+    display: block;
+}
+
+.uws-events-controls .uwsviews .uws-dropdown-cont ul li {
+    margin-bottom: 0.3em;
+}
+
+.uws-events-controls .uwsviews .uws-dropdown-cont ul li:last-child {
+    margin-bottom: 0;
+}
+
+.uws-events-controls .uws-dropdown-cont>a {
+    display: block;
+    padding-right: 2em;
+    min-width: 8em;
+    max-width: 17em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.uws-events-controls .uws-dropdown-cont>a:after {
+    right: 0.5em;
+}
+
+.uws-events-controls .uws-dropdown {
+    min-width: 11.5em;
+}
+
+.uws-events-controls .uws-dropdown li button,
+.uws-events-controls .uws-dropdown li a {
+    white-space: nowrap;
+    max-width: 18em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uws-events-controls .uws-dropdown li:has(button.uws-performer-hidden) {
+    display: none;
+}
+
+.uws-events-controls .uws-dropdown ul:not(.uwsismultiselected) .uwscurrent {
+    display: none;
+}
+
+.uws-events-controls .uwsfilters label {
+    display: none;
+}
+
+.uws-events-controls .uwsfilters .uwsmonthssteps {
+    display: flex;
+    align-items: center;
+}
+
+.uws-events-controls .uwsfilters .uwsmonthssteps .uwsmonth {
+    text-transform: uppercase;
+    color: var(--uws-main-color);
+    padding: 0.8em 0;
+    margin-left: 1em;
+}
+
+.uws-events-controls .uwsfilters .uwsmonthssteps .uwsmonthsstepsbtns {
+    display: flex;
+    align-items: center;
+}
+
+.uws-events-controls .uwsfilters .uwsmonthssteps a span {
+    display: none;
+}
+
+.uws-events-controls .uwsfilters .uwsmonthssteps a {
+    text-transform: uppercase;
+    color: var(--uws-main-color);
+    padding: 0.4em 0.3em;
+    min-width: 0.5em;
+}
+
+.uws-events-controls .uwsfilters .uwsmonthssteps a:hover,
+.uws-events-controls .uwsfilters .uwsmonthssteps a:focus,
+.uws-events-controls .uwsfilters .uwsmonthssteps a:active {
+    background-color: var(--uws-subtle-hover);
+}
+
+.uws-events-controls .uwsfilters .uwsmonthssteps a:first-child {
+    margin-right: 0.3em;
+}
+
+.uws-events-controls .uwsfilters .uwsmonthssteps a.uwsdisabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.uws-events-controls .uws-events-dpinput input {
+    padding-right: 2.3em;
+}
+
+.uws-events-controls .uwshascalincon input {
+    padding-left: 2.5em;
+}
+
+.uws-events-controls .uwshascalincon>i {
+    position: absolute;
+    left: 0.6em;
+    top: 0;
+    bottom: 0;
+    height: 1.23em;
+    width: 1.23em;
+    text-align: center;
+    margin: auto;
+    z-index: 1;
+}
+
+/*.uws-events-dpinput:after{
+    position: absolute;
+    display: block;
+    content: '\f004';
+    font-family: "uwsicon";
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    pointer-events: none;
+
+    width: 1.2em;
+    height: 1.23em;
+    right: 0.5em;
+    top: 0.2em;
+    bottom: 0;
+    margin: auto;
+}*/
+.uws-events-controls .uwsviews>ul,
+.uws-events-controls .uwsviews>ul>li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.uws-events-controls .uwsviews>ul {
+    display: flex;
+    align-items: center;
+    gap: .25em;
+}
+
+/* .uws-events-controls .uwsviews>ul>li {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+}
+
+.uws-events-controls .uwsviews>ul>li:first-child {
+    padding-left: 0;
+}
+
+.uws-events-controls .uwsviews>ul>li:last-child {
+    padding-right: 0;
+} */
+
+.uws-events-controls .uwsviews>ul>li>a {
+    display: flex;
+    align-items: center;
+    padding: 0.56em 1.25em 0.56em 0.75em;
+    gap: 0.375em;
+    position: relative;
+    color: var(--uws-secondary-color);
+    background-color: var(--uws-filters-bg);
+    font-size: 0.85em;
+    /* text-transform: uppercase; */
+    font-weight: 400;
+    line-height: 124%;
+    /* letter-spacing: 0.04em; */
+    border-radius: 1rem;
+}
+
+.uws-integration.uws-dark .uws-events-controls .uwsviews>ul>li>a {
+    color: var(--uws-main-color);
+}
+
+.uws-events:not(.uws-dark) .uws-events-controls .uwsviews>ul>li>a.uvsactive,
+.uws-events:not(.uws-dark) .uws-events-controls .uwsviews>ul>li>a:is(:hover, :focus) {
+    color: var(--uws-accentcolorcust);
+}
+
+.uws-dark .uws-events-controls .uwsviews>ul>li>a.uvsactive,
+.uws-dark .uws-events-controls .uwsviews>ul>li>a:is(:hover, :focus) {
+    background-color: var(--uws-input-bg);
+}
+
+.uws-events-controls .uwsviews>ul>li>a i {
+    font-size: 1.1em;
+    opacity: 0.7;
+}
+
+/* .uws-events-controls .uwsviews>ul>li>a span {
+    opacity: 0.5;
+} */
+
+.uws-events-controls .uwsviews>ul>li>a.uvsactive span,
+.uws-events-controls .uwsviews>ul>li>a.uvsactive i {
+    opacity: 1;
+}
+
+/* .uws-events-controls .uwsviews>ul>li>a:after {
+    display: block;
+    position: absolute;
+    content: " ";
+    bottom: -5px;
+    height: 2px;
+    width: 100%;
+    background-color: var(--uws-input-border);
+    transition: all 300ms ease-in-out;
+    opacity: 0;
+}
+
+.uws-events-controls .uwsviews>ul>li>a:not(.uvsactive):hover:after,
+.uws-events-controls .uwsviews>ul>li>a:not(.uvsactive):focus:after {
+    opacity: 1;
+} */
+
+.uws-events-views,
+.uws-events-views .uws-events-view {
+    position: relative;
+}
+
+.uws-events-view {
+    display: none;
+}
+
+.uws-events-view.uvsactive {
+    display: block;
+}
+
+.uws-dp-filterdaterange-label {
+    text-align: center;
+    padding-bottom: 0.5em;
+    padding-top: 0.7em;
+    color: var(--uws-main-color);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+}
+
+.uws-agenda-default {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-left: -0.7em;
+    margin-right: -0.7em;
+    margin-bottom: -1.4em;
+}
+
+.uws-agenda-default>div {
+    position: relative;
+}
+
+.uws-agenda-cols-4 .uws-agenda-default>div {
+    flex: 0 0 25%;
+}
+
+.uws-agenda-cols-3 .uws-agenda-default>div {
+    flex: 0 0 33.33333%;
+}
+
+.uws-agenda-cols-5 .uws-agenda-default>div {
+    flex: 0 0 20%;
+}
+
+.uws-agenda-default>div {
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    margin-bottom: 1.4em;
+}
+
+.uwsflyercont {
+    display: block;
+    position: relative;
+    background-color: var(--uws-flyers-holder-bg);
+}
+
+.uwsflyercont::before {
+    display: block;
+    position: relative;
+    content: " ";
+    padding-top: 100%;
+}
+
+.uwsflyercont img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.uwsflyercont.uws-ratio-venuelogo img {
+    width: 85%;
+    height: 85%;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.uwsflyercont.uws-ratio-Square img {
+    object-fit: cover;
+}
+
+.uws-agenda-item-default .uwsinfo {
+    text-align: center;
+    padding: 1em;
+    color: var(--uws-primary-color);
+    box-shadow: 0 1px 3px var(--uws-dropdown-shadow);
+    background-color: var(--uws-grid-bg);
+    border: 1px solid var(--uws-dropdown-border);
+}
+
+.uws-agenda-item-default .uwsddate {
+    font-size: 1em;
+    color: var(--uws-subtle-color);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.6em;
+}
+
+.uws-agenda-item-default .uwsname {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4em;
+    line-height: 1.2;
+    min-height: 2.4em;
+}
+
+.uws-agenda-item-default .uwsname span {
+    text-align: center;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.uws-agenda-item-default .uwsvenuename {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--uws-subtle-color);
+    margin-top: 1.3em;
+    margin-bottom: 1.3em;
+}
+
+.uws-agenda-item-default .uwsactions {
+    margin-top: 1.5em;
+}
+
+.uws-agenda-item-default .uwsactions .uws-btn {
+    width: 100%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.uws-dark .uws-events-view .uwsactions .uws-btn:not(:hover, :focus, :active) {
+    background-color: transparent;
+}
+
+.uws-dark .uws-events-view .uwsactions .uws-btn {
+    color: var(--uws-main-color);
+}
+
+.uws-dark .uws-events-view .uwsactions .uws-btn:is(:hover, :focus, :active) {
+    color: var(--uws-primary-oposite-color);
+}
+
+.uws-list-item-default {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1.5em;
+    color: var(--uws-main-color);
+    box-shadow: 0 1px 3px var(--uws-dropdown-shadow);
+    background-color: var(--uws-dropdown-bg);
+    border: 1px solid var(--uws-dropdown-border);
+}
+
+.uws-list-item-default .uwsflyercont {
+    flex: 0 0 170px;
+}
+
+.uws-list-item-default .uwsdedate {
+    flex: 0 0 8em;
+    text-align: center;
+}
+
+.uws-list-item-default .uwsdedate .uwsdsday {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    color: var(--uws-subtle-color);
+    letter-spacing: 0.05em;
+}
+
+.uws-list-item-default .uwsdedate .uwsdsmonth {
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--uws-subtle-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.uws-list-item-default .uwsdedate .uwsdday {
+    font-size: 2.2em;
+    margin-top: 0.1em;
+    margin-bottom: 0.12em;
+}
+
+.uws-list-item-default .uwsinfo {
+    flex: 1;
+    padding-right: 1.5em;
+}
+
+.uws-list-item-default .uwsinfo .uwsddate {
+    display: none;
+    text-transform: uppercase;
+    font-size: 0.95em;
+    color: var(--uws-subtle-color);
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    margin-bottom: 0.15em;
+}
+
+.uws-list-item-default .uwsinfo .uwsname {
+    font-size: 1.5em;
+    line-height: 1.2;
+}
+
+.uws-list-item-default .uwsinfo .uwsvenuename {
+    display: none;
+}
+
+.uws-list-item-default .uwsvenuename {
+    flex: 0 0 170px;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    color: var(--uws-subtle-color);
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    padding-right: 1.5em;
+    text-align: center;
+}
+
+.uws-list-item-default .uwsactions {
+    padding-right: 2em;
+}
+
+.uws-events-calendar {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    border-left: 1px solid var(--uws-main-color);
+    border-top: 1px solid var(--uws-main-color);
+}
+
+.uws-events-calendar .uws-cal-date {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    flex-basis: 14.2858%;
+    border-right: 1px solid var(--uws-main-color);
+    border-bottom: 1px solid var(--uws-main-color);
+}
+
+.uws-cal-ddate {
+    position: absolute;
+    background-color: var(--uws-accentcolorcust);
+    color: var(--uws-primary-oposite-color);
+    font-size: 0.75em;
+    top: 0px;
+    right: 0px;
+    padding: 0.2em 0.35em;
+    z-index: 10;
+}
+
+.uws-dark .uws-cal-ddate {
+    background-color: var(--uws-accentcoloropac);
+    color: var(--uws-primary-color);
+}
+
+.uws-cal-box:empty {
+    padding-top: 100%;
+}
+
+.uws-cal-box {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: var(--uws-cal-cell-minheight);
+}
+
+.uws-cal-box>a {
+    display: block;
+    width: 100%;
+}
+
+.uws-cal-date .uws-cal-single-default {
+    position: relative;
+}
+
+.uws-cal-date .uws-cal-single-default::before {
+    display: block;
+    position: relative;
+    content: " ";
+    padding-top: 101%;
+}
+
+.uws-cal-date .uws-cal-single-default::after {
+    position: absolute;
+    display: block;
+    content: " ";
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 6;
+    background-color: rgba(0, 0, 0, .6);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 250ms ease-in-out;
+}
+
+.uws-cal-box>a:hover .uws-cal-single-default::after,
+.uws-cal-box>a:focus .uws-cal-single-default::after,
+.uws-cal-box>a:active .uws-cal-single-default::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-cal-date .uws-cal-single-default .uwsflyercont {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 5;
+}
+
+.uws-cal-date .uws-cal-single-default .uwsflyercont::after {
+    display: block;
+    position: absolute;
+    content: " ";
+    height: 49.7%;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+    z-index: 1;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 250ms ease-in-out;
+}
+
+.uws-cal-date .uws-cal-single-default.uwsloaded .uwsflyercont::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-cal-date .uws-cal-single-default .uwsactions {
+    display: none;
+}
+
+.uws-cal-date .uws-cal-single-default .uwsinfo {
+    position: absolute;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    padding: 0 6%;
+    bottom: 10%;
+    top: auto;
+    z-index: 7;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 250ms ease-in-out;
+}
+
+.uws-cal-date .uws-cal-single-default.uwsloaded .uwsinfo {
+    visibility: visible;
+    opacity: 1;
+}
+
+.uws-cal-date .uws-cal-single-default .uwsinfo .uwsddate {
+    display: none;
+}
+
+.uws-cal-date .uws-cal-single-default .uwsinfo .uwsvenuename {
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 0.7em;
+    margin-bottom: 0.1em;
+}
+
+.uws-cal-date .uws-cal-single-default .uwsinfo .uwsname {
+    font-size: 0.875em;
+    font-weight: bold;
+}
+
+.uws-cal-box ul.uws-cal-multi-default {
+    padding-left: 1em;
+    padding-right: 0.4em;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+.uws-cal-box ul.uws-cal-multi-default .uwsvenuename {
+    color: var(--uws-subtle-color);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 0.7em;
+    margin-bottom: 0.07em;
+}
+
+.uws-cal-box ul.uws-cal-multi-default .uwsname {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--uws-main-color);
+}
+
+.uws-cal-box ul.uws-cal-multi-default li {
+    margin-bottom: 0.6em;
+}
+
+.uws-cal-box ul.uws-cal-multi-default li:last-child {
+    margin-bottom: 0;
+}
+
+.uws-events-controls .uwsfilters {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 55px;
+}
+
+.uws-events-controls .uwsfilters>div {
+    margin-right: 1em;
+}
+
+.uws-events-controls .uwsfilters>div:last-child,
+.uws-events-controls .uwsfilters>div:nth-last-child(2) {
+    margin-right: 0;
+}
+
+.uws-events-controls .uwsviews.uwsviews-text li i {
+    display: none;
+}
+
+.uws-events-controls .uwsviews.uwsviews-icons li span {
+    display: none;
+}
+
+.uws-events-controls .uwsfilters .uws-loader-uvicon {
+    display: block;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+}
+
+.uws-events-controls.uwsloading .uwsfilters>div:not(.uws-loader-uvicon) {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.uws-events-controls.uwsloading .uwsfilters .uws-loader-uvicon {
+    opacity: 1;
+    z-index: 1;
+}
+
+.uws-events-controls.uwsloading .uwsviews {
+    opacity: 0.5;
+}
+
+.uws-events-view-calendar .uwscaldaysnames {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.uws-events-view-calendar .uwscaldaysnames>div {
+    position: relative;
+    flex-basis: 14.2858%;
+    text-align: center;
+    color: var(--uws-main-color);
+    font-size: 0.87em;
+    padding-bottom: 0.7em;
+}
+
+.uws-events-actions {
+    display: none;
+    margin-top: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.uws-events-actions.uwsactive {
+    display: flex;
+}
+
+.uws-events-actions .uws-loader-uvicon {
+    display: none;
+    margin-right: -55px;
+    margin-left: 15px;
+}
+
+.uws-events-actions.uwsloading .uws-loader-uvicon {
+    display: block;
+}
+
+.uws-events-actions.uwsloading .uws-btn {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.uws-events-calendar .uws-cal-cellmob-link {
+    display: none;
+}
+
+.uws-cal-cellmob {
+    position: relative;
+    margin-top: 15px;
+}
+
+.uws-cal-cellmob:before {
+    display: block;
+    position: relative;
+    content: " ";
+    padding-top: 120%;
+}
+
+.uws-cal-cellmob-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uws-cal-cellmob-inner .uws-btn {
+    width: 90%;
+    font-size: 0.8em;
+    padding: 0.8em 1em;
+}
+
+.uws-events-controls .uwsviews .uws-dropdown-cont {
+    display: none;
+}
+
+.uws-events-controls .uwsdatesel .uws-dropdown {
+    font-size: 16px;
+}
+
+.uws-events-dpinput .uws-loader-uvicon {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 10;
+    visibility: hidden;
+    transition: all 150ms ease-in-out;
+}
+
+.uws-events-dpinput.uwsloading .uws-loader-uvicon,
+.uws-events-dpinput.uwsloading .uws-dropdown::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-events-dpinput .uws-dropdown::before {
+    position: absolute;
+    display: block;
+    content: " ";
+    background: rgba(22, 27, 71, 0.3);
+    z-index: 20;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    visibility: hidden;
+    outline: 0;
+    transition: all 150ms linear;
+}
+
+.uws-integration .uws-events-dpinput .litepicker .container__days .day-item.is-today {
+    background-color: var(--uws-accentcoloropaclight);
+    color: var(--uws-accentcolorcust);
+}
+
+.uws-integration.uws-dark .uws-events-dpinput .litepicker .container__days .day-item.is-today {
+    color: var(--uws-main-color);
+}
+
+.uws-events-dpinput :is(.uws-day-disabled, .is-locked) {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.uws-events-controls .uwsfilters .uwsdatesel .uws-dropdown-cont>a {
+    padding-left: 2.5em;
+}
+
+.uws-calcell-pop.uws-pop-cont .uws-pop-charge {
+    font-size: 23px;
+}
+
+.uws-calcell-pop .uws-pop-box {
+    max-width: 300px;
+    min-height: auto;
+    margin-bottom: 4em;
+    margin-top: 4em;
+}
+
+.uws-calcell-pop .uws-cal-box .uws-cal-cellmob,
+.uws-calcell-pop .uws-cal-box>a {
+    display: none;
+}
+
+.uws-calcell-pop .uws-cal-box ul.uws-cal-multi-default,
+.uws-calcell-pop .uws-cal-box .uws-cal-single-link {
+    display: block;
+    width: 100%;
+}
+
+.uws-calcell-pop.uws-pop-cont .uws-pop-box>.uws-closepop {
+    top: -45px;
+    color: var(--uws-primary-oposite-color);
+    /*box-shadow: inset 0 0 100px 100px var(--uws-subtle-hover);*/
+}
+
+.uws-calcell-pop .uws-cal-box ul.uws-cal-multi-default,
+.uws-calcell-pop .uws-cal-box ul.uws-cal-multi-default li {
+    list-style: none;
+}
+
+.uws-calcell-pop .uws-cal-date .uws-cal-single-default .uwsactions {
+    display: block;
+    position: absolute;
+    bottom: -3.5em;
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+}
+
+.uws-calcell-pop .uws-cal-date .uws-cal-single-default .uwsactions .uws-btn-s {
+    width: 100%;
+    max-width: 300px;
+}
+
+.uws-cal-date .uwsinstructions {
+    display: none;
+    text-align: left;
+    margin-top: 0.8em;
+    margin-bottom: 1.1em;
+    width: 100%;
+    padding-left: 1em;
+    padding-right: 0.4em;
+}
+
+.uws-cal-date .uwsinstructions span {
+    font-size: 0.6em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.uws-calcell-pop .uws-cal-date .uwsinstructions {
+    display: block;
+}
+
+.uws-calcell-pop .uws-cal-box {
+    flex-direction: column;
+}
+
+.uws-calcell-pop .uws-cal-box ul.uws-cal-multi-default {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.uws-cal-cellmob-inner .uws-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em;
+    height: 85%;
+    width: 85%;
+    background-color: var(--uws-subtle-hover);
+}
+
+.uws-cal-cellmob-inner .uws-btn:hover,
+.uws-cal-cellmob-inner .uws-btn:focus,
+.uws-cal-cellmob-inner .uws-btn:active {
+    color: var(--uws-main-color);
+}
+
+.uws-events-loadmoremsg {
+    display: none;
+    text-align: center;
+    padding: 0.9em 2em;
+}
+
+.uws-events-actions.uwsmsgactive .uws-events-loadmoremsg {
+    display: block;
+}
+
+.uws-events-actions.uwsmsgactive .uws-btn-s,
+.uws-events-actions.uwsmsgactive .uwsjs-events-loadmore {
+    display: none;
+}
+
+.uws-events .uws-nocontent {
+    display: none;
+    text-align: center;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.uws-events.uws-events-count-0 .uws-nocontent {
+    display: block;
+}
+
+.uws-events.uws-events-count-0 .uws-events-view-calendar .uws-nocontent {
+    display: none;
+}
+
+.uws-events.uws-events-count-0 .uws-events-view-agenda .uws-nocontent {
+    margin-top: 1.4em;
+}
+
+.uws-events.uws-events-count-0 .uws-events-actions.uwsmsgactive .uws-events-loadmoremsg {
+    display: none;
+}
+
+.uws-event-two-cols {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.4em;
+}
+
+.uws-event-two-cols .uwsflyercont {
+    position: relative;
+    width: 10.625em;
+    height: 10.625em;
+    flex: 0 0 auto;
+    background-color: var(--uws-subtle-bg);
+}
+
+.uws-event-two-cols .uwsflyercont.uws-ratio-venuelogo {
+    background-color: var(--uws-subtle-color);
+}
+
+.uws-event-two-cols .uwsinfo {
+    flex: 1;
+}
+
+.uws-event-two-cols .uwsinfo .uwstitle {
+    color: var(--uws-main-color);
+    font-size: 1.35em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.8em;
+}
+
+.uws-event-two-cols .uwsinfo .uwsddate {
+    color: var(--uws-subtle-color);
+    font-size: 1.125em;
+    font-weight: 400;
+}
+
+.uws-event-two-cols .uwsddate .uwsdtime {
+    display: inline;
+}
+
+.uws-event-two-cols .uwsddate .uwsdtime:empty {
+    display: none;
+}
+
+.uwsdynamicevent .uws-event-description {
+    display: none;
+    margin: 1.62em 0 .2em;
+}
+
+.uwsdynamicevent .uws-event-description:empty {
+    display: none;
+}
+
+.uws-event-description .uwsclamptext {
+    overflow: hidden;
+    max-height: 4.26em;
+    transition: all 0.42s ease-in-out;
+}
+
+.uws-event-description .uwsclamptext.uwsdescropened {
+    max-height: 1000px;
+    transition: all 0.42s ease-in-out;
+}
+
+.uws-event-description .uwsdescr {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.42;
+    color: var(--uws-venueitem-descr-color);
+    position: relative;
+}
+
+.uws-event-description :is(.uwsreadmore, .uwsreadless) {
+    display: flex;
+    font-size: 1rem;
+    font-weight: 400;
+    text-decoration: underline;
+    color: var(--uws-accentcolorcust);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, var(--uws-primary-oposite-color) 15.14%);
+    outline: none;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.uws-dark .uws-event-description :is(.uwsreadmore, .uwsreadless) {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, var(--uws-bg-accent) 15.14%);
+}
+
+.uws-event-description .uwsreadmore {
+    padding-left: 1.5em;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.uws-event-description .uwsdescropened .uwsreadmore {
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.uws-event-description .uwsreadless {
+    background: transparent;
+    padding: 1em 0 0;
+}
+
+.uws-event-two-cols .uwsddate .uwsdtime::before {
+    content: "at ";
+}
+
+.uws-event-two-cols .uwsvenuename {
+    font-weight: 500;
+    margin-top: 1.15em;
+}
+
+.uwsdynamicevent {
+    position: relative;
+}
+
+.uwsdynamicevent .uws-loader-uvicon {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 10;
+    transition: all 150ms ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.uwsdynamicevent .uvdy-theevent {
+    transition: all 150ms ease-in-out;
+}
+
+.uwsdynamicevent.uwsloading .uws-loader-uvicon {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uwsdynamicevent.uwsloading .uvdy-theevent {
+    opacity: 0.2;
+}
+
+
+/*Responsive*/
+@media(max-width: 1280px) {
+    .uws-agenda-cols-5 .uws-agenda-default>div {
+        flex: 0 0 25%;
+    }
+}
+
+@media(max-width: 1100px) {
+    .uws-events-calendar {
+        font-size: 13px;
+    }
+}
+
+@media(max-width: 1050px) {
+
+    .uws-agenda-cols-4 .uws-agenda-default>div,
+    .uws-agenda-cols-5 .uws-agenda-default>div {
+        flex-basis: 33.3333%;
+    }
+}
+
+@media(max-width: 950px) {
+    .uws-list-item-default .uwsvenuename {
+        display: none;
+    }
+
+    .uws-list-item-default .uwsinfo .uwsvenuename {
+        display: block;
+        text-align: left;
+        margin-top: 0.1em;
+    }
+}
+
+@media(max-width: 900px) {
+    .uws-events-controls {
+        font-size: 13px;
+    }
+
+    .uws-events-actions .uws-loader-uvicon {
+        margin-right: -47px;
+    }
+
+    .uws-events-controls .uwsfilters {
+        padding-right: 47px;
+    }
+}
+
+@media(max-width: 880px) {
+    .uws-list-item-default {
+        font-size: 13px;
+    }
+
+    .uws-list-item-default .uwsdedate {
+        font-size: 12px;
+        flex-basis: 6em;
+    }
+
+    .uws-list-item-default .uwsflyercont {
+        flex-basis: 130px;
+    }
+
+    .uws-list-item-default .uwsinfo .uwsvenuename {
+        font-size: 0.8em;
+        margin-top: 0.2em;
+    }
+
+    .uws-list-item-default .uwsactions {
+        padding-right: 1em;
+        flex: 0 0 115px;
+    }
+
+    .uws-list-item-default .uwsactions .uws-btn {
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+        width: 100%;
+    }
+
+    .uws-cal-box ul.uws-cal-multi-default {
+        padding-top: 1.5em
+    }
+}
+
+@media(max-width: 880px) {
+    .uws-events-controls {
+        flex-direction: column;
+    }
+
+    .uws-events-controls .uwsviews {
+        width: 100%;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+    }
+
+    .uws-events-controls .uwsviews .uws-dropdown-cont {
+        display: none;
+    }
+
+    .uws-events-controls .uwsviews>ul {
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+    }
+
+    .uws-events-controls .uwsfilters {
+        padding-right: 0;
+    }
+
+    .uws-events-controls .uwsfilters .uws-loader-uvicon {
+        right: -45px;
+    }
+}
+
+@media(max-width: 767px) {
+
+    /* 767px does not affect ipad */
+    .uws-events-calendar .uws-cal-cellmob-link {
+        display: block;
+    }
+
+    .uws-cal-box ul.uws-cal-multi-default,
+    .uws-cal-box .uws-cal-single-link {
+        display: none;
+    }
+}
+
+@media(max-width: 750px) {
+
+    .uws-agenda-cols-4 .uws-agenda-default>div,
+    .uws-agenda-cols-5 .uws-agenda-default>div,
+    .uws-agenda-cols-3 .uws-agenda-default>div {
+        flex-basis: 50%;
+    }
+}
+
+@media(max-width: 700px) {
+    .uws-events-view-calendar .uwscaldaysnames>div>span {
+        display: none;
+    }
+}
+
+@media(max-width: 600px) {
+    .uws-events-view-calendar .uwscaldaysnames>div {
+        font-size: 0.8em;
+        padding-bottom: 0.4em;
+    }
+
+    .uws-list-item-default .uwsdedate {
+        display: none;
+    }
+
+    .uws-list-item-default .uwsinfo .uwsddate {
+        display: block;
+    }
+
+    .uws-list-item-default .uwsinfo {
+        padding-left: 1.2em;
+        padding-top: 0.7em;
+        padding-bottom: 0.7em;
+        padding-right: 1.2em;
+    }
+
+    .uws-list-item-default .uwsflyercont {
+        flex-basis: 90px;
+    }
+
+    .uws-events-actions {
+        font-size: 13px;
+    }
+}
+
+@media(max-width: 550px) {
+    .uws-events-controls {
+        font-size: 12px;
+    }
+
+    .uws-events-controls .uwsfilters>div {
+        margin-right: 0.5em;
+    }
+
+    .uws-events-controls .uwsviews .uws-dropdown-cont>a>span>span {
+        display: none;
+    }
+
+    .uws-events-controls .uwsfilters a,
+    .uws-events-controls .uwsfilters input,
+    .uws-events-controls .uwsviews .uws-dropdown-cont>a {
+        padding: 0.8em 0.8em;
+        padding-right: 1.5em;
+    }
+
+    .uws-events-controls .uwsviews .uws-dropdown-cont>a {
+        min-width: 4.5em;
+    }
+
+    .uws-events-controls .uwsviews .uws-dropdown-cont .uws-dropdown {
+        right: 0;
+        left: auto;
+    }
+
+    .uws-events-controls .uwshascalincon input {
+        padding-left: 2em;
+    }
+
+    .uws-events-controls .uwshascalincon>i {
+        left: 0.4em;
+    }
+
+    .uws-events-controls .uws-events-dpinput input {
+        padding-right: 1.8em;
+    }
+
+    /* .uws-events-dpinput:after,
+    .uws-events-controls .uws-dropdown-cont>a:after {
+        right: 0.2em;
+    } */
+
+    .uws-events-controls .uwsfilters .uws-loader-uvicon {
+        right: -38px;
+    }
+
+    .uws-events-controls .uwsfilters .uwsmonthssteps .uwsmonth {
+        margin-left: 0.4em;
+    }
+
+    .uws-agenda-default>div {
+        padding-left: 0.4em;
+        padding-right: 0.4em;
+        margin-bottom: 0.8em;
+    }
+
+    .uws-agenda-default {
+        font-size: 14px;
+        margin-left: -0.4em;
+        margin-right: -0.4em;
+        margin-bottom: -0.8em;
+    }
+
+    .uws-agenda-item-default .uwsname {
+        font-size: 1.2em;
+        line-height: 1.2;
+        min-height: 2.2em;
+    }
+
+    .uws-list-item-default .uwsinfo .uwsname {
+        font-size: 1.3em;
+    }
+
+    .uws-events-calendar .uws-cal-ddate {
+        width: 100%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+    }
+
+    .uws-events-controls .uwsfilters .uwsdatesel .uws-dropdown-cont>a {
+        padding-left: 2em;
+    }
+
+    .uws-events-controls .uwsviews .uws-dropdown-cont>a {
+        min-width: auto;
+    }
+
+    .uws-events-controls .uwsviews .uws-dropdown-cont>a {
+        padding: 0.6em 0.3em;
+        padding-right: 1.4em;
+        font-size: 1.2em;
+    }
+
+    .uws-events-controls .uwsviews .uws-dropdown-cont>a::after {
+        font-size: 0.9em;
+    }
+
+    .uws-list-item-default .uwsactions .uws-btn>span {
+        display: none;
+    }
+
+    .uws-list-item-default .uwsactions {
+        padding-right: 0.6em;
+    }
+
+    .uws-list-item-default .uwsactions {
+        flex-basis: 75px;
+    }
+
+    .uws-events-controls .uws-dropdown-cont>a {
+        max-width: 15em;
+    }
+
+    .uws-events-controls .uwsviews>ul {
+        font-size: 1.3em;
+    }
+
+    .uws-events-controls .uwsvenuesel .uws-dropdown {
+        left: auto;
+        right: 0;
+    }
+}
+
+@media(max-width: 450px) {
+    .uws-events-dpinput:after {
+        display: none;
+    }
+
+    .uws-events-controls .uws-events-dpinput input {
+        padding-right: 0.6em;
+    }
+
+    .uws-events-controls .uwsfilters a {
+        padding-left: 0.8em;
+        white-space: nowrap;
+    }
+
+    .uws-events-controls .uwsfilters .uws-loader-uvicon {
+        display: none;
+    }
+
+    .uws-events-controls .uwsfilters .uws-events-dpinput .uws-loader-uvicon {
+        display: block;
+        right: 0;
+    }
+
+    .uws-events-controls .uwsfilters {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .uws-events-controls .uwsfilters>div {
+        margin-bottom: 0.4em;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+    }
+
+    .uws-events-controls .uwsfilters>div:last-child {
+        margin-bottom: 0;
+    }
+
+    .uws-events-controls {
+        font-size: 14px;
+    }
+
+    .uws-events-controls .uwsviews>ul {
+        font-size: 1em;
+    }
+
+    .uws-events-controls .uws-dropdown-cont>a {
+        max-width: 20em;
+    }
+
+    .uws-events-controls .uwsvenuesel .uws-dropdown {
+        left: 0;
+        right: auto;
+    }
+
+    .uws-event-description .uwsclamptext {
+        max-height: 7em;
+    }
+}
+
+@media(max-width: 374px) {
+
+    /*Doesn't affect Iphone 11X*/
+    .uws-agenda-cols-4 .uws-agenda-default>div,
+    .uws-agenda-cols-5 .uws-agenda-default>div,
+    .uws-agenda-cols-3 .uws-agenda-default>div {
+        flex-basis: 100%;
+    }
+
+    .uws-list-item-default .uwsinfo {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .uws-list-item-default {
+        font-size: 12px;
+    }
+
+    .uws-list-item-default .uwsactions {
+        flex-basis: 70px;
+    }
+
+    .uws-list-item-default .uwsflyercont {
+        flex-basis: 80px;
+    }
+}
+
+@media(max-width: 355px) {
+    .uws-cal-ddate {
+        font-size: 0.7em;
+        padding: 0.2em 0.3em;
+    }
+}

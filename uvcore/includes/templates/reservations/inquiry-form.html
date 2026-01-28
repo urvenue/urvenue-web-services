@@ -1,0 +1,72 @@
+<form class="uwsjs-inquiryform uws-inquiryform" action="javascript:;">
+    <input class="uwsdy-inq-manageentid" type="hidden" name="manageentid" value="{manageentid}">
+    <input class="uwsdy-inq-venueid" type="hidden" name="venueid" value="{venueid}">
+    <input class="uwsdy-inq-caldate" type="hidden" name="caldate" value="{caldate}">
+    <input class="uwsdy-inq-leadtype" type="hidden" name="leadtype" value="{leadtype}">
+    <input type="hidden" name="itemcode" value="{itemcode}">
+    <input type="hidden" name="booktypeid" value="{booktypeid}">
+    <input type="hidden" name="globaltype" value="{globaltype}">
+    <input type="hidden" name="mastercode" value="{mastercode}">
+    <input type="hidden" name="itemname" value="{itemname}">
+
+    <input type="hidden" name="redirect_to" value="{redirect_to}">
+
+    <div class="uwsformbody">
+        {venueselector}
+        {dateselector}
+        {partyfield}
+        <div class="uws-inputcont">
+            <label for="unvinqemail">Email*</label>
+            <input id="unvinqemail" type="email" name="email" value="" required>
+        </div>
+        <div class="uws-inputcont">
+            <label for="uwsinqphonenumber">Phone</label>
+            <div class="uws-phoneinputcont">
+                <div>
+                    <select name="phonecode">
+                        {phonecodesopts}
+                    </select>
+                </div>
+                <div>
+                    <input id="uwsinqphonenumber" type="tel" name="phonenumber" value=""
+                        oninput="return uwsPhoneInputFromat(event)">
+                </div>
+            </div>
+        </div>
+        <div class="uws-inputcont-2">
+            <div class="uwsinput50 uws-inputcont">
+                <label for="uwsinqpartysize">Party Size</label>
+                <input id="uwsinqpartysize" name="partysize" type="number" min="1" max="100" value="">
+            </div>
+            <div class="uwsinput50 uws-inputcont uwsinployalty">
+                <label for="uwsinqloyalty">Loyalty #</label>
+                <input id="uwsinqloyalty" name="loyality" type="text" value="">
+            </div>
+        </div>
+        <div class="uws-inputcont">
+            <label for="uwsinqbudget">Budget</label>
+            <input id="uwsinqbudget" name="budget" type="text" value="">
+        </div>
+        <div class="uws-inputcont">
+            <label for="uwsinqcomments">Comments</label>
+            <textarea id="uwsinqcomments" name="comments" rows="3"></textarea>
+        </div>
+        <div class="uws-inputcont">
+            <div class="uwscheckbox">
+                <input id="uwsinqoptinemail" type="checkbox" name="optin" value="1">
+                <label for="uwsinqoptinemail"><span>I would like to join the mailing list</span></label>
+            </div>
+        </div>
+        <div class="uws-inputcont">
+            <div class="uwscheckbox">
+                <input id="uwsinqoptinpriv" type="checkbox" name="optinpriv" value="1" required>
+                <label for="uwsinqoptinpriv"><span>I have read and agree to the <a href="{privacylink}"
+                            target="_blank">Privacy Policy</a> and <a href="{termslink}" target="_blank">Terms of
+                            Service</a>.</span></label>
+            </div>
+        </div>
+    </div>
+    <div class="uwsactions">
+        <button type="submit" class="uws-btn uws-btn-p">Submit</button>
+    </div>
+</form>

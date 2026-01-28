@@ -1,0 +1,8 @@
+<a href="#show-ititem-info-{ititemid}" class="uws-ititem uwsititemcard uws-ititem-type-{ititemtype} uws-ititem-slots-{ititemnslots} uws-ititem-{ititemid} uwsjs-show-ititem-info" data-ititemid="{ititemid}">
+    {ifititemimage}<img class="uwsimgloading" src="{ititemimage}" alt="{ititemname} - Image" onload="this.classList.add('uwsloaded')">{/ifititemimage}
+    <div class="uwsname">{ititemname}</div>
+    <div class="uwsguests">{ititemguestscircles}</div>
+    {ifititemisoffer}<div class="uwsactions">
+        <span class="uws-btn uws-btn-p"><span>Add</span></span>
+    </div>{/ifititemisoffer}
+</a>

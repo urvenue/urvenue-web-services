@@ -1,0 +1,182 @@
+.uws-memberships-pop .uws-pop-box{
+    max-width: 41.5em;
+    font-size: 1em;
+}
+.uws-membership{
+    position: relative;
+}
+.uws-membership-inner{
+    padding: 3.6em 3.6em 4em 3.6em;
+    max-width: 36em;
+    margin-left: auto;
+    margin-right: auto;
+}
+.uws-pop-cont.uws-memberships-pop .uws-pop-box>.uws-closepop{box-shadow: none;}
+.uws-membership .uwsheader{
+    text-align: center;
+    margin-bottom: 1em;
+}
+.uws-membership .uwstitle{
+    font-size: 1.5em;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.25em;
+    text-transform: uppercase;
+    text-align: center;
+}
+.uws-primary-memberships{margin-bottom: 1em;}
+.uws-prim-membership-selitem{
+    display: flex;
+    background-color: var(--uws-cardsel-bg);
+    color: inherit;
+    flex-wrap: nowrap;
+    gap: 2.15em 2em;
+    align-items: center;
+    padding: 0.875em 1.5em 0.875em 1.5em;
+    box-shadow: 0px 0.25em 1.25em 0px var(--uws-dropdown-shadow);
+    border-radius: 0.4375em;
+}
+.uws-prim-membership-selitem img{
+    width: 5.25em;
+    height: 5.25em;
+    object-fit: cover;
+    display: block;
+}
+.uws-prim-membership-selitem .uwsname{
+    font-size: 1.375em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.uws-prim-membership-selitem .uwsname span{display: block;}
+.uws-membership .uws-inputcont{
+    position: relative;
+    margin-bottom: 0.6em;
+}
+.uws-membership .uws-inputcont:last-child{margin-bottom: 0;}
+.uws-membership .uws-inputcont label{
+    position: absolute;
+    font-weight: normal;
+    margin: 0;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    padding: 0.4em 1em 0 0.96em;
+    opacity: 0.5;
+    line-height: 1.2;
+}
+.uws-membership .uws-inputcont input{
+    padding: 1.7em 1em 0.5em 0.85em;
+    border-radius: 0.357em;
+    font-size: 1em;
+}
+.uws-membership .uwspricesbreakdown .uws-togglecoll > a{border-bottom-color: var(--uws-input-border);}
+.uws-membership .uwspricesbreakdown{margin-bottom: 1em;}
+.uws-membership .uwspricesbreakdown .uws-togglecoll{margin-bottom: 1em;}
+.uws-membership .uwspricesbreakdown .uws-togglecoll:last-child{margin-bottom: 0;}
+.uwssecmemberships{margin-top: 2em;}
+.uwssecmemberships:empty{display: none;}
+.uws-secmembership-addbox{
+    padding: 1.25em 2.1875em 1.5em;
+    border: 1px solid var(--uws-input-border);
+    border-radius: 0.3125em;
+    text-align: center;
+}
+.uws-secmembership-addbox .uwsname{
+    font-size: 1.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.25em;
+}
+.uws-secondary-membership{margin-bottom: 1em;}
+.uws-secmembership-addbox .uws-btn > span{
+    font-size: 1.05em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.uws-secmembership-addbox .uws-btn .uwspriceinfo{
+    opacity: 0.8;
+    font-size: 1.1em;
+}
+.uws-secmembership-addbox .uws-btn .uwspriceinfo .uwsprice{font-weight: bold;}
+.uws-secondary-membership.uwsfull .uws-secmembership-addbox{display: none;}
+.uwssubmembershipinputs .uwssubmemheader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+.uwssubmembershipinputs .uwssubmemheader .uwsinfo .uwsname{
+    font-size: 1.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.1;
+}
+.uwssubmembershipinputs .uwssubmemheader .uwsinfo .uwspriceinfo{
+    opacity: 0.6;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.92;
+}
+.uwssubmembershipinputs .uwssubmemheader > a{
+    font-weight: 500;
+    text-underline-offset: 0.25em;
+    color: var(--uws-error-color);
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+.uwssubmembershipinputs{
+    padding-top: 2em;
+    border-top: 1px solid var(--uws-input-border);
+    margin-bottom: 2em;
+}
+.uwssecmembershipinputs .uwspricesbreakdown{margin-top: 0.4em;}
+.uws-membership .uws-loader-uvicon{
+    position: absolute;
+    margin: auto;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateY(50%);
+    visibility: hidden;
+    z-index: 25;
+    transition: all 150ms linear;
+}
+.uws-membership::before {
+    position: absolute;
+    display: block;
+    content: " ";
+    background: rgba(22, 27, 71, 0.3);
+    z-index: 20;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    visibility: hidden;
+    outline: 0;
+    transition: all 150ms linear;
+}
+.uws-membership.uwsloading::before, .uws-membership.uwsloading .uws-loader-uvicon {
+    opacity: 1;
+    visibility: visible;
+}
+.uwsprimmemname{
+    font-size: 1.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 0.3em;
+}
+
+@media(max-width: 600px){
+    .uws-membership-inner{padding: 2.5em 2em 2em;}
+}
+@media(max-width: 400px){
+    .uws-membership-inner{
+        padding-left: 1em;
+        padding-right: 1em;
+    }   
+}

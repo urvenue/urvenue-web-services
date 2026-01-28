@@ -1,0 +1,37 @@
+<div class="uws-itinerary uws-integration uwsapi-missing-req" data-apimr-title="API Required" data-apimr-descr='We do NOT have an API for inventory'>
+    <div class="uws-itinerary-controls">
+        <div class="uwsinfo">
+            <div class="uwspretitle">Your Stay</div>
+            <div class="uwstitle">{reservationdrange}</div>
+        </div>
+        <div class="uws-dropdown-cont">
+            <a href="#select-itinerary-view" class="uwsjs-trigger-dropdown"><span class="uwsdy-dropvalue">Week View</span></a>
+            <div class="uws-dropdown">
+                <ul class="uws-contviewssel">
+                    <li><a href="#itinerar-days-view" class="uwsjs-view-change" data-view="days"><span class="uwsdesk">Day View</span><span class="uwsmob">Week View</span></a></li>
+                    <li class="uwsdesk"><a href="#itinerar-week-view" class="uwsjs-view-change" data-view="week"><span>Week View</span></a></li>
+                    <li class="uwsmob"><a href="#itinerar-daytime-view" class="uwsjs-view-change" data-view="daytime"><span>Day View</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="uws-itinerary-body">
+        <div class="uws-itinerary-filters">
+            <div class="uwsactions">
+                <a href="{experiencesurl}" class="uws-btn uws-btn-p"><i class="uwsicon-plus-1"></i> <span>Add Experience</span></a>
+            </div>
+            <div class="uwsitinerarydp uwsdpstyles" data-date="{itinerarydate}" data-maxdate="{reservationenddate}" data-ninvmonths="{ninvmonths}"></div>
+        </div>
+        <div class="uws-itinerary-views uws-contviews">
+            <div class="uws-contview uws-itinerary-view uws-contview-week uwsactive" data-viewkey="week">
+                {itineraryweekview}
+            </div>
+            <div class="uws-contview uws-itinerary-view uws-contview-days" dara-viewkey="days">
+                {itinerarydayview}
+            </div>
+            <div class="uws-contview uws-itinerary-view uws-contview-daytime" dara-viewkey="daytime">
+                {itinerarydaytimeview}
+            </div>
+        </div>
+    </div>
+</div>

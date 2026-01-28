@@ -1,0 +1,19 @@
+<div class="uws-ititemtooltip uws-ititemtooltip-{ititemid}">
+    {ifititemimage}<img class="uwsimgloading" src="{ititemimage}" alt="{ititemname} - Image" onload="this.classList.add('uwsloaded')">{/ifititemimage}
+    <div class="uwsinfo">
+        <div class="uwsinfotop">
+            <div class="uwsname">{ititemname}</div>
+            <div class="uwsddate">{ititemddate}</div>
+            <div class="uwsdtimes">{ititemdtimes}</div>
+            <div class="uwstimeinfo"><i class="uwsicon-bell"></i> {ititeminstructions}</div>
+        </div>
+        <div class="uwsinfobottom">
+            <div class="uwsguests">{ititemguestscircles}</div>
+            {ifititemisoffer}<div class="uwsactions">
+                <a href="#" class="uws-btn uws-btn-p uws-btn-100"><span>Add</span> Experience</a>
+            </div>{/ifititemisoffer}
+        </div>
+    </div>
+
+    <a href="#close-tooltip-{ititemid}" class="uwsjs-close-ititemtooltip uwsclosetooltip" aria-label="Close Tooltip"><span>Close Tooltip</span> <i class="uwsicon-cross"></i></a>
+</div>

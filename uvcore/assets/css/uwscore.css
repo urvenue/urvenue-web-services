@@ -1,0 +1,936 @@
+.uws-integration *,
+.uws-integration *:before,
+.uws-integration *:after,
+.uws-pop-cont *,
+.uuwsv-pop-cont *:before,
+.uws-pop-cont *:after {
+    box-sizing: border-box;
+}
+
+.uws-integration {
+    font-size: 16px;
+    color: var(--uws-main-color);
+    line-height: normal;
+}
+
+.uws-integration a,
+.uws-integration button {
+    transition: all 250ms ease-in-out;
+}
+
+/*.uws-integration button{color: inherit;}*/
+.uws-integration ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.uws-integration li {
+    line-height: normal;
+}
+
+.uws-integration input,
+.uws-integration textarea,
+.uws-integration select,
+.uws-inputcont .uwsinput {
+    display: inline-block;
+    background-color: var(--uws-input-bg);
+    padding: 0.8em;
+    border: 1px solid var(--uws-input-border);
+    color: var(--uws-main-color);
+    max-width: 100%;
+    width: 100%;
+}
+
+.uws-inputcont .uwsinput.uwshascalincon {
+    position: relative;
+    padding-left: 2.4em;
+}
+
+.uws-inputcont .uwsinput.uwshascalincon i {
+    position: absolute;
+    left: 0.6em;
+    top: 0;
+    bottom: 0;
+    height: 1.23em;
+    width: 1.23em;
+    text-align: center;
+    margin: auto;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.uws-inputcont .uws-dropdown-cont>a:after {
+    display: none;
+}
+
+.uws-btn {
+    display: inline-block;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 0.9em 3em;
+    color: var(--uws-accentcolorcust);
+    background-color: transparent;
+    line-height: normal;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+/* .uws-dark .uws-btn {
+    color: var(--uws-main-color);
+} */
+
+.uws-btn-100 {
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+}
+
+.uws-btn-p,
+.uws-btn-p:visited {
+    background-color: var(--uws-accentcolorcust);
+    border-color: var(--uws-accentcolorcust);
+    color: var(--uws-primary-oposite-color);
+}
+
+.uws-btn-p:hover,
+.uws-btn-p:focus,
+.uws-btn-p:active {
+    background-color: var(--uws-primary-oposite-color);
+    color: var(--uws-accentcolorcust);
+}
+
+.uws-btn-inl {
+    color: var(--uws-accentcolorcust);
+}
+
+.uws-btn-s,
+.uws-btn-s:visited {
+    border-color: var(--uws-accentcolorcust);
+    background-color: var(--uws-primary-oposite-color);
+}
+
+.uws-btn-s:hover,
+.uws-btn-s:focus,
+.uws-btn-s:active {
+    background-color: var(--uws-accentcolorcust);
+    color: var(--uws-primary-oposite-color);
+}
+
+.uws-dark .uws-btn-p,
+.uws-dark .uws-btn-p:visited {
+    background-color: var(--uws-accentcolorcust);
+}
+
+.uws-dark .uws-btn-p:is(:hover, :focus, :active) {
+    background-color: transparent;
+    /*color: var(--uws-primary-oposite-color);*/
+}
+
+.uws-dark .uws-btn-s {
+    background-color: transparent;
+}
+
+.uws-dark .uws-btn-s:is(:hover, :focus, :active) {
+    background-color: var(--uws-accentcolorcust);
+    color: var(--uws-primary-oposite-color);
+}
+
+.uws-noitems-btn {
+    margin-top: 1.5em;
+}
+
+.uws-dropdown-cont {
+    position: relative;
+}
+
+.uws-dropdown-cont ul a {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-decoration: none;
+    padding-right: 1.6em;
+}
+
+.uws-dropdown-cont .uws-dropdown {
+    position: absolute;
+    width: auto;
+    display: block;
+    top: 100%;
+    top: calc(100% + 0.3em);
+    left: 0;
+    border-radius: 0.375rem;
+    padding-left: 0.2em;
+    padding-top: 0.3em;
+    padding-right: 0.2em;
+    padding-bottom: 0.3em;
+    box-shadow: 0px 20px 50px 0px var(--uws-dropdown-shadow);
+    background-color: var(--uws-dropdown-bg);
+    border: 1px solid var(--uws-dropdown-border);
+    z-index: 55;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-20px) scale(.97);
+    transition: all 370ms cubic-bezier(.34, 1.61, .7, 1);
+}
+
+.uws-dropdown-cont.uwsactive .uws-dropdown {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.uws-dropdown-cont>a:after {
+    position: absolute;
+    display: block;
+    content: '\f004';
+    font-family: "uwsicon";
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    width: 1.2em;
+    height: 1.23em;
+    right: 0;
+    top: 0.2em;
+    bottom: 0;
+    margin: auto;
+}
+
+.uws-dropdown li a,
+.uws-dropdown li button {
+    display: block;
+    font-size: 0.875em;
+    font-weight: 400;
+    line-height: 145%;
+    width: 100%;
+    /* text-transform: uppercase; */
+    letter-spacing: 0.05em;
+    text-align: left;
+    /* padding: 0.6em 0.35em; */
+    padding: 0.85em 1em;
+    background: transparent;
+    outline: none;
+    border: 0;
+    color: var(--uws-main-color);
+}
+
+.uws-dropdown li :is(a, button):is(:hover, :focus, :active) {
+    background-color: var(--uws-dropdown-elemhovder);
+    color: var(--uws-accentcolorcust);
+    border-radius: 0.375rem;
+}
+
+.uws-dark .uws-dropdown li :is(a, button):is(:hover, :focus, :active) {
+    color: var(--uws-events-filter-color);
+}
+
+.uws-dropdown .litepicker .container__months {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.uws-dropdown .litepicker .container__months .month-item-header {
+    padding-top: 0;
+}
+
+.uws-integration .litepicker .container__days .day-item {
+    color: var(--uws-main-color);
+}
+
+.uws-integration .litepicker .container__days .day-item.is-today {
+    color: var(--uws-accentcolorcust);
+}
+
+.uws-integration .litepicker .container__days .day-item.is-locked {
+    color: var(--uws-locked-color);
+}
+
+.uws-integration .litepicker .container__days .day-item.is-end-date,
+.uws-integration .litepicker .container__days .day-item.is-start-date {
+    background-color: var(--uws-accentcolorcust);
+    color: var(--uws-primary-oposite-color);
+}
+
+.uws-integration.uws-dark .litepicker .container__days .day-item:is(.is-end-date, .is-start-date) {
+    color: var(--uws-primary-oposite-color);
+}
+
+.uws-integration .litepicker .container__days .day-item.is-in-range {
+    background-color: var(--uws-accentcoloropac);
+}
+
+.uws-integration .litepicker .container__months .month-item-header {
+    color: var(--uws-main-color);
+}
+
+img.uwsimgloading {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
+img.uwsimgloading.uwsloaded {
+    opacity: 1;
+}
+
+.uws-integration p:empty,
+.uws-events-controls br {
+    display: none;
+}
+
+.uws-social-shares {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--uws-accentcolorcust);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.uws-social-shares a {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    font-weight: 500;
+}
+
+.uws-social-shares li {
+    margin-left: 0.7em;
+    margin-right: 0.7em;
+}
+
+.uws-social-shares li:first-child {
+    margin-left: 0;
+}
+
+.uws-social-shares li:last-child {
+    margin-right: 0;
+}
+
+.uws-social-shares a i {
+    font-size: 1.2em;
+    /*margin-right: 0.2em;*/
+}
+
+.uws-social-shares a i::before {
+    text-align: center;
+}
+
+.uws-addcopyedtag {
+    position: relative;
+}
+
+.uws-addcopyedtag:before,
+.uws-addcopyedtag:after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -10px);
+    opacity: 0;
+    transition: 200ms;
+    visibility: hidden;
+}
+
+.uws-addcopyedtag:before {
+    content: "";
+    bottom: calc(100% + 2px);
+    border: solid 5px transparent;
+    border-top-color: #000000;
+}
+
+.uws-addcopyedtag.uwsactive:before,
+.uws-addcopyedtag.uwsactive:after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    visibility: visible;
+}
+
+.uws-addcopyedtag:before {
+    content: "";
+    bottom: calc(100% + 2px);
+    border: solid 5px transparent;
+    border-top-color: var(--uws-main-color);
+}
+
+.uws-addcopyedtag:after {
+    content: "URL Copied!";
+    bottom: calc(100% + 12px);
+    padding: 0.55em 0.88em;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 0.8em;
+    color: #ffffff;
+    border-radius: 0.2em;
+    background-color: var(--uws-main-color);
+    color: var(--uws-primary-oposite-color);
+}
+
+/* Popup */
+.uws-pop-cont {
+    visibility: hidden;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    transition: all 250ms linear;
+}
+
+.uws-pop-cont-tab {
+    height: 100%;
+    display: table;
+    width: 100%;
+    table-layout: auto;
+}
+
+.uws-pop-cont-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.uws-pop-cont.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-pop-box {
+    display: block;
+    border-radius: 3px;
+    min-height: 150px;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    background-color: var(--uws-popup-bg);
+    color: var(--uws-popup-main-color);
+    transform: translate(0, -25%);
+    transition: transform 250ms ease-out;
+}
+
+.uws-pop-cont.visible .uws-pop-box {
+    transform: translate(0, 0);
+}
+
+.uws-pop-cont .uws-pop-box>.uws-closepop {
+    color: inherit;
+    color: var(--uws-popup-main-color);
+    font-size: 2.2em;
+    line-height: 45px;
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    top: 0;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset 0 0 100px 100px var(--uws-subtle-hover);
+}
+
+.uws-pop-cont .uws-pop-box>.uws-closepop:hover,
+.uws-pop-cont .uv-pop-box>.uv-closepop:focus,
+.uws-pop-cont .uws-pop-box>.uws-closepop:active {
+    opacity: 0.8;
+}
+
+.uws-pop-cont .uws-closepop:before {
+    display: block;
+    content: '\e831';
+    font-family: 'uwsicon' !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 45px;
+    line-height: 45px;
+    width: 45px;
+    text-align: center;
+}
+
+.uws-closepop-label {
+    display: none;
+    font-family: sans-serif;
+    font-size: .342em;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: capitalize;
+    position: absolute;
+    top: 36.43%;
+    left: 0;
+    text-indent: -1.88em;
+}
+
+#uws-invitem-pop .uws-closepop-label {
+    display: block;
+}
+
+.uws-pop-open {
+    overflow: hidden;
+}
+
+.uws-pop-image.uws-pop-cont {
+    z-index: 11000;
+}
+
+.uws-gloader-cont {
+    visibility: hidden;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: rgba(22, 27, 71, 0.3);
+    z-index: 999999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    outline: 0;
+    transition: all 250ms linear;
+}
+
+.uws-gloader-cont.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-gloader-cont .uwsloadermsg {
+    color: #ffffff;
+    font-size: 1.3em;
+    margin-top: 0.8em;
+    max-width: 30em;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.uws-gloader-cont .uwsloadermsg:empty {
+    display: none;
+}
+
+.uws-pop-image.uws-pop-cont .uws-pop-box {
+    background-color: transparent;
+    color: #ffffff;
+    max-width: 780px;
+}
+
+.uws-pop-image.uws-pop-cont .uws-pop-box>.uws-closepop {
+    color: #ffffff;
+    top: -12px;
+}
+
+.uws-pop-image.uws-pop-cont .uwstitle {
+    padding-right: 50px;
+    font-size: 1.2em;
+    padding-bottom: 0.7em;
+}
+
+.uws-pop-image.uws-pop-cont .uwsimage img {
+    width: 100%;
+}
+
+/*******/
+
+#uws-msg-pop.uws-pop-cont {
+    z-index: 10005;
+}
+
+.uwscheckbox {
+    position: relative;
+}
+
+.uwscheckbox input {
+    position: absolute;
+    left: -99999px;
+    width: auto;
+}
+
+.uwscheckbox label {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    line-height: 1.2;
+    min-height: 1.125em;
+    position: relative;
+    padding-left: 2.1em;
+    text-align: left;
+}
+
+.uwscheckbox label::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 1.125em;
+    height: 1.125em;
+    border-radius: 0.2em;
+    background: transparent;
+    border: solid 1px var(--uws-subtle-color);
+    background-color: var(--uws-primary-oposite-color);
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.uwscheckbox label::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: calc(1.4em - 2px);
+    height: calc(1.41em - 2px);
+    border-radius: 0.2em;
+    left: 1px;
+    top: 1px;
+    cursor: pointer;
+    z-index: 3;
+    opacity: 0;
+    line-height: 1.3em;
+    font-size: 0.8em;
+    content: '\e821';
+    font-family: "uwsicon";
+    color: var(--uws-primary-oposite-color);
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.uwscheckbox input:checked+label::after {
+    opacity: 1;
+}
+
+.uwscheckbox input:checked+label::before {
+    background: var(--uws-primary-color);
+}
+
+.uws-inputcont {
+    position: relative;
+    margin-bottom: 1.1em;
+}
+
+.uws-inputcont:last-child {
+    margin-bottom: 0;
+}
+
+.uws-inputcont label {
+    display: block;
+    width: 100%;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: none;
+    margin-bottom: 0.35em;
+}
+
+.uws-inputcont .uwscheckbox label {
+    font-weight: normal;
+}
+
+.uws-inputcont input,
+.uws-inputcont textarea,
+.uws-inputcont select {
+    background-color: var(--uws-inquire-bg);
+    padding: 0.6em;
+}
+
+.uwsinputerror {
+    position: relative;
+    display: block;
+    font-size: 0.8em;
+    color: var(--uws-error-color);
+    margin-top: 0.2em;
+}
+
+.uws-phoneinputcont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.uws-phoneinputcont>div:first-child {
+    flex: 0 0 42%;
+    padding-right: 0.5em;
+}
+
+.uws-phoneinputcont>div:last-child {
+    flex: 0 0 58%;
+    padding-left: 0.5em;
+}
+
+.uwsprivfields>label a {
+    font-weight: 600;
+    color: var(--uws-main-color);
+    text-decoration: underline;
+}
+
+.uws-pop-box .uwsprivfields>label a {
+    color: var(--uws-popup-main-color);
+}
+
+.uws-inputcont-2 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.uws-inputcont-2>div {
+    flex: 0 0 50%;
+}
+
+.uws-inputcont-2>div:first-child {
+    padding-right: 0.5em;
+}
+
+.uws-inputcont-2>div:last-child {
+    padding-left: 0.5em;
+}
+
+.uwsabscover {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+}
+
+.uwspowby {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+    text-align: center;
+    line-height: 0;
+    gap: 0 1.5em;
+}
+
+.uwspowby img {
+    display: block;
+    height: 1.3em;
+    width: auto;
+}
+
+.uwspowby img.uwspwby-bk4 {height: 1em;}
+
+.uws-togglecoll-body {
+    position: relative;
+    max-height: 0px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.uws-togglecoll.uwsactive .uws-togglecoll-body {
+    max-height: 1000px;
+}
+
+.uws-contviews .uws-contview {
+    display: none;
+}
+
+.uws-contviews .uws-contview.uwsactive {
+    display: block;
+}
+
+.uws-integration .uwsprice::before {
+    display: inline-block;
+    content: "$";
+}
+
+.uws-integration .uwsinv-item .uwsprice::before,
+.uws-integration.uwsinv-item .uwsprice::before,
+.uws-integration.uws-cart-item .uwsprice::before, .uws-integration .uwsprice::before {
+    content: attr(data-symbol);
+}
+
+.uws-integration .uwsinv-item .uwsprice:empty::before,
+.uws-integration.uwsinv-item .uwsprice:empty::before,
+.uws-integration.uws-cart-item .uwsprice:empty::before,
+.uws-integration .uwsinv-item .uwsprice.uwspricelistzero::before,
+.uws-integration.uwsinv-item .uwsprice.uwspricelistzero::before,
+.uws-integration.uws-cart-item .uwsprice.uwspricelistzero::before {
+    display: none;
+}
+
+.uws-integration .uwsprice span {
+    display: inline-block;
+    font-size: 60%;
+    transform: translateY(-0.55em);
+}
+
+.uwsdebugpre {
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.uwsviewscontainer {
+    position: relative;
+}
+
+.uwsviewinfix {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 200ms ease-in-out;
+}
+
+.uwsviewscontainer.uwsviewstoanim {
+    overflow: hidden;
+    transition: all 500ms ease-in-out;
+}
+
+.uws-integration .uwsviewtoin {
+    display: block;
+    transition: all 200ms ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.uws-integration .uwsviewhidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.uws-integration .uwsviewshown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.uwsviewaltern .uwsviewhidden,
+.uwsviewdispnone {
+    display: none;
+}
+
+.uws-integration .uwsviewscontainer.uwsblockcontainerview:before {
+    position: absolute;
+    display: block;
+    content: " ";
+    background: rgba(22, 27, 71, 0.3);
+    z-index: 20;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    height: 100%;
+    visibility: visible;
+    outline: 0;
+    transition: all 150ms linear;
+}
+
+/*UV icon Loader*/
+.uws-loader-uvicon {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    background: url(../images/urvenueicon.png) center center no-repeat;
+    background-size: 20px 20px;
+}
+
+.uws-loader-uvicon:before {
+    position: absolute;
+    display: block;
+    content: " ";
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-top: 3px solid #0063C1;
+    border-radius: 50%;
+    animation: uviconspin 1s linear infinite;
+}
+
+.uwsdy-bg {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.uws-nocontent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+@keyframes uviconspin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*Responsive*/
+@media(max-width: 900px) {
+    .uws-loader-uvicon {
+        width: 32px;
+        height: 32px;
+        background-size: 18px 18px;
+    }
+
+    .uws-loader-uvicon:before {
+        border: 2px solid transparent;
+        border-top: 2px solid #0063C1;
+    }
+}
+
+@media(max-width: 374px) {
+    .uws-pop-image.uws-pop-cont .uwstitle {
+        font-size: 0.98em;
+    }
+}
+
+@media(max-width: 350px) {
+    .uws-social-shares {
+        font-size: 0.95em;
+    }
+}

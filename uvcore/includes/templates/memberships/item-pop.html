@@ -1,0 +1,43 @@
+<div class="uws-membership uwsinv-item uws-inv-item-{mastercode}" data-mastercode="{mastercode}">
+    <div class="uws-membership-inner">
+        <form class="uws-membership-form" action="javascript:;">
+            <input id="uwsmembershipguests" class="uwsinputdy-value-guests" type="hidden" name="guests" value="">
+            <input id="uwsmembershippaytype" class="uwsinputdy-value-paytype" type="hidden" name="paytype" value="">
+            <input id="uwsmembershipmastercode" class="uwsinputdy-value-primmastercode" type="hidden" name="mastercode" value="{primmastercode}">
+            <input id="uwsmembershipitemcode" class="uwsinputdy-value-itemcode" type="hidden" name="itemcode" value="{itemcode}">
+            <input id="uwsmembershipcaldate" class="uwsinputdy-value-caldate" type="hidden" name="caldate" value="{caldate}">
+            <input id="uwsmembershipvenuecode" class="uwsinputdy-value-venuecode" type="hidden" name="venuecode" value="{venuecode}">
+            <input id="uwsmembershipecozone" class="uwsinputdy-value-ecozone" type="hidden" name="ecozone" value="{ecozone}">
+            <input id="uwsmembershipitemname" class="uwsinputdy-value-itemname" type="hidden" name="itemname" value="{itemname}">
+            <input id="uwsmembershipsubtotalagree" class="uwsinputdy-value-subtotalagree" type="hidden" name="subtotalagree" value="{subtotalagree}">
+
+            <div class="uwsheader">
+                <div class="uwstitle">Add New Membership</div>
+                <div class="uwssubtitle">Please complete the following information</div>
+            </div>
+
+            <div class="uws-primary-memberships uwsdy-memberships-primary"></div>
+            <div class="uwsprimmemname uwsdy-primary-membership-name"></div>
+            <div class="uwsdy-primary-membership-prices uwspricesbreakdown"></div>
+            <div class="uws-inputcont">
+                <label for="uwsprimmembername">Full Name *</label>
+                <input id="uwsprimmembername" class="uwsinputdy-name-primarymembership" name="subinfo[{primary_membership}][0][fullname]" type="text" value="" required>
+            </div>
+            <div class="uws-inputcont">
+                <label for="uwsprimmemberemail">Email *</label>
+                <input id="uwsprimmemberemail" class="uwsinputdy-name-primarymembership uwsvaluniqeemail" name="subinfo[{primary_membership}][0][email]" type="email" required>
+            </div>
+            <input type="hidden" class="uwsinputdy-name-primarymembership" name="subinfo[{primary_membership}][0][type]" value="primary">
+            <input type="hidden" class="uwsinputdy-name-primarymembership uwsinputdy-value-listprice" name="subinfo[{primary_membership}][0][listprice]" value="">
+            <input type="hidden" class="uwsinputdy-name-primarymembership uwsinputdy-value-membername" name="subinfo[{primary_membership}][0][membershipname]" value="">
+
+            <div class="uwsdy-secondary-memberships uwssecmemberships"></div>
+
+            <div class="uwsactions">
+                <button class="uws-btn uws-btn-p uws-btn-100 uwsjs-membership-cartcheckout"><span>Checkout Membership</span></button>
+            </div>
+        </form>
+    </div>
+
+    <div class="uws-loader-uvicon"></div>
+</div>

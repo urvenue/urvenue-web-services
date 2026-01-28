@@ -1,0 +1,37 @@
+<div class="uwsinv-item uws-inventory-item-pop uws-inv-item-{mastercode} uwsviewscontainer uws-integration {poptheme}" data-mastercode="{mastercode}">
+    <div class="uws-inventory-item-pop-inner">
+        <div class="uws-itempop-header">
+            <div class="uws-itempop-header-inner">
+                <div class="uwsname">{itemname}{iteminfoicon}</div>
+                <div class="uwsitemdetslist">
+                    <ul>
+                        <li><i class="uwsicon-calendar-2"></i> <span>{itemddate}</span></li>
+                        <li><i class="uwsicon-user-1"></i> <span>{itemcapacity} {itemcapacitylabel}</span></li>
+                        <li><i class="uwsicon-clock-1"></i> <span class="uwsdy-timerange">{itemtimerange}</span></li>
+                        <li><i class="uwsicon-hourglass"></i> <span>{actduration}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="uws-itempop-content uwsviewscontainer">
+            <div class="uws-itempop-main">
+                <div class="uws-itempop-body">
+                    {iteminlineinfo}
+                    {itemguestsel}
+                    {itemreqaddonsel}
+                    {itemtimesel}
+                    {itembottlesel}
+                    {itemdurationsel}
+                    <div class="uwsdy-agreement-prices uwspricescont"></div>
+                    {itemaddons}
+                    <div class="uwsdy-pay-prices uwspaytypescont"></div>
+                    <div class="uwsdy-price-breakdown uwspricesbreakdown"></div>
+                </div>
+                <div class="uws-itempop-footer">
+                    {itemactionbuttons}
+                </div>
+            </div>
+            <div class="uws-loader-uvicon"></div>
+        </div>
+    </div>
+</div>

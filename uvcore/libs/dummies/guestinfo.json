@@ -1,0 +1,106 @@
+{
+    "guestsinfo": {
+        "GUE1": {
+            "firstname": "John",
+            "lastname": "Smith",
+            "email": "john.smith@gmail.com",
+            "phone": "(555) 555 5555",
+            "ischild": 0,
+            "isprimaryguest": 1,
+            "isaccountowner": 1,
+            "includeonparty": 1
+        },
+        "GUE2": {
+            "firstname": "Sara ",
+            "lastname": "Smith",
+            "email": "sara.smith@gmail.com",
+            "phone": "(555) 555 5556",
+            "ischild": 0,
+            "isprimaryguest": 1,
+            "isaccountowner": 0,
+            "includeonparty": 1
+        },
+        "GUE3": {
+            "firstname": "Jimmy",
+            "lastname": "Smith",
+            "email": "john.smith@gmail.com",
+            "phone": "(555) 555 5557",
+            "ischild": 1,
+            "isprimaryguest": 1,
+            "isaccountowner": 0,
+            "includeonparty": 1
+        },
+        "GUE4": {
+            "firstname": "Lisa",
+            "lastname": "Smith",
+            "email": "lisa.smith@gmail.com",
+            "phone": "(555) 555 5558",
+            "ischild": 1,
+            "isprimaryguest": 1,
+            "isaccountowner": 0,
+            "includeonparty": 1
+        }
+    },
+    "reservationinfo": {
+        "checkin": "2023-06-01",
+        "checkout": "2023-06-05",
+        "checkintime": "11600",
+        "checkouttime": "11200"
+    },
+    "itinerary": {
+        "IAC1": {
+            "name": "Castle Carolers Sign Along",
+            "guests": ["GUE1", "GUE2", "GUE3", "GUE4"],
+            "date": "2023-06-02",
+            "starttime": "11400",
+            "endtime": "11500",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "instructions": "10 minutes before"
+        },
+        "IAC2": {
+            "name": "Private - Evening Winter Snowshoe Tour",
+            "guests": ["GUE1", "GUE2"],
+            "date": "2023-06-03",
+            "starttime": "11800",
+            "endtime": "12100",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Image.webp",
+            "instructions": "10 minutes before"
+        },
+        "IAC3": {
+            "name": "Campfire",
+            "guests": ["GUE1", "GUE2"],
+            "date": "2023-06-04",
+            "starttime": "11200",
+            "endtime": "11300",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "instructions": "10 minutes before"
+        },
+        "IAC4": {
+            "name": "Supervised Playtime",
+            "guests": ["GUE3", "GUE4"],
+            "date": "2023-06-04",
+            "starttime": "11200",
+            "endtime": "11300",
+            "image": "",
+            "instructions": "10 minutes before"
+        }
+    },
+    "offers": {
+        "IOF1": {
+            "name": "Enjoy Our Best Nightlife Experience",
+            "date": "2023-06-02",
+            "starttime": "12100",
+            "endtime": "12200",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2022/12/Campfire-by-the-terrace.jpg",
+            "instructions": "10 minutes before"
+        },
+        "IOF2": {
+            "name": "Vermillion Room",
+            "date": "2023-06-03",
+            "starttime": "11100",
+            "endtime": "11200",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2022/12/dining-experiences.png",
+            "instructions": "10 minutes before"
+        }
+    }
+}
