@@ -1,4 +1,5 @@
 === UrVenue Web Services ===
+
 Contributors: urvenue
 Tags: hospitality, nightlife, tickets, booking, ticketing, events, calendar
 Requires at least: 5.0.0
@@ -12,7 +13,7 @@ Effortlessly integrate UrVenue events into your website. Empower users to book i
 
 == Description ==
 
-UrVenue Web Services plugin allows you to access to access the services from urvenue.com, add to you website:
+UrVenue Web Services - plugin allows you to access to access the services from urvenue.com, add to you website:
 
 * "Events" add to a event calendar, agenda and list to you website
 * "Event Page" create a page for each of your events
@@ -29,6 +30,8 @@ You need a UrVenue account, with you account get an `API key` and a `Microcode`,
 Constact with our sales services to request a demo: https://www.urvenue.com/request-demo/
 
 == Changelog ==
+= 1.0.52 =
+Transparent price
 
 = 1.0.5 =
 * Hybrid Widget - Look for Specific Ecozone
