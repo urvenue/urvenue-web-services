@@ -1,0 +1,935 @@
+{
+    "activities": {
+        "ACT1": "Exclusive Castle Experiences",
+        "ACT2": "Resort Activities",
+        "ACT3": "Christmas at the castle",
+        "ACT4": "Kids @ The Castle",
+        "ACT5": "Dining Experiences",
+        "ACT6": "Special Events",
+        "ACT7": "Equipment Rentals"
+    },
+    "recommentations": {
+        "REC1": "Popular",
+        "REC2": "On Sale",
+        "REC3": "Small Groups",
+        "REC4": "Adventure",
+        "REC5": "Family Activities"
+    },
+    "activitytypes": {
+        "ATY1": "Biking",
+        "ATY2": "Dining",
+        "ATY3": "Hiking",
+        "ATY4": "Private Tours",
+        "ATY5": "Sports",
+        "ATY6": "Tour"
+    },
+    "budgets": {
+        "BUD1": "Less than $100",
+        "BUD2": "Less than $200",
+        "BUD3": "Less than $300"
+    },
+    "timeofday": {
+        "TOD1": "Day",
+        "TOD2": "Night"
+    },
+    "complimentary": {
+        "COM1": "Complimentary"
+    },
+    "items": {
+        "MAS1": {
+            "mastercode": "MAS1",
+            "itemname": "Gingerbread House",
+            "listprice": "250",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Get your sweet tooth ready and join us in decorating your very own gingerbread house with all the trimmings. A great treat for now or take away for you to enjoy.",
+            "fulldescription": "Please book by number of chairs you will be requiring and inform the team how many kits you would like upon arrival. We ask you to limit the extra number of guests attending if they will not be participating in building a gingerbread house. This is to allow for those who would like to build a house. Children 16 years and under must be accompanied by an adult guardian that is over 18 years old. A signed waiver is required to participate",
+            "included": [
+                "Pre-made gingerbread house, icing, candies."
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "primaryaddon": {
+                "itemname": "Gingerbread Kits",
+                "min": 1,
+                "max": 4
+            },
+            "times": ["11000", "11330", "11530"]
+        },
+        "MAS2": {
+            "mastercode": "MAS2",
+            "itemname": "Costello Italiana",
+            "listprice": "45",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "activityduration": "1 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 2,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "times": ["11000", "11330", "11530"],
+            "isot": 1
+        },
+        "MAS3": {
+            "mastercode": "MAS3",
+            "itemname": "Campfire",
+            "listprice": "35",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "activityduration": "4 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!",
+            "fulldescription": "<ul><li>Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!</li><li>This campfire experience is located on our unique Upper Terrace with the \"\"Million Dollar View\"\". Our host will manage the fire for you, and ensure you are cozy with blankets and service from our Rundle Lounge.</li><li>6 guests per Campfire. Please book a second campfire spot if you have more attendees.</li><ul>",
+            "included": [
+                "Hour at the Campfire",
+                "Wood",
+                "Kindling",
+                "Fire starter"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 11:30pm",
+            "times": ["11000", "11230", "11500", "11730", "12030"],
+            "addons": {
+                "ADN1": {
+                    "id": "ADN1",
+                    "itemname": "Smores Kit",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 10
+                },
+                "ADN2": {
+                    "id": "ADN2",
+                    "itemname": "Campagne Bottle & Bucket",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 5
+                }
+            }
+        },
+        "MAS4": {
+            "mastercode": "MAS4",
+            "itemname": "Bike Rentals",
+            "listprice": "20",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2022/12/Bike-Rentals.jpg",
+            "activityduration": "3 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views.",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Bike-Rentals.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "9:00am - 4:00pm",
+            "frequency": 60,
+            "durationtimes": {
+                "T10900": {
+                    "time": "10900",
+                    "status": "active"
+                },
+                "T11000": {
+                    "time": "11000",
+                    "status": "active"
+                },
+                "T11100": {
+                    "time": "11100",
+                    "status": "active"
+                },
+                "T11200": {
+                    "time": "11200",
+                    "status": "active"
+                },
+                "T11300": {
+                    "time": "11300",
+                    "status": "active"
+                },
+                "T11400": {
+                    "time": "11400",
+                    "status": "active"
+                },
+                "T11500": {
+                    "time": "11500",
+                    "status": "active"
+                }
+            }
+        },
+        "MAS5": {
+            "mastercode": "MAS5",
+            "itemname": "Vinyasa Flow Yoga",
+            "listprice": "0",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather. Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "complimentary": 1
+        },
+        "MAS6": {
+            "mastercode": "MAS6",
+            "itemname": "Gingerbread House",
+            "listprice": "250",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Get your sweet tooth ready and join us in decorating your very own gingerbread house with all the trimmings. A great treat for now or take away for you to enjoy.",
+            "fulldescription": "Please book by number of chairs you will be requiring and inform the team how many kits you would like upon arrival. We ask you to limit the extra number of guests attending if they will not be participating in building a gingerbread house. This is to allow for those who would like to build a house. Children 16 years and under must be accompanied by an adult guardian that is over 18 years old. A signed waiver is required to participate",
+            "included": [
+                "Pre-made gingerbread house, icing, candies."
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "primaryaddon": {
+                "itemname": "Gingerbread Kits",
+                "min": 1,
+                "max": 4
+            },
+            "times": ["11000", "11330", "11530"]
+        },
+        "MAS7": {
+            "mastercode": "MAS7",
+            "itemname": "Costello Italiana",
+            "listprice": "45",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "activityduration": "1 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 2,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "times": ["11000", "11330", "11530"],
+            "isot": 1
+        },
+        "MAS8": {
+            "mastercode": "MAS8",
+            "itemname": "Campfire",
+            "listprice": "35",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "activityduration": "4 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!",
+            "fulldescription": "<ul><li>Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!</li><li>This campfire experience is located on our unique Upper Terrace with the \"\"Million Dollar View\"\". Our host will manage the fire for you, and ensure you are cozy with blankets and service from our Rundle Lounge.</li><li>6 guests per Campfire. Please book a second campfire spot if you have more attendees.</li><ul>",
+            "included": [
+                "Hour at the Campfire",
+                "Wood",
+                "Kindling",
+                "Fire starter"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 11:30pm",
+            "times": ["11000", "11230", "11500", "11730", "12030"],
+            "addons": {
+                "ADN1": {
+                    "id": "ADN1",
+                    "itemname": "Smores Kit",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 10
+                },
+                "ADN2": {
+                    "id": "ADN2",
+                    "itemname": "Campagne Bottle & Bucket",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 5
+                }
+            }
+        },
+        "MAS9": {
+            "mastercode": "MAS9",
+            "itemname": "Bike Rentals",
+            "listprice": "20",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2022/12/Bike-Rentals.jpg",
+            "activityduration": "3 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views.",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Bike-Rentals.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "9:00am - 4:00pm",
+            "frequency": 60,
+            "durationtimes": {
+                "T10900": {
+                    "time": "10900",
+                    "status": "active"
+                },
+                "T11000": {
+                    "time": "11000",
+                    "status": "active"
+                },
+                "T11100": {
+                    "time": "11100",
+                    "status": "active"
+                },
+                "T11200": {
+                    "time": "11200",
+                    "status": "active"
+                },
+                "T11300": {
+                    "time": "11300",
+                    "status": "active"
+                },
+                "T11400": {
+                    "time": "11400",
+                    "status": "active"
+                },
+                "T11500": {
+                    "time": "11500",
+                    "status": "active"
+                }
+            }
+        },
+        "MAS10": {
+            "mastercode": "MAS10",
+            "itemname": "Vinyasa Flow Yoga",
+            "listprice": "0",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather. Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "complimentary": 1
+        },
+        "MAS11": {
+            "mastercode": "MAS11",
+            "itemname": "Gingerbread House",
+            "listprice": "250",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Get your sweet tooth ready and join us in decorating your very own gingerbread house with all the trimmings. A great treat for now or take away for you to enjoy.",
+            "fulldescription": "Please book by number of chairs you will be requiring and inform the team how many kits you would like upon arrival. We ask you to limit the extra number of guests attending if they will not be participating in building a gingerbread house. This is to allow for those who would like to build a house. Children 16 years and under must be accompanied by an adult guardian that is over 18 years old. A signed waiver is required to participate",
+            "included": [
+                "Pre-made gingerbread house, icing, candies."
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "primaryaddon": {
+                "itemname": "Gingerbread Kits",
+                "min": 1,
+                "max": 4
+            },
+            "times": ["11000", "11330", "11530"]
+        },
+        "MAS12": {
+            "mastercode": "MAS12",
+            "itemname": "Costello Italiana",
+            "listprice": "45",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "activityduration": "1 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 2,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "times": ["11000", "11330", "11530"],
+            "isot": 1
+        },
+        "MAS13": {
+            "mastercode": "MAS13",
+            "itemname": "Campfire",
+            "listprice": "35",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "activityduration": "4 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!",
+            "fulldescription": "<ul><li>Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!</li><li>This campfire experience is located on our unique Upper Terrace with the \"\"Million Dollar View\"\". Our host will manage the fire for you, and ensure you are cozy with blankets and service from our Rundle Lounge.</li><li>6 guests per Campfire. Please book a second campfire spot if you have more attendees.</li><ul>",
+            "included": [
+                "Hour at the Campfire",
+                "Wood",
+                "Kindling",
+                "Fire starter"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 11:30pm",
+            "times": ["11000", "11230", "11500", "11730", "12030"],
+            "addons": {
+                "ADN1": {
+                    "id": "ADN1",
+                    "itemname": "Smores Kit",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 10
+                },
+                "ADN2": {
+                    "id": "ADN2",
+                    "itemname": "Campagne Bottle & Bucket",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 5
+                }
+            }
+        },
+        "MAS14": {
+            "mastercode": "MAS14",
+            "itemname": "Bike Rentals",
+            "listprice": "20",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2022/12/Bike-Rentals.jpg",
+            "activityduration": "3 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views.",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Bike-Rentals.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "9:00am - 4:00pm",
+            "frequency": 60,
+            "durationtimes": {
+                "T10900": {
+                    "time": "10900",
+                    "status": "active"
+                },
+                "T11000": {
+                    "time": "11000",
+                    "status": "active"
+                },
+                "T11100": {
+                    "time": "11100",
+                    "status": "active"
+                },
+                "T11200": {
+                    "time": "11200",
+                    "status": "active"
+                },
+                "T11300": {
+                    "time": "11300",
+                    "status": "active"
+                },
+                "T11400": {
+                    "time": "11400",
+                    "status": "active"
+                },
+                "T11500": {
+                    "time": "11500",
+                    "status": "active"
+                }
+            }
+        },
+        "MAS15": {
+            "mastercode": "MAS15",
+            "itemname": "Vinyasa Flow Yoga",
+            "listprice": "0",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather. Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "complimentary": 1
+        },
+        "MAS16": {
+            "mastercode": "MAS16",
+            "itemname": "Gingerbread House",
+            "listprice": "250",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Get your sweet tooth ready and join us in decorating your very own gingerbread house with all the trimmings. A great treat for now or take away for you to enjoy.",
+            "fulldescription": "Please book by number of chairs you will be requiring and inform the team how many kits you would like upon arrival. We ask you to limit the extra number of guests attending if they will not be participating in building a gingerbread house. This is to allow for those who would like to build a house. Children 16 years and under must be accompanied by an adult guardian that is over 18 years old. A signed waiver is required to participate",
+            "included": [
+                "Pre-made gingerbread house, icing, candies."
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "primaryaddon": {
+                "itemname": "Gingerbread Kits",
+                "min": 1,
+                "max": 4
+            },
+            "times": ["11000", "11330", "11530"]
+        },
+        "MAS17": {
+            "mastercode": "MAS17",
+            "itemname": "Costello Italiana",
+            "listprice": "45",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "activityduration": "1 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 2,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "times": ["11000", "11330", "11530"],
+            "isot": 1
+        },
+        "MAS18": {
+            "mastercode": "MAS18",
+            "itemname": "Campfire",
+            "listprice": "35",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "activityduration": "4 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!",
+            "fulldescription": "<ul><li>Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!</li><li>This campfire experience is located on our unique Upper Terrace with the \"\"Million Dollar View\"\". Our host will manage the fire for you, and ensure you are cozy with blankets and service from our Rundle Lounge.</li><li>6 guests per Campfire. Please book a second campfire spot if you have more attendees.</li><ul>",
+            "included": [
+                "Hour at the Campfire",
+                "Wood",
+                "Kindling",
+                "Fire starter"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 11:30pm",
+            "times": ["11000", "11230", "11500", "11730", "12030"],
+            "addons": {
+                "ADN1": {
+                    "id": "ADN1",
+                    "itemname": "Smores Kit",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 10
+                },
+                "ADN2": {
+                    "id": "ADN2",
+                    "itemname": "Campagne Bottle & Bucket",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 5
+                }
+            }
+        },
+        "MAS19": {
+            "mastercode": "MAS19",
+            "itemname": "Bike Rentals",
+            "listprice": "20",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2022/12/Bike-Rentals.jpg",
+            "activityduration": "3 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views.",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Bike-Rentals.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "9:00am - 4:00pm",
+            "frequency": 60,
+            "durationtimes": {
+                "T10900": {
+                    "time": "10900",
+                    "status": "active"
+                },
+                "T11000": {
+                    "time": "11000",
+                    "status": "active"
+                },
+                "T11100": {
+                    "time": "11100",
+                    "status": "active"
+                },
+                "T11200": {
+                    "time": "11200",
+                    "status": "active"
+                },
+                "T11300": {
+                    "time": "11300",
+                    "status": "active"
+                },
+                "T11400": {
+                    "time": "11400",
+                    "status": "active"
+                },
+                "T11500": {
+                    "time": "11500",
+                    "status": "active"
+                }
+            }
+        },
+        "MAS20": {
+            "mastercode": "MAS20",
+            "itemname": "Vinyasa Flow Yoga",
+            "listprice": "0",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather. Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "complimentary": 1
+        },
+        "MAS21": {
+            "mastercode": "MAS21",
+            "itemname": "Gingerbread House",
+            "listprice": "250",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Get your sweet tooth ready and join us in decorating your very own gingerbread house with all the trimmings. A great treat for now or take away for you to enjoy.",
+            "fulldescription": "Please book by number of chairs you will be requiring and inform the team how many kits you would like upon arrival. We ask you to limit the extra number of guests attending if they will not be participating in building a gingerbread house. This is to allow for those who would like to build a house. Children 16 years and under must be accompanied by an adult guardian that is over 18 years old. A signed waiver is required to participate",
+            "included": [
+                "Pre-made gingerbread house, icing, candies."
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Gingerbread-House-Kit-To-Go.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "primaryaddon": {
+                "itemname": "Gingerbread Kits",
+                "min": 1,
+                "max": 4
+            },
+            "times": ["11000", "11330", "11530"]
+        },
+        "MAS22": {
+            "mastercode": "MAS22",
+            "itemname": "Costello Italiana",
+            "listprice": "45",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "activityduration": "1 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/castello.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 2,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "times": ["11000", "11330", "11530"],
+            "isot": 1
+        },
+        "MAS23": {
+            "mastercode": "MAS23",
+            "itemname": "Campfire",
+            "listprice": "35",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "activityduration": "4 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!",
+            "fulldescription": "<ul><li>Enjoy some time under the stars or the company of your friends around one of our signature Campfires. Let our team take care of everything!</li><li>This campfire experience is located on our unique Upper Terrace with the \"\"Million Dollar View\"\". Our host will manage the fire for you, and ensure you are cozy with blankets and service from our Rundle Lounge.</li><li>6 guests per Campfire. Please book a second campfire spot if you have more attendees.</li><ul>",
+            "included": [
+                "Hour at the Campfire",
+                "Wood",
+                "Kindling",
+                "Fire starter"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Campfire-by-the-terrace.jpeg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 11:30pm",
+            "times": ["11000", "11230", "11500", "11730", "12030"],
+            "addons": {
+                "ADN1": {
+                    "id": "ADN1",
+                    "itemname": "Smores Kit",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 10
+                },
+                "ADN2": {
+                    "id": "ADN2",
+                    "itemname": "Campagne Bottle & Bucket",
+                    "min": 1,
+                    "max": 4,
+                    "listprice": 5
+                }
+            }
+        },
+        "MAS24": {
+            "mastercode": "MAS24",
+            "itemname": "Bike Rentals",
+            "listprice": "20",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2022/12/Bike-Rentals.jpg",
+            "activityduration": "3 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views.",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather.  Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Bike-Rentals.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "9:00am - 4:00pm",
+            "frequency": 60,
+            "durationtimes": {
+                "T10900": {
+                    "time": "10900",
+                    "status": "active"
+                },
+                "T11000": {
+                    "time": "11000",
+                    "status": "active"
+                },
+                "T11100": {
+                    "time": "11100",
+                    "status": "active"
+                },
+                "T11200": {
+                    "time": "11200",
+                    "status": "active"
+                },
+                "T11300": {
+                    "time": "11300",
+                    "status": "active"
+                },
+                "T11400": {
+                    "time": "11400",
+                    "status": "active"
+                },
+                "T11500": {
+                    "time": "11500",
+                    "status": "active"
+                }
+            }
+        },
+        "MAS25": {
+            "mastercode": "MAS25",
+            "itemname": "Vinyasa Flow Yoga",
+            "listprice": "0",
+            "image": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "activityduration": "2 Hours",
+            "descr": "Donec sed pharetra est, eu dictum turpis. Quisque cursus vulputate pellentesque.",
+            "highlight": "Enjoy the best of both worlds and adventure on this Bike and Hike experience to Sundance Canyon. We will take you on this beautiful scenic route as you learn about local Banff history and amaze in classic Banff views. ",
+            "fulldescription": "<ul><li>4 Guests per experience - additional fees apply for more guests.</li><li>Bike 6.1km each way with 100M of elevation gain to the Canyon.</li><li>Hike: 1.6km round trip (moderate level). Height requirements for bikes - 5''2.</li><li>Tour is recommended for 12+ in age.</li><li>Tour runs in all weather. Weather cancellations is up to the discrepancy of the guide, day of. Please dress according to the weather in active gear.</li></ul>",
+            "included": [
+                "Mountain Bike",
+                "Helmet",
+                "Water Bottles",
+                "Protective Equipment"
+            ],
+            "bring": [
+                "Comfortable Shoes",
+                "Light sweater or ajcket",
+                "Extra cash for photos and souvenirs"
+            ],
+            "banner": "https://fairmontbaff.wpengine.com/wp-content/uploads/2023/01/Vinyasa-Flow-Yoga.jpg",
+            "category": "Christmas at the castle",
+            "capacity": 4,
+            "min": 1,
+            "timerange": "6:30pm - 8:30pm",
+            "complimentary": 1
+        }
+    }
+}

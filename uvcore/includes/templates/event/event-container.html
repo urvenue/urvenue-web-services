@@ -1,0 +1,36 @@
+<div class="uws-event-cont {eventcontclasses} uws-integration {theme}">
+    <div class="uws-event-title">
+        <h1 class="uwsname">{eventname}</h1>
+        <div class="uwsddate uwsjs-trigger-evtdp">{eventdp}<span>{eventddate}</span> {dstarttimediv} {eventvenuediv}
+            {eventdpicon}
+        </div>
+    </div>
+    <div class="uws-event-columns">
+        <div class="uws-event-maincol">
+            {eventinventoryblock}
+            {eventdescrtitlediv}
+        </div>
+        <div class="uws-event-info">
+            <div class="uws-event-flyer">
+                <a href="{eventflyer-eventpage-full}" class="uwsjs-show-image" data-pop-title="{eventname}"
+                    target="_blank"><img class="uwsimgloading" src="{eventflyer-eventpage}" alt="{eventname} - Flyer"
+                        onload="this.classList.add('uwsloaded')"><span class="uwsviewfullbtn"><i
+                            class="uwsicon-resize-full-alt"></i></span></a>
+            </div>
+            {eventsharelinks}
+            <div class="uwsinfobox">
+                <div class="uwsddate">
+                    {eventddate}{dstarttimediv}
+                    <div class="uwsactions"><a href="{venuegooglecalendarlink}" target="_blank"
+                            aria-label="Add Event to Your Calendar">Add to your calendar</a></div>
+                </div>
+                <div class="uwsvenueinfo">
+                    <div class='uwsvenuename uws-venkey-{venuekey}'>{venuename}</div>
+                    <div class="uwsaddress">{venueaddress}</div>
+                </div>
+                {ddooropendiv}
+            </div>
+            {eventdescrtitlediv}
+        </div>
+    </div>
+</div>

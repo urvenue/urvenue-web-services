@@ -1,0 +1,20 @@
+<div class='uws-integration uws-inventory-widget {widgetclasses}'>
+    <div class='uws-events-widget-dp-picker uws-invwidget-filters'>
+        <div class='uws-events-dpinput uwshascalincon uws-dropdown-cont'>
+            <label for='uwsgpdatepicker'>Date</label>
+            <i class='uwsicon-calendar'></i>
+            <a id='uwsgpdatepicker' href='javascript:;' data-date="{date}" data-mindate='{startdate}'
+                data-maxdate='{max-date}' class='uwsjs-trigger-dropdown'>{initdate}</a>
+            <div class='uws-dropdown'>
+                <div class='uws-gp-datepicker'></div>
+            </div>
+        </div>
+        {dropdownfilters}
+    </div>
+
+    <div class='uwsjs-loadeventinventorywidget uws-event-inventory' data-eventcode='{initeventcode}'
+        data-weekdays='{onlyweekdays}' data-venuecode='{venuecode}' data-date='{date}' data-ecozone='{ecozone}'
+        data-globaltype='{globaltype}' data-errortitle='{errortitle}' data-showeventsdropdown="{showeventsdropdown}"
+        data-errorcontent='{errorcontent}' data-booktypename='{booktypename}' data-mixecozones='{mixecozones}'></div>
+    {ctacontent}
+</div>

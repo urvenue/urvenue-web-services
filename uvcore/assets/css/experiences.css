@@ -1,0 +1,294 @@
+.uws-experiences-controls{
+    background-color: var(--uws-bg-accent);
+    max-width: 328px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 19px 28px;
+}
+.uws-experiences-controls .uws-dropdown-cont > a:after{display: none;}
+.uws-experiences-controls .uwsdatesel .uws-dropdown-cont{
+    display: flex;
+    position: relative;
+}
+.uws-experiences-controls .uwsdatesel .uws-dropdown-cont a{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-right: 36px;
+    height: 39px;
+    color: var(--uws-main-color);
+    border-bottom: 1px solid var(--uws-subtle-color);
+}
+.uws-experiences-controls .uwsdatesel .uws-dropdown-cont i{
+    position: absolute;
+    pointer-events: none;
+    right: 0;
+    bottom: 50%;
+    top: auto;
+    transform: translateY(50%);
+}
+.uws-experiences{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.uws-experiences.uwsloading .uws-experiences-list{display: none;}
+.uws-experiences.uwsloading .uws-inventoryloader{display: block;}
+.uws-experiences .uws-experiences-filters{
+    flex: 0 1 21%;
+    max-width: 285px;
+}
+.uws-experiences .uws-experiences-stage{
+    flex: 1;
+    padding-left: 40px;
+    max-width: 1020px;
+}
+.uws-experiences .uws-experiences-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: -0.625em;
+    margin-right: -0.625em;
+    margin-bottom: -1.25em;
+}
+.uws-experiences .uwslilist li{border-bottom: 1px solid var(--uws-subtle-color);}
+.uws-experiences .uwslilist li:last-child{border-bottom: none;}
+.uws-experiences .uwslilist li a{
+    display: block;
+    font-size: 0.8125em;
+    letter-spacing: 0.0673em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: inherit;
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.uws-experiences .uwslilist li a:hover, .uws-experiences .uwslilist li a:focus, .uws-experiences .uwslilist li a:active, .uws-experiences .uwslilist li.uwscurrent a{
+    background-color: var(--uws-primary-color);
+    color: var(--uws-primary-oposite-color);
+}
+.uws-experiences-filters .uwsfilter{margin-bottom: 2.5em;}
+.uws-experiences-filters .uwsfilteraction{margin-bottom: 2em;}
+.uws-experiences .uwslilistchecks li{margin-bottom: 0.8em;}
+.uws-experiences-filters .uwstitle{
+    font-size: 1.125em;
+    font-weight: 700;
+    margin-bottom: 0.7em;
+}
+.uws-experiences .uws-experiences-list > div{
+    flex: 0 0 50%;
+    padding-left: 0.625em;
+    padding-right: 0.625em;
+    margin-bottom: 1.25em;
+}
+.uws-experiences .uws-experiences-list > div > a{color: inherit;}
+.uws-experiences-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--uws-main-color);
+    box-shadow: 0 1px 3px var(--uws-dropdown-shadow);
+    background-color: var(--uws-dropdown-bg);
+    border: 1px solid var(--uws-dropdown-border);
+    transition: box-shadow 150ms ease-in-out;
+}
+.uws-experiences .uws-experiences-list > div > a:hover .uws-experiences-item, .uws-experiences .uws-experiences-list > div > a:focus .uws-experiences-item, .uws-experiences .uws-experiences-list > div > a:active .uws-experiences-item{box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);}
+.uws-experiences-item .uwsflyercont{
+    position: relative;
+    flex: 0 0 7.75em;
+    width: 7.75em;
+    height: 7.75em;
+    background-color: var(--uws-flyers-holder-bg);
+}
+.uws-experiences-item .uwsinfo{
+    flex: 1;
+    padding: 1em 1.56em;
+}
+.uws-experiences-item .uwsflyercont img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.uws-experiences-item .uwsinfo .uwsname{
+    font-size: 0.9375em;
+    margin-bottom: 0.3em;
+    letter-spacing: 0.0226em;
+}
+.uws-experiences-item .uwsdets{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5em 1em;
+    font-size: 0.875em;
+}
+.uws-experiences-item .uwsdets .uvprice{font-weight: bold;}
+.uws-experiences-item .uwsdets .uvprice:empty{display: none;}
+.uws-experiences-item .uwsdets .uwsactduration{
+    display: flex;
+    align-items: center;
+}
+.uws-experiences-item .uwsdets .uwsactduration span{white-space: nowrap;}
+.uws-experiences-item .uwsdets .uwsactduration i{
+    font-size: 1.2em;
+    color: var(--uws-subtle-color);
+    margin-right: 0.2em;
+}
+.uws-experiences-item .uwsdescr{
+    font-size: 0.875em;
+    line-height: 1.357;
+    margin-top: 0.25em;
+}
+.uws-experiences-filters .uws-experiences-controls{
+    padding: 0;
+    background: transparent;
+}
+.uws-experiences-filters .uws-dropdown-cont > a{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-right: 36px;
+    height: 39px;
+    color: var(--uws-main-color);
+    border-bottom: 1px solid var(--uws-subtle-color);
+}
+.uws-experiences-filters .uws-dropdown-cont > a::after{
+    color: var(--uv-primary-color);
+    right: 0.45em;
+}
+.uws-experiences-filters .uws-dropdown-cont .uws-dropdown li a{
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+}
+.uws-experiences.uws-expview-agenda .uws-experiences-list > div{flex: 0 0 33.3333%;}
+.uws-expview-agenda .uws-experiences-item{flex-direction: column;}
+.uws-expview-agenda .uws-experiences-item .uwsflyercont{
+    width: 100%;
+    height: auto;
+}
+.uws-expview-agenda .uws-experiences-item .uwsflyercont::before{
+    position: relative;
+    display: block;
+    content: " ";
+    padding-top: 59%;
+}
+.uws-expview-agenda .uws-experiences-item .uwsflyercont img{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.uws-expview-agenda .uws-experiences-item .uwsinfo{
+    padding: 1.7em 2.3em;
+    width: 100%;
+}
+.uws-expview-agenda .uws-experiences-item .uwsinfo .uwsname{
+    font-size: 1.5em;
+    line-height: 1.16;
+    min-height: 2.31em;
+}
+.uws-expview-agenda .uws-experiences-item .uwsdets{font-size: 1em;}
+.uws-experiences-item .uwsdets .uwscomplimentary{
+    font-weight: 700;
+    white-space: nowrap;
+}
+.uws-expview-agenda .uws-experiences-item .uwsdets .uwscomplimentary{font-size: 0.875em;}
+.uws-related-experiences{position: relative;}
+.uws-related-experiences.uws-expview-agenda .uws-experiences-list{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-left: -0.625em;
+    margin-right: -0.625em;
+    margin-bottom: -1.25em;
+}
+.uws-related-experiences.uws-expview-agenda .uws-experiences-list  > div{
+    flex: 0 0 33.3333%;
+    padding-left: 0.625em;
+    padding-right: 0.625em;
+    margin-bottom: 1.25em;
+}
+.uws-related-experiences .uws-experiences-list{pointer-events: none;}
+
+
+/*Responsive*/
+@media(min-width: 751px){
+    .uws-experiences-filters .uwsexpfiltercat.uws-dropdown-cont > a{display: none;}
+    .uws-experiences-filters .uwsexpfiltercat.uws-dropdown-cont .uws-dropdown{
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+        top: auto;
+        transform: none;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    .uws-experiences-filters .uwsexpfiltercat.uws-dropdown-cont .uws-dropdown li a{
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+}
+@media(max-width: 1250px){
+    .uws-experiences.uws-expview-agenda .uws-experiences-list > div{flex-basis: 50%;}
+}
+@media(max-width: 1150px){
+    .uws-experiences{max-width: 900px;}
+    .uws-experiences .uws-experiences-list > div{flex-basis: 100%;}
+    .uws-experiences .uws-experiences-filters{flex-basis: 33%;}
+    .uws-experiences.uws-expview-agenda{max-width: none;}
+}
+@media(max-width: 950px){
+    .uws-related-experiences.uws-expview-agenda .uws-experiences-list  > div{flex-basis: 50%;}
+}
+@media(max-width: 900px){
+    .uws-experiences.uws-expview-agenda{max-width: 600px;}
+    .uws-experiences.uws-expview-agenda .uws-experiences-list > div{flex-basis: 100%;}
+}
+@media(max-width: 750px){
+    .uws-experiences{flex-direction: column;}
+    .uws-experiences-filters .uwsfilter, .uws-experiences-filters .uwsfilteraction{display: none;}
+    .uws-experiences-filters .uwsfilter.uwsexpfilterdate, .uws-experiences-filters .uwsfilter.uwsexpfiltercat{display: block;}
+    .uws-experiences .uws-experiences-filters{
+        width: 100%;
+        max-width: 380px;
+        margin-left: auto;
+        margin-right: auto;
+        flex-basis: auto;
+    }
+    .uws-experiences-controls{max-width: 400px;}
+    .uws-experiences .uws-experiences-stage{padding-left: 0;}
+    .uws-experiences.uws-expview-agenda .uws-experiences-list > div{flex-basis: 50%;}
+    .uv-page-expcat .uws-experiences-filters .uwsfilter.uwsexpfiltercat{display: none;}
+}
+@media(max-width: 600px){
+    .uws-experiences.uws-expview-agenda{max-width: 400px;}
+    .uws-experiences.uws-expview-agenda .uws-experiences-list > div{flex-basis: 100%;}
+    .uws-expview-agenda .uws-experiences-item .uwsinfo .uwsname{min-height: 1em;}
+    .uws-related-experiences.uws-expview-agenda{
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 400px;
+    }
+    .uws-related-experiences.uws-expview-agenda .uws-experiences-list  > div{flex-basis: 100%;}
+}
+@media(max-width: 470px){
+    .uws-experiences-item .uwsflyercont{
+        flex-basis: 5.9em;
+        width: 5.9em;
+    }
+    .uws-experiences-item .uwsinfo{padding: 0.4em 1.2em;}
+    .uws-experiences-filters .uwsfilter{margin-bottom: 1.5em;}
+    .uws-experiences .uws-experiences-stage{padding-top: 1em;}
+}
+@media(max-width: 350px){
+    .uws-expview-agenda .uws-experiences-item .uwsinfo{padding: 1.5em 1.5em;}
+}

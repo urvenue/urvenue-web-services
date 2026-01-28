@@ -1,0 +1,174 @@
+.uws-inquiryform .uwsactions {
+    margin-top: 2em;
+}
+
+.uws-inquiryform-cont {
+    position: relative;
+    padding: 1em;
+}
+
+.uws-inquiryform-cont .uws-loader-uvicon {
+    position: absolute;
+    margin: auto;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateY(50%);
+    visibility: hidden;
+    z-index: 25;
+    transition: all 150ms linear;
+}
+
+.uws-inquiryform-cont .uws-leadtypeselector {
+    display: none;
+}
+
+.uws-inquiryform-cont .uws-leadtypeselector.uwsactive {
+    display: block;
+}
+
+.uws-inquiry-statusmsg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 300ms linear;
+    z-index: 10;
+    background-color: var(--uws-bg-accent);
+    color: var(--uws-main-color);
+}
+
+.uws-inquiryform-cont.uwsloading .uws-loader-uvicon,
+.uws-inquiryform-cont.uwsloading::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-inquiryform-cont::before {
+    position: absolute;
+    display: block;
+    content: " ";
+    background: rgba(22, 27, 71, 0.3);
+    z-index: 20;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    visibility: hidden;
+    outline: 0;
+    transition: all 150ms linear;
+}
+
+.uws-inquiryform-cont.uwssubmitted .uws-inquiry-statusmsg {
+    visibility: visible;
+    opacity: 1;
+}
+
+.uwsinqmsgcont {
+    text-align: center;
+}
+
+.uwsinqmsgcont .uwsapierrormsg {
+    background-color: var(--uws-subtle-bg);
+    padding: 1em;
+    text-align: center;
+    font-size: 0.8em;
+    font-family: monospace;
+}
+
+.uwsinqmsgcont .uwsapierrormsg:empty {
+    display: none;
+}
+
+.uwsinqmsgcont>i {
+    display: inline-block;
+    font-size: 6em;
+    margin-top: -0.4em;
+    margin-bottom: -0.24em;
+}
+
+.uwsinqmsgcont .uwstitle {
+    font-size: 1.5em;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.65em;
+}
+
+.uwsinqmsgcont .uwstext {
+    max-width: 19.44em;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--uws-subtle-color);
+    line-height: 1.687;
+    margin-bottom: 0.95em;
+}
+
+.uws-inquiryform-cont .uws-inputcont.uwsisspecificvenue {
+    display: none;
+}
+
+.uws-inquiry-loader {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 4px;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+
+.uws-inquiry-loader .uws-loader-uvicon {
+    display: inline-block;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    background: url(../images/urvenueicon.png) center center no-repeat;
+    background-size: 20px 20px;
+}
+
+.uws-inquiryform-cont .uws-inquiry-loader .uws-loader-uvicon {
+    opacity: 1;
+    visibility: visible;
+}
+
+.uws-inquiry-loader .uws-loader-uvicon:before {
+    position: absolute;
+    display: block;
+    content: " ";
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-top: 3px solid #0063C1;
+    border-radius: 50%;
+    animation: uviconspin 1s linear infinite;
+}
+
+.uws-inquiryform-cont .uws-dropdown-cont.uv-date-disable .uws-dropdown {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.uws-inquiryform-cont .uv-date-disable #uwsinqddate {
+    cursor: not-allowed;
+}
+
+.uws-inputcont.phone-inq .pristine-error.uwsinputerror {
+    width: 55%;
+    left: 43.5%;
+}
+
+.uws-inputcont .uws-inquiry-dpinput .uwsinput.uwshascalincon {
+    background-color: var(--uws-inquire-bg);
+}

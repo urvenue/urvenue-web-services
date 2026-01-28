@@ -1,0 +1,19 @@
+<svg version="1.1" x="0px" y="0px" width="65px" height="65px" viewBox="0 0 210 210" enable-background="new 0 0 210 210"
+    xml:space="preserve">
+    <defs>
+        <clipPath id="clip">
+            <circle cx="105" cy="105" r="99"></circle>
+        </clipPath>
+        <linearGradient id="grad" gradientUnits="userSpaceOnUse" x1="160" y1="105" x2="80" y2="160">
+            <stop id="uv-stop1" offset="0" style="stop-color:#6D6D6D" />
+            <stop id="uv-stop2" offset="1" style="stop-color:#6D6D6D" />
+        </linearGradient>
+    </defs>
+
+    <circle fill="url(#grad)" cx="105" cy="105" r="99" stroke-width="1" stroke="#F0F0F0" />
+    <g transform="rotate(270.1 105 105)">
+        <circle id="uv-ticker" fill="none" cx="105" cy="105" r="95.4" stroke="#E6E6E6" stroke-width="70"
+            clip-path="url(#clip)" />
+    </g>
+    <circle fill="#FFF" cx="105" cy="105" r="90" />
+</svg>

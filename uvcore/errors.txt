@@ -1,0 +1,13 @@
+Errors Format: NN-NNN
+
+prefix: Module
+	01: System
+	02: Integrations
+
+subfix: Error Number
+
+--------------------------------
+01-001: Error from uvcore.proxy, "uvaction" is not valid action or variable is empty
+01-002: Error from admin-init, $uvs_path does not exist
+01-002: Error from adminsave-pro, system var doesn't exist on REQUEST php array
+02-001: Error from uvcore-init, $uv_path does not exist

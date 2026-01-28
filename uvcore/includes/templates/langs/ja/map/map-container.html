@@ -1,0 +1,52 @@
+<div class="uws-integration uws-map uwsjs-loadmap uwsloading uws-map-addspaces uws-map-forcelisttype-{mapforcelisttype} {mapviewclass}" data-date="{mapdate}" data-mindate="{mapmindate}" data-venuecode="{venuecode}" date-filter-maxdate="{filtermaxdate}" data-ecozone="{ecozone}" data-forcelisttype="{mapforcelisttype}" data-nogroupings="" data-lang="ja">
+    <div class="uws-map-controls {mapcontrolsclass}">
+        <div class="uwsmapselsstring"><a href="#uwsmap-select-dateorvenue" class="uwsjs-map-showcontrols" aria-label="日付または会場を変更"><span class="uwsdy-mapselstring">{mapselsstring}</span> <i class="uwsicon-pencil"></i></a></div>
+        <div class="uwsfilters">
+            <div class="uwsdatesel">{mapdatesel}</div>
+            <div class="uwsvenuesel">{mapvenuesel}</div>
+            <div class="uwsecozonesel"></div>
+            <div class="uwsmapcartdrop">{mapcartdrop}</div>
+            <div class="uwseventinfo">
+                <div class='uws-dropdown-cont'>
+                    <a href='#uws-show-event-info' class='uwsjs-trigger-dropdown' aria-label='イベント情報を表示'><i class="uwsicon-info"></i><span>イベント情報</span></a>
+                    <div class='uws-dropdown'>
+                        <div class="uwsdy-map-eventinfo"></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#uwsmap-hide-dateorvenue-controls" class="uwsmaphidecontrols uwsjs-map-hidecontrols"><span>マップコントロールを非表示</span> <i class="uwsicon-cross"></i></a>
+        </div>
+        <div class="uwsviews">
+            <ul>
+                <li>
+                    <a class="uwsjs-changemapview" href="#uws-mapview-map" aria-label="地図表示に切り替え" data-view="uws-map-view-map"><span>地図</span></a>
+                </li>
+                <li class="uwscurrent">
+                    <a class="uwsjs-changemapview" href="#uws-mapview-list" aria-label="リスト表示に切り替え" data-view="uws-map-view-list"><span>リスト</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="uws-map-container">
+        <div class="uws-inventoryloader">
+            <div class="uwsloadingmsg">
+                <div class="uws-loader-uvicon"></div>
+                <div class="uwsloadingtxt">地図を読み込んでいます...</div>
+            </div>
+            <div class="uwsloadingbkt"></div>
+            <div class="uwsloadingbitem"></div>
+            <div class="uwsloadingbitem"></div>
+            <div class="uwsloadingbkt"></div>
+        </div>
+        <div class="uws-map-load"></div>
+        <div class="uwseventinfo">
+            <div class='uws-dropdown-cont'>
+                <a href='#uws-show-event-info' class='uwsjs-trigger-dropdown' aria-label='イベント情報を表示'><i class="uwsicon-info"></i><span>イベント情報</span></a>
+                <div class='uws-dropdown'>
+                    <div class="uwsdy-map-eventinfo"></div>
+                </div>
+            </div>
+        </div>
+        <div class="uwsmapcartdrop">{mapcartdrop}</div>
+    </div>
+</div>
