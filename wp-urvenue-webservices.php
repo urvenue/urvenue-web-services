@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @wordpress-plugin
  * Plugin Name: UrVenue Web Services
- * Version:     1.0.52
  * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
  * Description: UrVenue Integrations: Events, Inventory.
- * Author:      UrVenue/uws
+ * Version:     1.0
+ * Author:      UrVenue / UWS
  * Author URI:  https://www.urvenue.com/
- * Text Domain: wp-urvenue-webservices
+ * License:     GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: urvenue-web-services
  */
-
 
 /* UvCore Global Vars */
 $uws_corepath = plugin_dir_path(__FILE__) . "uvcore";
