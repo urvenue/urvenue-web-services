@@ -2,14 +2,14 @@
 
 /**
  * Plugin Name: UrVenue Web Services
- * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
+ * Plugin URI:  https://wordpress.org/plugins/wp-urvenue-webservices/
  * Description: UrVenue Integrations: Events, Inventory.
- * Version:     1.0
+ * Version:     1.2.1
  * Author:      UrVenue / UWS
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: urvenue-web-services
+ * Text Domain: wp-urvenue-webservices
  */
 
 /* UvCore Global Vars */
