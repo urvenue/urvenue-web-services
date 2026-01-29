@@ -1,31 +1,14 @@
 <?php
 
 /**
- * @wordpress-plugin
  * Plugin Name: UrVenue Web Services
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
- * Version:     1.0.52
- * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
- * Description: UrVenue Integrations: Events, Inventory.
- * Author:      UrVenue/uws
- * Author URI:  https://www.urvenue.com/
-=======
  * Plugin URI:  https://wordpress.org/plugins/wp-urvenue-webservices/
  * Description: UrVenue Integrations: Events, Inventory.
-=======
- * Plugin URI:  https://wordpress.org/plugins/wp-urvenue-webservices/
- * Description: UrVenue Integrations: Events, Inventory.
->>>>>>> Stashed changes
  * Version:     1.2.1
  * Author:      UrVenue / UWS
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
  * Text Domain: wp-urvenue-webservices
  */
 
