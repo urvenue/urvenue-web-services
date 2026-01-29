@@ -5,7 +5,7 @@
  * Plugin URI:  https://wordpress.org/plugins/wp-urvenue-webservices/
  * Description: UrVenue Integrations: Events, Inventory.
  * Version:     1.2.1
- * Author:      UrVenue / UWS
+ * Author:      UrVenue / UWS, uvwebservices
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
