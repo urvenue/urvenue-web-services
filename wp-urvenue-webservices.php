@@ -12,7 +12,6 @@
  * Text Domain: wp-urvenue-webservices
  */
 
-
 /* UvCore Global Vars */
 $uws_corepath = plugin_dir_path(__FILE__) . "uvcore";
 $uws_coreurl = plugin_dir_url(__FILE__) . "uvcore";
