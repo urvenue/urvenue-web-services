@@ -2313,7 +2313,7 @@ function uws_item_header()
 
         if (is_array($uviteminfo)) {
             $uvitemheadertemplate = uws_get_template("inventory/inventory-item-page-header");
-            $uviteminfo["banner"] = "https://fairmontbanff.wpengine.com/wp-content/uploads/2023/01/Image.png";
+            $uviteminfo["banner"] = "/wp-content/plugins/wp-urvenue-webservices/uvcore/assets/images/external/banner.png";
 
             if ($uviteminfo["banner"]) { //Only if item has banner
                 $uvitemhaderhtml = str_replace(

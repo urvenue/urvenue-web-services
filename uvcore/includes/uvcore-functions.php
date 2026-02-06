@@ -363,9 +363,9 @@ function uws_get_uwscredits($uvcreditstype = ""){
 	$uvuitheme = ($uws_theme_vars[$uvuitheme]) ? $uvuitheme : "light";
 	$uvuitheme = ($uws_config_uitheme) ? $uws_config_uitheme : $uvuitheme;
 
-	$uvextracreditlogo = ($uvcreditstype == "uv+ot" or $uvcreditstype == "ot") ? "<a href='https://www.opentable.com/' target='_blank'><img src='https://booketing.com/uvcore/assets/images/opentablelogo.svg' class='uwspowbyot' alt='Powered By OpenTable'></a>" : "";
+	$uvextracreditlogo = ($uvcreditstype == "uv+ot" or $uvcreditstype == "ot") ? "<a href='https://www.opentable.com/' target='_blank'><img src='/wp-content/plugins/wp-urvenue-webservices/uvcore/assets/images/external/opentablelogo.svg' class='uwspowbyot' alt='Powered By OpenTable'></a>" : "";
 	$uvextracreditlogo = ($uvcreditstype == "bk4") ? "<a href='https://book4time.com/' target='_blank'><img src='$uws_url/assets/images/b4t-logo.svg' class='uwspwby-bk4' alt='Powered By book4time'></a>" : $uvextracreditlogo;
-	$uvurvenuecreditlogo = ($uvcreditstype != "ot" and $uvcreditstype != "bk4") ? "<a href='https://www.urvenue.com/' target='_blank'><img src='https://uvtix.com/brand/powered-landspace-{$uvuitheme}bg.png' alt='Powered By UrVenue'></a>" : "";
+	$uvurvenuecreditlogo = ($uvcreditstype != "ot" and $uvcreditstype != "bk4") ? "<a href='https://www.urvenue.com/' target='_blank'><img src='/wp-content/plugins/wp-urvenue-webservices/uvcore/assets/images/brand/powered-landspace-{$uvuitheme}bg.png' alt='Powered By UrVenue'></a>" : "";
 
 	return "<div class='uwspowby'>{$uvurvenuecreditlogo}{$uvextracreditlogo}</div>";
 }
