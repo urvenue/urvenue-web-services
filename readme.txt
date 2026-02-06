@@ -1,6 +1,6 @@
 === UrVenue Web Services ===
 
-Contributors: urvenue
+Contributors: UrVenue, UvWebServices
 Tags: events, booking, calendar, tickets, hospitality
 Requires at least: 5.0
 Tested up to: 6.7
