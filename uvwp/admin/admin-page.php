@@ -1,20 +1,31 @@
 <?php
 $uvsinitialtab = "dashboard";
+
+// @egt [UWS-7264]
+function uvwp_adminpage_styles() {
+    $uvwp_admin_css = "
+		.uvs-setupbox, .uvs-logo, .uvs-content{display: none;}
+		body{background-color: #fafafa;}
+		.uvs-nostyleserror{
+			display: block;
+			font-size: 30px;
+			line-height: 1.2;
+			position: absolute;
+			width: 80%;
+			top: 45vh;
+			left: 10%;
+			text-align: center;
+		}
+	";
+
+    wp_register_style('uvwp_admin_styles', false);
+    wp_enqueue_style('uvwp_admin_styles');
+    wp_add_inline_style('uvwp_admin_styles', $uvwp_admin_css);
+}
+add_action('wp_enqueue_scripts', 'uvwp_adminpage_styles');
+
 ?>
-<style>
-	.uvs-setupbox, .uvs-logo, .uvs-content{display: none;}
-	body{background-color: #fafafa;}
-	.uvs-nostyleserror{
-		display: block;
-		font-size: 30px;
-		line-height: 1.2;
-		position: absolute;
-		width: 80%;
-		top: 45vh;
-		left: 10%;
-		text-align: center;
-	}
-</style>
+
 <div class="uvs-systempage uvs-page">
 	<div class="uvs-nostyleserror">
 		<div>Loading...</div>
@@ -39,6 +50,11 @@ $uvsinitialtab = "dashboard";
 	</div>
 </div>
 
-<script>
-	var uvs_core_lib = <?php echo json_encode($uvs_core_lib); ?>;
-</script>
+<?php
+
+// @egt [UWS-7264]
+add_action('wp_footer', function () use ($uvs_core_lib) {
+	echo "<script>var uvs_core_lib = " . json_encode($uvs_core_lib) . ";</script>";
+});
+
+?>

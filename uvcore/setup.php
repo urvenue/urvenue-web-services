@@ -100,13 +100,18 @@ if($uvurl){
 	);
 	$uvs_lib = json_encode($uvs_lib);
 	
-	$uvurlscript = "
-		<script>
-			var uvcoreinput = '$uvurl';
-			var uvcorejsonlib = '$uvs_lib';
-			$uvaddsubmitvarscript
-		</script>
-	";
+	$uvurlscript = "";
+
+	// @egt [UWS-7264]
+	add_action('wp_footer', function () use ($uvurl, $uvs_lib, $uvaddsubmitvarscript) {
+		echo "
+			<script>
+				var uvcoreinput = '$uvurl';
+				var uvcorejsonlib = '$uvs_lib';
+				$uvaddsubmitvarscript
+			</script>
+		";
+	});
 }
 
 $uvs_uvcorepath = ($uvpath) ? $uvpath : $uvs_uvcorepath;
@@ -132,27 +137,39 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 	<meta name="robots" content="noindex,nofollow" />
 	<title>UvCore | Setup</title>
 	
-	<style>
-		.uvs-setupbox, .uvs-logo{display: none;}
-		body{background-color: #fafafa;}
-		.uvs-nostyleserror{
-			display: block;
-			font-size: 30px;
-			position: absolute;
-			width: 80%;
-			top: 45vh;
-			left: 10%;
-			text-align: center;
-		}
-	</style>
-	<link rel="stylesheet" href="assets/css/system.css" type="text/css" media="all">
-	<link rel="stylesheet" href="assets/css/setup.css" type="text/css" media="all">
-	<link rel="stylesheet" href="assets/css/uwsicons.css" type="text/css" media="all">
-	
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.validate.min.js"></script>
-	<script src="assets/js/admin.js"></script>
-	<script src="assets/js/setup.js"></script>
+	<?php
+		// @egt [UWS-7264]
+		add_action('setup_enqueue_scripts', function(){
+			$uvbaseurl = plugin_dir_url( __FILE__ );
+
+			$uvwp_setup_css = "
+				.uvs-setupbox, .uvs-logo{display: none;}
+				body{background-color: #fafafa;}
+				.uvs-nostyleserror{
+					display: block;
+					font-size: 30px;
+					position: absolute;
+					width: 80%;
+					top: 45vh;
+					left: 10%;
+					text-align: center;
+				}
+			";
+
+			wp_register_style('uvwp_setup_styles', '');
+			wp_enqueue_style('uvwp_setup_styles');
+			wp_add_inline_style('uvwp_setup_styles', $uvwp_setup_css);
+
+			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), null, 'all');
+			wp_enqueue_style('setup-css', $uvbaseurl . 'assets/css/setup.css', array(), null, 'all');
+			wp_enqueue_style('uwsicons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), null, 'all');
+
+			wp_enqueue_script('jquery', $uvbaseurl . 'assets/js/jquery.min.js', array(), null, true);
+			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), null, true);
+			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate'), null, true);
+			wp_enqueue_script('setup', $uvbaseurl . 'assets/js/setup.js', array('jquery', 'jquery-validate'), null, true);
+		});
+	?>
 </head>
 <body class="uvs-systempage">
 	<div class="uvs-nostyleserror">
