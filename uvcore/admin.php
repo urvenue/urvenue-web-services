@@ -42,7 +42,7 @@ $uvsinitialtab = "dashboard";
 			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), null, 'all');
 			wp_enqueue_style('uwsicons-css', '$uvbaseurl . assets/css/uwsicons.css', array(), null, 'all');
 
-			wp_enqueue_script('jquery', $uvbaseurl . 'assets/js/jquery.min.js', array(), null, true);
+			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), null, true);
 			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate', 'flatpickr'), null, true);
 			wp_enqueue_script('flatpickr', $uvbaseurl . 'assets/js/flatpickr.min.js', array(), null, true);

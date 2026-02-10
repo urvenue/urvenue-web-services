@@ -164,7 +164,7 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 			wp_enqueue_style('setup-css', $uvbaseurl . 'assets/css/setup.css', array(), null, 'all');
 			wp_enqueue_style('uwsicons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), null, 'all');
 
-			wp_enqueue_script('jquery', $uvbaseurl . 'assets/js/jquery.min.js', array(), null, true);
+			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), null, true);
 			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate'), null, true);
 			wp_enqueue_script('setup', $uvbaseurl . 'assets/js/setup.js', array('jquery', 'jquery-validate'), null, true);
