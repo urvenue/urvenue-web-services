@@ -107,15 +107,25 @@ else{
 
     $uvitemdatabuild = http_build_query($uvitemdata);
 
-    $uvch = curl_init();
-    curl_setopt($uvch, CURLOPT_URL, $uvcartendurl);
-    curl_setopt($uvch, CURLOPT_POST, true);
-    curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
-    curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
-    $uvresultraw = curl_exec($uvch);
+    // TESTING @Axl
+    // $uvch = curl_init();
+    // curl_setopt($uvch, CURLOPT_URL, $uvcartendurl);
+    // curl_setopt($uvch, CURLOPT_POST, true);
+    // curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
+    // curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
+    // curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
+    // $uvresultraw = curl_exec($uvch);
+
+    $uvresponse = wp_remote_post($uvcartendurl, array(
+        'body' => $uvitemdatabuild,
+        'timeout' => 60,
+    ));
+    $uvresultraw = wp_remote_retrieve_body($uvresponse);
+    
     $uvcartfeedresponse = json_decode($uvresultraw, true);
-    curl_close($uvch);
+    
+    // TESTING @Axl
+    // curl_close($uvch);
 
     if($uws_feeds_debug){
         print_r($uvitemdata);
