@@ -15,27 +15,39 @@ $uvsinitialtab = "dashboard";
 	<meta name="robots" content="noindex,nofollow" />
 	<title>UvCore | Admin</title>
 	
-	<style>
-		.uvs-setupbox, .uvs-logo, .uvs-content{display: none;}
-		body{background-color: #fafafa;}
-		.uvs-nostyleserror{
-			display: block;
-			font-size: 30px;
-			position: absolute;
-			width: 80%;
-			top: 45vh;
-			left: 10%;
-			text-align: center;
-		}
-	</style>
-	<link rel="stylesheet" href="assets/css/flatpickr.min.css" type="text/css" media="all">
-	<link rel="stylesheet" href="assets/css/system.css" type="text/css" media="all">
-	<link rel="stylesheet" href="assets/css/uwsicons.css" type="text/css" media="all">
-	
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.validate.min.js"></script>
-	<script src="assets/js/admin.js"></script>
-	<script src="assets/js/flatpickr.min.js"></script>
+	<?php
+		// @egt [UWS-7264]
+		add_action('admin_enqueue_scripts', function(){
+			$uvbaseurl = plugin_dir_url( __FILE__ );
+
+			$uvwp_admin_css = "
+				.uvs-setupbox, .uvs-logo, .uvs-content{display: none;}
+				body{background-color: #fafafa;}
+				.uvs-nostyleserror{
+					display: block;
+					font-size: 30px;
+					position: absolute;
+					width: 80%;
+					top: 45vh;
+					left: 10%;
+					text-align: center;
+				}
+			";
+
+			wp_register_style('uvwp_admin_styles', '');
+			wp_enqueue_style('uvwp_admin_styles');
+			wp_add_inline_style('uvwp_admin_styles', $uvwp_admin_css);
+
+			wp_enqueue_style('flatpickr-css', $uvbaseurl . 'assets/css/flatpickr.min.css', array(), null, 'all');
+			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), null, 'all');
+			wp_enqueue_style('uwsicons-css', '$uvbaseurl . assets/css/uwsicons.css', array(), null, 'all');
+
+			wp_enqueue_script('jquery');
+			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), null, true);
+			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate', 'flatpickr'), null, true);
+			wp_enqueue_script('flatpickr', $uvbaseurl . 'assets/js/flatpickr.min.js', array(), null, true);
+		});
+	?>
 </head>
 <body class="uvs-systempage">
 	<div class="uvs-nostyleserror">

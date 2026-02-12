@@ -159,7 +159,13 @@ function uws_events_views($uvargs = "", $uvreturnarray = false)
                     if ($uvreturnarray) {
                         $uvviewsarray[$uvviewkey] = uws_calendar($uvevents, $uvargs);
                     } else {
-                        $uvviewhtml = '<script>const uvcalcellwidth = document.querySelector(".uws-events-views").offsetWidth / 7; document.documentElement.style.setProperty("--uws-cal-cell-minheight", `${uvcalcellwidth}px`);</script>'; //add css var to add min height to cells
+                        // @egt [UWS-7264]
+                        $uvcalcellwidth_script = 'const uvcalcellwidth = document.querySelector(".uws-events-views").offsetWidth / 7; document.documentElement.style.setProperty("--uws-cal-cell-minheight", uvcalcellwidth + "px");';
+                        
+                        wp_register_script('uvcalcellwidth', false, array(), null, true);
+                        wp_enqueue_script('uvcalcellwidth');
+                        wp_add_inline_script('uvcalcellwidth', "(function () { {$uvcalcellwidth_script} })();"); //add css var to add min height to cells
+
                         $uvdaysnames = "<div class='uwscaldaysnames'><div>" . uws_lang("cal-monday") . "</div><div>" . uws_lang("cal-tuesday") . "</div><div>" . uws_lang("cal-wednesday") . "</div><div>" . uws_lang("cal-thursday") . "</div><div>" . uws_lang("cal-friday") . "</div><div>" . uws_lang("cal-saturday") . "</div><div>" . uws_lang("cal-sunday") . "</div></div>";
                         $uvviewhtml .= $uvdaysnames . "<div class='uws-events-calendar'>" . uws_calendar($uvevents, $uvargs) . "</div>";
                     }
@@ -201,8 +207,13 @@ function uws_events_views($uvargs = "", $uvreturnarray = false)
 
     if ($uveventsschema) {
         $uveventsschemajson = json_encode($uveventsschema);
-        $uveventsschemainline .= "<script type='application/ld+json'>$uveventsschemajson</script>";
+        $uveventsschemainline .= "";
         $uvviewshtml .= $uveventsschemainline;
+
+        // @egt [UWS-7264]
+        add_action('wp_footer', function () use ($uveventsschemajson) {
+            echo "<script type='application/ld+json'>$uveventsschemajson</script>";
+        });
     }
 
     if ($uvreturnarray) {
@@ -2006,7 +2017,12 @@ function uws_event($uvargs = ""){
 
         if($uvgeteventschema){
             $uvgeteventschemajson = json_encode($uvgeteventschema);
-	        $uveventschemainline .= "<script type='application/ld+json'>$uvgeteventschemajson</script>";
+	        $uveventschemainline .= "";
+
+            // @egt [UWS-7264]
+            add_action('wp_footer', function () use ($uvgeteventschemajson) {
+                echo "<script type='application/ld+json'>$uvgeteventschemajson</script>";
+            });
         }
 
         $uveventhtml = "

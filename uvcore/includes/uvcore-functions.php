@@ -76,19 +76,24 @@ function uws_get_share_links($uvshareurl){
 }
 
 // Include styles on head
+//updated with enqueue for @egt [UWS-7264]
 function uws_include_styles(){
     global $uws_url;
-
-    echo '<link rel="stylesheet" id="uvcore-css"  href="' . $uws_url . '/assets/css/uvcore.css" type="text/css" media="all" />';
-    echo '<link rel="stylesheet" id="uwsicons-css"  href="' . $uws_url . '/assets/css/uwsicons.css" type="text/css" media="all" />';
+	
+	wp_enqueue_style('uvcore-css', $uws_url . '/assets/css/uvcore.css', array(), null, 'all');
+    wp_enqueue_style('uwsicons-css', $uws_url . '/assets/css/uwsicons.css', array(), null, 'all');
 }
+// add_action('wp_enqueue_scripts', 'uws_include_styles');
 
 // Include styles on head 
+//updated with enqueue for @egt [UWS-7264]
 function uws_include_scripts(){
     global $uws_url;
 
-    echo '<script src="' . $uws_url . '/assets/js/uvcore.js" async></script>';
+	wp_register_script('uvcore-js',  $uws_url . '/assets/js/uvcore.js', array(), null, array('strategy' => 'async'));
+	wp_enqueue_script('uvcore-js');
 }
+// add_action('wp_enqueue_scripts', 'uws_include_scripts');
 
 /*Get css vars script
     Returns: string with css vars form global styles
@@ -419,7 +424,14 @@ function uws_get_proxies_script($uvproxysection = ""){
 		$uvproxies = $uws_proxies_lib[$uvproxysection];
 
 	$uvproxiesjson = json_encode($uvproxies);
-	$uvproxiesscript = "<script>window.uws_proxies = window.uws_proxies || {}; uws_proxies = $uvproxiesjson;</script>";
+	$uvproxiesscript = "";
+
+	// @egt [UWS-7264]
+	$uws_proxies_script = "window.uws_proxies = window.uws_proxies || {}; uws_proxies = $uvproxiesjson;";
+
+	wp_register_script('uws_proxies', false, array(), null, true);
+	wp_enqueue_script('uws_proxies');
+	wp_add_inline_script('uws_proxies', "(function () { {$uws_proxies_script} })();");
 
 	return $uvproxiesscript;
 }
@@ -549,7 +561,14 @@ function uws_get_proxy_script(){
 		$uvproxy .= "&action=uvpx";
 
 	$uvproxy .= $uws_config_addproxyparams;
-	$uvproxiesscript = "<script>window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';</script>";
+	$uvproxiesscript = "";
+
+	// @egt [UWS-7264]
+	$uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';";
+
+	wp_register_script('uws_proxy', false, array(), null, true);
+	wp_enqueue_script('uws_proxy');
+	wp_add_inline_script('uws_proxy', "(function () { {$uws_proxy_script} })();");
 
 	return $uvproxiesscript;
 }
