@@ -414,14 +414,22 @@ function uws_clean_cached_feeds(){
 */
 function uws_api_call($uvfileurl, $uvusefileget = false){
 	if(!$uvusefileget){
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $uvfileurl);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,5);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    	// TESTING @Axl
+		// $ch = curl_init();
+		// curl_setopt($ch, CURLOPT_URL, $uvfileurl);
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		// curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,5);
+		// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		// curl_setopt($ch, CURLOPT_TIMEOUT, 60);
    
-		$output = curl_exec($ch);
+		// $output = curl_exec($ch);
+    	
+		// TESTING @Axl
+		$response = wp_remote_get($uvfileurl, array(
+			'timeout' => 60,
+			'redirection' => 5,
+		));
+		$output = wp_remote_retrieve_body($response);
    }
    else
 	   $output = @file_get_contents($uvfileurl);

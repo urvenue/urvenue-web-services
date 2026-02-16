@@ -77,15 +77,24 @@ if($uvtimecategory){//When is OT times detailed
 
 $uvitemdata = http_build_query($uvitemdata);
 
-$uvch = curl_init();
-curl_setopt($uvch, CURLOPT_URL, $uvcartendurl);
-curl_setopt($uvch, CURLOPT_POST, true);
-curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
-curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
-curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdata);
-$uvresultraw = curl_exec($uvch);
+// TESTING @Axl
+// $uvch = curl_init();
+// curl_setopt($uvch, CURLOPT_URL, $uvcartendurl);
+// curl_setopt($uvch, CURLOPT_POST, true);
+// curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
+// curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
+// curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdata);
+// $uvresultraw = curl_exec($uvch);
+$uvresponse = wp_remote_post($uvcartendurl, array(
+    'body' => $uvitemdata,
+    'timeout' => 60,
+));
+$uvresultraw = wp_remote_retrieve_body($uvresponse);
+
 $uvcartfeedresponse = json_decode($uvresultraw, true);
-curl_close($uvch);
+
+// TESTING @Axl
+// curl_close($uvch);
 
 
 //Build Response

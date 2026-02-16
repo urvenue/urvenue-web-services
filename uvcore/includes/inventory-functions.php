@@ -1686,15 +1686,25 @@ function uws_recreate_cartv2($uvcartcode = "")
         $uvreqdata["requestinfo"] = $uvrequestinfo;
         $uvitemdatabuild = http_build_query($uvreqdata, 'flags_');
 
-        $uvch = curl_init();
-        curl_setopt($uvch, CURLOPT_URL, $uvcreatecartendpoint);
-        curl_setopt($uvch, CURLOPT_POST, true);
-        curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
-        $uvresultraw = curl_exec($uvch);
+        // TESTING @Axl
+        // $uvch = curl_init();
+        // curl_setopt($uvch, CURLOPT_URL, $uvcreatecartendpoint);
+        // curl_setopt($uvch, CURLOPT_POST, true);
+        // curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
+        // curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
+        // $uvresultraw = 
+        
+        // TESTING @Axl
+        $uvwpresponse = wp_remote_post($uvcreatecartendpoint, array(
+            'body' => $uvitemdatabuild,
+            'timeout' => 60,
+        ));
+        $uvresultraw = wp_remote_retrieve_body($uvwpresponse);
         $uvresult = json_decode($uvresultraw, true);
-        curl_close($uvch);
+
+        // TESTING @Axl
+        // curl_close($uvch);
 
         if (is_array($uvresult) and $uvresult["success"]) {
             $uvapicartcode = $uvresult["data"]["cartcode"];
