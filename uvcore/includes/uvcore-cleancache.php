@@ -51,22 +51,41 @@ function uvclear_wpengine_cache() {
 
 	$fields = json_encode(array( 'type' => $cachetoclear ));
 
-	$uvwpe_curl = curl_init();
+    // TESTING @Axl
+	// $uvwpe_curl = curl_init();
 
-	curl_setopt_array($uvwpe_curl, array(
-		CURLOPT_URL => $api_url,
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS => $fields,
-		CURLOPT_HTTPHEADER => $headers,
+	// curl_setopt_array($uvwpe_curl, array(
+	// 	CURLOPT_URL => $api_url,
+	// 	CURLOPT_RETURNTRANSFER => true,
+	// 	CURLOPT_ENCODING => '',
+	// 	CURLOPT_MAXREDIRS => 10,
+	// 	CURLOPT_TIMEOUT => 0,
+	// 	CURLOPT_FOLLOWLOCATION => true,
+	// 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	// 	CURLOPT_CUSTOMREQUEST => 'POST',
+	// 	CURLOPT_POSTFIELDS => $fields,
+	// 	CURLOPT_HTTPHEADER => $headers,
+	// ));
+
+    // TESTING @Axl
+    $uvwpe_response = wp_remote_post($api_url, array(
+		'headers' => array(
+			'Content-Type' => 'application/json',
+			'Authorization' => 'Basic ' . base64_encode($uvwpenginecreds),
+		),
+		'body' => $fields,
+		'timeout' => 60,
+		'redirection' => 10,
 	));
-	$response = curl_exec($uvwpe_curl);
-	$httpcode = curl_getinfo($uvwpe_curl, CURLINFO_HTTP_CODE);
+
+    // TESTING @Axl
+	// $response = curl_exec($uvwpe_curl);
+	// $httpcode = curl_getinfo($uvwpe_curl, CURLINFO_HTTP_CODE);
+
+    // TESTING @Axl
+    $response = wp_remote_retrieve_body($uvwpe_response);
+	$httpcode = wp_remote_retrieve_response_code($uvwpe_response);
+    
 
 	$uvresponse = json_decode($response, true);
 
@@ -76,8 +95,13 @@ function uvclear_wpengine_cache() {
     $cachecleared = 'uvfeeds';
 
     // Check for errors
-    if (curl_errno($uvwpe_curl)) {
-        echo 'Error: ' . curl_error($uvwpe_curl);
+
+    // TESTING @Axl
+    // if (curl_errno($uvwpe_curl)) {
+    //     echo 'Error: ' . curl_error($uvwpe_curl);
+    if (is_wp_error($uvwpe_response)) {
+        echo 'Error: ' . $uvwpe_response->get_error_message();
+
     } else if ($uvresponse && !$install_id) {
         $status = 1;
         $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. WP Engine Cache clearing failed, please set the API fields.';
@@ -120,7 +144,9 @@ function uvclear_wpengine_cache() {
     $uvdata = json_encode($uvresponsemsg);
     header('Content-Type: application/json; charset=utf-8');
     echo($uvdata);
-    curl_close($uvwpe_curl);
+
+    // TESTING @Axl
+    // curl_close($uvwpe_curl);
 }
 
 function custom_template_redirect() {

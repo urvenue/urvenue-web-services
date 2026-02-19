@@ -21,14 +21,22 @@ if($uvcartcode and $uvitemcartcode){
 
     $uvdeletecartendpoint = $uvdeletecartendpoint . "&" . http_build_query($uvitemdata);
 
-    $uvch = curl_init();
-    curl_setopt($uvch, CURLOPT_URL, $uvdeletecartendpoint);
-    curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "DELETE");
-    curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true);
-    $uvresultraw = curl_exec($uvch);
+    // TESTING @Axl
+    // $uvch = curl_init();
+    // curl_setopt($uvch, CURLOPT_URL, $uvdeletecartendpoint);
+    // curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "DELETE");
+    // curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true);
+    // $uvresultraw = curl_exec($uvch);
+    $uvresponse = wp_remote_request($uvdeletecartendpoint, array(
+        'method' => 'DELETE',
+        'timeout' => 60,
+    ));
+    $uvresultraw = wp_remote_retrieve_body($uvresponse);
+
     $uvresult = json_decode($uvresultraw, true);
 
-    curl_close($uvch);
+    // TESTING @Axl
+    // curl_close($uvch);
 
     if(is_array($uvresult) and $uvresult["success"]){
         $uvcartcount = $uvresult["data"]["cartcount"];

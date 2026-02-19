@@ -127,18 +127,28 @@ function uws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){
             'text' => $uvnoticemsg,
         );
 
-        $ch = curl_init($uvwebhook);
-        curl_setopt_array($ch, array(
-            CURLOPT_POST           => true,
-            CURLOPT_HTTPHEADER     => array('Content-Type: application/json; charset=utf-8'),
-            CURLOPT_POSTFIELDS     => json_encode($uvpayload),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CONNECTTIMEOUT => 5,
-            CURLOPT_TIMEOUT        => 8,
+        // TESTING @Axl
+        // $ch = curl_init($uvwebhook);
+        // curl_setopt_array($ch, array(
+        //     CURLOPT_POST           => true,
+        //     CURLOPT_HTTPHEADER     => array('Content-Type: application/json; charset=utf-8'),
+        //     CURLOPT_POSTFIELDS     => json_encode($uvpayload),
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_CONNECTTIMEOUT => 5,
+        //     CURLOPT_TIMEOUT        => 8,
+        // ));
+
+        $uvwpresponse = wp_remote_post($uvwebhook, array(
+            'headers' => array('Content-Type' => 'application/json; charset=utf-8'),
+            'body' => json_encode($uvpayload),
+            'timeout' => 8,
         ));
-        curl_exec($ch);
-        $uvisok = !curl_errno($ch) && ((int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE) >= 200) && ((int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE) < 300);
-        curl_close($ch);
+
+        // TESTING @Axl
+        // curl_exec($ch);
+        // $uvisok = !curl_errno($ch) && ((int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE) >= 200) && ((int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE) < 300);
+        // curl_close($ch);
+        $uvisok = !is_wp_error($uvwpresponse) && ((int)wp_remote_retrieve_response_code($uvwpresponse) >= 200) && ((int)wp_remote_retrieve_response_code($uvwpresponse) < 300);
 
         if ($uvisok) {
             // mark sent in this request

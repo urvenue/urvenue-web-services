@@ -46,14 +46,24 @@ if($uvmastercode){
         $uvitemdata["cartcode"] = $uvcartcode;
         $uvitemdatabuild = http_build_query($uvitemdata, 'flags_');
 
-        $uvch = curl_init();
-        curl_setopt($uvch, CURLOPT_URL, $uvaddcartendpoint);
-        curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "PUT");
-        curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
-        curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
-        $uvresultraw = curl_exec($uvch);
+        // TESTING @Axl
+        // $uvch = curl_init();
+        // curl_setopt($uvch, CURLOPT_URL, $uvaddcartendpoint);
+        // curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "PUT");
+        // curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
+        // curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
+        // $uvresultraw = curl_exec($uvch);
+        $uvresponse = wp_remote_request($uvaddcartendpoint, array(
+            'method' => 'PUT',
+            'body' => $uvitemdatabuild,
+            'timeout' => 60,
+        ));
+        $uvresultraw = wp_remote_retrieve_body($uvresponse);
+
         $uvresult = json_decode($uvresultraw, true);
-        curl_close($uvch);
+
+        // TESTING @Axl
+        // curl_close($uvch);
 
         if($uws_feeds_debug){
             print_r($uvitemdata);
@@ -69,15 +79,24 @@ if($uvmastercode){
             $uvitemdata["meta"]["subscriptions"] = $uvsubinfo;
         $uvitemdatabuild = http_build_query($uvitemdata, 'flags_');
 
-        $uvch = curl_init();
-        curl_setopt($uvch, CURLOPT_URL, $uvcreatecartendpoint);
-        curl_setopt($uvch, CURLOPT_POST, true);
-        curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
-        curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
-        $uvresultraw = curl_exec($uvch);
+        // TESTING @Axl
+        // $uvch = curl_init();
+        // curl_setopt($uvch, CURLOPT_URL, $uvcreatecartendpoint);
+        // curl_setopt($uvch, CURLOPT_POST, true);
+        // curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
+        // curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
+        // curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
+        // $uvresultraw = curl_exec($uvch);
+        $uvresponse = wp_remote_post($uvcreatecartendpoint, array(
+            'body' => $uvitemdatabuild,
+            'timeout' => 60,
+        ));
+        $uvresultraw = wp_remote_retrieve_body($uvresponse);
+
         $uvresult = json_decode($uvresultraw, true);
-        curl_close($uvch);
+        
+        // TESTING @Axl
+        // curl_close($uvch);
 
         if($uws_feeds_debug){
             print_r($uvitemdata);

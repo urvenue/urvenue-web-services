@@ -113,13 +113,18 @@ function uvs_get_boxtabs_state($uvsactivetab){
 	return $uvsadminboxtabsstatus;
 }
 function uvs_pullfeed($uvsfileurl){
- 	$ch = curl_init();
- 	curl_setopt($ch, CURLOPT_URL, $uvsfileurl);
- 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
- 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT , 5);
- 	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+	// TESTING @Axl
+ 	// $ch = curl_init();
+ 	// curl_setopt($ch, CURLOPT_URL, $uvsfileurl);
+ 	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+ 	// curl_setopt($ch, CURLOPT_CONNECTTIMEOUT , 5);
+ 	// curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 
- 	$output = curl_exec($ch);
+ 	// $output = curl_exec($ch);
+	$response = wp_remote_get($uvsfileurl, array(
+		'timeout' => 60,
+	));
+	$output = wp_remote_retrieve_body($response);
 	
  	return($output);
 }

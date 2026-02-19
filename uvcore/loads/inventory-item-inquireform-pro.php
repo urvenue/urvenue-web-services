@@ -17,15 +17,21 @@ unset($uvdata["phonecode"]);
 unset($uvdata["phonenumber"]);
 //$uvdata = array();
 
-$curl = curl_init();
-curl_setopt_array($curl, [
-    CURLOPT_URL => $uvapiurl,
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $uvdata,
-    CURLOPT_RETURNTRANSFER => true,
-]);
-$response = curl_exec($curl);
-curl_close($curl);
+// TESTING @Axl
+// $curl = curl_init();
+// curl_setopt_array($curl, [
+//     CURLOPT_URL => $uvapiurl,
+//     CURLOPT_POST => true,
+//     CURLOPT_POSTFIELDS => $uvdata,
+//     CURLOPT_RETURNTRANSFER => true,
+// ]);
+// $response = curl_exec($curl);
+// curl_close($curl);
+$uvwpresponse = wp_remote_post($uvapiurl, array(
+    'body' => $uvdata,
+    'timeout' => 60,
+));
+$response = wp_remote_retrieve_body($uvwpresponse);
 
 $uvresponse = json_decode($response, true);
 
