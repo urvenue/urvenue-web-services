@@ -2,6 +2,9 @@
 
 global $uws_core_lib;
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 $uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
 $uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
 $uvitemcode = (isset($_REQUEST["itemcode"])) ? uws_cleanup_var($_REQUEST["itemcode"]) : "";

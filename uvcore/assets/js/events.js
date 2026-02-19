@@ -493,6 +493,11 @@ function uwsEventsFilter() {
     if (typeof (uws_inventory.microcode) != "undefined" && uws_inventory.microcode)
         uveventsload = uveventsload + "&microcode=" + uws_inventory.microcode;
 
+    // @egt [UWS-7297]
+    if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
+        uveventsload = uveventsload + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+    }
+
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uveventsload, true);
     uvrequest.onload = function () {
@@ -645,6 +650,11 @@ function uwsEventsLoadMore() {
     if (typeof (uws_inventory.microcode) != "undefined" && uws_inventory.microcode)
         uveventsload = uveventsload + "&microcode=" + uws_inventory.microcode;
 
+    // @egt [UWS-7297]
+    if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
+        uveventsload = uveventsload + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+    }
+
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uveventsload, true);
     uvrequest.onload = function () {
@@ -763,6 +773,12 @@ function uwsLoadDynamicEvents() {
         uveventcodes = uveventcodes.slice(0, -1);
 
         let uvdynaeventsurl = uws_proxy + "&uvaction=uwspx_loaddynamicevents&eventcodes=" + uveventcodes + "&templates=" + uvtemplates;
+        
+        // @egt [UWS-7297]
+        if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
+            uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+        }
+        
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvdynaeventsurl, true);
         uvrequest.onload = function () {
@@ -920,6 +936,11 @@ function uwsLoadDPEvent(uvelem, uvdate, uvenddate, uvvenuecode) {
 
     uvelem.classList.add("uwsloading");
 
+    // @egt [UWS-7297]
+    if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
+        uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+    }
+
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvdynaeventsurl, true);
     uvrequest.onload = function () {
@@ -988,6 +1009,11 @@ function uwsLoadDPEvents(uvelem, uvdate, uvenddate, uvvenuecode, uvdp = null) {
     const uvcachekey = `${uvdate}_${uvenddate}`;
 
     uvelem.classList.add("uwsloading");
+    
+    // @egt [UWS-7297]
+    if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
+        uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+    }
 
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvdynaeventsurl, true);

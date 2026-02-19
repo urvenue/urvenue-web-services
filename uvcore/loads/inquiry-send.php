@@ -2,6 +2,9 @@
 
 global $uws_feeds_lib;
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsreservations");
+
 $uvapiurl = $uws_feeds_lib["inquiry-send"]["url"];
 
 $uvdata = $_POST;

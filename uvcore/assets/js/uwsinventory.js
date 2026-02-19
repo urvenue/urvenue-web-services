@@ -89,6 +89,11 @@ function uwsinventoryinitwidget(uvinvblock) {
             uvinventoryload += "&addonvenues=1" + "&homeeventcode=" + uvhomeeventcode + "&mainvenuecode=" + uvmainvenuecode + "&venuecode=" + uvvenuecode + "&microcode=" + uvmicrocode + "&date=" + uvdate + "&managementid=" + uvmanagementid + "&globaltype=" + uvglobaltype + "&mixecozones=" + uvaddmixeco;
         }
 
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvinventoryload = uvinventoryload + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvinventoryload, true);
         uvrequest.onload = function () {
@@ -583,6 +588,11 @@ uwsClickListener(".uwsjs-show-otselect", function (e) {
         let uvloadottimes = uws_inventory.proxies["item-getottimes"];
         uvloadottimes = uvloadottimes + uwsInvGetItemCartVars(uvitem) + "&otid=" + uws_inventory.popitem.info.opentable.otid + "&resatt=" + uws_inventory.popitem.info.opentable.resatt;
 
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvloadottimes = uvloadottimes + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvloadottimes, true);
         uvrequest.onload = function () {
@@ -628,6 +638,11 @@ uwsClickListener(".uwsjs-show-bk4select", function (e) {
         //load ot time
         let uvloadottimes = uws_inventory.proxies["item-getbk4times"];
         uvloadottimes = uvloadottimes + uwsInvGetItemCartVars(uvitem) + "&ext_datajson=" + uws_inventory.popitem.info.ext_datajson;
+
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvloadottimes = uvloadottimes + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
 
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvloadottimes, true);
@@ -688,6 +703,11 @@ uwsClickListener(".uwsjs-show-bottleselect", function (e) {
         let uvloadbottles = uws_inventory.proxies["item-getbottles"];
         uvloadbottles = uvloadbottles + uwsInvGetItemCartVars(uvitem) + "&venueid=" + uvvenueid + "&currencysymbol=" + uvcurrencysymbol;
 
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvloadbottles = uvloadbottles + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvloadbottles, true);
         uvrequest.onload = function () {
@@ -747,6 +767,11 @@ uwsClickListener(".uwsjs-show-timeselect", function (e) {
     //load ot time
     let uvloadottimes = uws_inventory.proxies["item-gettimes"];
     uvloadottimes = uvloadottimes + uwsInvGetItemCartVars(uvitem) + "&guests=" + uws_inventory.popitemsels.guests;
+
+    // @egt [UWS-7297]
+    if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+        uvloadottimes = uvloadottimes + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+    }
 
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvloadottimes, true);
@@ -915,7 +940,7 @@ function uwsInitItemInquireForm(uvitemelem) {
         const uvformvalid = uvformvalidate.validate();
 
         if (uvformvalid) {
-            const uvformproxy = uws_inventory.proxies["item-inquireform-pro"];
+            var uvformproxy = uws_inventory.proxies["item-inquireform-pro"];
             let uvformdata = new FormData(uvform);
 
             if (uvformdata.get('fname') && uvformdata.get('lname')) {
@@ -927,6 +952,11 @@ function uwsInitItemInquireForm(uvitemelem) {
 
             if (uws_invitem_pop.querySelector(".uwsinv-item.uws-inventory-item-pop"))
                 uws_invitem_pop.querySelector(".uwsinv-item.uws-inventory-item-pop").querySelector(".uws-itempop-content").classList.add("uwsloading");
+
+            // @egt [UWS-7297]
+            if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+                uvformproxy = uvformproxy + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+            }
 
             let uvrequest = new XMLHttpRequest();
             uvrequest.open('POST', uvformproxy, true);
@@ -1007,6 +1037,11 @@ function uwsInitCartDrop() {
         //add microcode if is in uwsinventory object (for no lib integrations)
         if (typeof (uws_inventory.microcode) != "undefined" && uws_inventory.microcode)
             uvinitcarturl = uvinitcarturl + "&microcode=" + uws_inventory.microcode;
+
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvinitcarturl = uvinitcarturl + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
 
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvinitcarturl, true);
@@ -1111,6 +1146,11 @@ function uwsInvShowItemPop(uvmastercode, uvitempresels) {
     uws_inventory.popitem = "";
     uws_inventory.popitemsels = "";
 
+    // @egt [UWS-7297]
+    if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+        uvinventoryload = uvinventoryload + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+    }
+
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvinventoryload, true);
     uvrequest.onload = function () {
@@ -1214,6 +1254,11 @@ function uwsInvLoadShowItemInfoPop(uvmastercode) {
         let uvitemload = uws_proxy + "&uvaction=uwspx_inventoryiteminfo";
         uvitemload = uvitemload + "&mastercode=" + uvmastercode;
 
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvitemload = uvitemload + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvitemload, true);
         uvrequest.onload = function () {
@@ -1278,6 +1323,11 @@ function uwsInvAddItemToCart() {
 
     if (uws_invitem_pop.querySelector(".uwsinv-item.uws-inventory-item-pop"))
         uws_invitem_pop.querySelector(".uwsinv-item.uws-inventory-item-pop").querySelector(".uws-itempop-content").classList.add("uwsloading");
+
+    // @egt [UWS-7297]
+    if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+        uvinvaddtocartpx = uvinvaddtocartpx + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+    }
 
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvinvaddtocartpx, true);
@@ -2442,6 +2492,11 @@ function uwsinvInitBlock(uvinvblock) {
         let uvinventoryload = uws_proxy + "&uvaction=uwspx_inventoryinit";
         uvinventoryload = uvinventoryload + "&eventcode=" + uveventcode + "&cartcode=" + uwsInvGetCartCookie() + uvintegration + "&homeeventcode=" + uvhomeeventcode + "&homename=" + uvhomename + "&returntempl=" + uvreturntempl;
 
+         // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvinventoryload = uvinventoryload + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvinventoryload, true);
         uvrequest.onload = function () {
@@ -2514,6 +2569,11 @@ function uwsinvInitAddOnVenueBlock(uvinvblock) {
         const uvissnippetinteg = uwsIsSnippetIntegration();
 
         uvinventoryload = uvinventoryload + "&cartcode=" + uwsInvGetCartCookie() + uvintegration + "&homeeventcode=" + uvhomeeventcode + "&homename=" + uvhomename + "&returntempl=" + uvreturntempl + "&mainvenuecode=" + uvmainvenuecode + "&venuecode=" + uvvenuecode + "&date=" + uvdate + "&managementid=" + uvmanagementid + "&globaltype=" + uvglobaltype + "&mixecozones=" + uvaddmixeco;
+
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvinventoryload = uvinventoryload + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
 
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvinventoryload, true);
@@ -2646,6 +2706,11 @@ function uwsinvGetBKCalendarDisDates(uvbkcalstage, uvdate, uvvenuecode, uvecozon
         let uvnoinventorydatesproxy = uws_proxy + "&uvaction=uwspx_noinventorydates";
         uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&date=" + uvdate + "&venuecode=" + uvvenuecode + "&ecozone=" + uvecozone;
 
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvnoinventorydatesproxy, true);
         uvrequest.onload = function () {
@@ -2722,6 +2787,11 @@ uwsClickListener(".uwsjs-removecartitem", function (e) {
     //add microcode if is in uwsinventory object (for no lib integrations)
     if (typeof (uws_inventory.microcode) != "undefined" && uws_inventory.microcode)
         uvdeletecarturl = uvdeletecarturl + "&microcode=" + uws_inventory.microcode;
+
+    // @egt [UWS-7297]
+    if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+        uvdeletecarturl = uvdeletecarturl + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+    }
 
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvdeletecarturl, true);
@@ -3242,6 +3312,11 @@ function uwsInvRemoveCartItem(uvcartitem) {
         if (typeof (uws_inventory.microcode) != "undefined" && uws_inventory.microcode)
             uvdeletecarturl = uvdeletecarturl + "&microcode=" + uws_inventory.microcode;
 
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvdeletecarturl = uvdeletecarturl + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         uwsShowGLoader();
 
         let uvrequest = new XMLHttpRequest();
@@ -3501,6 +3576,12 @@ function uwsGTFUpdateMonth(uvcheckdate) {
     } else {
         let uvnoinventorydatesproxy = uws_proxy + "&uvaction=uwspx_noinventorydates";
         uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&date=" + uws_gt_datp + "&venuecode=" + uvvenuecode + uvaddmixeco + "&ecozone=" + uvecozone;
+
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvnoinventorydatesproxy, true);
         uvrequest.onload = function () {

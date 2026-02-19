@@ -666,3 +666,10 @@ function uws_get_popup_theme() {
 
 	return "uws-" . $uvuipotheme;
 }
+
+// @egt [UWS-7297]
+function uws_check_nonce($uvnonce) {
+	if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) {
+		wp_send_json_error(array('message' => 'Invalid nonce'), 403);
+	}
+}

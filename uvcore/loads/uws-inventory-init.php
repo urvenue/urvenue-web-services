@@ -2,6 +2,9 @@
 
 global $uws_proxies_lib;
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 $uveventcode = (isset($_REQUEST["eventcode"])) ? uws_cleanup_var($_REQUEST["eventcode"]) : "";
 $uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
 $uvintegration = (isset($_REQUEST["integration"])) ? uws_cleanup_var($_REQUEST["integration"]) : "";

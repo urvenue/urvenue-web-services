@@ -1,5 +1,8 @@
 <?php
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 $uveventcode = (isset($_REQUEST["homeeventcode"])) ? uws_cleanup_var($_REQUEST["homeeventcode"]) : "";
 $uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
 $uvshowdatepicker = (isset($_REQUEST["showdatepicker"])) ? uws_cleanup_var($_REQUEST["showdatepicker"]) : 0;

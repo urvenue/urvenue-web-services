@@ -2,6 +2,9 @@
 
 global $uws_proxies_lib;
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 $uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
 $uvsectionid = (isset($_REQUEST["sectionid"])) ? uws_cleanup_var($_REQUEST["sectionid"]) : "";
 $uvlocationid = (isset($_REQUEST["locationid"])) ? uws_cleanup_var($_REQUEST["locationid"]) : "";

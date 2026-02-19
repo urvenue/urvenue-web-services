@@ -2,6 +2,9 @@
 
 global $uws_core_lib;
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 $uvmanagementid = (isset($_REQUEST["manageentid"])) ? uws_cleanup_var($_REQUEST["manageentid"]) : "";
 $uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
 $uvcaldate = (isset($_REQUEST["caldate"])) ? uws_cleanup_var($_REQUEST["caldate"]) : "";

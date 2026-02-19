@@ -1,5 +1,8 @@
 <?php
 
+// @egt [UWS-7297]
+uws_check_nonce("uwspackages");
+
 $uvmasteritemcode = (isset($_REQUEST["masteritemcode"])) ? uws_cleanup_var($_REQUEST["masteritemcode"]) : "";
 $uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
 $uvdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";

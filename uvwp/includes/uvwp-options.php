@@ -133,15 +133,47 @@ function uvscore_include_scripts(){
 
     //Specific pages scrips
     wp_register_script('uws-events-scripts', $uws_coreurl . '/assets/js/events.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-events-scripts', 'uwseventsvars', array(
+        'targetNonce' => wp_create_nonce('uwsevents'),
+    ));
+
     wp_register_script('litepicker', $uws_coreurl . '/assets/js/litepicker.min.js', false, 1);
     wp_register_script('nouislider', $uws_coreurl . '/assets/js/nouislider.min.js', false, 1);
     wp_register_script('hammer', $uws_coreurl . '/assets/js/hammer.min.js', false, 1);
+
     wp_register_script('uws-inventory-scripts', $uws_coreurl . '/assets/js/uwsinventory.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-inventory-scripts', 'uwsinventoryvars', array(
+        'targetNonce' => wp_create_nonce('uwsinventory'),
+    ));
+
     wp_register_script('uws-experiences-scripts', $uws_coreurl . '/assets/js/experiences.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-experiences-scripts', 'uwsexperiencesvars', array(
+        'targetNonce' => wp_create_nonce('uwsexperiences'),
+    ));
+
     wp_register_script('uws-invitempage-scripts', $uws_coreurl . '/assets/js/invitempage.js', false, $uv_assetsversion);
+
 	wp_register_script('uws-itinerary-scripts', $uws_coreurl . '/assets/js/itinerary.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-itinerary-scripts', 'uwsitineraryvars', array(
+        'targetNonce' => wp_create_nonce('uwsitinerary'),
+    ));
+
     wp_register_script('uws-map-scripts', $uws_coreurl . '/assets/js/map.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-map-scripts', 'uwsmapvars', array(
+        'targetNonce' => wp_create_nonce('uwsmap'),
+    ));
+
     wp_register_script('uws-reservations-scripts', $uws_coreurl . '/assets/js/reservations.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-reservations-scripts', 'uwsreservationsvars', array(
+        'targetNonce' => wp_create_nonce('uwsreservations'),
+    ));
+
     wp_register_script('uws-hooks-ga4dl', $uws_coreurl . '/assets/js/hooks-ga4dl.js', false, 1);
     wp_register_script('uws-mapzoom', $uws_coreurl . '/assets/js/mapzoom.min.js', false, 1);
     wp_register_script('uws-mapthumbview', $uws_coreurl . '/assets/js/mapthumbview.js', false, $uv_assetsversion);
@@ -149,7 +181,12 @@ function uvscore_include_scripts(){
     wp_register_script('perfect-scrollbar', $uws_coreurl . '/assets/js/perfect-scrollbar.min.js', false, 1);
     wp_register_script('pristine', $uws_coreurl . '/assets/js/validate.min.js', false, 1);
     wp_register_script('uws-memberships', $uws_coreurl . '/assets/js/memberships.js', false, $uv_assetsversion);
+
     wp_register_script('uws-packages', $uws_coreurl . '/assets/js/packages.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-packages', 'uwspackagesvars', array(
+        'targetNonce' => wp_create_nonce('uwspackages'),
+    ));
 
     wp_enqueue_script('uwscore-scripts');
     wp_enqueue_script('uws-inventory-scripts');

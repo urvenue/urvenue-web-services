@@ -4,6 +4,9 @@ global $uws_path, $uws_config_uitheme;
 
 include_once($uws_path . "/includes/map-functions.php");
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsmap");
+
 $uvdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
 $uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
 $uvreturntempl = (isset($_REQUEST["returntempl"])) ? uws_cleanup_var($_REQUEST["returntempl"]) : "";

@@ -2,6 +2,9 @@
 
 global $uws_path, $uws_today;
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsexperiences");
+
 include_once($uws_path . "/includes/experiences-functions.php");
 
 $uvdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : $uws_today;

@@ -1,5 +1,8 @@
 <?php
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 //Add the thing to the cart
 $uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
 $uvmanagementid = (isset($_REQUEST["managementid"])) ? uws_cleanup_var($_REQUEST["managementid"]) : "";

@@ -1,5 +1,8 @@
 <?php
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 $uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
 $uvotid = (isset($_REQUEST["otid"])) ? uws_cleanup_var($_REQUEST["otid"]) : "";
 $uvresattr = (isset($_REQUEST["resatt"])) ? uws_cleanup_var($_REQUEST["resatt"]) : "";

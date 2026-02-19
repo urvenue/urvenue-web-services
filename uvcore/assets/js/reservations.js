@@ -112,7 +112,12 @@ uwsChangeListener(".uwsjs-inq-selectvenue", function (e) {
     uvform.querySelector(".uwsdy-inq-venueid").value = uvvenueid;
     uvform.querySelector(".uwsdy-inq-manageentid").value = uvmanageentid;
 
-    const uvleadtypesproxy = uws_proxy + "&uvaction=uwspx_getinquiryleadtypes&venuecode=" + uvvenuecode + "&manageentid=" + uvmanageentid;
+    var uvleadtypesproxy = uws_proxy + "&uvaction=uwspx_getinquiryleadtypes&venuecode=" + uvvenuecode + "&manageentid=" + uvmanageentid;
+
+    // @egt [UWS-7297]
+    if(typeof uwsreservationsvars !== "undefined" && uwsreservationsvars.targetNonce) {
+        uvleadtypesproxy = uvleadtypesproxy + "&uws_nonce=" + encodeURIComponent(uwsreservationsvars.targetNonce);
+    }
 
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvleadtypesproxy, true);
@@ -190,8 +195,13 @@ function uwsInitInquiryForm(uvform) {
         if (uvformvalid && uvdateisvalid) {
             uvform.closest(".uws-inquiryform-cont").classList.add("uwsloading");
 
-            const uvformproxy = uws_proxy + "&uvaction=uwspx_sendinquiry";
+            var uvformproxy = uws_proxy + "&uvaction=uwspx_sendinquiry";
             let uvformdata = new FormData(uvform);
+
+            // @egt [UWS-7297]
+            if(typeof uwsreservationsvars !== "undefined" && uwsreservationsvars.targetNonce) {
+                uvformproxy = uvformproxy + "&uws_nonce=" + encodeURIComponent(uwsreservationsvars.targetNonce);
+            }
 
             if (uvformdata.get('fname') && uvformdata.get('lname')) {
                 const partyname = uvformdata.get('fname') + ' ' + uvformdata.get('lname');
@@ -259,6 +269,12 @@ function uwsInqueryUpdateMonth(uvcheckdate) {
 
         let uvcloseddatesproxy = uws_proxy + "&uvaction=uwspx_closeddates";
         uvcloseddatesproxy = uvcloseddatesproxy + "&date=" + uws_datp + "&venuecode=" + uvvenuecode;
+
+        // @egt [UWS-7297]
+        if(typeof uwsreservationsvars !== "undefined" && uwsreservationsvars.targetNonce) {
+            uvcloseddatesproxy = uvcloseddatesproxy + "&uws_nonce=" + encodeURIComponent(uwsreservationsvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvcloseddatesproxy, true);
         uvrequest.onload = function () {

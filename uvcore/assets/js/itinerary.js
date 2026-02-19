@@ -71,6 +71,11 @@ uwsDOMReady(function(){
 function uwsInitItinerary(){
     let uvinititinerary = uws_proxy + "&uvaction=uwspx_itineraryinit";
     
+    // @egt [UWS-7297]
+    if(typeof uwsitineraryvars !== "undefined" && uwsitineraryvars.targetNonce) {
+        uvinititinerary = uvinititinerary + "&uws_nonce=" + encodeURIComponent(uwsitineraryvars.targetNonce);
+    }
+
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvinititinerary, true);
     uvrequest.onload = function(){

@@ -50,6 +50,11 @@ function uwsExpLoadDate(){
 
 	let uvexperiencesurl = uws_proxy + "&uvaction=uwspx_loadexperiences" + "&date=" + uvexpelem.getAttribute("data-date");
 
+	// @egt [UWS-7297]
+	if(typeof uwsexperiencesvars !== "undefined" && uwsexperiencesvars.targetNonce) {
+		uvexperiencesurl = uvexperiencesurl + "&uws_nonce=" + encodeURIComponent(uwsexperiencesvars.targetNonce);
+	}
+
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvexperiencesurl, true);
     uvrequest.onload = function(){
