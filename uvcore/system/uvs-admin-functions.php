@@ -263,6 +263,19 @@ function uvs_get_flyerlocdivhtml($uvflyerloccode = ""){
 
 	return $uvsflyerlocdivhtml;
 }
+// @Axl
+function uvs_allowed_admin_html() {
+	return array(
+		'input'  => array( 'type' => true, 'id' => true, 'class' => true, 'name' => true, 'value' => true, 'data-value-on' => true, 'data-value-off' => true, 'placeholder' => true, 'readonly' => true, 'disabled' => true ),
+		'select' => array( 'id' => true, 'class' => true, 'name' => true ),
+		'option' => array( 'value' => true, 'selected' => true ),
+		'div'    => array( 'class' => true ),
+		'button' => array( 'type' => true, 'class' => true ),
+		'span'   => array( 'class' => true ),
+	);
+}
+// @Axl End
+
 function uvs_get_adminfieldhtml($uvsfieldname){
 	global $uvs_admin_fields;
 
@@ -278,26 +291,48 @@ function uvs_get_adminfieldhtml($uvsfieldname){
 		$uvsinputaddclass = ($uvsinputtype == "colorpicker") ? $uvsinputaddclass . " uvs-color-field" : $uvsinputaddclass;
 		$uvsinputtype = ($uvsinputtype == "colorpicker" or $uvsinputtype == "page") ? "text" : $uvsinputtype;
 
+		// @Axl
+		$uvsinputvalue_esc    = esc_attr( $uvsinputvalue );
+		$uvsinputname_esc     = esc_attr( $uvsinputname );
+		$uvsinputaddclass_esc = esc_attr( $uvsinputaddclass );
+		$uvsinputtype_esc     = esc_attr( $uvsinputtype );
+		$uvsinputidattr_esc   = ( isset( $uvs_admin_fields[$uvsfieldname]["id"] ) ) ? "id='" . esc_attr( $uvs_admin_fields[$uvsfieldname]["id"] ) . "'" : "";
+		// @Axl End
+
 		if($uvs_admin_fields[$uvsfieldname]["type"] == "page" and uvs_is_wordpress()){
 			$uvpagesopts = uvs_get_wppages($uvsinputvalue);
 
-			$uvsfieldhtml = "<select $uvsinputidattr class='uvsjson $uvsinputaddclass' name='$uvsinputname'><option value=''>Select Page</option>$uvpagesopts</select>";
+			// @Axl
+			// $uvsfieldhtml = "<select $uvsinputidattr class='uvsjson $uvsinputaddclass' name='$uvsinputname'><option value=''>Select Page</option>$uvpagesopts</select>";
+			$uvsfieldhtml = "<select $uvsinputidattr_esc class='uvsjson $uvsinputaddclass_esc' name='$uvsinputname_esc'><option value=''>Select Page</option>$uvpagesopts</select>";
+			// @Axl End
 		}
 		else if($uvsinputtype == "select"){
 			$uvsselectvalues = $uvs_admin_fields[$uvsfieldname]["values"];
 
 			$uvsselectvalueshtml = uvs_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue);
 
-			$uvsfieldhtml = "<select $uvsinputidattr class='uvsjson $uvsinputaddclass' name='$uvsinputname'>$uvsselectvalueshtml</select>";
+			// @Axl
+			// $uvsfieldhtml = "<select $uvsinputidattr class='uvsjson $uvsinputaddclass' name='$uvsinputname'>$uvsselectvalueshtml</select>";
+			$uvsfieldhtml = "<select $uvsinputidattr_esc class='uvsjson $uvsinputaddclass_esc' name='$uvsinputname_esc'>$uvsselectvalueshtml</select>";
+			// @Axl End
 		}
 		else if($uvsinputtype == "switchui"){
 			$uvsswithclaass = ($uvsinputvalue == 1) ? "uvs-on" : "";
 
-			$uvsfieldhtml = "<div class='uvs-switch-ui $uvsswithclaass'><button class='uvsjs-trigger-switch' type='button'><span class='uvs-lb-on'>Yes</span><span class='uvs-lb-off'>No</span></button>
-			<input $uvsinputidattr class='uvsjson $uvsinputaddclass' type='hidden' name='$uvsinputname' value='$uvsinputvalue' data-value-on='1' data-value-off='0' $uvsinputattrs></div>";
+			// @Axl
+			// $uvsfieldhtml = "<div class='uvs-switch-ui $uvsswithclaass'><button class='uvsjs-trigger-switch' type='button'><span class='uvs-lb-on'>Yes</span><span class='uvs-lb-off'>No</span></button>
+			// <input $uvsinputidattr class='uvsjson $uvsinputaddclass' type='hidden' name='$uvsinputname' value='$uvsinputvalue' data-value-on='1' data-value-off='0' $uvsinputattrs></div>";
+			$uvsswithclaass_esc = esc_attr( $uvsswithclaass );
+			$uvsfieldhtml = "<div class='uvs-switch-ui $uvsswithclaass_esc'><button class='uvsjs-trigger-switch' type='button'><span class='uvs-lb-on'>Yes</span><span class='uvs-lb-off'>No</span></button>
+			<input $uvsinputidattr_esc class='uvsjson $uvsinputaddclass_esc' type='hidden' name='$uvsinputname_esc' value='$uvsinputvalue_esc' data-value-on='1' data-value-off='0' $uvsinputattrs></div>";
+			// @Axl End
 		}
 		else
-			$uvsfieldhtml = "<input $uvsinputidattr class='uvsjson $uvsinputaddclass' type='$uvsinputtype' name='$uvsinputname' value='$uvsinputvalue' $uvsinputattrs>";
+			// @Axl
+			// $uvsfieldhtml = "<input $uvsinputidattr class='uvsjson $uvsinputaddclass' type='$uvsinputtype' name='$uvsinputname' value='$uvsinputvalue' $uvsinputattrs>";
+			$uvsfieldhtml = "<input $uvsinputidattr_esc class='uvsjson $uvsinputaddclass_esc' type='$uvsinputtype_esc' name='$uvsinputname_esc' value='$uvsinputvalue_esc' $uvsinputattrs>";
+			// @Axl End
 	}
 
 	return $uvsfieldhtml;
@@ -348,7 +383,10 @@ function uvs_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue){
 
 			$uvsslvalueattr = ($uvsinputvalue == $uvsslvalueval) ? "selected" : "";
 
-			$uvsselectvalueshtml .= "<option value='$uvsslvalueval' $uvsslvalueattr>$uvsslvaluelabel</option>";
+			// @Axl
+		// $uvsselectvalueshtml .= "<option value='$uvsslvalueval' $uvsslvalueattr>$uvsslvaluelabel</option>";
+		$uvsselectvalueshtml .= "<option value='" . esc_attr( $uvsslvalueval ) . "' $uvsslvalueattr>" . esc_html( $uvsslvaluelabel ) . "</option>";
+		// @Axl End
 		}
 	}
 
@@ -391,7 +429,10 @@ function uvs_get_string2u($string, $uchar){
 
 /* UV Error */
 function uvs_uverror($uvserror){
-	echo($uvserror);
+	// @Axl
+	// echo($uvserror);
+	echo esc_html( $uvserror );
+	// @Axl End
 }
 
 //Check if is wordpress
@@ -431,7 +472,10 @@ function uvs_get_wppages($uvselpageid = ""){
 		if($uvpageparent > 0)
 			$uvparenttag = "$uvpageparenttitle > ";
 		
-		$uvpagelist .= "<option value='$uvpageid' $uvselected>{$uvparenttag}{$uvpagetitle}</option>";
+		// @Axl
+		// $uvpagelist .= "<option value='$uvpageid' $uvselected>{$uvparenttag}{$uvpagetitle}</option>";
+		$uvpagelist .= "<option value='" . esc_attr( $uvpageid ) . "' $uvselected>" . esc_html( $uvparenttag . $uvpagetitle ) . "</option>";
+		// @Axl End
 	}
 
 	return $uvpagelist;

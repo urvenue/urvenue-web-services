@@ -113,7 +113,10 @@ function uws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){
         // Only add details if it's not already part of the processed message
         if(!is_string($uvnoticedetails) || (is_string($uvnoticedetails) && empty($uvnoticedetails))){
             if (is_array($uvnoticedetails) || is_object($uvnoticedetails)) {
-                $uvdetails = json_encode($uvnoticedetails, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+                // @Axl
+                // $uvdetails = json_encode($uvnoticedetails, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+                $uvdetails = wp_json_encode($uvnoticedetails, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+                // @Axl End
             } else {
                 $uvdetails = trim((string)$uvnoticedetails);
             }
@@ -138,11 +141,14 @@ function uws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){
         //     CURLOPT_TIMEOUT        => 8,
         // ));
 
+        // @Axl
+        // 'body' => json_encode($uvpayload),
         $uvwpresponse = wp_remote_post($uvwebhook, array(
             'headers' => array('Content-Type' => 'application/json; charset=utf-8'),
-            'body' => json_encode($uvpayload),
+            'body' => wp_json_encode($uvpayload),
             'timeout' => 8,
         ));
+        // @Axl End
 
         // TESTING @Axl
         // curl_exec($ch);

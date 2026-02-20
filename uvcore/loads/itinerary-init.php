@@ -9,6 +9,9 @@ $uvitineraryinfo = array(
     "tooltips" => $uvittootipitems,
 );
 
-$uvreturnjson = json_encode($uvitineraryinfo);
+// @Axl
+// $uvreturnjson = json_encode($uvitineraryinfo);
+$uvreturnjson = wp_json_encode($uvitineraryinfo);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

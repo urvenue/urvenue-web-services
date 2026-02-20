@@ -57,7 +57,10 @@ function uws_events($uvargs = ""){
     </div>
     ";
 
-    echo $uveventshtml;
+    // @Axl
+    // echo $uveventshtml;
+    echo wp_kses_post( $uveventshtml );
+    // @Axl End
 }
 
 /*Get events views
@@ -206,7 +209,10 @@ function uws_events_views($uvargs = "", $uvreturnarray = false)
     $uveventsschema = (is_array($uveventsseo)) ? uws_get_events_schema($uveventsseo) : "";
 
     if ($uveventsschema) {
-        $uveventsschemajson = json_encode($uveventsschema);
+        // @Axl
+        // $uveventsschemajson = json_encode($uveventsschema);
+        $uveventsschemajson = wp_json_encode($uveventsschema);
+        // @Axl End
         $uveventsschemainline .= "";
         $uvviewshtml .= $uveventsschemainline;
 
@@ -2016,7 +2022,10 @@ function uws_event($uvargs = ""){
         //$uveventproxiesscript = uws_get_proxies_script("inventory-init");
 
         if($uvgeteventschema){
-            $uvgeteventschemajson = json_encode($uvgeteventschema);
+            // @Axl
+            // $uvgeteventschemajson = json_encode($uvgeteventschema);
+            $uvgeteventschemajson = wp_json_encode($uvgeteventschema);
+            // @Axl End
 	        $uveventschemainline .= "";
 
             // @egt [UWS-7264]
@@ -2067,7 +2076,10 @@ function uws_event($uvargs = ""){
 
     $uveventhtml = uws_apply_filters("uws_event_page_after_replace", $uveventhtml, $uveventinfo);
 
-    echo $uveventhtml;
+    // @Axl
+    // echo $uveventhtml;
+    echo wp_kses_post( $uveventhtml );
+    // @Axl End
 }
 
 /*Get event schema

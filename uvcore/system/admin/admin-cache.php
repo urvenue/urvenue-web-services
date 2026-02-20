@@ -9,7 +9,7 @@ $uvsinpapikey = uvs_get_adminfieldhtml("cache->apikey");
 $uvisuvuser = uvs_is_uv_email();
 $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 ?>
-<div id="uvs-admin-cache" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['cache']; ?>">
+<div id="uvs-admin-cache" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['cache']; */ echo esc_attr( $uvs_admin_optstabs_state['cache'] ); ?>">
 	<!-- <div class="uv-loader-uvicon"></div> -->
     <div class="uvs-admin-opt-title">UWS Cache</div>
 	<div class="uvs-admin-opt-subtitle">Please fill out every field to activate the <strong>Clear Cache</strong> functionality.</div>
@@ -30,17 +30,20 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 			<small>Provide this URL to the Backend Team.</small>
 			<?php if(uvs_get_fieldvalue_by_stringroute("cache->endpoint") != ""): ?>
 				<div class="uvs-btn-group">
-					<button class="uvsjs-clearcache uvs-btn uvs-btn-p" data-endpoint="<?php echo $uvcacheendpoint; ?>">
+					<button class="uvsjs-clearcache uvs-btn uvs-btn-p" data-endpoint="<?php /* Old: echo $uvcacheendpoint; */ echo esc_attr( $uvcacheendpoint ); ?>">
 						Clear Cache
 					</button>
-					<button class="uvsjs-copyendpoint uvs-btn uvs-btn-p" data-endpoint="<?php echo $uvcacheendpoint; ?>">
+					<button class="uvsjs-copyendpoint uvs-btn uvs-btn-p" data-endpoint="<?php /* Old: echo $uvcacheendpoint; */ echo esc_attr( $uvcacheendpoint ); ?>">
 						Copy Endpoint
 					</button>
 				</div>
 			<?php endif; ?>
 		</div>
 		<div class="uvsvalue">
-			<?php echo $uvsinpendpoint; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsinpendpoint; */ ?>
+			<?php echo wp_kses( $uvsinpendpoint, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
     </div>
 	
@@ -53,21 +56,30 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 					</small>
 				</div>
 				<div class="uvsvalue">
-					<?php echo $uvswpeinstid; ?>
+					<?php // @Axl ?>
+					<?php /* Old: echo $uvswpeinstid; */ ?>
+					<?php echo wp_kses( $uvswpeinstid, uvs_allowed_admin_html() ); ?>
+					<?php // @Axl End ?>
 				</div>
 			</div>
 
 			<div class="uvs-infolist-item uvs-clearfix">
 				<div class="uvsname">WP Engine Username</div>
 				<div class="uvsvalue">
-					<?php echo $uvsinpwpeusername; ?>
+					<?php // @Axl ?>
+					<?php /* Old: echo $uvsinpwpeusername; */ ?>
+					<?php echo wp_kses( $uvsinpwpeusername, uvs_allowed_admin_html() ); ?>
+					<?php // @Axl End ?>
 				</div>
 			</div>
 
 			<div class="uvs-infolist-item uvs-clearfix" style="border:none;">
 				<div class="uvsname">WP Engine Password</div>
 				<div class="uvsvalue">
-					<?php echo $uvsinpwpepassword; ?>
+					<?php // @Axl ?>
+					<?php /* Old: echo $uvsinpwpepassword; */ ?>
+					<?php echo wp_kses( $uvsinpwpepassword, uvs_allowed_admin_html() ); ?>
+					<?php // @Axl End ?>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -81,7 +93,10 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 				<small>(Auto-generated)</small>
 			</div>
 			<div class="uvsvalue">
-				<?php echo $uvsinpapikey; ?>
+				<?php // @Axl ?>
+				<?php /* Old: echo $uvsinpapikey; */ ?>
+				<?php echo wp_kses( $uvsinpapikey, uvs_allowed_admin_html() ); ?>
+				<?php // @Axl End ?>
 			</div>
 		</div>
     <?php endif; ?>

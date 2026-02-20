@@ -39,7 +39,10 @@ function uws_itinerary(){
         $uvitineraryconttemp
     );
 
-    echo $uvitinerary;
+    // @Axl
+    // echo $uvitinerary;
+    echo wp_kses_post( $uvitinerary );
+    // @Axl End
 }
 
 /*Get Week View html

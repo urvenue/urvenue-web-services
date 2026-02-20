@@ -18,7 +18,10 @@ function uws_events(){
         <div class='uws-events-views'>$uveventsviews</div>
     </div>";
 
-    echo $uveventshtml;
+    // @Axl
+    // echo $uveventshtml;
+    echo wp_kses_post( $uveventshtml );
+    // @Axl End
 }
 
 /*Get events views*/

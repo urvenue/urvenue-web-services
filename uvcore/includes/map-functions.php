@@ -15,7 +15,10 @@ function uws_map($uvargs = ""){
     }
     else{
         $uvmaphtml = uws_get_map($uvargs);
-        echo $uvmaphtml;
+        // @Axl
+        // echo $uvmaphtml;
+        echo wp_kses_post( $uvmaphtml );
+        // @Axl End
     }
 }
 

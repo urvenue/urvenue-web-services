@@ -49,6 +49,9 @@ $uvreturnarray = array(
     "msg" => $uvpopcontent
 );
 
-$uvreturnjson = json_encode($uvreturnarray);
+// @Axl
+// $uvreturnjson = json_encode($uvreturnarray);
+$uvreturnjson = wp_json_encode($uvreturnarray);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

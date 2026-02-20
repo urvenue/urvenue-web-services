@@ -32,7 +32,7 @@ add_action('wp_enqueue_scripts', 'uvwp_adminpage_styles');
 	</div>
 
 	<div class="uvs-logo">
-		<a href="https://urvenue.com/"><img src="<?php echo $uvs_url; ?>/assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
+		<a href="https://urvenue.com/"><img src="<?php /* Old: echo $uvs_url; */ echo esc_url( $uvs_url ); ?>/assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
 	</div>
 	
 	<div class="uvs-content">
@@ -54,7 +54,10 @@ add_action('wp_enqueue_scripts', 'uvwp_adminpage_styles');
 
 // @egt [UWS-7264]
 add_action('wp_footer', function () use ($uvs_core_lib) {
-	echo "<script>var uvs_core_lib = " . json_encode($uvs_core_lib) . ";</script>";
+	// @Axl
+	// echo "<script>var uvs_core_lib = " . json_encode($uvs_core_lib) . ";</script>";
+	echo "<script>var uvs_core_lib = " . wp_json_encode($uvs_core_lib) . ";</script>";
+	// @Axl End
 });
 
 ?>

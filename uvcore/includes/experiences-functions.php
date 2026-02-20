@@ -70,7 +70,10 @@ function uws_experiences($uvargs = ""){
         </div>
     ";
 
-    echo $uvexperienceshtml;
+    // @Axl
+    // echo $uvexperienceshtml;
+    echo wp_kses_post( $uvexperienceshtml );
+    // @Axl End
 }
 
 /*Get Related Experiences
@@ -107,7 +110,10 @@ function uws_related_experiences($uvargs = ""){
         </div>
     ";
 
-    echo $uvexperienceshtml;
+    // @Axl
+    // echo $uvexperienceshtml;
+    echo wp_kses_post( $uvexperienceshtml );
+    // @Axl End
 }
 
 /*Get Experiences List

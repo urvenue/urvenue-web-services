@@ -8,20 +8,23 @@
 $uvsartistslistview = uvs_get_adminfieldhtml("artists->artist-listview");
 $uvsartistsbuttonlabel = uvs_get_adminfieldhtml("artists->artist-buttonlabel");
 ?>
-<div id="uvs-admin-artists-list" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['artists-list']; ?>">
+<?php // @Axl ?>
+<!-- <div id="uvs-admin-artists-list" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['artists-list']; ?>"> -->
+<div id="uvs-admin-artists-list" class="uvs-admin-opt-section <?php echo esc_attr( $uvs_admin_optstabs_state['artists-list'] ); ?>">
     <div class="uvs-admin-opt-title">Artist List</div>
     <div class="uvs-admin-opt-space"></div>
 
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">List View</div>
 		<div class="uvsvalue">
-			<?php echo $uvsartistslistview; ?>
+			<?php /* Old: echo $uvsartistslistview; */ echo wp_kses( $uvsartistslistview, uvs_allowed_admin_html() ); ?>
 		</div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Button Label</div>
 		<div class="uvsvalue">
-			<?php echo $uvsartistsbuttonlabel; ?>
+			<?php /* Old: echo $uvsartistsbuttonlabel; */ echo wp_kses( $uvsartistsbuttonlabel, uvs_allowed_admin_html() ); ?>
 		</div>
     </div>
 </div>
+<?php // @Axl End ?>

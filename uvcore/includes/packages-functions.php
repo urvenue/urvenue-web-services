@@ -6,7 +6,10 @@
 */
 function uws_packages($uvargs = ""){
     $uvpackageshtml = uws_get_packages($uvargs);
-    echo $uvpackageshtml;
+    // @Axl
+    // echo $uvpackageshtml;
+    echo wp_kses_post( $uvpackageshtml );
+    // @Axl End
 }
 
 /*Get html of the packages integration
