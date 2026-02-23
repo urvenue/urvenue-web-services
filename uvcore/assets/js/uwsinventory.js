@@ -190,6 +190,11 @@ function uwsLoadItemInquireForm(uvitem) {
         let uvloadinqitem = uws_inventory.proxies["item-inquireform"];
         uvloadinqitem = uvloadinqitem + uwsInvGetItemCartVars(uvitem);
 
+        // @egt [UWS-7297]
+        if(typeof uwsinventoryvars !== "undefined" && uwsinventoryvars.targetNonce) {
+            uvloadinqitem = uvloadinqitem + "&uws_nonce=" + encodeURIComponent(uwsinventoryvars.targetNonce);
+        }
+
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvloadinqitem, true);
         uvrequest.onload = function () {

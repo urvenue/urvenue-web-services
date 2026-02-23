@@ -18,11 +18,11 @@ switch ($nonceaction) {
         wp_send_json_error(['message' => 'Invalid action'], 400);
 }
 
-$uvdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-$uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
-$uvecozone = (isset($_REQUEST["ecozone"])) ? uws_cleanup_var($_REQUEST["ecozone"]) : "ECZ0";
-$uvglobaltype = (isset($_REQUEST["globaltype"])) ? uws_cleanup_var($_REQUEST["globaltype"]) : "";
-$uvmixecozones = (isset($_REQUEST["mixecozones"])) ? uws_cleanup_var($_REQUEST["mixecozones"]) : "";
+$uvdate = uws_cleanup_request("date");
+$uvvenuecode = uws_cleanup_request("venuecode");
+$uvecozone = uws_cleanup_request("ecozone", "ECZ0");
+$uvglobaltype = uws_cleanup_request("globaltype");
+$uvmixecozones = uws_cleanup_request("mixecozones");
 
 $uvreturn = array();
 

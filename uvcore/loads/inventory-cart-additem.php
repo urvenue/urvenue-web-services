@@ -5,7 +5,7 @@ global $uws_core_lib;
 // @egt [UWS-7297]
 uws_check_nonce("uwsinventory");
 
-$uvcheckoutinfo = (isset($_REQUEST["checkoutinfo"])) ? uws_cleanup_var($_REQUEST["checkoutinfo"]) : "";
+$uvcheckoutinfo = uws_cleanup_request("checkoutinfo");
 $uvforcecheckotv1 = ($uvcheckoutinfo == "forcecheckoutv1") ? 1 : 0;
 
 if($uvforcecheckotv1){

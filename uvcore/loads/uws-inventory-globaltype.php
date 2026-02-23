@@ -5,14 +5,14 @@ global $uws_proxies_lib;
 // @egt [UWS-7297]
 uws_check_nonce("uwsinventory");
 
-$uveventcode = (isset($_REQUEST["eventcode"])) ? uws_cleanup_var($_REQUEST["eventcode"]) : "";
-$uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
-$uvintegration = (isset($_REQUEST["integration"])) ? uws_cleanup_var($_REQUEST["integration"]) : "";
-$uvreturntempl = (isset($_REQUEST["returntempl"])) ? uws_cleanup_var($_REQUEST["returntempl"]) : "";
-$uvglobaltype = (isset($_REQUEST["globaltype"])) ? uws_cleanup_var($_REQUEST["globaltype"]) : "";
-$uvshoweventsdropdown = (isset($_REQUEST["showeventsdropdown"])) ? uws_cleanup_var($_REQUEST["showeventsdropdown"]) : 0;
-$uvbooktypename = (isset($_REQUEST["booktypename"])) ? uws_cleanup_var($_REQUEST["booktypename"]) : "";
-$uvmixecozones = (isset($_REQUEST["mixecozones"])) ? uws_cleanup_var($_REQUEST["mixecozones"]) : 0;
+$uveventcode = uws_cleanup_request("eventcode");
+$uvcartcode = uws_cleanup_request("cartcode");
+$uvintegration = uws_cleanup_request("integration");
+$uvreturntempl = uws_cleanup_request("returntempl");
+$uvglobaltype = uws_cleanup_request("globaltype");
+$uvshoweventsdropdown = uws_cleanup_request("showeventsdropdown", 0);
+$uvbooktypename = uws_cleanup_request("booktypename");
+$uvmixecozones = uws_cleanup_request("mixecozones", 0);
 
 // Check if ecozones are valid (all must have non-empty names)
 $uvevtdata = uws_get_event($uveventcode);
@@ -34,11 +34,11 @@ $uvargs = array(
 );
 
 // Add-On Venues
-$uvaddonvenues = (isset($_REQUEST["addonvenues"])) ? uws_cleanup_var($_REQUEST["addonvenues"]) : 0;
-$uvmainvenuecode = (isset($_REQUEST["mainvenuecode"])) ? uws_cleanup_var($_REQUEST["mainvenuecode"]) : "";
-$uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
-$uvmicrcodode = (isset($_REQUEST["microcode"])) ? uws_cleanup_var($_REQUEST["microcode"]) : "";
-$uvhomeeventcode = (isset($_REQUEST["homeeventcode"])) ? uws_cleanup_var($_REQUEST["homeeventcode"]) : "";
+$uvaddonvenues = uws_cleanup_request("addonvenues", 0);
+$uvmainvenuecode = uws_cleanup_request("mainvenuecode");
+$uvvenuecode = uws_cleanup_request("venuecode");
+$uvmicrcodode = uws_cleanup_request("microcode");
+$uvhomeeventcode = uws_cleanup_request("homeeventcode");
 
 if($uvaddonvenues) {
     $uvargs["mainvenuecode"] = $uvmainvenuecode;

@@ -7,7 +7,7 @@ uws_check_nonce("uwsexperiences");
 
 include_once($uws_path . "/includes/experiences-functions.php");
 
-$uvdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : $uws_today;
+$uvdate = uws_cleanup_request("date", $uws_today);
 
 $uvexperiences = uws_get_dummyapi("experiences");
 $uvinvitems = uws_inventory_microcode_items(array("date" => $uvdate));

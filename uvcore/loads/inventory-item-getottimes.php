@@ -3,11 +3,11 @@
 // @egt [UWS-7297]
 uws_check_nonce("uwsinventory");
 
-$uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
-$uvotid = (isset($_REQUEST["otid"])) ? uws_cleanup_var($_REQUEST["otid"]) : "";
-$uvresattr = (isset($_REQUEST["resatt"])) ? uws_cleanup_var($_REQUEST["resatt"]) : "";
-$uvdate = (isset($_REQUEST["caldate"])) ? uws_cleanup_var($_REQUEST["caldate"]) : "";
-$uvguests = (isset($_REQUEST["guests"])) ? uws_cleanup_var($_REQUEST["guests"]) : "";
+$uvmastercode = uws_cleanup_request("mastercode");
+$uvotid = uws_cleanup_request("otid");
+$uvresattr = uws_cleanup_request("resatt");
+$uvdate = uws_cleanup_request("caldate");
+$uvguests = uws_cleanup_request("guests");
 
 $uvotdata = "otid:" . $uvotid . "|resatt:" . $uvresattr;
 $uvotargs = array(

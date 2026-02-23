@@ -3,9 +3,9 @@
 // @egt [UWS-7297]
 uws_check_nonce("uwsevents");
 
-$uvfromdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-$uvtodate = (isset($_REQUEST["enddate"])) ? uws_cleanup_var($_REQUEST["enddate"]) : "";
-$uvvenue = (isset($_REQUEST["venue"])) ? uws_cleanup_var($_REQUEST["venue"]) : "";
+$uvfromdate = uws_cleanup_request("date");
+$uvtodate = uws_cleanup_request("enddate");
+$uvvenue = uws_cleanup_request("venue");
 
 $uvreturnjson = "";
 $uvresponse = array(

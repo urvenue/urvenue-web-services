@@ -3,8 +3,8 @@
 // @egt [UWS-7297]
 uws_check_nonce("uwsevents");
 
-$uveventcodes = (isset($_REQUEST["eventcodes"])) ? uws_cleanup_var($_REQUEST["eventcodes"]) : "";
-$uvtemplates = (isset($_REQUEST["templates"])) ? uws_cleanup_var($_REQUEST["templates"]) : "";
+$uveventcodes = uws_cleanup_request("eventcodes");
+$uvtemplates = uws_cleanup_request("templates");
 
 $uveventhtml = "";
 //support multiple events templates on the future

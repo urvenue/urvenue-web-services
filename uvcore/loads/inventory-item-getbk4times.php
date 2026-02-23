@@ -3,11 +3,11 @@
 // @egt [UWS-7297]
 uws_check_nonce("uwsinventory");
 
-$uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
-$uvdate = (isset($_REQUEST["caldate"])) ? uws_cleanup_var($_REQUEST["caldate"]) : "";
-$uvguests = (isset($_REQUEST["guests"])) ? uws_cleanup_var($_REQUEST["guests"]) : "";
-$uvextdatajson = (isset($_REQUEST["ext_datajson"])) ? uws_cleanup_var($_REQUEST["ext_datajson"]) : "";
-$uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
+$uvmastercode = uws_cleanup_request("mastercode");
+$uvdate = uws_cleanup_request("caldate");
+$uvguests = uws_cleanup_request("guests");
+$uvextdatajson = uws_cleanup_request("ext_datajson");
+$uvvenuecode = uws_cleanup_request("venuecode");
 $uvextdatajson = ($uvextdatajson) ? stripslashes(html_entity_decode($uvextdatajson)) : $uvextdatajson;
 
 $uvbk4args = array(

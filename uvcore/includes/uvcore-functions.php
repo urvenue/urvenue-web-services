@@ -673,3 +673,16 @@ function uws_check_nonce($uvnonce) {
 		wp_send_json_error(array('message' => 'Invalid nonce'), 403);
 	}
 }
+
+// @egt [UWS-7297]
+function uws_cleanup_request(string $uv_request, string $uv_default = ''): string {
+    if(!isset($_REQUEST[$uv_request])) {
+        return $uv_default;
+    }
+
+    return uws_cleanup_var(
+        sanitize_text_field(
+            wp_unslash($_REQUEST[$uv_request])
+        )
+    );
+}

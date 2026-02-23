@@ -5,11 +5,11 @@ global $uws_proxies_lib;
 // @egt [UWS-7297]
 uws_check_nonce("uwsinventory");
 
-$uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
-$uvsectionid = (isset($_REQUEST["sectionid"])) ? uws_cleanup_var($_REQUEST["sectionid"]) : "";
-$uvlocationid = (isset($_REQUEST["locationid"])) ? uws_cleanup_var($_REQUEST["locationid"]) : "";
-$uvforcenew = (isset($_REQUEST["forcenew"])) ? uws_cleanup_var($_REQUEST["forcenew"]) : "";
-$uvpricingbreakdown = (isset($_REQUEST["pricingbreakdown"])) ? uws_cleanup_var($_REQUEST["pricingbreakdown"]) : "";
+$uvmastercode = uws_cleanup_request("mastercode");
+$uvsectionid = uws_cleanup_request("sectionid");
+$uvlocationid = uws_cleanup_request("locationid");
+$uvforcenew = uws_cleanup_request("forcenew");
+$uvpricingbreakdown = uws_cleanup_request("pricingbreakdown");
 $uvitem = uws_get_invitem($uvmastercode);
 $uviteminfo = $uvitem["info"];
 $uvitempop = "";
