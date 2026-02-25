@@ -57,10 +57,7 @@ function uws_events($uvargs = ""){
     </div>
     ";
 
-    // @Axl
-    // echo $uveventshtml;
-    echo wp_kses_post( $uveventshtml );
-    // @Axl End
+    echo $uveventshtml;
 }
 
 /*Get events views
@@ -2076,10 +2073,7 @@ function uws_event($uvargs = ""){
 
     $uveventhtml = uws_apply_filters("uws_event_page_after_replace", $uveventhtml, $uveventinfo);
 
-    // @Axl
-    // echo $uveventhtml;
-    echo wp_kses_post( $uveventhtml );
-    // @Axl End
+    echo $uveventhtml;
 }
 
 /*Get event schema
