@@ -13,6 +13,10 @@ $uvsboxpanelclass = (is_array($uvs_core_lib) and !$uvs_core_lib["system"]["apike
 			<div class="uvs-adminbox-corever"><?php echo $uws_core_version; ?></div>
 		</div>
 
+		<?php // @egt [UWS-7297]
+		//wp_nonce_field('uvsp_adminsave_action', 'uvsp_adminsave_nonce'); ?>
+		<input class="uvsjson" type="hidden" name="uvsp_adminsave_nonce" value="<?php echo esc_attr( wp_create_nonce('uvsp_adminsave_action') ); ?>">
+		
 		<div class="uvs-adminbox-credentials">
 			<?php include_once($uvs_path . "/system/admin/admin-apiconfig.php"); ?>
 		</div>

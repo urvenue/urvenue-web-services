@@ -237,6 +237,22 @@ function uwswpplug_add_query_vars($query_vars){
     return $query_vars;
 }
 
+// @egt [UWS-7297] 
+// moved flush and nonce check to wp_ajax_uvpx since lifecycle for init is too early and wont let nonce check work properly
+add_action('wp_ajax_uvpx', 'uvpx_ajax_handler');
+function uvpx_ajax_handler() {
+    if(!isset($_POST['uvsp_adminsave_nonce']) ||
+    !wp_verify_nonce(wp_unslash($_POST['uvsp_adminsave_nonce']), 'uvsp_adminsave_action')) {
+        wp_send_json_error(['message' => 'Invalid nonce'], 403);
+    }
+
+    if(isset($_POST['uvaction']) && $_POST['uvaction'] === 'uvsp_adminsave') {
+        update_option('uv-flush-pending', 1);
+    }
+
+    wp_send_json_success();
+}
+
 //Pages URLs rewrite rules
 add_action('init', function(){
 	global $uws_core_lib;
@@ -245,8 +261,6 @@ add_action('init', function(){
         flush_rewrite_rules();
         update_option( 'uv-flush-pending', 0);
     }
-    if(isset($_REQUEST["uvaction"]) and $_REQUEST["uvaction"] and $_REQUEST["uvaction"] == "uvsp_adminsave")//add flush to pending
-        update_option('uv-flush-pending', 1);
 	
     //Event Page Rewrite
     $uvsingleeventpageid = $uws_core_lib["pages"]["singleevent"];
