@@ -36,11 +36,50 @@ UrVenue Web Services connects your WordPress site with the [UrVenue](https://www
 
 = External Service =
 
-This plugin connects to the **UrVenue API** (`https://api.urvenue.com/`) to retrieve event data, venue information, and inventory. All event and booking data is fetched from and processed through UrVenue servers.
+This plugin connects to external services to provide event, inventory, checkout and optional cache purge functionality.
+
+1) UrVenue / UvTix API
+Service: UrVenue API (UvTix)
+URL: https://uvtix.com/api/
+Purpose: Retrieve venue/event/inventory data used by the plugin.
+Data sent: Request parameters such as venue identifiers, source codes, and API key (if configured).
+Data received: Venue/event/inventory data in JSON format.
+
+2) UrVenue Microsite API
+Service: UrVenue Microsite API
+URL: https://{envicode}.urvenue.me/
+Purpose: Retrieve microsite user/venue data used by the plugin.
+Data sent: API key (if configured), sourcecode, sourceloc, and request parameters.
+Data received: JSON payload with microsite data.
+
+3) Checkout / Booking service (Booketing / UrVenue checkout)
+Service: Booking/Checkout
+URL: https://booketing.com/
+Purpose: Redirect users to cart/checkout/payment/success pages.
+Data sent: Query parameters such as cart code, sourcecode, sourceloc, manageentid, resellerid, providerid, language, and optional environment parameters.
+Data received: Checkout pages rendered by the external service.
+
+4) Google Maps (link generation)
+Service: Google Maps Search
+URL: https://www.google.com/maps/search/?api=1
+Purpose: Generate a Google Maps link for venue locations.
+Data sent: Query parameter containing venue name/address.
+Data received: Map search results displayed by Google Maps.
+
+5) WP Engine Cache Purge (optional)
+Service: WP Engine API
+URL: https://api.wpengineapi.com/
+Purpose: Purge cache for WP Engine installs (only if the site is hosted on WP Engine and the feature is enabled/configured).
+Data sent: Install ID and authentication headers configured by the site administrator.
+Data received: API response confirming purge status.
+
+This plugin connects to the **UrVenue API** (https://api.urvenue.com/) to retrieve event data, venue information, and inventory. All event and booking data is fetched from and processed through UrVenue servers.
 
 * UrVenue website: [https://www.urvenue.com/](https://www.urvenue.com/)
 * Terms of Service: [https://www.urvenue.com/legal/terms-conditions/](https://www.urvenue.com/legal/terms-conditions/)
 * Privacy Policy: [https://www.urvenue.com/privacy-policy/](https://www.urvenue.com/privacy-policy/)
+
+
 
 == Installation ==
 
