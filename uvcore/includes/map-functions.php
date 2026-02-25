@@ -331,7 +331,6 @@ function uws_get_map_venuesel($uvvenuecode){
             <a href='#uws-openvenueselection' class='uwsjs-trigger-dropdown' aria-label='Select Venue'><span class='uwsdy-dropvalue'>$uvvenuename</span></a>
             <div class='uws-dropdown'>
                 <ul>
-                    <!--<li class='uwscurrent'><button class='uwsjs-events-selectvenue' aria-label='Select All Venues' type='button' data-venue='all'>All<span> Venues</span></button></li>-->
                     $uvvenueslist
                 </ul>
             </div>
