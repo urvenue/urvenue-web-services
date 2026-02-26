@@ -133,15 +133,47 @@ function uvscore_include_scripts(){
 
     //Specific pages scrips
     wp_register_script('uws-events-scripts', $uws_coreurl . '/assets/js/events.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-events-scripts', 'uwseventsvars', array(
+        'targetNonce' => wp_create_nonce('uwsevents'),
+    ));
+
     wp_register_script('litepicker', $uws_coreurl . '/assets/js/litepicker.min.js', false, 1);
     wp_register_script('nouislider', $uws_coreurl . '/assets/js/nouislider.min.js', false, 1);
     wp_register_script('hammer', $uws_coreurl . '/assets/js/hammer.min.js', false, 1);
+
     wp_register_script('uws-inventory-scripts', $uws_coreurl . '/assets/js/uwsinventory.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-inventory-scripts', 'uwsinventoryvars', array(
+        'targetNonce' => wp_create_nonce('uwsinventory'),
+    ));
+
     wp_register_script('uws-experiences-scripts', $uws_coreurl . '/assets/js/experiences.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-experiences-scripts', 'uwsexperiencesvars', array(
+        'targetNonce' => wp_create_nonce('uwsexperiences'),
+    ));
+
     wp_register_script('uws-invitempage-scripts', $uws_coreurl . '/assets/js/invitempage.js', false, $uv_assetsversion);
+
 	wp_register_script('uws-itinerary-scripts', $uws_coreurl . '/assets/js/itinerary.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-itinerary-scripts', 'uwsitineraryvars', array(
+        'targetNonce' => wp_create_nonce('uwsitinerary'),
+    ));
+
     wp_register_script('uws-map-scripts', $uws_coreurl . '/assets/js/map.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-map-scripts', 'uwsmapvars', array(
+        'targetNonce' => wp_create_nonce('uwsmap'),
+    ));
+
     wp_register_script('uws-reservations-scripts', $uws_coreurl . '/assets/js/reservations.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-reservations-scripts', 'uwsreservationsvars', array(
+        'targetNonce' => wp_create_nonce('uwsreservations'),
+    ));
+
     wp_register_script('uws-hooks-ga4dl', $uws_coreurl . '/assets/js/hooks-ga4dl.js', false, 1);
     wp_register_script('uws-mapzoom', $uws_coreurl . '/assets/js/mapzoom.min.js', false, 1);
     wp_register_script('uws-mapthumbview', $uws_coreurl . '/assets/js/mapthumbview.js', false, $uv_assetsversion);
@@ -149,7 +181,12 @@ function uvscore_include_scripts(){
     wp_register_script('perfect-scrollbar', $uws_coreurl . '/assets/js/perfect-scrollbar.min.js', false, 1);
     wp_register_script('pristine', $uws_coreurl . '/assets/js/validate.min.js', false, 1);
     wp_register_script('uws-memberships', $uws_coreurl . '/assets/js/memberships.js', false, $uv_assetsversion);
+
     wp_register_script('uws-packages', $uws_coreurl . '/assets/js/packages.js', false, $uv_assetsversion);
+    // @egt [UWS-7297]
+    wp_localize_script('uws-packages', 'uwspackagesvars', array(
+        'targetNonce' => wp_create_nonce('uwspackages'),
+    ));
 
     wp_enqueue_script('uwscore-scripts');
     wp_enqueue_script('uws-inventory-scripts');
@@ -200,6 +237,22 @@ function uwswpplug_add_query_vars($query_vars){
     return $query_vars;
 }
 
+// @egt [UWS-7297] 
+// moved flush and nonce check to wp_ajax_uvpx since lifecycle for init is too early and wont let nonce check work properly
+add_action('wp_ajax_uvpx', 'uvpx_ajax_handler');
+function uvpx_ajax_handler() {
+    if(!isset($_POST['uvsp_adminsave_nonce']) ||
+    !wp_verify_nonce(wp_unslash($_POST['uvsp_adminsave_nonce']), 'uvsp_adminsave_action')) {
+        wp_send_json_error(['message' => 'Invalid nonce'], 403);
+    }
+
+    if(isset($_POST['uvaction']) && $_POST['uvaction'] === 'uvsp_adminsave') {
+        update_option('uv-flush-pending', 1);
+    }
+
+    wp_send_json_success();
+}
+
 //Pages URLs rewrite rules
 add_action('init', function(){
 	global $uws_core_lib;
@@ -208,8 +261,6 @@ add_action('init', function(){
         flush_rewrite_rules();
         update_option( 'uv-flush-pending', 0);
     }
-    if(isset($_REQUEST["uvaction"]) and $_REQUEST["uvaction"] and $_REQUEST["uvaction"] == "uvsp_adminsave")//add flush to pending
-        update_option('uv-flush-pending', 1);
 	
     //Event Page Rewrite
     $uvsingleeventpageid = $uws_core_lib["pages"]["singleevent"];

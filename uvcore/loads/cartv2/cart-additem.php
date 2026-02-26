@@ -2,25 +2,28 @@
 
 global $uws_feeds_debug, $uws_actionlinks_lib, $uws_feeds_lib;
 
-$uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
-$uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
-$uvitemcode = (isset($_REQUEST["itemcode"])) ? uws_cleanup_var($_REQUEST["itemcode"]) : "";
-$uvcaldate = (isset($_REQUEST["caldate"])) ? uws_cleanup_var($_REQUEST["caldate"]) : "";
-$uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
-$uvecozone = (isset($_REQUEST["ecozone"])) ? uws_cleanup_var($_REQUEST["ecozone"]) : "";
-$uvitemname = (isset($_REQUEST["itemname"])) ? uws_cleanup_var($_REQUEST["itemname"]) : "";
-$uvpaytype = (isset($_REQUEST["paytype"])) ? uws_cleanup_var($_REQUEST["paytype"]) : "";
-$uvguests = (isset($_REQUEST["guests"])) ? uws_cleanup_var($_REQUEST["guests"]) : "";
-$uveventcode = (isset($_REQUEST["eventcode"])) ? uws_cleanup_var($_REQUEST["eventcode"]) : "";
-$uvtime = (isset($_REQUEST["time"])) ? uws_cleanup_var($_REQUEST["time"]) : "";
-$uvduration = (isset($_REQUEST["duration"])) ? uws_cleanup_var($_REQUEST["duration"]) : "";
-$uvvendor = (isset($_REQUEST["vendor"])) ? uws_cleanup_var($_REQUEST["vendor"]) : "";
-$uvgotocheck = (isset($_REQUEST["gotocheck"])) ? uws_cleanup_var($_REQUEST["gotocheck"]) : "";
-$uvsectionid = (isset($_REQUEST["sectionid"])) ? uws_cleanup_var($_REQUEST["sectionid"]) : "";
-$uvlocationid = (isset($_REQUEST["locationid"])) ? uws_cleanup_var($_REQUEST["locationid"]) : "";
-$uvcartmanagementid = (isset($_REQUEST["cartmanagementid"])) ? uws_cleanup_var($_REQUEST["cartmanagementid"]) : "";
-$uvmanageentid = (isset($_REQUEST["manageentid"])) ? uws_cleanup_var($_REQUEST["manageentid"]) : "";
-$uvsubtotalagree = (isset($_REQUEST["subtotalagree"])) ? uws_cleanup_var($_REQUEST["subtotalagree"]) : "";
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
+$uvcartcode = uws_cleanup_request("cartcode");
+$uvmastercode = uws_cleanup_request("mastercode");
+$uvitemcode = uws_cleanup_request("itemcode");
+$uvcaldate = uws_cleanup_request("caldate");
+$uvvenuecode = uws_cleanup_request("venuecode");
+$uvecozone = uws_cleanup_request("ecozone");
+$uvitemname = uws_cleanup_request("itemname");
+$uvpaytype = uws_cleanup_request("paytype");
+$uvguests = uws_cleanup_request("guests");
+$uveventcode = uws_cleanup_request("eventcode");
+$uvtime = uws_cleanup_request("time");
+$uvduration = uws_cleanup_request("duration");
+$uvvendor = uws_cleanup_request("vendor");
+$uvgotocheck = uws_cleanup_request("gotocheck");
+$uvsectionid = uws_cleanup_request("sectionid");
+$uvlocationid = uws_cleanup_request("locationid");
+$uvcartmanagementid = uws_cleanup_request("cartmanagementid");
+$uvmanageentid = uws_cleanup_request("manageentid");
+$uvsubtotalagree = uws_cleanup_request("subtotalagree");
 $uvsubinfo = (isset($_REQUEST["subinfo"])) ? $_REQUEST["subinfo"] : "";
 $uvapicartcode = $uvcartcount = "";
 $uvreturn = array();

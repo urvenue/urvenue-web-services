@@ -1,8 +1,11 @@
 <?php
 
-$uvvenueid = (isset($_REQUEST["venueid"])) ? uws_cleanup_var($_REQUEST["venueid"]) : "";
-$uvminspend = (isset($_REQUEST["subtotalagree"])) ? uws_cleanup_var($_REQUEST["subtotalagree"]) : 0;
-$uvcurrencysymbol = (isset($_REQUEST["currencysymbol"])) ? uws_cleanup_var($_REQUEST["currencysymbol"]) : "$";
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
+$uvvenueid = uws_cleanup_request("venueid");
+$uvminspend = uws_cleanup_request("subtotalagree", 0);
+$uvcurrencysymbol = uws_cleanup_request("currencysymbol", "$");
 
 $uvbottleargs = array(
     "venueid" => $uvvenueid,

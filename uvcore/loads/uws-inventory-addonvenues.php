@@ -1,15 +1,18 @@
 <?php
 
-$uveventcode = (isset($_REQUEST["homeeventcode"])) ? uws_cleanup_var($_REQUEST["homeeventcode"]) : "";
-$uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
-$uvshowdatepicker = (isset($_REQUEST["showdatepicker"])) ? uws_cleanup_var($_REQUEST["showdatepicker"]) : 0;
-$uvshowinventorybuttons = (isset($_REQUEST["showinventorybuttons"])) ? uws_cleanup_var($_REQUEST["showinventorybuttons"]) : 1;
-$uvglobaltype = (isset($_REQUEST["globaltype"])) ? uws_cleanup_var($_REQUEST["globaltype"]) : "";
-$uvbooktypename = (isset($_REQUEST["booktypename"])) ? uws_cleanup_var($_REQUEST["booktypename"]) : "";
-$uvdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-$uvenddate = (isset($_REQUEST["enddate"])) ? uws_cleanup_var($_REQUEST["enddate"]) : "";
-$uvmanagementid = (isset($_REQUEST["managementid"])) ? uws_cleanup_var($_REQUEST["managementid"]) : "";
-$uvmixecozones = (isset($_REQUEST["mixecozones"])) ? uws_cleanup_var($_REQUEST["mixecozones"]) : 0;
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
+$uveventcode = uws_cleanup_request("homeeventcode");
+$uvvenuecode = uws_cleanup_request("venuecode");
+$uvshowdatepicker = uws_cleanup_request("showdatepicker", 0);
+$uvshowinventorybuttons = uws_cleanup_request("showinventorybuttons", 1);
+$uvglobaltype = uws_cleanup_request("globaltype");
+$uvbooktypename = uws_cleanup_request("booktypename");
+$uvdate = uws_cleanup_request("date");
+$uvenddate = uws_cleanup_request("enddate");
+$uvmanagementid = uws_cleanup_request("managementid");
+$uvmixecozones = uws_cleanup_request("mixecozones", 0);
 
 $uvhidedatepicker = 1;
 $uvshowinventorybuttons = 1;

@@ -2,12 +2,15 @@
 
 global $uws_proxies_lib;
 
-$uveventcode = (isset($_REQUEST["eventcode"])) ? uws_cleanup_var($_REQUEST["eventcode"]) : "";
-$uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
-$uvintegration = (isset($_REQUEST["integration"])) ? uws_cleanup_var($_REQUEST["integration"]) : "";
-$uvreturntempl = (isset($_REQUEST["returntempl"])) ? uws_cleanup_var($_REQUEST["returntempl"]) : "";
-$uvhomeeventcode = (isset($_REQUEST["homeeventcode"])) ? uws_cleanup_var($_REQUEST["homeeventcode"]) : "";
-$uvhomename = (isset($_REQUEST["homename"])) ? uws_cleanup_var($_REQUEST["homename"]) : "";
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
+$uveventcode = uws_cleanup_request("eventcode");
+$uvcartcode = uws_cleanup_request("cartcode");
+$uvintegration = uws_cleanup_request("integration");
+$uvreturntempl = uws_cleanup_request("returntempl");
+$uvhomeeventcode = uws_cleanup_request("homeeventcode");
+$uvhomename = uws_cleanup_request("homename");
 
 $uveventdataandeczmap = uws_get_event($uveventcode, array("returnecozonesmap" => 1));
 

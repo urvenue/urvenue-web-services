@@ -2,11 +2,27 @@
 
 global $uws_path;
 
-$uvdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-$uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
-$uvecozone = (isset($_REQUEST["ecozone"])) ? uws_cleanup_var($_REQUEST["ecozone"]) : "ECZ0";
-$uvglobaltype = (isset($_REQUEST["globaltype"])) ? uws_cleanup_var($_REQUEST["globaltype"]) : "";
-$uvmixecozones = (isset($_REQUEST["mixecozones"])) ? uws_cleanup_var($_REQUEST["mixecozones"]) : "";
+// @egt [UWS-7297]
+$nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : '';
+switch ($nonceaction) {
+    case 'uwsinventory':
+        uws_check_nonce("uwsinventory");
+        break;
+    case 'uwsmap':
+        uws_check_nonce("uwsmap");
+        break;
+    case 'uwspackages':
+        uws_check_nonce("uwspackages");
+        break;
+    default:
+        wp_send_json_error(['message' => 'Invalid action'], 400);
+}
+
+$uvdate = uws_cleanup_request("date");
+$uvvenuecode = uws_cleanup_request("venuecode");
+$uvecozone = uws_cleanup_request("ecozone", "ECZ0");
+$uvglobaltype = uws_cleanup_request("globaltype");
+$uvmixecozones = uws_cleanup_request("mixecozones");
 
 $uvreturn = array();
 

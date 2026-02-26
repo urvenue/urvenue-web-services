@@ -2,7 +2,10 @@
 
 global $uws_proxies_lib;
 
-$uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
+$uvmastercode = uws_cleanup_request("mastercode");
 $uvitem = uws_get_invitem($uvmastercode);
 
 $uvreturn = array(

@@ -1,7 +1,10 @@
 <?php
 
-$uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
-$uvguests = (isset($_REQUEST["guests"])) ? uws_cleanup_var($_REQUEST["guests"]) : "";
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
+$uvmastercode = uws_cleanup_request("mastercode");
+$uvguests = uws_cleanup_request("guests");
 
 $uvitem = uws_get_invitem($uvmastercode);
 

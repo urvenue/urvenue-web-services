@@ -2,6 +2,9 @@
 
 global $uws_feeds_lib;
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 $uvapiurl = $uws_feeds_lib["inventory-inquiry"]["url"];
 
 $uvdata = $_POST;

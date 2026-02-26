@@ -2,9 +2,12 @@
 
 global $uws_path;
 
-$uvdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-$uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
-$uvecozone = (isset($_REQUEST["ecozone"])) ? uws_cleanup_var($_REQUEST["ecozone"]) : "ECZ0";
+// @egt [UWS-7297]
+uws_check_nonce("uwsreservations");
+
+$uvdate = uws_cleanup_request("date");
+$uvvenuecode = uws_cleanup_request("venuecode");
+$uvecozone = uws_cleanup_request("ecozone", "ECZ0");
 
 $uvreturn = array();
 

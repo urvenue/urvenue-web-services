@@ -27,6 +27,11 @@ uwsClickListener(".uwsjs-open-date-uvmasteritemcode", function (e) {
 
     let uvloadurl = uws_proxy + "&uvaction=uwspx_mastercodebymasteritemcode&masteritemcode=" + masteritemcode + "&venuecode=" + venuecode + "&date=" + uvdate;
 
+    // @egt [UWS-7297]
+    if(typeof uwspackagesvars !== "undefined" && uwspackagesvars.targetNonce) {
+        uvloadurl = uvloadurl + "&uws_nonce=" + encodeURIComponent(uwspackagesvars.targetNonce);
+    }
+
     let uvrequest = new XMLHttpRequest();
     uvrequest.open('GET', uvloadurl, true);
     uvrequest.onload = function () {
@@ -160,6 +165,11 @@ function uwsinvGetPackDisDates(uvdate, uvvenuecode, uvglobaltype) {
 
         let uvnoinventorydatesproxy = uws_proxy + "&uvaction=uwspx_noinventorydates";
         uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&date=" + uvdate + "&venuecode=" + uvvenuecode + "&globaltype=" + uvglobaltype;
+
+        // @egt [UWS-7297]
+        if(typeof uwspackagesvars !== "undefined" && uwspackagesvars.targetNonce) {
+            uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&uws_nonce=" + encodeURIComponent(uwspackagesvars.targetNonce);
+        }
 
         let uvrequest = new XMLHttpRequest();
         uvrequest.open('GET', uvnoinventorydatesproxy, true);

@@ -1,13 +1,16 @@
 <?php
 
-$uvfromdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-$uvtodate = (isset($_REQUEST["enddate"])) ? uws_cleanup_var($_REQUEST["enddate"]) : "";
-$uvvenue = (isset($_REQUEST["venue"])) ? uws_cleanup_var($_REQUEST["venue"]) : "";
-$uvnopredates = (isset($_REQUEST["nopredates"])) ? uws_cleanup_var($_REQUEST["nopredates"]) : "";
-$uvbuttonlabel = (isset($_REQUEST["btnlabel"])) ? uws_cleanup_var($_REQUEST["btnlabel"]) : "";
+// @egt [UWS-7297]
+uws_check_nonce("uwsevents");
+
+$uvfromdate = uws_cleanup_request("date");
+$uvtodate = uws_cleanup_request("enddate");
+$uvvenue = uws_cleanup_request("venue");
+$uvnopredates = uws_cleanup_request("nopredates");
+$uvbuttonlabel = uws_cleanup_request("btnlabel");
 $uvviews = (isset($_REQUEST["views"])) ? explode(",", uws_cleanup_var($_REQUEST["views"])) : null;
 $uvdefaultview = $_REQUEST["defaultview"] ? uws_cleanup_var($_REQUEST["defaultview"]) : "";
-//$uvnowrap = (isset($_REQUEST["nowrap"])) ? uws_cleanup_var($_REQUEST["nowrap"]) : "";
+//$uvnowrap = uws_cleanup_request("nowrap");
 
 $uvargs = array(
     "fromdate" => $uvfromdate,

@@ -1,11 +1,14 @@
 <?php
 
-$uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
-$uvitemcartcode = (isset($_REQUEST["itemcartcode"])) ? uws_cleanup_var($_REQUEST["itemcartcode"]) : "";
-$uvmanagementid = (isset($_REQUEST["managementid"])) ? uws_cleanup_var($_REQUEST["managementid"]) : "";
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
+$uvcartcode = uws_cleanup_request("cartcode");
+$uvitemcartcode = uws_cleanup_request("itemcartcode");
+$uvmanagementid = uws_cleanup_request("managementid");
 $uvmanagementid = (!$uvmanagementid and isset($uws_defaultmanageentid)) ? $uws_defaultmanageentid : $uvmanagementid;
 $uvmanagementid = (!$uvmanagementid and isset($uws_config_manageentid)) ? $uws_config_manageentid : $uvmanagementid;
-$uvmastercode = (isset($_REQUEST["mastercode"])) ? uws_cleanup_var($_REQUEST["mastercode"]) : "";
+$uvmastercode = uws_cleanup_request("mastercode");
 $uvitem = ($uvmastercode) ? uws_get_invitem($uvmastercode) : "";
 
 if($uvcartcode and $uvitemcartcode){

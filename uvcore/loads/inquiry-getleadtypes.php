@@ -2,8 +2,11 @@
 
 global $uws_feeds_lib;
 
-$uvmanageentid = (isset($_REQUEST["manageentid"])) ? uws_cleanup_var($_REQUEST["manageentid"]) : "";
-$uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
+// @egt [UWS-7297]
+uws_check_nonce("uwsreservations");
+
+$uvmanageentid = uws_cleanup_request("manageentid");
+$uvvenuecode = uws_cleanup_request("venuecode");
 $uvvenueid = str_replace("VEN", "", $uvvenuecode);
 
 $uvargs = array(

@@ -1,8 +1,11 @@
 <?php
 
+// @egt [UWS-7297]
+uws_check_nonce("uwsinventory");
+
 //Add the thing to the cart
-$uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
-$uvmanagementid = (isset($_REQUEST["managementid"])) ? uws_cleanup_var($_REQUEST["managementid"]) : "";
+$uvcartcode = uws_cleanup_request("cartcode");
+$uvmanagementid = uws_cleanup_request("managementid");
 $uvmanagementid = (!$uvmanagementid and isset($uws_defaultmanageentid)) ? $uws_defaultmanageentid : $uvmanagementid;
 $uvmanagementid = (!$uvmanagementid and isset($uws_config_manageentid)) ? $uws_config_manageentid : $uvmanagementid;
 
