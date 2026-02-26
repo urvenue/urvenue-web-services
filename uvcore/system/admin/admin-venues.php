@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvsvenueslisthtml = uvs_admin_venues_list_html();
 ?>
 

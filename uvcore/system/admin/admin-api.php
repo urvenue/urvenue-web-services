@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 $uvsapisourcecode = uvs_get_adminfieldhtml("system->sourcecode");
 $uvsapisourceloc = uvs_get_adminfieldhtml("system->sourceloc");
 $uvsapiapikey = uvs_get_adminfieldhtml("system->apikey");

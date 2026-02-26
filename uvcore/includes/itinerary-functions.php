@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*Prints Itinerary
     Requires: guestinfo(array with all the guest/itinerary info)

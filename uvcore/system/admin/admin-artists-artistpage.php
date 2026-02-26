@@ -1,10 +1,12 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvsartistspageurl = uvs_get_adminfieldhtml("artists->artist-url");
 $uvsartistsimagetype = uvs_get_adminfieldhtml("artists->artist-imagetype");
 $uvsartistsimageratio = uvs_get_adminfieldhtml("artists->artist-imageratio");
 
 ?>
 <?php // @Axl ?>
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 <!-- <div id="uvs-admin-artists-artistpage" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['artists-artistpage']; ?>"> -->
 <div id="uvs-admin-artists-artistpage" class="uvs-admin-opt-section <?php echo esc_attr( $uvs_admin_optstabs_state['artists-artistpage'] ); ?>">
     <div class="uvs-admin-opt-title">Artist Page</div>
@@ -30,4 +32,4 @@ $uvsartistsimageratio = uvs_get_adminfieldhtml("artists->artist-imageratio");
 		</div>
     </div>
 </div>
-<?php // @Axl End ?>
+<?php // @Axl End ?>if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly

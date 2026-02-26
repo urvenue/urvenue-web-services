@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //print_r($_REQUEST);
 //print_r($uvs_core_lib);

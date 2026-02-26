@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*Get Experiences Date Selector Filter
     Returns: Prints html date control for experiences

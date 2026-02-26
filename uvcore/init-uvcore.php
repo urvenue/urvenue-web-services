@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uws_coredir = realpath(__DIR__);
 $uv_assetsversion = "1.0.52"; 

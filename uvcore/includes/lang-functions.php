@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /*Set the current language
 	Returns: language code: (en, ja, es, fr, etc)
 */

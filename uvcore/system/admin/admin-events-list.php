@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
 	@module: system/admin/box/events-list
 	@author: UrVenue - aa

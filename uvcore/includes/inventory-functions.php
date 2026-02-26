@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*Get date, venueid and ecozone from eventcode
     Returns: array with date, venueid and ecozone

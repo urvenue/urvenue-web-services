@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 define('UWS_SECURITY_MAX_BODY', 1024 * 1024);
 define('UWS_SECURITY_BLOCK', true);

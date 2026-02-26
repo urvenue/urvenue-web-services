@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //$uvseventseventurl = uvs_get_adminfieldhtml("events->event-url");
 //$uvseventsshowartist = uvs_get_adminfieldhtml("events->event-showartist");

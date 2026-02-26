@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uvsevetnsshowarrows = uvs_get_adminfieldhtml("events->slider-showarrows");
 $uvsevetnsshowdots = uvs_get_adminfieldhtml("events->slider-showdots");

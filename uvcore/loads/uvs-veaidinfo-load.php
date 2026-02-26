@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 if($uvs_libexits)
 	include_once($uvs_path . "/system/uvs-admin-init.php");
 

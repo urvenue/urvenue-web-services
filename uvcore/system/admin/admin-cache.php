@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvswpeinstid = uvs_get_adminfieldhtml("cache->wpeinst");
 $uvsinpwpeusername = uvs_get_adminfieldhtml("cache->username");
 $uvsinpwpepassword = uvs_get_adminfieldhtml("cache->password");

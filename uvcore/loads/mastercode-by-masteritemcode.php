@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uvmasteritemcode = (isset($_REQUEST["masteritemcode"])) ? uws_cleanup_var($_REQUEST["masteritemcode"]) : "";
 $uvvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";

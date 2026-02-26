@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uws_proxyurl = uws_get_proxyurl();
 $uws_config_addproxyparams = (isset($uws_config_addproxyparams) and $uws_config_addproxyparams) ? $uws_config_addproxyparams : "";

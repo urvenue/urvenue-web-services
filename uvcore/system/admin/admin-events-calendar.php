@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //$uvseventscalnmonths = uvs_get_adminfieldhtml("events->calendar-nmonths");
 //$uvseventsaddlist = uvs_get_adminfieldhtml("events->calendar-addlist");
 //$uvseventsinitialview = uvs_get_adminfieldhtml("events->calendar-initialview");

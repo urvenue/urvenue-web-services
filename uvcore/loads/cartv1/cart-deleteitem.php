@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uvcartcode = (isset($_REQUEST["cartcode"])) ? uws_cleanup_var($_REQUEST["cartcode"]) : "";
 $uvitemcartcode = (isset($_REQUEST["itemcartcode"])) ? uws_cleanup_var($_REQUEST["itemcartcode"]) : "";

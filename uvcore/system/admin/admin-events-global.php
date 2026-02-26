@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uvseventssourcefield = uvs_get_adminfieldhtml("events->global-source");
 $uvseventsaddvenuename = uvs_get_adminfieldhtml("events->global-addvenuename");

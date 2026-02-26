@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 add_shortcode("uws_itinerary", function($atts, $content = null){
     global $uws_path;

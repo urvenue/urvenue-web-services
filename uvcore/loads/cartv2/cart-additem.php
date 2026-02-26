@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $uws_feeds_debug, $uws_actionlinks_lib, $uws_feeds_lib;
 

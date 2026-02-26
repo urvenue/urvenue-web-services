@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvsinitialtab = "dashboard";
 
 // @egt [UWS-7264]

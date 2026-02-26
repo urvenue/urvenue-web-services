@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvsinpenable = uvs_get_adminfieldhtml("notifications->enable");
 $uvsinpwebhook = uvs_get_adminfieldhtml("notifications->webhook");
 $uvsinpminevents = uvs_get_adminfieldhtml("notifications->minevents");

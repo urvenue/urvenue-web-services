@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uvsinventorymanageentlock = uvs_get_adminfieldhtml("inventory->manageentlock");
 $uvsinventoryshowiteminfoinline = uvs_get_adminfieldhtml("inventory->showiteminfoinline");

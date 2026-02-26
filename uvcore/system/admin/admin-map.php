@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvsmapaddecos = uvs_get_adminfieldhtml("map->mappage-showecomaps");
 $uvsmapviews = uvs_get_adminfieldhtml("map->mappage-views");
 $uvsmapaddadmopt = uvs_get_adminfieldhtml("map->mappage-addadmissionopt");

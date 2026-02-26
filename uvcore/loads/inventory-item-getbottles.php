@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uvvenueid = (isset($_REQUEST["venueid"])) ? uws_cleanup_var($_REQUEST["venueid"]) : "";
 $uvminspend = (isset($_REQUEST["subtotalagree"])) ? uws_cleanup_var($_REQUEST["subtotalagree"]) : 0;

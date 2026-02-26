@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //Experiences Date Filter
 function shrotcode_uws_experiences_date_filter($atts, $content = null){

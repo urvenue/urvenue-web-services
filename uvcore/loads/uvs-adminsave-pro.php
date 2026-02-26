@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 unset($_REQUEST["uvaction"]);
 
 if($_REQUEST["system"] and isset($_REQUEST["system"]["path"])){

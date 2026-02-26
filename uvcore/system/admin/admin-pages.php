@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvspageevents = uvs_get_adminfieldhtml("pages->events");
 $uvspagesingleevent = uvs_get_adminfieldhtml("pages->singleevent");
 $uvspagemap = uvs_get_adminfieldhtml("pages->map");

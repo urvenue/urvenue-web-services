@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvsseoenabledata = uvs_get_adminfieldhtml("seo->enabledata");
 $uvsseoenablemetatags = uvs_get_adminfieldhtml("seo->enabletags");
 $uvsseotitle = uvs_get_adminfieldhtml("seo->seotitle");

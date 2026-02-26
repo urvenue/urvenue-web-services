@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uvs_adminbox_tabs;
 
 $uvs_admin_optstabs_state = uvs_get_boxtabs_state($uvsinitialtab);

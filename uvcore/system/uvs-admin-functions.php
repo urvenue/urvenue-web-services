@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 function uvs_get_core_library(){
 	global $uvs_path, $uv_core_defaults_lib;
 	

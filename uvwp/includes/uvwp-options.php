@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 add_action( 'admin_menu', 'uvwp_options_page' );
 function uvwp_options_page(){

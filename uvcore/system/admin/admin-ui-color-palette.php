@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvsuitheme = uvs_get_adminfieldhtml("ui->uitheme");
 $uvsuiprimarycolor = uvs_get_adminfieldhtml("ui->primarycolor");
 $uvsuisecondarycolor = uvs_get_adminfieldhtml("ui->secondarycolor");

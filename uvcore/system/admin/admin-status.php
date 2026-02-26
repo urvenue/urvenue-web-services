@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 preg_match("#^\d+(\.\d+)*#", PHP_VERSION, $uvsphpvermatch);
 $uvsphpversion = $uvsphpvermatch[0];

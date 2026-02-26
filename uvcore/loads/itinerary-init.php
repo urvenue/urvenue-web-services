@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 global $uws_path;
 
 include_once($uws_path . "/includes/itinerary-functions.php");
