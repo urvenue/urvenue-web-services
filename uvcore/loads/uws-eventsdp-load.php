@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // @egt [UWS-7297]
 uws_check_nonce("uwsevents");
@@ -80,6 +81,9 @@ if(is_array($uvevents) && count($uvevents) > 0){
     );
 }
 
-$uvreturnjson = json_encode($uvresponse);
+// @Axl
+// $uvreturnjson = json_encode($uvresponse);
+$uvreturnjson = wp_json_encode($uvresponse);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

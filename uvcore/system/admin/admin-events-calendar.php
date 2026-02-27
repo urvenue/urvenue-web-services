@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //$uvseventscalnmonths = uvs_get_adminfieldhtml("events->calendar-nmonths");
 //$uvseventsaddlist = uvs_get_adminfieldhtml("events->calendar-addlist");
 //$uvseventsinitialview = uvs_get_adminfieldhtml("events->calendar-initialview");
@@ -11,7 +12,7 @@ $uvseventscalonlylist = uvs_get_adminfieldhtml("events->calendar-alwayslist");
 
 ?>
 
-<div id="uvs-admin-events-calendar" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['events-calendar']; ?>">
+<div id="uvs-admin-events-calendar" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['events-calendar']; */ echo esc_attr( $uvs_admin_optstabs_state['events-calendar'] ); ?>">
     <div class="uvs-admin-opt-title">Events Calendar</div>
 	<div class="uvs-admin-opt-space"></div>
 	<!--<div class="uvs-infolist-item uvs-clearfix">
@@ -26,13 +27,13 @@ $uvseventscalonlylist = uvs_get_adminfieldhtml("events->calendar-alwayslist");
 			<?php //echo $uvseventsaddlist; ?>
 		</div>
 	</div>-->
-    <!--<div class="uvs-fieldcallistrel uvs-infolist-item <?php echo $uvseventsinitialviewclass; ?> uvs-clearfix">
+    <!--<div class="uvs-fieldcallistrel uvs-infolist-item <?php /* Old: echo $uvseventsinitialviewclass; */ echo esc_attr( $uvseventsinitialviewclass ); ?> uvs-clearfix">
 		<div class="uvsname">Initial View</div>
 		<div class="uvsvalue">
 			<?php //echo $uvseventsinitialview; ?>
 		</div>
     </div>-->
-    <!--<div class="uvs-fieldcallistrel uvs-infolist-item <?php echo $uvseventsinitialviewclass; ?> uvs-clearfix">
+    <!--<div class="uvs-fieldcallistrel uvs-infolist-item <?php /* Old: echo $uvseventsinitialviewclass; */ echo esc_attr( $uvseventsinitialviewclass ); ?> uvs-clearfix">
 		<div class="uvsname">View Menu</div>
 		<div class="uvsvalue">
 			<?php //echo $uvseventsviewmenu; ?>
@@ -47,7 +48,10 @@ $uvseventscalonlylist = uvs_get_adminfieldhtml("events->calendar-alwayslist");
 	<div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Always List <small>Don't show event flyer, show always as list</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvseventscalonlylist; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvseventscalonlylist; */ ?>
+			<?php echo wp_kses( $uvseventscalonlylist, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
     </div>
     <!--<div class="uvs-infolist-item uvs-clearfix">

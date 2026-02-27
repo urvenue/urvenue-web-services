@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*Get Calendar implementation
     Returns: Prints html controls + events integration
@@ -206,7 +207,10 @@ function uws_events_views($uvargs = "", $uvreturnarray = false)
     $uveventsschema = (is_array($uveventsseo)) ? uws_get_events_schema($uveventsseo) : "";
 
     if ($uveventsschema) {
-        $uveventsschemajson = json_encode($uveventsschema);
+        // @Axl
+        // $uveventsschemajson = json_encode($uveventsschema);
+        $uveventsschemajson = wp_json_encode($uveventsschema);
+        // @Axl End
         $uveventsschemainline .= "";
         $uvviewshtml .= $uveventsschemainline;
 
@@ -2016,7 +2020,10 @@ function uws_event($uvargs = ""){
         //$uveventproxiesscript = uws_get_proxies_script("inventory-init");
 
         if($uvgeteventschema){
-            $uvgeteventschemajson = json_encode($uvgeteventschema);
+            // @Axl
+            // $uvgeteventschemajson = json_encode($uvgeteventschema);
+            $uvgeteventschemajson = wp_json_encode($uvgeteventschema);
+            // @Axl End
 	        $uveventschemainline .= "";
 
             // @egt [UWS-7264]

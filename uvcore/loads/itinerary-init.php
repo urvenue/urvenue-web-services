@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 global $uws_path;
 
 // @egt [UWS-7297]
@@ -12,6 +14,9 @@ $uvitineraryinfo = array(
     "tooltips" => $uvittootipitems,
 );
 
-$uvreturnjson = json_encode($uvitineraryinfo);
+// @Axl
+// $uvreturnjson = json_encode($uvitineraryinfo);
+$uvreturnjson = wp_json_encode($uvitineraryinfo);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

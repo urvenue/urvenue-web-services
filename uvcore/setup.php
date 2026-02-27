@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
 	@module: system/setup
 	@author: UrVenue - aa
@@ -34,8 +36,11 @@ if($uvwrite == 1){
 			"library" => $uvlibrary
 		)
 	);
-	$uvs_lib = json_encode($uvs_lib);
-	
+	// @Axl
+	// $uvs_lib = json_encode($uvs_lib);
+	$uvs_lib = wp_json_encode($uvs_lib);
+	// @Axl End
+
 	$fp = fopen("$uvlibrary", "w+");
 	fwrite($fp, $uvs_lib);
 	fclose($fp);
@@ -98,8 +103,11 @@ if($uvurl){
 			"library" => $uvlibrary
 		)
 	);
-	$uvs_lib = json_encode($uvs_lib);
-	
+	// @Axl
+	// $uvs_lib = json_encode($uvs_lib);
+	$uvs_lib = wp_json_encode($uvs_lib);
+	// @Axl End
+
 	$uvurlscript = "";
 
 	// @egt [UWS-7264]
@@ -191,26 +199,30 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 				<input id="uvs-input-manuallib" type="hidden" name="manual" value="0">
 				
 				<div class="uvs-setupfields">
-					<div class="uvs-setupfield <?php echo $uvpathclass; ?> uvs-clearfix">
+					<div class="uvs-setupfield <?php /* Old: echo $uvpathclass; */ echo esc_attr( $uvpathclass ); ?> uvs-clearfix">
 						<div><label for="path">UvCore Path</label></div>
-						<div><input id="path" class="uvsjs-copytoinput" data-addafter="/uvcore.lib.json" data-target="#library" type="text" name="path" value="<?php echo $uvs_uvcorepath; ?>"></div>
+						<div><input id="path" class="uvsjs-copytoinput" data-addafter="/uvcore.lib.json" data-target="#library" type="text" name="path" value="<?php /* Old: echo $uvs_uvcorepath; */ echo esc_attr( $uvs_uvcorepath ); ?>"></div>
 					</div>
 					<div class="uvs-setupfield uvs-clearfix">
 						<div><label for="url">UvCore URL</label></div>
-						<div><input id="url" type="text" name="url" value="<?php echo $uvs_uvcoreurl; ?>"></div>
+						<div><input id="url" type="text" name="url" value="<?php /* Old: echo $uvs_uvcoreurl; */ echo esc_attr( $uvs_uvcoreurl ); ?>"></div>
 					</div>
-					<div class="uvs-setupfield <?php echo $uvlibraryclass; ?> uvs-clearfix">
+					<div class="uvs-setupfield <?php /* Old: echo $uvlibraryclass; */ echo esc_attr( $uvlibraryclass ); ?> uvs-clearfix">
 						<div><label for="library">Library File</label></div>
-						<div><input id="library" type="text" name="library" value="<?php echo $uvs_uvcorepath; ?>/uvcore.lib.json" readonly></div>
+						<div><input id="library" type="text" name="library" value="<?php /* Old: echo $uvs_uvcorepath; */ echo esc_attr( $uvs_uvcorepath ); ?>/uvcore.lib.json" readonly></div>
 					</div>
 				</div>
 				
 				<div class="uvs-setup-errors">
-					<?php echo $uverrorshtml; ?>
+					<?php // @Axl ?>
+					<?php /* echo $uverrorshtml; */ echo wp_kses_post( $uverrorshtml ); ?>
+					<?php // @Axl End ?>
 				</div>
 				
 				<div class="uvs-setupbuttons">
-					<?php echo $uvmanualwritehtml; ?>
+					<?php // @Axl ?>
+					<?php /* echo $uvmanualwritehtml; */ echo wp_kses_post( $uvmanualwritehtml ); ?>
+					<?php // @Axl End ?>
 					<button class="uvs-btn uvs-btn-p" type="submit">Submit</button>
 				</div>
 			</form>	
@@ -231,6 +243,8 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 	</div>
 	
 	
-	<?php echo $uvurlscript; ?>
+	<?php // @Axl ?>
+	<?php /* echo $uvurlscript; */ echo wp_kses_post( $uvurlscript ); ?>
+	<?php // @Axl End ?>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //uvcorepath: $uvs_path
 $uvs_libexits = false;
 $uvs_core_lib = "";

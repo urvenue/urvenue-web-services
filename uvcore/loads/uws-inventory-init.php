@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $uws_proxies_lib;
 
@@ -52,6 +53,9 @@ if($uvreturntempl){
     $uvinventorylist["templates"] = $uvtempls;
 }
     
-$uvreturnjson = json_encode($uvinventorylist);
+// @Axl
+// $uvreturnjson = json_encode($uvinventorylist);
+$uvreturnjson = wp_json_encode($uvinventorylist);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

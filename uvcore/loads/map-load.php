@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $uws_path, $uws_config_uitheme;
 
@@ -91,6 +92,9 @@ if($uvmappopuptheme){
     $uvreturn["poptheme"] = $uvmappopuptheme;
 }    
 
-$uvreturnjson = json_encode($uvreturn);
+// @Axl
+// $uvreturnjson = json_encode($uvreturn);
+$uvreturnjson = wp_json_encode($uvreturn);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

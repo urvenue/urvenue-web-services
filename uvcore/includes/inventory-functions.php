@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*Get date, venueid and ecozone from eventcode
     Returns: array with date, venueid and ecozone
@@ -2341,7 +2342,10 @@ function uws_item_header()
         }
     }
 
-    echo $uvitemhaderhtml;
+    // @Axl
+    // echo $uvitemhaderhtml;
+    echo wp_kses_post( $uvitemhaderhtml );
+    // @Axl End
 }
 
 /*Get Inventory Item
@@ -2415,7 +2419,10 @@ function uws_item_page()
         $uvinvitempagehtml .= $uvinvitemproxiesscript;*/
     }
 
-    echo $uvinvitempagehtml;
+    // @Axl
+    // echo $uvinvitempagehtml;
+    echo wp_kses_post( $uvinvitempagehtml );
+    // @Axl End
 }
 
 /*Get inventory item popup
@@ -3325,7 +3332,10 @@ function uws_get_itembk4sel($uvargs = ""){
                     $uvafmidnight = 1;
                 }
                 $uvdtime = $uvdtime["dtime"];
-                $uvbk4timeslotjson = json_encode($uvbk4timeslot, true);
+                // @Axl
+                // $uvbk4timeslotjson = json_encode($uvbk4timeslot, true);
+                $uvbk4timeslotjson = wp_json_encode($uvbk4timeslot);
+                // @Axl End
 
                 $uvbk4timeslist .= "<li><a class='uwsjs-selectbk4time' href='#selectbk4time-$uvtime' data-time='$uvtime' data-dtime='$uvdtime' data-bk4data='$uvbk4timeslotjson'><div class='uvtimemaininfo'><span>$uvdtime</span><span class='uvdduration' >$uvdduration</span></div><div class='uwsprice' data-symbol='$'>$uvdprice</div><span class='uvtechnician'>$uvtechnician</span></a></li>";
             }
@@ -3992,7 +4002,10 @@ function uws_booking_calendar($uvargs = "")
         );
     }
 
-    echo $uvbookingcalendar;
+    // @Axl
+    // echo $uvbookingcalendar;
+    echo wp_kses_post( $uvbookingcalendar );
+    // @Axl End
 }
 
 function uws_get_requestinfo()
@@ -4027,7 +4040,10 @@ function uws_inventorywidget($uvargs)
 {
     $uvglobaltypewidget = uws_get_inventorywidget($uvargs);
 
-    echo $uvglobaltypewidget;
+    // @Axl
+    // echo $uvglobaltypewidget;
+    echo wp_kses_post( $uvglobaltypewidget );
+    // @Axl End
 }
 
 function uws_get_inventorywidget($uvargs)

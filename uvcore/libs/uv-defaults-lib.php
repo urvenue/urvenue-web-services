@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // autogenerate cache apikey only 1 time, if not exists
 $uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("uvs_cacheapikey") : "";

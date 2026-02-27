@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if(!is_array($uws_core_lib) && !is_array($uws_feeds_lib)) exit;
 
@@ -49,7 +50,10 @@ function uvclear_wpengine_cache() {
     // page, object, cdn
 	$cachetoclear = 'page';
 
-	$fields = json_encode(array( 'type' => $cachetoclear ));
+	// @Axl
+	// $fields = json_encode(array( 'type' => $cachetoclear ));
+	$fields = wp_json_encode(array( 'type' => $cachetoclear ));
+	// @Axl End
 
     // TESTING @Axl
 	// $uvwpe_curl = curl_init();
@@ -141,7 +145,10 @@ function uvclear_wpengine_cache() {
                                             'cache' => $cachecleared,
                                         )));
 
-    $uvdata = json_encode($uvresponsemsg);
+    // @Axl
+    // $uvdata = json_encode($uvresponsemsg);
+    $uvdata = wp_json_encode($uvresponsemsg);
+    // @Axl End
     header('Content-Type: application/json; charset=utf-8');
     echo($uvdata);
 
@@ -183,5 +190,8 @@ function uvwp_send_json_error($status, $message, $reason) {
             'reason' => $reason,
         )));
     header('Content-Type: application/json; charset=utf-8');
-    echo(json_encode($uvresponsemsg));
+    // @Axl
+    // echo(json_encode($uvresponsemsg));
+    echo wp_json_encode($uvresponsemsg);
+    // @Axl End
 }

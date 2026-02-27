@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // @egt [UWS-7297]
 uws_check_nonce("uwsinventory");
@@ -35,6 +36,9 @@ $uvinventorywidget = uws_get_inventorywidget($uvargs);
 $uvreturn = array(
     "markup" => $uvinventorywidget,
 );
-$uvreturnjson = json_encode($uvreturn);
+// @Axl
+// $uvreturnjson = json_encode($uvreturn);
+$uvreturnjson = wp_json_encode($uvreturn);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

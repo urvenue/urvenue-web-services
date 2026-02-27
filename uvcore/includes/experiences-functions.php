@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*Get Experiences Date Selector Filter
     Returns: Prints html date control for experiences
@@ -70,7 +71,10 @@ function uws_experiences($uvargs = ""){
         </div>
     ";
 
-    echo $uvexperienceshtml;
+    // @Axl
+    // echo $uvexperienceshtml;
+    echo wp_kses_post( $uvexperienceshtml );
+    // @Axl End
 }
 
 /*Get Related Experiences
@@ -107,7 +111,10 @@ function uws_related_experiences($uvargs = ""){
         </div>
     ";
 
-    echo $uvexperienceshtml;
+    // @Axl
+    // echo $uvexperienceshtml;
+    echo wp_kses_post( $uvexperienceshtml );
+    // @Axl End
 }
 
 /*Get Experiences List

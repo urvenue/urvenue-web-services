@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //Experiences Date Filter
 function shrotcode_uws_experiences_date_filter($atts, $content = null){
@@ -24,7 +25,10 @@ function shrotcode_uws_experiences_date_filter($atts, $content = null){
     include_once($uws_path . "/includes/experiences-functions.php");
 	$uvargs = ($date) ? array("date" => $date) : "";
     $uvexperiencesfilter = uws_get_experiences_date_filter($uvargs);
-	echo $uvexperiencesfilter;
+	// @Axl
+	// echo $uvexperiencesfilter;
+	echo wp_kses_post( $uvexperiencesfilter );
+	// @Axl End
 	
 	$content = ob_get_contents();
   	ob_end_clean();

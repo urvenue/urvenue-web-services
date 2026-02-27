@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 define('UWS_SECURITY_MAX_BODY', 1024 * 1024);
 define('UWS_SECURITY_BLOCK', true);
@@ -104,7 +105,10 @@ function uws_security_check_params_injection(){
     $body_to_check = $body_decoded = '';
     if (stripos($ct, 'application/json') !== false) {
         $data = @json_decode($bodyRaw, true);
-        $body_to_check = $body_decoded = is_array($data) ? json_encode($data) : $bodyRaw;
+        // @Axl
+        // $body_to_check = $body_decoded = is_array($data) ? json_encode($data) : $bodyRaw;
+        $body_to_check = $body_decoded = is_array($data) ? wp_json_encode($data) : $bodyRaw;
+        // @Axl End
     } elseif (stripos($ct, 'application/x-www-form-urlencoded') !== false) {
         $body_to_check = $bodyRaw;
         $body_decoded  = urldecode($bodyRaw);

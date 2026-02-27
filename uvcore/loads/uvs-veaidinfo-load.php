@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 if($uvs_libexits)
 	include_once($uvs_path . "/system/uvs-admin-init.php");
 
@@ -58,7 +60,14 @@ if(is_array($uvsvenueinfofeed) and is_array($uvsvenueinfofeed["venues"]) and is_
 
 	$uvsvenueinfoinfohtml = "<div class='uvs-admin-venueinf uvs-admin-venueinf-veaid-$uvsvenueveaid'>$uvsvenueforminfo<div class='uvs-infolist-item-img $uvsvenuelogoclass' style='background-image: url($uvsvenuelogo);'></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Code:</div><div class='uvsvalue'><strong>$uvsvenuewbcode</strong></div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Name:</div><div class='uvsvalue'>$uvsvenuename</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Name Alias:</div><div class='uvsvalue'><input type='text' name='venues[$uvsvenuekey][venuealias]' value='$uvsvenuealias' class='uvsjson'></div></div>{$uvvenuealiasinput}{$uvhideeventsinput}<div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>VEA Venue ID:</div><div class='uvsvalue'>$uvsvenueveaid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>UrVenue Venue ID:</div><div class='uvsvalue'>$uvsvenueuvid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Client ID:</div><div class='uvsvalue'>$uvsvenueclientid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>UrVenue Server:</div><div class='uvsvalue'>$uvsvenueserver</div></div><div class='actions'><a class='uvsjs-triggervenueprimary $uvsvenueisprimaryclass' href='javascript:;' data-isprimary='$uvsvenueisprimary'>$uvsvenueisprimarylabel</a><a class='uvsjs-removevenue' href='javascript:;'>Remove</a></div></div>";
 	
-	echo $uvsvenueinfoinfohtml;
+	// @Axl
+	// echo $uvsvenueinfoinfohtml;
+	echo wp_kses( $uvsvenueinfoinfohtml, uvs_allowed_admin_html() );
+	// @Axl End
 }
-else
-	echo "<div class='uvs-admin-errormsg'>We did not find a venue with this VEA Venue ID: <strong>$uvsve</strong>, check your ID or contact support.</div>";
+else {
+	// @Axl
+	// echo "<div class='uvs-admin-errormsg'>We did not find a venue with this VEA Venue ID: <strong>$uvsve</strong>, check your ID or contact support.</div>";
+	echo "<div class='uvs-admin-errormsg'>We did not find a venue with this VEA Venue ID: <strong>" . esc_html( $uvsve ) . "</strong>, check your ID or contact support.</div>";
+	// @Axl End
+}

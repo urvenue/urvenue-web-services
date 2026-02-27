@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uv_isproxy = 1;
 $uvaction = isset($uvaction) ? $uvaction : $_REQUEST["uvaction"];
 

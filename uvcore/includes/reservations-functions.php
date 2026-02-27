@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*Get inquiry forms
     Optional: args: array with options: venue(default all on library)
@@ -156,11 +157,18 @@ function uws_inquiry_form($uvargs = "")
         $uwsinqformhtml
     );
 
-    echo "<div class='uws-integration uws-inquiryform-cont'>";
-    echo $uwsinqformhtml;
-    echo "<div class='uws-inquiry-statusmsg'><div class='uwsinqmsgbody uwsdy-inqmessage'></div></div>";
-    echo "<div class='uws-loader-uvicon'></div>";
-    echo "</div>";
+    // @Axl
+    // echo "<div class='uws-integration uws-inquiryform-cont'>";
+    // echo $uwsinqformhtml;
+    // echo "<div class='uws-inquiry-statusmsg'><div class='uwsinqmsgbody uwsdy-inqmessage'></div></div>";
+    // echo "<div class='uws-loader-uvicon'></div>";
+    // echo "</div>";
+    echo wp_kses_post( "<div class='uws-integration uws-inquiryform-cont'>" );
+    echo wp_kses_post( $uwsinqformhtml );
+    echo wp_kses_post( "<div class='uws-inquiry-statusmsg'><div class='uwsinqmsgbody uwsdy-inqmessage'></div></div>" );
+    echo wp_kses_post( "<div class='uws-loader-uvicon'></div>" );
+    echo wp_kses_post( "</div>" );
+    // @Axl End
 }
 
 function uws_inquiry_get_leadtypes($uvargs)

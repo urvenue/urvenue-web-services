@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //print_r($_REQUEST);
 //print_r($uvs_core_lib);
@@ -111,6 +112,9 @@ else{
     );
 }
 
-$uvreturnjson = json_encode($uvreturnarray);
+// @Axl
+// $uvreturnjson = json_encode($uvreturnarray);
+$uvreturnjson = wp_json_encode($uvreturnarray);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

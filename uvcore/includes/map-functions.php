@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /*Get Map implementation
     Optional: args
@@ -15,7 +16,10 @@ function uws_map($uvargs = ""){
     }
     else{
         $uvmaphtml = uws_get_map($uvargs);
-        echo $uvmaphtml;
+        // @Axl
+        // echo $uvmaphtml;
+        echo wp_kses_post( $uvmaphtml );
+        // @Axl End
     }
 }
 
@@ -328,7 +332,6 @@ function uws_get_map_venuesel($uvvenuecode){
             <a href='#uws-openvenueselection' class='uwsjs-trigger-dropdown' aria-label='Select Venue'><span class='uwsdy-dropvalue'>$uvvenuename</span></a>
             <div class='uws-dropdown'>
                 <ul>
-                    <!--<li class='uwscurrent'><button class='uwsjs-events-selectvenue' aria-label='Select All Venues' type='button' data-venue='all'>All<span> Venues</span></button></li>-->
                     $uvvenueslist
                 </ul>
             </div>

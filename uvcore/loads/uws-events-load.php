@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // @egt [UWS-7297]
 uws_check_nonce("uwsevents");
@@ -41,7 +42,10 @@ $uveventsviews["nextloaddate"] = date("Y-m-d", strtotime($uveventsviews["todate"
 $uvreturnjson = "";
 
 if(is_array($uveventsviews)){
-    $uvreturnjson = json_encode($uveventsviews);
+    // @Axl
+    // $uvreturnjson = json_encode($uveventsviews);
+    $uvreturnjson = wp_json_encode($uveventsviews);
+    // @Axl End
 }
 
 header('Content-Type: application/json');

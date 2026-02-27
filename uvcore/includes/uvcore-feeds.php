@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //$uws_feeds_debug: if is 1 show debug messages
 
@@ -177,7 +178,10 @@ function uws_update_feeds_infofile($uvfeedinfo){
 
 		$uvclearfeedstime = $uvfeedsinfofilearray["clearfeedstime"];
 		$uvfeedsinfofilearray["feeds"][$uvfeedinfo["feedhash"]] = $uvfeedinfo;
-		$uvfeedsinfofilejson = json_encode($uvfeedsinfofilearray);
+		// @Axl
+		// $uvfeedsinfofilejson = json_encode($uvfeedsinfofilearray);
+		$uvfeedsinfofilejson = wp_json_encode($uvfeedsinfofilearray);
+		// @Axl End
 
 		if(is_writable($uvfeedcachefolder)){
 			/*$fp = fopen("$uvfeedsinfofilepath", "w+");

@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uws_core_version = "1.0.52";
 $uvs_envicode = "api";

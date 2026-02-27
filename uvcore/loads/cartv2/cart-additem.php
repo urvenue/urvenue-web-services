@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $uws_feeds_debug, $uws_actionlinks_lib, $uws_feeds_lib;
 
@@ -143,6 +144,9 @@ if($uvmastercode){
 
 //print_r($uvitemdata);
 
-$uvreturnjson = json_encode($uvreturn);
+// @Axl
+// $uvreturnjson = json_encode($uvreturn);
+$uvreturnjson = wp_json_encode($uvreturn);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

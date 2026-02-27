@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 unset($_REQUEST["uvaction"]);
 
 if($_REQUEST["system"] and isset($_REQUEST["system"]["path"])){
@@ -19,7 +21,10 @@ if($_REQUEST["system"] and isset($_REQUEST["system"]["path"])){
 			$uvslibtmp["system"]["sourcecode"] = (uvs_is_wordpress()) ? "wpplugin" : "uwscore";
 	}
 
-	$uvslib = json_encode($uvslibtmp);
+	// @Axl
+	// $uvslib = json_encode($uvslibtmp);
+	$uvslib = wp_json_encode($uvslibtmp);
+	// @Axl End
 	uvs_admin_save_lib($uvslib);
 }
 else

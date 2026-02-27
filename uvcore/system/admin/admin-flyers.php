@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $uws_core_lib;
 
@@ -47,7 +48,7 @@ $uvsflyercustom2sizecode = uvs_get_adminfieldhtml("flyers->custom2-sizecode");
 $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeholderurl");
 ?>
 
-<div id="uvs-admin-flyers" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['flyers']; ?>">
+<div id="uvs-admin-flyers" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['flyers']; */ echo esc_attr( $uvs_admin_optstabs_state['flyers'] ); ?>">
     <div class="uvs-admin-opt-title">Flyers</div>
     <div class="uvs-admin-opt-descr">Change the Flyer Type and Flyer Ratio for your events on the different events integrations, the order of the items defines the priority.</div>
     <div class="uvs-admin-opt-space"></div>
@@ -55,29 +56,44 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Hide If No Match <small>Hide Flyer if there is no exact match</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerevpagehideifnomatch; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerevpagehideifnomatch; */ ?>
+			<?php echo wp_kses( $uvsflyerevpagehideifnomatch, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Use Placeholder <small>Use Placeholder if there is no flyer</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerevpageuseplaceholder; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerevpageuseplaceholder; */ ?>
+			<?php echo wp_kses( $uvsflyerevpageuseplaceholder, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Size Code <small>Default size code of the image</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerevpagesizecode; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerevpagesizecode; */ ?>
+			<?php echo wp_kses( $uvsflyerevpagesizecode, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Placeholder Flyer URL<small>When the flyer is not found the placeholder is shown.</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerevpageplaceholderurl; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerevpageplaceholderurl; */ ?>
+			<?php echo wp_kses( $uvsflyerevpageplaceholderurl, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-admin-flyer-loccont uvs-admin-flyer-event">
-        <?php echo $uvsevflyerlocdivhtml; ?>
+        <?php // @Axl ?>
+        <?php /* Old: echo $uvsevflyerlocdivhtml; */ ?>
+        <?php echo wp_kses( $uvsevflyerlocdivhtml, uvs_allowed_admin_html() ); ?>
+        <?php // @Axl End ?>
     </div>
     <div class="uvs-admin-flyer-actions">
         <span>Add a new Flyer set to the priority list</span>
@@ -88,29 +104,44 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Hide If No Match <small>Hide Flyer if there is no exact match</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyercalendarhideifnomatch; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyercalendarhideifnomatch; */ ?>
+			<?php echo wp_kses( $uvsflyercalendarhideifnomatch, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Use Placeholder <small>Use Placeholder if there is no flyer</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyercalendaruseplaceholder; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyercalendaruseplaceholder; */ ?>
+			<?php echo wp_kses( $uvsflyercalendaruseplaceholder, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Size Code <small>Default size code of the image</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyercalendarsizecode; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyercalendarsizecode; */ ?>
+            <?php echo wp_kses( $uvsflyercalendarsizecode, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Placeholder Flyer URL<small>When the flyer is not found the placeholder is shown.</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyercalendarplaceholderurl; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyercalendarplaceholderurl; */ ?>
+			<?php echo wp_kses( $uvsflyercalendarplaceholderurl, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>    
     <div class="uvs-admin-flyer-loccont uvs-admin-flyer-cal">
-        <?php echo $uvscalflyerlocdivhtml; ?>
+        <?php // @Axl ?>
+        <?php /* Old: echo $uvscalflyerlocdivhtml; */ ?>
+        <?php echo wp_kses( $uvscalflyerlocdivhtml, uvs_allowed_admin_html() ); ?>
+        <?php // @Axl End ?>
     </div>
     <div class="uvs-admin-flyer-actions">
         <span>Add a new Flyer set to the priority list</span>
@@ -121,29 +152,44 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Hide If No Match <small>Hide Flyer if there is no exact match</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerlisthideifnomatch; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerlisthideifnomatch; */ ?>
+			<?php echo wp_kses( $uvsflyerlisthideifnomatch, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Use Placeholder <small>Use Placeholder if there is no flyer</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerlistuseplaceholder; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerlistuseplaceholder; */ ?>
+			<?php echo wp_kses( $uvsflyerlistuseplaceholder, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Size Code <small>Default size code of the image</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyerlistsizecode; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyerlistsizecode; */ ?>
+            <?php echo wp_kses( $uvsflyerlistsizecode, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Placeholder Flyer URL<small>When the flyer is not found the placeholder is shown.</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyerlistplaceholderurl; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyerlistplaceholderurl; */ ?>
+            <?php echo wp_kses( $uvsflyerlistplaceholderurl, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-admin-flyer-loccont uvs-admin-flyer-list">
-        <?php echo $uvslisflyerlocdivhtml; ?>
+        <?php // @Axl ?>
+        <?php /* Old: echo $uvslisflyerlocdivhtml; */ ?>
+        <?php echo wp_kses( $uvslisflyerlocdivhtml, uvs_allowed_admin_html() ); ?>
+        <?php // @Axl End ?>
     </div>
     <div class="uvs-admin-flyer-actions">
         <span>Add a new Flyer set to the priority list</span>
@@ -154,29 +200,44 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Hide If No Match <small>Hide Flyer if there is no exact match</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyersliderhideifnomatch; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyersliderhideifnomatch; */ ?>
+			<?php echo wp_kses( $uvsflyersliderhideifnomatch, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Use Placeholder <small>Use Placeholder if there is no flyer</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerslideruseplaceholder; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerslideruseplaceholder; */ ?>
+			<?php echo wp_kses( $uvsflyerslideruseplaceholder, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Size Code <small>Default size code of the image</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyerslidersizecode; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyerslidersizecode; */ ?>
+            <?php echo wp_kses( $uvsflyerslidersizecode, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Placeholder Flyer URL<small>When the flyer is not found the placeholder is shown.</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyersliderplaceholderurl; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyersliderplaceholderurl; */ ?>
+            <?php echo wp_kses( $uvsflyersliderplaceholderurl, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-admin-flyer-loccont uvs-admin-flyer-slider">
-        <?php echo $uvsslflyerlocdivhtml; ?>
+        <?php // @Axl ?>
+        <?php /* Old: echo $uvsslflyerlocdivhtml; */ ?>
+        <?php echo wp_kses( $uvsslflyerlocdivhtml, uvs_allowed_admin_html() ); ?>
+        <?php // @Axl End ?>
     </div>
     <div class="uvs-admin-flyer-actions">
         <span>Add a new Flyer set to the priority list</span>
@@ -187,29 +248,44 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Hide If No Match <small>Hide Flyer if there is no exact match</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerslidermobilehideifnomatch; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerslidermobilehideifnomatch; */ ?>
+			<?php echo wp_kses( $uvsflyerslidermobilehideifnomatch, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Use Placeholder <small>Use Placeholder if there is no flyer</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyerslidermobileuseplaceholder; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyerslidermobileuseplaceholder; */ ?>
+			<?php echo wp_kses( $uvsflyerslidermobileuseplaceholder, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Size Code <small>Default size code of the image</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyerslidermobilesizecode; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyerslidermobilesizecode; */ ?>
+            <?php echo wp_kses( $uvsflyerslidermobilesizecode, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Placeholder Flyer URL<small>When the flyer is not found the placeholder is shown.</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyerslidermobileplaceholderurl; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyerslidermobileplaceholderurl; */ ?>
+            <?php echo wp_kses( $uvsflyerslidermobileplaceholderurl, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-admin-flyer-loccont uvs-admin-flyer-slidermobile">
-        <?php echo $uvsslmobflyerlocdivhtml; ?>
+        <?php // @Axl ?>
+        <?php /* Old: echo $uvsslmobflyerlocdivhtml; */ ?>
+        <?php echo wp_kses( $uvsslmobflyerlocdivhtml, uvs_allowed_admin_html() ); ?>
+        <?php // @Axl End ?>
     </div>
     <div class="uvs-admin-flyer-actions">
         <span>Add a new Flyer set to the priority list</span>
@@ -220,29 +296,44 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Hide If No Match <small>Hide Flyer if there is no exact match</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyersharehideifnomatch; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyersharehideifnomatch; */ ?>
+			<?php echo wp_kses( $uvsflyersharehideifnomatch, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Use Placeholder <small>Use Placeholder if there is no flyer</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyershareuseplaceholder; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyershareuseplaceholder; */ ?>
+			<?php echo wp_kses( $uvsflyershareuseplaceholder, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Size Code <small>Default size code of the image</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyersharesizecode; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyersharesizecode; */ ?>
+            <?php echo wp_kses( $uvsflyersharesizecode, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Placeholder Flyer URL<small>When the flyer is not found the placeholder is shown.</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyershareplaceholderurl; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyershareplaceholderurl; */ ?>
+            <?php echo wp_kses( $uvsflyershareplaceholderurl, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-admin-flyer-loccont uvs-admin-flyer-share">
-        <?php echo $uvssrflyerlocdivhtml; ?>
+        <?php // @Axl ?>
+        <?php /* Old: echo $uvssrflyerlocdivhtml; */ ?>
+        <?php echo wp_kses( $uvssrflyerlocdivhtml, uvs_allowed_admin_html() ); ?>
+        <?php // @Axl End ?>
     </div>
     <div class="uvs-admin-flyer-actions">
         <span>Add a new Flyer set to the priority list</span>
@@ -253,29 +344,44 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Hide If No Match <small>Hide Flyer if there is no exact match</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyercustom1hideifnomatch; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyercustom1hideifnomatch; */ ?>
+			<?php echo wp_kses( $uvsflyercustom1hideifnomatch, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Use Placeholder <small>Use Placeholder if there is no flyer</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyercustom1useplaceholder; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyercustom1useplaceholder; */ ?>
+			<?php echo wp_kses( $uvsflyercustom1useplaceholder, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Size Code <small>Default size code of the image</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyercustom1sizecode; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyercustom1sizecode; */ ?>
+            <?php echo wp_kses( $uvsflyercustom1sizecode, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Placeholder Flyer URL<small>When the flyer is not found the placeholder is shown.</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyercustom1placeholderurl; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyercustom1placeholderurl; */ ?>
+            <?php echo wp_kses( $uvsflyercustom1placeholderurl, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-admin-flyer-loccont uvs-admin-flyer-custom1">
-        <?php echo $uvsc1flyerlocdivhtml; ?>
+        <?php // @Axl ?>
+        <?php /* Old: echo $uvsc1flyerlocdivhtml; */ ?>
+        <?php echo wp_kses( $uvsc1flyerlocdivhtml, uvs_allowed_admin_html() ); ?>
+        <?php // @Axl End ?>
     </div>
     <div class="uvs-admin-flyer-actions">
         <span>Add a new Flyer set to the priority list</span>
@@ -286,29 +392,44 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Hide If No Match <small>Hide Flyer if there is no exact match</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyercustom2hideifnomatch; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyercustom2hideifnomatch; */ ?>
+			<?php echo wp_kses( $uvsflyercustom2hideifnomatch, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Use Placeholder <small>Use Placeholder if there is no flyer</small></div>
 		<div class="uvsvalue">
-			<?php echo $uvsflyercustom2useplaceholder; ?>
+			<?php // @Axl ?>
+			<?php /* Old: echo $uvsflyercustom2useplaceholder; */ ?>
+			<?php echo wp_kses( $uvsflyercustom2useplaceholder, uvs_allowed_admin_html() ); ?>
+			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Size Code <small>Default size code of the image</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyercustom2sizecode; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyercustom2sizecode; */ ?>
+            <?php echo wp_kses( $uvsflyercustom2sizecode, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
         <div class="uvsname">Placeholder Flyer URL<small>When the flyer is not found the placeholder is shown.</small></div>
         <div class="uvsvalue">
-            <?php echo $uvsflyercustom2placeholderurl; ?>
+            <?php // @Axl ?>
+            <?php /* Old: echo $uvsflyercustom2placeholderurl; */ ?>
+            <?php echo wp_kses( $uvsflyercustom2placeholderurl, uvs_allowed_admin_html() ); ?>
+            <?php // @Axl End ?>
         </div>
     </div>
     <div class="uvs-admin-flyer-loccont uvs-admin-flyer-custom2">
-        <?php echo $uvsc2flyerlocdivhtml; ?>
+        <?php // @Axl ?>
+        <?php /* Old: echo $uvsc2flyerlocdivhtml; */ ?>
+        <?php echo wp_kses( $uvsc2flyerlocdivhtml, uvs_allowed_admin_html() ); ?>
+        <?php // @Axl End ?>
     </div>
     <div class="uvs-admin-flyer-actions">
         <span>Add a new Flyer set to the priority list</span>
@@ -317,6 +438,9 @@ $uvsflyercustom2placeholderurl = uvs_get_adminfieldhtml("flyers->custom2-placeho
     <div class="uvs-admin-opt-spacedivi"></div>
     <div class="uvs-infolist-item">
         <div class="uvsname">Global Placeholder Flyer URL <small>When an event doesn't have flyer the placeholder is shown.</small></div>
-        <div class="uvsvalue"><?php echo $uvsflyerplaceholderurlfield; ?></div>
+        <?php // @Axl ?>
+        <!-- <div class="uvsvalue"><?php echo $uvsflyerplaceholderurlfield; ?></div> -->
+        <div class="uvsvalue"><?php echo wp_kses( $uvsflyerplaceholderurlfield, uvs_allowed_admin_html() ); ?></div>
+        <?php // @Axl End ?>
     </div>
 </div>

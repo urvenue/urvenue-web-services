@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $uws_proxies_lib;
 
@@ -57,6 +58,9 @@ if($uvpopitemmodule == "membership"){
 if($_REQUEST["returnprox"])
     $uvreturn["proxies"] = uws_get_proxies("inventory");
     
-$uvreturnjson = json_encode($uvreturn);
+// @Axl
+// $uvreturnjson = json_encode($uvreturn);
+$uvreturnjson = wp_json_encode($uvreturn);
+// @Axl End
 header('Content-Type: application/json');
 echo($uvreturnjson);

@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 add_action( 'admin_menu', 'uvwp_options_page' );
 function uvwp_options_page(){
@@ -111,7 +112,11 @@ add_action('wp_enqueue_scripts', 'uvscore_include_styles');
 function uvscore_add_head_styles(){
     $uvcssvars = uws_get_css_vars();
 
-    echo "<style>$uvcssvars</style>";
+    // @Axl
+    // echo "<style>$uvcssvars</style>";
+    // CSS output — no HTML escaping function applies to CSS; wp_strip_all_tags() prevents HTML/script injection while preserving CSS declarations
+    echo '<style>' . wp_strip_all_tags( $uvcssvars ) . '</style>';
+    // @Axl End
 }
 add_action('wp_head', 'uvscore_add_head_styles', 50);
 
@@ -120,7 +125,11 @@ function uwscore_add_footer_scripts(){
     //$uvfooterproxy = uws_get_proxies_script("uvcore-init");
     $uvfooterproxy = uws_get_proxy_script();
 
-    echo $uvfooterproxy;
+    // @Axl
+    // echo $uvfooterproxy;
+    // uws_get_proxy_script() always returns "" — proxy is registered internally via wp_add_inline_script(). Echo is a no-op but kept for traceability.
+    echo wp_kses( $uvfooterproxy, array() );
+    // @Axl End
 }
 add_action('wp_footer', 'uwscore_add_footer_scripts');
 

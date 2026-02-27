@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // Get uvcore library, set global variables
 function uws_get_core_library(){
@@ -423,7 +424,10 @@ function uws_get_proxies_script($uvproxysection = ""){
 	if($uvproxysection and is_array($uws_proxies_lib[$uvproxysection]))
 		$uvproxies = $uws_proxies_lib[$uvproxysection];
 
-	$uvproxiesjson = json_encode($uvproxies);
+	// @Axl
+	// $uvproxiesjson = json_encode($uvproxies);
+	$uvproxiesjson = wp_json_encode($uvproxies);
+	// @Axl End
 	$uvproxiesscript = "";
 
 	// @egt [UWS-7264]
