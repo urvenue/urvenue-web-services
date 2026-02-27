@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+
 <div class="uvs-admin-apiconfigcont">
 
     <div class="uvs-admin-opt-title">UrVenue Configuration</div>
