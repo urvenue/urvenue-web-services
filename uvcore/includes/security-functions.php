@@ -73,11 +73,13 @@ $uws_patterns = array_values(array_unique([
     '/%25/i',
 ]));
 
-function uws_security_log($msg) {
+// function uws_security_log($msg) {
+function urvenue_ws_security_log($msg) { // Axl UWS-7416
     error_log('[UWS_SECURITY] ' . $msg);
 }
 
-function uws_security_matches(array $patterns, $haystack, &$which = null) {
+// function uws_security_matches(array $patterns, $haystack, &$which = null) {
+function urvenue_ws_security_matches(array $patterns, $haystack, &$which = null) { // Axl UWS-7416
     if (!is_string($haystack) || $haystack === '') return false;
     foreach ($patterns as $p) {
         if (@preg_match($p, $haystack, $m)) {
@@ -88,7 +90,8 @@ function uws_security_matches(array $patterns, $haystack, &$which = null) {
     return false;
 }
 
-function uws_security_check_params_injection(){
+// function uws_security_check_params_injection(){
+function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
     global $uws_patterns;
 
     $max = UWS_SECURITY_MAX_BODY;

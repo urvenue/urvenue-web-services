@@ -4,14 +4,21 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uws_proxies_lib;
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsinventory");
+// uws_check_nonce("uwsinventory");
+urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
 
-$uvmastercode = uws_cleanup_request("mastercode");
-$uvsectionid = uws_cleanup_request("sectionid");
-$uvlocationid = uws_cleanup_request("locationid");
-$uvforcenew = uws_cleanup_request("forcenew");
-$uvpricingbreakdown = uws_cleanup_request("pricingbreakdown");
-$uvitem = uws_get_invitem($uvmastercode);
+// $uvmastercode = uws_cleanup_request("mastercode");
+$uvmastercode = urvenue_ws_cleanup_request("mastercode"); // Axl UWS-7416
+// $uvsectionid = uws_cleanup_request("sectionid");
+$uvsectionid = urvenue_ws_cleanup_request("sectionid"); // Axl UWS-7416
+// $uvlocationid = uws_cleanup_request("locationid");
+$uvlocationid = urvenue_ws_cleanup_request("locationid"); // Axl UWS-7416
+// $uvforcenew = uws_cleanup_request("forcenew");
+$uvforcenew = urvenue_ws_cleanup_request("forcenew"); // Axl UWS-7416
+// $uvpricingbreakdown = uws_cleanup_request("pricingbreakdown");
+$uvpricingbreakdown = urvenue_ws_cleanup_request("pricingbreakdown"); // Axl UWS-7416
+// $uvitem = uws_get_invitem($uvmastercode);
+$uvitem = urvenue_ws_get_invitem($uvmastercode); // Axl UWS-7416
 $uviteminfo = $uvitem["info"];
 $uvitempop = "";
 $uvpopitemmodule = "default";
@@ -31,7 +38,8 @@ if(is_array($uvitem)){
         );
         
 
-    $uvitempop = uws_get_itempop($uvitem, $uvargs);
+    // $uvitempop = uws_get_itempop($uvitem, $uvargs);
+    $uvitempop = urvenue_ws_get_itempop($uvitem, $uvargs); // Axl UWS-7416
 
     if($uvsectionid)
         $uvitem["selectedsectionid"] = $uvsectionid;
@@ -49,14 +57,16 @@ $uvreturn = array(
 
 if($uvpopitemmodule == "membership"){
     $uvtempls = array(
-        "membership-primmembership-sel-item" => uws_get_template("memberships/primmembership-sel-item"),
+        // "membership-primmembership-sel-item" => uws_get_template("memberships/primmembership-sel-item"),
+        "membership-primmembership-sel-item" => urvenue_ws_get_template("memberships/primmembership-sel-item"), // Axl UWS-7416
     );
 
     $uvreturn["templates"] = $uvtempls;
 }
 
 if($_REQUEST["returnprox"])
-    $uvreturn["proxies"] = uws_get_proxies("inventory");
+    // $uvreturn["proxies"] = uws_get_proxies("inventory");
+    $uvreturn["proxies"] = urvenue_ws_get_proxies("inventory"); // Axl UWS-7416
     
 // @Axl
 // $uvreturnjson = json_encode($uvreturn);

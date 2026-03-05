@@ -4,7 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uws_feeds_lib;
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsinventory");
+// uws_check_nonce("uwsinventory");
+urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
 
 $uvapiurl = $uws_feeds_lib["inventory-inquiry"]["url"];
 
@@ -37,11 +38,13 @@ $response = wp_remote_retrieve_body($uvwpresponse);
 $uvresponse = json_decode($response, true);
 
 if(is_array($uvresponse) and  $uvresponse["uv"]["success"]["status"] == "success"){
-    $uvpopcontent = uws_get_template("inventory/inventory-inq-success");
+    // $uvpopcontent = uws_get_template("inventory/inventory-inq-success");
+    $uvpopcontent = urvenue_ws_get_template("inventory/inventory-inq-success"); // Axl UWS-7416
 }
 else{
     $uverrormsg = (isset($uvresponse["uv"]["success"]["message"])) ? $uvresponse["uv"]["success"]["message"] : "";
-    $uvpopcontent = uws_get_template("inventory/inventory-inq-failed");
+    // $uvpopcontent = uws_get_template("inventory/inventory-inq-failed");
+    $uvpopcontent = urvenue_ws_get_template("inventory/inventory-inq-failed"); // Axl UWS-7416
     $uvpopcontent = str_replace("{apierrormsg}", $uverrormsg, $uvpopcontent);
 }
 

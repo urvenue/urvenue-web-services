@@ -1,10 +1,14 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$uvsevetnsshowarrows = uvs_get_adminfieldhtml("events->slider-showarrows");
-$uvsevetnsshowdots = uvs_get_adminfieldhtml("events->slider-showdots");
-$uvsevetnsslideranimation = uvs_get_adminfieldhtml("events->slider-animation");
-$uvseventsslidermaxevents = uvs_get_adminfieldhtml("events->slider-maxevents");
+// $uvsevetnsshowarrows = uvs_get_adminfieldhtml("events->slider-showarrows");
+$uvsevetnsshowarrows = urvenue_ws_adm_get_adminfieldhtml("events->slider-showarrows"); // Axl UWS-7416
+// $uvsevetnsshowdots = uvs_get_adminfieldhtml("events->slider-showdots");
+$uvsevetnsshowdots = urvenue_ws_adm_get_adminfieldhtml("events->slider-showdots"); // Axl UWS-7416
+// $uvsevetnsslideranimation = uvs_get_adminfieldhtml("events->slider-animation");
+$uvsevetnsslideranimation = urvenue_ws_adm_get_adminfieldhtml("events->slider-animation"); // Axl UWS-7416
+// $uvseventsslidermaxevents = uvs_get_adminfieldhtml("events->slider-maxevents");
+$uvseventsslidermaxevents = urvenue_ws_adm_get_adminfieldhtml("events->slider-maxevents"); // Axl UWS-7416
 ?>
 <div id="uvs-admin-events-slider" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['events-slider']; */ echo esc_attr( $uvs_admin_optstabs_state['events-slider'] ); ?>">
     <div class="uvs-admin-opt-title">Events Slider</div>
@@ -15,7 +19,8 @@ $uvseventsslidermaxevents = uvs_get_adminfieldhtml("events->slider-maxevents");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsevetnsshowarrows; */ ?>
-			<?php echo wp_kses( $uvsevetnsshowarrows, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsevetnsshowarrows, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsevetnsshowarrows, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -24,7 +29,8 @@ $uvseventsslidermaxevents = uvs_get_adminfieldhtml("events->slider-maxevents");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsevetnsshowdots; */ ?>
-			<?php echo wp_kses( $uvsevetnsshowdots, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsevetnsshowdots, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsevetnsshowdots, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -33,7 +39,8 @@ $uvseventsslidermaxevents = uvs_get_adminfieldhtml("events->slider-maxevents");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsevetnsslideranimation; */ ?>
-			<?php echo wp_kses( $uvsevetnsslideranimation, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsevetnsslideranimation, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsevetnsslideranimation, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -42,7 +49,8 @@ $uvseventsslidermaxevents = uvs_get_adminfieldhtml("events->slider-maxevents");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsslidermaxevents; */ ?>
-			<?php echo wp_kses( $uvseventsslidermaxevents, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsslidermaxevents, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsslidermaxevents, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>

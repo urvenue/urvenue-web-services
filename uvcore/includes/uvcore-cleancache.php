@@ -6,18 +6,22 @@ if(!is_array($uws_core_lib) && !is_array($uws_feeds_lib)) exit;
 $uvwpecreds = $uws_core_lib["cache"];
 
 // If cacheword exists, update it
-update_option('cacheword', 'uv' . uniqid());
+// update_option('cacheword', 'uv' . uniqid());
+update_option('urvenue_ws_cacheword', 'uv' . uniqid()); // Axl UWS-7416
 
 // Custom WP Engine Clear Cache
-function uvclear_wpengine_cache() {
+// function uvclear_wpengine_cache() {
+function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
     global $uvvenuecodes, $uvwpecreds, $uws_core_lib, $uws_feeds_lib, $uws_today;
 
     $uvdefaultmessage = 'UrVenue local cache cleared.';
-    $uws_core_lib["system"]["cache-word"] = get_option('cacheword');
+    // $uws_core_lib["system"]["cache-word"] = get_option('cacheword');
+    $uws_core_lib["system"]["cache-word"] = get_option('urvenue_ws_cacheword'); // Axl UWS-7416
 
     // UV FEED
     // Dates
-    $uvlatestdate = uws_get_events_endinit_date("Y-m-d", $uws_today);
+    // $uvlatestdate = uws_get_events_endinit_date("Y-m-d", $uws_today);
+    $uvlatestdate = urvenue_ws_get_events_endinit_date("Y-m-d", $uws_today); // Axl UWS-7416
     $uvfeedtodate = date("Y-m-d", strtotime($uvlatestdate . " +7 days"));
     $uvfeeddates = "fromdate={$uws_today}&todate={$uvfeedtodate}";
 
@@ -108,8 +112,10 @@ function uvclear_wpengine_cache() {
 
     } else if ($uvresponse && !$install_id) {
         $status = 1;
-        $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. WP Engine Cache clearing failed, please set the API fields.';
-        $reason = (!uvs_is_hosted_on_wpengine()) && 'Missed a WP Engine field, HTTP Status: ' . $httpcode;
+        // $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. WP Engine Cache clearing failed, please set the API fields.';
+        $message = (!urvenue_ws_adm_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. WP Engine Cache clearing failed, please set the API fields.'; // Axl UWS-7416
+        // $reason = (!uvs_is_hosted_on_wpengine()) && 'Missed a WP Engine field, HTTP Status: ' . $httpcode;
+        $reason = (!urvenue_ws_adm_is_hosted_on_wpengine()) && 'Missed a WP Engine field, HTTP Status: ' . $httpcode; // Axl UWS-7416
     } else if(!$uvresponse && in_array($httpcode, $acceptedHTTPCodes)) {
             $status = 1;
             $cachecleared = 'uvfeeds, wpcache';
@@ -118,23 +124,28 @@ function uvclear_wpengine_cache() {
     } else if($uvresponse && $install_id) {
         if($httpcode === 429) { // Too many requests
             $status = 1;
-            $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, try again in some minutes';
+            // $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, try again in some minutes';
+            $message = (!urvenue_ws_adm_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, try again in some minutes'; // Axl UWS-7416
             $reason = $uvresponse['message'];
 		} else if($httpcode === 400) { // Bad request or invalid parameters
             $message = $uvresponse['errors'][0]['message'];
         } else if($httpcode === 401 || $httpcode === 403) { // Invalid API credentials
             $status = 1;
-            $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, please check that the WP Engine API credentials are correct';
+            // $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, please check that the WP Engine API credentials are correct';
+            $message = (!urvenue_ws_adm_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, please check that the WP Engine API credentials are correct'; // Axl UWS-7416
             $reason = $uvresponse['message'];
         } else if($httpcode === 404) { // Installation ID not found
             $status = 1;
-            $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, please check that the WP Engine Installation ID is correct';
+            // $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, please check that the WP Engine Installation ID is correct';
+            $message = (!urvenue_ws_adm_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. We can’t clear WP Engine cache, please check that the WP Engine Installation ID is correct'; // Axl UWS-7416
             $reason = 'Site ' . $uvresponse['message'];
         } else {
             $status = 1;
-            $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. WP Engine Cache clearing failed';
+            // $message = (!uvs_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. WP Engine Cache clearing failed';
+            $message = (!urvenue_ws_adm_is_hosted_on_wpengine()) ? $uvdefaultmessage : 'UrVenue local cache cleared. WP Engine Cache clearing failed'; // Axl UWS-7416
             $reason = 'Unknown error, HTTP Status: ' . $httpcode;
-            uvwp_send_json_error($status, $message, $reason);
+            // uvwp_send_json_error($status, $message, $reason);
+            urvenue_ws_send_json_error($status, $message, $reason); // Axl UWS-7416
         }
     }
     $status = ($status) ? 'success' : 'error';
@@ -156,32 +167,41 @@ function uvclear_wpengine_cache() {
     // curl_close($uvwpe_curl);
 }
 
-function custom_template_redirect() {
+// function custom_template_redirect() {
+function urvenue_ws_template_redirect() { // Axl UWS-7416
     $uv_url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
     if ($uv_url_path == '/apis/uvclearcache/') {
-        clear_cache_endpoint_callback();
+        // clear_cache_endpoint_callback();
+        urvenue_ws_clear_cache_callback(); // Axl UWS-7416
     }
 }
 
-add_action('template_redirect', 'custom_template_redirect');
+// add_action('template_redirect', 'custom_template_redirect');
+add_action('template_redirect', 'urvenue_ws_template_redirect'); // Axl UWS-7416
 
-function clear_cache_endpoint_callback() {
+// function clear_cache_endpoint_callback() {
+function urvenue_ws_clear_cache_callback() { // Axl UWS-7416
     global $uvwpecreds;
 
     if (isset($_GET['apikey']) && $_GET['apikey'] == $uvwpecreds['cacheapikey']) {
-        uvclear_wpengine_cache();
+        // uvclear_wpengine_cache();
+        urvenue_ws_clear_wpengine_cache(); // Axl UWS-7416
         
-        if(function_exists('uws_clean_cached_feeds'))
-            uws_clean_cached_feeds();
+        // if(function_exists('uws_clean_cached_feeds'))
+        if(function_exists('urvenue_ws_clean_cached_feeds')) // Axl UWS-7416
+            // uws_clean_cached_feeds();
+            urvenue_ws_clean_cached_feeds(); // Axl UWS-7416
         exit;
     } else {
-        uvwp_send_json_error(0, 'Invalid API Key', 'unauthorized');
+        // uvwp_send_json_error(0, 'Invalid API Key', 'unauthorized');
+        urvenue_ws_send_json_error(0, 'Invalid API Key', 'unauthorized'); // Axl UWS-7416
         exit;
     }
 }
 
-function uvwp_send_json_error($status, $message, $reason) {
+// function uvwp_send_json_error($status, $message, $reason) {
+function urvenue_ws_send_json_error($status, $message, $reason) { // Axl UWS-7416
     $status = ($status) ? 'success' : 'error';
     $uvresponsemsg = array('uv' => array(
         'success' => array(

@@ -4,9 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uws_core_lib;
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsinventory");
+// uws_check_nonce("uwsinventory");
+urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
 
-$uvcheckoutinfo = uws_cleanup_request("checkoutinfo");
+// $uvcheckoutinfo = uws_cleanup_request("checkoutinfo");
+$uvcheckoutinfo = urvenue_ws_cleanup_request("checkoutinfo"); // Axl UWS-7416
 $uvforcecheckotv1 = ($uvcheckoutinfo == "forcecheckoutv1") ? 1 : 0;
 
 if($uvforcecheckotv1){

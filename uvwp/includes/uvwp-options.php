@@ -1,8 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-add_action( 'admin_menu', 'uvwp_options_page' );
-function uvwp_options_page(){
+// add_action( 'admin_menu', 'uvwp_options_page' );
+add_action( 'admin_menu', 'urvenue_ws_options_page' ); // Axl UWS-7416
+// function uvwp_options_page(){
+function urvenue_ws_options_page(){ // Axl UWS-7416
     global $uvwp_url;
 
     add_menu_page(
@@ -10,13 +12,15 @@ function uvwp_options_page(){
         "UrVenue",
         "administrator",
         "urvenue_opts",
-        "uvwp_admin_page",
+        // "uvwp_admin_page",
+        "urvenue_ws_admin_page", // Axl UWS-7416
         $uvwp_url . "/assets/icons/uvlogo-options.png",
         80
     );
 }
 
-function uvwp_include_adminstyles(){
+// function uvwp_include_adminstyles(){
+function urvenue_ws_include_adminstyles(){ // Axl UWS-7416
     global $uvwp_url, $uvs_url, $uv_assetsversion;
 
     wp_register_style('uvwp-admin', $uvwp_url . '/assets/css/uvwp-admin.css', false, $uv_assetsversion);
@@ -35,9 +39,11 @@ function uvwp_include_adminstyles(){
     wp_enqueue_style('flatpickr');
 
 }
-add_action('admin_head', 'uvwp_include_adminstyles');
+// add_action('admin_head', 'uvwp_include_adminstyles');
+add_action('admin_enqueue_scripts', 'urvenue_ws_include_adminstyles'); // Axl UWS-7416
 
-function uvwp_include_adminscripts(){
+// function uvwp_include_adminscripts(){
+function urvenue_ws_include_adminscripts(){ // Axl UWS-7416
     global $uvs_url;
 
     wp_enqueue_style( 'wp-color-picker' );
@@ -49,11 +55,13 @@ function uvwp_include_adminscripts(){
     wp_enqueue_script('uvs-admin');
 
     wp_register_script('flatpickr', $uvs_url . '/assets/js/flatpickr.min.js', false, 1, true);
-    wp_enqueue_script('flatpickr'); 
+    wp_enqueue_script('flatpickr');
 }
-add_action('admin_enqueue_scripts', 'uvwp_include_adminscripts');
+// add_action('admin_enqueue_scripts', 'uvwp_include_adminscripts');
+add_action('admin_enqueue_scripts', 'urvenue_ws_include_adminscripts'); // Axl UWS-7416
 
-function uvwp_admin_page(){
+// function uvwp_admin_page(){
+function urvenue_ws_admin_page(){ // Axl UWS-7416
     global $uvs_path, $uvs_libexits, $uvwp_path, $uvs_core_lib, $uvs_url, $uws_coreurl, $uvs_admin_lib, $uws_core_version, $uvs_feeds_path;
         
     include_once($uvwp_path . "/admin/admin-page.php");
@@ -61,7 +69,8 @@ function uvwp_admin_page(){
 
 /* Front */
 //Include front styles
-function uvscore_include_styles(){
+// function uvscore_include_styles(){
+function urvenue_ws_include_styles(){ // Axl UWS-7416
     global $uws_coreurl, $uv_assetsversion, $uws_core_lib;
 	
     //Global Styles, included on all pages
@@ -106,11 +115,14 @@ function uvscore_include_styles(){
         wp_enqueue_style('nouislider');
     }
 }
-add_action('wp_enqueue_scripts', 'uvscore_include_styles');
+// add_action('wp_enqueue_scripts', 'uvscore_include_styles');
+add_action('wp_enqueue_scripts', 'urvenue_ws_include_styles'); // Axl UWS-7416
 
 //Add <head> styles for css vars
-function uvscore_add_head_styles(){
-    $uvcssvars = uws_get_css_vars();
+// function uvscore_add_head_styles(){
+function urvenue_ws_add_head_styles(){ // Axl UWS-7416
+    // $uvcssvars = uws_get_css_vars();
+    $uvcssvars = urvenue_ws_get_css_vars(); // Axl UWS-7416
 
     // @Axl
     // echo "<style>$uvcssvars</style>";
@@ -118,12 +130,15 @@ function uvscore_add_head_styles(){
     echo '<style>' . wp_strip_all_tags( $uvcssvars ) . '</style>';
     // @Axl End
 }
-add_action('wp_head', 'uvscore_add_head_styles', 50);
+// add_action('wp_head', 'uvscore_add_head_styles', 50);
+add_action('wp_head', 'urvenue_ws_add_head_styles', 50); // Axl UWS-7416
 
 //Add scripts to footer
-function uwscore_add_footer_scripts(){
+// function uwscore_add_footer_scripts(){
+function urvenue_ws_add_footer_scripts(){ // Axl UWS-7416
     //$uvfooterproxy = uws_get_proxies_script("uvcore-init");
-    $uvfooterproxy = uws_get_proxy_script();
+    // $uvfooterproxy = uws_get_proxy_script();
+    $uvfooterproxy = urvenue_ws_get_proxy_script(); // Axl UWS-7416
 
     // @Axl
     // echo $uvfooterproxy;
@@ -131,10 +146,12 @@ function uwscore_add_footer_scripts(){
     echo wp_kses( $uvfooterproxy, array() );
     // @Axl End
 }
-add_action('wp_footer', 'uwscore_add_footer_scripts');
+// add_action('wp_footer', 'uwscore_add_footer_scripts');
+add_action('wp_footer', 'urvenue_ws_add_footer_scripts'); // Axl UWS-7416
 
 //Include front scripts
-function uvscore_include_scripts(){
+// function uvscore_include_scripts(){
+function urvenue_ws_include_scripts(){ // Axl UWS-7416
     global $uws_coreurl, $uv_assetsversion, $uws_core_lib;
 
     //Global Styles, included on all pages
@@ -224,12 +241,16 @@ function uvscore_include_scripts(){
         wp_enqueue_script('pristine');
     }
 }
-add_action("wp_enqueue_scripts", "uvscore_include_scripts");
+// add_action("wp_enqueue_scripts", "uvscore_include_scripts");
+add_action("wp_enqueue_scripts", "urvenue_ws_include_scripts"); // Axl UWS-7416
 
 //Add proxy files
-add_action('wp_ajax_nopriv_uvpx', 'uvwp_proxy');
-add_action('wp_ajax_uvpx', 'uvwp_proxy');
-function uvwp_proxy(){
+// add_action('wp_ajax_nopriv_uvpx', 'uvwp_proxy');
+add_action('wp_ajax_nopriv_uvpx', 'urvenue_ws_proxy'); // Axl UWS-7416
+// add_action('wp_ajax_uvpx', 'uvwp_proxy');
+add_action('wp_ajax_uvpx', 'urvenue_ws_proxy'); // Axl UWS-7416
+// function uvwp_proxy(){
+function urvenue_ws_proxy(){ // Axl UWS-7416
 	global $uws_corepath, $uvs_path, $uvs_admin_feeds, $uvs_core_lib, $uvs_envicode;
 	
 	include_once($uws_corepath . "/uvcore.proxy.php");
@@ -238,8 +259,10 @@ function uvwp_proxy(){
 }
 
 //Event URL and Vars
-add_filter('query_vars', 'uwswpplug_add_query_vars');
-function uwswpplug_add_query_vars($query_vars){
+// add_filter('query_vars', 'uwswpplug_add_query_vars');
+add_filter('query_vars', 'urvenue_ws_add_query_vars'); // Axl UWS-7416
+// function uwswpplug_add_query_vars($query_vars){
+function urvenue_ws_add_query_vars($query_vars){ // Axl UWS-7416
     $query_vars[] = 'eventcode';
     $query_vars[] = 'mastercode';
 
@@ -248,15 +271,18 @@ function uwswpplug_add_query_vars($query_vars){
 
 // @egt [UWS-7297] 
 // moved flush and nonce check to wp_ajax_uvpx since lifecycle for init is too early and wont let nonce check work properly
-add_action('wp_ajax_uvpx', 'uvpx_ajax_handler');
-function uvpx_ajax_handler() {
+// add_action('wp_ajax_uvpx', 'uvpx_ajax_handler');
+add_action('wp_ajax_uvpx', 'urvenue_ws_ajax_handler'); // Axl UWS-7416
+// function uvpx_ajax_handler() {
+function urvenue_ws_ajax_handler() { // Axl UWS-7416
     if(!isset($_POST['uvsp_adminsave_nonce']) ||
     !wp_verify_nonce(wp_unslash($_POST['uvsp_adminsave_nonce']), 'uvsp_adminsave_action')) {
         wp_send_json_error(['message' => 'Invalid nonce'], 403);
     }
 
     if(isset($_POST['uvaction']) && $_POST['uvaction'] === 'uvsp_adminsave') {
-        update_option('uv-flush-pending', 1);
+        // update_option('uv-flush-pending', 1);
+        update_option('urvenue_ws_flush_pending', 1); // Axl UWS-7416
     }
 
     wp_send_json_success();
@@ -266,9 +292,11 @@ function uvpx_ajax_handler() {
 add_action('init', function(){
 	global $uws_core_lib;
 
-    if(get_option('uv-flush-pending')){//Flush if pending
+    // if(get_option('uv-flush-pending')){//Flush if pending
+    if(get_option('urvenue_ws_flush_pending')){//Flush if pending // Axl UWS-7416
         flush_rewrite_rules();
-        update_option( 'uv-flush-pending', 0);
+        // update_option( 'uv-flush-pending', 0);
+        update_option( 'urvenue_ws_flush_pending', 0); // Axl UWS-7416
     }
 	
     //Event Page Rewrite
@@ -328,7 +356,8 @@ add_action('init', function(){
 }, 10, 0);
 
 //Check if pageid is in event pages map
-function uwswpplug_is_page_singleevent(){
+// function uwswpplug_is_page_singleevent(){
+function urvenue_ws_is_page_singleevent(){ // Axl UWS-7416
     global $uws_core_lib;
 
     $uvissingleevent = 0;
@@ -367,16 +396,23 @@ function uwswpplug_is_page_singleevent(){
 //SEO 
 //Edit Page Title When Page is Dynamic
 // Yoast
-add_filter('wpseo_title', 'uwswpplug_set_meta_title', 10, 2 );
-add_filter('wpseo_opengraph_title', 'uwswpplug_set_meta_title', 10, 2 );
-add_filter('wpseo_twitter_title', 'uwswpplug_set_meta_title', 10, 2 );
+// add_filter('wpseo_title', 'uwswpplug_set_meta_title', 10, 2 );
+add_filter('wpseo_title', 'urvenue_ws_set_meta_title', 10, 2 ); // Axl UWS-7416
+// add_filter('wpseo_opengraph_title', 'uwswpplug_set_meta_title', 10, 2 );
+add_filter('wpseo_opengraph_title', 'urvenue_ws_set_meta_title', 10, 2 ); // Axl UWS-7416
+// add_filter('wpseo_twitter_title', 'uwswpplug_set_meta_title', 10, 2 );
+add_filter('wpseo_twitter_title', 'urvenue_ws_set_meta_title', 10, 2 ); // Axl UWS-7416
 
 // Rank Math
-add_filter('rank_math/frontend/title', 'uwswpplug_set_meta_title', 10, 2 );
-add_filter('rank_math/opengraph/facebook/title', 'uwswpplug_set_meta_title', 10, 2 );
-add_filter('rank_math/opengraph/twitter/title', 'uwswpplug_set_meta_title', 10, 2 );
+// add_filter('rank_math/frontend/title', 'uwswpplug_set_meta_title', 10, 2 );
+add_filter('rank_math/frontend/title', 'urvenue_ws_set_meta_title', 10, 2 ); // Axl UWS-7416
+// add_filter('rank_math/opengraph/facebook/title', 'uwswpplug_set_meta_title', 10, 2 );
+add_filter('rank_math/opengraph/facebook/title', 'urvenue_ws_set_meta_title', 10, 2 ); // Axl UWS-7416
+// add_filter('rank_math/opengraph/twitter/title', 'uwswpplug_set_meta_title', 10, 2 );
+add_filter('rank_math/opengraph/twitter/title', 'urvenue_ws_set_meta_title', 10, 2 ); // Axl UWS-7416
 
-function uwswpplug_set_meta_title($title){
+// function uwswpplug_set_meta_title($title){
+function urvenue_ws_set_meta_title($title){ // Axl UWS-7416
 	global $uvs_core_lib;
 
     $uviseventsingle = 0;
@@ -385,10 +421,12 @@ function uwswpplug_set_meta_title($title){
     if($uvsingleeventpageid and is_page($uvsingleeventpageid))
         $uviseventsingle = 1;
     else
-        $uviseventsingle = uwswpplug_is_page_singleevent();
+        // $uviseventsingle = uwswpplug_is_page_singleevent();
+        $uviseventsingle = urvenue_ws_is_page_singleevent(); // Axl UWS-7416
 		
 	if($uviseventsingle and $uvs_core_lib["seo"]["enabletags"]){
-        $uveventseo = uws_get_event_seo();
+        // $uveventseo = uws_get_event_seo();
+        $uveventseo = urvenue_ws_get_event_seo(); // Axl UWS-7416
 
         if(is_array($uveventseo) and $uveventseo["title"])
             $title = $uveventseo["title"];
@@ -397,8 +435,10 @@ function uwswpplug_set_meta_title($title){
     return $title;
 }
 
-add_filter('wpseo_opengraph_type', 'uwswpplug_set_meta_type', 10, 2 );
-function uwswpplug_set_meta_type($type){
+// add_filter('wpseo_opengraph_type', 'uwswpplug_set_meta_type', 10, 2 );
+add_filter('wpseo_opengraph_type', 'urvenue_ws_set_meta_type', 10, 2 ); // Axl UWS-7416
+// function uwswpplug_set_meta_type($type){
+function urvenue_ws_set_meta_type($type){ // Axl UWS-7416
 	global $uvs_core_lib;
 
     $uviseventsingle = 0;
@@ -407,7 +447,8 @@ function uwswpplug_set_meta_type($type){
     if($uvsingleeventpageid and is_page($uvsingleeventpageid))
         $uviseventsingle = 1;
     else
-        $uviseventsingle = uwswpplug_is_page_singleevent();
+        // $uviseventsingle = uwswpplug_is_page_singleevent();
+        $uviseventsingle = urvenue_ws_is_page_singleevent(); // Axl UWS-7416
 		
 	if($uviseventsingle and $uvs_core_lib["seo"]["enabletags"]){
         //$uveventseo = uws_get_event_seo();
@@ -420,14 +461,19 @@ function uwswpplug_set_meta_type($type){
 
 //Edit Page Description When Page is Dynamic
 // Yoast
-add_filter('wpseo_metadesc', 'uwswpplug_set_meta_description', 10, 2 );
-add_filter('wpseo_opengraph_desc', 'uwswpplug_set_meta_description', 10, 2 );
+// add_filter('wpseo_metadesc', 'uwswpplug_set_meta_description', 10, 2 );
+add_filter('wpseo_metadesc', 'urvenue_ws_set_meta_description', 10, 2 ); // Axl UWS-7416
+// add_filter('wpseo_opengraph_desc', 'uwswpplug_set_meta_description', 10, 2 );
+add_filter('wpseo_opengraph_desc', 'urvenue_ws_set_meta_description', 10, 2 ); // Axl UWS-7416
 
 // Rank Math
-add_filter('rank_math/frontend/description', 'uwswpplug_set_meta_description', 10, 2 );
-add_filter('rank_math/opengraph/facebook/description', 'uwswpplug_set_meta_description', 10, 2 );
+// add_filter('rank_math/frontend/description', 'uwswpplug_set_meta_description', 10, 2 );
+add_filter('rank_math/frontend/description', 'urvenue_ws_set_meta_description', 10, 2 ); // Axl UWS-7416
+// add_filter('rank_math/opengraph/facebook/description', 'uwswpplug_set_meta_description', 10, 2 );
+add_filter('rank_math/opengraph/facebook/description', 'urvenue_ws_set_meta_description', 10, 2 ); // Axl UWS-7416
 
-function uwswpplug_set_meta_description($description){
+// function uwswpplug_set_meta_description($description){
+function urvenue_ws_set_meta_description($description){ // Axl UWS-7416
 	global $uvs_core_lib;
 
     $uviseventsingle = 0;
@@ -436,10 +482,12 @@ function uwswpplug_set_meta_description($description){
     if($uvsingleeventpageid and is_page($uvsingleeventpageid))
         $uviseventsingle = 1;
     else
-        $uviseventsingle = uwswpplug_is_page_singleevent();
+        // $uviseventsingle = uwswpplug_is_page_singleevent();
+        $uviseventsingle = urvenue_ws_is_page_singleevent(); // Axl UWS-7416
 	
 	if($uviseventsingle and $uvs_core_lib["seo"]["enabletags"]){
-        $uveventseo = uws_get_event_seo();
+        // $uveventseo = uws_get_event_seo();
+        $uveventseo = urvenue_ws_get_event_seo(); // Axl UWS-7416
 
         if(is_array($uveventseo) and $uveventseo["description"])
             $description = $uveventseo["description"];
@@ -450,14 +498,19 @@ function uwswpplug_set_meta_description($description){
 
 //Edit Page Image When Page is Dynamic
 // Yoast
-add_filter('wpseo_opengraph_image', 'uwswpplug_set_meta_image', 10, 2 );
-add_filter('wpseo_twitter_image', 'uwswpplug_set_meta_image', 10, 2 );
+// add_filter('wpseo_opengraph_image', 'uwswpplug_set_meta_image', 10, 2 );
+add_filter('wpseo_opengraph_image', 'urvenue_ws_set_meta_image', 10, 2 ); // Axl UWS-7416
+// add_filter('wpseo_twitter_image', 'uwswpplug_set_meta_image', 10, 2 );
+add_filter('wpseo_twitter_image', 'urvenue_ws_set_meta_image', 10, 2 ); // Axl UWS-7416
 
 // Rank Math
-add_filter('rank_math/opengraph/facebook/image', 'uwswpplug_set_meta_image', 10, 2 );
-add_filter('rank_math/opengraph/twitter/image', 'uwswpplug_set_meta_image', 10, 2 );
+// add_filter('rank_math/opengraph/facebook/image', 'uwswpplug_set_meta_image', 10, 2 );
+add_filter('rank_math/opengraph/facebook/image', 'urvenue_ws_set_meta_image', 10, 2 ); // Axl UWS-7416
+// add_filter('rank_math/opengraph/twitter/image', 'uwswpplug_set_meta_image', 10, 2 );
+add_filter('rank_math/opengraph/twitter/image', 'urvenue_ws_set_meta_image', 10, 2 ); // Axl UWS-7416
 
-function uwswpplug_set_meta_image($image){
+// function uwswpplug_set_meta_image($image){
+function urvenue_ws_set_meta_image($image){ // Axl UWS-7416
 	global $uvs_core_lib;
 	
     $uviseventsingle = 0;
@@ -466,10 +519,12 @@ function uwswpplug_set_meta_image($image){
     if($uvsingleeventpageid and is_page($uvsingleeventpageid))
         $uviseventsingle = 1;
     else
-        $uviseventsingle = uwswpplug_is_page_singleevent();
+        // $uviseventsingle = uwswpplug_is_page_singleevent();
+        $uviseventsingle = urvenue_ws_is_page_singleevent(); // Axl UWS-7416
 	
 	if($uviseventsingle and $uvs_core_lib["seo"]["enabletags"]){
-        $uveventseo = uws_get_event_seo();
+        // $uveventseo = uws_get_event_seo();
+        $uveventseo = urvenue_ws_get_event_seo(); // Axl UWS-7416
 
         if(is_array($uveventseo) and $uveventseo["image"])
             $image = $uveventseo["image"];
@@ -480,12 +535,15 @@ function uwswpplug_set_meta_image($image){
 
 //Edit Page URL When Page is Dynamic
 // Yoast
-add_filter('wpseo_opengraph_url', 'uwswpplug_set_page_url', 10, 2 );
+// add_filter('wpseo_opengraph_url', 'uwswpplug_set_page_url', 10, 2 );
+add_filter('wpseo_opengraph_url', 'urvenue_ws_set_page_url', 10, 2 ); // Axl UWS-7416
 
 // Rank Math
-add_filter('rank_math/opengraph/facebook/url', 'uwswpplug_set_page_url', 10, 2 );
+// add_filter('rank_math/opengraph/facebook/url', 'uwswpplug_set_page_url', 10, 2 );
+add_filter('rank_math/opengraph/facebook/url', 'urvenue_ws_set_page_url', 10, 2 ); // Axl UWS-7416
 
-function uwswpplug_set_page_url($pageurl){
+// function uwswpplug_set_page_url($pageurl){
+function urvenue_ws_set_page_url($pageurl){ // Axl UWS-7416
     global $uvs_core_lib;
 	
     $uviseventsingle = 0;
@@ -494,10 +552,12 @@ function uwswpplug_set_page_url($pageurl){
     if($uvsingleeventpageid and is_page($uvsingleeventpageid))
         $uviseventsingle = 1;
     else
-        $uviseventsingle = uwswpplug_is_page_singleevent();
+        // $uviseventsingle = uwswpplug_is_page_singleevent();
+        $uviseventsingle = urvenue_ws_is_page_singleevent(); // Axl UWS-7416
 	
 	if($uviseventsingle and $uvs_core_lib["seo"]["enabletags"]){
-        $uveventseo = uws_get_event_seo();
+        // $uveventseo = uws_get_event_seo();
+        $uveventseo = urvenue_ws_get_event_seo(); // Axl UWS-7416
 
         if(is_array($uveventseo) and $uveventseo["url"])
             $pageurl = $uveventseo["url"];
@@ -507,14 +567,17 @@ function uwswpplug_set_page_url($pageurl){
 }
 
 //Enable debug only if admin
-add_action('plugins_loaded', 'uwswpplug_check_enable_debug');
-function uwswpplug_check_enable_debug(){
+// add_action('plugins_loaded', 'uwswpplug_check_enable_debug');
+add_action('plugins_loaded', 'urvenue_ws_check_enable_debug'); // Axl UWS-7416
+// function uwswpplug_check_enable_debug(){
+function urvenue_ws_check_enable_debug(){ // Axl UWS-7416
     global $uws_feeds_debug;
 
     $uws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and $_REQUEST["uvdbg"]) ? 1 : 0;
 
     if(isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"])
-        uws_clean_cached_feeds();
+        // uws_clean_cached_feeds();
+        urvenue_ws_clean_cached_feeds(); // Axl UWS-7416
 }   
 
 /**
@@ -529,16 +592,20 @@ function uwswpplug_check_enable_debug(){
  *   - Modifies the canonical URL using the `rank_math/frontend/canonical` filter.
  */
 if (defined('WPSEO_VERSION')) {
-    add_filter('wpseo_sitemap_index', 'uwswpplug_add_sitemap_events');
+    // add_filter('wpseo_sitemap_index', 'uwswpplug_add_sitemap_events');
+    add_filter('wpseo_sitemap_index', 'urvenue_ws_add_sitemap_events'); // Axl UWS-7416
     
     add_action('init', function() {
-        add_action("wpseo_do_sitemap_events", 'uwswpplug_sitemap_events');
+        // add_action("wpseo_do_sitemap_events", 'uwswpplug_sitemap_events');
+        add_action("wpseo_do_sitemap_events", 'urvenue_ws_sitemap_events'); // Axl UWS-7416
     });
     
-    add_filter('wpseo_canonical', 'uvwp_seo_canonical');
+    // add_filter('wpseo_canonical', 'uvwp_seo_canonical');
+    add_filter('wpseo_canonical', 'urvenue_ws_seo_canonical'); // Axl UWS-7416
 }
 if (class_exists('RankMath')) {
-    add_filter('rank_math/frontend/canonical', 'uvwp_seo_canonical');
+    // add_filter('rank_math/frontend/canonical', 'uvwp_seo_canonical');
+    add_filter('rank_math/frontend/canonical', 'urvenue_ws_seo_canonical'); // Axl UWS-7416
 }
 
 /**
@@ -547,7 +614,8 @@ if (class_exists('RankMath')) {
  * @param string $sitemap_index The original sitemap index.
  * @return string The modified sitemap index.
  */
-function uwswpplug_add_sitemap_events($sitemap_index) {
+// function uwswpplug_add_sitemap_events($sitemap_index) {
+function urvenue_ws_add_sitemap_events($sitemap_index) { // Axl UWS-7416
     $uveventssmp = '';
     $uvlastmod = date('c', time());
 
@@ -566,11 +634,13 @@ function uwswpplug_add_sitemap_events($sitemap_index) {
  * containing the URLs and last modification dates of the events. The generated sitemap is then set as the sitemap
  * for the Yoast SEO plugin.
  */
-function uwswpplug_sitemap_events() {
+// function uwswpplug_sitemap_events() {
+function urvenue_ws_sitemap_events() { // Axl UWS-7416
     global $wpseo_sitemaps;
     
     $uveventsmp = '';
-    $uvevents = uws_get_events();
+    // $uvevents = uws_get_events();
+    $uvevents = urvenue_ws_get_events(); // Axl UWS-7416
     
     if(is_array($uvevents)) {
         $uvlastmod = date('c', time());
@@ -591,7 +661,8 @@ function uwswpplug_sitemap_events() {
 /* 
 * Update the Canonical URL on every single event, this update requires Yoast or Rank Math SEO plugins to be active.
 */
-function uvwp_seo_canonical($uvcanonical) {
+// function uvwp_seo_canonical($uvcanonical) {
+function urvenue_ws_seo_canonical($uvcanonical) { // Axl UWS-7416
     global $uvs_core_lib;
 	
     $uviseventsingle = 0;
@@ -600,10 +671,12 @@ function uvwp_seo_canonical($uvcanonical) {
     if($uvsingleeventpageid and is_page($uvsingleeventpageid))
         $uviseventsingle = 1;
     else
-        $uviseventsingle = uwswpplug_is_page_singleevent();
+        // $uviseventsingle = uwswpplug_is_page_singleevent();
+        $uviseventsingle = urvenue_ws_is_page_singleevent(); // Axl UWS-7416
 	
 	if($uviseventsingle and $uvs_core_lib["seo"]["enabletags"]){
-        $uveventseo = uws_get_event_seo();
+        // $uveventseo = uws_get_event_seo();
+        $uveventseo = urvenue_ws_get_event_seo(); // Axl UWS-7416
 
         if(is_array($uveventseo) and $uveventseo["url"])
             $uvcanonical = $uveventseo["url"];

@@ -2,10 +2,13 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsevents");
+// uws_check_nonce("uwsevents");
+urvenue_ws_check_nonce("uwsevents"); // Axl UWS-7416
 
-$uveventcodes = uws_cleanup_request("eventcodes");
-$uvtemplates = uws_cleanup_request("templates");
+// $uveventcodes = uws_cleanup_request("eventcodes");
+$uveventcodes = urvenue_ws_cleanup_request("eventcodes"); // Axl UWS-7416
+// $uvtemplates = uws_cleanup_request("templates");
+$uvtemplates = urvenue_ws_cleanup_request("templates"); // Axl UWS-7416
 
 $uveventhtml = "";
 //support multiple events templates on the future
@@ -16,7 +19,8 @@ if($uveventcodes and $uvtemplates){
     );
 
     ob_start();
-    uws_event($uvargs);
+    // uws_event($uvargs);
+    urvenue_ws_event($uvargs); // Axl UWS-7416
     $uveventhtml = ob_get_contents();
   	ob_end_clean();
 }

@@ -164,9 +164,12 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 				}
 			";
 
-			wp_register_style('uvwp_setup_styles', '');
-			wp_enqueue_style('uvwp_setup_styles');
-			wp_add_inline_style('uvwp_setup_styles', $uvwp_setup_css);
+			// wp_register_style('uvwp_setup_styles', '');
+			wp_register_style('urvenue_ws_setup_styles', ''); // Axl UWS-7416
+			// wp_enqueue_style('uvwp_setup_styles');
+			wp_enqueue_style('urvenue_ws_setup_styles'); // Axl UWS-7416
+			// wp_add_inline_style('uvwp_setup_styles', $uvwp_setup_css);
+			wp_add_inline_style('urvenue_ws_setup_styles', $uvwp_setup_css); // Axl UWS-7416
 
 			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), null, 'all');
 			wp_enqueue_style('setup-css', $uvbaseurl . 'assets/css/setup.css', array(), null, 'all');

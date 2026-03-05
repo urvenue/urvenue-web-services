@@ -5,13 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	Returns: language code: (en, ja, es, fr, etc)
 */
 if (function_exists('add_action'))
-	add_action('wp_loaded', 'uws_set_cur_lang');
+	// add_action('wp_loaded', 'uws_set_cur_lang');
+	add_action('wp_loaded', 'urvenue_ws_set_cur_lang'); // Axl UWS-7416
 
-function uws_set_cur_lang() {
+// function uws_set_cur_lang() {
+function urvenue_ws_set_cur_lang() { // Axl UWS-7416
     global $uvcurlang;
     $uvcurlang = "en";
 
-    if (uws_is_wordpress()) {
+    // if (uws_is_wordpress()) {
+    if (urvenue_ws_is_wordpress()) { // Axl UWS-7416
         
 		// Check for WPML
         if (apply_filters('wpml_current_language', null)) {
@@ -37,10 +40,12 @@ function uws_set_cur_lang() {
 /*Get the current language
     Returns: language code: (en, ja, es, fr, etc)
 */
-function uws_get_cur_lang(){
+// function uws_get_cur_lang(){
+function urvenue_ws_get_cur_lang(){ // Axl UWS-7416
 	global $uvcurlang;
 
-	if(!$uvcurlang) uws_set_cur_lang();
+	// if(!$uvcurlang) uws_set_cur_lang();
+	if(!$uvcurlang) urvenue_ws_set_cur_lang(); // Axl UWS-7416
 
     return $uvcurlang;
 }
@@ -50,21 +55,25 @@ function uws_get_cur_lang(){
     Returns: Traslated text for the current language if exists
 */
 $uws_langvars = $uws_langvars_en = "";
-function uws_lang($uvkey){
+// function uws_lang($uvkey){
+function urvenue_ws_lang($uvkey){ // Axl UWS-7416
 	global $uws_langvars, $uws_path, $uws_langvars_en;
 
-    $uvcurlang = uws_get_cur_lang();
+    // $uvcurlang = uws_get_cur_lang();
+    $uvcurlang = urvenue_ws_get_cur_lang(); // Axl UWS-7416
 
 	if(!$uws_langvars){
 		$uvlangfile = $uws_path . "/langs/" . $uvcurlang . ".json";
 		
 		if(file_exists($uvlangfile)){
-			$uvlangjson = uws_api_call($uvlangfile, 1);
+			// $uvlangjson = uws_api_call($uvlangfile, 1);
+			$uvlangjson = urvenue_ws_api_call($uvlangfile, 1); // Axl UWS-7416
 			$uws_langvars = json_decode($uvlangjson, true);
 		}
 		else{
 			$uvlangfile = $uws_path . "/langs/en.json";
-			$uvlangjson = uws_api_call($uvlangfile, 1);
+			// $uvlangjson = uws_api_call($uvlangfile, 1);
+			$uvlangjson = urvenue_ws_api_call($uvlangfile, 1); // Axl UWS-7416
 			$uws_langvars = json_decode($uvlangjson, true);
 		}
 	}
@@ -74,7 +83,8 @@ function uws_lang($uvkey){
 	if(!$uws_langvars[$uvkey]){
 		if(!$uws_langvars_en){
 			$uvlangfile = $uws_path . "/langs/en.json";
-			$uvlangjson = uws_api_call($uvlangfile, 1);
+			// $uvlangjson = uws_api_call($uvlangfile, 1);
+			$uvlangjson = urvenue_ws_api_call($uvlangfile, 1); // Axl UWS-7416
 			$uws_langvars_en = json_decode($uvlangjson, true);
 		}
 
@@ -89,14 +99,20 @@ function uws_lang($uvkey){
     Requires: Date in english
     Returns: Date in the current language if exists
 */
-function uws_lang_date($uvddate){
-    $uvcurlang = uws_get_cur_lang();
+// function uws_lang_date($uvddate){
+function urvenue_ws_lang_date($uvddate){ // Axl UWS-7416
+    // $uvcurlang = uws_get_cur_lang();
+    $uvcurlang = urvenue_ws_get_cur_lang(); // Axl UWS-7416
 
 	if($uvcurlang and $uvcurlang != "en"){
-		$uvlangfulldate = uws_lang("uv-date-fullday");
-		$uvlangfullmonths = uws_lang("uv-date-fullmonth");
-		$uvlangabbdate = uws_lang("uv-date-abbday");
-		$uvlangabbmonths = uws_lang("uv-date-abbmonth");
+		// $uvlangfulldate = uws_lang("uv-date-fullday");
+		$uvlangfulldate = urvenue_ws_lang("uv-date-fullday"); // Axl UWS-7416
+		// $uvlangfullmonths = uws_lang("uv-date-fullmonth");
+		$uvlangfullmonths = urvenue_ws_lang("uv-date-fullmonth"); // Axl UWS-7416
+		// $uvlangabbdate = uws_lang("uv-date-abbday");
+		$uvlangabbdate = urvenue_ws_lang("uv-date-abbday"); // Axl UWS-7416
+		// $uvlangabbmonths = uws_lang("uv-date-abbmonth");
+		$uvlangabbmonths = urvenue_ws_lang("uv-date-abbmonth"); // Axl UWS-7416
 
 		if(is_array($uvlangfulldate)){
 			foreach($uvlangfulldate as $uvfulldatekey => $uvfulldate){

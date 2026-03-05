@@ -1,11 +1,17 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-$uvsuitheme = uvs_get_adminfieldhtml("ui->uitheme");
-$uvsuiprimarycolor = uvs_get_adminfieldhtml("ui->primarycolor");
-$uvsuisecondarycolor = uvs_get_adminfieldhtml("ui->secondarycolor");
-$uvsuiaccentcolor = uvs_get_adminfieldhtml("ui->accentcolor");
-$uvsuipoptheme = uvs_get_adminfieldhtml("ui->uipoptheme");
-$uvsuipopaccentcolor = uvs_get_adminfieldhtml("ui->popaccentcolor");
+// $uvsuitheme = uvs_get_adminfieldhtml("ui->uitheme");
+$uvsuitheme = urvenue_ws_adm_get_adminfieldhtml("ui->uitheme"); // Axl UWS-7416
+// $uvsuiprimarycolor = uvs_get_adminfieldhtml("ui->primarycolor");
+$uvsuiprimarycolor = urvenue_ws_adm_get_adminfieldhtml("ui->primarycolor"); // Axl UWS-7416
+// $uvsuisecondarycolor = uvs_get_adminfieldhtml("ui->secondarycolor");
+$uvsuisecondarycolor = urvenue_ws_adm_get_adminfieldhtml("ui->secondarycolor"); // Axl UWS-7416
+// $uvsuiaccentcolor = uvs_get_adminfieldhtml("ui->accentcolor");
+$uvsuiaccentcolor = urvenue_ws_adm_get_adminfieldhtml("ui->accentcolor"); // Axl UWS-7416
+// $uvsuipoptheme = uvs_get_adminfieldhtml("ui->uipoptheme");
+$uvsuipoptheme = urvenue_ws_adm_get_adminfieldhtml("ui->uipoptheme"); // Axl UWS-7416
+// $uvsuipopaccentcolor = uvs_get_adminfieldhtml("ui->popaccentcolor");
+$uvsuipopaccentcolor = urvenue_ws_adm_get_adminfieldhtml("ui->popaccentcolor"); // Axl UWS-7416
 ?>
 <div id="uvs-admin-ui-color-palette" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['ui-color-palette']; */ echo esc_attr( $uvs_admin_optstabs_state['ui-color-palette'] ); ?>">
     <div class="uvs-admin-opt-title">UI Color Palette</div>
@@ -17,7 +23,8 @@ $uvsuipopaccentcolor = uvs_get_adminfieldhtml("ui->popaccentcolor");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsuitheme; */ ?>
-			<?php echo wp_kses( $uvsuitheme, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsuitheme, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsuitheme, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -41,7 +48,8 @@ $uvsuipopaccentcolor = uvs_get_adminfieldhtml("ui->popaccentcolor");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsuiaccentcolor; */ ?>
-			<?php echo wp_kses( $uvsuiaccentcolor, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsuiaccentcolor, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsuiaccentcolor, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 			<div class="uv-loader-uvicon"></div>
 		</div>
@@ -57,7 +65,8 @@ $uvsuipopaccentcolor = uvs_get_adminfieldhtml("ui->popaccentcolor");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsuipoptheme; */ ?>
-			<?php echo wp_kses( $uvsuipoptheme, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsuipoptheme, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsuipoptheme, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -66,7 +75,8 @@ $uvsuipopaccentcolor = uvs_get_adminfieldhtml("ui->popaccentcolor");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsuipopaccentcolor; */ ?>
-			<?php echo wp_kses( $uvsuipopaccentcolor, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsuipopaccentcolor, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsuipopaccentcolor, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 			<div class="uv-loader-uvicon"></div>
 		</div>

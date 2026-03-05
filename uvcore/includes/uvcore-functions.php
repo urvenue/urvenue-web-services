@@ -2,13 +2,16 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // Get uvcore library, set global variables
-function uws_get_core_library(){
+// function uws_get_core_library(){
+function urvenue_ws_get_core_library(){ // Axl UWS-7416
 	global $uws_path, $uv_core_defaults_lib;
 	
 	$uvscorelibarray = "";
 	
-	if(uws_is_wordpress()){//if is wordpress
-        $uvscorelibjson = get_option("uvcore_lib");
+	// if(uws_is_wordpress()){//if is wordpress
+	if(urvenue_ws_is_wordpress()){//if is wordpress // Axl UWS-7416
+        // $uvscorelibjson = get_option("uvcore_lib");
+        $uvscorelibjson = get_option("urvenue_ws_uvcore_lib"); // Axl UWS-7416
         $uvscorelibarray = json_decode($uvscorelibjson, true);
     }
 	if($uws_path and file_exists($uws_path . "/uvcore.lib.json")){
@@ -19,7 +22,8 @@ function uws_get_core_library(){
 	if(!is_array($uvscorelibarray) or !is_array($uvscorelibarray["system"]))
 		$uvscorelibarray = false;
 
-	$uvscorelibarray = (is_array($uvscorelibarray)) ? uws_lib_add_defaults($uvscorelibarray) : $uv_core_defaults_lib;
+	// $uvscorelibarray = (is_array($uvscorelibarray)) ? uws_lib_add_defaults($uvscorelibarray) : $uv_core_defaults_lib;
+	$uvscorelibarray = (is_array($uvscorelibarray)) ? urvenue_ws_lib_add_defaults($uvscorelibarray) : $uv_core_defaults_lib; // Axl UWS-7416
 
 	//Set Basic Variables if they are not pressent
 	if(is_array($uvscorelibarray) and !isset($uvscorelibarray["system"]["path"]))
@@ -31,7 +35,8 @@ function uws_get_core_library(){
 		
 	return $uvscorelibarray;
 }
-function uws_get_today(){
+// function uws_get_today(){
+function urvenue_ws_get_today(){ // Axl UWS-7416
     global $uws_today;
 
     $uvtoday = ($uws_today) ? $uws_today : date("Y-m-d");
@@ -40,7 +45,8 @@ function uws_get_today(){
 }
 
 // Add default values to library
-function uws_lib_add_defaults($uvcorelibarray){
+// function uws_lib_add_defaults($uvcorelibarray){
+function urvenue_ws_lib_add_defaults($uvcorelibarray){ // Axl UWS-7416
     global $uv_core_defaults_lib;
 
     //$uvnewcorelibarray = array_merge($uv_core_defaults_lib, $uvcorelibarray);
@@ -60,15 +66,16 @@ function uws_lib_add_defaults($uvcorelibarray){
     return $uvnewcorelibarray;
 }
 
-function uws_get_share_links($uvshareurl){
+// function uws_get_share_links($uvshareurl){
+function urvenue_ws_get_share_links($uvshareurl){ // Axl UWS-7416
 	$uvsharelinks = "";
 
 	if($uvshareurl){
 		$uvsharelinks = "
 			<ul class='uws-social-shares'>
-				<li><a class='uwsjs-fbshare' href='#uws-share-fb' data-shareurl='$uvshareurl' aria-label='" . uws_lang("share-fb") . "'><i class='uwsicon-facebook'></i> <span>" . uws_lang("share") . "</span></a></li>
-				<li><a class='uwsjs-twshare' href='#uws-share-tw' data-shareurl='$uvshareurl' aria-label='" . uws_lang("share-tw") . "'><i class='uwsicon-x-logo'></i> <span>" . uws_lang("post") . "</span></a></li>
-				<li><a class='uwsjs-copytext uws-addcopyedtag' href='#uws-share-url' data-copytext='$uvshareurl' aria-label='" . uws_lang("share-url") . "'><i class='uwsicon-link'></i> <span>" . uws_lang("copy-link") . "</span></a></li>
+				<li><a class='uwsjs-fbshare' href='#uws-share-fb' data-shareurl='$uvshareurl' aria-label='" . urvenue_ws_lang("share-fb") . "'><i class='uwsicon-facebook'></i> <span>" . urvenue_ws_lang("share") . "</span></a></li>
+				<li><a class='uwsjs-twshare' href='#uws-share-tw' data-shareurl='$uvshareurl' aria-label='" . urvenue_ws_lang("share-tw") . "'><i class='uwsicon-x-logo'></i> <span>" . urvenue_ws_lang("post") . "</span></a></li>
+				<li><a class='uwsjs-copytext uws-addcopyedtag' href='#uws-share-url' data-copytext='$uvshareurl' aria-label='" . urvenue_ws_lang("share-url") . "'><i class='uwsicon-link'></i> <span>" . urvenue_ws_lang("copy-link") . "</span></a></li>
 			</ul>
 		";
 	}
@@ -78,7 +85,8 @@ function uws_get_share_links($uvshareurl){
 
 // Include styles on head
 //updated with enqueue for @egt [UWS-7264]
-function uws_include_styles(){
+// function uws_include_styles(){
+function urvenue_ws_core_include_styles(){ // Axl UWS-7416
     global $uws_url;
 	
 	wp_enqueue_style('uvcore-css', $uws_url . '/assets/css/uvcore.css', array(), null, 'all');
@@ -88,7 +96,8 @@ function uws_include_styles(){
 
 // Include styles on head 
 //updated with enqueue for @egt [UWS-7264]
-function uws_include_scripts(){
+// function uws_include_scripts(){
+function urvenue_ws_core_include_scripts(){ // Axl UWS-7416
     global $uws_url;
 
 	wp_register_script('uvcore-js',  $uws_url . '/assets/js/uvcore.js', array(), null, array('strategy' => 'async'));
@@ -99,7 +108,8 @@ function uws_include_scripts(){
 /*Get css vars script
     Returns: string with css vars form global styles
 */ 
-function uws_get_css_vars(){
+// function uws_get_css_vars(){
+function urvenue_ws_get_css_vars(){ // Axl UWS-7416
 	global $uws_theme_vars, $uws_poptheme_vars, $uws_core_lib, $uws_config_uitheme, $uws_config_uipoptheme;
 
 	$uvcssstyles = "";
@@ -165,7 +175,8 @@ function uws_get_css_vars(){
 }
 
 /*Check if is wordpress*/
-function uws_is_wordpress(){
+// function uws_is_wordpress(){
+function urvenue_ws_is_wordpress(){ // Axl UWS-7416
 	$uviswordpress = 0;
 
 	if(function_exists('get_option') and function_exists('add_menu_page'))
@@ -175,8 +186,10 @@ function uws_is_wordpress(){
 }
 
 /*Get string returns string for url*/
-function uws_get_linkstring($string){
-    $string = uws_get_string2u($string, "-");
+// function uws_get_linkstring($string){
+function urvenue_ws_get_linkstring($string){ // Axl UWS-7416
+    // $string = uws_get_string2u($string, "-");
+    $string = urvenue_ws_get_string2u($string, "-"); // Axl UWS-7416
     $string = preg_replace("|[^a-zA-Z0-9_]|", "-", $string);
     $string = preg_replace("|-+|", "-", $string);
     
@@ -192,7 +205,8 @@ function uws_get_linkstring($string){
 }
 
 /*Clean special chars*/
-function uws_get_string2u($string, $uchar){
+// function uws_get_string2u($string, $uchar){
+function urvenue_ws_get_string2u($string, $uchar){ // Axl UWS-7416
     global $uws_cleanchars_lib;
  
     if(!$uchar)
@@ -211,7 +225,8 @@ function uws_get_string2u($string, $uchar){
 /*Get argument by code
 	Requires: args(var with args), argcode(code for the argument), argdef(default value for the argument)
 */
-function uws_get_arg($uvargs, $uvargcode, $uvargdef = ""){
+// function uws_get_arg($uvargs, $uvargcode, $uvargdef = ""){
+function urvenue_ws_get_arg($uvargs, $uvargcode, $uvargdef = ""){ // Axl UWS-7416
 	$uvthearg = "";
 
 	if(is_array($uvargs) and isset($uvargs[$uvargcode]) and $uvargs[$uvargcode])
@@ -225,7 +240,8 @@ function uws_get_arg($uvargs, $uvargcode, $uvargdef = ""){
 /*Get template content
 	Requires: template(template code or html template)
 */
-function uws_get_template($uvtemplate){
+// function uws_get_template($uvtemplate){
+function urvenue_ws_get_template($uvtemplate){ // Axl UWS-7416
 	global $uws_path, $uws_alttemplatepath, $uws_core_lib;
 
 	$uvtemplatecontent = "";
@@ -237,23 +253,31 @@ function uws_get_template($uvtemplate){
 		$uvcustomtemplatename = (isset($uws_core_lib["system"]["templates-custom-folder"])) ? $uws_core_lib["system"]["templates-custom-folder"] : "uwstemplates";
 		$uvteamplatepath = $uws_path . "/includes/templates/" . $uvtemplate . ".html";
 		
-		if(uws_get_cur_lang() != "en" and file_exists($uws_path . "/includes/templates/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
-			$uvteamplatepath = $uws_path . "/includes/templates/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
+		// if(uws_get_cur_lang() != "en" and file_exists($uws_path . "/includes/templates/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
+		if(urvenue_ws_get_cur_lang() != "en" and file_exists($uws_path . "/includes/templates/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html")) // Axl UWS-7416
+			// $uvteamplatepath = $uws_path . "/includes/templates/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
+			$uvteamplatepath = $uws_path . "/includes/templates/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
 
-		if(uws_is_wordpress() and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename .  "/" . $uvtemplate . ".html"))
+		// if(uws_is_wordpress() and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename .  "/" . $uvtemplate . ".html"))
+		if(urvenue_ws_is_wordpress() and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename .  "/" . $uvtemplate . ".html")) // Axl UWS-7416
 			$uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/" . $uvtemplate . ".html";
 
-		if(uws_is_wordpress() and uws_get_cur_lang() != "en" and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
-			$uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
+		// if(uws_is_wordpress() and uws_get_cur_lang() != "en" and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
+		if(urvenue_ws_is_wordpress() and urvenue_ws_get_cur_lang() != "en" and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html")) // Axl UWS-7416
+			// $uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
+			$uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
 
 		if($uws_alttemplatepath and file_exists($uws_alttemplatepath . "/" . $uvtemplate . ".html"))
 			$uvteamplatepath = $uws_alttemplatepath . "/" . $uvtemplate . ".html";
 
-		if($uws_alttemplatepath and uws_get_cur_lang() != "en" and file_exists($uws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
-			$uvteamplatepath = $uws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
+		// if($uws_alttemplatepath and uws_get_cur_lang() != "en" and file_exists($uws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
+		if($uws_alttemplatepath and urvenue_ws_get_cur_lang() != "en" and file_exists($uws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html")) // Axl UWS-7416
+			// $uvteamplatepath = $uws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
+			$uvteamplatepath = $uws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
 
 		if(file_exists($uvteamplatepath)){
-			$uvtemplatecontent  = uws_api_call($uvteamplatepath, 1);
+			// $uvtemplatecontent  = uws_api_call($uvteamplatepath, 1);
+			$uvtemplatecontent  = urvenue_ws_api_call($uvteamplatepath, 1); // Axl UWS-7416
 		}
 	}
 
@@ -264,7 +288,8 @@ function uws_get_template($uvtemplate){
 	Requires: Name of the dummy
 	Returns: Array with the dummy content
 */
-function uws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){
+// function uws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){
+function urvenue_ws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){ // Axl UWS-7416
 	global $uws_path;
 
 	$uvdummycontent = "";
@@ -273,7 +298,8 @@ function uws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){
 		$uvdummypath = $uws_path . "/libs/dummies/" . $uvdummycode . "." . $uvdummytype;
 
 		if(file_exists($uvdummypath)){
-			$uvdummycontent  = uws_api_call($uvdummypath, 1);
+			// $uvdummycontent  = uws_api_call($uvdummypath, 1);
+			$uvdummycontent  = urvenue_ws_api_call($uvdummypath, 1); // Axl UWS-7416
 			if($uvdummycontent and $uvdummytype == "json")
 				$uvdummycontent = json_decode($uvdummycontent, 1);
 		}
@@ -285,7 +311,8 @@ function uws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){
 /*Get svg icon 
 	Requires: Icon key
 */
-function uws_get_icon($uviconkey = ""){
+// function uws_get_icon($uviconkey = ""){
+function urvenue_ws_get_icon($uviconkey = ""){ // Axl UWS-7416
 	global $uws_path;
 
 	$uvicon = "";
@@ -294,7 +321,8 @@ function uws_get_icon($uviconkey = ""){
 		$uviconpath = $uws_path . "/includes/icons/" . $uviconkey . ".svg";
 
 		if(file_exists($uviconpath)){
-			$uvicon  = uws_api_call($uviconpath, 1);
+			// $uvicon  = uws_api_call($uviconpath, 1);
+			$uvicon  = urvenue_ws_api_call($uviconpath, 1); // Axl UWS-7416
 		}
 	}
 
@@ -305,7 +333,8 @@ function uws_get_icon($uviconkey = ""){
 	Requires: Array with the list to show
 	Returns: html with the list (only <li>)
 */
-function uws_get_optionslist($uvlist, $uvselected = "", $uvtype = "", $uvnolink = ""){
+// function uws_get_optionslist($uvlist, $uvselected = "", $uvtype = "", $uvnolink = ""){
+function urvenue_ws_get_optionslist($uvlist, $uvselected = "", $uvtype = "", $uvnolink = ""){ // Axl UWS-7416
 	$uvlisthtml = "";
 
 	if(is_array($uvlist)){
@@ -335,11 +364,13 @@ function uws_get_optionslist($uvlist, $uvselected = "", $uvtype = "", $uvnolink 
     Optional: selected phone code, format: [US]+1
     Returns: html with phone code options
 */
-function uws_get_phonecode_options($uvphonecode = ""){
+// function uws_get_phonecode_options($uvphonecode = ""){
+function urvenue_ws_get_phonecode_options($uvphonecode = ""){ // Axl UWS-7416
     $uvphonecodeopts = "";
     $uvphonecode = ($uvphonecode == "") ? "[US]+1" : $uvphonecode;
 
-    $uvphonecodes = uws_get_dummyapi("phonecodes");
+    // $uvphonecodes = uws_get_dummyapi("phonecodes");
+    $uvphonecodes = urvenue_ws_get_dummyapi("phonecodes"); // Axl UWS-7416
 
     if(is_array($uvphonecodes)){
         preg_match('/\[(.*?)\]/', $uvphonecode, $uvmatches);
@@ -362,7 +393,8 @@ function uws_get_phonecode_options($uvphonecode = ""){
 	Optional: creditstype(kind of credits to show)
 	Returns: html with powered by urvenue
 */
-function uws_get_uwscredits($uvcreditstype = ""){
+// function uws_get_uwscredits($uvcreditstype = ""){
+function urvenue_ws_get_uwscredits($uvcreditstype = ""){ // Axl UWS-7416
 	global $uws_core_lib, $uws_config_uitheme, $uws_theme_vars, $uws_url;
 
 	$uvuitheme = $uws_core_lib["ui"]["uitheme"];
@@ -380,7 +412,8 @@ function uws_get_uwscredits($uvcreditstype = ""){
 	Optional: proxysection(section to return, example: events)
 	Returns: Proxy array for given key
 */
-function uws_get_proxies($uvproxysection = ""){
+// function uws_get_proxies($uvproxysection = ""){
+function urvenue_ws_get_proxies($uvproxysection = ""){ // Axl UWS-7416
 	global $uws_proxies_lib;
 
 	$uvproxies = "";
@@ -399,7 +432,8 @@ function uws_get_proxies($uvproxysection = ""){
  * @param string $uvmore The string to append if the text is trimmed.
  * @return string The trimmed string.
  */
-function uws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = "..."){
+// function uws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = "..."){
+function urvenue_ws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = "..."){ // Axl UWS-7416
     $uvtext = preg_replace('/<.*?>/', ' $0 ', $uvtext);
     $uvwordsarray = preg_split('/\s+/', $uvtext, -1, PREG_SPLIT_NO_EMPTY);
     $uvwordcount = count($uvwordsarray);
@@ -416,7 +450,8 @@ function uws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = "..."){
 	Optional: proxysection(section to return, example: events)
 	Returns: Proxy script html
 */
-function uws_get_proxies_script($uvproxysection = ""){
+// function uws_get_proxies_script($uvproxysection = ""){
+function urvenue_ws_get_proxies_script($uvproxysection = ""){ // Axl UWS-7416
 	global $uws_proxies_lib;
 
 	$uvproxies = $uws_proxies_lib;
@@ -431,11 +466,15 @@ function uws_get_proxies_script($uvproxysection = ""){
 	$uvproxiesscript = "";
 
 	// @egt [UWS-7264]
-	$uws_proxies_script = "window.uws_proxies = window.uws_proxies || {}; uws_proxies = $uvproxiesjson;";
+	// $uws_proxies_script = "window.uws_proxies = window.uws_proxies || {}; uws_proxies = $uvproxiesjson;";
+	$uws_proxies_script = "window.urvenue_ws_proxies = window.urvenue_ws_proxies || {}; urvenue_ws_proxies = $uvproxiesjson;"; // Axl UWS-7416
 
-	wp_register_script('uws_proxies', false, array(), null, true);
-	wp_enqueue_script('uws_proxies');
-	wp_add_inline_script('uws_proxies', "(function () { {$uws_proxies_script} })();");
+	// wp_register_script('uws_proxies', false, array(), null, true);
+	wp_register_script('urvenue_ws_proxies', false, array(), null, true); // Axl UWS-7416
+	// wp_enqueue_script('uws_proxies');
+	wp_enqueue_script('urvenue_ws_proxies'); // Axl UWS-7416
+	// wp_add_inline_script('uws_proxies', "(function () { {$uws_proxies_script} })();");
+	wp_add_inline_script('urvenue_ws_proxies', "(function () { {$uws_proxies_script} })();"); // Axl UWS-7416
 
 	return $uvproxiesscript;
 }
@@ -443,7 +482,8 @@ function uws_get_proxies_script($uvproxysection = ""){
 /*Get time formated
 	Required: time (time on uv format "12200" first digit 1 = same day, 2 = after midnight, las 4 params: HHMM)
 */
-function uws_get_formattime($uvtime, $uvreturnarray = 0){
+// function uws_get_formattime($uvtime, $uvreturnarray = 0){
+function urvenue_ws_get_formattime($uvtime, $uvreturnarray = 0){ // Axl UWS-7416
 	$uvdtime = "";
 
 	if($uvtime){
@@ -466,7 +506,8 @@ function uws_get_formattime($uvtime, $uvreturnarray = 0){
 	Required: date, time (time on uv format "12200" first digit 1 = same day, 2 = after midnight, las 4 params: HHMM): 
 	Returns: YYYY-MM-DDThh:mm:ss
 */
-function uws_get_iso_time($uvdate = "", $uvtime = ""){
+// function uws_get_iso_time($uvdate = "", $uvtime = ""){
+function urvenue_ws_get_iso_time($uvdate = "", $uvtime = ""){ // Axl UWS-7416
 	$uvisotime = "";
 
 	if($uvdate){
@@ -487,7 +528,8 @@ function uws_get_iso_time($uvdate = "", $uvtime = ""){
 /*Get duration format
 	Required: minutes
 */
-function uws_get_formatduration($uvminutes = ""){
+// function uws_get_formatduration($uvminutes = ""){
+function urvenue_ws_get_formatduration($uvminutes = ""){ // Axl UWS-7416
 	$uvdduration = "";
 
 	if($uvminutes){
@@ -502,7 +544,8 @@ function uws_get_formatduration($uvminutes = ""){
 	Required: time (time on uv format "12200" first digit 1 = same day, 2 = after midnight, las 4 params: HHMM), minutes to add
 	Returns: formated time
 */
-function uws_add_minutestotime($uvtime, $uvminutes){
+// function uws_add_minutestotime($uvtime, $uvminutes){
+function urvenue_ws_add_minutestotime($uvtime, $uvminutes){ // Axl UWS-7416
 	$uvnewtime = substr($uvtime, 0, 1) . date("Hi", strtotime(substr($uvtime, 1, 4) . " +$uvminutes minutes"));
 
 	return $uvnewtime;
@@ -512,12 +555,15 @@ function uws_add_minutestotime($uvtime, $uvminutes){
     Requires: starttime(uv format), endtime(uv format), frequency(minutes)
     Returns: n time slots on the range of time
 */
-function uws_get_ntimerows($uvstarttime, $uvendtime, $uvfrequency = 60){
+// function uws_get_ntimerows($uvstarttime, $uvendtime, $uvfrequency = 60){
+function urvenue_ws_get_ntimerows($uvstarttime, $uvendtime, $uvfrequency = 60){ // Axl UWS-7416
     $uvntimerows = 0;
 
     if($uvstarttime and $uvendtime and $uvfrequency){
-        $uvstarttimeminutes = uws_uvtimetominutes($uvstarttime);
-        $uvendtimeminutes = uws_uvtimetominutes($uvendtime);
+        // $uvstarttimeminutes = uws_uvtimetominutes($uvstarttime);
+        $uvstarttimeminutes = urvenue_ws_uvtimetominutes($uvstarttime); // Axl UWS-7416
+        // $uvendtimeminutes = uws_uvtimetominutes($uvendtime);
+        $uvendtimeminutes = urvenue_ws_uvtimetominutes($uvendtime); // Axl UWS-7416
 
         $uvntimerows = floor(($uvendtimeminutes - $uvstarttimeminutes) / $uvfrequency);
     }
@@ -529,7 +575,8 @@ function uws_get_ntimerows($uvstarttime, $uvendtime, $uvfrequency = 60){
 	Required: time (time on uv format "12200" first digit 1 = same day, 2 = after midnight, las 4 params: HHMM), minutes to add
 	Returns: n minutes
 */
-function uws_uvtimetominutes($uvtime){
+// function uws_uvtimetominutes($uvtime){
+function urvenue_ws_uvtimetominutes($uvtime){ // Axl UWS-7416
     $uvfactor = substr($uvtime, 0, 1) / 1;
     $uvhours = substr($uvtime, 1, 2) / 1;
     $uvminutes = substr($uvtime, 3, 2) / 1;
@@ -538,11 +585,13 @@ function uws_uvtimetominutes($uvtime){
 }
 
 /*Get proxy url*/
-function uws_get_proxyurl(){
+// function uws_get_proxyurl(){
+function urvenue_ws_get_proxyurl(){ // Axl UWS-7416
 	global $uws_url, $uws_config_proxyurl;
 
 	$uvproxyurl = "";
-	if(uws_is_wordpress())//is wordpress
+	// if(uws_is_wordpress())//is wordpress
+	if(urvenue_ws_is_wordpress())//is wordpress // Axl UWS-7416
 		$uvproxyurl = admin_url('admin-ajax.php');
 	else if($uws_config_proxyurl)
 		$uvproxyurl = $uws_config_proxyurl;
@@ -555,10 +604,12 @@ function uws_get_proxyurl(){
 /*Get main proxy script
 	Returns: html script with main uws proxy
 */
-function uws_get_proxy_script(){
+// function uws_get_proxy_script(){
+function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
 	global $uws_config_addproxyparams;
 
-	$uvproxy = uws_get_proxyurl();
+	// $uvproxy = uws_get_proxyurl();
+	$uvproxy = urvenue_ws_get_proxyurl(); // Axl UWS-7416
 	if (strpos($uvproxy, '?') === false)
 		$uvproxy .= "?action=uvpx";
 	else
@@ -568,11 +619,19 @@ function uws_get_proxy_script(){
 	$uvproxiesscript = "";
 
 	// @egt [UWS-7264]
-	$uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';";
+	// $uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';";
+	// $uws_proxy_script = "window.urvenue_ws_proxy = window.urvenue_ws_proxy || {}; urvenue_ws_proxy = '$uvproxy';";
+	$uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';"; // Axl UWS-7416
 
-	wp_register_script('uws_proxy', false, array(), null, true);
-	wp_enqueue_script('uws_proxy');
-	wp_add_inline_script('uws_proxy', "(function () { {$uws_proxy_script} })();");
+	// wp_register_script('uws_proxy', false, array(), null, true);
+	// wp_register_script('urvenue_ws_proxy', false, array(), null, true);
+	wp_register_script('uws_proxy', false, array(), null, true); // Axl UWS-7416
+	// wp_enqueue_script('uws_proxy');
+	// wp_enqueue_script('urvenue_ws_proxy');
+	wp_enqueue_script('uws_proxy'); // Axl UWS-7416
+	// wp_add_inline_script('uws_proxy', "(function () { {$uws_proxy_script} })();");
+	// wp_add_inline_script('urvenue_ws_proxy', "(function () { {$uws_proxy_script} })();");
+	wp_add_inline_script('uws_proxy', "(function () { {$uws_proxy_script} })();"); // Axl UWS-7416
 
 	return $uvproxiesscript;
 }
@@ -581,7 +640,8 @@ function uws_get_proxy_script(){
 	Requires: venuecode
 	Returns: Array with venue info
 */
-function uws_get_venuelibinfo_byvenuecode($uvvenuecode){
+// function uws_get_venuelibinfo_byvenuecode($uvvenuecode){
+function urvenue_ws_get_venuelibinfo_byvenuecode($uvvenuecode){ // Axl UWS-7416
 	global $uws_core_lib;
 
 	$uvvenueinfo = "";
@@ -602,7 +662,8 @@ function uws_get_venuelibinfo_byvenuecode($uvvenuecode){
 	Requires: venuekey
 	Returns: string with name of the venue
 */
-function uws_get_venuename_byvenuekey($uvvenuekey){
+// function uws_get_venuename_byvenuekey($uvvenuekey){
+function urvenue_ws_get_venuename_byvenuekey($uvvenuekey){ // Axl UWS-7416
 	global $uws_core_lib;
 
 	$uvvenuename = "";
@@ -619,7 +680,8 @@ function uws_get_venuename_byvenuekey($uvvenuekey){
 /*Cleanup string variables to make requests
 	Requires: uvstring
 */
-function uws_cleanup_var($uvstring){
+// function uws_cleanup_var($uvstring){
+function urvenue_ws_cleanup_var($uvstring){ // Axl UWS-7416
 	while(substr($uvstring, -1) == "\\")
   		$uvstring = substr($uvstring, 0, -1);
 
@@ -651,7 +713,8 @@ function uws_cleanup_var($uvstring){
 	return $uvstring;
 }
 
-function uws_get_theme() {
+// function uws_get_theme() {
+function urvenue_ws_get_theme() { // Axl UWS-7416
 	global $uws_core_lib, $uws_config_uitheme, $uws_theme_vars;
 
 	$uvuitheme = $uws_core_lib["ui"]["uitheme"];
@@ -661,7 +724,8 @@ function uws_get_theme() {
 	return "uws-" . $uvuitheme;
 }
 
-function uws_get_popup_theme() {
+// function uws_get_popup_theme() {
+function urvenue_ws_get_popup_theme() { // Axl UWS-7416
 	global $uws_core_lib, $uws_config_uipoptheme, $uws_poptheme_vars;
 
 	$uvuipotheme = $uws_core_lib["ui"]["uipoptheme"];
@@ -672,19 +736,23 @@ function uws_get_popup_theme() {
 }
 
 // @egt [UWS-7297]
-function uws_check_nonce($uvnonce) {
-	if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) {
+// function uws_check_nonce($uvnonce) {
+function urvenue_ws_check_nonce($uvnonce) { // Axl UWS-7416
+	// if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) {
+	if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) { // Axl UWS-7416
 		wp_send_json_error(array('message' => 'Invalid nonce'), 403);
 	}
 }
 
 // @egt [UWS-7297]
-function uws_cleanup_request(string $uv_request, string $uv_default = ''): string {
+// function uws_cleanup_request(string $uv_request, string $uv_default = ''): string {
+function urvenue_ws_cleanup_request(string $uv_request, string $uv_default = ''): string { // Axl UWS-7416
     if(!isset($_REQUEST[$uv_request])) {
         return $uv_default;
     }
 
-    return uws_cleanup_var(
+    // return uws_cleanup_var(
+    return urvenue_ws_cleanup_var( // Axl UWS-7416
         sanitize_text_field(
             wp_unslash($_REQUEST[$uv_request])
         )

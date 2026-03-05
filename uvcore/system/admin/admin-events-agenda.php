@@ -1,14 +1,20 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /*$uvseventscalnmonths = uvs_get_adminfieldhtml("events->calendar-nmonths");
-$uvseventsaddlist = uvs_get_adminfieldhtml("events->calendar-addlist");
-$uvseventsinitialview = uvs_get_adminfieldhtml("events->calendar-initialview");
-$uvseventsviewmenu = uvs_get_adminfieldhtml("events->calendar-viewmenu");
-$uvseventsonlyoneevent = uvs_get_adminfieldhtml("events->calendar-onlyoneevent");
-$uvseventsmonthseltype = uvs_get_adminfieldhtml("events->calendar-monthseltype");
+// $uvseventsaddlist = uvs_get_adminfieldhtml("events->calendar-addlist");
+$uvseventsaddlist = urvenue_ws_adm_get_adminfieldhtml("events->calendar-addlist"); // Axl UWS-7416
+// $uvseventsinitialview = uvs_get_adminfieldhtml("events->calendar-initialview");
+$uvseventsinitialview = urvenue_ws_adm_get_adminfieldhtml("events->calendar-initialview"); // Axl UWS-7416
+// $uvseventsviewmenu = uvs_get_adminfieldhtml("events->calendar-viewmenu");
+$uvseventsviewmenu = urvenue_ws_adm_get_adminfieldhtml("events->calendar-viewmenu"); // Axl UWS-7416
+// $uvseventsonlyoneevent = uvs_get_adminfieldhtml("events->calendar-onlyoneevent");
+$uvseventsonlyoneevent = urvenue_ws_adm_get_adminfieldhtml("events->calendar-onlyoneevent"); // Axl UWS-7416
+// $uvseventsmonthseltype = uvs_get_adminfieldhtml("events->calendar-monthseltype");
+$uvseventsmonthseltype = urvenue_ws_adm_get_adminfieldhtml("events->calendar-monthseltype"); // Axl UWS-7416
 $uvseventsinitialviewclass = (!is_array($uvs_core_lib["events"]) or !$uvs_core_lib["events"]["calendar-addlist"]) ? "uvs-fieldhide" : "";*/
 
-$uvseventsagendacolumns = uvs_get_adminfieldhtml("events->agenda-columns");
+// $uvseventsagendacolumns = uvs_get_adminfieldhtml("events->agenda-columns");
+$uvseventsagendacolumns = urvenue_ws_adm_get_adminfieldhtml("events->agenda-columns"); // Axl UWS-7416
 ?>
 
 <div id="uvs-admin-events-agenda" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['events-agenda']; */ echo esc_attr( $uvs_admin_optstabs_state['events-agenda'] ); ?>">
@@ -19,7 +25,8 @@ $uvseventsagendacolumns = uvs_get_adminfieldhtml("events->agenda-columns");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsagendacolumns; */ ?>
-			<?php echo wp_kses( $uvseventsagendacolumns, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsagendacolumns, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsagendacolumns, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>

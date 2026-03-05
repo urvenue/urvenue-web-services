@@ -2,12 +2,14 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // autogenerate cache apikey only 1 time, if not exists
-$uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("uvs_cacheapikey") : "";
+// $uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("uvs_cacheapikey") : "";
+$uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("urvenue_ws_cacheapikey") : ""; // Axl UWS-7416
 $uvsiteURL = (function_exists('get_option') and function_exists('add_menu_page')) ? get_site_url() : "";
 
 if(!$uvs_cacheapikey && function_exists('get_option') and function_exists('add_menu_page')){
     $uvs_cacheapikey = md5(uniqid(rand(), true));
-    update_option("uvs_cacheapikey", $uvs_cacheapikey);
+    // update_option("uvs_cacheapikey", $uvs_cacheapikey);
+    update_option("urvenue_ws_cacheapikey", $uvs_cacheapikey); // Axl UWS-7416
 }
 
 if(isset($uv_uwscore_overwrite_lib_defaults) and is_array($uv_uwscore_overwrite_lib_defaults)){

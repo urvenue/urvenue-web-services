@@ -27,7 +27,8 @@ if(isset($uvs_path) and $uvs_path){
 	include_once($uvs_path . "/system/uvs-admin-functions.php");
 
 	$uvs_feeds_path = $uvs_path . "/uvfeeds";
-	$uvs_core_lib = uvs_get_core_library();
+	// $uvs_core_lib = uvs_get_core_library();
+	$uvs_core_lib = urvenue_ws_adm_get_core_library(); // Axl UWS-7416
 
 	$uvs_url = ($uws_coreurl) ? $uws_coreurl : $uvs_core_lib["system"]["url"];
 	$uvs_lib_path = ($uvs_core_lib and isset($uvs_core_lib["system"]["library"])) ? $uvs_core_lib["system"]["library"] : "";

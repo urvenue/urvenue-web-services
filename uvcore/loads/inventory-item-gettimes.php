@@ -2,12 +2,16 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsinventory");
+// uws_check_nonce("uwsinventory");
+urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
 
-$uvmastercode = uws_cleanup_request("mastercode");
-$uvguests = uws_cleanup_request("guests");
+// $uvmastercode = uws_cleanup_request("mastercode");
+$uvmastercode = urvenue_ws_cleanup_request("mastercode"); // Axl UWS-7416
+// $uvguests = uws_cleanup_request("guests");
+$uvguests = urvenue_ws_cleanup_request("guests"); // Axl UWS-7416
 
-$uvitem = uws_get_invitem($uvmastercode);
+// $uvitem = uws_get_invitem($uvmastercode);
+$uvitem = urvenue_ws_get_invitem($uvmastercode); // Axl UWS-7416
 
 $uvdataslots = "";
 
@@ -18,7 +22,8 @@ if(is_array($uvitem) and isset($uvitem["header"]) and $uvitem["header"]["timemod
     $uvmasteritemcode = $uvitem["info"]["masteritemcode"];
 
     foreach($uvitem["shifts"]["SHT0"]["all_times"] as $uvtime => $uvdtime){
-        $uvdtime = uws_get_formattime($uvtime, 1);
+        // $uvdtime = uws_get_formattime($uvtime, 1);
+        $uvdtime = urvenue_ws_get_formattime($uvtime, 1); // Axl UWS-7416
         $uvshowtype = 1;
 
         if(isset($uvitem["slots"]) and is_array($uvitem["slots"]) and isset($uvitem["slots"]["SHT" . $uvtime]) and $uvitem["slots"]["SHT" . $uvtime] == "-1")

@@ -4,10 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /*Get Experiences Date Selector Filter
     Returns: Prints html date control for experiences
 */
-function uws_get_experiences_date_filter($uvargs = ""){
+// function uws_get_experiences_date_filter($uvargs = ""){
+function urvenue_ws_get_experiences_date_filter($uvargs = ""){ // Axl UWS-7416
     global $uws_core_lib, $uws_today;
 
-    $uvdate = uws_get_arg($uvargs, "date", $uws_today);
+    // $uvdate = uws_get_arg($uvargs, "date", $uws_today);
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", $uws_today); // Axl UWS-7416
 
     $uvinitialddate = date("F j, Y", strtotime($uvdate));
     $uvmaxdate = date("Y-m-d", strtotime($uvdate . " +3 months"));
@@ -34,19 +36,25 @@ function uws_get_experiences_date_filter($uvargs = ""){
     Args: "customclass": custom class on integration
     Returns: Prints html for experiences list
 */
-function uws_experiences($uvargs = ""){
+// function uws_experiences($uvargs = ""){
+function urvenue_ws_experiences($uvargs = ""){ // Axl UWS-7416
     global $uws_path, $uws_today;
 
     //$uvexperiences = uws_get_dummyapi("experiences");
-    $uvdate = uws_get_arg($uvargs, "date", $uws_today);
-    $uvexperiencesfilters = uws_get_experiences_filters($uvexperiences, $uvargs);
-    $uvinvitems = uws_inventory_microcode_items(array("date" => $uvdate));
+    // $uvdate = uws_get_arg($uvargs, "date", $uws_today);
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", $uws_today); // Axl UWS-7416
+    // $uvexperiencesfilters = uws_get_experiences_filters($uvexperiences, $uvargs);
+    $uvexperiencesfilters = urvenue_ws_get_experiences_filters($uvexperiences, $uvargs); // Axl UWS-7416
+    // $uvinvitems = uws_inventory_microcode_items(array("date" => $uvdate));
+    $uvinvitems = urvenue_ws_inventory_microcode_items(array("date" => $uvdate)); // Axl UWS-7416
 
     //Add real items to dummy filters api --- shound connect the filters latter
     $uvexperiences["items"] = $uvinvitems;
 
-    $uvexperienceslist = uws_get_experiences_list($uvexperiences);
-    $uvintclass = uws_get_arg($uvargs, "customclass", "");
+    // $uvexperienceslist = uws_get_experiences_list($uvexperiences);
+    $uvexperienceslist = urvenue_ws_get_experiences_list($uvexperiences); // Axl UWS-7416
+    // $uvintclass = uws_get_arg($uvargs, "customclass", "");
+    $uvintclass = urvenue_ws_get_arg($uvargs, "customclass", ""); // Axl UWS-7416
 
     $uvexperienceshtml = "
         <div class='uws-experiences $uvintclass uws-integration' data-date='$uvdate'>
@@ -82,11 +90,16 @@ function uws_experiences($uvargs = ""){
     Args: "customclass": custom class on integration
     Returns: Prints html for related experiences, skips the current item page
 */
-function uws_related_experiences($uvargs = ""){
-    $uvmastercode = uws_get_itempagemastercode();//current item page
-    $uvexperiences = uws_get_dummyapi("experiences");
-    $uvnexperiences = uws_get_arg($uvargs, "nexperiences", 3);
-    $uvintclass = uws_get_arg($uvargs, "customclass", "");
+// function uws_related_experiences($uvargs = ""){
+function urvenue_ws_related_experiences($uvargs = ""){ // Axl UWS-7416
+    // $uvmastercode = uws_get_itempagemastercode();//current item page
+    $uvmastercode = urvenue_ws_get_itempagemastercode();//current item page // Axl UWS-7416
+    // $uvexperiences = uws_get_dummyapi("experiences");
+    $uvexperiences = urvenue_ws_get_dummyapi("experiences"); // Axl UWS-7416
+    // $uvnexperiences = uws_get_arg($uvargs, "nexperiences", 3);
+    $uvnexperiences = urvenue_ws_get_arg($uvargs, "nexperiences", 3); // Axl UWS-7416
+    // $uvintclass = uws_get_arg($uvargs, "customclass", "");
+    $uvintclass = urvenue_ws_get_arg($uvargs, "customclass", ""); // Axl UWS-7416
     $uvexperlist = array("items" => array());
 
     if(is_array($uvexperiences)){
@@ -101,7 +114,8 @@ function uws_related_experiences($uvargs = ""){
         }
     }
 
-    $uvexperienceslist = uws_get_experiences_list($uvexperlist);
+    // $uvexperienceslist = uws_get_experiences_list($uvexperlist);
+    $uvexperienceslist = urvenue_ws_get_experiences_list($uvexperlist); // Axl UWS-7416
 
     $uvexperienceshtml = "
         <div class='uws-related-experiences $uvintclass uws-integration uwsapi-missing-req' data-apimr-title='Not in API' data-apimr-descr='We do NOT have Related Experiences on the inventoryitem API, maybe we can get items from the same venue and date, or just the same date under the microcode, but we need to know the integration structure'>
@@ -121,25 +135,31 @@ function uws_related_experiences($uvargs = ""){
     Requires: Experiences array
     Returns: Experiences List html
 */
-function uws_get_experiences_list($uvexperiences){
+// function uws_get_experiences_list($uvexperiences){
+function urvenue_ws_get_experiences_list($uvexperiences){ // Axl UWS-7416
     global $uws_core_lib;
 
     $uvexperienceslist = "";
 
     if(is_array($uvexperiences) and is_array($uvexperiences["items"])){
-        $uvexperienceslistitemtemplate = uws_get_template("inventory/inventory-experience-list-item");
+        // $uvexperienceslistitemtemplate = uws_get_template("inventory/inventory-experience-list-item");
+        $uvexperienceslistitemtemplate = urvenue_ws_get_template("inventory/inventory-experience-list-item"); // Axl UWS-7416
 
         foreach($uvexperiences["items"] as $uvitemmascode => $uvitem){
-            $uvitemdprice = uws_frontformat_money($uvitem["listprice"], 1);
-            $uvitemurl = uws_get_item_url($uvitem);
+            // $uvitemdprice = uws_frontformat_money($uvitem["listprice"], 1);
+            $uvitemdprice = urvenue_ws_frontformat_money($uvitem["listprice"], 1); // Axl UWS-7416
+            // $uvitemurl = uws_get_item_url($uvitem);
+            $uvitemurl = urvenue_ws_get_item_url($uvitem); // Axl UWS-7416
             $uvitimage = (isset($uvitem["image"])) ? $uvitem["image"] : "";
             $uvitdur = (isset($uvitem["activityduration"])) ? $uvitem["activityduration"] : "";
             $uvddate = date($uws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"]));
 
             $uvcapacitylabel = ($uvitem["capacity"] > 1) ? "Guests" : "Guest";
             //$uvdstartdtime = ($uvitem["startuvtime"]) ? uws_get_formattime($uvitem["startuvtime"]) : "";
-            $uvdstartdtime = ($uvitem["starttime"]) ? uws_get_formattime($uvitem["starttime"]) : "";
-            $uvdenddtime = ($uvitem["endtime"]) ? uws_get_formattime($uvitem["endtime"]) : "";
+            // $uvdstartdtime = ($uvitem["starttime"]) ? uws_get_formattime($uvitem["starttime"]) : "";
+            $uvdstartdtime = ($uvitem["starttime"]) ? urvenue_ws_get_formattime($uvitem["starttime"]) : ""; // Axl UWS-7416
+            // $uvdenddtime = ($uvitem["endtime"]) ? uws_get_formattime($uvitem["endtime"]) : "";
+            $uvdenddtime = ($uvitem["endtime"]) ? urvenue_ws_get_formattime($uvitem["endtime"]) : ""; // Axl UWS-7416
             $uvdtimerange = ($uvdstartdtime) ? $uvdstartdtime : "";
             $uvdtimerange = ($uvdstartdtime and $uvdenddtime) ? $uvdstartdtime . " - " . $uvdenddtime : $uvdtimerange;
 
@@ -195,7 +215,8 @@ function uws_get_experiences_list($uvexperiences){
     Requires: Experiences array
     Returns: Experiences filters html
 */
-function uws_get_experiences_filters($uvexperiences, $uvargs = ""){
+// function uws_get_experiences_filters($uvexperiences, $uvargs = ""){
+function urvenue_ws_get_experiences_filters($uvexperiences, $uvargs = ""){ // Axl UWS-7416
     $uvexperiencesfilters = "";
 
     if(is_array($uvexperiences)){
@@ -206,14 +227,21 @@ function uws_get_experiences_filters($uvexperiences, $uvargs = ""){
         $uvexptoda = $uvexperiences["timeofday"];
         $uvexpcomp = $uvexperiences["complimentary"];
 
-        $uvexpcatslist = uws_get_optionslist($uvexpcats);
-        $uvexprecolist = uws_get_optionslist($uvexpreco, "", "checkboxes");
-        $uvexpactylist = uws_get_optionslist($uvexpacty, "", "checkboxes");
-        $uvexpbudglist = uws_get_optionslist($uvexpbudg, "", "checkboxes");
-        $uvexptodalist = uws_get_optionslist($uvexptoda, "", "checkboxes");
-        $uvexpcomplist = uws_get_optionslist($uvexpcomp, "", "checkboxes");
+        // $uvexpcatslist = uws_get_optionslist($uvexpcats);
+        $uvexpcatslist = urvenue_ws_get_optionslist($uvexpcats); // Axl UWS-7416
+        // $uvexprecolist = uws_get_optionslist($uvexpreco, "", "checkboxes");
+        $uvexprecolist = urvenue_ws_get_optionslist($uvexpreco, "", "checkboxes"); // Axl UWS-7416
+        // $uvexpactylist = uws_get_optionslist($uvexpacty, "", "checkboxes");
+        $uvexpactylist = urvenue_ws_get_optionslist($uvexpacty, "", "checkboxes"); // Axl UWS-7416
+        // $uvexpbudglist = uws_get_optionslist($uvexpbudg, "", "checkboxes");
+        $uvexpbudglist = urvenue_ws_get_optionslist($uvexpbudg, "", "checkboxes"); // Axl UWS-7416
+        // $uvexptodalist = uws_get_optionslist($uvexptoda, "", "checkboxes");
+        $uvexptodalist = urvenue_ws_get_optionslist($uvexptoda, "", "checkboxes"); // Axl UWS-7416
+        // $uvexpcomplist = uws_get_optionslist($uvexpcomp, "", "checkboxes");
+        $uvexpcomplist = urvenue_ws_get_optionslist($uvexpcomp, "", "checkboxes"); // Axl UWS-7416
 
-        $uvexperiencesfilter = uws_get_experiences_date_filter($uvargs);
+        // $uvexperiencesfilter = uws_get_experiences_date_filter($uvargs);
+        $uvexperiencesfilter = urvenue_ws_get_experiences_date_filter($uvargs); // Axl UWS-7416
 
         $uvexperiencesfilters = "
             <div class='uwsfilter uwsexpfilterdate'>

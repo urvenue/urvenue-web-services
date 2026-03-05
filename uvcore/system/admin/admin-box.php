@@ -2,7 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uvs_adminbox_tabs;
 
-$uvs_admin_optstabs_state = uvs_get_boxtabs_state($uvsinitialtab);
+// $uvs_admin_optstabs_state = uvs_get_boxtabs_state($uvsinitialtab);
+$uvs_admin_optstabs_state = urvenue_ws_adm_get_boxtabs_state($uvsinitialtab); // Axl UWS-7416
 $uvsboxpanelclass = (is_array($uvs_core_lib) and !$uvs_core_lib["system"]["apikey"]) ? "uvapiconfig" : "";
 
 ?>

@@ -5,7 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //$uvseventsinitialview = uvs_get_adminfieldhtml("events->calendar-initialview");
 //$uvseventsviewmenu = uvs_get_adminfieldhtml("events->calendar-viewmenu");
 //$uvseventsonlyoneevent = uvs_get_adminfieldhtml("events->calendar-onlyoneevent");
-$uvseventscalonlylist = uvs_get_adminfieldhtml("events->calendar-alwayslist");
+// $uvseventscalonlylist = uvs_get_adminfieldhtml("events->calendar-alwayslist");
+$uvseventscalonlylist = urvenue_ws_adm_get_adminfieldhtml("events->calendar-alwayslist"); // Axl UWS-7416
 //$uvseventsmonthseltype = uvs_get_adminfieldhtml("events->calendar-monthseltype");
 
 //$uvseventsinitialviewclass = (!is_array($uvs_core_lib["events"]) or !$uvs_core_lib["events"]["calendar-addlist"]) ? "uvs-fieldhide" : "";
@@ -50,7 +51,8 @@ $uvseventscalonlylist = uvs_get_adminfieldhtml("events->calendar-alwayslist");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventscalonlylist; */ ?>
-			<?php echo wp_kses( $uvseventscalonlylist, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventscalonlylist, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventscalonlylist, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>

@@ -4,7 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uws_feeds_lib;
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsreservations");
+// uws_check_nonce("uwsreservations");
+urvenue_ws_check_nonce("uwsreservations"); // Axl UWS-7416
 
 $uvapiurl = $uws_feeds_lib["inquiry-send"]["url"];
 
@@ -38,12 +39,14 @@ $uvresponse = json_decode($response, true);
 
 $uvstatus = "";
 if(is_array($uvresponse) and  $uvresponse["uv"]["success"]["status"] == "success"){
-    $uvpopcontent = uws_get_template("reservations/inquiry-success");
+    // $uvpopcontent = uws_get_template("reservations/inquiry-success");
+    $uvpopcontent = urvenue_ws_get_template("reservations/inquiry-success"); // Axl UWS-7416
     $uvstatus = "success";
 }
 else{
     $uverrormsg = (isset($uvresponse["uv"]["success"]["message"])) ? $uvresponse["uv"]["success"]["message"] : "";
-    $uvpopcontent = uws_get_template("reservations/inquiry-failed");
+    // $uvpopcontent = uws_get_template("reservations/inquiry-failed");
+    $uvpopcontent = urvenue_ws_get_template("reservations/inquiry-failed"); // Axl UWS-7416
     $uvpopcontent = str_replace("{apierrormsg}", $uverrormsg, $uvpopcontent);
     $uvstatus = "error";
 }

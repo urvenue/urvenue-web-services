@@ -9,7 +9,8 @@ $uvsnv = isset($uvsnv) ? $uvsnv : $_REQUEST["uvsnv"];
 $uvsvenueinfofeedurl = $uvs_admin_feeds["venueinfo"];
 $uvsvenueinfofeedurl = str_replace("{params}", "ve" . $uvsve, $uvsvenueinfofeedurl);
 
-$uvsvenueinfofeed = uvs_pullfeed($uvsvenueinfofeedurl);
+// $uvsvenueinfofeed = uvs_pullfeed($uvsvenueinfofeedurl);
+$uvsvenueinfofeed = urvenue_ws_adm_pullfeed($uvsvenueinfofeedurl); // Axl UWS-7416
 $uvsvenueinfofeed = json_decode($uvsvenueinfofeed, true);
 
 if(is_array($uvsvenueinfofeed) and is_array($uvsvenueinfofeed["venues"]) and is_array($uvsvenueinfofeed["venues"][0]) and ($uvsvenueinfofeed["venues"][0]["id"] == $uvsve)){
@@ -53,7 +54,7 @@ if(is_array($uvsvenueinfofeed) and is_array($uvsvenueinfofeed["venues"]) and is_
 	
 	// @egt [UWS-7264]
 	$uvs_pendchanges_script = 'uvs_pendchanges = true;';
-	
+
 	wp_register_script('uvs_pendchanges', false, array(), null, true);
 	wp_enqueue_script('uvs_pendchanges');
 	wp_add_inline_script('uvs_pendchanges', "(function () { {$uvs_pendchanges_script} })();");
@@ -62,7 +63,8 @@ if(is_array($uvsvenueinfofeed) and is_array($uvsvenueinfofeed["venues"]) and is_
 	
 	// @Axl
 	// echo $uvsvenueinfoinfohtml;
-	echo wp_kses( $uvsvenueinfoinfohtml, uvs_allowed_admin_html() );
+	// echo wp_kses( $uvsvenueinfoinfohtml, uvs_allowed_admin_html() );
+	echo wp_kses( $uvsvenueinfoinfohtml, urvenue_ws_adm_allowed_admin_html() ); // Axl UWS-7416
 	// @Axl End
 }
 else {

@@ -4,10 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uws_proxies_lib;
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsinventory");
+// uws_check_nonce("uwsinventory");
+urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
 
-$uvmastercode = uws_cleanup_request("mastercode");
-$uvitem = uws_get_invitem($uvmastercode);
+// $uvmastercode = uws_cleanup_request("mastercode");
+$uvmastercode = urvenue_ws_cleanup_request("mastercode"); // Axl UWS-7416
+// $uvitem = uws_get_invitem($uvmastercode);
+$uvitem = urvenue_ws_get_invitem($uvmastercode); // Axl UWS-7416
 
 $uvreturn = array(
     "item" => $uvitem,

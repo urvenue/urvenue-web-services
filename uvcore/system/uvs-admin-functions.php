@@ -1,13 +1,16 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-function uvs_get_core_library(){
+// function uvs_get_core_library(){
+function urvenue_ws_adm_get_core_library(){ // Axl UWS-7416
 	global $uvs_path, $uv_core_defaults_lib;
 	
 	$uvscorelibarray = "";
 	
-	if(uvs_is_wordpress()){//if is wordpress
-        $uvscorelibjson = get_option("uvcore_lib");
+	// if(uvs_is_wordpress()){//if is wordpress
+	if(urvenue_ws_adm_is_wordpress()){//if is wordpress // Axl UWS-7416
+        // $uvscorelibjson = get_option("uvcore_lib");
+        $uvscorelibjson = get_option("urvenue_ws_uvcore_lib"); // Axl UWS-7416
         $uvscorelibarray = json_decode($uvscorelibjson, true);
     }
 	if($uvs_path and file_exists($uvs_path . "/uvcore.lib.json")){
@@ -18,7 +21,8 @@ function uvs_get_core_library(){
 	if(!is_array($uvscorelibarray) or !is_array($uvscorelibarray["system"]))
 		$uvscorelibarray = false;
 
-	$uvscorelibarray = (is_array($uvscorelibarray)) ? uvs_lib_add_defaults($uvscorelibarray) : $uv_core_defaults_lib;
+	// $uvscorelibarray = (is_array($uvscorelibarray)) ? uvs_lib_add_defaults($uvscorelibarray) : $uv_core_defaults_lib;
+	$uvscorelibarray = (is_array($uvscorelibarray)) ? urvenue_ws_adm_lib_add_defaults($uvscorelibarray) : $uv_core_defaults_lib; // Axl UWS-7416
 
 	//Set Basic Variables if they are not pressent
 	if(is_array($uvscorelibarray) and !isset($uvscorelibarray["system"]["path"]))
@@ -31,7 +35,8 @@ function uvs_get_core_library(){
 	return $uvscorelibarray;
 }
 // Add default values to library
-function uvs_lib_add_defaults($uvcorelibarray){
+// function uvs_lib_add_defaults($uvcorelibarray){
+function urvenue_ws_adm_lib_add_defaults($uvcorelibarray){ // Axl UWS-7416
     global $uv_core_defaults_lib;
 
     //$uvnewcorelibarray = array_merge($uv_core_defaults_lib, $uvcorelibarray);
@@ -52,7 +57,8 @@ function uvs_lib_add_defaults($uvcorelibarray){
 }
 
 //Get proxy url
-function uvs_get_proxyurl(){
+// function uvs_get_proxyurl(){
+function urvenue_ws_adm_get_proxyurl(){ // Axl UWS-7416
 	global $uvs_url;
 
 	$uvproxyurl = "";
@@ -65,11 +71,13 @@ function uvs_get_proxyurl(){
 }
 
 //Get Html for events views
-function uvs_get_eventsviews($uveventsviewsinfo){
+// function uvs_get_eventsviews($uveventsviewsinfo){
+function urvenue_ws_adm_get_eventsviews($uveventsviewsinfo){ // Axl UWS-7416
 	$uveventsviewshtml = "";
 
 	if(is_array($uveventsviewsinfo)){
-		uasort($uveventsviewsinfo, 'uvs_order_keyvalue');
+		// uasort($uveventsviewsinfo, 'uvs_order_keyvalue');
+		uasort($uveventsviewsinfo, 'urvenue_ws_adm_order_keyvalue'); // Axl UWS-7416
 
 		foreach($uveventsviewsinfo as $uveventviewkey => $uveventsview){
 			$uvviewshow = $uveventsview["show"];
@@ -98,11 +106,13 @@ function uvs_get_eventsviews($uveventsviewsinfo){
 }
 
 //Sort by helper, order by order(key) value
-function uvs_order_keyvalue($a, $b){
+// function uvs_order_keyvalue($a, $b){
+function urvenue_ws_adm_order_keyvalue($a, $b){ // Axl UWS-7416
 	return $a['order'] - $b['order'];
 }
 
-function uvs_get_boxtabs_state($uvsactivetab){
+// function uvs_get_boxtabs_state($uvsactivetab){
+function urvenue_ws_adm_get_boxtabs_state($uvsactivetab){ // Axl UWS-7416
 	global $uvs_adminbox_tabs;
 	
 	$uvsadminboxtabsstatus = array();
@@ -114,7 +124,8 @@ function uvs_get_boxtabs_state($uvsactivetab){
 		
 	return $uvsadminboxtabsstatus;
 }
-function uvs_pullfeed($uvsfileurl){
+// function uvs_pullfeed($uvsfileurl){
+function urvenue_ws_adm_pullfeed($uvsfileurl){ // Axl UWS-7416
 	// TESTING @Axl
  	// $ch = curl_init();
  	// curl_setopt($ch, CURLOPT_URL, $uvsfileurl);
@@ -130,11 +141,14 @@ function uvs_pullfeed($uvsfileurl){
 	
  	return($output);
 }
-function uvs_admin_save_lib($uvslib){
+// function uvs_admin_save_lib($uvslib){
+function urvenue_ws_adm_admin_save_lib($uvslib){ // Axl UWS-7416
 	global $uvs_lib_path;
 
-	if(uvs_is_wordpress()){
-		update_option("uvcore_lib", $uvslib);
+	// if(uvs_is_wordpress()){
+	if(urvenue_ws_adm_is_wordpress()){ // Axl UWS-7416
+		// update_option("uvcore_lib", $uvslib);
+		update_option("urvenue_ws_uvcore_lib", $uvslib); // Axl UWS-7416
 		echo("saved");
 	}
 	else if(is_writable($uvs_lib_path)){
@@ -147,7 +161,8 @@ function uvs_admin_save_lib($uvslib){
 	else
 		echo("popup");
 }
-function uvs_admin_venues_list_html(){
+// function uvs_admin_venues_list_html(){
+function urvenue_ws_adm_admin_venues_list_html(){ // Axl UWS-7416
 	global $uvs_core_lib;
 
 	$uvsvenueslisthtml = "";
@@ -209,7 +224,8 @@ function uvs_admin_venues_list_html(){
 
 	return $uvsvenueslisthtml;
 }
-function uvs_get_flyertypes_html($uvsflyertypevalue = ""){
+// function uvs_get_flyertypes_html($uvsflyertypevalue = ""){
+function urvenue_ws_adm_get_flyertypes_html($uvsflyertypevalue = ""){ // Axl UWS-7416
 	global $uvs_flyertypes_lib;
 
 	$uvsflyertypes = "";
@@ -222,7 +238,8 @@ function uvs_get_flyertypes_html($uvsflyertypevalue = ""){
 
 	return $uvsflyertypes;
 }
-function uvs_get_flyerratios_html($uvsflyerratiovalue = ""){
+// function uvs_get_flyerratios_html($uvsflyerratiovalue = ""){
+function urvenue_ws_adm_get_flyerratios_html($uvsflyerratiovalue = ""){ // Axl UWS-7416
 	global $uvs_flyersratios_lib, $uv_core_defaults_lib;
 
 	$uvsflyerratios = "";
@@ -235,7 +252,8 @@ function uvs_get_flyerratios_html($uvsflyerratiovalue = ""){
 
 	return $uvsflyerratios;
 }
-function uvs_get_flyerlocdivhtml($uvflyerloccode = ""){
+// function uvs_get_flyerlocdivhtml($uvflyerloccode = ""){
+function urvenue_ws_adm_get_flyerlocdivhtml($uvflyerloccode = ""){ // Axl UWS-7416
 	global $uvs_core_lib, $uv_core_defaults_lib;
 
 	$uvsflyerlocdivhtml = "";
@@ -246,8 +264,10 @@ function uvs_get_flyerlocdivhtml($uvflyerloccode = ""){
 			$uvsflyersettype = $uvsflyerset["type"];
 			$uvsflyersetratio = $uvsflyerset["ratio"];
 			
-			$uvsflyertypeshtml = uvs_get_flyertypes_html($uvsflyersettype);
-			$uvsflyerrationshtml = uvs_get_flyerratios_html($uvsflyersetratio);
+			// $uvsflyertypeshtml = uvs_get_flyertypes_html($uvsflyersettype);
+			$uvsflyertypeshtml = urvenue_ws_adm_get_flyertypes_html($uvsflyersettype); // Axl UWS-7416
+			// $uvsflyerrationshtml = uvs_get_flyerratios_html($uvsflyersetratio);
+			$uvsflyerrationshtml = urvenue_ws_adm_get_flyerratios_html($uvsflyersetratio); // Axl UWS-7416
 
 			$uvsflyerlocdivhtml .= "<div class='uvs-infolist-groupnoti' data-nflyerset='$uvsflyerloccount' data-flyerloc='$uvflyerloccode'><div class='uvs-infolist-item'><div class='uvsname'>Flyer Type:</div><div class='uvsvalue'><select class='uvsjson uvsflyertype' name='flyers[$uvflyerloccode][$uvsflyerloccount][type]'><option value=''> - </option>$uvsflyertypeshtml</select></div></div><div class='uvs-infolist-item'><div class='uvsname'>Flyer Ratio:</div><div class='uvsvalue'><select class='uvsjson uvsflyerratio' name='flyers[$uvflyerloccode][$uvsflyerloccount][ratio]'><option value=''> - </option>$uvsflyerrationshtml</select></div></div><div class='actions'><a class='uvsjs-removeflyer' href='javascript:;'>Remove</a></div></div>";
 
@@ -257,8 +277,10 @@ function uvs_get_flyerlocdivhtml($uvflyerloccode = ""){
 	else{
 		$uvsftypedefault = $uv_core_defaults_lib["flyers"][$uvflyerloccode]["type"];
 		$uvsfratiodefault = $uv_core_defaults_lib["flyers"][$uvflyerloccode]["ratio"];
-		$uvsflyertypeshtml = uvs_get_flyertypes_html($uvsftypedefault);
-		$uvsflyerrationshtml = uvs_get_flyerratios_html($uvsfratiodefault);
+		// $uvsflyertypeshtml = uvs_get_flyertypes_html($uvsftypedefault);
+		$uvsflyertypeshtml = urvenue_ws_adm_get_flyertypes_html($uvsftypedefault); // Axl UWS-7416
+		// $uvsflyerrationshtml = uvs_get_flyerratios_html($uvsfratiodefault);
+		$uvsflyerrationshtml = urvenue_ws_adm_get_flyerratios_html($uvsfratiodefault); // Axl UWS-7416
 
 		$uvsflyerlocdivhtml = "<div class='uvs-infolist-groupnoti' data-nflyerset='0' data-flyerloc='$uvflyerloccode'><div class='uvs-infolist-item'><div class='uvsname'>Flyer Type:</div><div class='uvsvalue'><select class='uvsjson uvsflyertype' name='flyers[$uvflyerloccode][0][type]'><option value=''> - </option>$uvsflyertypeshtml</select></div></div><div class='uvs-infolist-item'><div class='uvsname'>Flyer Ratio:</div><div class='uvsvalue'><select class='uvsjson uvsflyerratio' name='flyers[$uvflyerloccode][0][ratio]'><option value=''> - </option>$uvsflyerrationshtml</select></div></div><div class='actions'><a class='uvsjs-removeflyer' href='javascript:;'>Remove</a></div></div>";
 	}
@@ -266,7 +288,8 @@ function uvs_get_flyerlocdivhtml($uvflyerloccode = ""){
 	return $uvsflyerlocdivhtml;
 }
 // @Axl
-function uvs_allowed_admin_html() {
+// function uvs_allowed_admin_html() {
+function urvenue_ws_adm_allowed_admin_html() { // Axl UWS-7416
 	return array(
 		'input'  => array( 'type' => true, 'id' => true, 'class' => true, 'name' => true, 'value' => true, 'data-value-on' => true, 'data-value-off' => true, 'placeholder' => true, 'readonly' => true, 'disabled' => true ),
 		'select' => array( 'id' => true, 'class' => true, 'name' => true ),
@@ -278,7 +301,8 @@ function uvs_allowed_admin_html() {
 }
 // @Axl End
 
-function uvs_get_adminfieldhtml($uvsfieldname){
+// function uvs_get_adminfieldhtml($uvsfieldname){
+function urvenue_ws_adm_get_adminfieldhtml($uvsfieldname){ // Axl UWS-7416
 	global $uvs_admin_fields;
 
 	$uvsfieldhtml = "";
@@ -289,7 +313,8 @@ function uvs_get_adminfieldhtml($uvsfieldname){
 		$uvsinputaddclass = (isset($uvs_admin_fields[$uvsfieldname]["addclass"])) ? $uvs_admin_fields[$uvsfieldname]["addclass"] : "";
 		$uvsinputattrs = (isset($uvs_admin_fields[$uvsfieldname]["addattrs"])) ? $uvs_admin_fields[$uvsfieldname]["addattrs"] : "";
 		$uvsinputidattr = (isset($uvs_admin_fields[$uvsfieldname]["id"])) ? "id='" . $uvs_admin_fields[$uvsfieldname]["id"] . "'" : "";
-		$uvsinputvalue = uvs_get_fieldvalue_by_stringroute($uvsfieldname);
+		// $uvsinputvalue = uvs_get_fieldvalue_by_stringroute($uvsfieldname);
+		$uvsinputvalue = urvenue_ws_adm_get_fieldvalue_by_stringroute($uvsfieldname); // Axl UWS-7416
 		$uvsinputaddclass = ($uvsinputtype == "colorpicker") ? $uvsinputaddclass . " uvs-color-field" : $uvsinputaddclass;
 		$uvsinputtype = ($uvsinputtype == "colorpicker" or $uvsinputtype == "page") ? "text" : $uvsinputtype;
 
@@ -301,8 +326,10 @@ function uvs_get_adminfieldhtml($uvsfieldname){
 		$uvsinputidattr_esc   = ( isset( $uvs_admin_fields[$uvsfieldname]["id"] ) ) ? "id='" . esc_attr( $uvs_admin_fields[$uvsfieldname]["id"] ) . "'" : "";
 		// @Axl End
 
-		if($uvs_admin_fields[$uvsfieldname]["type"] == "page" and uvs_is_wordpress()){
-			$uvpagesopts = uvs_get_wppages($uvsinputvalue);
+		// if($uvs_admin_fields[$uvsfieldname]["type"] == "page" and uvs_is_wordpress()){
+		if($uvs_admin_fields[$uvsfieldname]["type"] == "page" and urvenue_ws_adm_is_wordpress()){ // Axl UWS-7416
+			// $uvpagesopts = uvs_get_wppages($uvsinputvalue);
+			$uvpagesopts = urvenue_ws_adm_get_wppages($uvsinputvalue); // Axl UWS-7416
 
 			// @Axl
 			// $uvsfieldhtml = "<select $uvsinputidattr class='uvsjson $uvsinputaddclass' name='$uvsinputname'><option value=''>Select Page</option>$uvpagesopts</select>";
@@ -312,7 +339,8 @@ function uvs_get_adminfieldhtml($uvsfieldname){
 		else if($uvsinputtype == "select"){
 			$uvsselectvalues = $uvs_admin_fields[$uvsfieldname]["values"];
 
-			$uvsselectvalueshtml = uvs_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue);
+			// $uvsselectvalueshtml = uvs_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue);
+			$uvsselectvalueshtml = urvenue_ws_adm_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue); // Axl UWS-7416
 
 			// @Axl
 			// $uvsfieldhtml = "<select $uvsinputidattr class='uvsjson $uvsinputaddclass' name='$uvsinputname'>$uvsselectvalueshtml</select>";
@@ -339,7 +367,8 @@ function uvs_get_adminfieldhtml($uvsfieldname){
 
 	return $uvsfieldhtml;
 }
-function uvs_get_fieldvalue_by_stringroute($uvsstringroute){
+// function uvs_get_fieldvalue_by_stringroute($uvsstringroute){
+function urvenue_ws_adm_get_fieldvalue_by_stringroute($uvsstringroute){ // Axl UWS-7416
 	global $uvs_core_lib, $uv_core_defaults_lib;
 
 	$uvsroutecurval = $uvs_core_lib;
@@ -369,7 +398,8 @@ function uvs_get_fieldvalue_by_stringroute($uvsstringroute){
 
 	return $uvsroutecurval;
 }
-function uvs_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue){
+// function uvs_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue){
+function urvenue_ws_adm_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue){ // Axl UWS-7416
 	$uvsselectvalueshtml = "";
 
 	if(is_array($uvsselectvalues)){
@@ -396,8 +426,10 @@ function uvs_get_fieldvalueshtml($uvsselectvalues, $uvsinputvalue){
 }
 
 // Get string returns string for url
-function uvs_get_linkstring($string){
-    $string = uvs_get_string2u($string, "-");
+// function uvs_get_linkstring($string){
+function urvenue_ws_adm_get_linkstring($string){ // Axl UWS-7416
+    // $string = uvs_get_string2u($string, "-");
+    $string = urvenue_ws_adm_get_string2u($string, "-"); // Axl UWS-7416
     $string = preg_replace("|[^a-zA-Z0-9_]|", "-", $string);
     $string = preg_replace("|-+|", "-", $string);
     
@@ -413,7 +445,8 @@ function uvs_get_linkstring($string){
 }
 
 // Clean special chars
-function uvs_get_string2u($string, $uchar){
+// function uvs_get_string2u($string, $uchar){
+function urvenue_ws_adm_get_string2u($string, $uchar){ // Axl UWS-7416
     global $uvs_cleanchars;
  
     if(!$uchar)
@@ -430,7 +463,8 @@ function uvs_get_string2u($string, $uchar){
 }
 
 /* UV Error */
-function uvs_uverror($uvserror){
+// function uvs_uverror($uvserror){
+function urvenue_ws_adm_uverror($uvserror){ // Axl UWS-7416
 	// @Axl
 	// echo($uvserror);
 	echo esc_html( $uvserror );
@@ -438,7 +472,8 @@ function uvs_uverror($uvserror){
 }
 
 //Check if is wordpress
-function uvs_is_wordpress(){
+// function uvs_is_wordpress(){
+function urvenue_ws_adm_is_wordpress(){ // Axl UWS-7416
 	$uviswordpress = 0;
 
 	if(function_exists('get_option') and function_exists('add_menu_page'))
@@ -448,7 +483,8 @@ function uvs_is_wordpress(){
 }
 
 //Get wordpress pages
-function uvs_get_wppages($uvselpageid = ""){
+// function uvs_get_wppages($uvselpageid = ""){
+function urvenue_ws_adm_get_wppages($uvselpageid = ""){ // Axl UWS-7416
 	$uvpagelist = "";
 
 	$uvsargs = array(
@@ -488,11 +524,13 @@ function uvs_get_wppages($uvselpageid = ""){
  *
  * @return int Returns 1 if the user's email is a UrVenue email, 0 otherwise.
  */
-function uvs_is_uv_email(){
+// function uvs_is_uv_email(){
+function urvenue_ws_adm_is_uv_email(){ // Axl UWS-7416
 	$uvuseremail = "";
 	$uvemailuv = 0;
 
-	if(uvs_is_wordpress()){
+	// if(uvs_is_wordpress()){
+	if(urvenue_ws_adm_is_wordpress()){ // Axl UWS-7416
 		$uvcurrentuser = wp_get_current_user();
 		$uvuseremail = $uvcurrentuser->user_email;
 
@@ -504,6 +542,7 @@ function uvs_is_uv_email(){
 }
 
 //Checks if is hosted on wpe
-function uvs_is_hosted_on_wpengine() {
+// function uvs_is_hosted_on_wpengine() {
+function urvenue_ws_adm_is_hosted_on_wpengine() { // Axl UWS-7416
 	return function_exists('is_wpe') && is_wpe();
 }
