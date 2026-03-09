@@ -1,8 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$uvsinventorymanageentlock = uvs_get_adminfieldhtml("inventory->manageentlock");
-$uvsinventoryshowiteminfoinline = uvs_get_adminfieldhtml("inventory->showiteminfoinline");
+// $uvsinventorymanageentlock = uvs_get_adminfieldhtml("inventory->manageentlock");
+$uvsinventorymanageentlock = urvenue_ws_adm_get_adminfieldhtml("inventory->manageentlock"); // Axl UWS-7416
+// $uvsinventoryshowiteminfoinline = uvs_get_adminfieldhtml("inventory->showiteminfoinline");
+$uvsinventoryshowiteminfoinline = urvenue_ws_adm_get_adminfieldhtml("inventory->showiteminfoinline"); // Axl UWS-7416
 
 ?>
 
@@ -14,7 +16,8 @@ $uvsinventoryshowiteminfoinline = uvs_get_adminfieldhtml("inventory->showiteminf
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsinventorymanageentlock; */ ?>
-			<?php echo wp_kses( $uvsinventorymanageentlock, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsinventorymanageentlock, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsinventorymanageentlock, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -23,7 +26,8 @@ $uvsinventoryshowiteminfoinline = uvs_get_adminfieldhtml("inventory->showiteminf
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsinventoryshowiteminfoinline; */ ?>
-			<?php echo wp_kses( $uvsinventoryshowiteminfoinline, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsinventoryshowiteminfoinline, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsinventoryshowiteminfoinline, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>

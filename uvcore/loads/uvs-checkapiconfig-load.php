@@ -16,7 +16,8 @@ $uvsmicrocodeurl = str_replace("{sourcecode}", $uvsourcecode, $uvsmicrocodeurl);
 $uvsmicrocodeurl = str_replace("{sourceloc}", $uvsourceloc, $uvsmicrocodeurl);
 $uvsmicrocodeurl = str_replace("{params}", "code=$uvmicrocode&venueimages=1", $uvsmicrocodeurl);
 
-$uvsmicrocodefeed = uvs_pullfeed($uvsmicrocodeurl);
+// $uvsmicrocodefeed = uvs_pullfeed($uvsmicrocodeurl);
+$uvsmicrocodefeed = urvenue_ws_adm_pullfeed($uvsmicrocodeurl); // Axl UWS-7416
 $uvsmicrocodefeed = ($uvsmicrocodefeed) ? json_decode($uvsmicrocodefeed, true) : "";
 
 if(is_array($uvsmicrocodefeed) and $uvsmicrocodefeed["uv"]["success"]){
@@ -58,7 +59,8 @@ if(is_array($uvsmicrocodefeed) and $uvsmicrocodefeed["uv"]["success"]){
                 $uvsvenueisprimary = ($uvvenuescounter == 1) ? 1 : 0;
 
                 //Assign venuekey if no wbcode 
-                $uvsvenuewbcode = ($uvsvenuewbcode) ? $uvsvenuewbcode : uvs_get_linkstring($uvsvenuename);
+                // $uvsvenuewbcode = ($uvsvenuewbcode) ? $uvsvenuewbcode : uvs_get_linkstring($uvsvenuename);
+                $uvsvenuewbcode = ($uvsvenuewbcode) ? $uvsvenuewbcode : urvenue_ws_adm_get_linkstring($uvsvenuename); // Axl UWS-7416
 
                 //Provider + Reseller equal to manageetid
                 $uvsproviderid = $uvsresellerid = $uvsmanageentid;

@@ -4,15 +4,21 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /*Get Calendar implementation
     Returns: Prints html controls + events integration
 */
-function uws_events(){
+// function uws_events(){
+function urvenue_ws_events(){ // Axl UWS-7416
     global $uws_core_lib, $uws_today;
 
-    $uvinitialdate = uws_get_events_initial_date("Y-m-d");
-    $uvenddate = uws_get_events_endinit_date("Y-m-d");
-    $uvmaxdate = uws_get_events_max_date("Y-m-d");
+    // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
+    $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
+    // $uvenddate = uws_get_events_endinit_date("Y-m-d");
+    $uvenddate = urvenue_ws_get_events_endinit_date("Y-m-d"); // Axl UWS-7416
+    // $uvmaxdate = uws_get_events_max_date("Y-m-d");
+    $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
 
-    $uveventsactions = uws_events_controls();
-    $uveventsviews = uws_events_views();
+    // $uveventsactions = uws_events_controls();
+    $uveventsactions = urvenue_ws_events_controls(); // Axl UWS-7416
+    // $uveventsviews = uws_events_views();
+    $uveventsviews = urvenue_ws_events_views(); // Axl UWS-7416
     $uveventshtml = "
     <div class='uws-integration uws-events' data-filter-date='$uvinitialdate' data-filter-enddate='$uvenddate' data-filter-maxdate='$uvmaxdate' data-filter-venue='all'>
         $uveventsactions
@@ -26,7 +32,8 @@ function uws_events(){
 }
 
 /*Get events views*/
-function uws_events_views(){
+// function uws_events_views(){
+function urvenue_ws_events_views(){ // Axl UWS-7416
     global $uws_core_lib;
 
     $uvviewshtml = "";
@@ -50,14 +57,17 @@ function uws_events_views(){
 /*Get events filter/controls
     Returns: Controls html
 */
-function uws_events_controls(){
+// function uws_events_controls(){
+function urvenue_ws_events_controls(){ // Axl UWS-7416
     global $uws_core_lib;
 
     $uvdateselectortype = $uws_core_lib["events"]["eventspage-dateselector"]; //"datepicker-date", "datepicker-range", "month-dropdown", "month-arrows"
 
     if($uvdateselectortype == "datepicker-date"){
-        $uvinitialddate = uws_get_events_initial_date("M j, Y");
-        $uvinitialdate = uws_get_events_initial_date("Y-m-d");
+        // $uvinitialddate = uws_get_events_initial_date("M j, Y");
+        $uvinitialddate = urvenue_ws_get_events_initial_date("M j, Y"); // Axl UWS-7416
+        // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
+        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
         $uvcalmonthselhtml = "
         <div class='uws-events-dpinput uwshascalincon uws-dropdown-cont'>
             <label for='uwsfilterdate'>Date</label>
@@ -70,10 +80,14 @@ function uws_events_controls(){
         ";
     }
     else if($uvdateselectortype == "datepicker-range"){
-        $uvinitialddate = uws_get_events_initial_date("M j");
-        $uvinitialdate = uws_get_events_initial_date("Y-m-d");
-        $uvendddate = uws_get_events_endinit_date("M j, Y");
-        $uvenddate = uws_get_events_endinit_date("Y-m-d");
+        // $uvinitialddate = uws_get_events_initial_date("M j");
+        $uvinitialddate = urvenue_ws_get_events_initial_date("M j"); // Axl UWS-7416
+        // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
+        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
+        // $uvendddate = uws_get_events_endinit_date("M j, Y");
+        $uvendddate = urvenue_ws_get_events_endinit_date("M j, Y"); // Axl UWS-7416
+        // $uvenddate = uws_get_events_endinit_date("Y-m-d");
+        $uvenddate = urvenue_ws_get_events_endinit_date("Y-m-d"); // Axl UWS-7416
         $uvcalmonthselhtml = "
         <div class='uws-events-dpinput uws-dropdown-cont uwshascalincon'>
             <label for='uwsfilterrange'>Date Range</label>
@@ -87,8 +101,10 @@ function uws_events_controls(){
         ";
     }
     else if($uvdateselectortype == "month-dropdown"){
-        $uvinitialddate = uws_get_events_initial_date("F Y");
-        $uvmonthslist = uws_get_monthslis();
+        // $uvinitialddate = uws_get_events_initial_date("F Y");
+        $uvinitialddate = urvenue_ws_get_events_initial_date("F Y"); // Axl UWS-7416
+        // $uvmonthslist = uws_get_monthslis();
+        $uvmonthslist = urvenue_ws_get_monthslis(); // Axl UWS-7416
         $uvcalmonthselhtml = "
         <div class='uws-dropdown-cont'>
             <a href='#uws-openmonthselection' class='uwsjs-trigger-dropdown' aria-label='Select Month'><span class='uwsdy-dropvalue'>$uvinitialddate</span></a>
@@ -99,9 +115,12 @@ function uws_events_controls(){
         ";
     }
     else{//Month Arrows
-        $uvinitialddate = uws_get_events_initial_date("F Y");
-        $uvinitialdate = uws_get_events_initial_date("Y-m-d");
-        $uvmonthsstring = uws_get_monthsoptsstring();
+        // $uvinitialddate = uws_get_events_initial_date("F Y");
+        $uvinitialddate = urvenue_ws_get_events_initial_date("F Y"); // Axl UWS-7416
+        // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
+        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
+        // $uvmonthsstring = uws_get_monthsoptsstring();
+        $uvmonthsstring = urvenue_ws_get_monthsoptsstring(); // Axl UWS-7416
         $uvcalmonthselhtml = "
         <div class='uwsmonthssteps'>
             <div class='uwsmonthsstepsbtns' data-currentdate='$uvinitialdate' data-months='$uvmonthsstring'>
@@ -113,7 +132,8 @@ function uws_events_controls(){
         ";
     }
 
-    $uveventsviewmenu = uws_get_events_view_menu();
+    // $uveventsviewmenu = uws_get_events_view_menu();
+    $uveventsviewmenu = urvenue_ws_get_events_view_menu(); // Axl UWS-7416
 
     $uvcontrols = "
     <div class='uws-events-controls'>
@@ -127,7 +147,8 @@ function uws_events_controls(){
 }
 
 /*Get List of views menu*/
-function uws_get_events_view_menu(){
+// function uws_get_events_view_menu(){
+function urvenue_ws_get_events_view_menu(){ // Axl UWS-7416
     global $uws_core_lib;
 
     $uvviewsmenu = "";
@@ -158,7 +179,8 @@ function uws_get_events_view_menu(){
 }
 
 // Get list of months for calendar dropdown
-function uws_get_monthslis($uvcurrentdate = ""){
+// function uws_get_monthslis($uvcurrentdate = ""){
+function urvenue_ws_get_monthslis($uvcurrentdate = ""){ // Axl UWS-7416
     global $uws_core_lib, $uws_today;
 
     $uvcurrentdate = ($uvcurrentdate) ? $uvcurrentdate : $uws_today;
@@ -186,7 +208,8 @@ function uws_get_monthslis($uvcurrentdate = ""){
 }
 
 // Get string with the months to navigate with arrows
-function uws_get_monthsoptsstring($uvcurrentdate = ""){
+// function uws_get_monthsoptsstring($uvcurrentdate = ""){
+function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){ // Axl UWS-7416
     global $uws_core_lib, $uws_today;
 
     $uvcurrentdate = ($uvcurrentdate) ? $uvcurrentdate : $uws_today;
@@ -215,7 +238,8 @@ function uws_get_monthsoptsstring($uvcurrentdate = ""){
 /*Get Events Max Date
     Optional: dateformat
 */
-function uws_get_events_max_date($uvdateformat = ""){
+// function uws_get_events_max_date($uvdateformat = ""){
+function urvenue_ws_get_events_max_date($uvdateformat = ""){ // Axl UWS-7416
     global $uws_core_lib, $uws_today;
 
     $uvnmonths = (isset($uws_core_lib["events"]) and $uws_core_lib["events"]["eventspage-monthsrange"]) ? $uws_core_lib["events"]["eventspage-monthsrange"] : 6;
@@ -230,7 +254,8 @@ function uws_get_events_max_date($uvdateformat = ""){
 /*Get Events Initial Date
     Optional: dateformat
 */
-function uws_get_events_initial_date($uvdateformat = ""){
+// function uws_get_events_initial_date($uvdateformat = ""){
+function urvenue_ws_get_events_initial_date($uvdateformat = ""){ // Axl UWS-7416
     global $uws_core_lib, $uws_today;
 
     $uvlibeventsinitialdate = (isset($uws_core_lib["events"]) and $uws_core_lib["events"]["global-initaldate"]) ? $uws_core_lib["events"]["global-initaldate"] : $uws_today;
@@ -247,10 +272,12 @@ function uws_get_events_initial_date($uvdateformat = ""){
     Returns: enddate = initial date + number of months to load (global-nmonths)
     Optional: dateformat
 */
-function uws_get_events_endinit_date($uvdateformat = ""){
+// function uws_get_events_endinit_date($uvdateformat = ""){
+function urvenue_ws_get_events_endinit_date($uvdateformat = ""){ // Axl UWS-7416
     global $uws_core_lib;
 
-    $uvinitialdate = uws_get_events_initial_date("Y-m-d");
+    // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
+    $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
     $uvnmonths = (isset($uws_core_lib["events"]) and $uws_core_lib["events"]["global-nmonths"]) ? $uws_core_lib["events"]["global-nmonths"] : 2;
     $uvenddate = date("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months"));
 

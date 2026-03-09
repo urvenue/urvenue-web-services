@@ -2,11 +2,15 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsevents");
+// uws_check_nonce("uwsevents");
+urvenue_ws_check_nonce("uwsevents"); // Axl UWS-7416
 
-$uvfromdate = uws_cleanup_request("date");
-$uvtodate = uws_cleanup_request("enddate");
-$uvvenue = uws_cleanup_request("venue");
+// $uvfromdate = uws_cleanup_request("date");
+$uvfromdate = urvenue_ws_cleanup_request("date"); // Axl UWS-7416
+// $uvtodate = uws_cleanup_request("enddate");
+$uvtodate = urvenue_ws_cleanup_request("enddate"); // Axl UWS-7416
+// $uvvenue = uws_cleanup_request("venue");
+$uvvenue = urvenue_ws_cleanup_request("venue"); // Axl UWS-7416
 
 $uvreturnjson = "";
 $uvresponse = array(
@@ -30,7 +34,8 @@ if(strpos($uvvenue, 'VEN') !== false)//if venue is venuecodes and not venue inte
 else
     $uvargs["venue"] = $uvvenue;
 
-$uvevents = uws_get_events($uvargs);
+// $uvevents = uws_get_events($uvargs);
+$uvevents = urvenue_ws_get_events($uvargs); // Axl UWS-7416
 $uvdates = array();
 
 if (is_array($uvevents) && count($uvevents) > 0) {
@@ -55,7 +60,8 @@ if (is_array($uvevents) && count($uvevents) > 0) {
                 "eventurl" => isset($uvevent["event-page-url"]) ? $uvevent["event-page-url"] : "",
                 "eventname" => isset($uvevent["name"]) ? $uvevent["name"] : "",
                 "eventdate" => $uvusedate,
-                "eventddate" => uws_lang_date($uvddate),
+                // "eventddate" => uws_lang_date($uvddate),
+                "eventddate" => urvenue_ws_lang_date($uvddate), // Axl UWS-7416
                 "eventstarttime" => $uvdstarttimediv,
                 "eventflyer" => isset($uvevent["flyers"]["eventpage"]["full"]) ? $uvevent["flyers"]["eventpage"]["full"] : "",
             );

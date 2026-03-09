@@ -6,8 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	@version: 1.0
 */
 
-$uvseventslisttype = uvs_get_adminfieldhtml("events->list-listtype");
-$uvseventslistmaxevents = uvs_get_adminfieldhtml("events->list-maxevents");
+// $uvseventslisttype = uvs_get_adminfieldhtml("events->list-listtype");
+$uvseventslisttype = urvenue_ws_adm_get_adminfieldhtml("events->list-listtype"); // Axl UWS-7416
+// $uvseventslistmaxevents = uvs_get_adminfieldhtml("events->list-maxevents");
+$uvseventslistmaxevents = urvenue_ws_adm_get_adminfieldhtml("events->list-maxevents"); // Axl UWS-7416
 ?>
 <?php // @Axl ?>
 <!-- <div id="uvs-admin-events-list" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['events-list']; ?>"> -->
@@ -19,7 +21,8 @@ $uvseventslistmaxevents = uvs_get_adminfieldhtml("events->list-maxevents");
 		<div class="uvsname">List Type</div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvseventslisttype; */ echo wp_kses( $uvseventslisttype, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventslisttype, uvs_allowed_admin_html() ); */ ?>
+			<?php /* Old: echo $uvseventslisttype; */ echo wp_kses( $uvseventslisttype, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -27,7 +30,8 @@ $uvseventslistmaxevents = uvs_get_adminfieldhtml("events->list-maxevents");
 		<div class="uvsname">Maximum Events <small>Maximum Number of events in the list</small></div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvseventslistmaxevents; */ echo wp_kses( $uvseventslistmaxevents, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventslistmaxevents, uvs_allowed_admin_html() ); */ ?>
+			<?php /* Old: echo $uvseventslistmaxevents; */ echo wp_kses( $uvseventslistmaxevents, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>

@@ -4,17 +4,21 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uws_feeds_lib;
 
 // @egt [UWS-7297]
-uws_check_nonce("uwsreservations");
+// uws_check_nonce("uwsreservations");
+urvenue_ws_check_nonce("uwsreservations"); // Axl UWS-7416
 
-$uvmanageentid = uws_cleanup_request("manageentid");
-$uvvenuecode = uws_cleanup_request("venuecode");
+// $uvmanageentid = uws_cleanup_request("manageentid");
+$uvmanageentid = urvenue_ws_cleanup_request("manageentid"); // Axl UWS-7416
+// $uvvenuecode = uws_cleanup_request("venuecode");
+$uvvenuecode = urvenue_ws_cleanup_request("venuecode"); // Axl UWS-7416
 $uvvenueid = str_replace("VEN", "", $uvvenuecode);
 
 $uvargs = array(
     "manageentid" => $uvmanageentid,
     "venueid" => $uvvenueid,
 );
-$uvleadtypeslist = uws_inquiry_get_leadtypes($uvargs);
+// $uvleadtypeslist = uws_inquiry_get_leadtypes($uvargs);
+$uvleadtypeslist = urvenue_ws_inquiry_get_leadtypes($uvargs); // Axl UWS-7416
 
 $uvreturn = array(
     "venuecode" => $uvvenuecode,

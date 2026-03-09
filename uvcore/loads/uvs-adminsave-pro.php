@@ -18,14 +18,17 @@ if($_REQUEST["system"] and isset($_REQUEST["system"]["path"])){
 		$uvslibtmp["system"]["sourceloc"] = $uvslibtmp["system"]["microcode"];
 
 		if(!isset($uvslibtmp["system"]["sourcecode"]))
-			$uvslibtmp["system"]["sourcecode"] = (uvs_is_wordpress()) ? "wpplugin" : "uwscore";
+			// $uvslibtmp["system"]["sourcecode"] = (uvs_is_wordpress()) ? "wpplugin" : "uwscore";
+			$uvslibtmp["system"]["sourcecode"] = (urvenue_ws_adm_is_wordpress()) ? "wpplugin" : "uwscore"; // Axl UWS-7416
 	}
 
 	// @Axl
 	// $uvslib = json_encode($uvslibtmp);
 	$uvslib = wp_json_encode($uvslibtmp);
 	// @Axl End
-	uvs_admin_save_lib($uvslib);
+	// uvs_admin_save_lib($uvslib);
+	urvenue_ws_adm_admin_save_lib($uvslib); // Axl UWS-7416
 }
 else
-	uvs_uverror("UVError 01-003: Data info missing.<br>");
+	// uvs_uverror("UVError 01-003: Data info missing.<br>");
+	urvenue_ws_adm_uverror("UVError 01-003: Data info missing.<br>"); // Axl UWS-7416

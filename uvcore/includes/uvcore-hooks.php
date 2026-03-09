@@ -4,12 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uws_hooks = array();
 $uws_filters = array();
 
-function uws_add_action($uvhook, $uvcallback){
+// function uws_add_action($uvhook, $uvcallback){
+function urvenue_ws_add_action($uvhook, $uvcallback){ // Axl UWS-7416
     global $uws_hooks;
     $uws_hooks[$uvhook][] = $uvcallback;
 }
 
-function uws_do_action($uvhook, ...$uvargs){
+// function uws_do_action($uvhook, ...$uvargs){
+function urvenue_ws_do_action($uvhook, ...$uvargs){ // Axl UWS-7416
     global $uws_hooks;
 
     if (isset($uws_hooks[$uvhook])) {
@@ -21,7 +23,8 @@ function uws_do_action($uvhook, ...$uvargs){
 
 
 // Function to register a callback to a filter
-function uws_add_filter($uvfilter, $uvcallback) {
+// function uws_add_filter($uvfilter, $uvcallback) {
+function urvenue_ws_add_filter($uvfilter, $uvcallback) { // Axl UWS-7416
     global $uws_filters;
     if (!isset($uws_filters[$uvfilter])) {
         $uws_filters[$uvfilter] = array();
@@ -30,7 +33,8 @@ function uws_add_filter($uvfilter, $uvcallback) {
 }
 
 // Function to apply filters to a value
-function uws_apply_filters($uvfilter, $uvvalue, ...$uvargs) {
+// function uws_apply_filters($uvfilter, $uvvalue, ...$uvargs) {
+function urvenue_ws_apply_filters($uvfilter, $uvvalue, ...$uvargs) { // Axl UWS-7416
     global $uws_filters;
     if (isset($uws_filters[$uvfilter])) {
         foreach ($uws_filters[$uvfilter] as $uvcallback) {

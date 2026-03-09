@@ -177,11 +177,15 @@ $uws_feeds_lib = array(
 
 $uws_feedscleartime = 86400;//172800 - 2 Days
 
-$uws_endcurlangparam = (uws_get_cur_lang() != "en") ? "&lang=" . uws_get_cur_lang() : "";
+// $uws_endcurlangparam = (uws_get_cur_lang() != "en") ? "&lang=" . uws_get_cur_lang() : "";
+$uws_endcurlangparam = (urvenue_ws_get_cur_lang() != "en") ? "&lang=" . urvenue_ws_get_cur_lang() : ""; // Axl UWS-7416
 $uvaddcheckoutparams = $uvendcheckoutparams = $uv_addurlstaging ="";
-if(uws_get_cur_lang() != "en"){
-	$uvaddcheckoutparams = "?lang=" . uws_get_cur_lang();
-	$uvendcheckoutparams = "&lang=" . uws_get_cur_lang();
+// if(uws_get_cur_lang() != "en"){
+if(urvenue_ws_get_cur_lang() != "en"){ // Axl UWS-7416
+	// $uvaddcheckoutparams = "?lang=" . uws_get_cur_lang();
+	$uvaddcheckoutparams = "?lang=" . urvenue_ws_get_cur_lang(); // Axl UWS-7416
+	// $uvendcheckoutparams = "&lang=" . uws_get_cur_lang();
+	$uvendcheckoutparams = "&lang=" . urvenue_ws_get_cur_lang(); // Axl UWS-7416
 }
 else
 	$uv_addurlstaging = str_replace("&", "?", $uv_addurlstaging);
@@ -190,8 +194,10 @@ else
 $uws_bkgaddhost = $uws_config_chkhost ?? "booketing";
 $uws_actionlinks_lib = array(
 	"microsite" => array(
-		"checkout-carturl" => "https://{$uws_bkgaddsubd}$uws_bkgaddhost.com/checkout/cart/{cartcode}/?sourcecode=$uws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}&noredirect=1{$uws_config_addurlstaging}{$uws_config_addcheckouturl}&lang=" . uws_get_cur_lang(),
-		"checkout-checkurl" => "https://{$uws_bkgaddsubd}$uws_bkgaddhost.com/checkout/details/{cartcode}/?sourcecode=$uws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}{$uws_config_addurlstaging}{$uws_config_addcheckouturl}&lang=" . uws_get_cur_lang(),
+		// "checkout-carturl" => "https://{$uws_bkgaddsubd}$uws_bkgaddhost.com/checkout/cart/{cartcode}/?sourcecode=$uws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}&noredirect=1{$uws_config_addurlstaging}{$uws_config_addcheckouturl}&lang=" . uws_get_cur_lang(),
+		"checkout-carturl" => "https://{$uws_bkgaddsubd}$uws_bkgaddhost.com/checkout/cart/{cartcode}/?sourcecode=$uws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}&noredirect=1{$uws_config_addurlstaging}{$uws_config_addcheckouturl}&lang=" . urvenue_ws_get_cur_lang(), // Axl UWS-7416
+		// "checkout-checkurl" => "https://{$uws_bkgaddsubd}$uws_bkgaddhost.com/checkout/details/{cartcode}/?sourcecode=$uws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}{$uws_config_addurlstaging}{$uws_config_addcheckouturl}&lang=" . uws_get_cur_lang(),
+		"checkout-checkurl" => "https://{$uws_bkgaddsubd}$uws_bkgaddhost.com/checkout/details/{cartcode}/?sourcecode=$uws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}{$uws_config_addurlstaging}{$uws_config_addcheckouturl}&lang=" . urvenue_ws_get_cur_lang(), // Axl UWS-7416
 	),
 	"bk" => array(
 		"checkout-carturl" => "#uws-view-cart",

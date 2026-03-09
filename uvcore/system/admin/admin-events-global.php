@@ -1,20 +1,33 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$uvseventssourcefield = uvs_get_adminfieldhtml("events->global-source");
-$uvseventsaddvenuename = uvs_get_adminfieldhtml("events->global-addvenuename");
-$uvseventsnmontsfield = uvs_get_adminfieldhtml("events->global-nmonths");
-$uvseventshidenoflyer = uvs_get_adminfieldhtml("events->global-hidenoflyer");
-$uvseventsinitaldate = uvs_get_adminfieldhtml("events->global-initaldate");
-$uvseventsevpagedateselector = uvs_get_adminfieldhtml("events->eventspage-dateselector");
-$uvseventsnmontsrange = uvs_get_adminfieldhtml("events->eventspage-monthsrange");
-$uvseventsevpageaddvenuefilter = uvs_get_adminfieldhtml("events->eventspage-addvenuefilter");
-$uvseventsevpageviewmenu = uvs_get_adminfieldhtml("events->eventspage-viewmenu");
-$uvseventsevpageaddperformerfilter = uvs_get_adminfieldhtml("events->global-addperformerfilter");
-$uvseventsevpageupdateurl = uvs_get_adminfieldhtml("events->global-updateurl");
-$uvseventsdefeventurl = uvs_get_adminfieldhtml("events->global-defaulteventurl");
+// $uvseventssourcefield = uvs_get_adminfieldhtml("events->global-source");
+$uvseventssourcefield = urvenue_ws_adm_get_adminfieldhtml("events->global-source"); // Axl UWS-7416
+// $uvseventsaddvenuename = uvs_get_adminfieldhtml("events->global-addvenuename");
+$uvseventsaddvenuename = urvenue_ws_adm_get_adminfieldhtml("events->global-addvenuename"); // Axl UWS-7416
+// $uvseventsnmontsfield = uvs_get_adminfieldhtml("events->global-nmonths");
+$uvseventsnmontsfield = urvenue_ws_adm_get_adminfieldhtml("events->global-nmonths"); // Axl UWS-7416
+// $uvseventshidenoflyer = uvs_get_adminfieldhtml("events->global-hidenoflyer");
+$uvseventshidenoflyer = urvenue_ws_adm_get_adminfieldhtml("events->global-hidenoflyer"); // Axl UWS-7416
+// $uvseventsinitaldate = uvs_get_adminfieldhtml("events->global-initaldate");
+$uvseventsinitaldate = urvenue_ws_adm_get_adminfieldhtml("events->global-initaldate"); // Axl UWS-7416
+// $uvseventsevpagedateselector = uvs_get_adminfieldhtml("events->eventspage-dateselector");
+$uvseventsevpagedateselector = urvenue_ws_adm_get_adminfieldhtml("events->eventspage-dateselector"); // Axl UWS-7416
+// $uvseventsnmontsrange = uvs_get_adminfieldhtml("events->eventspage-monthsrange");
+$uvseventsnmontsrange = urvenue_ws_adm_get_adminfieldhtml("events->eventspage-monthsrange"); // Axl UWS-7416
+// $uvseventsevpageaddvenuefilter = uvs_get_adminfieldhtml("events->eventspage-addvenuefilter");
+$uvseventsevpageaddvenuefilter = urvenue_ws_adm_get_adminfieldhtml("events->eventspage-addvenuefilter"); // Axl UWS-7416
+// $uvseventsevpageviewmenu = uvs_get_adminfieldhtml("events->eventspage-viewmenu");
+$uvseventsevpageviewmenu = urvenue_ws_adm_get_adminfieldhtml("events->eventspage-viewmenu"); // Axl UWS-7416
+// $uvseventsevpageaddperformerfilter = uvs_get_adminfieldhtml("events->global-addperformerfilter");
+$uvseventsevpageaddperformerfilter = urvenue_ws_adm_get_adminfieldhtml("events->global-addperformerfilter"); // Axl UWS-7416
+// $uvseventsevpageupdateurl = uvs_get_adminfieldhtml("events->global-updateurl");
+$uvseventsevpageupdateurl = urvenue_ws_adm_get_adminfieldhtml("events->global-updateurl"); // Axl UWS-7416
+// $uvseventsdefeventurl = uvs_get_adminfieldhtml("events->global-defaulteventurl");
+$uvseventsdefeventurl = urvenue_ws_adm_get_adminfieldhtml("events->global-defaulteventurl"); // Axl UWS-7416
 
-$uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"]);
+// $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"]);
+$uvseventsviews = urvenue_ws_adm_get_eventsviews($uvs_core_lib["events"]["eventspage-views"]); // Axl UWS-7416
 ?>
 
 <div id="uvs-admin-events-global" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['events-global']; */ echo esc_attr( $uvs_admin_optstabs_state['events-global'] ); ?>">
@@ -26,7 +39,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventssourcefield; */ ?>
-			<?php echo wp_kses( $uvseventssourcefield, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventssourcefield, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventssourcefield, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -35,7 +49,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsaddvenuename; */ ?>
-			<?php echo wp_kses( $uvseventsaddvenuename, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsaddvenuename, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsaddvenuename, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -44,7 +59,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsnmontsfield; */ ?>
-			<?php echo wp_kses( $uvseventsnmontsfield, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsnmontsfield, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsnmontsfield, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -53,7 +69,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventshidenoflyer; */ ?>
-			<?php echo wp_kses( $uvseventshidenoflyer, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventshidenoflyer, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventshidenoflyer, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -63,7 +80,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 			<!--<input class="uvsjson uvsjs-datepicker" type="text" name="events[global-initaldate]" placeholder="Select a Date" value="">-->
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsinitaldate; */ ?>
-			<?php echo wp_kses( $uvseventsinitaldate, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsinitaldate, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsinitaldate, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 			<button class="uvs-btn uvs-btn-p uvsjs-clearinitialdatefield" type="button" data-target=".uvs-clear-initial-date-field">Clear Date</button>
 		</div>
@@ -73,7 +91,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsdefeventurl; */ ?>
-			<?php echo wp_kses( $uvseventsdefeventurl, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsdefeventurl, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsdefeventurl, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -86,7 +105,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsevpagedateselector; */ ?>
-			<?php echo wp_kses( $uvseventsevpagedateselector, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsevpagedateselector, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsevpagedateselector, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -95,7 +115,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsnmontsrange; */ ?>
-			<?php echo wp_kses( $uvseventsnmontsrange, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsnmontsrange, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsnmontsrange, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -104,7 +125,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsevpageaddvenuefilter; */ ?>
-			<?php echo wp_kses( $uvseventsevpageaddvenuefilter, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsevpageaddvenuefilter, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsevpageaddvenuefilter, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -113,7 +135,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsevpageaddperformerfilter; */ ?>
-			<?php echo wp_kses( $uvseventsevpageaddperformerfilter, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsevpageaddperformerfilter, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsevpageaddperformerfilter, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -122,7 +145,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsevpageupdateurl; */ ?>
-			<?php echo wp_kses( $uvseventsevpageupdateurl, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsevpageupdateurl, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsevpageupdateurl, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -131,7 +155,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventsevpageviewmenu; */ ?>
-			<?php echo wp_kses( $uvseventsevpageviewmenu, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventsevpageviewmenu, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventsevpageviewmenu, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -141,7 +166,8 @@ $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"
 	<div class="uvs-admin-listorderandview">
 		<?php // @Axl ?>
 		<?php /* Old: echo $uvseventsviews; */ ?>
-		<?php echo wp_kses( $uvseventsviews, uvs_allowed_admin_html() ); ?>
+		<?php /* Old: echo wp_kses( $uvseventsviews, uvs_allowed_admin_html() ); */ ?>
+		<?php echo wp_kses( $uvseventsviews, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 		<?php // @Axl End ?>
 	</div>
 </div>

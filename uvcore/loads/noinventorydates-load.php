@@ -7,23 +7,31 @@ global $uws_path;
 $nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : '';
 switch ($nonceaction) {
     case 'uwsinventory':
-        uws_check_nonce("uwsinventory");
+        // uws_check_nonce("uwsinventory");
+        urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
         break;
     case 'uwsmap':
-        uws_check_nonce("uwsmap");
+        // uws_check_nonce("uwsmap");
+        urvenue_ws_check_nonce("uwsmap"); // Axl UWS-7416
         break;
     case 'uwspackages':
-        uws_check_nonce("uwspackages");
+        // uws_check_nonce("uwspackages");
+        urvenue_ws_check_nonce("uwspackages"); // Axl UWS-7416
         break;
     default:
         wp_send_json_error(['message' => 'Invalid action'], 400);
 }
 
-$uvdate = uws_cleanup_request("date");
-$uvvenuecode = uws_cleanup_request("venuecode");
-$uvecozone = uws_cleanup_request("ecozone", "ECZ0");
-$uvglobaltype = uws_cleanup_request("globaltype");
-$uvmixecozones = uws_cleanup_request("mixecozones");
+// $uvdate = uws_cleanup_request("date");
+$uvdate = urvenue_ws_cleanup_request("date"); // Axl UWS-7416
+// $uvvenuecode = uws_cleanup_request("venuecode");
+$uvvenuecode = urvenue_ws_cleanup_request("venuecode"); // Axl UWS-7416
+// $uvecozone = uws_cleanup_request("ecozone", "ECZ0");
+$uvecozone = urvenue_ws_cleanup_request("ecozone", "ECZ0"); // Axl UWS-7416
+// $uvglobaltype = uws_cleanup_request("globaltype");
+$uvglobaltype = urvenue_ws_cleanup_request("globaltype"); // Axl UWS-7416
+// $uvmixecozones = uws_cleanup_request("mixecozones");
+$uvmixecozones = urvenue_ws_cleanup_request("mixecozones"); // Axl UWS-7416
 
 $uvreturn = array();
 
@@ -35,7 +43,8 @@ if($uvdate and $uvvenuecode and $uvecozone){
         "globaltype" => $uvglobaltype,
         "mixecozones" => $uvmixecozones,
     );
-    $uvmonthnoinventorydates = uws_get_month_noinventory_dates($uvargs);
+    // $uvmonthnoinventorydates = uws_get_month_noinventory_dates($uvargs);
+    $uvmonthnoinventorydates = urvenue_ws_get_month_noinventory_dates($uvargs); // Axl UWS-7416
     $uvreturn["availabilityinfo"] = $uvmonthnoinventorydates;
 }
     

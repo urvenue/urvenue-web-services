@@ -1,8 +1,11 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-$uvsinpenable = uvs_get_adminfieldhtml("notifications->enable");
-$uvsinpwebhook = uvs_get_adminfieldhtml("notifications->webhook");
-$uvsinpminevents = uvs_get_adminfieldhtml("notifications->minevents");
+// $uvsinpenable = uvs_get_adminfieldhtml("notifications->enable");
+$uvsinpenable = urvenue_ws_adm_get_adminfieldhtml("notifications->enable"); // Axl UWS-7416
+// $uvsinpwebhook = uvs_get_adminfieldhtml("notifications->webhook");
+$uvsinpwebhook = urvenue_ws_adm_get_adminfieldhtml("notifications->webhook"); // Axl UWS-7416
+// $uvsinpminevents = uvs_get_adminfieldhtml("notifications->minevents");
+$uvsinpminevents = urvenue_ws_adm_get_adminfieldhtml("notifications->minevents"); // Axl UWS-7416
 ?>
 <div id="uvs-admin-notifications" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['notifications']; */ echo esc_attr( $uvs_admin_optstabs_state['notifications'] ); ?>">
 	<div class="uvs-admin-opt-title">Events Notifications</div>
@@ -16,7 +19,8 @@ $uvsinpminevents = uvs_get_adminfieldhtml("notifications->minevents");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsinpenable; */ ?>
-			<?php echo wp_kses( $uvsinpenable, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsinpenable, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsinpenable, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -28,7 +32,8 @@ $uvsinpminevents = uvs_get_adminfieldhtml("notifications->minevents");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsinpwebhook; */ ?>
-			<?php echo wp_kses( $uvsinpwebhook, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsinpwebhook, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsinpwebhook, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -40,7 +45,8 @@ $uvsinpminevents = uvs_get_adminfieldhtml("notifications->minevents");
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsinpminevents; */ ?>
-			<?php echo wp_kses( $uvsinpminevents, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsinpminevents, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsinpminevents, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>

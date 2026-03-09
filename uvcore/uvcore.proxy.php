@@ -14,7 +14,8 @@ if (!$uvs_path) {
 
 //Check parameters to detect injection attacks
 include_once($uws_corepath . "/includes/security-functions.php");
-uws_security_check_params_injection();
+// uws_security_check_params_injection();
+urvenue_ws_security_check_params_injection(); // Axl UWS-7416
 
 if ($uvs_path) {
 	if ($uvaction == "uvsp_veaidinfo")
@@ -76,6 +77,7 @@ if ($uvs_path) {
 	else if ($uvaction == "uwspx_mastercodebymasteritemcode")
 		include_once($uvs_path . "/loads/mastercode-by-masteritemcode.php");
 	/*else
-		   uvs_uverror("UVError 01-001: Proxy action not found.<br>");*/
+		   // uvs_uverror("UVError 01-001: Proxy action not found.<br>");*/
 } else
-	uvs_uverror("UVError 01-001: Proxy action not found.<br>");
+	// uvs_uverror("UVError 01-001: Proxy action not found.<br>");
+	urvenue_ws_adm_uverror("UVError 01-001: Proxy action not found.<br>"); // Axl UWS-7416

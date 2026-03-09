@@ -1,6 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-$uvsvenueslisthtml = uvs_admin_venues_list_html();
+// $uvsvenueslisthtml = uvs_admin_venues_list_html();
+$uvsvenueslisthtml = urvenue_ws_adm_admin_venues_list_html(); // Axl UWS-7416
 ?>
 
 <div id="uvs-admin-venues" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['venues']; */ echo esc_attr( $uvs_admin_optstabs_state['venues'] ); ?>">
@@ -21,7 +22,8 @@ $uvsvenueslisthtml = uvs_admin_venues_list_html();
 	<div id="uvs-admin-venuesinfo" class="uvs-admin-opt-infolist">
 		<?php // @Axl ?>
 		<?php /* Old: echo $uvsvenueslisthtml; */ ?>
-		<?php echo wp_kses( $uvsvenueslisthtml, uvs_allowed_admin_html() ); ?>
+		<?php /* Old: echo wp_kses( $uvsvenueslisthtml, uvs_allowed_admin_html() ); */ ?>
+		<?php echo wp_kses( $uvsvenueslisthtml, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 		<?php // @Axl End ?>
 	</div>
 	<div class="uvs-admin-venues-actions">

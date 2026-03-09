@@ -24,7 +24,8 @@ function shrotcode_uws_experiences_date_filter($atts, $content = null){
     
     include_once($uws_path . "/includes/experiences-functions.php");
 	$uvargs = ($date) ? array("date" => $date) : "";
-    $uvexperiencesfilter = uws_get_experiences_date_filter($uvargs);
+    // $uvexperiencesfilter = uws_get_experiences_date_filter($uvargs);
+    $uvexperiencesfilter = urvenue_ws_get_experiences_date_filter($uvargs); // Axl UWS-7416
 	// @Axl
 	// echo $uvexperiencesfilter;
 	echo wp_kses_post( $uvexperiencesfilter );
@@ -84,7 +85,8 @@ function shrotcode_uws_experiences($atts, $content = null){
 			);
 	}
 
-    uws_experiences($uvargs);
+    // uws_experiences($uvargs);
+    urvenue_ws_experiences($uvargs); // Axl UWS-7416
 	
 	$content = ob_get_contents();
   	ob_end_clean();
@@ -117,7 +119,8 @@ function shrotcode_uws_related_experiences($atts, $content = null){
 		"nexperiences" => $nexperiences
 	);
 
-    uws_related_experiences($uvargs);
+    // uws_related_experiences($uvargs);
+    urvenue_ws_related_experiences($uvargs); // Axl UWS-7416
 	
 	$content = ob_get_contents();
   	ob_end_clean();

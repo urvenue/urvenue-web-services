@@ -5,7 +5,8 @@ $uws_core_version = "1.0.52";
 $uvs_envicode = "api";
 $uvs_adminbox_tabs = array("venues", "inventory", "status", "flyers", "map","events-event", "events-list", "events-global", "events-calendar", "events-agenda", "events-slider", "dashboard", "artists-artistpage", "artists-list", "pages", "api", "seo", "cache", "ui-color-palette", "notifications");
 
-$uvs_proxyurl = uvs_get_proxyurl();
+// $uvs_proxyurl = uvs_get_proxyurl();
+$uvs_proxyurl = urvenue_ws_adm_get_proxyurl(); // Axl UWS-7416
 
 $uvs_admin_lib = array(
 	"loads" => array(

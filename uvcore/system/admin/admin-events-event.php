@@ -3,13 +3,19 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //$uvseventseventurl = uvs_get_adminfieldhtml("events->event-url");
 //$uvseventsshowartist = uvs_get_adminfieldhtml("events->event-showartist");
-$uvseventlayout = uvs_get_adminfieldhtml("events->event-layout");
-$uvseventcolumns = uvs_get_adminfieldhtml("events->event-columns");
-$uvsactivedropdows = uvs_get_adminfieldhtml("events->event-activedropdowns");
+// $uvseventlayout = uvs_get_adminfieldhtml("events->event-layout");
+$uvseventlayout = urvenue_ws_adm_get_adminfieldhtml("events->event-layout"); // Axl UWS-7416
+// $uvseventcolumns = uvs_get_adminfieldhtml("events->event-columns");
+$uvseventcolumns = urvenue_ws_adm_get_adminfieldhtml("events->event-columns"); // Axl UWS-7416
+// $uvsactivedropdows = uvs_get_adminfieldhtml("events->event-activedropdowns");
+$uvsactivedropdows = urvenue_ws_adm_get_adminfieldhtml("events->event-activedropdowns"); // Axl UWS-7416
 
-$uvseventshowdigitalmenu = uvs_get_adminfieldhtml("events->addon-bottles->showdigitalmenu");
-$uvseventshowsummary     = uvs_get_adminfieldhtml("events->addon-bottles->showsummary");
-$uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuapikey");
+// $uvseventshowdigitalmenu = uvs_get_adminfieldhtml("events->addon-bottles->showdigitalmenu");
+$uvseventshowdigitalmenu = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->showdigitalmenu"); // Axl UWS-7416
+// $uvseventshowsummary     = uvs_get_adminfieldhtml("events->addon-bottles->showsummary");
+$uvseventshowsummary     = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->showsummary"); // Axl UWS-7416
+// $uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuapikey");
+$uvseventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->menuapikey"); // Axl UWS-7416
 ?>
 <div id="uvs-admin-events-event" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['events-event']; */ echo esc_attr( $uvs_admin_optstabs_state['events-event'] ); ?>">
     <div class="uvs-admin-opt-title">Event Page</div>
@@ -37,7 +43,8 @@ $uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuap
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventlayout; */ ?>
-			<?php echo wp_kses( $uvseventlayout, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventlayout, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventlayout, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -46,7 +53,8 @@ $uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuap
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvseventcolumns; */ ?>
-			<?php echo wp_kses( $uvseventcolumns, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvseventcolumns, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvseventcolumns, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -55,7 +63,8 @@ $uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuap
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsactivedropdows; */ ?>
-			<?php echo wp_kses( $uvsactivedropdows, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsactivedropdows, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsactivedropdows, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -69,7 +78,8 @@ $uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuap
         <div class="uvsvalue">
             <?php // @Axl ?>
             <?php /* Old: echo $uvseventshowdigitalmenu; */ ?>
-            <?php echo wp_kses( $uvseventshowdigitalmenu, uvs_allowed_admin_html() ); ?>
+            <?php /* Old: echo wp_kses( $uvseventshowdigitalmenu, uvs_allowed_admin_html() ); */ ?>
+            <?php echo wp_kses( $uvseventshowdigitalmenu, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
             <?php // @Axl End ?>
         </div>
     </div>
@@ -78,7 +88,8 @@ $uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuap
         <div class="uvsvalue">
             <?php // @Axl ?>
             <?php /* Old: echo $uvseventshowsummary; */ ?>
-            <?php echo wp_kses( $uvseventshowsummary, uvs_allowed_admin_html() ); ?>
+            <?php /* Old: echo wp_kses( $uvseventshowsummary, uvs_allowed_admin_html() ); */ ?>
+            <?php echo wp_kses( $uvseventshowsummary, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
             <?php // @Axl End ?>
         </div>
     </div>
@@ -89,7 +100,8 @@ $uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuap
         <div class="uvsvalue">
             <?php // @Axl ?>
             <?php /* Old: echo $uvseventmenuapikey; */ ?>
-            <?php echo wp_kses( $uvseventmenuapikey, uvs_allowed_admin_html() ); ?>
+            <?php /* Old: echo wp_kses( $uvseventmenuapikey, uvs_allowed_admin_html() ); */ ?>
+            <?php echo wp_kses( $uvseventmenuapikey, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
             <?php // @Axl End ?>
         </div>
     </div>

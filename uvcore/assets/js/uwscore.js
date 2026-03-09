@@ -58,7 +58,8 @@ function uwsInitDrops() {
                 const uvactivedrops = document.querySelectorAll(".uwshasdrop.uwsactive");
 
                 Array.prototype.forEach.call(uvactivedrops, function (el, i) {
-                    if (!el.matches(":hover"))
+                    // if (!el.matches(":hover")) // Old: unreliable on mobile and with DevTools open
+                    if (!el.contains(e.target)) // Check if click was outside the container
                         el.classList.remove("uwsactive");
                 });
             }
@@ -323,8 +324,8 @@ function uwsCreatePop(uvpopname) {
     uvpopelemclose.addEventListener("click", function () {
         uwsHidePopup(uvpopelem, true);
     });
-    uvpopelem.addEventListener("click", function () {
-        uwsHidePopup(uvpopelem);
+    uvpopelem.addEventListener("click", function (e) {
+        uwsHidePopup(uvpopelem, false, e);
     });
 
     return uvpopelem;
@@ -333,13 +334,15 @@ function uwsFadePopup(uvpoptarget) {
     uvpoptarget.classList.add("visible");
     document.getElementsByTagName('html')[0].classList.add("uws-pop-open");
 }
-function uwsHidePopup(uvpoptarget, uvpopforceclose) {
+function uwsHidePopup(uvpoptarget, uvpopforceclose, e) {
     uvpopforceclose = (uvpopforceclose != undefined) ? uvpopforceclose : false;
 
     let uvpopbox = uvpoptarget.querySelectorAll(".uws-pop-box");
     uvpopbox = uvpopbox[0];
 
-    if ((uvpopforceclose) || (!uvpopbox.matches(":hover") && !uvpoptarget.classList.contains("uws-noareaclose"))) {
+    // const uvclickedoutside = !uvpopbox.matches(":hover"); // Old: unreliable on mobile and with DevTools open
+    const uvclickedoutside = !e || !uvpopbox.contains(e.target);
+    if ((uvpopforceclose) || (uvclickedoutside && !uvpoptarget.classList.contains("uws-noareaclose"))) {
         uvpoptarget.classList.remove("visible");
         setTimeout(function () {
             let uvpopnoclear = (uvpoptarget.classList.contains("uwsnoclear")) ? 1 : 0;

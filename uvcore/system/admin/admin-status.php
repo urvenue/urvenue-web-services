@@ -15,7 +15,8 @@ if($uvs_feeds_path and is_writable($uvs_feeds_path))
 else
 	$uvsfeedsiswrhtml = "<span class='uvsbad'>Not Working</span>";
 
-$uvcorelayer = (uvs_is_wordpress()) ? "Wordpress" : "Base";
+// $uvcorelayer = (uvs_is_wordpress()) ? "Wordpress" : "Base";
+$uvcorelayer = (urvenue_ws_adm_is_wordpress()) ? "Wordpress" : "Base"; // Axl UWS-7416
 
 ?>
 
@@ -27,7 +28,8 @@ $uvcorelayer = (uvs_is_wordpress()) ? "Wordpress" : "Base";
 		<div class="uvsname">UWS Version:</div>
 		<div class="uvsvalue"><strong><?php /* Old: echo $uws_core_version; */ echo esc_html( $uws_core_version ); ?></strong></div>
 	</div>
-	<?php if(!uvs_is_wordpress()){ ?>
+	<?php /* Old: if(!uvs_is_wordpress()){ */ ?>
+	<?php if(!urvenue_ws_adm_is_wordpress()){  // Axl UWS-7416 ?>
 		<div class="uvs-infolist-item uvs-clearfix">
 			<div class="uvsname">UvCore URL</div>
 			<div class="uvsvalue"><?php /* Old: echo $uvs_url; */ echo esc_html( $uvs_url ); ?></div>
@@ -35,16 +37,17 @@ $uvcorelayer = (uvs_is_wordpress()) ? "Wordpress" : "Base";
 	<?php } ?>
 	<div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">UWS Cache Status</div>
-		<div class="uvsvalue"><?php /* Old: echo $uvsfeedsiswrhtml; */ echo wp_kses( $uvsfeedsiswrhtml, uvs_allowed_admin_html() ); ?></div>
+		<div class="uvsvalue"><?php /* Old: echo $uvsfeedsiswrhtml; */ echo wp_kses( $uvsfeedsiswrhtml, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
 	</div>
 	<div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">UWS Layer</div>
 		<div class="uvsvalue"><?php /* Old: echo $uvcorelayer; */ echo esc_html( $uvcorelayer ); ?></div>
 	</div>
-	<?php if(!uvs_is_wordpress()){ ?>
+	<?php /* Old: if(!uvs_is_wordpress()){ */ ?>
+	<?php if(!urvenue_ws_adm_is_wordpress()){  // Axl UWS-7416 ?>
 		<div class="uvs-infolist-item uvs-clearfix">
 			<div class="uvsname">Library is Writable</div>
-			<div class="uvsvalue"><?php /* Old: echo $uvslibiswrhtml; */ echo wp_kses( $uvslibiswrhtml, uvs_allowed_admin_html() ); ?></div>
+			<div class="uvsvalue"><?php /* Old: echo $uvslibiswrhtml; */ echo wp_kses( $uvslibiswrhtml, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
 		</div>
 	<?php } ?>
 	<div class="uvs-infolist-item uvs-clearfix">

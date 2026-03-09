@@ -1,14 +1,22 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-$uvswpeinstid = uvs_get_adminfieldhtml("cache->wpeinst");
-$uvsinpwpeusername = uvs_get_adminfieldhtml("cache->username");
-$uvsinpwpepassword = uvs_get_adminfieldhtml("cache->password");
-$uvsinpendpoint = uvs_get_adminfieldhtml("cache->endpoint");
-$uvcacheendpoint = uvs_get_fieldvalue_by_stringroute("cache->endpoint");
+// $uvswpeinstid = uvs_get_adminfieldhtml("cache->wpeinst");
+$uvswpeinstid = urvenue_ws_adm_get_adminfieldhtml("cache->wpeinst"); // Axl UWS-7416
+// $uvsinpwpeusername = uvs_get_adminfieldhtml("cache->username");
+$uvsinpwpeusername = urvenue_ws_adm_get_adminfieldhtml("cache->username"); // Axl UWS-7416
+// $uvsinpwpepassword = uvs_get_adminfieldhtml("cache->password");
+$uvsinpwpepassword = urvenue_ws_adm_get_adminfieldhtml("cache->password"); // Axl UWS-7416
+// $uvsinpendpoint = uvs_get_adminfieldhtml("cache->endpoint");
+$uvsinpendpoint = urvenue_ws_adm_get_adminfieldhtml("cache->endpoint"); // Axl UWS-7416
+// $uvcacheendpoint = uvs_get_fieldvalue_by_stringroute("cache->endpoint");
+$uvcacheendpoint = urvenue_ws_adm_get_fieldvalue_by_stringroute("cache->endpoint"); // Axl UWS-7416
 
-$uvsinpapikey = uvs_get_adminfieldhtml("cache->apikey");
-$uvisuvuser = uvs_is_uv_email();
-$uvsishostedwpe = uvs_is_hosted_on_wpengine();
+// $uvsinpapikey = uvs_get_adminfieldhtml("cache->apikey");
+$uvsinpapikey = urvenue_ws_adm_get_adminfieldhtml("cache->apikey"); // Axl UWS-7416
+// $uvisuvuser = uvs_is_uv_email();
+$uvisuvuser = urvenue_ws_adm_is_uv_email(); // Axl UWS-7416
+// $uvsishostedwpe = uvs_is_hosted_on_wpengine();
+$uvsishostedwpe = urvenue_ws_adm_is_hosted_on_wpengine(); // Axl UWS-7416
 ?>
 <div id="uvs-admin-cache" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['cache']; */ echo esc_attr( $uvs_admin_optstabs_state['cache'] ); ?>">
 	<!-- <div class="uv-loader-uvicon"></div> -->
@@ -29,7 +37,8 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 	<div class="uvs-infolist-item uvs-clearfix" <?php if(!$uvisuvuser): echo "style= border:none;"; endif;?> >
 		<div class="uvsname">Clear Cache Endpoint
 			<small>Provide this URL to the Backend Team.</small>
-			<?php if(uvs_get_fieldvalue_by_stringroute("cache->endpoint") != ""): ?>
+			<?php /* Old: if(uvs_get_fieldvalue_by_stringroute("cache->endpoint") != ""): */ ?>
+			<?php if(urvenue_ws_adm_get_fieldvalue_by_stringroute("cache->endpoint") != ""):  // Axl UWS-7416 ?>
 				<div class="uvs-btn-group">
 					<button class="uvsjs-clearcache uvs-btn uvs-btn-p" data-endpoint="<?php /* Old: echo $uvcacheendpoint; */ echo esc_attr( $uvcacheendpoint ); ?>">
 						Clear Cache
@@ -43,7 +52,8 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 		<div class="uvsvalue">
 			<?php // @Axl ?>
 			<?php /* Old: echo $uvsinpendpoint; */ ?>
-			<?php echo wp_kses( $uvsinpendpoint, uvs_allowed_admin_html() ); ?>
+			<?php /* Old: echo wp_kses( $uvsinpendpoint, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $uvsinpendpoint, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -59,7 +69,8 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 				<div class="uvsvalue">
 					<?php // @Axl ?>
 					<?php /* Old: echo $uvswpeinstid; */ ?>
-					<?php echo wp_kses( $uvswpeinstid, uvs_allowed_admin_html() ); ?>
+					<?php /* Old: echo wp_kses( $uvswpeinstid, uvs_allowed_admin_html() ); */ ?>
+					<?php echo wp_kses( $uvswpeinstid, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 					<?php // @Axl End ?>
 				</div>
 			</div>
@@ -69,7 +80,8 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 				<div class="uvsvalue">
 					<?php // @Axl ?>
 					<?php /* Old: echo $uvsinpwpeusername; */ ?>
-					<?php echo wp_kses( $uvsinpwpeusername, uvs_allowed_admin_html() ); ?>
+					<?php /* Old: echo wp_kses( $uvsinpwpeusername, uvs_allowed_admin_html() ); */ ?>
+					<?php echo wp_kses( $uvsinpwpeusername, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 					<?php // @Axl End ?>
 				</div>
 			</div>
@@ -79,7 +91,8 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 				<div class="uvsvalue">
 					<?php // @Axl ?>
 					<?php /* Old: echo $uvsinpwpepassword; */ ?>
-					<?php echo wp_kses( $uvsinpwpepassword, uvs_allowed_admin_html() ); ?>
+					<?php /* Old: echo wp_kses( $uvsinpwpepassword, uvs_allowed_admin_html() ); */ ?>
+					<?php echo wp_kses( $uvsinpwpepassword, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 					<?php // @Axl End ?>
 				</div>
 			</div>
@@ -96,7 +109,8 @@ $uvsishostedwpe = uvs_is_hosted_on_wpengine();
 			<div class="uvsvalue">
 				<?php // @Axl ?>
 				<?php /* Old: echo $uvsinpapikey; */ ?>
-				<?php echo wp_kses( $uvsinpapikey, uvs_allowed_admin_html() ); ?>
+				<?php /* Old: echo wp_kses( $uvsinpapikey, uvs_allowed_admin_html() ); */ ?>
+				<?php echo wp_kses( $uvsinpapikey, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 				<?php // @Axl End ?>
 			</div>
 		</div>
