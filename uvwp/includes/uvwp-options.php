@@ -276,11 +276,13 @@ add_action('wp_ajax_uvpx', 'urvenue_ws_ajax_handler'); // Axl UWS-7416
 // function uvpx_ajax_handler() {
 function urvenue_ws_ajax_handler() { // Axl UWS-7416
     if(!isset($_POST['uvsp_adminsave_nonce']) ||
-    !wp_verify_nonce(wp_unslash($_POST['uvsp_adminsave_nonce']), 'uvsp_adminsave_action')) {
+    // !wp_verify_nonce(wp_unslash($_POST['uvsp_adminsave_nonce']), 'uvsp_adminsave_action')) { // Axl UWS-7416
+    !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['uvsp_adminsave_nonce'] ) ), 'uvsp_adminsave_action')) { // Axl UWS-7418
         wp_send_json_error(['message' => 'Invalid nonce'], 403);
     }
 
-    if(isset($_POST['uvaction']) && $_POST['uvaction'] === 'uvsp_adminsave') {
+    // if(isset($_POST['uvaction']) && $_POST['uvaction'] === 'uvsp_adminsave') { // Axl UWS-7418
+    if(isset($_POST['uvaction']) && sanitize_text_field( wp_unslash( $_POST['uvaction'] ) ) === 'uvsp_adminsave') { // Axl UWS-7418
         // update_option('uv-flush-pending', 1);
         update_option('urvenue_ws_flush_pending', 1); // Axl UWS-7416
     }
@@ -573,9 +575,11 @@ add_action('plugins_loaded', 'urvenue_ws_check_enable_debug'); // Axl UWS-7416
 function urvenue_ws_check_enable_debug(){ // Axl UWS-7416
     global $uws_feeds_debug;
 
-    $uws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and $_REQUEST["uvdbg"]) ? 1 : 0;
+    // $uws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and $_REQUEST["uvdbg"]) ? 1 : 0; // Axl UWS-7418
+    $uws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) )) ? 1 : 0; // Axl UWS-7418
 
-    if(isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"])
+    // if(isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"]) // Axl UWS-7418
+    if(isset($_REQUEST["uvclearcache"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvclearcache"] ) ))
         // uws_clean_cached_feeds();
         urvenue_ws_clean_cached_feeds(); // Axl UWS-7416
 }   

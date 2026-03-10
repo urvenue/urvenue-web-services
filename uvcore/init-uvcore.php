@@ -4,9 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uws_coredir = realpath(__DIR__);
 $uv_assetsversion = "1.0.52"; 
 
-$uvurlpath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// $uvurlpath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Axl UWS-7416
+$uvurlpath = parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ); // Axl UWS-7418
 
-if(isset($_REQUEST["uvwpdeleteuvcorelib"]) and $_REQUEST["uvwpdeleteuvcorelib"])
+// if(isset($_REQUEST["uvwpdeleteuvcorelib"]) and $_REQUEST["uvwpdeleteuvcorelib"]) // Axl UWS-7418
+if(isset($_REQUEST["uvwpdeleteuvcorelib"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvwpdeleteuvcorelib"] ) )) // Axl UWS-7418
 	// delete_option("uvcore_lib");
 	delete_option("urvenue_ws_uvcore_lib"); // Axl UWS-7416
 
@@ -46,7 +48,8 @@ if($uws_path){
 
 	// if(!uws_is_wordpress())
 	if(!urvenue_ws_is_wordpress()) // Axl UWS-7416
-		$uws_feeds_debug = (isset($_REQUEST["uvdbg"]) and $_REQUEST["uvdbg"] and ($_REQUEST["uvdbg"] == date("j"))) ? 1 : 0;
+		// $uws_feeds_debug = (isset($_REQUEST["uvdbg"]) and $_REQUEST["uvdbg"] and ($_REQUEST["uvdbg"] == date("j"))) ? 1 : 0; // Axl UWS-7418
+		$uws_feeds_debug = (isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) ) and (sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) ) == date("j"))) ? 1 : 0; // Axl UWS-7418
 	else
 		$uws_feeds_debug = 0;
 

@@ -35,25 +35,29 @@ function shortcode_uws_events($atts, $content = null) {
 
 	//add date filter if is set on the url
 	// $uvfilterdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-	$uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var($_REQUEST["date"]) : ""; // Axl UWS-7416
+	// $uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var($_REQUEST["date"]) : ""; // Axl UWS-7416
+	$uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["date"] ) ) ) : ""; // Axl UWS-7418
 	if ($uvfilterdate)
 		$uvargs["date"] = $uvfilterdate;
 
 	//add end date filter if is set on the url
 	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? uws_cleanup_var($_REQUEST["enddate"]) : "";
-	$uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var($_REQUEST["enddate"]) : ""; // Axl UWS-7416
+	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var($_REQUEST["enddate"]) : ""; // Axl UWS-7416
+	$uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["enddate"] ) ) ) : ""; // Axl UWS-7418
 	if ($uvfilterenddate)
 		$uvargs["enddate"] = $uvfilterenddate;
 
 	//add venue filter if is set on the url
 	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? uws_cleanup_var($_REQUEST["venue"]) : "";
-	$uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var($_REQUEST["venue"]) : ""; // Axl UWS-7416
+	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var($_REQUEST["venue"]) : ""; // Axl UWS-7416
+	$uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venue"] ) ) ) : ""; // Axl UWS-7418
 	if ($uvfiltervenue)
 		$uvargs["venue"] = $uvfiltervenue;
 
 	//add performer filter if is set on the url
 	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? uws_cleanup_var($_REQUEST["performer"]) : "";
-	$uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var($_REQUEST["performer"]) : ""; // Axl UWS-7416
+	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var($_REQUEST["performer"]) : ""; // Axl UWS-7416
+	$uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["performer"] ) ) ) : ""; // Axl UWS-7418
 	if ($uvfilterperformer)
 		$uvargs["performer"] = $uvfilterperformer;
 
@@ -98,25 +102,29 @@ function shortcode_uws_events_list($atts, $content = null) {
 
 	//add date filter if is set on the url
 	// $uvfilterdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-	$uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var($_REQUEST["date"]) : ""; // Axl UWS-7416
+	// $uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var($_REQUEST["date"]) : ""; // Axl UWS-7416
+	$uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["date"] ) ) ) : ""; // Axl UWS-7418
 	if ($uvfilterdate)
 		$uvargs["date"] = $uvfilterdate;
 
 	//add end date filter if is set on the url
 	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? uws_cleanup_var($_REQUEST["enddate"]) : "";
-	$uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var($_REQUEST["enddate"]) : ""; // Axl UWS-7416
+	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var($_REQUEST["enddate"]) : ""; // Axl UWS-7416
+	$uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["enddate"] ) ) ) : ""; // Axl UWS-7418
 	if ($uvfilterenddate)
 		$uvargs["enddate"] = $uvfilterenddate;
 
 	//add venue filter if is set on the url
 	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? uws_cleanup_var($_REQUEST["venue"]) : "";
-	$uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var($_REQUEST["venue"]) : ""; // Axl UWS-7416
+	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var($_REQUEST["venue"]) : ""; // Axl UWS-7416
+	$uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venue"] ) ) ) : ""; // Axl UWS-7418
 	if ($uvfiltervenue)
 		$uvargs["venue"] = $uvfiltervenue;
 
 	//add performer filter if is set on the url
 	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? uws_cleanup_var($_REQUEST["performer"]) : "";
-	$uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var($_REQUEST["performer"]) : ""; // Axl UWS-7416
+	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var($_REQUEST["performer"]) : ""; // Axl UWS-7416
+	$uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["performer"] ) ) ) : ""; // Axl UWS-7418
 	if ($uvfilterperformer)
 		$uvargs["performer"] = $uvfilterperformer;
 

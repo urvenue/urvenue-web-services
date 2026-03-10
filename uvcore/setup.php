@@ -9,22 +9,29 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
 $uvs_uvcorepath = realpath(dirname(__FILE__));
-$uvs_uvcoreurl = "//" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+// $uvs_uvcoreurl = "//" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]; // Axl UWS-7416
+$uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( $_SERVER["HTTP_HOST"] ) ) . sanitize_text_field( wp_unslash( $_SERVER["REQUEST_URI"] ) ); // Axl UWS-7418
 $uvs_uvcoreurl = strtok($uvs_uvcoreurl, '?');
 $uvs_uvcoreurl = str_replace("/setup.php", "", $uvs_uvcoreurl);
 
-$uvpath = isset($path) ? $path : $_REQUEST["path"];
-$uvurl = isset($url) ? $url : $_REQUEST["url"];
-$uvlibrary = isset($library) ? $library : $_REQUEST["library"];
-$uvwrite = isset($write) ? $white : $_REQUEST["write"];
+// $uvpath = isset($path) ? $path : $_REQUEST["path"]; // Axl UWS-7416
+$uvpath = isset($path) ? $path : sanitize_text_field( wp_unslash( $_REQUEST["path"] ?? '' ) ); // Axl UWS-7418
+// $uvurl = isset($url) ? $url : $_REQUEST["url"]; // Axl UWS-7416
+$uvurl = isset($url) ? $url : esc_url_raw( wp_unslash( $_REQUEST["url"] ?? '' ) ); // Axl UWS-7418
+// $uvlibrary = isset($library) ? $library : $_REQUEST["library"]; // Axl UWS-7416
+$uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_REQUEST["library"] ?? '' ) ); // Axl UWS-7418
+// $uvwrite = isset($write) ? $white : $_REQUEST["write"]; // Axl UWS-7416
+$uvwrite = isset($write) ? $write : absint( $_REQUEST["write"] ?? 0 ); // Axl UWS-7418
 
 
-if($_REQUEST["manual"]){
+// if($_REQUEST["manual"]){ // Axl UWS-7416
+if( isset( $_REQUEST["manual"] ) && sanitize_text_field( wp_unslash( $_REQUEST["manual"] ) ) ){ // Axl UWS-7418
 	$uvslibinfojson = file_get_contents("uvcore.lib.json");
-	
+
 	$uvslib = json_decode($uvslibinfojson, true);
-	
-	if(is_array($uvslib["system"]) and (!$_REQUEST["nconf"]))
+
+	// if(is_array($uvslib["system"]) and (!$_REQUEST["nconf"])) // Axl UWS-7416
+	if(is_array($uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // Axl UWS-7418
 		header("location: $uvurl" . "/admin.php");
 }
 	
@@ -131,7 +138,8 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 	
 	$uvslib = json_decode($uvslibinfojson, true);
 	
-	if(is_array($uvslib["system"]) and (!$_REQUEST["nconf"]))
+	// if(is_array($uvslib["system"]) and (!$_REQUEST["nconf"])) // Axl UWS-7416
+	if(is_array($uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // Axl UWS-7418
 		$uvs_libexit = true;
 }
 
