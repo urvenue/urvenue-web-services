@@ -10,7 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $uvs_uvcorepath = realpath(dirname(__FILE__));
 // $uvs_uvcoreurl = "//" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]; // Axl UWS-7416
-$uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( $_SERVER["HTTP_HOST"] ) ) . sanitize_text_field( wp_unslash( $_SERVER["REQUEST_URI"] ) ); // Axl UWS-7418
+// $uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( $_SERVER["HTTP_HOST"] ) ) . sanitize_text_field( wp_unslash( $_SERVER["REQUEST_URI"] ) ); // Axl UWS-7418
+$uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( isset( $_SERVER["HTTP_HOST"] ) ? $_SERVER["HTTP_HOST"] : '' ) ) . sanitize_text_field( wp_unslash( isset( $_SERVER["REQUEST_URI"] ) ? $_SERVER["REQUEST_URI"] : '' ) ); // Axl UWS-7418
 $uvs_uvcoreurl = strtok($uvs_uvcoreurl, '?');
 $uvs_uvcoreurl = str_replace("/setup.php", "", $uvs_uvcoreurl);
 

@@ -104,7 +104,8 @@ function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
     foreach ($_POST as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v);
     $params_string = implode('&', $param_parts);
 
-    $ct = $_SERVER['CONTENT_TYPE'] ?? ($_SERVER['HTTP_CONTENT_TYPE'] ?? '');
+    // $ct = $_SERVER['CONTENT_TYPE'] ?? ($_SERVER['HTTP_CONTENT_TYPE'] ?? ''); // Axl UWS-7418
+    $ct = sanitize_text_field( wp_unslash( $_SERVER['CONTENT_TYPE'] ?? ($_SERVER['HTTP_CONTENT_TYPE'] ?? '') ) ); // Axl UWS-7418
     $body_to_check = $body_decoded = '';
     if (stripos($ct, 'application/json') !== false) {
         $data = @json_decode($bodyRaw, true);
@@ -122,7 +123,8 @@ function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
 
     $combined_raw     = trim($params_string . ' ' . $body_to_check);
     $combined_decoded = trim($params_string . ' ' . $body_decoded);
-    $query_raw        = $_SERVER['QUERY_STRING'] ?? '';
+    // $query_raw        = $_SERVER['QUERY_STRING'] ?? ''; // Axl UWS-7418
+    $query_raw        = sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ?? '' ) ); // Axl UWS-7418
     $query_decoded    = urldecode($query_raw);
 
     $haystacks = [

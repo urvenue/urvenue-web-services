@@ -4,7 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uws_path;
 
 // @egt [UWS-7297]
-$nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : '';
+// $nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : ''; // Axl UWS-7418
+$nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // Axl UWS-7418
 switch ($nonceaction) {
     case 'uwsinventory':
         // uws_check_nonce("uwsinventory");

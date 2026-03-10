@@ -45,7 +45,8 @@ $uvcartmanagementid = urvenue_ws_cleanup_request("cartmanagementid"); // Axl UWS
 $uvmanageentid = urvenue_ws_cleanup_request("manageentid"); // Axl UWS-7416
 // $uvsubtotalagree = uws_cleanup_request("subtotalagree");
 $uvsubtotalagree = urvenue_ws_cleanup_request("subtotalagree"); // Axl UWS-7416
-$uvsubinfo = (isset($_REQUEST["subinfo"])) ? $_REQUEST["subinfo"] : "";
+// $uvsubinfo = (isset($_REQUEST["subinfo"])) ? $_REQUEST["subinfo"] : ""; // Axl UWS-7418
+$uvsubinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // Axl UWS-7418
 $uvapicartcode = $uvcartcount = "";
 $uvreturn = array();
 

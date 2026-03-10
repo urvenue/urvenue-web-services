@@ -11,7 +11,8 @@ $uvapiurl = $uws_feeds_lib["inquiry-send"]["url"];
 
 $uvdata = $_POST;
 $uvdata["phone"] = ($uvdata["phonecode"] and $uvdata["phonenumber"]) ? $uvdata["phonecode"] . "." . $uvdata["phonenumber"] : "";
-$uvdata["optinemail"] = (isset($_REQUEST["optin"])) ? $_REQUEST["optin"] : "";
+// $uvdata["optinemail"] = (isset($_REQUEST["optin"])) ? $_REQUEST["optin"] : ""; // Axl UWS-7418
+$uvdata["optinemail"] = (isset($_REQUEST["optin"])) ? sanitize_text_field( wp_unslash( $_REQUEST["optin"] ) ) : ""; // Axl UWS-7418
 
 unset($uvdata["action"]);
 unset($uvdata["uvaction"]);

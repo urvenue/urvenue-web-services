@@ -64,7 +64,8 @@ if($uvpopitemmodule == "membership"){
     $uvreturn["templates"] = $uvtempls;
 }
 
-if($_REQUEST["returnprox"])
+// if($_REQUEST["returnprox"]) // Axl UWS-7418
+if(isset($_REQUEST["returnprox"]) && sanitize_text_field( wp_unslash( $_REQUEST["returnprox"] ) )) // Axl UWS-7418
     // $uvreturn["proxies"] = uws_get_proxies("inventory");
     $uvreturn["proxies"] = urvenue_ws_get_proxies("inventory"); // Axl UWS-7416
     
