@@ -3,7 +3,7 @@
 Contributors: UrVenue, UvWebServices
 Tags: events, booking, calendar, tickets, hospitality
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 6.9
 Stable tag: 1.2.1
 Requires PHP: 7.0
 License: GPLv2 or later
