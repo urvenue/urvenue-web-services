@@ -164,7 +164,8 @@ function urvenue_ws_get_eventinventory_list($uveventdata, $uvargs = "") // Axl U
 
     //Add urls to cart
     // if (isset($_COOKIE['uws_gcart']) and $_COOKIE['uws_gcart']) {
-    if (isset($_COOKIE['urvenue_ws_gcart']) and $_COOKIE['urvenue_ws_gcart']) { // Axl UWS-7416
+    // if (isset($_COOKIE['urvenue_ws_gcart']) and $_COOKIE['urvenue_ws_gcart']) { // Axl UWS-7416
+    if (isset($_COOKIE['urvenue_ws_gcart']) and sanitize_text_field( wp_unslash( $_COOKIE['urvenue_ws_gcart'] ) )) { // Axl UWS-7418
         // $uvbkgcheckoutlinks = uws_get_bkgcheckout_links($_COOKIE['uws_gcart']);
         // $uvbkgcheckoutlinks = urvenue_ws_get_bkgcheckout_links($_COOKIE['urvenue_ws_gcart']); // Axl UWS-7416
         $uvbkgcheckoutlinks = urvenue_ws_get_bkgcheckout_links( sanitize_text_field( wp_unslash( $_COOKIE['urvenue_ws_gcart'] ) ) ); // Axl UWS-7418

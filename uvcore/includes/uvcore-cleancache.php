@@ -170,7 +170,8 @@ function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
 // function custom_template_redirect() {
 function urvenue_ws_template_redirect() { // Axl UWS-7416
     // $uv_url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Axl UWS-7418
-    $uv_url_path = parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ); // Axl UWS-7418
+    // $uv_url_path = parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ); // Axl UWS-7418
+    $uv_url_path = parse_url( sanitize_text_field( wp_unslash( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '' ) ), PHP_URL_PATH ); // Axl UWS-7418
 
     if ($uv_url_path == '/apis/uvclearcache/') {
         // clear_cache_endpoint_callback();
