@@ -120,6 +120,8 @@ if($uvurl){
 
 	// @egt [UWS-7264]
 	add_action('wp_footer', function () use ($uvurl, $uvs_lib, $uvaddsubmitvarscript) {
+		// echo "<script>var uvcoreinput = '$uvurl'; var uvcorejsonlib = '$uvs_lib'; $uvaddsubmitvarscript</script>";
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated inline JS with internal variables // Axl UWS-7416
 		echo "
 			<script>
 				var uvcoreinput = '$uvurl';
@@ -127,6 +129,7 @@ if($uvurl){
 				$uvaddsubmitvarscript
 			</script>
 		";
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	});
 }
 

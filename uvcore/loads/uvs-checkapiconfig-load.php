@@ -121,4 +121,5 @@ else{
 $uvreturnjson = wp_json_encode($uvreturnarray);
 // @Axl End
 header('Content-Type: application/json');
-echo($uvreturnjson);
+// echo($uvreturnjson);
+echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

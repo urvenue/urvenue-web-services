@@ -9,9 +9,9 @@ $uvsboxpanelclass = (is_array($uvs_core_lib) and !$uvs_core_lib["system"]["apike
 ?>
 
 <?php // @Axl ?>
-<!-- <div class="uvs-boxpanel uvs-boxpanel-admin <?php echo $uvsboxpanelclass; ?>"> -->
-<!-- <form id="uvs-uvcoreadmin-form" action="<?php echo $uvs_admin_lib["loads"]["adminsave"]; ?>"> -->
-<!-- <div class="uvs-adminbox-corever"><?php echo $uws_core_version; ?></div> -->
+<?php /* old: <div class="uvs-boxpanel uvs-boxpanel-admin [echo $uvsboxpanelclass]"> */ ?>
+<?php /* old: <form id="uvs-uvcoreadmin-form" action="[echo $uvs_admin_lib[loads][adminsave]]"> */ ?>
+<?php /* old: <div class="uvs-adminbox-corever">[echo $uws_core_version]</div> */ ?>
 <div class="uvs-boxpanel uvs-boxpanel-admin <?php echo esc_attr( $uvsboxpanelclass ); ?>">
 	<form id="uvs-uvcoreadmin-form" action="<?php echo esc_url( $uvs_admin_lib["loads"]["adminsave"] ); ?>">
 		<div class="uvs-adminbox-head uvs-clearfix">
@@ -38,13 +38,13 @@ $uvsboxpanelclass = (is_array($uvs_core_lib) and !$uvs_core_lib["system"]["apike
 					<li><a class="<?php /* Old: echo $uvs_admin_optstabs_state['events-global']; */ echo esc_attr( $uvs_admin_optstabs_state['events-global'] ); ?>" href="#events-global">Global</a></li>
 					<li class="uvissubitem"><a class="<?php /* Old: echo $uvs_admin_optstabs_state['events-calendar']; */ echo esc_attr( $uvs_admin_optstabs_state['events-calendar'] ); ?>" href="#events-calendar">Calendar</a></li>
 					<li class="uvissubitem"><a class="<?php /* Old: echo $uvs_admin_optstabs_state['events-agenda']; */ echo esc_attr( $uvs_admin_optstabs_state['events-agenda'] ); ?>" href="#events-agenda">Agenda</a></li>
-					<!--<li class="uvissubitem"><a class="<?php echo $uvs_admin_optstabs_state['events-list']; ?>" href="#events-list">List</a></li>-->
+					<?php /* old: <li class="uvissubitem"><a class="[echo $uvs_admin_optstabs_state[events-list]]" href="#events-list">List</a></li> */ ?>
 					<li class="uvissubitem"><a class="<?php /* Old: echo $uvs_admin_optstabs_state['events-slider']; */ echo esc_attr( $uvs_admin_optstabs_state['events-slider'] ); ?>" href="#events-slider">Slider</a></li>
 					<li><a class="<?php /* Old: echo $uvs_admin_optstabs_state['events-event']; */ echo esc_attr( $uvs_admin_optstabs_state['events-event'] ); ?>" href="#events-event">Event Page</a></li>
 					<li><a class="<?php /* Old: echo $uvs_admin_optstabs_state['flyers']; */ echo esc_attr( $uvs_admin_optstabs_state['flyers'] ); ?>" href="#flyers">Flyers</a></li>
-					<!--<li class="uvs-menu-group"><span><i class="uwsicon-group"></i> Artists</span></li>
-					<li><a class="<?php echo $uvs_admin_optstabs_state['artists-artistpage']; ?>" href="#artists-artistpage">Artist Page</a></li>
-					<li><a class="<?php echo $uvs_admin_optstabs_state['artists-list']; ?>" href="#artists-list">Artists List</a></li>-->
+					<?php /* old: <li class="uvs-menu-group"><span>Artists</span></li>
+					<li><a class="[echo $uvs_admin_optstabs_state[artists-artistpage]]" href="#artists-artistpage">Artist Page</a></li>
+					<li><a class="[echo $uvs_admin_optstabs_state[artists-list]]" href="#artists-list">Artists List</a></li> */ ?>
 
 					<li class="uvs-menu-group"><span><i class="uwsicon-cog"></i> Configuration</span></li>
 					<li><a class="<?php /* Old: echo $uvs_admin_optstabs_state['pages']; */ echo esc_attr( $uvs_admin_optstabs_state['pages'] ); ?>" href="#pages">Pages</a></li>
@@ -63,9 +63,9 @@ $uvsboxpanelclass = (is_array($uvs_core_lib) and !$uvs_core_lib["system"]["apike
 			<div class="uvs-adminbox-optionsarea">
 				<div class="uvs-adminbox-optionsarea-inner">
 					<?php // @Axl ?>
-					<!-- <input ... value="<?php echo $uvs_core_lib["system"]["path"]; ?>"> -->
-					<!-- <input ... value="<?php echo $uvs_url; ?>"> -->
-					<!-- <input ... value="<?php echo $uvs_core_lib["system"]["library"]; ?>"> -->
+					<?php /* old: <input ... value="[echo $uvs_core_lib[system][path]]"> */ ?>
+					<?php /* old: <input ... value="[echo $uvs_url]"> */ ?>
+					<?php /* old: <input ... value="[echo $uvs_core_lib[system][library]]"> */ ?>
 					<input class="uvsjson" type="hidden" name="system[path]" value="<?php echo esc_attr( $uvs_core_lib["system"]["path"] ); ?>">
 					<input class="uvsjson" type="hidden" name="system[url]" value="<?php echo esc_attr( $uvs_url ); ?>">
 					<input class="uvsjson" type="hidden" name="system[library]" value="<?php echo esc_attr( $uvs_core_lib["system"]["library"] ); ?>">

@@ -12,7 +12,7 @@ $uvseventslisttype = urvenue_ws_adm_get_adminfieldhtml("events->list-listtype");
 $uvseventslistmaxevents = urvenue_ws_adm_get_adminfieldhtml("events->list-maxevents"); // Axl UWS-7416
 ?>
 <?php // @Axl ?>
-<!-- <div id="uvs-admin-events-list" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['events-list']; ?>"> -->
+<?php /* old: <div id="uvs-admin-events-list" class="uvs-admin-opt-section [echo $uvs_admin_optstabs_state[events-list]]"> */ ?>
 <div id="uvs-admin-events-list" class="uvs-admin-opt-section <?php echo esc_attr( $uvs_admin_optstabs_state['events-list'] ); ?>">
     <div class="uvs-admin-opt-title">Events List</div>
     <div class="uvs-admin-opt-space"></div>

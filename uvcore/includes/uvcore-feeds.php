@@ -511,7 +511,8 @@ function urvenue_ws_feeds_cache_is_writable(){ // Axl UWS-7416
 /*Shows Debug Message*/
 // function uws_feed_debug_msg($uwsmsg){
 function urvenue_ws_feed_debug_msg($uwsmsg){ // Axl UWS-7416
-    echo "<pre class='uwsdebugpre'><code>UVDebug: " . $uwsmsg . "</code></pre>";
+    // echo "<pre class='uwsdebugpre'><code>UVDebug: " . $uwsmsg . "</code></pre>";
+    echo "<pre class='uwsdebugpre'><code>UVDebug: " . esc_html( $uwsmsg ) . "</code></pre>"; // Axl UWS-7416
 }
 
 /**

@@ -127,7 +127,8 @@ function urvenue_ws_add_head_styles(){ // Axl UWS-7416
     // @Axl
     // echo "<style>$uvcssvars</style>";
     // CSS output — no HTML escaping function applies to CSS; wp_strip_all_tags() prevents HTML/script injection while preserving CSS declarations
-    echo '<style>' . wp_strip_all_tags( $uvcssvars ) . '</style>';
+    // echo '<style>' . wp_strip_all_tags( $uvcssvars ) . '</style>';
+    echo '<style>' . wp_strip_all_tags( $uvcssvars ) . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output; wp_strip_all_tags() prevents HTML/script injection // Axl UWS-7416
     // @Axl End
 }
 // add_action('wp_head', 'uvscore_add_head_styles', 50);

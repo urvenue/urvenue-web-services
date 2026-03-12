@@ -73,7 +73,8 @@ function urvenue_ws_events($uvargs = ""){ // Axl UWS-7416
     </div>
     ";
 
-    echo $uveventshtml;
+    // echo $uveventshtml;
+    echo $uveventshtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
 }
 
 /*Get events views
@@ -249,7 +250,8 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
 
         // @egt [UWS-7264]
         add_action('wp_footer', function () use ($uveventsschemajson) {
-            echo "<script type='application/ld+json'>$uveventsschemajson</script>";
+            // echo "<script type='application/ld+json'>$uveventsschemajson</script>";
+            echo "<script type='application/ld+json'>$uveventsschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output // Axl UWS-7416
         });
     }
 
@@ -2241,7 +2243,8 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
 
             // @egt [UWS-7264]
             add_action('wp_footer', function () use ($uvgeteventschemajson) {
-                echo "<script type='application/ld+json'>$uvgeteventschemajson</script>";
+                // echo "<script type='application/ld+json'>$uvgeteventschemajson</script>";
+                echo "<script type='application/ld+json'>$uvgeteventschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output // Axl UWS-7416
             });
         }
 
@@ -2292,7 +2295,8 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
     // $uveventhtml = uws_apply_filters("uws_event_page_after_replace", $uveventhtml, $uveventinfo);
     $uveventhtml = urvenue_ws_apply_filters("urvenue_ws_event_page_after_replace", $uveventhtml, $uveventinfo); // Axl UWS-7416
 
-    echo $uveventhtml;
+    // echo $uveventhtml;
+    echo $uveventhtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
 }
 
 /*Get event schema

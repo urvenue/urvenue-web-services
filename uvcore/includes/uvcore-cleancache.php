@@ -108,7 +108,8 @@ function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
     // if (curl_errno($uvwpe_curl)) {
     //     echo 'Error: ' . curl_error($uvwpe_curl);
     if (is_wp_error($uvwpe_response)) {
-        echo 'Error: ' . $uvwpe_response->get_error_message();
+        // echo 'Error: ' . $uvwpe_response->get_error_message();
+        echo 'Error: ' . esc_html( $uvwpe_response->get_error_message() ); // Axl UWS-7416
 
     } else if ($uvresponse && !$install_id) {
         $status = 1;
@@ -161,7 +162,8 @@ function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
     $uvdata = wp_json_encode($uvresponsemsg);
     // @Axl End
     header('Content-Type: application/json; charset=utf-8');
-    echo($uvdata);
+    // echo($uvdata);
+    echo( $uvdata ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
 
     // TESTING @Axl
     // curl_close($uvwpe_curl);
