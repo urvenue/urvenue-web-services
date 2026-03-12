@@ -10,7 +10,7 @@ $uvsartistsimageratio = urvenue_ws_adm_get_adminfieldhtml("artists->artist-image
 ?>
 <?php // @Axl ?>
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-<!-- <div id="uvs-admin-artists-artistpage" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['artists-artistpage']; ?>"> -->
+<?php /* old: <div id="uvs-admin-artists-artistpage" class="uvs-admin-opt-section [echo $uvs_admin_optstabs_state[artists-artistpage]]"> */ ?>
 <div id="uvs-admin-artists-artistpage" class="uvs-admin-opt-section <?php echo esc_attr( $uvs_admin_optstabs_state['artists-artistpage'] ); ?>">
     <div class="uvs-admin-opt-title">Artist Page</div>
     <div class="uvs-admin-opt-space"></div>

@@ -4,8 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //print_r($_REQUEST);
 //print_r($uvs_core_lib);
 
-$uvapikey = $_REQUEST["apikey"];
-$uvmicrocode = $_REQUEST["microcode"];
+// $uvapikey = $_REQUEST["apikey"]; // Axl UWS-7418
+$uvapikey = isset( $_REQUEST["apikey"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["apikey"] ) ) : ''; // Axl UWS-7418
+// $uvmicrocode = $_REQUEST["microcode"]; // Axl UWS-7418
+$uvmicrocode = isset( $_REQUEST["microcode"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["microcode"] ) ) : ''; // Axl UWS-7418
 $uvsourcecode = $uvs_core_lib["system"]["sourcecode"];
 $uvsourceloc = $uvs_core_lib["system"]["sourceloc"];
 
@@ -119,4 +121,5 @@ else{
 $uvreturnjson = wp_json_encode($uvreturnarray);
 // @Axl End
 header('Content-Type: application/json');
-echo($uvreturnjson);
+// echo($uvreturnjson);
+echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

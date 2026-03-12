@@ -73,7 +73,8 @@ function urvenue_ws_events($uvargs = ""){ // Axl UWS-7416
     </div>
     ";
 
-    echo $uveventshtml;
+    // echo $uveventshtml;
+    echo $uveventshtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
 }
 
 /*Get events views
@@ -249,7 +250,8 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
 
         // @egt [UWS-7264]
         add_action('wp_footer', function () use ($uveventsschemajson) {
-            echo "<script type='application/ld+json'>$uveventsschemajson</script>";
+            // echo "<script type='application/ld+json'>$uveventsschemajson</script>";
+            echo "<script type='application/ld+json'>$uveventsschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output // Axl UWS-7416
         });
     }
 
@@ -2184,7 +2186,10 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
     // $uveventcode = uws_get_arg($uvargs, "eventcode", uws_get_eventcode());
     $uveventcode = urvenue_ws_get_arg($uvargs, "eventcode", urvenue_ws_get_eventcode()); // Axl UWS-7416
     // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
-    $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var($_REQUEST["venuecode"]) : ""; // Axl UWS-7416
+    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var($_REQUEST["venuecode"]) : ""; // Axl UWS-7416
+    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["venuecode"] ) ) : ""; // Axl UWS-7418
+    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // Axl UWS-7418
+    $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // Axl UWS-7416
 
     if(isset($uws_core_lib["system"]) and isset($uws_core_lib["system"]["use-market-events"]) and isset($uws_core_lib["system"]["use-market-eventsvenues"]) and !$uws_core_lib["system"]["use-market-eventsvenues"] and $uws_core_lib["system"]["use-market-events"] and isset($uws_core_lib["events"]["market-events-venueid"]) and $uws_core_lib["events"]["market-events-venueid"] and $uvgetvenuecode){
         // $uveventcodedata = uws_get_eventcode_data($uveventcode);
@@ -2238,7 +2243,8 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
 
             // @egt [UWS-7264]
             add_action('wp_footer', function () use ($uvgeteventschemajson) {
-                echo "<script type='application/ld+json'>$uvgeteventschemajson</script>";
+                // echo "<script type='application/ld+json'>$uvgeteventschemajson</script>";
+                echo "<script type='application/ld+json'>$uvgeteventschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output // Axl UWS-7416
             });
         }
 
@@ -2289,7 +2295,8 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
     // $uveventhtml = uws_apply_filters("uws_event_page_after_replace", $uveventhtml, $uveventinfo);
     $uveventhtml = urvenue_ws_apply_filters("urvenue_ws_event_page_after_replace", $uveventhtml, $uveventinfo); // Axl UWS-7416
 
-    echo $uveventhtml;
+    // echo $uveventhtml;
+    echo $uveventhtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
 }
 
 /*Get event schema

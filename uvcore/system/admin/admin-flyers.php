@@ -520,7 +520,7 @@ $uvsflyercustom2placeholderurl = urvenue_ws_adm_get_adminfieldhtml("flyers->cust
     <div class="uvs-infolist-item">
         <div class="uvsname">Global Placeholder Flyer URL <small>When an event doesn't have flyer the placeholder is shown.</small></div>
         <?php // @Axl ?>
-        <!-- <div class="uvsvalue"><?php echo $uvsflyerplaceholderurlfield; ?></div> -->
+        <?php /* old: <div class="uvsvalue">[echo $uvsflyerplaceholderurlfield]</div> */ ?>
         <?php /* Old: echo wp_kses( $uvsflyerplaceholderurlfield, uvs_allowed_admin_html() ); */ ?>
         <div class="uvsvalue"><?php echo wp_kses( $uvsflyerplaceholderurlfield, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
         <?php // @Axl End ?>

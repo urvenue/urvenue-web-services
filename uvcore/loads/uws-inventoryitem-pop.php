@@ -64,7 +64,8 @@ if($uvpopitemmodule == "membership"){
     $uvreturn["templates"] = $uvtempls;
 }
 
-if($_REQUEST["returnprox"])
+// if($_REQUEST["returnprox"]) // Axl UWS-7418
+if(isset($_REQUEST["returnprox"]) && sanitize_text_field( wp_unslash( $_REQUEST["returnprox"] ) )) // Axl UWS-7418
     // $uvreturn["proxies"] = uws_get_proxies("inventory");
     $uvreturn["proxies"] = urvenue_ws_get_proxies("inventory"); // Axl UWS-7416
     
@@ -73,4 +74,5 @@ if($_REQUEST["returnprox"])
 $uvreturnjson = wp_json_encode($uvreturn);
 // @Axl End
 header('Content-Type: application/json');
-echo($uvreturnjson);
+// echo($uvreturnjson);
+echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

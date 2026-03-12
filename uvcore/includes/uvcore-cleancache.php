@@ -108,7 +108,8 @@ function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
     // if (curl_errno($uvwpe_curl)) {
     //     echo 'Error: ' . curl_error($uvwpe_curl);
     if (is_wp_error($uvwpe_response)) {
-        echo 'Error: ' . $uvwpe_response->get_error_message();
+        // echo 'Error: ' . $uvwpe_response->get_error_message();
+        echo 'Error: ' . esc_html( $uvwpe_response->get_error_message() ); // Axl UWS-7416
 
     } else if ($uvresponse && !$install_id) {
         $status = 1;
@@ -161,7 +162,8 @@ function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
     $uvdata = wp_json_encode($uvresponsemsg);
     // @Axl End
     header('Content-Type: application/json; charset=utf-8');
-    echo($uvdata);
+    // echo($uvdata);
+    echo( $uvdata ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
 
     // TESTING @Axl
     // curl_close($uvwpe_curl);
@@ -169,7 +171,9 @@ function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
 
 // function custom_template_redirect() {
 function urvenue_ws_template_redirect() { // Axl UWS-7416
-    $uv_url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    // $uv_url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Axl UWS-7418
+    // $uv_url_path = parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ); // Axl UWS-7418
+    $uv_url_path = parse_url( sanitize_text_field( wp_unslash( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '' ) ), PHP_URL_PATH ); // Axl UWS-7418
 
     if ($uv_url_path == '/apis/uvclearcache/') {
         // clear_cache_endpoint_callback();
@@ -184,7 +188,8 @@ add_action('template_redirect', 'urvenue_ws_template_redirect'); // Axl UWS-7416
 function urvenue_ws_clear_cache_callback() { // Axl UWS-7416
     global $uvwpecreds;
 
-    if (isset($_GET['apikey']) && $_GET['apikey'] == $uvwpecreds['cacheapikey']) {
+    // if (isset($_GET['apikey']) && $_GET['apikey'] == $uvwpecreds['cacheapikey']) { // Axl UWS-7418
+    if (isset($_GET['apikey']) && sanitize_text_field( wp_unslash( $_GET['apikey'] ) ) == $uvwpecreds['cacheapikey']) { // Axl UWS-7418
         // uvclear_wpengine_cache();
         urvenue_ws_clear_wpengine_cache(); // Axl UWS-7416
         

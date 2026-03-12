@@ -164,9 +164,11 @@ function urvenue_ws_get_eventinventory_list($uveventdata, $uvargs = "") // Axl U
 
     //Add urls to cart
     // if (isset($_COOKIE['uws_gcart']) and $_COOKIE['uws_gcart']) {
-    if (isset($_COOKIE['urvenue_ws_gcart']) and $_COOKIE['urvenue_ws_gcart']) { // Axl UWS-7416
+    // if (isset($_COOKIE['urvenue_ws_gcart']) and $_COOKIE['urvenue_ws_gcart']) { // Axl UWS-7416
+    if (isset($_COOKIE['urvenue_ws_gcart']) and sanitize_text_field( wp_unslash( $_COOKIE['urvenue_ws_gcart'] ) )) { // Axl UWS-7418
         // $uvbkgcheckoutlinks = uws_get_bkgcheckout_links($_COOKIE['uws_gcart']);
-        $uvbkgcheckoutlinks = urvenue_ws_get_bkgcheckout_links($_COOKIE['urvenue_ws_gcart']); // Axl UWS-7416
+        // $uvbkgcheckoutlinks = urvenue_ws_get_bkgcheckout_links($_COOKIE['urvenue_ws_gcart']); // Axl UWS-7416
+        $uvbkgcheckoutlinks = urvenue_ws_get_bkgcheckout_links( sanitize_text_field( wp_unslash( $_COOKIE['urvenue_ws_gcart'] ) ) ); // Axl UWS-7418
         $uvcarturl = $uvbkgcheckoutlinks["checkout-carturl"];
         $uvcheckurl = $uvbkgcheckoutlinks["checkout-checkurl"];
     } else
@@ -3220,7 +3222,8 @@ function urvenue_ws_normalize_item_to_replace($uvitem) // Axl UWS-7416
         //$uvitemreturn["pricing"] = ($uvitemreturn["pricing"]) ? uws_lang($uvitemreturn["pricing"]) : "";
 
         //Add placeholders for now
-        if ($_REQUEST["apireq"]) {
+        // if ($_REQUEST["apireq"]) { // Axl UWS-7418
+        if (isset($_REQUEST["apireq"]) && sanitize_text_field( wp_unslash( $_REQUEST["apireq"] ) )) { // Axl UWS-7418
             $uvitemreturn["primaryaddon"] = array(
                 "itemname" => "Gingerbread Kits",
                 "min" => 1,
@@ -4363,11 +4366,14 @@ function urvenue_ws_booking_calendar($uvargs = "") // Axl UWS-7416
 // function uws_get_requestinfo()
 function urvenue_ws_get_requestinfo() // Axl UWS-7416
 {
-    $uvredqstring = (isset($_SERVER['REDIRECT_QUERY_STRING'])) ? $_SERVER['REDIRECT_QUERY_STRING'] : "";
+    // $uvredqstring = (isset($_SERVER['REDIRECT_QUERY_STRING'])) ? $_SERVER['REDIRECT_QUERY_STRING'] : ""; // Axl UWS-7418
+    $uvredqstring = (isset($_SERVER['REDIRECT_QUERY_STRING'])) ? sanitize_text_field( wp_unslash( $_SERVER['REDIRECT_QUERY_STRING'] ) ) : ""; // Axl UWS-7418
 
     return array(
-        "HTTP_HOST" => $_SERVER['HTTP_HOST'],
-        "HTTP_USER_AGENT" => $_SERVER['HTTP_USER_AGENT'],
+        // "HTTP_HOST" => $_SERVER['HTTP_HOST'], // Axl UWS-7418
+        "HTTP_HOST" => isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '', // Axl UWS-7418
+        // "HTTP_USER_AGENT" => $_SERVER['HTTP_USER_AGENT'], // Axl UWS-7418
+        "HTTP_USER_AGENT" => isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '', // Axl UWS-7418
         "REDIRECT_QUERY_STRING" => $uvredqstring,
         // "REMOTE_ADDR" => uws_get_ipaddress()
         "REMOTE_ADDR" => urvenue_ws_get_ipaddress() // Axl UWS-7416
@@ -4380,11 +4386,14 @@ function urvenue_ws_get_ipaddress() // Axl UWS-7416
     $uvip = "";
 
     if (!empty($_SERVER['HTTP_CLIENT_IP']))
-        $uvip = $_SERVER['HTTP_CLIENT_IP'];
+        // $uvip = $_SERVER['HTTP_CLIENT_IP']; // Axl UWS-7418
+        $uvip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) ); // Axl UWS-7418
     elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-        $uvip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        // $uvip = $_SERVER['HTTP_X_FORWARDED_FOR']; // Axl UWS-7418
+        $uvip = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ); // Axl UWS-7418
     else
-        $uvip = $_SERVER['REMOTE_ADDR'];
+        // $uvip = $_SERVER['REMOTE_ADDR']; // Axl UWS-7418
+        $uvip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : ''; // Axl UWS-7418
 
     return $uvip;
 }

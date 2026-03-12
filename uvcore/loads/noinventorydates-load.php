@@ -4,7 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $uws_path;
 
 // @egt [UWS-7297]
-$nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : '';
+// $nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : ''; // Axl UWS-7418
+$nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // Axl UWS-7418
 switch ($nonceaction) {
     case 'uwsinventory':
         // uws_check_nonce("uwsinventory");
@@ -53,4 +54,5 @@ if($uvdate and $uvvenuecode and $uvecozone){
 $uvreturnjson = wp_json_encode($uvreturn);
 // @Axl End
 header('Content-Type: application/json');
-echo($uvreturnjson);
+// echo($uvreturnjson);
+echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

@@ -70,10 +70,11 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
                 $uvnoticemsg = isset($uws_website_notices_types[$uvnoticemsg]['message_template']) 
                     ? $uws_website_notices_types[$uvnoticemsg]['message_template'] 
                     : $uws_website_notices_types['default']['message_template'];
-                $uvsiteurl = function_exists('get_site_url') ? get_site_url() : $_SERVER['HTTP_HOST'];
+                // $uvsiteurl = function_exists('get_site_url') ? get_site_url() : $_SERVER['HTTP_HOST']; // Axl UWS-7418
+                $uvsiteurl = function_exists('get_site_url') ? get_site_url() : sanitize_text_field( wp_unslash( isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : '' ) ); // Axl UWS-7418
                 $uvnoticemsg = str_replace('{website_url}', $uvsiteurl, $uvnoticemsg);
             }
-            
+
             // Prevent empty messages from being sent
             if (empty(trim($uvnoticemsg))) {
                 return false;
@@ -82,8 +83,9 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
             // Custom message - generate a type key from the message
             $uvnoticetype = 'custom_' . substr(md5($uvnoticemsg), 0, 12);
             $uvnoticemsg = trim((string)$uvnoticemsg);
-            
-            $uvsiteurl = function_exists('get_site_url') ? get_site_url() : $_SERVER['HTTP_HOST'];
+
+            // $uvsiteurl = function_exists('get_site_url') ? get_site_url() : $_SERVER['HTTP_HOST']; // Axl UWS-7418
+            $uvsiteurl = function_exists('get_site_url') ? get_site_url() : sanitize_text_field( wp_unslash( isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : '' ) ); // Axl UWS-7418
             $uvnoticemsg = str_replace('{website_url}', $uvsiteurl, $uvnoticemsg);
         }
 

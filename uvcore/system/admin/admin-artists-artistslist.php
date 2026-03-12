@@ -12,7 +12,7 @@ $uvsartistslistview = urvenue_ws_adm_get_adminfieldhtml("artists->artist-listvie
 $uvsartistsbuttonlabel = urvenue_ws_adm_get_adminfieldhtml("artists->artist-buttonlabel"); // Axl UWS-7416
 ?>
 <?php // @Axl ?>
-<!-- <div id="uvs-admin-artists-list" class="uvs-admin-opt-section <?php echo $uvs_admin_optstabs_state['artists-list']; ?>"> -->
+<?php /* old: <div id="uvs-admin-artists-list" class="uvs-admin-opt-section [echo $uvs_admin_optstabs_state[artists-list]]"> */ ?>
 <div id="uvs-admin-artists-list" class="uvs-admin-opt-section <?php echo esc_attr( $uvs_admin_optstabs_state['artists-list'] ); ?>">
     <div class="uvs-admin-opt-title">Artist List</div>
     <div class="uvs-admin-opt-space"></div>

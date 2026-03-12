@@ -739,7 +739,8 @@ function urvenue_ws_get_popup_theme() { // Axl UWS-7416
 // function uws_check_nonce($uvnonce) {
 function urvenue_ws_check_nonce($uvnonce) { // Axl UWS-7416
 	// if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) {
-	if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) { // Axl UWS-7416
+	// if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) { // Axl UWS-7416
+	if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['uws_nonce'] ) ), $uvnonce)) { // Axl UWS-7418
 		wp_send_json_error(array('message' => 'Invalid nonce'), 403);
 	}
 }

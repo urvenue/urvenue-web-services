@@ -1,7 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uv_isproxy = 1;
-$uvaction = isset($uvaction) ? $uvaction : $_REQUEST["uvaction"];
+// $uvaction = isset($uvaction) ? $uvaction : $_REQUEST["uvaction"]; // Axl UWS-7418
+$uvaction = isset($uvaction) ? $uvaction : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // Axl UWS-7418
 
 if ($uvaction == "uvsp_checkproxyurl") {
 	echo ("uv1");

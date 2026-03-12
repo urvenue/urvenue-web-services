@@ -511,7 +511,8 @@ function urvenue_ws_feeds_cache_is_writable(){ // Axl UWS-7416
 /*Shows Debug Message*/
 // function uws_feed_debug_msg($uwsmsg){
 function urvenue_ws_feed_debug_msg($uwsmsg){ // Axl UWS-7416
-    echo "<pre class='uwsdebugpre'><code>UVDebug: " . $uwsmsg . "</code></pre>";
+    // echo "<pre class='uwsdebugpre'><code>UVDebug: " . $uwsmsg . "</code></pre>";
+    echo "<pre class='uwsdebugpre'><code>UVDebug: " . esc_html( $uwsmsg ) . "</code></pre>"; // Axl UWS-7416
 }
 
 /**
@@ -740,7 +741,8 @@ function urvenue_ws_send_integration_alert($uvalerttype, $uvfeedurl = "", $uvdet
 	$uvmessage = $uws_website_notices_types[$uvalerttype]["message_template"];
 	
 	// Get website URL
-	$uvsite_url = function_exists('get_site_url') ? get_site_url() : ($_SERVER['HTTP_HOST'] ?? 'Unknown');
+	// $uvsite_url = function_exists('get_site_url') ? get_site_url() : ($_SERVER['HTTP_HOST'] ?? 'Unknown'); // Axl UWS-7418
+	$uvsite_url = function_exists('get_site_url') ? get_site_url() : sanitize_text_field( wp_unslash( isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : 'Unknown' ) ); // Axl UWS-7418
 	
 	// Replace standard placeholders
 	$uvmessage = str_replace('{website_url}', $uvsite_url, $uvmessage);
@@ -765,6 +767,7 @@ function urvenue_ws_send_integration_alert($uvalerttype, $uvfeedurl = "", $uvdet
 }
 
 // if(!uws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"])
-if(!urvenue_ws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"]) // Axl UWS-7416
+// if(!urvenue_ws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"]) // Axl UWS-7416
+if(!urvenue_ws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvclearcache"] ) )) // Axl UWS-7418
     // uws_clean_cached_feeds();
     urvenue_ws_clean_cached_feeds(); // Axl UWS-7416
