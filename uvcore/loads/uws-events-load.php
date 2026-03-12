@@ -18,11 +18,13 @@ $uvbuttonlabel = urvenue_ws_cleanup_request("btnlabel"); // Axl UWS-7416
 // $uvviews = (isset($_REQUEST["views"])) ? explode(",", uws_cleanup_var($_REQUEST["views"])) : null;
 // $uvviews = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var($_REQUEST["views"])) : null; // Axl UWS-7416
 // $uvviews = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) )) : null; // Axl UWS-7418
-$uvviews = (isset($_REQUEST["views"])) ? explode(",", sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7418
+// $uvviews = (isset($_REQUEST["views"])) ? explode(",", sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7418
+$uvviews = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7416
 // $uvdefaultview = $_REQUEST["defaultview"] ? uws_cleanup_var($_REQUEST["defaultview"]) : "";
 // $uvdefaultview = $_REQUEST["defaultview"] ? urvenue_ws_cleanup_var($_REQUEST["defaultview"]) : ""; // Axl UWS-7416
 // $uvdefaultview = (isset($_REQUEST["defaultview"]) && $_REQUEST["defaultview"]) ? urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) : ""; // Axl UWS-7418
-$uvdefaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7418
+// $uvdefaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7418
+$uvdefaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7416
 //$uvnowrap = uws_cleanup_request("nowrap");
 
 $uvargs = array(

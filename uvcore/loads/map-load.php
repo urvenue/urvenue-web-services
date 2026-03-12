@@ -39,7 +39,8 @@ $uvmaptheme = ($uvreqmaptheme) ? "uws-" . $uvreqmaptheme : urvenue_ws_get_theme(
 // $uvmappopuptheme = (isset($_REQUEST["poptheme"])) ? "uws-" . uws_cleanup_var($_REQUEST["poptheme"]) : uws_get_popup_theme();
 // $uvmappopuptheme = (isset($_REQUEST["poptheme"])) ? "uws-" . urvenue_ws_cleanup_var($_REQUEST["poptheme"]) : urvenue_ws_get_popup_theme(); // Axl UWS-7416
 // $uvmappopuptheme = (isset($_REQUEST["poptheme"])) ? "uws-" . urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["poptheme"] ) ) : urvenue_ws_get_popup_theme(); // Axl UWS-7418
-$uvmappopuptheme = (isset($_REQUEST["poptheme"])) ? "uws-" . sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["poptheme"] ) ) ) : urvenue_ws_get_popup_theme(); // Axl UWS-7418
+// $uvmappopuptheme = (isset($_REQUEST["poptheme"])) ? "uws-" . sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["poptheme"] ) ) ) : urvenue_ws_get_popup_theme(); // Axl UWS-7418
+$uvmappopuptheme = (isset($_REQUEST["poptheme"])) ? "uws-" . urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["poptheme"] ) ) ) : urvenue_ws_get_popup_theme(); // Axl UWS-7416
 
 if($uvreqmaptheme) $uws_config_uitheme = $uvreqmaptheme;
 
