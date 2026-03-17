@@ -3,14 +3,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Plugin Name: UrVenue Web Services
- * Plugin URI:  https://wordpress.org/plugins/wp-urvenue-webservices/
+ * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
  * Description: UrVenue Integrations: Events, Inventory.
  * Version:     1.2.1
  * Author:      UrVenue / UWS, uvwebservices
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: wp-urvenue-webservices
+ * Text Domain: urvenue-web-services
  */
 
 /* UvCore Global Vars */
