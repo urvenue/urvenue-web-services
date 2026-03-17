@@ -374,13 +374,10 @@ function urvenue_ws_check_feed_response($uvfilecontent){ // Axl UWS-7416
 */
 // function uws_get_feed_array($uvfilecontent, $uvfeedfiletype){
 function urvenue_ws_get_feed_array($uvfilecontent, $uvfeedfiletype){ // Axl UWS-7416
-	if($uvfeedfiletype == "json"){
-		$uvfilecontent = json_decode($uvfilecontent, true);
-	}
-	else if($uvfeedfiletype == "pc8"){
-		eval($uvfilecontent);
-		$uvfilecontent = $xc8;
-	}
+
+	if ($uvfeedfiletype === "json" || $uvfeedfiletype === "pc8") {
+        return json_decode($uvfilecontent, true);
+    }
 	
 	return $uvfilecontent;
 }
