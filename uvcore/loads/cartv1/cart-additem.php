@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_core_lib, $uws_feeds_debug;
+global $urvenue_ws_core_lib, $urvenue_ws_feeds_debug;
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsinventory");
@@ -56,7 +56,7 @@ $uvforcenew = urvenue_ws_cleanup_request("forcenew"); // Axl UWS-7416
 $uvismixedmanagentid = 0;
 $uvwasadded = 0;
 
-if($uws_core_lib["inventory"]["manageentlock"] && $uvcartmanagementid){
+if($urvenue_ws_core_lib["inventory"]["manageentlock"] && $uvcartmanagementid){
     // $uvitemthevenueinfo = uws_get_venuelibinfo_byvenuecode($uvvenuecode);
     $uvitemthevenueinfo = urvenue_ws_get_venuelibinfo_byvenuecode($uvvenuecode); // Axl UWS-7416
 
@@ -161,7 +161,7 @@ else{
     // TESTING @Axl
     // curl_close($uvch);
 
-    if($uws_feeds_debug){
+    if($urvenue_ws_feeds_debug){
         print_r($uvitemdata);
         // uws_feed_debug_msg("Adding item to cart: $uvcartcode -- endpoint: $uvcartendurl");
         urvenue_ws_feed_debug_msg("Adding item to cart: $uvcartcode -- endpoint: $uvcartendurl"); // Axl UWS-7416
@@ -245,7 +245,7 @@ else{
     
     if($uvgotocheck and $uvcartcode and is_array($uvbkgcheckoutlinks) and $uvbkgcheckoutlinks["checkout-checkurl"])
         $uvreturn["redirect"] = $uvbkgcheckoutlinks["checkout-checkurl"];
-    else if($uws_core_lib["inventory"]["closepopupafteraddtocart"] and $uvwasadded)
+    else if($urvenue_ws_core_lib["inventory"]["closepopupafteraddtocart"] and $uvwasadded)
         $uvreturn["closepopup"] = 1;
 }
 

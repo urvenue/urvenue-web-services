@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_path;
+global $urvenue_ws_path;
 
 // @egt [UWS-7297]
 // $nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : ''; // Axl UWS-7418

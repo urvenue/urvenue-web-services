@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-//$uws_feeds_debug: if is 1 show debug messages
+//$urvenue_ws_feeds_debug: if is 1 show debug messages
 
 /*Get API by feed key from library or by url
     Requires: feedkey(key to identify API), uvterms(array with vars to send or expiration time in case it's direct url API)
@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 */
 // function uws_get_feed($uvfeedkey, $uvterms = ""){
 function urvenue_ws_get_feed($uvfeedkey, $uvterms = ""){ // Axl UWS-7416
-	global $uws_feeds_lib, $uws_feeds_debug;
+	global $urvenue_ws_feeds_lib, $urvenue_ws_feeds_debug;
 
 	if(preg_match("/^https?:\/\/.+$/", $uvfeedkey)){ //Check if is direct feed url
 		$uvfeedexpiration = $uvterms ? $uvterms : 86400; //If expiration is not present set to 1 day
@@ -17,15 +17,15 @@ function urvenue_ws_get_feed($uvfeedkey, $uvterms = ""){ // Axl UWS-7416
 		return urvenue_ws_call_feed($uvfeedkey, $uvfeedexpiration); // Axl UWS-7416
 	}
 	else{
-		if(array_key_exists($uvfeedkey, $uws_feeds_lib)){
+		if(array_key_exists($uvfeedkey, $urvenue_ws_feeds_lib)){
 			if($uvterms)
 				// return uws_get_lib_feed($uvfeedkey, $uvterms);
 				return urvenue_ws_get_lib_feed($uvfeedkey, $uvterms); // Axl UWS-7416
-			else if($uws_feeds_debug)
+			else if($urvenue_ws_feeds_debug)
                 // uws_feed_debug_msg("Parameters are required");
                 urvenue_ws_feed_debug_msg("Parameters are required"); // Axl UWS-7416
 		}
-		else if($uws_feeds_debug)
+		else if($urvenue_ws_feeds_debug)
             // uws_feed_debug_msg("Given feed key({$uvfeedkey}) does not exist");
             urvenue_ws_feed_debug_msg("Given feed key({$uvfeedkey}) does not exist"); // Axl UWS-7416
 	}
@@ -38,11 +38,11 @@ function urvenue_ws_get_feed($uvfeedkey, $uvterms = ""){ // Axl UWS-7416
 */
 // function uws_get_lib_feed($uvfeedkey, $uvterms){
 function urvenue_ws_get_lib_feed($uvfeedkey, $uvterms){ // Axl UWS-7416
-	global $uws_feeds_lib, $uws_feeds_path, $uws_core_lib;
+	global $urvenue_ws_feeds_lib, $urvenue_ws_feeds_path, $urvenue_ws_core_lib;
 	
     //Get API url and expiration
-	$uvlibfeedurl = $uws_feeds_lib[$uvfeedkey]["url"];
-	$uvlibfeedexpiration = $uws_feeds_lib[$uvfeedkey]["expiration"];
+	$uvlibfeedurl = $urvenue_ws_feeds_lib[$uvfeedkey]["url"];
+	$uvlibfeedexpiration = $urvenue_ws_feeds_lib[$uvfeedkey]["expiration"];
 	
     if(is_array($uvterms)){
 		$uvgetandchar = $uvparams = "";
@@ -54,9 +54,9 @@ function urvenue_ws_get_lib_feed($uvfeedkey, $uvterms){ // Axl UWS-7416
     else
         $uvparams = $uvterms;
 		
-	// $uvparams .= (uws_is_wordpress() && get_option('cacheword')) ? "&cacheword=" . get_option('cacheword') : "&cacheword=" . $uws_core_lib["system"]["cache-word"];
-	// $uvparams .= (uws_is_wordpress() && get_option('urvenue_ws_cacheword')) ? "&cacheword=" . get_option('urvenue_ws_cacheword') : "&cacheword=" . $uws_core_lib["system"]["cache-word"];
-	$uvparams .= (urvenue_ws_is_wordpress() && get_option('urvenue_ws_cacheword')) ? "&cacheword=" . get_option('urvenue_ws_cacheword') : "&cacheword=" . $uws_core_lib["system"]["cache-word"]; // Axl UWS-7416
+	// $uvparams .= (uws_is_wordpress() && get_option('cacheword')) ? "&cacheword=" . get_option('cacheword') : "&cacheword=" . $urvenue_ws_core_lib["system"]["cache-word"];
+	// $uvparams .= (uws_is_wordpress() && get_option('urvenue_ws_cacheword')) ? "&cacheword=" . get_option('urvenue_ws_cacheword') : "&cacheword=" . $urvenue_ws_core_lib["system"]["cache-word"];
+	$uvparams .= (urvenue_ws_is_wordpress() && get_option('urvenue_ws_cacheword')) ? "&cacheword=" . get_option('urvenue_ws_cacheword') : "&cacheword=" . $urvenue_ws_core_lib["system"]["cache-word"]; // Axl UWS-7416
 	$uvlibfeedurl = str_replace("{params}", $uvparams, $uvlibfeedurl);
 		
 	// return uws_call_feed($uvlibfeedurl, $uvlibfeedexpiration, $uvfeedkey);
@@ -69,7 +69,7 @@ function urvenue_ws_get_lib_feed($uvfeedkey, $uvterms){ // Axl UWS-7416
 */
 // function uws_call_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = ""){
 function urvenue_ws_call_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = ""){ // Axl UWS-7416
-	global $uws_feeds_path;
+	global $urvenue_ws_feeds_path;
 	
 	// if(uws_feeds_cache_is_writable() and $uvfeedexpiration > 0){
 	if(urvenue_ws_feeds_cache_is_writable() and $uvfeedexpiration > 0){ // Axl UWS-7416
@@ -88,7 +88,7 @@ function urvenue_ws_call_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = ""){ /
 */
 // function uws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = ""){
 function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = ""){ // Axl UWS-7416
-	global $uws_feeds_path, $uws_feeds_debug, $uws_config_manageentid;
+	global $urvenue_ws_feeds_path, $urvenue_ws_feeds_debug, $uws_config_manageentid;
 
 	$uvfileexpiresat = $uvfilelastupdate = "";
     $uvfeefilenof = $uvupdateinfofile = false;
@@ -106,9 +106,9 @@ function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = 
     $uvfeedhash = hash('md5', $uvfeedurl);
 
 	if($uws_config_manageentid and preg_match("/^\d+$/", $uws_config_manageentid))
-		$uvfeedcachefolder = $uws_feeds_path . "/" . $uws_config_manageentid;
+		$uvfeedcachefolder = $urvenue_ws_feeds_path . "/" . $uws_config_manageentid;
 	else
-		$uvfeedcachefolder = $uws_feeds_path . "/global";
+		$uvfeedcachefolder = $urvenue_ws_feeds_path . "/global";
     
 	$uvfeedfullpath = $uvfeedcachefolder . "/" . $uvfeedhash . "." . $uvfeedfiletype;
 
@@ -124,7 +124,7 @@ function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = 
 			$uvfilelastupdate = $uvnowtime;
 			$uvupdateinfofile = 1;
             
-            if($uws_feeds_debug)
+            if($urvenue_ws_feeds_debug)
                 // uws_feed_debug_msg("Cached feed refreshed: <a href='$uvfeedurl' target='_blank'>$uvfeedurl</a>");
                 urvenue_ws_feed_debug_msg("Cached feed refreshed: <a href='$uvfeedurl' target='_blank'>$uvfeedurl</a>"); // Axl UWS-7416
         }
@@ -133,7 +133,7 @@ function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = 
             // $uvfilecontent = uws_api_call($uvfeedfullpath, true); //Get local cache
             $uvfilecontent = urvenue_ws_api_call($uvfeedfullpath, true); //Get local cache // Axl UWS-7416
             
-            if($uws_feeds_debug)
+            if($urvenue_ws_feeds_debug)
                 // uws_feed_debug_msg("Feed called from cache: <a href='$uvfeedurl' target='_blank'>$uvfeedurl</a>");
                 urvenue_ws_feed_debug_msg("Feed called from cache: <a href='$uvfeedurl' target='_blank'>$uvfeedurl</a>"); // Axl UWS-7416
         }
@@ -145,7 +145,7 @@ function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = 
         $uvfilecontent = urvenue_ws_create_feed_file($uvfeedurl, $uvfeedfullpath, $uvfeedexpiration, $uvfeedkey ?? ""); // Axl UWS-7416
 		$uvupdateinfofile = 1;
         
-        if($uws_feeds_debug)
+        if($urvenue_ws_feeds_debug)
             // uws_feed_debug_msg("Cache feed created: <a href='$uvfeedurl' target='_blank'>$uvfeedurl</a>");
             urvenue_ws_feed_debug_msg("Cache feed created: <a href='$uvfeedurl' target='_blank'>$uvfeedurl</a>"); // Axl UWS-7416
     }
@@ -173,20 +173,20 @@ function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = 
 */
 // function uws_update_feeds_infofile($uvfeedinfo){
 function urvenue_ws_update_feeds_infofile($uvfeedinfo){ // Axl UWS-7416
-	global $uws_feeds_path, $uws_feedscleartime, $uws_config_manageentid, $uws_feeds_debug;
+	global $urvenue_ws_feeds_path, $urvenue_ws_feedscleartime, $uws_config_manageentid, $urvenue_ws_feeds_debug;
 
-	if($uws_feeds_path and is_array($uvfeedinfo)){
+	if($urvenue_ws_feeds_path and is_array($uvfeedinfo)){
 		$uvtimenow = time();
 
 		if($uws_config_manageentid and preg_match("/^\d+$/", $uws_config_manageentid))
-			$uvfeedcachefolder = $uws_feeds_path . "/" . $uws_config_manageentid;
+			$uvfeedcachefolder = $urvenue_ws_feeds_path . "/" . $uws_config_manageentid;
 		else
-			$uvfeedcachefolder = $uws_feeds_path . "/global";
+			$uvfeedcachefolder = $urvenue_ws_feeds_path . "/global";
 
 		$uvfeedsinfofilepath = $uvfeedcachefolder . "/cachedfeedsinfo.json";
 
 		if(!file_exists($uvfeedsinfofilepath)){//Check if feeds info file exists if not create it
-			$uvclearfeedstime = $uvtimenow + $uws_feedscleartime;
+			$uvclearfeedstime = $uvtimenow + $urvenue_ws_feedscleartime;
 			$uvdclearfeedstime = date("Y-m-d H:i:s", $uvclearfeedstime);
 		
 			$uvfeedsinfofilearray = array(
@@ -215,7 +215,7 @@ function urvenue_ws_update_feeds_infofile($uvfeedinfo){ // Axl UWS-7416
 
 			$fp = @fopen($uvfeedsinfofilepath, "w+");
 			if ($fp === false) {
-				if($uws_feeds_debug)
+				if($urvenue_ws_feeds_debug)
 					// uws_feed_debug_msg("Failed to open file for writing: $uvfeedsinfofilepath. Permission denied or path incorrect.<br>");
 					urvenue_ws_feed_debug_msg("Failed to open file for writing: $uvfeedsinfofilepath. Permission denied or path incorrect.<br>"); // Axl UWS-7416
 			} else {
@@ -322,16 +322,16 @@ function urvenue_ws_create_feed_file($uvfeedurl, $uvfeedfullpath, $uvfeedexpirat
 
 /**
  * Checks if the variable $uvfeedurl starts with the specified URL pattern.
- * The URL pattern is "https://$uws_envicode.urvenue.me/v"
+ * The URL pattern is "https://$urvenue_ws_envicode.urvenue.me/v"
  * 
  * @param string $uvfeedurl The URL to be checked.
  * @return bool Returns true if $uvfeedurl starts with the specified URL pattern, false otherwise.
  */
 // function uws_check_feed_url($uvfeedurl){
 function urvenue_ws_check_feed_url($uvfeedurl){ // Axl UWS-7416
-	global $uws_envicode;
+	global $urvenue_ws_envicode;
 
-	return preg_match("/^https:\/\/$uws_envicode.urvenue.me\/v/", $uvfeedurl);
+	return preg_match("/^https:\/\/$urvenue_ws_envicode.urvenue.me\/v/", $uvfeedurl);
 }
 
 /**
@@ -391,7 +391,7 @@ function urvenue_ws_get_feed_array($uvfilecontent, $uvfeedfiletype){ // Axl UWS-
 */
 // function uws_get_feed_nocache($uvfeedurl, $uvfeedkey = ""){
 function urvenue_ws_get_feed_nocache($uvfeedurl, $uvfeedkey = ""){ // Axl UWS-7416
-	global $uws_feeds_debug;
+	global $urvenue_ws_feeds_debug;
 
 	if((preg_match("/^.+\.(\w{3,4})$/", $uvfeedurl, $uvfeedurlparts) or preg_match("/^.+\.(\w{3,4})[\?].+$/", $uvfeedurl, $uvfeedurlparts))){
 		$uvfeedfiletype = $uvfeedurlparts[1];
@@ -401,7 +401,7 @@ function urvenue_ws_get_feed_nocache($uvfeedurl, $uvfeedkey = ""){ // Axl UWS-74
 		// $uvfilecontent = uws_get_feed_array($uvfilecontent, $uvfeedfiletype, $uvfeedkey);
 		$uvfilecontent = urvenue_ws_get_feed_array($uvfilecontent, $uvfeedfiletype, $uvfeedkey); // Axl UWS-7416
 		
-		if($uws_feeds_debug)
+		if($urvenue_ws_feeds_debug)
             // uws_feed_debug_msg("No cache feed called: $uvfeedurl");
             urvenue_ws_feed_debug_msg("No cache feed called: $uvfeedurl"); // Axl UWS-7416
 		
@@ -415,7 +415,7 @@ function urvenue_ws_get_feed_nocache($uvfeedurl, $uvfeedkey = ""){ // Axl UWS-74
 		// $uvfilecontent = uws_get_feed_array($uvfilecontent, $uvfeedfiletype, $uvfeedkey);
 		$uvfilecontent = urvenue_ws_get_feed_array($uvfilecontent, $uvfeedfiletype, $uvfeedkey); // Axl UWS-7416
 		
-		if($uws_feeds_debug)
+		if($urvenue_ws_feeds_debug)
             // uws_feed_debug_msg("No cache feed called: $uvfeedurl");
             urvenue_ws_feed_debug_msg("No cache feed called: $uvfeedurl"); // Axl UWS-7416
 		
@@ -426,14 +426,14 @@ function urvenue_ws_get_feed_nocache($uvfeedurl, $uvfeedkey = ""){ // Axl UWS-74
 /*Deletes all cache files*/
 // function uws_clean_cached_feeds(){
 function urvenue_ws_clean_cached_feeds(){ // Axl UWS-7416
-	global $uws_feeds_path, $uws_config_manageentid, $uws_feeds_debug;
+	global $urvenue_ws_feeds_path, $uws_config_manageentid, $urvenue_ws_feeds_debug;
 
-	if($uws_feeds_path){
-        //$uvcachedir = "$uws_feeds_path/global";
+	if($urvenue_ws_feeds_path){
+        //$uvcachedir = "$urvenue_ws_feeds_path/global";
 		if($uws_config_manageentid and preg_match("/^\d+$/", $uws_config_manageentid))
-			$uvcachedir = $uws_feeds_path . "/" . $uws_config_manageentid;
+			$uvcachedir = $urvenue_ws_feeds_path . "/" . $uws_config_manageentid;
 		else
-			$uvcachedir = $uws_feeds_path . "/global";
+			$uvcachedir = $urvenue_ws_feeds_path . "/global";
 
 		$uvfilescount = 0;
 
@@ -448,15 +448,15 @@ function urvenue_ws_clean_cached_feeds(){ // Axl UWS-7416
 				}
 			}
 
-            if(@rmdir($uvcachedir) and $uws_feeds_debug)
+            if(@rmdir($uvcachedir) and $urvenue_ws_feeds_debug)
 				// uws_feed_debug_msg("Cache folder deleted: $uvcachedir");
 				urvenue_ws_feed_debug_msg("Cache folder deleted: $uvcachedir"); // Axl UWS-7416
-			else if($uws_feeds_debug)
+			else if($urvenue_ws_feeds_debug)
 				// uws_feed_debug_msg("Cache folder could not be deleted: $uvcachedir");
 				urvenue_ws_feed_debug_msg("Cache folder could not be deleted: $uvcachedir"); // Axl UWS-7416
 		}
 		
-		if($uws_feeds_debug)
+		if($urvenue_ws_feeds_debug)
             // uws_feed_debug_msg("$uvfilescount cached files deleted");
             urvenue_ws_feed_debug_msg("$uvfilescount cached files deleted"); // Axl UWS-7416
 
@@ -498,11 +498,11 @@ function urvenue_ws_api_call($uvfileurl, $uvusefileget = false){ // Axl UWS-7416
 /*Check if local cache folder is writtable*/
 // function uws_feeds_cache_is_writable(){
 function urvenue_ws_feeds_cache_is_writable(){ // Axl UWS-7416
-    global $uws_feeds_path;
+    global $urvenue_ws_feeds_path;
 
     $uvfeedscacheiswritable = 0;
 
-    if($uws_feeds_path and is_writable($uws_feeds_path))
+    if($urvenue_ws_feeds_path and is_writable($urvenue_ws_feeds_path))
         $uvfeedscacheiswritable = 1;
 
     return $uvfeedscacheiswritable;
@@ -525,13 +525,13 @@ function urvenue_ws_feed_debug_msg($uwsmsg){ // Axl UWS-7416
  */
 // function uws_check_min_events($uvresponse, $uvfeedurl){
 function urvenue_ws_check_min_events($uvresponse, $uvfeedurl){ // Axl UWS-7416
-	global $uws_core_lib;
+	global $urvenue_ws_core_lib;
 	
 	// Check if $uvresponse is an array
 	if(!is_array($uvresponse) || !isset($uvresponse["uv"]["data"]["schedules"])) return false;
 	
 	// Get minimum events setting (default to 1 if not set)
-	$uvminevents = isset($uws_core_lib["notifications"]["minevents"]) ? (int)$uws_core_lib["notifications"]["minevents"] : 1;
+	$uvminevents = isset($urvenue_ws_core_lib["notifications"]["minevents"]) ? (int)$urvenue_ws_core_lib["notifications"]["minevents"] : 1;
 	
 	// If minevents is 0 or 1, skip validation
 	if($uvminevents <= 1) return true;
@@ -732,13 +732,13 @@ function urvenue_ws_validate_schedules_integrity($uvschedules, $uvfeedurl){ // A
  */
 // function uws_send_integration_alert($uvalerttype, $uvfeedurl = "", $uvdetails = array()){
 function urvenue_ws_send_integration_alert($uvalerttype, $uvfeedurl = "", $uvdetails = array()){ // Axl UWS-7416
-	global $uws_website_notices_types;
+	global $urvenue_ws_website_notices_types;
 	
-	if(!isset($uws_website_notices_types[$uvalerttype])){
+	if(!isset($urvenue_ws_website_notices_types[$uvalerttype])){
 		return false;
 	}
 	
-	$uvmessage = $uws_website_notices_types[$uvalerttype]["message_template"];
+	$uvmessage = $urvenue_ws_website_notices_types[$uvalerttype]["message_template"];
 	
 	// Get website URL
 	// $uvsite_url = function_exists('get_site_url') ? get_site_url() : ($_SERVER['HTTP_HOST'] ?? 'Unknown'); // Axl UWS-7418

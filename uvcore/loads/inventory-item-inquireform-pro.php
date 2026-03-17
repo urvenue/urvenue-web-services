@@ -1,13 +1,13 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_feeds_lib;
+global $urvenue_ws_feeds_lib;
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsinventory");
 urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
 
-$uvapiurl = $uws_feeds_lib["inventory-inquiry"]["url"];
+$uvapiurl = $urvenue_ws_feeds_lib["inventory-inquiry"]["url"];
 
 $uvdata = $_POST;
 $uvdata["phone"] = ($uvdata["phonecode"] and $uvdata["phonenumber"]) ? $uvdata["phonecode"] . "." . $uvdata["phonenumber"] : "";

@@ -11,7 +11,7 @@ $uvseventsviewmenu = urvenue_ws_adm_get_adminfieldhtml("events->calendar-viewmen
 $uvseventsonlyoneevent = urvenue_ws_adm_get_adminfieldhtml("events->calendar-onlyoneevent"); // Axl UWS-7416
 // $uvseventsmonthseltype = uvs_get_adminfieldhtml("events->calendar-monthseltype");
 $uvseventsmonthseltype = urvenue_ws_adm_get_adminfieldhtml("events->calendar-monthseltype"); // Axl UWS-7416
-$uvseventsinitialviewclass = (!is_array($uvs_core_lib["events"]) or !$uvs_core_lib["events"]["calendar-addlist"]) ? "uvs-fieldhide" : "";*/
+$uvseventsinitialviewclass = (!is_array($urvenue_ws_core_lib["events"]) or !$urvenue_ws_core_lib["events"]["calendar-addlist"]) ? "uvs-fieldhide" : "";*/
 
 // $uvseventsagendacolumns = uvs_get_adminfieldhtml("events->agenda-columns");
 $uvseventsagendacolumns = urvenue_ws_adm_get_adminfieldhtml("events->agenda-columns"); // Axl UWS-7416

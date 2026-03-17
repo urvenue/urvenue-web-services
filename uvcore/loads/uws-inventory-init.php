@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_proxies_lib;
+global $urvenue_ws_proxies_lib;
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsinventory");
@@ -44,10 +44,10 @@ if($uvcart){
 if(!is_array($uvinventorylist))
     $uvinventorylist = array();
 
-if(is_array($uws_core_lib) and (isset($uws_core_lib["system"]["checkouttype"])) and $uws_core_lib["system"]["checkouttype"] == "uvcheckout")
+if(is_array($urvenue_ws_core_lib) and (isset($urvenue_ws_core_lib["system"]["checkouttype"])) and $urvenue_ws_core_lib["system"]["checkouttype"] == "uvcheckout")
     $uvinventorylist["issidecheck"] = 1;
 
-$uvinventorylist["proxies"] = $uws_proxies_lib["inventory"];
+$uvinventorylist["proxies"] = $urvenue_ws_proxies_lib["inventory"];
 $uvinventorylist["cart"] = $uvcart;
 $uvinventorylist["templates"] = array();
 $uvinventorylist["eventdata"] = $uveventdata;

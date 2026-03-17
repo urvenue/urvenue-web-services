@@ -6,16 +6,16 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 */
 // function uws_get_experiences_date_filter($uvargs = ""){
 function urvenue_ws_get_experiences_date_filter($uvargs = ""){ // Axl UWS-7416
-    global $uws_core_lib, $uws_today;
+    global $urvenue_ws_core_lib, $urvenue_ws_today;
 
-    // $uvdate = uws_get_arg($uvargs, "date", $uws_today);
-    $uvdate = urvenue_ws_get_arg($uvargs, "date", $uws_today); // Axl UWS-7416
+    // $uvdate = uws_get_arg($uvargs, "date", $urvenue_ws_today);
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", $urvenue_ws_today); // Axl UWS-7416
 
     $uvinitialddate = date("F j, Y", strtotime($uvdate));
     $uvmaxdate = date("Y-m-d", strtotime($uvdate . " +3 months"));
 
     $uvcontrolshtml = "
-        <div class='uws-experiences-controls uws-integration' data-mindate='$uws_today' data-date='$uvdate' data-maxdate='$uvmaxdate'>
+        <div class='uws-experiences-controls uws-integration' data-mindate='$urvenue_ws_today' data-date='$uvdate' data-maxdate='$uvmaxdate'>
             <div class='uwsdatesel'>
                 <div class='uws-dropdown-cont uwshascalincon'>
                     <i class='uwsicon-calendar'></i>
@@ -38,11 +38,11 @@ function urvenue_ws_get_experiences_date_filter($uvargs = ""){ // Axl UWS-7416
 */
 // function uws_experiences($uvargs = ""){
 function urvenue_ws_experiences($uvargs = ""){ // Axl UWS-7416
-    global $uws_path, $uws_today;
+    global $urvenue_ws_path, $urvenue_ws_today;
 
     //$uvexperiences = uws_get_dummyapi("experiences");
-    // $uvdate = uws_get_arg($uvargs, "date", $uws_today);
-    $uvdate = urvenue_ws_get_arg($uvargs, "date", $uws_today); // Axl UWS-7416
+    // $uvdate = uws_get_arg($uvargs, "date", $urvenue_ws_today);
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", $urvenue_ws_today); // Axl UWS-7416
     // $uvexperiencesfilters = uws_get_experiences_filters($uvexperiences, $uvargs);
     $uvexperiencesfilters = urvenue_ws_get_experiences_filters($uvexperiences, $uvargs); // Axl UWS-7416
     // $uvinvitems = uws_inventory_microcode_items(array("date" => $uvdate));
@@ -137,7 +137,7 @@ function urvenue_ws_related_experiences($uvargs = ""){ // Axl UWS-7416
 */
 // function uws_get_experiences_list($uvexperiences){
 function urvenue_ws_get_experiences_list($uvexperiences){ // Axl UWS-7416
-    global $uws_core_lib;
+    global $urvenue_ws_core_lib;
 
     $uvexperienceslist = "";
 
@@ -152,7 +152,7 @@ function urvenue_ws_get_experiences_list($uvexperiences){ // Axl UWS-7416
             $uvitemurl = urvenue_ws_get_item_url($uvitem); // Axl UWS-7416
             $uvitimage = (isset($uvitem["image"])) ? $uvitem["image"] : "";
             $uvitdur = (isset($uvitem["activityduration"])) ? $uvitem["activityduration"] : "";
-            $uvddate = date($uws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"]));
+            $uvddate = date($urvenue_ws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"]));
 
             $uvcapacitylabel = ($uvitem["capacity"] > 1) ? "Guests" : "Guest";
             //$uvdstartdtime = ($uvitem["startuvtime"]) ? uws_get_formattime($uvitem["startuvtime"]) : "";

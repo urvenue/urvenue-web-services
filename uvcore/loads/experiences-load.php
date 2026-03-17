@@ -1,16 +1,16 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_path, $uws_today;
+global $urvenue_ws_path, $urvenue_ws_today;
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsexperiences");
 urvenue_ws_check_nonce("uwsexperiences"); // Axl UWS-7416
 
-include_once($uws_path . "/includes/experiences-functions.php");
+include_once($urvenue_ws_path . "/includes/experiences-functions.php");
 
-// $uvdate = uws_cleanup_request("date", $uws_today);
-$uvdate = urvenue_ws_cleanup_request("date", $uws_today); // Axl UWS-7416
+// $uvdate = uws_cleanup_request("date", $urvenue_ws_today);
+$uvdate = urvenue_ws_cleanup_request("date", $urvenue_ws_today); // Axl UWS-7416
 
 // $uvexperiences = uws_get_dummyapi("experiences");
 $uvexperiences = urvenue_ws_get_dummyapi("experiences"); // Axl UWS-7416

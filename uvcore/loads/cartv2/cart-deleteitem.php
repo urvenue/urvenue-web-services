@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_feeds_lib;
+global $urvenue_ws_feeds_lib;
 
 // $uvcartcode = uws_cleanup_request("cartcode");
 $uvcartcode = urvenue_ws_cleanup_request("cartcode"); // Axl UWS-7416
@@ -19,7 +19,7 @@ $uvcartcount = 1;
 
 if($uvcartcode and $uvitemcartcode){
 
-    $uvdeletecartendpoint = $uws_feeds_lib["cartv2-delete"]["url"];
+    $uvdeletecartendpoint = $urvenue_ws_feeds_lib["cartv2-delete"]["url"];
     $uvitemdata = array(
         "cartcode" => $uvcartcode,
         "itemcartcode" => $uvitemcartcode

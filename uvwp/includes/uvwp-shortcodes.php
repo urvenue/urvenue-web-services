@@ -2,7 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // Calendar
-function shortcode_uws_events($atts, $content = null) {
+// function shortcode_uws_events($atts, $content = null) {
+function urvenue_ws_shortcode_events($atts, $content = null) { // Axl UWS-7416
 	$uvvenuescodes = (isset($atts['venues'])) ? $atts['venues'] : "";
 	$uvvenuesinfilter = (isset($atts['venuesinfilter'])) ? $atts['venuesinfilter'] : "";
 	$uvnevents = (isset($atts['nevents'])) ? $atts['nevents'] : "";
@@ -69,10 +70,12 @@ function shortcode_uws_events($atts, $content = null) {
 
 	return $content;
 }
-add_shortcode("uws_events", "shortcode_uws_events");
+// add_shortcode("uws_events", "shortcode_uws_events");
+add_shortcode("uws_events", "urvenue_ws_shortcode_events"); // Axl UWS-7416
 
-function shortcode_uws_events_list($atts, $content = null) {
-	global $uws_core_lib;
+// function shortcode_uws_events_list($atts, $content = null) {
+function urvenue_ws_shortcode_events_list($atts, $content = null) { // Axl UWS-7416
+	global $urvenue_ws_core_lib;
 
 	$uvvenuescodes = (isset($atts['venues'])) ? $atts['venues'] : "";
 	$uvvenuesinfilter = (isset($atts['venuesinfilter'])) ? $atts['venuesinfilter'] : "";
@@ -144,7 +147,7 @@ function shortcode_uws_events_list($atts, $content = null) {
 
 	if($uvthisviewhtml) {
 		if ($useview == "agenda") {
-            $uvviewclass .= " uws-agenda-cols-" . $uws_core_lib["events"]["agenda-columns"];
+            $uvviewclass .= " uws-agenda-cols-" . $urvenue_ws_core_lib["events"]["agenda-columns"];
         }
 
         $uvthisviewhtml = "<div class='uws-integration uws-events-view uws-events-view-$useview uvsactive $uvviewclass'>$uvthisviewhtml</div>";
@@ -159,10 +162,12 @@ function shortcode_uws_events_list($atts, $content = null) {
 
 	return $content;
 }
-add_shortcode("uws_events_list", "shortcode_uws_events_list");
+// add_shortcode("uws_events_list", "shortcode_uws_events_list");
+add_shortcode("uws_events_list", "urvenue_ws_shortcode_events_list"); // Axl UWS-7416
 
 // Slider
-function shortcode_uws_events_slider($atts, $content = null)
+// function shortcode_uws_events_slider($atts, $content = null)
+function urvenue_ws_shortcode_events_slider($atts, $content = null) // Axl UWS-7416
 {
 	/*extract(shortcode_atts(array(
 		   "date" => date("Y-m-d"),
@@ -178,10 +183,12 @@ function shortcode_uws_events_slider($atts, $content = null)
 
 	return $content;
 }
-add_shortcode("uws_events_slider", "shortcode_uws_events_slider");
+// add_shortcode("uws_events_slider", "shortcode_uws_events_slider");
+add_shortcode("uws_events_slider", "urvenue_ws_shortcode_events_slider"); // Axl UWS-7416
 
 //Event
-function shrotcode_uws_event($atts, $content = null)
+// function shrotcode_uws_event($atts, $content = null)
+function urvenue_ws_shortcode_event($atts, $content = null) // Axl UWS-7416
 {
 	ob_start();
 
@@ -211,10 +218,12 @@ function shrotcode_uws_event($atts, $content = null)
 
 	return $content;
 }
-add_shortcode("uws_event", "shrotcode_uws_event");
+// add_shortcode("uws_event", "shrotcode_uws_event");
+add_shortcode("uws_event", "urvenue_ws_shortcode_event"); // Axl UWS-7416
 
 //Inventory Item Header
-function shrotcode_uws_inventory_item_header($atts, $content = null)
+// function shrotcode_uws_inventory_item_header($atts, $content = null)
+function urvenue_ws_shortcode_inventory_item_header($atts, $content = null) // Axl UWS-7416
 {
 	ob_start();
 
@@ -236,10 +245,12 @@ function shrotcode_uws_inventory_item_header($atts, $content = null)
 
 	return $content;
 }
-add_shortcode("uws_inventory_item_header", "shrotcode_uws_inventory_item_header");
+// add_shortcode("uws_inventory_item_header", "shrotcode_uws_inventory_item_header");
+add_shortcode("uws_inventory_item_header", "urvenue_ws_shortcode_inventory_item_header"); // Axl UWS-7416
 
 //Inventory Item Page
-function shrotcode_uws_inventory_item_page($atts, $content = null)
+// function shrotcode_uws_inventory_item_page($atts, $content = null)
+function urvenue_ws_shortcode_inventory_item_page($atts, $content = null) // Axl UWS-7416
 {
 	ob_start();
 
@@ -267,12 +278,14 @@ function shrotcode_uws_inventory_item_page($atts, $content = null)
 
 	return $content;
 }
-add_shortcode("uws_inventory_item_page", "shrotcode_uws_inventory_item_page");
+// add_shortcode("uws_inventory_item_page", "shrotcode_uws_inventory_item_page");
+add_shortcode("uws_inventory_item_page", "urvenue_ws_shortcode_inventory_item_page"); // Axl UWS-7416
 
 // Map
-function shortcode_uws_map($atts, $content = null)
+// function shortcode_uws_map($atts, $content = null)
+function urvenue_ws_shortcode_map($atts, $content = null) // Axl UWS-7416
 {
-	global $uws_path, $uws_today;
+	global $urvenue_ws_path, $urvenue_ws_today;
 	ob_start();
 
 	$venuecode = (isset($atts['venuecode'])) ? $atts['venuecode'] : "";
@@ -363,7 +376,7 @@ function shortcode_uws_map($atts, $content = null)
 			$uveventdata = array("hidevenuesel" => 1);
 	}
 
-	include_once($uws_path . "/includes/map-functions.php");
+	include_once($urvenue_ws_path . "/includes/map-functions.php");
 
 	// uws_map($uveventdata);
 	urvenue_ws_map($uveventdata); // Axl UWS-7416
@@ -373,22 +386,24 @@ function shortcode_uws_map($atts, $content = null)
 
 	return $content;
 }
-add_shortcode("uws_map", "shortcode_uws_map");
+// add_shortcode("uws_map", "shortcode_uws_map");
+add_shortcode("uws_map", "urvenue_ws_shortcode_map"); // Axl UWS-7416
 
 
-include_once($uvwp_path . "/includes/uvwp-shortcodes-experiences.php");
-include_once($uvwp_path . "/includes/uvwp-shortcodes-guests.php");
+include_once($urvenue_ws_uvwp_path . "/includes/uvwp-shortcodes-experiences.php");
+include_once($urvenue_ws_uvwp_path . "/includes/uvwp-shortcodes-guests.php");
 
 //Inquiry
-function shortcode_uws_inquiry($atts, $content = null)
+// function shortcode_uws_inquiry($atts, $content = null)
+function urvenue_ws_shortcode_inquiry($atts, $content = null) // Axl UWS-7416
 {
-	global $uws_path, $uws_core_lib;
+	global $urvenue_ws_path, $urvenue_ws_core_lib;
 	ob_start();
 
 	$uvvenuescodes = (isset($atts['venues'])) ? $atts['venues'] : "";
 	$uvredirect_to = (isset($atts['redirect_to'])) ? $atts['redirect_to'] : "";
 	$uvnamefields = (isset($atts['namefields'])) ? $atts['namefields'] : "";
-	$uvnamefields = (is_array($uws_core_lib) and isset($uws_core_lib["inventory"]["namefields"]) and $uws_core_lib["inventory"]["namefields"]) ? $uws_core_lib["inventory"]["namefields"] : $uvnamefields;
+	$uvnamefields = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["inventory"]["namefields"]) and $urvenue_ws_core_lib["inventory"]["namefields"]) ? $urvenue_ws_core_lib["inventory"]["namefields"] : $uvnamefields;
 	$uvopendays = (isset($atts['opendays'])) ? $atts['opendays'] : "";
 
 	//include styles
@@ -417,13 +432,15 @@ function shortcode_uws_inquiry($atts, $content = null)
 
 	return $content;
 }
-add_shortcode("uws_inquiry", "shortcode_uws_inquiry");
+// add_shortcode("uws_inquiry", "shortcode_uws_inquiry");
+add_shortcode("uws_inquiry", "urvenue_ws_shortcode_inquiry"); // Axl UWS-7416
 
 
 //[uws_inventorywidget
-function shortcode_uws_inventorywidget($atts, $content = null)
+// function shortcode_uws_inventorywidget($atts, $content = null)
+function urvenue_ws_shortcode_inventorywidget($atts, $content = null) // Axl UWS-7416
 {
-	global $uws_path;
+	global $urvenue_ws_path;
 	ob_start();
 
 	$uvvenuescodes = (isset($atts['venues'])) ? $atts['venues'] : "";
@@ -492,20 +509,22 @@ function shortcode_uws_inventorywidget($atts, $content = null)
 
 	return $content;
 }
-add_shortcode("uws_inventorywidget", "shortcode_uws_inventorywidget");
+// add_shortcode("uws_inventorywidget", "shortcode_uws_inventorywidget");
+add_shortcode("uws_inventorywidget", "urvenue_ws_shortcode_inventorywidget"); // Axl UWS-7416
 
 //[uws_packages]
-function shortcode_uws_packages($atts, $content = null)
+// function shortcode_uws_packages($atts, $content = null)
+function urvenue_ws_shortcode_packages($atts, $content = null) // Axl UWS-7416
 {
-	global $uws_path, $uws_today;
+	global $urvenue_ws_path, $urvenue_ws_today;
 	ob_start();
 
 	$uvvenuecode = (isset($atts['venuecode'])) ? $atts['venuecode'] : "";
 	$uvdate = (isset($atts['fromdate'])) ? $atts['fromdate'] : "";
 	$uvtodate = (isset($atts['todate'])) ? $atts['todate'] : "";
 
-	// If $uvdate is set and is in the past, use $uws_today instead
-	$uvdate = ($uvdate && strtotime($uvdate) < strtotime($uws_today)) ? $uws_today : $uvdate;
+	// If $uvdate is set and is in the past, use $urvenue_ws_today instead
+	$uvdate = ($uvdate && strtotime($uvdate) < strtotime($urvenue_ws_today)) ? $urvenue_ws_today : $uvdate;
 
 	//include styles
 	wp_enqueue_style('uwscore-styles');
@@ -537,4 +556,5 @@ function shortcode_uws_packages($atts, $content = null)
 
 	return $content;
 }
-add_shortcode("uws_packages", "shortcode_uws_packages");
+// add_shortcode("uws_packages", "shortcode_uws_packages");
+add_shortcode("uws_packages", "urvenue_ws_shortcode_packages"); // Axl UWS-7416

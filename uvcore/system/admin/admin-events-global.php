@@ -26,8 +26,8 @@ $uvseventsevpageupdateurl = urvenue_ws_adm_get_adminfieldhtml("events->global-up
 // $uvseventsdefeventurl = uvs_get_adminfieldhtml("events->global-defaulteventurl");
 $uvseventsdefeventurl = urvenue_ws_adm_get_adminfieldhtml("events->global-defaulteventurl"); // Axl UWS-7416
 
-// $uvseventsviews = uvs_get_eventsviews($uvs_core_lib["events"]["eventspage-views"]);
-$uvseventsviews = urvenue_ws_adm_get_eventsviews($uvs_core_lib["events"]["eventspage-views"]); // Axl UWS-7416
+// $uvseventsviews = uvs_get_eventsviews($urvenue_ws_core_lib["events"]["eventspage-views"]);
+$uvseventsviews = urvenue_ws_adm_get_eventsviews($urvenue_ws_core_lib["events"]["eventspage-views"]); // Axl UWS-7416
 ?>
 
 <div id="uvs-admin-events-global" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['events-global']; */ echo esc_attr( $uvs_admin_optstabs_state['events-global'] ); ?>">

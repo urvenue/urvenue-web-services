@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_core_lib;
+global $urvenue_ws_core_lib;
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsinventory");
@@ -44,15 +44,15 @@ $uvdefaultprivacylink = "https://www.urvenue.com/legal/privacy-policy/";
 $uvdefaulttermslink = "https://www.urvenue.com/legal/terms-conditions/";
 
 // Privacy Policy link
-// $uvprivacylink = (is_array($uws_core_lib) and isset($uws_core_lib["pages"]["privacy"]) and $uws_core_lib["pages"]["privacy"] and uws_is_wordpress()) ? get_permalink($uws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink;
-$uvprivacylink = (is_array($uws_core_lib) and isset($uws_core_lib["pages"]["privacy"]) and $uws_core_lib["pages"]["privacy"] and urvenue_ws_is_wordpress()) ? get_permalink($uws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink; // Axl UWS-7416
+// $uvprivacylink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["privacy"]) and $urvenue_ws_core_lib["pages"]["privacy"] and uws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink;
+$uvprivacylink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["privacy"]) and $urvenue_ws_core_lib["pages"]["privacy"] and urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink; // Axl UWS-7416
 
 // Terms link
-// $uvtermslink = (is_array($uws_core_lib) and isset($uws_core_lib["pages"]["terms"]) and $uws_core_lib["pages"]["terms"] and uws_is_wordpress()) ? get_permalink($uws_core_lib["pages"]["terms"]) : $uvdefaulttermslink;
-$uvtermslink = (is_array($uws_core_lib) and isset($uws_core_lib["pages"]["terms"]) and $uws_core_lib["pages"]["terms"] and urvenue_ws_is_wordpress()) ? get_permalink($uws_core_lib["pages"]["terms"]) : $uvdefaulttermslink; // Axl UWS-7416
+// $uvtermslink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["terms"]) and $urvenue_ws_core_lib["pages"]["terms"] and uws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["terms"]) : $uvdefaulttermslink;
+$uvtermslink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["terms"]) and $urvenue_ws_core_lib["pages"]["terms"] and urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["terms"]) : $uvdefaulttermslink; // Axl UWS-7416
 
 // Name fields/Party Name
-$uvnamefields = (is_array($uws_core_lib) and isset($uws_core_lib["inventory"]["namefields"]) and $uws_core_lib["inventory"]["namefields"]) ? $uws_core_lib["inventory"]["namefields"] : "";
+$uvnamefields = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["inventory"]["namefields"]) and $urvenue_ws_core_lib["inventory"]["namefields"]) ? $urvenue_ws_core_lib["inventory"]["namefields"] : "";
 $uvpartyfield = "
     <div class='uws-inputcont'>
         <label for='uwsinqpartyname'>Party Name*</label>

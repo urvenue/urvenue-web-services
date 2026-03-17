@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 include_once("system/uvs-admin-init.php");
 	
-$uvsinitialtab = "dashboard";
+$urvenue_ws_initialtab = "dashboard";
 
 ?>
 
@@ -63,8 +63,8 @@ $uvsinitialtab = "dashboard";
 	</div>
 	
 	<div class="uvs-content">
-		<?php if($uvs_libexits){
-			include_once($uvs_path . "/system/admin/admin-box.php");
+		<?php if($urvenue_ws_libexits){
+			include_once($urvenue_ws_uvs_path . "/system/admin/admin-box.php");
 		} else{ ?>
 			<div class="uvs-boxpanel uvs-blockcenter uvs-maxw800">
 				<p class="uvs-text-center">Sorry the library is empty, start the initial setup or contact support@urvenue.com</p>

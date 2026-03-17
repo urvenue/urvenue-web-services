@@ -4,13 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 preg_match("#^\d+(\.\d+)*#", PHP_VERSION, $uvsphpvermatch);
 $uvsphpversion = $uvsphpvermatch[0];
 
-$uvslibfile = $uvs_core_lib["system"]["library"];
+$uvslibfile = $urvenue_ws_core_lib["system"]["library"];
 if(is_writable($uvslibfile))
 	$uvslibiswrhtml = "<span class='uvsok'>Yes</span>";
 else
 	$uvslibiswrhtml = "<span class='uvsbad'>No</span>";
 
-if($uvs_feeds_path and is_writable($uvs_feeds_path))
+if($urvenue_ws_feeds_path and is_writable($urvenue_ws_feeds_path))
 	$uvsfeedsiswrhtml = "<span class='uvsok'>Working Properly</span>";
 else
 	$uvsfeedsiswrhtml = "<span class='uvsbad'>Not Working</span>";
@@ -26,13 +26,13 @@ $uvcorelayer = (urvenue_ws_adm_is_wordpress()) ? "Wordpress" : "Base"; // Axl UW
 	<div class="uvs-admin-opt-space"></div>
 	<div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">UWS Version:</div>
-		<div class="uvsvalue"><strong><?php /* Old: echo $uws_core_version; */ echo esc_html( $uws_core_version ); ?></strong></div>
+		<div class="uvsvalue"><strong><?php /* Old: echo $urvenue_ws_adm_core_version; */ echo esc_html( $urvenue_ws_adm_core_version ); ?></strong></div>
 	</div>
 	<?php /* Old: if(!uvs_is_wordpress()){ */ ?>
 	<?php if(!urvenue_ws_adm_is_wordpress()){  // Axl UWS-7416 ?>
 		<div class="uvs-infolist-item uvs-clearfix">
 			<div class="uvsname">UvCore URL</div>
-			<div class="uvsvalue"><?php /* Old: echo $uvs_url; */ echo esc_html( $uvs_url ); ?></div>
+			<div class="uvsvalue"><?php /* Old: echo $urvenue_ws_url; */ echo esc_html( $urvenue_ws_url ); ?></div>
 		</div>
 	<?php } ?>
 	<div class="uvs-infolist-item uvs-clearfix">

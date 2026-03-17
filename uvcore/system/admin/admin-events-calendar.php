@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $uvseventscalonlylist = urvenue_ws_adm_get_adminfieldhtml("events->calendar-alwayslist"); // Axl UWS-7416
 //$uvseventsmonthseltype = uvs_get_adminfieldhtml("events->calendar-monthseltype");
 
-//$uvseventsinitialviewclass = (!is_array($uvs_core_lib["events"]) or !$uvs_core_lib["events"]["calendar-addlist"]) ? "uvs-fieldhide" : "";
+//$uvseventsinitialviewclass = (!is_array($urvenue_ws_core_lib["events"]) or !$urvenue_ws_core_lib["events"]["calendar-addlist"]) ? "uvs-fieldhide" : "";
 
 ?>
 

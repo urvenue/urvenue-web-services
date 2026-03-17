@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_proxies_lib;
+global $urvenue_ws_proxies_lib;
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsinventory");

@@ -50,7 +50,7 @@ if (is_array($uvevents) && count($uvevents) > 0) {
             $uvdstarttimediv = ($uvdstarttime) ? "<div class='uwsdtime'>" . $uvdstarttime . "</div>" : "";
             
             $uvusedate = $uvevent["date"];
-            $uvddate = date($uws_core_lib["events"]["global-dateformat"], strtotime($uvusedate));
+            $uvddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvusedate));
             
             if (!isset($uvdates[$uvusedate])) {
                 $uvdates[$uvusedate] = array();

@@ -1,22 +1,22 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-global $uvs_adminbox_tabs;
+global $urvenue_ws_adm_adminbox_tabs;
 
-// $uvs_admin_optstabs_state = uvs_get_boxtabs_state($uvsinitialtab);
-$uvs_admin_optstabs_state = urvenue_ws_adm_get_boxtabs_state($uvsinitialtab); // Axl UWS-7416
-$uvsboxpanelclass = (is_array($uvs_core_lib) and !$uvs_core_lib["system"]["apikey"]) ? "uvapiconfig" : "";
+// $uvs_admin_optstabs_state = uvs_get_boxtabs_state($urvenue_ws_initialtab);
+$uvs_admin_optstabs_state = urvenue_ws_adm_get_boxtabs_state($urvenue_ws_initialtab); // Axl UWS-7416
+$uvsboxpanelclass = (is_array($urvenue_ws_core_lib) and !$urvenue_ws_core_lib["system"]["apikey"]) ? "uvapiconfig" : "";
 
 ?>
 
 <?php // @Axl ?>
 <?php /* old: <div class="uvs-boxpanel uvs-boxpanel-admin [echo $uvsboxpanelclass]"> */ ?>
-<?php /* old: <form id="uvs-uvcoreadmin-form" action="[echo $uvs_admin_lib[loads][adminsave]]"> */ ?>
-<?php /* old: <div class="uvs-adminbox-corever">[echo $uws_core_version]</div> */ ?>
+<?php /* old: <form id="uvs-uvcoreadmin-form" action="[echo $urvenue_ws_adm_admin_lib[loads][adminsave]]"> */ ?>
+<?php /* old: <div class="uvs-adminbox-corever">[echo $urvenue_ws_adm_core_version]</div> */ ?>
 <div class="uvs-boxpanel uvs-boxpanel-admin <?php echo esc_attr( $uvsboxpanelclass ); ?>">
-	<form id="uvs-uvcoreadmin-form" action="<?php echo esc_url( $uvs_admin_lib["loads"]["adminsave"] ); ?>">
+	<form id="uvs-uvcoreadmin-form" action="<?php echo esc_url( $urvenue_ws_adm_admin_lib["loads"]["adminsave"] ); ?>">
 		<div class="uvs-adminbox-head uvs-clearfix">
 			<div class="uvs-adminbox-head-title">UrVenue Web Services</div>
-			<div class="uvs-adminbox-corever"><?php echo esc_html( $uws_core_version ); ?></div>
+			<div class="uvs-adminbox-corever"><?php echo esc_html( $urvenue_ws_adm_core_version ); ?></div>
 		</div>
 <?php // @Axl End ?>
 
@@ -25,7 +25,7 @@ $uvsboxpanelclass = (is_array($uvs_core_lib) and !$uvs_core_lib["system"]["apike
 		<input class="uvsjson" type="hidden" name="uvsp_adminsave_nonce" value="<?php echo esc_attr( wp_create_nonce('uvsp_adminsave_action') ); ?>">
 		
 		<div class="uvs-adminbox-credentials">
-			<?php include_once($uvs_path . "/system/admin/admin-apiconfig.php"); ?>
+			<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-apiconfig.php"); ?>
 		</div>
 
 		<div class="uvs-adminbox-admcols uvs-clearfix">
@@ -63,34 +63,34 @@ $uvsboxpanelclass = (is_array($uvs_core_lib) and !$uvs_core_lib["system"]["apike
 			<div class="uvs-adminbox-optionsarea">
 				<div class="uvs-adminbox-optionsarea-inner">
 					<?php // @Axl ?>
-					<?php /* old: <input ... value="[echo $uvs_core_lib[system][path]]"> */ ?>
-					<?php /* old: <input ... value="[echo $uvs_url]"> */ ?>
-					<?php /* old: <input ... value="[echo $uvs_core_lib[system][library]]"> */ ?>
-					<input class="uvsjson" type="hidden" name="system[path]" value="<?php echo esc_attr( $uvs_core_lib["system"]["path"] ); ?>">
-					<input class="uvsjson" type="hidden" name="system[url]" value="<?php echo esc_attr( $uvs_url ); ?>">
-					<input class="uvsjson" type="hidden" name="system[library]" value="<?php echo esc_attr( $uvs_core_lib["system"]["library"] ); ?>">
+					<?php /* old: <input ... value="[echo $urvenue_ws_core_lib[system][path]]"> */ ?>
+					<?php /* old: <input ... value="[echo $urvenue_ws_url]"> */ ?>
+					<?php /* old: <input ... value="[echo $urvenue_ws_core_lib[system][library]]"> */ ?>
+					<input class="uvsjson" type="hidden" name="system[path]" value="<?php echo esc_attr( $urvenue_ws_core_lib["system"]["path"] ); ?>">
+					<input class="uvsjson" type="hidden" name="system[url]" value="<?php echo esc_attr( $urvenue_ws_url ); ?>">
+					<input class="uvsjson" type="hidden" name="system[library]" value="<?php echo esc_attr( $urvenue_ws_core_lib["system"]["library"] ); ?>">
 					<?php // @Axl End ?>
 
-					<?php include_once($uvs_path . "/system/admin/admin-dashboard.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-events-global.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-events-calendar.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-events-agenda.php"); ?>
-					<?php //include_once($uvs_path . "/system/admin/admin-events-list.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-events-slider.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-events-event.php"); ?>
-					<?php //include_once($uvs_path . "/system/admin/admin-artists-artistpage.php"); ?>
-					<?php //include_once($uvs_path . "/system/admin/admin-artists-artistslist.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-flyers.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-map.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-pages.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-venues.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-inventory.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-notifications.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-ui-color-palette.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-seo.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-cache.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-api.php"); ?>
-					<?php include_once($uvs_path . "/system/admin/admin-status.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-dashboard.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-events-global.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-events-calendar.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-events-agenda.php"); ?>
+					<?php //include_once($urvenue_ws_uvs_path . "/system/admin/admin-events-list.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-events-slider.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-events-event.php"); ?>
+					<?php //include_once($urvenue_ws_uvs_path . "/system/admin/admin-artists-artistpage.php"); ?>
+					<?php //include_once($urvenue_ws_uvs_path . "/system/admin/admin-artists-artistslist.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-flyers.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-map.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-pages.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-venues.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-inventory.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-notifications.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-ui-color-palette.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-seo.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-cache.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-api.php"); ?>
+					<?php include_once($urvenue_ws_uvs_path . "/system/admin/admin-status.php"); ?>
 				</div>
 			</div>
 		</div>

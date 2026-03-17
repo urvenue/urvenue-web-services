@@ -2,17 +2,17 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //print_r($_REQUEST);
-//print_r($uvs_core_lib);
+//print_r($urvenue_ws_core_lib);
 
 // $uvapikey = $_REQUEST["apikey"]; // Axl UWS-7418
 $uvapikey = isset( $_REQUEST["apikey"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["apikey"] ) ) : ''; // Axl UWS-7418
 // $uvmicrocode = $_REQUEST["microcode"]; // Axl UWS-7418
 $uvmicrocode = isset( $_REQUEST["microcode"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["microcode"] ) ) : ''; // Axl UWS-7418
-$uvsourcecode = $uvs_core_lib["system"]["sourcecode"];
-$uvsourceloc = $uvs_core_lib["system"]["sourceloc"];
+$uvsourcecode = $urvenue_ws_core_lib["system"]["sourcecode"];
+$uvsourceloc = $urvenue_ws_core_lib["system"]["sourceloc"];
 
-$uvsmicrocodeurl = $uvs_admin_feeds["microsite"];
-$uvsmicrocodeurl = str_replace("{envicode}", $uvs_envicode, $uvsmicrocodeurl);
+$uvsmicrocodeurl = $urvenue_ws_adm_admin_feeds["microsite"];
+$uvsmicrocodeurl = str_replace("{envicode}", $urvenue_ws_adm_envicode, $uvsmicrocodeurl);
 $uvsmicrocodeurl = str_replace("{apikey}", $uvapikey, $uvsmicrocodeurl);
 $uvsmicrocodeurl = str_replace("{sourcecode}", $uvsourcecode, $uvsmicrocodeurl);
 $uvsmicrocodeurl = str_replace("{sourceloc}", $uvsourceloc, $uvsmicrocodeurl);

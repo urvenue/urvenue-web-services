@@ -1,9 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_path, $uws_config_uitheme;
+global $urvenue_ws_path, $uws_config_uitheme;
 
-include_once($uws_path . "/includes/map-functions.php");
+include_once($urvenue_ws_path . "/includes/map-functions.php");
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsmap");

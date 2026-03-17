@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_feeds_lib;
+global $urvenue_ws_feeds_lib;
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsreservations");

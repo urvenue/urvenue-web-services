@@ -1,14 +1,14 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if($uvs_libexits)
-	include_once($uvs_path . "/system/uvs-admin-init.php");
+if($urvenue_ws_libexits)
+	include_once($urvenue_ws_uvs_path . "/system/uvs-admin-init.php");
 
 // $uvsve = isset($uvsve) ? $uvsve : $_REQUEST["uvsve"]; // Axl UWS-7418
 $uvsve = isset($uvsve) ? $uvsve : ( isset( $_REQUEST["uvsve"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsve"] ) ) : '' ); // Axl UWS-7418
 // $uvsnv = isset($uvsnv) ? $uvsnv : $_REQUEST["uvsnv"]; // Axl UWS-7418
 $uvsnv = isset($uvsnv) ? $uvsnv : ( isset( $_REQUEST["uvsnv"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsnv"] ) ) : '' ); // Axl UWS-7418
-$uvsvenueinfofeedurl = $uvs_admin_feeds["venueinfo"];
+$uvsvenueinfofeedurl = $urvenue_ws_adm_admin_feeds["venueinfo"];
 $uvsvenueinfofeedurl = str_replace("{params}", "ve" . $uvsve, $uvsvenueinfofeedurl);
 
 // $uvsvenueinfofeed = uvs_pullfeed($uvsvenueinfofeedurl);

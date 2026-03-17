@@ -52,14 +52,14 @@ if(isset($_REQUEST['uwsclearthrottle'])) urvenue_ws_clear_notice_throttling(); /
 
 // function uws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){
 function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){ // Axl UWS-7416
-    global $uws_website_notices_types, $uws_core_lib;
+    global $urvenue_ws_website_notices_types, $urvenue_ws_core_lib;
 
-    $uvenablenotice = (isset($uws_core_lib["notifications"]["enable"]) and $uws_core_lib["notifications"]["enable"]) ? $uws_core_lib["notifications"]["enable"] : 0;
-    $uvwebhook = (isset($uws_core_lib["notifications"]["webhook"]) and $uws_core_lib["notifications"]["webhook"]) ? $uws_core_lib["notifications"]["webhook"] : "";
+    $uvenablenotice = (isset($urvenue_ws_core_lib["notifications"]["enable"]) and $urvenue_ws_core_lib["notifications"]["enable"]) ? $urvenue_ws_core_lib["notifications"]["enable"] : 0;
+    $uvwebhook = (isset($urvenue_ws_core_lib["notifications"]["webhook"]) and $urvenue_ws_core_lib["notifications"]["webhook"]) ? $urvenue_ws_core_lib["notifications"]["webhook"] : "";
 
     if($uvwebhook and $uvenablenotice){
         // Check if first parameter is a known alert type
-        if (isset($uws_website_notices_types[$uvnoticemsg])) {
+        if (isset($urvenue_ws_website_notices_types[$uvnoticemsg])) {
             $uvnoticetype = $uvnoticemsg;
             
             // If second parameter is a processed message (string), use it
@@ -67,9 +67,9 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
             if(is_string($uvnoticedetails) && !empty($uvnoticedetails)){
                 $uvnoticemsg = $uvnoticedetails;
             } else {
-                $uvnoticemsg = isset($uws_website_notices_types[$uvnoticemsg]['message_template']) 
-                    ? $uws_website_notices_types[$uvnoticemsg]['message_template'] 
-                    : $uws_website_notices_types['default']['message_template'];
+                $uvnoticemsg = isset($urvenue_ws_website_notices_types[$uvnoticemsg]['message_template']) 
+                    ? $urvenue_ws_website_notices_types[$uvnoticemsg]['message_template'] 
+                    : $urvenue_ws_website_notices_types['default']['message_template'];
                 // $uvsiteurl = function_exists('get_site_url') ? get_site_url() : $_SERVER['HTTP_HOST']; // Axl UWS-7418
                 $uvsiteurl = function_exists('get_site_url') ? get_site_url() : sanitize_text_field( wp_unslash( isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : '' ) ); // Axl UWS-7418
                 $uvnoticemsg = str_replace('{website_url}', $uvsiteurl, $uvnoticemsg);

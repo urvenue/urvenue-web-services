@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_feeds_debug, $uws_actionlinks_lib, $uws_feeds_lib;
+global $urvenue_ws_feeds_debug, $urvenue_ws_actionlinks_lib, $urvenue_ws_feeds_lib;
 
 // @egt [UWS-7297]
 // uws_check_nonce("uwsinventory");
@@ -64,7 +64,7 @@ $uvitemdata = array(
 
 if($uvmastercode){
     if($uvcartcode){
-        $uvaddcartendpoint = $uws_feeds_lib["cartv2-add"]["url"];
+        $uvaddcartendpoint = $urvenue_ws_feeds_lib["cartv2-add"]["url"];
         $uvitemdata["cartcode"] = $uvcartcode;
         $uvitemdatabuild = http_build_query($uvitemdata, 'flags_');
 
@@ -87,7 +87,7 @@ if($uvmastercode){
         // TESTING @Axl
         // curl_close($uvch);
 
-        if($uws_feeds_debug){
+        if($urvenue_ws_feeds_debug){
             print_r($uvitemdata);
             // uws_feed_debug_msg("Adding item to cart: $uvcartcode -- endpoint: $uvaddcartendpoint");
             urvenue_ws_feed_debug_msg("Adding item to cart: $uvcartcode -- endpoint: $uvaddcartendpoint"); // Axl UWS-7416
@@ -95,7 +95,7 @@ if($uvmastercode){
         }
     }
     else{
-        $uvcreatecartendpoint = $uws_feeds_lib["cartv2-create"]["url"];
+        $uvcreatecartendpoint = $urvenue_ws_feeds_lib["cartv2-create"]["url"];
         // $uvrequestinfo = uws_get_requestinfo();
         $uvrequestinfo = urvenue_ws_get_requestinfo(); // Axl UWS-7416
 
@@ -122,7 +122,7 @@ if($uvmastercode){
         // TESTING @Axl
         // curl_close($uvch);
 
-        if($uws_feeds_debug){
+        if($urvenue_ws_feeds_debug){
             print_r($uvitemdata);
             // uws_feed_debug_msg("Creating new cart, endpoint: $uvcreatecartendpoint");
             urvenue_ws_feed_debug_msg("Creating new cart, endpoint: $uvcreatecartendpoint"); // Axl UWS-7416
