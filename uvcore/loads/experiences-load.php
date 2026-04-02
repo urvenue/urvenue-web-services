@@ -9,26 +9,26 @@ urvenue_ws_check_nonce("uwsexperiences"); // Axl UWS-7416
 
 include_once($urvenue_ws_path . "/includes/experiences-functions.php");
 
-// $uvdate = uws_cleanup_request("date", $urvenue_ws_today);
-$uvdate = urvenue_ws_cleanup_request("date", $urvenue_ws_today); // Axl UWS-7416
+// $urvenue_ws_date = uws_cleanup_request("date", $urvenue_ws_today);
+$urvenue_ws_date = urvenue_ws_cleanup_request("date", $urvenue_ws_today); // Axl UWS-7416
 
-// $uvexperiences = uws_get_dummyapi("experiences");
-$uvexperiences = urvenue_ws_get_dummyapi("experiences"); // Axl UWS-7416
-// $uvinvitems = uws_inventory_microcode_items(array("date" => $uvdate));
-$uvinvitems = urvenue_ws_inventory_microcode_items(array("date" => $uvdate)); // Axl UWS-7416
+// $urvenue_ws_experiences = uws_get_dummyapi("experiences");
+$urvenue_ws_experiences = urvenue_ws_get_dummyapi("experiences"); // Axl UWS-7416
+// $urvenue_ws_invitems = uws_inventory_microcode_items(array("date" => $urvenue_ws_date));
+$urvenue_ws_invitems = urvenue_ws_inventory_microcode_items(array("date" => $urvenue_ws_date)); // Axl UWS-7416
 //Add real items to dummy filters api --- shound connect the filters latter
-$uvexperiences["items"] = $uvinvitems;
-// $uvexperienceslist = uws_get_experiences_list($uvexperiences);
-$uvexperienceslist = urvenue_ws_get_experiences_list($uvexperiences); // Axl UWS-7416
+$urvenue_ws_experiences["items"] = $urvenue_ws_invitems;
+// $urvenue_ws_experienceslist = uws_get_experiences_list($urvenue_ws_experiences);
+$urvenue_ws_experienceslist = urvenue_ws_get_experiences_list($urvenue_ws_experiences); // Axl UWS-7416
 
-$uvreturn = array(
-    "list" => $uvexperienceslist
+$urvenue_ws_return = array(
+    "list" => $urvenue_ws_experienceslist
 );
     
 // @Axl
-// $uvreturnjson = json_encode($uvreturn);
-$uvreturnjson = wp_json_encode($uvreturn);
+// $urvenue_ws_returnjson = json_encode($urvenue_ws_return);
+$urvenue_ws_returnjson = wp_json_encode($urvenue_ws_return);
 // @Axl End
 header('Content-Type: application/json');
-// echo($uvreturnjson);
-echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
+// echo($urvenue_ws_returnjson);
+echo( $urvenue_ws_returnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

@@ -1,13 +1,16 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-// $uvsinpenable = uvs_get_adminfieldhtml("notifications->enable");
-$uvsinpenable = urvenue_ws_adm_get_adminfieldhtml("notifications->enable"); // Axl UWS-7416
-// $uvsinpwebhook = uvs_get_adminfieldhtml("notifications->webhook");
-$uvsinpwebhook = urvenue_ws_adm_get_adminfieldhtml("notifications->webhook"); // Axl UWS-7416
-// $uvsinpminevents = uvs_get_adminfieldhtml("notifications->minevents");
-$uvsinpminevents = urvenue_ws_adm_get_adminfieldhtml("notifications->minevents"); // Axl UWS-7416
+// $urvenue_ws_inpenable = uvs_get_adminfieldhtml("notifications->enable");
+// $urvenue_ws_inpenable = urvenue_ws_adm_get_adminfieldhtml("notifications->enable"); // Axl UWS-7416
+$urvenue_ws_inpenable = urvenue_ws_adm_get_adminfieldhtml("notifications->enable"); // Axl UWS-7634
+// $urvenue_ws_inpwebhook = uvs_get_adminfieldhtml("notifications->webhook");
+// $urvenue_ws_inpwebhook = urvenue_ws_adm_get_adminfieldhtml("notifications->webhook"); // Axl UWS-7416
+$urvenue_ws_inpwebhook = urvenue_ws_adm_get_adminfieldhtml("notifications->webhook"); // Axl UWS-7634
+// $urvenue_ws_inpminevents = uvs_get_adminfieldhtml("notifications->minevents");
+// $urvenue_ws_inpminevents = urvenue_ws_adm_get_adminfieldhtml("notifications->minevents"); // Axl UWS-7416
+$urvenue_ws_inpminevents = urvenue_ws_adm_get_adminfieldhtml("notifications->minevents"); // Axl UWS-7634
 ?>
-<div id="uvs-admin-notifications" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['notifications']; */ echo esc_attr( $uvs_admin_optstabs_state['notifications'] ); ?>">
+<div id="uvs-admin-notifications" class="uvs-admin-opt-section <?php /* Old: echo $urvenue_ws_admin_optstabs_state['notifications']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['notifications'] ); ?>">
 	<div class="uvs-admin-opt-title">Events Notifications</div>
 	<div class="uvs-admin-opt-subtitle">Configure events alert notifications.</div>
 	<div class="uvs-admin-opt-space"></div>
@@ -18,9 +21,9 @@ $uvsinpminevents = urvenue_ws_adm_get_adminfieldhtml("notifications->minevents")
 		</div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvsinpenable; */ ?>
-			<?php /* Old: echo wp_kses( $uvsinpenable, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvsinpenable, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_inpenable; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_inpenable, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_inpenable, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -31,9 +34,9 @@ $uvsinpminevents = urvenue_ws_adm_get_adminfieldhtml("notifications->minevents")
 		</div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvsinpwebhook; */ ?>
-			<?php /* Old: echo wp_kses( $uvsinpwebhook, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvsinpwebhook, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_inpwebhook; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_inpwebhook, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_inpwebhook, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -44,9 +47,9 @@ $uvsinpminevents = urvenue_ws_adm_get_adminfieldhtml("notifications->minevents")
 		</div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvsinpminevents; */ ?>
-			<?php /* Old: echo wp_kses( $uvsinpminevents, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvsinpminevents, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_inpminevents; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_inpminevents, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_inpminevents, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>

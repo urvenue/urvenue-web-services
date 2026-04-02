@@ -3,21 +3,27 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //$uvseventseventurl = uvs_get_adminfieldhtml("events->event-url");
 //$uvseventsshowartist = uvs_get_adminfieldhtml("events->event-showartist");
-// $uvseventlayout = uvs_get_adminfieldhtml("events->event-layout");
-$uvseventlayout = urvenue_ws_adm_get_adminfieldhtml("events->event-layout"); // Axl UWS-7416
-// $uvseventcolumns = uvs_get_adminfieldhtml("events->event-columns");
-$uvseventcolumns = urvenue_ws_adm_get_adminfieldhtml("events->event-columns"); // Axl UWS-7416
-// $uvsactivedropdows = uvs_get_adminfieldhtml("events->event-activedropdowns");
-$uvsactivedropdows = urvenue_ws_adm_get_adminfieldhtml("events->event-activedropdowns"); // Axl UWS-7416
+// $urvenue_ws_eventlayout = uvs_get_adminfieldhtml("events->event-layout");
+// $urvenue_ws_eventlayout = urvenue_ws_adm_get_adminfieldhtml("events->event-layout"); // Axl UWS-7416
+$urvenue_ws_eventlayout = urvenue_ws_adm_get_adminfieldhtml("events->event-layout"); // Axl UWS-7634
+// $urvenue_ws_eventcolumns = uvs_get_adminfieldhtml("events->event-columns");
+// $urvenue_ws_eventcolumns = urvenue_ws_adm_get_adminfieldhtml("events->event-columns"); // Axl UWS-7416
+$urvenue_ws_eventcolumns = urvenue_ws_adm_get_adminfieldhtml("events->event-columns"); // Axl UWS-7634
+// $urvenue_ws_activedropdows = uvs_get_adminfieldhtml("events->event-activedropdowns");
+// $urvenue_ws_activedropdows = urvenue_ws_adm_get_adminfieldhtml("events->event-activedropdowns"); // Axl UWS-7416
+$urvenue_ws_activedropdows = urvenue_ws_adm_get_adminfieldhtml("events->event-activedropdowns"); // Axl UWS-7634
 
-// $uvseventshowdigitalmenu = uvs_get_adminfieldhtml("events->addon-bottles->showdigitalmenu");
-$uvseventshowdigitalmenu = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->showdigitalmenu"); // Axl UWS-7416
-// $uvseventshowsummary     = uvs_get_adminfieldhtml("events->addon-bottles->showsummary");
-$uvseventshowsummary     = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->showsummary"); // Axl UWS-7416
-// $uvseventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuapikey");
-$uvseventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->menuapikey"); // Axl UWS-7416
+// $urvenue_ws_eventshowdigitalmenu = uvs_get_adminfieldhtml("events->addon-bottles->showdigitalmenu");
+// $urvenue_ws_eventshowdigitalmenu = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->showdigitalmenu"); // Axl UWS-7416
+$urvenue_ws_eventshowdigitalmenu = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->showdigitalmenu"); // Axl UWS-7634
+// $urvenue_ws_eventshowsummary     = uvs_get_adminfieldhtml("events->addon-bottles->showsummary");
+// $urvenue_ws_eventshowsummary     = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->showsummary"); // Axl UWS-7416
+$urvenue_ws_eventshowsummary     = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->showsummary"); // Axl UWS-7634
+// $urvenue_ws_eventmenuapikey      = uvs_get_adminfieldhtml("events->addon-bottles->menuapikey");
+// $urvenue_ws_eventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->menuapikey"); // Axl UWS-7416
+$urvenue_ws_eventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bottles->menuapikey"); // Axl UWS-7634
 ?>
-<div id="uvs-admin-events-event" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['events-event']; */ echo esc_attr( $uvs_admin_optstabs_state['events-event'] ); ?>">
+<div id="uvs-admin-events-event" class="uvs-admin-opt-section <?php /* Old: echo $urvenue_ws_admin_optstabs_state['events-event']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['events-event'] ); ?>">
     <div class="uvs-admin-opt-title">Event Page</div>
     <div class="uvs-admin-opt-space"></div>
     <!--<div class="uvs-infolist-item uvs-clearfix">
@@ -42,9 +48,9 @@ $uvseventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bott
 		</div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvseventlayout; */ ?>
-			<?php /* Old: echo wp_kses( $uvseventlayout, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvseventlayout, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_eventlayout; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_eventlayout, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_eventlayout, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -52,9 +58,9 @@ $uvseventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bott
 		<div class="uvsname">Event Columns <small>Select the event page columns placement</small></div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvseventcolumns; */ ?>
-			<?php /* Old: echo wp_kses( $uvseventcolumns, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvseventcolumns, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_eventcolumns; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_eventcolumns, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_eventcolumns, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>
@@ -62,9 +68,9 @@ $uvseventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bott
 		<div class="uvsname">Auto Open Tabs/Dropdowns <small>Will show the event tabs/items info by default.</small></div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvsactivedropdows; */ ?>
-			<?php /* Old: echo wp_kses( $uvsactivedropdows, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvsactivedropdows, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_activedropdows; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_activedropdows, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_activedropdows, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -77,9 +83,9 @@ $uvseventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bott
         <div class="uvsname">Show Digital Menu</div>
         <div class="uvsvalue">
             <?php // @Axl ?>
-            <?php /* Old: echo $uvseventshowdigitalmenu; */ ?>
-            <?php /* Old: echo wp_kses( $uvseventshowdigitalmenu, uvs_allowed_admin_html() ); */ ?>
-            <?php echo wp_kses( $uvseventshowdigitalmenu, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+            <?php /* Old: echo $urvenue_ws_eventshowdigitalmenu; */ ?>
+            <?php /* Old: echo wp_kses( $urvenue_ws_eventshowdigitalmenu, uvs_allowed_admin_html() ); */ ?>
+            <?php echo wp_kses( $urvenue_ws_eventshowdigitalmenu, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
             <?php // @Axl End ?>
         </div>
     </div>
@@ -87,9 +93,9 @@ $uvseventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bott
         <div class="uvsname">Show Summary</div>
         <div class="uvsvalue">
             <?php // @Axl ?>
-            <?php /* Old: echo $uvseventshowsummary; */ ?>
-            <?php /* Old: echo wp_kses( $uvseventshowsummary, uvs_allowed_admin_html() ); */ ?>
-            <?php echo wp_kses( $uvseventshowsummary, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+            <?php /* Old: echo $urvenue_ws_eventshowsummary; */ ?>
+            <?php /* Old: echo wp_kses( $urvenue_ws_eventshowsummary, uvs_allowed_admin_html() ); */ ?>
+            <?php echo wp_kses( $urvenue_ws_eventshowsummary, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
             <?php // @Axl End ?>
         </div>
     </div>
@@ -99,9 +105,9 @@ $uvseventmenuapikey      = urvenue_ws_adm_get_adminfieldhtml("events->addon-bott
         </div>
         <div class="uvsvalue">
             <?php // @Axl ?>
-            <?php /* Old: echo $uvseventmenuapikey; */ ?>
-            <?php /* Old: echo wp_kses( $uvseventmenuapikey, uvs_allowed_admin_html() ); */ ?>
-            <?php echo wp_kses( $uvseventmenuapikey, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+            <?php /* Old: echo $urvenue_ws_eventmenuapikey; */ ?>
+            <?php /* Old: echo wp_kses( $urvenue_ws_eventmenuapikey, uvs_allowed_admin_html() ); */ ?>
+            <?php echo wp_kses( $urvenue_ws_eventmenuapikey, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
             <?php // @Axl End ?>
         </div>
     </div>

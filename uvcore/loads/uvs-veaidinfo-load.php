@@ -4,78 +4,78 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if($urvenue_ws_libexits)
 	include_once($urvenue_ws_uvs_path . "/system/uvs-admin-init.php");
 
-// $uvsve = isset($uvsve) ? $uvsve : $_REQUEST["uvsve"]; // Axl UWS-7418
-$uvsve = isset($uvsve) ? $uvsve : ( isset( $_REQUEST["uvsve"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsve"] ) ) : '' ); // Axl UWS-7418
-// $uvsnv = isset($uvsnv) ? $uvsnv : $_REQUEST["uvsnv"]; // Axl UWS-7418
-$uvsnv = isset($uvsnv) ? $uvsnv : ( isset( $_REQUEST["uvsnv"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsnv"] ) ) : '' ); // Axl UWS-7418
-$uvsvenueinfofeedurl = $urvenue_ws_adm_admin_feeds["venueinfo"];
-$uvsvenueinfofeedurl = str_replace("{params}", "ve" . $uvsve, $uvsvenueinfofeedurl);
+// $urvenue_ws_adm_ve = isset($urvenue_ws_adm_ve) ? $urvenue_ws_adm_ve : $_REQUEST["uvsve"]; // Axl UWS-7418
+$urvenue_ws_adm_ve = isset($urvenue_ws_adm_ve) ? $urvenue_ws_adm_ve : ( isset( $_REQUEST["uvsve"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsve"] ) ) : '' ); // Axl UWS-7418
+// $urvenue_ws_adm_nv = isset($urvenue_ws_adm_nv) ? $urvenue_ws_adm_nv : $_REQUEST["uvsnv"]; // Axl UWS-7418
+$urvenue_ws_adm_nv = isset($urvenue_ws_adm_nv) ? $urvenue_ws_adm_nv : ( isset( $_REQUEST["uvsnv"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsnv"] ) ) : '' ); // Axl UWS-7418
+$urvenue_ws_adm_venueinfofeedurl = $urvenue_ws_adm_admin_feeds["venueinfo"];
+$urvenue_ws_adm_venueinfofeedurl = str_replace("{params}", "ve" . $urvenue_ws_adm_ve, $urvenue_ws_adm_venueinfofeedurl);
 
-// $uvsvenueinfofeed = uvs_pullfeed($uvsvenueinfofeedurl);
-$uvsvenueinfofeed = urvenue_ws_adm_pullfeed($uvsvenueinfofeedurl); // Axl UWS-7416
-$uvsvenueinfofeed = json_decode($uvsvenueinfofeed, true);
+// $urvenue_ws_adm_venueinfofeed = uvs_pullfeed($urvenue_ws_adm_venueinfofeedurl);
+$urvenue_ws_adm_venueinfofeed = urvenue_ws_adm_pullfeed($urvenue_ws_adm_venueinfofeedurl); // Axl UWS-7416
+$urvenue_ws_adm_venueinfofeed = json_decode($urvenue_ws_adm_venueinfofeed, true);
 
-if(is_array($uvsvenueinfofeed) and is_array($uvsvenueinfofeed["venues"]) and is_array($uvsvenueinfofeed["venues"][0]) and ($uvsvenueinfofeed["venues"][0]["id"] == $uvsve)){
-	$uvsvenueinfoarray = $uvsvenueinfofeed["venues"][0];
-	$uvsvenuename = $uvsvenueinfoarray["name"];
-	$uvsvenuealias = $uvsvenueinfo["venuealias"];
-	$uvsvenueforcealias = $uvsvenueinfo["venueforcealias"];
-	$uvsvenuehideinevents = $uvsvenueinfo["venuehideinevents"];
-	$uvsvenueveaid = $uvsvenueinfoarray["id"];
-	$uvsvenueuvid = $uvsvenueinfoarray["urvenueid"];
-	$uvsvenueserver = $uvsvenueinfoarray["urvenueurl"];
-	$uvsvenueclientid = $uvsvenueinfoarray["urclientid"];
-	$uvsvenuewbcode = $uvsvenueinfoarray["wbcode"];
-	$uvsvenuelogo = $uvsvenueinfoarray["logos"]["transpwhitebg"]["raw_url"];
-	$uvsvenueisprimary = ($uvsnv == 0) ? 1 : 0;
+if(is_array($urvenue_ws_adm_venueinfofeed) and is_array($urvenue_ws_adm_venueinfofeed["venues"]) and is_array($urvenue_ws_adm_venueinfofeed["venues"][0]) and ($urvenue_ws_adm_venueinfofeed["venues"][0]["id"] == $urvenue_ws_adm_ve)){
+	$urvenue_ws_adm_venueinfoarray = $urvenue_ws_adm_venueinfofeed["venues"][0];
+	$urvenue_ws_adm_venuename = $urvenue_ws_adm_venueinfoarray["name"];
+	$urvenue_ws_adm_venuealias = $urvenue_ws_adm_venueinfo["venuealias"];
+	$urvenue_ws_adm_venueforcealias = $urvenue_ws_adm_venueinfo["venueforcealias"];
+	$urvenue_ws_adm_venuehideinevents = $urvenue_ws_adm_venueinfo["venuehideinevents"];
+	$urvenue_ws_adm_venueveaid = $urvenue_ws_adm_venueinfoarray["id"];
+	$urvenue_ws_adm_venueuvid = $urvenue_ws_adm_venueinfoarray["urvenueid"];
+	$urvenue_ws_adm_venueserver = $urvenue_ws_adm_venueinfoarray["urvenueurl"];
+	$urvenue_ws_adm_venueclientid = $urvenue_ws_adm_venueinfoarray["urclientid"];
+	$urvenue_ws_adm_venuewbcode = $urvenue_ws_adm_venueinfoarray["wbcode"];
+	$urvenue_ws_adm_venuelogo = $urvenue_ws_adm_venueinfoarray["logos"]["transpwhitebg"]["raw_url"];
+	$urvenue_ws_adm_venueisprimary = ($urvenue_ws_adm_nv == 0) ? 1 : 0;
 
-	if(!$uvsvenuewbcode)
-		$uvsvenuewbcode = str_replace(array(" ", "-"), array("", ""), $uvsvenuename);
+	if(!$urvenue_ws_adm_venuewbcode)
+		$urvenue_ws_adm_venuewbcode = str_replace(array(" ", "-"), array("", ""), $urvenue_ws_adm_venuename);
 
-	$uvsvenuelogoclass = (!$uvsvenuelogo) ? "noimg" : "";
-	$uvsvenueforcealias_checked = ($uvsvenueforcealias) ? " checked":"";
-	$uvsvenuehideinevents_checked = ($uvsvenuehideinevents) ? " checked":"";
+	$urvenue_ws_adm_venuelogoclass = (!$urvenue_ws_adm_venuelogo) ? "noimg" : "";
+	$urvenue_ws_adm_venueforcealias_checked = ($urvenue_ws_adm_venueforcealias) ? " checked":"";
+	$urvenue_ws_adm_venuehideinevents_checked = ($urvenue_ws_adm_venuehideinevents) ? " checked":"";
 
-	$uvsvenueforminfo = "<input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][wbcode]' value='$uvsvenuewbcode'>";
-	$uvsvenueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][venue-name]' value='$uvsvenuename'>";
-	$uvsvenueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][veaid]' value='$uvsvenueveaid'>";
-	$uvsvenueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][urvenueid]' value='$uvsvenueuvid'>";
-	$uvsvenueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][clientid]' value='$uvsvenueclientid'>";
-	$uvsvenueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][logourl]' value='$uvsvenuelogo'>";
-	$uvsvenueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][uvserver]' value='$uvsvenueserver'>";
-	$uvsvenueforminfo .= "<input class='uvsjson venueprimary' type='hidden' name='venues[$uvsvenuewbcode][isprimary]' value='$uvsvenueisprimary'>";
+	$urvenue_ws_adm_venueforminfo = "<input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][wbcode]' value='$urvenue_ws_adm_venuewbcode'>";
+	$urvenue_ws_adm_venueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][venue-name]' value='$urvenue_ws_adm_venuename'>";
+	$urvenue_ws_adm_venueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][veaid]' value='$urvenue_ws_adm_venueveaid'>";
+	$urvenue_ws_adm_venueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][urvenueid]' value='$urvenue_ws_adm_venueuvid'>";
+	$urvenue_ws_adm_venueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][clientid]' value='$urvenue_ws_adm_venueclientid'>";
+	$urvenue_ws_adm_venueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][logourl]' value='$urvenue_ws_adm_venuelogo'>";
+	$urvenue_ws_adm_venueforminfo .= "<input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][uvserver]' value='$urvenue_ws_adm_venueserver'>";
+	$urvenue_ws_adm_venueforminfo .= "<input class='uvsjson venueprimary' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][isprimary]' value='$urvenue_ws_adm_venueisprimary'>";
 
-	$uvsvenueisprimarylabel = ($uvsvenueisprimary) ? "Is Primary" : "Make Primary";
-	$uvsvenueisprimaryclass = ($uvsvenueisprimary) ? "active" : "";
+	$urvenue_ws_adm_venueisprimarylabel = ($urvenue_ws_adm_venueisprimary) ? "Is Primary" : "Make Primary";
+	$urvenue_ws_adm_venueisprimaryclass = ($urvenue_ws_adm_venueisprimary) ? "active" : "";
 
-	$uvvenuealiasswitchclass = ($uvsvenueforcealias) ? "uvs-on" : "";
-	$uvvenuealiasinput = "<div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Use Alias as Venue Name:</div><div class='uvsvalue'><div class='uvs-switch-ui $uvvenuealiasswitchclass'><button class='uvsjs-trigger-switch' type='button'><span class='uvs-lb-on'>Yes</span><span class='uvs-lb-off'>No</span></button><input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][venueforcealias]' value='$uvsvenueforcealias' data-value-on='1' data-value-off=''></div></div></div>";
+	$urvenue_ws_venuealiasswitchclass = ($urvenue_ws_adm_venueforcealias) ? "uvs-on" : "";
+	$urvenue_ws_venuealiasinput = "<div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Use Alias as Venue Name:</div><div class='uvsvalue'><div class='uvs-switch-ui $urvenue_ws_venuealiasswitchclass'><button class='uvsjs-trigger-switch' type='button'><span class='uvs-lb-on'>Yes</span><span class='uvs-lb-off'>No</span></button><input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][venueforcealias]' value='$urvenue_ws_adm_venueforcealias' data-value-on='1' data-value-off=''></div></div></div>";
 
-	$uvhideeventsswitchclass = ($uvsvenuehideinevents) ? "uvs-on" : "";
-	$uvhideeventsinput = "<div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Use Alias as Venue Name:</div><div class='uvsvalue'><div class='uvs-switch-ui $uvhideeventsswitchclass'><button class='uvsjs-trigger-switch' type='button'><span class='uvs-lb-on'>Yes</span><span class='uvs-lb-off'>No</span></button><input class='uvsjson' type='hidden' name='venues[$uvsvenuewbcode][venuehideinevents]' value='$uvsvenuehideinevents' data-value-on='1' data-value-off=''></div></div></div>";
+	$urvenue_ws_hideeventsswitchclass = ($urvenue_ws_adm_venuehideinevents) ? "uvs-on" : "";
+	$urvenue_ws_hideeventsinput = "<div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Use Alias as Venue Name:</div><div class='uvsvalue'><div class='uvs-switch-ui $urvenue_ws_hideeventsswitchclass'><button class='uvsjs-trigger-switch' type='button'><span class='uvs-lb-on'>Yes</span><span class='uvs-lb-off'>No</span></button><input class='uvsjson' type='hidden' name='venues[$urvenue_ws_adm_venuewbcode][venuehideinevents]' value='$urvenue_ws_adm_venuehideinevents' data-value-on='1' data-value-off=''></div></div></div>";
 	
 	// @egt [UWS-7264]
-	// $uvs_pendchanges_script = 'uvs_pendchanges = true;';
-	$uvs_pendchanges_script = 'urvenue_ws_adm_pendchanges = true;'; // Axl UWS-7416
+	// $urvenue_ws_adm_pendchanges_script = 'uvs_pendchanges = true;';
+	$urvenue_ws_adm_pendchanges_script = 'urvenue_ws_adm_pendchanges = true;'; // Axl UWS-7416
 
 	// wp_register_script('uvs_pendchanges', false, array(), null, true);
 	wp_register_script('urvenue_ws_adm_pendchanges', false, array(), null, true); // Axl UWS-7416
 	// wp_enqueue_script('uvs_pendchanges');
 	wp_enqueue_script('urvenue_ws_adm_pendchanges'); // Axl UWS-7416
-	// wp_add_inline_script('uvs_pendchanges', "(function () { {$uvs_pendchanges_script} })();");
-	wp_add_inline_script('urvenue_ws_adm_pendchanges', "(function () { {$uvs_pendchanges_script} })();"); // Axl UWS-7416
+	// wp_add_inline_script('uvs_pendchanges', "(function () { {$urvenue_ws_adm_pendchanges_script} })();");
+	wp_add_inline_script('urvenue_ws_adm_pendchanges', "(function () { {$urvenue_ws_adm_pendchanges_script} })();"); // Axl UWS-7416
 
-	$uvsvenueinfoinfohtml = "<div class='uvs-admin-venueinf uvs-admin-venueinf-veaid-$uvsvenueveaid'>$uvsvenueforminfo<div class='uvs-infolist-item-img $uvsvenuelogoclass' style='background-image: url($uvsvenuelogo);'></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Code:</div><div class='uvsvalue'><strong>$uvsvenuewbcode</strong></div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Name:</div><div class='uvsvalue'>$uvsvenuename</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Name Alias:</div><div class='uvsvalue'><input type='text' name='venues[$uvsvenuekey][venuealias]' value='$uvsvenuealias' class='uvsjson'></div></div>{$uvvenuealiasinput}{$uvhideeventsinput}<div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>VEA Venue ID:</div><div class='uvsvalue'>$uvsvenueveaid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>UrVenue Venue ID:</div><div class='uvsvalue'>$uvsvenueuvid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Client ID:</div><div class='uvsvalue'>$uvsvenueclientid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>UrVenue Server:</div><div class='uvsvalue'>$uvsvenueserver</div></div><div class='actions'><a class='uvsjs-triggervenueprimary $uvsvenueisprimaryclass' href='javascript:;' data-isprimary='$uvsvenueisprimary'>$uvsvenueisprimarylabel</a><a class='uvsjs-removevenue' href='javascript:;'>Remove</a></div></div>";
+	$urvenue_ws_adm_venueinfoinfohtml = "<div class='uvs-admin-venueinf uvs-admin-venueinf-veaid-$urvenue_ws_adm_venueveaid'>$urvenue_ws_adm_venueforminfo<div class='uvs-infolist-item-img $urvenue_ws_adm_venuelogoclass' style='background-image: url($urvenue_ws_adm_venuelogo);'></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Code:</div><div class='uvsvalue'><strong>$urvenue_ws_adm_venuewbcode</strong></div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Name:</div><div class='uvsvalue'>$urvenue_ws_adm_venuename</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Venue Name Alias:</div><div class='uvsvalue'><input type='text' name='venues[$urvenue_ws_adm_venuekey][venuealias]' value='$urvenue_ws_adm_venuealias' class='uvsjson'></div></div>{$urvenue_ws_venuealiasinput}{$urvenue_ws_hideeventsinput}<div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>VEA Venue ID:</div><div class='uvsvalue'>$urvenue_ws_adm_venueveaid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>UrVenue Venue ID:</div><div class='uvsvalue'>$urvenue_ws_adm_venueuvid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>Client ID:</div><div class='uvsvalue'>$urvenue_ws_adm_venueclientid</div></div><div class='uvs-infolist-item uvs-clearfix'><div class='uvsname'>UrVenue Server:</div><div class='uvsvalue'>$urvenue_ws_adm_venueserver</div></div><div class='actions'><a class='uvsjs-triggervenueprimary $urvenue_ws_adm_venueisprimaryclass' href='javascript:;' data-isprimary='$urvenue_ws_adm_venueisprimary'>$urvenue_ws_adm_venueisprimarylabel</a><a class='uvsjs-removevenue' href='javascript:;'>Remove</a></div></div>";
 	
 	// @Axl
-	// echo $uvsvenueinfoinfohtml;
-	// echo wp_kses( $uvsvenueinfoinfohtml, uvs_allowed_admin_html() );
-	echo wp_kses( $uvsvenueinfoinfohtml, urvenue_ws_adm_allowed_admin_html() ); // Axl UWS-7416
+	// echo $urvenue_ws_adm_venueinfoinfohtml;
+	// echo wp_kses( $urvenue_ws_adm_venueinfoinfohtml, uvs_allowed_admin_html() );
+	echo wp_kses( $urvenue_ws_adm_venueinfoinfohtml, urvenue_ws_adm_allowed_admin_html() ); // Axl UWS-7416
 	// @Axl End
 }
 else {
 	// @Axl
-	// echo "<div class='uvs-admin-errormsg'>We did not find a venue with this VEA Venue ID: <strong>$uvsve</strong>, check your ID or contact support.</div>";
-	echo "<div class='uvs-admin-errormsg'>We did not find a venue with this VEA Venue ID: <strong>" . esc_html( $uvsve ) . "</strong>, check your ID or contact support.</div>";
+	// echo "<div class='uvs-admin-errormsg'>We did not find a venue with this VEA Venue ID: <strong>$urvenue_ws_adm_ve</strong>, check your ID or contact support.</div>";
+	echo "<div class='uvs-admin-errormsg'>We did not find a venue with this VEA Venue ID: <strong>" . esc_html( $urvenue_ws_adm_ve ) . "</strong>, check your ID or contact support.</div>";
 	// @Axl End
 }

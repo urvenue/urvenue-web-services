@@ -5,15 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //$uvseventsinitialview = uvs_get_adminfieldhtml("events->calendar-initialview");
 //$uvseventsviewmenu = uvs_get_adminfieldhtml("events->calendar-viewmenu");
 //$uvseventsonlyoneevent = uvs_get_adminfieldhtml("events->calendar-onlyoneevent");
-// $uvseventscalonlylist = uvs_get_adminfieldhtml("events->calendar-alwayslist");
-$uvseventscalonlylist = urvenue_ws_adm_get_adminfieldhtml("events->calendar-alwayslist"); // Axl UWS-7416
+// $urvenue_ws_eventscalonlylist = uvs_get_adminfieldhtml("events->calendar-alwayslist");
+// $urvenue_ws_eventscalonlylist = urvenue_ws_adm_get_adminfieldhtml("events->calendar-alwayslist"); // Axl UWS-7416
+$urvenue_ws_eventscalonlylist = urvenue_ws_adm_get_adminfieldhtml("events->calendar-alwayslist"); // Axl UWS-7634
 //$uvseventsmonthseltype = uvs_get_adminfieldhtml("events->calendar-monthseltype");
 
 //$uvseventsinitialviewclass = (!is_array($urvenue_ws_core_lib["events"]) or !$urvenue_ws_core_lib["events"]["calendar-addlist"]) ? "uvs-fieldhide" : "";
 
 ?>
 
-<div id="uvs-admin-events-calendar" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['events-calendar']; */ echo esc_attr( $uvs_admin_optstabs_state['events-calendar'] ); ?>">
+<div id="uvs-admin-events-calendar" class="uvs-admin-opt-section <?php /* Old: echo $urvenue_ws_admin_optstabs_state['events-calendar']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['events-calendar'] ); ?>">
     <div class="uvs-admin-opt-title">Events Calendar</div>
 	<div class="uvs-admin-opt-space"></div>
 	<!--<div class="uvs-infolist-item uvs-clearfix">
@@ -50,9 +51,9 @@ $uvseventscalonlylist = urvenue_ws_adm_get_adminfieldhtml("events->calendar-alwa
 		<div class="uvsname">Always List <small>Don't show event flyer, show always as list</small></div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvseventscalonlylist; */ ?>
-			<?php /* Old: echo wp_kses( $uvseventscalonlylist, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvseventscalonlylist, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_eventscalonlylist; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_eventscalonlylist, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_eventscalonlylist, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
     </div>

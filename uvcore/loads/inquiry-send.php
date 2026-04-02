@@ -7,60 +7,62 @@ global $urvenue_ws_feeds_lib;
 // uws_check_nonce("uwsreservations");
 urvenue_ws_check_nonce("uwsreservations"); // Axl UWS-7416
 
-$uvapiurl = $urvenue_ws_feeds_lib["inquiry-send"]["url"];
+$urvenue_ws_apiurl = $urvenue_ws_feeds_lib["inquiry-send"]["url"];
 
-$uvdata = $_POST;
-$uvdata["phone"] = ($uvdata["phonecode"] and $uvdata["phonenumber"]) ? $uvdata["phonecode"] . "." . $uvdata["phonenumber"] : "";
-// $uvdata["optinemail"] = (isset($_REQUEST["optin"])) ? $_REQUEST["optin"] : ""; // Axl UWS-7418
-$uvdata["optinemail"] = (isset($_REQUEST["optin"])) ? sanitize_text_field( wp_unslash( $_REQUEST["optin"] ) ) : ""; // Axl UWS-7418
+$urvenue_ws_data = $_POST;
+$urvenue_ws_data["phone"] = ($urvenue_ws_data["phonecode"] and $urvenue_ws_data["phonenumber"]) ? $urvenue_ws_data["phonecode"] . "." . $urvenue_ws_data["phonenumber"] : "";
+// $urvenue_ws_data["optinemail"] = (isset($_REQUEST["optin"])) ? $_REQUEST["optin"] : ""; // Axl UWS-7418
+$urvenue_ws_data["optinemail"] = (isset($_REQUEST["optin"])) ? sanitize_text_field( wp_unslash( $_REQUEST["optin"] ) ) : ""; // Axl UWS-7418
 
-unset($uvdata["action"]);
-unset($uvdata["uvaction"]);
-unset($uvdata["phonecode"]);
-unset($uvdata["phonenumber"]);
-//$uvdata = array();
+unset($urvenue_ws_data["action"]);
+unset($urvenue_ws_data["uvaction"]);
+unset($urvenue_ws_data["phonecode"]);
+unset($urvenue_ws_data["phonenumber"]);
+//$urvenue_ws_data = array();
 
 // TESTING @Axl
 // $curl = curl_init();
 // curl_setopt_array($curl, [
-//     CURLOPT_URL => $uvapiurl,
+//     CURLOPT_URL => $urvenue_ws_apiurl,
 //     CURLOPT_POST => true,
-//     CURLOPT_POSTFIELDS => $uvdata,
+//     CURLOPT_POSTFIELDS => $urvenue_ws_data,
 //     CURLOPT_RETURNTRANSFER => true,
 // ]);
-// $response = curl_exec($curl);
+// $urvenue_ws_response = curl_exec($curl);
 // curl_close($curl);
-$uvwpresponse = wp_remote_post($uvapiurl, array(
-    'body' => $uvdata,
+// $uvwpresponse = wp_remote_post($urvenue_ws_apiurl, array(
+$urvenue_ws_wpresponse = wp_remote_post($urvenue_ws_apiurl, array( // Axl UWS-7634
+    'body' => $urvenue_ws_data,
     'timeout' => 60,
 ));
-$response = wp_remote_retrieve_body($uvwpresponse);
+// $urvenue_ws_response = wp_remote_retrieve_body($uvwpresponse);
+$urvenue_ws_response = wp_remote_retrieve_body($urvenue_ws_wpresponse); // Axl UWS-7634
 
-$uvresponse = json_decode($response, true);
+$urvenue_ws_response = json_decode($urvenue_ws_response, true);
 
-$uvstatus = "";
-if(is_array($uvresponse) and  $uvresponse["uv"]["success"]["status"] == "success"){
-    // $uvpopcontent = uws_get_template("reservations/inquiry-success");
-    $uvpopcontent = urvenue_ws_get_template("reservations/inquiry-success"); // Axl UWS-7416
-    $uvstatus = "success";
+$urvenue_ws_status = "";
+if(is_array($urvenue_ws_response) and  $urvenue_ws_response["uv"]["success"]["status"] == "success"){
+    // $urvenue_ws_popcontent = uws_get_template("reservations/inquiry-success");
+    $urvenue_ws_popcontent = urvenue_ws_get_template("reservations/inquiry-success"); // Axl UWS-7416
+    $urvenue_ws_status = "success";
 }
 else{
-    $uverrormsg = (isset($uvresponse["uv"]["success"]["message"])) ? $uvresponse["uv"]["success"]["message"] : "";
-    // $uvpopcontent = uws_get_template("reservations/inquiry-failed");
-    $uvpopcontent = urvenue_ws_get_template("reservations/inquiry-failed"); // Axl UWS-7416
-    $uvpopcontent = str_replace("{apierrormsg}", $uverrormsg, $uvpopcontent);
-    $uvstatus = "error";
+    $urvenue_ws_errormsg = (isset($urvenue_ws_response["uv"]["success"]["message"])) ? $urvenue_ws_response["uv"]["success"]["message"] : "";
+    // $urvenue_ws_popcontent = uws_get_template("reservations/inquiry-failed");
+    $urvenue_ws_popcontent = urvenue_ws_get_template("reservations/inquiry-failed"); // Axl UWS-7416
+    $urvenue_ws_popcontent = str_replace("{apierrormsg}", $urvenue_ws_errormsg, $urvenue_ws_popcontent);
+    $urvenue_ws_status = "error";
 }
 
-$uvreturnarray = array(
-    "status" => $uvresponse["uv"]["success"]["status"],
-    "msg" => $uvpopcontent
+$urvenue_ws_returnarray = array(
+    "status" => $urvenue_ws_response["uv"]["success"]["status"],
+    "msg" => $urvenue_ws_popcontent
 );
 
 // @Axl
-// $uvreturnjson = json_encode($uvreturnarray);
-$uvreturnjson = wp_json_encode($uvreturnarray);
+// $urvenue_ws_returnjson = json_encode($urvenue_ws_returnarray);
+$urvenue_ws_returnjson = wp_json_encode($urvenue_ws_returnarray);
 // @Axl End
 header('Content-Type: application/json');
-// echo($uvreturnjson);
-echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
+// echo($urvenue_ws_returnjson);
+echo( $urvenue_ws_returnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

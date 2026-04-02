@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
-<div id="uvs-admin-dashboard" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['dashboard']; */ echo esc_attr( $uvs_admin_optstabs_state['dashboard'] ); ?>">
+<div id="uvs-admin-dashboard" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['dashboard']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['dashboard'] ); ?>">
     <div class="uvs-admin-opt-title">Dashboard</div>
     <div class="uvs-admin-opt-descr">Welcome to UrVenue Integrations, Make your configurations.</div>
     <div class="uvs-admin-opt-space"></div>

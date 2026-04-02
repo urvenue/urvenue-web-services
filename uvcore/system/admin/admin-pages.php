@@ -1,73 +1,83 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-// $uvspageevents = uvs_get_adminfieldhtml("pages->events");
-$uvspageevents = urvenue_ws_adm_get_adminfieldhtml("pages->events"); // Axl UWS-7416
-// $uvspagesingleevent = uvs_get_adminfieldhtml("pages->singleevent");
-$uvspagesingleevent = urvenue_ws_adm_get_adminfieldhtml("pages->singleevent"); // Axl UWS-7416
-// $uvspagemap = uvs_get_adminfieldhtml("pages->map");
-$uvspagemap = urvenue_ws_adm_get_adminfieldhtml("pages->map"); // Axl UWS-7416
-// $uvspageitem = uvs_get_adminfieldhtml("pages->itempage");
-$uvspageitem = urvenue_ws_adm_get_adminfieldhtml("pages->itempage"); // Axl UWS-7416
-// $uvspagepriv = uvs_get_adminfieldhtml("pages->privacy");
-$uvspagepriv = urvenue_ws_adm_get_adminfieldhtml("pages->privacy"); // Axl UWS-7416
-// $uvspageterms = uvs_get_adminfieldhtml("pages->terms");
-$uvspageterms = urvenue_ws_adm_get_adminfieldhtml("pages->terms"); // Axl UWS-7416
+// $urvenue_ws_pageevents = uvs_get_adminfieldhtml("pages->events");
+// $urvenue_ws_pageevents = urvenue_ws_adm_get_adminfieldhtml("pages->events"); // Axl UWS-7416
+$urvenue_ws_pageevents = urvenue_ws_adm_get_adminfieldhtml("pages->events"); // Axl UWS-7634
+// $urvenue_ws_pagesingleevent = uvs_get_adminfieldhtml("pages->singleevent");
+// $urvenue_ws_pagesingleevent = urvenue_ws_adm_get_adminfieldhtml("pages->singleevent"); // Axl UWS-7416
+$urvenue_ws_pagesingleevent = urvenue_ws_adm_get_adminfieldhtml("pages->singleevent"); // Axl UWS-7634
+// $urvenue_ws_pagemap = uvs_get_adminfieldhtml("pages->map");
+// $urvenue_ws_pagemap = urvenue_ws_adm_get_adminfieldhtml("pages->map"); // Axl UWS-7416
+$urvenue_ws_pagemap = urvenue_ws_adm_get_adminfieldhtml("pages->map"); // Axl UWS-7634
+// $urvenue_ws_pageitem = uvs_get_adminfieldhtml("pages->itempage");
+// $urvenue_ws_pageitem = urvenue_ws_adm_get_adminfieldhtml("pages->itempage"); // Axl UWS-7416
+$urvenue_ws_pageitem = urvenue_ws_adm_get_adminfieldhtml("pages->itempage"); // Axl UWS-7634
+// $urvenue_ws_pagepriv = uvs_get_adminfieldhtml("pages->privacy");
+// $urvenue_ws_pagepriv = urvenue_ws_adm_get_adminfieldhtml("pages->privacy"); // Axl UWS-7416
+$urvenue_ws_pagepriv = urvenue_ws_adm_get_adminfieldhtml("pages->privacy"); // Axl UWS-7634
+// $urvenue_ws_pageterms = uvs_get_adminfieldhtml("pages->terms");
+// $urvenue_ws_pageterms = urvenue_ws_adm_get_adminfieldhtml("pages->terms"); // Axl UWS-7416
+$urvenue_ws_pageterms = urvenue_ws_adm_get_adminfieldhtml("pages->terms"); // Axl UWS-7634
 
-// $uvseventstext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_events]</strong></small>" : "";
-$uvseventstext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_events]</strong></small>" : ""; // Axl UWS-7416
-// $uvseventtext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_event]</strong></small>" : "";
-$uvseventtext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_event]</strong></small>" : ""; // Axl UWS-7416
-// $uvsmaptext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_map]</strong></small>" : "";
-$uvsmaptext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_map]</strong></small>" : ""; // Axl UWS-7416
-// $uvsitempagetext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_inventory_item_page]</strong></small>" : "";
-$uvsitempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_inventory_item_page]</strong></small>" : ""; // Axl UWS-7416
+// $urvenue_ws_eventstext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_events]</strong></small>" : "";
+// $urvenue_ws_eventstext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_events]</strong></small>" : ""; // Axl UWS-7416
+$urvenue_ws_eventstext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_events]</strong></small>" : ""; // Axl UWS-7634
+// $urvenue_ws_eventtext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_event]</strong></small>" : "";
+// $urvenue_ws_eventtext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_event]</strong></small>" : ""; // Axl UWS-7416
+$urvenue_ws_eventtext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_event]</strong></small>" : ""; // Axl UWS-7634
+// $urvenue_ws_maptext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_map]</strong></small>" : "";
+// $urvenue_ws_maptext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_map]</strong></small>" : ""; // Axl UWS-7416
+$urvenue_ws_maptext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_map]</strong></small>" : ""; // Axl UWS-7634
+// $urvenue_ws_itempagetext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_inventory_item_page]</strong></small>" : "";
+// $urvenue_ws_itempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_inventory_item_page]</strong></small>" : ""; // Axl UWS-7416
+$urvenue_ws_itempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_inventory_item_page]</strong></small>" : ""; // Axl UWS-7634
 ?>
-<div id="uvs-admin-pages" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['pages']; */ echo esc_attr( $uvs_admin_optstabs_state['pages'] ); ?>">
+<div id="uvs-admin-pages" class="uvs-admin-opt-section <?php /* Old: echo $urvenue_ws_admin_optstabs_state['pages']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['pages'] ); ?>">
     <div class="uvs-admin-opt-title">Integration Pages</div>
 	<div class="uvs-admin-opt-subtitle">Select the pages for your integrations, this will help for site internal links and redirections</div>
     <div class="uvs-admin-opt-space"></div>
 
 	<div class="uvs-infolist-item uvs-clearfix">
-		<?php /* Old: echo wp_kses( $uvseventstext, uvs_allowed_admin_html() ); */ ?>
-		<div class="uvsname">Events Page<?php /* Old: echo $uvseventstext; */ echo wp_kses( $uvseventstext, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
+		<?php /* Old: echo wp_kses( $urvenue_ws_eventstext, uvs_allowed_admin_html() ); */ ?>
+		<div class="uvsname">Events Page<?php /* Old: echo $urvenue_ws_eventstext; */ echo wp_kses( $urvenue_ws_eventstext, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvspageevents; */ ?>
-			<?php /* Old: echo wp_kses( $uvspageevents, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvspageevents, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_pageevents; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_pageevents, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_pageevents, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
-		<?php /* Old: echo wp_kses( $uvseventtext, uvs_allowed_admin_html() ); */ ?>
-		<div class="uvsname">Event Page<?php /* Old: echo $uvseventtext; */ echo wp_kses( $uvseventtext, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
+		<?php /* Old: echo wp_kses( $urvenue_ws_eventtext, uvs_allowed_admin_html() ); */ ?>
+		<div class="uvsname">Event Page<?php /* Old: echo $urvenue_ws_eventtext; */ echo wp_kses( $urvenue_ws_eventtext, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvspagesingleevent; */ ?>
-			<?php /* Old: echo wp_kses( $uvspagesingleevent, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvspagesingleevent, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_pagesingleevent; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_pagesingleevent, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_pagesingleevent, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
     <div class="uvs-infolist-item uvs-clearfix">
-		<?php /* Old: echo wp_kses( $uvsmaptext, uvs_allowed_admin_html() ); */ ?>
-		<div class="uvsname">Map Page<?php /* Old: echo $uvsmaptext; */ echo wp_kses( $uvsmaptext, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
+		<?php /* Old: echo wp_kses( $urvenue_ws_maptext, uvs_allowed_admin_html() ); */ ?>
+		<div class="uvsname">Map Page<?php /* Old: echo $urvenue_ws_maptext; */ echo wp_kses( $urvenue_ws_maptext, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvspagemap; */ ?>
-			<?php /* Old: echo wp_kses( $uvspagemap, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvspagemap, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_pagemap; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_pagemap, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_pagemap, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
 	<div class="uvs-infolist-item uvs-clearfix">
-		<?php /* Old: echo wp_kses( $uvsitempagetext, uvs_allowed_admin_html() ); */ ?>
-		<div class="uvsname">Inventory Item Page<?php /* Old: echo $uvsitempagetext; */ echo wp_kses( $uvsitempagetext, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
+		<?php /* Old: echo wp_kses( $urvenue_ws_itempagetext, uvs_allowed_admin_html() ); */ ?>
+		<div class="uvsname">Inventory Item Page<?php /* Old: echo $urvenue_ws_itempagetext; */ echo wp_kses( $urvenue_ws_itempagetext, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?></div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvspageitem; */ ?>
-			<?php /* Old: echo wp_kses( $uvspageitem, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvspageitem, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_pageitem; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_pageitem, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_pageitem, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -75,9 +85,9 @@ $uvsitempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong
 		<div class="uvsname">Privacy Page</div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvspagepriv; */ ?>
-			<?php /* Old: echo wp_kses( $uvspagepriv, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvspagepriv, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_pagepriv; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_pagepriv, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_pagepriv, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>
@@ -85,9 +95,9 @@ $uvsitempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong
 		<div class="uvsname">Terms Page</div>
 		<div class="uvsvalue">
 			<?php // @Axl ?>
-			<?php /* Old: echo $uvspageterms; */ ?>
-			<?php /* Old: echo wp_kses( $uvspageterms, uvs_allowed_admin_html() ); */ ?>
-			<?php echo wp_kses( $uvspageterms, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
+			<?php /* Old: echo $urvenue_ws_pageterms; */ ?>
+			<?php /* Old: echo wp_kses( $urvenue_ws_pageterms, uvs_allowed_admin_html() ); */ ?>
+			<?php echo wp_kses( $urvenue_ws_pageterms, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
 		</div>
 	</div>

@@ -15,15 +15,19 @@ if(function_exists('get_option') and function_exists('add_menu_page')){//is word
 }
 else{
 	if(file_exists("uvcore.lib.json")){
-		$uvslibinfojson = file_get_contents("uvcore.lib.json");
+		// $uvslibinfojson = file_get_contents("uvcore.lib.json");
+		$urvenue_ws_adm_libinfojson = file_get_contents("uvcore.lib.json"); // Axl UWS-7634
 
-		$uvslib = json_decode($uvslibinfojson, true);
+		// $uvslib = json_decode($uvslibinfojson, true);
+		$urvenue_ws_adm_lib = json_decode($urvenue_ws_adm_libinfojson, true); // Axl UWS-7634
 
-		if(is_array($uvslib["system"])){
+		// if(is_array($uvslib["system"])){
+		if(is_array($urvenue_ws_adm_lib["system"])){ // Axl UWS-7634
 			// $uws_libexits = true;
 			$urvenue_ws_libexits = true; // Axl UWS-7416
 			// $uvs_path = $uvslib["system"]["path"];
-			$urvenue_ws_uvs_path = $uvslib["system"]["path"]; // Axl UWS-7416
+			// $urvenue_ws_uvs_path = $uvslib["system"]["path"]; // Axl UWS-7416
+			$urvenue_ws_uvs_path = $urvenue_ws_adm_lib["system"]["path"]; // Axl UWS-7634
 		}
 	}
 }
@@ -44,5 +48,6 @@ if(isset($urvenue_ws_uvs_path) and $urvenue_ws_uvs_path){
 
 	include_once($urvenue_ws_uvs_path . "/libs/uvs-admin-lib.php");
 }
-else if(isset($uv_isproxy) and $uv_isproxy)
+// else if(isset($uv_isproxy) and $uv_isproxy)
+else if(isset($urvenue_ws_isproxy) and $urvenue_ws_isproxy) // Axl UWS-7634
 	echo("UVError 01-002: UV Core Init, uvcore path not found<br>");

@@ -7,10 +7,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 */
 // function uws_map($uvargs = ""){
 function urvenue_ws_map($uvargs = ""){ // Axl UWS-7416
-    global $uws_hooks;
+    // global $uws_hooks;
+    global $urvenue_ws_hooks; // Axl UWS-7634
 
     // if(isset($uws_hooks['uws_map_replace'])){ //replace map integration on hook action
-    if(isset($uws_hooks['urvenue_ws_map_replace'])){ //replace map integration on hook action // Axl UWS-7416
+    // if(isset($uws_hooks['urvenue_ws_map_replace'])){ //replace map integration on hook action // Axl UWS-7416
+    if(isset($urvenue_ws_hooks['urvenue_ws_map_replace'])){ //replace map integration on hook action // Axl UWS-7634
         // $uveventcode = uws_get_eventcode();
         $uveventcode = urvenue_ws_get_eventcode(); // Axl UWS-7416
         // $uveventinfo = ($uveventcode) ? uws_get_event($uveventcode) : "";

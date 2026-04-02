@@ -7,173 +7,173 @@ global $urvenue_ws_feeds_debug, $urvenue_ws_actionlinks_lib, $urvenue_ws_feeds_l
 // uws_check_nonce("uwsinventory");
 urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
 
-// $uvcartcode = uws_cleanup_request("cartcode");
-$uvcartcode = urvenue_ws_cleanup_request("cartcode"); // Axl UWS-7416
-// $uvmastercode = uws_cleanup_request("mastercode");
-$uvmastercode = urvenue_ws_cleanup_request("mastercode"); // Axl UWS-7416
-// $uvitemcode = uws_cleanup_request("itemcode");
-$uvitemcode = urvenue_ws_cleanup_request("itemcode"); // Axl UWS-7416
-// $uvcaldate = uws_cleanup_request("caldate");
-$uvcaldate = urvenue_ws_cleanup_request("caldate"); // Axl UWS-7416
-// $uvvenuecode = uws_cleanup_request("venuecode");
-$uvvenuecode = urvenue_ws_cleanup_request("venuecode"); // Axl UWS-7416
-// $uvecozone = uws_cleanup_request("ecozone");
-$uvecozone = urvenue_ws_cleanup_request("ecozone"); // Axl UWS-7416
-// $uvitemname = uws_cleanup_request("itemname");
-$uvitemname = urvenue_ws_cleanup_request("itemname"); // Axl UWS-7416
-// $uvpaytype = uws_cleanup_request("paytype");
-$uvpaytype = urvenue_ws_cleanup_request("paytype"); // Axl UWS-7416
-// $uvguests = uws_cleanup_request("guests");
-$uvguests = urvenue_ws_cleanup_request("guests"); // Axl UWS-7416
-// $uveventcode = uws_cleanup_request("eventcode");
-$uveventcode = urvenue_ws_cleanup_request("eventcode"); // Axl UWS-7416
-// $uvtime = uws_cleanup_request("time");
-$uvtime = urvenue_ws_cleanup_request("time"); // Axl UWS-7416
-// $uvduration = uws_cleanup_request("duration");
-$uvduration = urvenue_ws_cleanup_request("duration"); // Axl UWS-7416
-// $uvvendor = uws_cleanup_request("vendor");
-$uvvendor = urvenue_ws_cleanup_request("vendor"); // Axl UWS-7416
-// $uvgotocheck = uws_cleanup_request("gotocheck");
-$uvgotocheck = urvenue_ws_cleanup_request("gotocheck"); // Axl UWS-7416
-// $uvsectionid = uws_cleanup_request("sectionid");
-$uvsectionid = urvenue_ws_cleanup_request("sectionid"); // Axl UWS-7416
-// $uvlocationid = uws_cleanup_request("locationid");
-$uvlocationid = urvenue_ws_cleanup_request("locationid"); // Axl UWS-7416
-// $uvcartmanagementid = uws_cleanup_request("cartmanagementid");
-$uvcartmanagementid = urvenue_ws_cleanup_request("cartmanagementid"); // Axl UWS-7416
-// $uvmanageentid = uws_cleanup_request("manageentid");
-$uvmanageentid = urvenue_ws_cleanup_request("manageentid"); // Axl UWS-7416
-// $uvsubtotalagree = uws_cleanup_request("subtotalagree");
-$uvsubtotalagree = urvenue_ws_cleanup_request("subtotalagree"); // Axl UWS-7416
-// $uvsubinfo = (isset($_REQUEST["subinfo"])) ? $_REQUEST["subinfo"] : ""; // Axl UWS-7418
-$uvsubinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // Axl UWS-7418
-$uvapicartcode = $uvcartcount = "";
-$uvreturn = array();
+// $urvenue_ws_cartcode = uws_cleanup_request("cartcode");
+$urvenue_ws_cartcode = urvenue_ws_cleanup_request("cartcode"); // Axl UWS-7416
+// $urvenue_ws_mastercode = uws_cleanup_request("mastercode");
+$urvenue_ws_mastercode = urvenue_ws_cleanup_request("mastercode"); // Axl UWS-7416
+// $urvenue_ws_itemcode = uws_cleanup_request("itemcode");
+$urvenue_ws_itemcode = urvenue_ws_cleanup_request("itemcode"); // Axl UWS-7416
+// $urvenue_ws_caldate = uws_cleanup_request("caldate");
+$urvenue_ws_caldate = urvenue_ws_cleanup_request("caldate"); // Axl UWS-7416
+// $urvenue_ws_venuecode = uws_cleanup_request("venuecode");
+$urvenue_ws_venuecode = urvenue_ws_cleanup_request("venuecode"); // Axl UWS-7416
+// $urvenue_ws_ecozone = uws_cleanup_request("ecozone");
+$urvenue_ws_ecozone = urvenue_ws_cleanup_request("ecozone"); // Axl UWS-7416
+// $urvenue_ws_itemname = uws_cleanup_request("itemname");
+$urvenue_ws_itemname = urvenue_ws_cleanup_request("itemname"); // Axl UWS-7416
+// $urvenue_ws_paytype = uws_cleanup_request("paytype");
+$urvenue_ws_paytype = urvenue_ws_cleanup_request("paytype"); // Axl UWS-7416
+// $urvenue_ws_guests = uws_cleanup_request("guests");
+$urvenue_ws_guests = urvenue_ws_cleanup_request("guests"); // Axl UWS-7416
+// $urvenue_ws_eventcode = uws_cleanup_request("eventcode");
+$urvenue_ws_eventcode = urvenue_ws_cleanup_request("eventcode"); // Axl UWS-7416
+// $urvenue_ws_time = uws_cleanup_request("time");
+$urvenue_ws_time = urvenue_ws_cleanup_request("time"); // Axl UWS-7416
+// $urvenue_ws_duration = uws_cleanup_request("duration");
+$urvenue_ws_duration = urvenue_ws_cleanup_request("duration"); // Axl UWS-7416
+// $urvenue_ws_vendor = uws_cleanup_request("vendor");
+$urvenue_ws_vendor = urvenue_ws_cleanup_request("vendor"); // Axl UWS-7416
+// $urvenue_ws_gotocheck = uws_cleanup_request("gotocheck");
+$urvenue_ws_gotocheck = urvenue_ws_cleanup_request("gotocheck"); // Axl UWS-7416
+// $urvenue_ws_sectionid = uws_cleanup_request("sectionid");
+$urvenue_ws_sectionid = urvenue_ws_cleanup_request("sectionid"); // Axl UWS-7416
+// $urvenue_ws_locationid = uws_cleanup_request("locationid");
+$urvenue_ws_locationid = urvenue_ws_cleanup_request("locationid"); // Axl UWS-7416
+// $urvenue_ws_cartmanagementid = uws_cleanup_request("cartmanagementid");
+$urvenue_ws_cartmanagementid = urvenue_ws_cleanup_request("cartmanagementid"); // Axl UWS-7416
+// $urvenue_ws_manageentid = uws_cleanup_request("manageentid");
+$urvenue_ws_manageentid = urvenue_ws_cleanup_request("manageentid"); // Axl UWS-7416
+// $urvenue_ws_subtotalagree = uws_cleanup_request("subtotalagree");
+$urvenue_ws_subtotalagree = urvenue_ws_cleanup_request("subtotalagree"); // Axl UWS-7416
+// $urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? $_REQUEST["subinfo"] : ""; // Axl UWS-7418
+$urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // Axl UWS-7418
+$urvenue_ws_apicartcode = $urvenue_ws_cartcount = "";
+$urvenue_ws_return = array();
 
-$uvshiftcode = ($uvtime) ? "SHT" . $uvtime : "SHT0";
-$uvdurcode = ($uvduration) ? "DUR" . $uvduration : "DUR0";
+$urvenue_ws_shiftcode = ($urvenue_ws_time) ? "SHT" . $urvenue_ws_time : "SHT0";
+$urvenue_ws_durcode = ($urvenue_ws_duration) ? "DUR" . $urvenue_ws_duration : "DUR0";
 
-$uvitemdata = array(
-    "mastercode" => $uvmastercode,
-    "shiftcode" => $uvshiftcode,
-    "durcode" => $uvdurcode,
-    "qty" => $uvguests,
-    "paytype" => $uvpaytype,
-    "subtotalagree" => $uvsubtotalagree,
+$urvenue_ws_itemdata = array(
+    "mastercode" => $urvenue_ws_mastercode,
+    "shiftcode" => $urvenue_ws_shiftcode,
+    "durcode" => $urvenue_ws_durcode,
+    "qty" => $urvenue_ws_guests,
+    "paytype" => $urvenue_ws_paytype,
+    "subtotalagree" => $urvenue_ws_subtotalagree,
 );
 
-if($uvmastercode){
-    if($uvcartcode){
-        $uvaddcartendpoint = $urvenue_ws_feeds_lib["cartv2-add"]["url"];
-        $uvitemdata["cartcode"] = $uvcartcode;
-        $uvitemdatabuild = http_build_query($uvitemdata, 'flags_');
+if($urvenue_ws_mastercode){
+    if($urvenue_ws_cartcode){
+        $urvenue_ws_addcartendpoint = $urvenue_ws_feeds_lib["cartv2-add"]["url"];
+        $urvenue_ws_itemdata["cartcode"] = $urvenue_ws_cartcode;
+        $urvenue_ws_itemdatabuild = http_build_query($urvenue_ws_itemdata, 'flags_');
 
         // TESTING @Axl
         // $uvch = curl_init();
-        // curl_setopt($uvch, CURLOPT_URL, $uvaddcartendpoint);
+        // curl_setopt($uvch, CURLOPT_URL, $urvenue_ws_addcartendpoint);
         // curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "PUT");
         // curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
-        // curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
-        // $uvresultraw = curl_exec($uvch);
-        $uvresponse = wp_remote_request($uvaddcartendpoint, array(
+        // curl_setopt($uvch, CURLOPT_POSTFIELDS, $urvenue_ws_itemdatabuild);
+        // $urvenue_ws_resultraw = curl_exec($uvch);
+        $urvenue_ws_response = wp_remote_request($urvenue_ws_addcartendpoint, array(
             'method' => 'PUT',
-            'body' => $uvitemdatabuild,
+            'body' => $urvenue_ws_itemdatabuild,
             'timeout' => 60,
         ));
-        $uvresultraw = wp_remote_retrieve_body($uvresponse);
+        $urvenue_ws_resultraw = wp_remote_retrieve_body($urvenue_ws_response);
 
-        $uvresult = json_decode($uvresultraw, true);
+        $urvenue_ws_result = json_decode($urvenue_ws_resultraw, true);
 
         // TESTING @Axl
         // curl_close($uvch);
 
         if($urvenue_ws_feeds_debug){
-            print_r($uvitemdata);
-            // uws_feed_debug_msg("Adding item to cart: $uvcartcode -- endpoint: $uvaddcartendpoint");
-            urvenue_ws_feed_debug_msg("Adding item to cart: $uvcartcode -- endpoint: $uvaddcartendpoint"); // Axl UWS-7416
-            print_r($uvresult);
+            print_r($urvenue_ws_itemdata);
+            // uws_feed_debug_msg("Adding item to cart: $urvenue_ws_cartcode -- endpoint: $urvenue_ws_addcartendpoint");
+            urvenue_ws_feed_debug_msg("Adding item to cart: $urvenue_ws_cartcode -- endpoint: $urvenue_ws_addcartendpoint"); // Axl UWS-7416
+            print_r($urvenue_ws_result);
         }
     }
     else{
-        $uvcreatecartendpoint = $urvenue_ws_feeds_lib["cartv2-create"]["url"];
-        // $uvrequestinfo = uws_get_requestinfo();
-        $uvrequestinfo = urvenue_ws_get_requestinfo(); // Axl UWS-7416
+        $urvenue_ws_createcartendpoint = $urvenue_ws_feeds_lib["cartv2-create"]["url"];
+        // $urvenue_ws_requestinfo = uws_get_requestinfo();
+        $urvenue_ws_requestinfo = urvenue_ws_get_requestinfo(); // Axl UWS-7416
 
-        if($uvsubinfo)
-            $uvitemdata["meta"]["subscriptions"] = $uvsubinfo;
-        $uvitemdatabuild = http_build_query($uvitemdata, 'flags_');
+        if($urvenue_ws_subinfo)
+            $urvenue_ws_itemdata["meta"]["subscriptions"] = $urvenue_ws_subinfo;
+        $urvenue_ws_itemdatabuild = http_build_query($urvenue_ws_itemdata, 'flags_');
 
         // TESTING @Axl
         // $uvch = curl_init();
-        // curl_setopt($uvch, CURLOPT_URL, $uvcreatecartendpoint);
+        // curl_setopt($uvch, CURLOPT_URL, $urvenue_ws_createcartendpoint);
         // curl_setopt($uvch, CURLOPT_POST, true);
         // curl_setopt($uvch, CURLOPT_CUSTOMREQUEST, "POST");
         // curl_setopt($uvch, CURLOPT_RETURNTRANSFER, true); 
-        // curl_setopt($uvch, CURLOPT_POSTFIELDS, $uvitemdatabuild);
-        // $uvresultraw = curl_exec($uvch);
-        $uvresponse = wp_remote_post($uvcreatecartendpoint, array(
-            'body' => $uvitemdatabuild,
+        // curl_setopt($uvch, CURLOPT_POSTFIELDS, $urvenue_ws_itemdatabuild);
+        // $urvenue_ws_resultraw = curl_exec($uvch);
+        $urvenue_ws_response = wp_remote_post($urvenue_ws_createcartendpoint, array(
+            'body' => $urvenue_ws_itemdatabuild,
             'timeout' => 60,
         ));
-        $uvresultraw = wp_remote_retrieve_body($uvresponse);
+        $urvenue_ws_resultraw = wp_remote_retrieve_body($urvenue_ws_response);
 
-        $uvresult = json_decode($uvresultraw, true);
+        $urvenue_ws_result = json_decode($urvenue_ws_resultraw, true);
         
         // TESTING @Axl
         // curl_close($uvch);
 
         if($urvenue_ws_feeds_debug){
-            print_r($uvitemdata);
-            // uws_feed_debug_msg("Creating new cart, endpoint: $uvcreatecartendpoint");
-            urvenue_ws_feed_debug_msg("Creating new cart, endpoint: $uvcreatecartendpoint"); // Axl UWS-7416
-            print_r($uvresult);
+            print_r($urvenue_ws_itemdata);
+            // uws_feed_debug_msg("Creating new cart, endpoint: $urvenue_ws_createcartendpoint");
+            urvenue_ws_feed_debug_msg("Creating new cart, endpoint: $urvenue_ws_createcartendpoint"); // Axl UWS-7416
+            print_r($urvenue_ws_result);
         }
     }
 
-    if(is_array($uvresult) and $uvresult["success"]){
-        $uvapicartcode = $uvresult["data"]["cartcode"];
-        $uvcartitemcode = $uvresult["data"]["cartitemcode"];
-        $uvcartcount = $uvresult["data"]["cartcount"];
+    if(is_array($urvenue_ws_result) and $urvenue_ws_result["success"]){
+        $urvenue_ws_apicartcode = $urvenue_ws_result["data"]["cartcode"];
+        $urvenue_ws_cartitemcode = $urvenue_ws_result["data"]["cartitemcode"];
+        $urvenue_ws_cartcount = $urvenue_ws_result["data"]["cartcount"];
     }
-    else if(is_array($uvresult) and $uvresult["message"]){
-        $uvapierrormsg = $uvresult["message"];
+    else if(is_array($urvenue_ws_result) and $urvenue_ws_result["message"]){
+        $urvenue_ws_apierrormsg = $urvenue_ws_result["message"];
 
-        if(strpos($uvapierrormsg, "Cart expired") !== false or strpos($uvapierrormsg, "Cart already redeemed") !== false or strpos($uvapierrormsg, "Cart not found") !== false){
-            $uvreturn["recreate"] = 1;
+        if(strpos($urvenue_ws_apierrormsg, "Cart expired") !== false or strpos($urvenue_ws_apierrormsg, "Cart already redeemed") !== false or strpos($urvenue_ws_apierrormsg, "Cart not found") !== false){
+            $urvenue_ws_return["recreate"] = 1;
         }
     }
 
-    if($uvapicartcode){
-        $uvsidebartarget = ($uvgotocheck) ? "checkout-checkurl" : "checkout-carturl";
-        // $uvcheckoutlinks = uws_get_bkgcheckout_links($uvapicartcode);
-        $uvcheckoutlinks = urvenue_ws_get_bkgcheckout_links($uvapicartcode); // Axl UWS-7416
-        $uvsidebarcheckurl = $uvcheckoutlinks[$uvsidebartarget];
+    if($urvenue_ws_apicartcode){
+        $urvenue_ws_sidebartarget = ($urvenue_ws_gotocheck) ? "checkout-checkurl" : "checkout-carturl";
+        // $urvenue_ws_checkoutlinks = uws_get_bkgcheckout_links($urvenue_ws_apicartcode);
+        $urvenue_ws_checkoutlinks = urvenue_ws_get_bkgcheckout_links($urvenue_ws_apicartcode); // Axl UWS-7416
+        $urvenue_ws_sidebarcheckurl = $urvenue_ws_checkoutlinks[$urvenue_ws_sidebartarget];
 
-        $uvcheckcarturl = $uvcheckoutlinks["checkout-carturl"];
-        $uvcheckcheckurl = $uvcheckoutlinks["checkout-checkurl"];
+        $urvenue_ws_checkcarturl = $urvenue_ws_checkoutlinks["checkout-carturl"];
+        $urvenue_ws_checkcheckurl = $urvenue_ws_checkoutlinks["checkout-checkurl"];
 
-        $uvreturn["cartcode"] = $uvapicartcode;
-        $uvreturn["opencheck"] = $uvsidebarcheckurl;
-        $uvcartreturn["cartcount"] = $uvcartcount;
-        $uvcartreturn["checkout-carturl"] = $uvcheckcarturl;
-        $uvcartreturn["checkout-checkurl"] = $uvcheckcheckurl;
-        $uvreturn["cart"] = $uvcartreturn;
-        $uvreturn["issidecheck"] = 1;
+        $urvenue_ws_return["cartcode"] = $urvenue_ws_apicartcode;
+        $urvenue_ws_return["opencheck"] = $urvenue_ws_sidebarcheckurl;
+        $urvenue_ws_cartreturn["cartcount"] = $urvenue_ws_cartcount;
+        $urvenue_ws_cartreturn["checkout-carturl"] = $urvenue_ws_checkcarturl;
+        $urvenue_ws_cartreturn["checkout-checkurl"] = $urvenue_ws_checkcheckurl;
+        $urvenue_ws_return["cart"] = $urvenue_ws_cartreturn;
+        $urvenue_ws_return["issidecheck"] = 1;
     }
     else{
-        // $uvpophtml = uws_get_template("inventory/inventory-cart-itemadded-error-pop");
-        $uvpophtml = urvenue_ws_get_template("inventory/inventory-cart-itemadded-error-pop"); // Axl UWS-7416
-        $uvpophtml = str_replace("{apierrormsg}", $uvapierrormsg, $uvpophtml);
-        $uvreturn["html"] = $uvpophtml;
+        // $urvenue_ws_pophtml = uws_get_template("inventory/inventory-cart-itemadded-error-pop");
+        $urvenue_ws_pophtml = urvenue_ws_get_template("inventory/inventory-cart-itemadded-error-pop"); // Axl UWS-7416
+        $urvenue_ws_pophtml = str_replace("{apierrormsg}", $urvenue_ws_apierrormsg, $urvenue_ws_pophtml);
+        $urvenue_ws_return["html"] = $urvenue_ws_pophtml;
     }
 }
 
-//print_r($uvitemdata);
+//print_r($urvenue_ws_itemdata);
 
 // @Axl
-// $uvreturnjson = json_encode($uvreturn);
-$uvreturnjson = wp_json_encode($uvreturn);
+// $urvenue_ws_returnjson = json_encode($urvenue_ws_return);
+$urvenue_ws_returnjson = wp_json_encode($urvenue_ws_return);
 // @Axl End
 header('Content-Type: application/json');
-// echo($uvreturnjson);
-echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
+// echo($urvenue_ws_returnjson);
+echo( $urvenue_ws_returnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
