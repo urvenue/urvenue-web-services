@@ -83,7 +83,8 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
         $uvvenueselector .= "<div class='uws-inputcont uws-leadtypeselector $uvleadtypeselectorclass'><label for='uwsinqleadtype'>Request Type*</label><div class='uwsdy-leadtypeselector'>$uvleadtypeselector</div></div>";
     }
 
-    $uvdpinitialdate = date("M j, Y", strtotime($urvenue_ws_today));
+    // $uvdpinitialdate = date("M j, Y", strtotime($urvenue_ws_today));
+    $uvdpinitialdate = gmdate("M j, Y", strtotime($urvenue_ws_today)); // Axl UWS-7416
     $uvinqdateselector = "
     <div class='uws-inputcont uws-isdateinput'>
         <div class='uws-inquiry-dpinput uws-dropdown-cont'>

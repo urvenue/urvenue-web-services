@@ -192,12 +192,15 @@ function urvenue_ws_get_monthslis($uvcurrentdate = ""){ // Axl UWS-7416
     $uvmonthlidate = strtotime($uvmonthlidate);
 
     for($i=0; $i<$uvnmonths; $i++){
-        $uvmonthlifdate = date("Y-m-01", $uvmonthlidate);
-        $uvmonthlimname = date("F", $uvmonthlidate);
-        $uvmonthliyear = date("Y", $uvmonthlidate);
+        // $uvmonthlifdate = date("Y-m-01", $uvmonthlidate);
+        $uvmonthlifdate = gmdate("Y-m-01", $uvmonthlidate); // Axl UWS-7416
+        // $uvmonthlimname = date("F", $uvmonthlidate);
+        $uvmonthlimname = gmdate("F", $uvmonthlidate); // Axl UWS-7416
+        // $uvmonthliyear = date("Y", $uvmonthlidate);
+        $uvmonthliyear = gmdate("Y", $uvmonthlidate); // Axl UWS-7416
 
         $uvmonthlifdate = ($uvmonthlifdate < $uvcurrentdate) ? $uvcurrentdate : $uvmonthlifdate;
-        
+
         $uvmonthslis .= "<li class='$uvfirstmonthclass'><button class='uwsjs-events-selectmonth' aria-label='Select $uvmonthlimname' type='button' data-date='$uvmonthlifdate'>$uvmonthlimname $uvmonthliyear</button></li>";
 
         $uvmonthlidate = strtotime("+1 month", $uvmonthlidate);
@@ -220,9 +223,12 @@ function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){ // Axl UWS-7416
     $uvmonthlidate = strtotime($uvmonthlidate);
 
     for($i=0; $i<$uvnmonths; $i++){
-        $uvmonthlifdate = date("Y-m-01", $uvmonthlidate);
-        $uvmonthlimname = date("F", $uvmonthlidate);
-        $uvmonthliyear = date("Y", $uvmonthlidate);
+        // $uvmonthlifdate = date("Y-m-01", $uvmonthlidate);
+        $uvmonthlifdate = gmdate("Y-m-01", $uvmonthlidate); // Axl UWS-7416
+        // $uvmonthlimname = date("F", $uvmonthlidate);
+        $uvmonthlimname = gmdate("F", $uvmonthlidate); // Axl UWS-7416
+        // $uvmonthliyear = date("Y", $uvmonthlidate);
+        $uvmonthliyear = gmdate("Y", $uvmonthlidate); // Axl UWS-7416
 
         $uvmonthlifdate = ($uvmonthlifdate < $uvcurrentdate) ? $uvcurrentdate : $uvmonthlifdate;
         $uvmonthsstring .= $uvmonthlifdate . ",";
@@ -243,10 +249,12 @@ function urvenue_ws_get_events_max_date($uvdateformat = ""){ // Axl UWS-7416
     global $urvenue_ws_core_lib, $urvenue_ws_today;
 
     $uvnmonths = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["eventspage-monthsrange"]) ? $urvenue_ws_core_lib["events"]["eventspage-monthsrange"] : 6;
-    $uvmaxdate = date("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months"));
+    // $uvmaxdate = date("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months"));
+    $uvmaxdate = gmdate("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months")); // Axl UWS-7416
 
     if($uvdateformat)
-        $uvmaxdate = date($uvdateformat, strtotime($uvmaxdate));
+        // $uvmaxdate = date($uvdateformat, strtotime($uvmaxdate));
+        $uvmaxdate = gmdate($uvdateformat, strtotime($uvmaxdate)); // Axl UWS-7416
 
     return $uvmaxdate;
 }
@@ -263,7 +271,8 @@ function urvenue_ws_get_events_initial_date($uvdateformat = ""){ // Axl UWS-7416
     if($uvlibeventsinitialdate < $urvenue_ws_today) $uvlibeventsinitialdate = $urvenue_ws_today;
 
     if($uvdateformat)
-        $uvlibeventsinitialdate = date($uvdateformat, strtotime($uvlibeventsinitialdate));
+        // $uvlibeventsinitialdate = date($uvdateformat, strtotime($uvlibeventsinitialdate));
+        $uvlibeventsinitialdate = gmdate($uvdateformat, strtotime($uvlibeventsinitialdate)); // Axl UWS-7416
 
     return $uvlibeventsinitialdate;
 }
@@ -279,10 +288,12 @@ function urvenue_ws_get_events_endinit_date($uvdateformat = ""){ // Axl UWS-7416
     // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
     $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
     $uvnmonths = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["global-nmonths"]) ? $urvenue_ws_core_lib["events"]["global-nmonths"] : 2;
-    $uvenddate = date("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months"));
+    // $uvenddate = date("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months"));
+    $uvenddate = gmdate("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months")); // Axl UWS-7416
 
     if($uvdateformat)
-        $uvenddate = date($uvdateformat, strtotime($uvenddate));
+        // $uvenddate = date($uvdateformat, strtotime($uvenddate));
+        $uvenddate = gmdate($uvdateformat, strtotime($uvenddate)); // Axl UWS-7416
 
     return $uvenddate;
 }

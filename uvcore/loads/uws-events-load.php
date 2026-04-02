@@ -52,7 +52,8 @@ else
 
 // $urvenue_ws_eventsviews = uws_events_views($urvenue_ws_args, true);
 $urvenue_ws_eventsviews = urvenue_ws_events_views($urvenue_ws_args, true); // Axl UWS-7416
-$urvenue_ws_eventsviews["nextloaddate"] = date("Y-m-d", strtotime($urvenue_ws_eventsviews["todate"] . " +1 day"));
+// $urvenue_ws_eventsviews["nextloaddate"] = date("Y-m-d", strtotime($urvenue_ws_eventsviews["todate"] . " +1 day"));
+$urvenue_ws_eventsviews["nextloaddate"] = gmdate("Y-m-d", strtotime($urvenue_ws_eventsviews["todate"] . " +1 day")); // Axl UWS-7416
 
 $urvenue_ws_returnjson = "";
 

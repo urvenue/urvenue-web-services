@@ -353,7 +353,8 @@ function urvenue_ws_shortcode_map($atts, $content = null) // Axl UWS-7416
 
 		if (is_array($uws_no_inventory_dates) && isset($uws_no_inventory_dates["noinventorydates"]) && in_array($uvdate, $uws_no_inventory_dates["noinventorydates"])) {
 			while (in_array($uvdate, $uws_no_inventory_dates["noinventorydates"])) {
-				$uvdate = date('Y-m-d', strtotime($uvdate . ' +1 day'));
+				// $uvdate = date('Y-m-d', strtotime($uvdate . ' +1 day'));
+				$uvdate = gmdate('Y-m-d', strtotime($uvdate . ' +1 day')); // Axl UWS-7416
 			}
 
 			$uvstartdate = $uvdate;

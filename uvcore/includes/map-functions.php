@@ -247,7 +247,7 @@ function urvenue_ws_get_map_ecozonessel($uvargs = ""){ // Axl UWS-7416
         $uvecozone = ($uvnogroupings) ? "ECZ0" : $uvecozone;
         // $uvecozonestd = uws_standardize_ecozone($uvecozone);
         $uvecozonestd = urvenue_ws_standardize_ecozone($uvecozone); // Axl UWS-7416
-        $uveventcode = "EVE" . str_replace("VEN", "", $uvvenuecode) . str_replace("ECZ", "", $uvecozonestd) . date("Ymd", strtotime($uvdate));
+        $uveventcode = "EVE" . str_replace("VEN", "", $uvvenuecode) . str_replace("ECZ", "", $uvecozonestd) . gmdate("Ymd", strtotime($uvdate)); // Axl UWS-7416
         // $uveventinfo = uws_get_event($uveventcode);
         $uveventinfo = urvenue_ws_get_event($uveventcode); // Axl UWS-7416
 
@@ -292,7 +292,8 @@ function urvenue_ws_get_map_selsstring($uvargs = ""){ // Axl UWS-7416
 
     // $uvdate = uws_get_arg($uvargs, "date", $urvenue_ws_today);
     $uvdate = urvenue_ws_get_arg($uvargs, "date", $urvenue_ws_today); // Axl UWS-7416
-    $uvddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate));
+    // $uvddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate));
+    $uvddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate)); // Axl UWS-7416
 
     // $uvvenuecode = uws_get_arg($uvargs, "venuecode");
     $uvvenuecode = urvenue_ws_get_arg($uvargs, "venuecode"); // Axl UWS-7416
@@ -343,7 +344,8 @@ function urvenue_ws_get_map_datesel($uvargs = ""){ // Axl UWS-7416
     $uvdate = urvenue_ws_get_arg($uvargs, "date", $urvenue_ws_today); // Axl UWS-7416
     $uvdate = ($uvdate < $urvenue_ws_today) ? $urvenue_ws_today : $uvdate;
     //$uvddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate));
-    $uvddate = date("M j, Y", strtotime($uvdate));
+    // $uvddate = date("M j, Y", strtotime($uvdate));
+    $uvddate = gmdate("M j, Y", strtotime($uvdate)); // Axl UWS-7416
     // $uvchangemapdatelabel = uws_lang("change-map-date");
     $uvchangemapdatelabel = urvenue_ws_lang("change-map-date"); // Axl UWS-7416
     // $uvddatelang = uws_lang_date($uvddate);
@@ -440,7 +442,7 @@ function urvenue_ws_get_map_stage($uvargs){ // Axl UWS-7416
     if(is_array($uvargs) and $uvdate and $uvvenuecode and $uvecozone){
         // $uvecozonestd = uws_standardize_ecozone($uvecozoneevent);
         $uvecozonestd = urvenue_ws_standardize_ecozone($uvecozoneevent); // Axl UWS-7416
-        $uveventcode = "EVE" . str_replace("VEN", "", $uvvenuecode) . str_replace("ECZ", "", $uvecozonestd) . date("Ymd", strtotime($uvdate));
+        $uveventcode = "EVE" . str_replace("VEN", "", $uvvenuecode) . str_replace("ECZ", "", $uvecozonestd) . gmdate("Ymd", strtotime($uvdate)); // Axl UWS-7416
         // $uveventinfoandeczmap = uws_get_event($uveventcode, array("returnecozonesmap" => 1));
         $uveventinfoandeczmap = urvenue_ws_get_event($uveventcode, array("returnecozonesmap" => 1)); // Axl UWS-7416
         $uveventinfo = $uveventinfoandeczmap["event"];
@@ -504,7 +506,7 @@ function urvenue_ws_get_map_stage($uvargs){ // Axl UWS-7416
 
             //Is multiecozone integration
             if(isset($uveventinfo["ecozones"]) and is_array($uveventinfo["ecozones"]) and count($uveventinfo["ecozones"]) > 1){
-                $uvinventorymasterlist = $uvinventorymapdata["inventory"]["D" . date("ymd", strtotime($uvdate))]["venues"][$uvvenuecode]["masterlist"];
+                $uvinventorymasterlist = $uvinventorymapdata["inventory"]["D" . gmdate("ymd", strtotime($uvdate))]["venues"][$uvvenuecode]["masterlist"]; // Axl UWS-7416
                 // $uvmapinfo = uws_map_tomultiecozones($uvmapinfo, $uvinventorymasterlist);
                 $uvmapinfo = urvenue_ws_map_tomultiecozones($uvmapinfo, $uvinventorymasterlist); // Axl UWS-7416
             }
@@ -531,7 +533,8 @@ function urvenue_ws_get_map_stage($uvargs){ // Axl UWS-7416
                 /*if($uveventinfo && is_array($uveventinfo) && isset($uveventinfo["ecozones"]) && is_array($uveventinfo["ecozones"]) && count($uveventinfo["ecozones"]) > 1)
                     $uvargs["ecozones"] = $uveventinfo["ecozones"];*/   
 
-                $uvsdate = date("ymd", strtotime($uvdate));
+                // $uvsdate = date("ymd", strtotime($uvdate));
+                $uvsdate = gmdate("ymd", strtotime($uvdate)); // Axl UWS-7416
                 // $uvecozone = uws_standardize_ecozone($uvecozone);
                 $uvecozone = urvenue_ws_standardize_ecozone($uvecozone); // Axl UWS-7416
                 
@@ -778,7 +781,8 @@ function urvenue_ws_map_get_list($uvinventorymapfeed, $uvargs, $uvlisttype = "se
             $uvdate = urvenue_ws_get_arg($uvargs, "date"); // Axl UWS-7416
             // $uvvenuecode = uws_get_arg($uvargs, "venuecode");
             $uvvenuecode = urvenue_ws_get_arg($uvargs, "venuecode"); // Axl UWS-7416
-            $uvsdate = date("ymd", strtotime($uvdate));
+            // $uvsdate = date("ymd", strtotime($uvdate));
+            $uvsdate = gmdate("ymd", strtotime($uvdate)); // Axl UWS-7416
             $uvmapitemslist = $uvinventorymapfeed["items"]; //$uvinventorymapfeed["inventory"]["D" . $uvsdate]["venues"][$uvvenuecode]["ecozones"][$uvecozone]["items"];
             // $uvmaplistitems = uws_get_map_booktypeslist($uvmapitemslist, $uvmapinfo);
             $uvmaplistitems = urvenue_ws_get_map_booktypeslist($uvmapitemslist, $uvmapinfo); // Axl UWS-7416

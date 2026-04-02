@@ -39,7 +39,7 @@ function urvenue_ws_get_core_library(){ // Axl UWS-7416
 function urvenue_ws_get_today(){ // Axl UWS-7416
     global $urvenue_ws_today;
 
-    $uvtoday = ($urvenue_ws_today) ? $urvenue_ws_today : date("Y-m-d");
+    $uvtoday = ($urvenue_ws_today) ? $urvenue_ws_today : gmdate("Y-m-d"); // Axl UWS-7416
 
     return $uvtoday;
 }
@@ -487,7 +487,8 @@ function urvenue_ws_get_formattime($uvtime, $uvreturnarray = 0){ // Axl UWS-7416
 	$uvdtime = "";
 
 	if($uvtime){
-    	$uvdtime = date("g:ia", strtotime(substr($uvtime, 1, 4)));
+    	// $uvdtime = date("g:ia", strtotime(substr($uvtime, 1, 4)));
+    	$uvdtime = gmdate("g:ia", strtotime(substr($uvtime, 1, 4))); // Axl UWS-7416
 		$uvisaftermid = (substr($uvtime, 0, 1) == "2") ? 1 : 0;
 
 		if($uvreturnarray)
@@ -515,9 +516,11 @@ function urvenue_ws_get_iso_time($uvdate = "", $uvtime = ""){ // Axl UWS-7416
 
 		if($uvtime){
 			if(substr($uvtime, 0, 1) == "2")
-				$uvisotime = date("Y-m-d", strtotime($uvisotime . " +1 day"));
+				// $uvisotime = date("Y-m-d", strtotime($uvisotime . " +1 day"));
+				$uvisotime = gmdate("Y-m-d", strtotime($uvisotime . " +1 day")); // Axl UWS-7416
 
-			$uvtimeiso = date("H:i:s", strtotime(substr($uvtime, 1, 4)));
+			// $uvtimeiso = date("H:i:s", strtotime(substr($uvtime, 1, 4)));
+			$uvtimeiso = gmdate("H:i:s", strtotime(substr($uvtime, 1, 4))); // Axl UWS-7416
 			$uvisotime = $uvisotime . "T" . $uvtimeiso;
 		}
 	}
@@ -546,7 +549,7 @@ function urvenue_ws_get_formatduration($uvminutes = ""){ // Axl UWS-7416
 */
 // function uws_add_minutestotime($uvtime, $uvminutes){
 function urvenue_ws_add_minutestotime($uvtime, $uvminutes){ // Axl UWS-7416
-	$uvnewtime = substr($uvtime, 0, 1) . date("Hi", strtotime(substr($uvtime, 1, 4) . " +$uvminutes minutes"));
+	$uvnewtime = substr($uvtime, 0, 1) . gmdate("Hi", strtotime(substr($uvtime, 1, 4) . " +$uvminutes minutes")); // Axl UWS-7416
 
 	return $uvnewtime;
 }

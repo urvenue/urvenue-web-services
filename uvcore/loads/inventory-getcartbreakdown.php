@@ -57,8 +57,9 @@ $urvenue_ws_ecozone = urvenue_ws_standardize_ecozone($urvenue_ws_ecozone); // Ax
 // $urvenue_ws_ecozoneid = uws_ecozone_to_ecoid($urvenue_ws_ecozone);
 $urvenue_ws_ecozoneid = urvenue_ws_ecozone_to_ecoid($urvenue_ws_ecozone); // Axl UWS-7416
 if(!$urvenue_ws_eventcode)
-    $urvenue_ws_eventcode = "EVE" . str_replace("VEN", "", $urvenue_ws_venuecode) . str_replace("ECZ", "", $urvenue_ws_ecozone) . date("Ymd", strtotime($urvenue_ws_caldate));
-    
+    // $urvenue_ws_eventcode = "EVE" . str_replace("VEN", "", $urvenue_ws_venuecode) . str_replace("ECZ", "", $urvenue_ws_ecozone) . date("Ymd", strtotime($urvenue_ws_caldate));
+    $urvenue_ws_eventcode = "EVE" . str_replace("VEN", "", $urvenue_ws_venuecode) . str_replace("ECZ", "", $urvenue_ws_ecozone) . gmdate("Ymd", strtotime($urvenue_ws_caldate)); // Axl UWS-7416
+
 $urvenue_ws_vendata = array(
     "venuecode" => $urvenue_ws_venuecode,
     "eventcode" => $urvenue_ws_eventcode,
