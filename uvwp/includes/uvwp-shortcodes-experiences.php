@@ -2,8 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //Experiences Date Filter
-function shrotcode_uws_experiences_date_filter($atts, $content = null){
-    global $uws_path;
+// function shrotcode_uws_experiences_date_filter($atts, $content = null){
+function urvenue_ws_shortcode_experiences_date_filter($atts, $content = null){ // Axl UWS-7416
+    global $urvenue_ws_path;
 
 	extract(shortcode_atts(array(
 		"date" => "",
@@ -22,7 +23,7 @@ function shrotcode_uws_experiences_date_filter($atts, $content = null){
 	wp_enqueue_script('uws-experiences-scripts');
 	wp_enqueue_script('litepicker');
     
-    include_once($uws_path . "/includes/experiences-functions.php");
+    include_once($urvenue_ws_path . "/includes/experiences-functions.php");
 	$uvargs = ($date) ? array("date" => $date) : "";
     // $uvexperiencesfilter = uws_get_experiences_date_filter($uvargs);
     $uvexperiencesfilter = urvenue_ws_get_experiences_date_filter($uvargs); // Axl UWS-7416
@@ -36,11 +37,13 @@ function shrotcode_uws_experiences_date_filter($atts, $content = null){
 
 	return $content;
 }
-add_shortcode("uws_experiences_date_filter", "shrotcode_uws_experiences_date_filter");
+// add_shortcode("uws_experiences_date_filter", "shrotcode_uws_experiences_date_filter");
+add_shortcode("uws_experiences_date_filter", "urvenue_ws_shortcode_experiences_date_filter"); // Axl UWS-7416
 
 //Experiences Filters + List
-function shrotcode_uws_experiences($atts, $content = null){
-    global $uws_path;
+// function shrotcode_uws_experiences($atts, $content = null){
+function urvenue_ws_shortcode_experiences($atts, $content = null){ // Axl UWS-7416
+    global $urvenue_ws_path;
 
 	extract(shortcode_atts(array(
 		"category" => "",
@@ -68,7 +71,7 @@ function shrotcode_uws_experiences($atts, $content = null){
 	if(isset($_REQUEST["apireq"]))
         wp_enqueue_script('uws-apireq');
     
-    include_once($uws_path . "/includes/experiences-functions.php");
+    include_once($urvenue_ws_path . "/includes/experiences-functions.php");
 
 	$uvargs = "";
 	if($view){
@@ -93,12 +96,14 @@ function shrotcode_uws_experiences($atts, $content = null){
 
 	return $content;
 }
-add_shortcode("uws_experiences", "shrotcode_uws_experiences");
+// add_shortcode("uws_experiences", "shrotcode_uws_experiences");
+add_shortcode("uws_experiences", "urvenue_ws_shortcode_experiences"); // Axl UWS-7416
 
 
 //Related Experiences
-function shrotcode_uws_related_experiences($atts, $content = null){
-    global $uws_path;
+// function shrotcode_uws_related_experiences($atts, $content = null){
+function urvenue_ws_shortcode_related_experiences($atts, $content = null){ // Axl UWS-7416
+    global $urvenue_ws_path;
 
 	extract(shortcode_atts(array(
 		"nexperiences" => "3",
@@ -112,7 +117,7 @@ function shrotcode_uws_related_experiences($atts, $content = null){
 	wp_enqueue_style('uws-icons-styles');
 	wp_enqueue_style('uws-inventory-styles');
     
-    include_once($uws_path . "/includes/experiences-functions.php");
+    include_once($urvenue_ws_path . "/includes/experiences-functions.php");
 
 	$uvargs = array(
 		"customclass" => "uws-expview-agenda",
@@ -127,4 +132,5 @@ function shrotcode_uws_related_experiences($atts, $content = null){
 
 	return $content;
 }
-add_shortcode("uws_related_experiences", "shrotcode_uws_related_experiences");
+// add_shortcode("uws_related_experiences", "shrotcode_uws_related_experiences");
+add_shortcode("uws_related_experiences", "urvenue_ws_shortcode_related_experiences"); // Axl UWS-7416

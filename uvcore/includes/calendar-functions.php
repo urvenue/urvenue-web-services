@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 */
 // function uws_events(){
 function urvenue_ws_events(){ // Axl UWS-7416
-    global $uws_core_lib, $uws_today;
+    global $urvenue_ws_core_lib, $urvenue_ws_today;
 
     // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
     $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
@@ -34,10 +34,10 @@ function urvenue_ws_events(){ // Axl UWS-7416
 /*Get events views*/
 // function uws_events_views(){
 function urvenue_ws_events_views(){ // Axl UWS-7416
-    global $uws_core_lib;
+    global $urvenue_ws_core_lib;
 
     $uvviewshtml = "";
-    $uvviews = (isset($uws_core_lib["events"])) ? $uws_core_lib["events"]["eventspage-views"] : "";
+    $uvviews = (isset($urvenue_ws_core_lib["events"])) ? $urvenue_ws_core_lib["events"]["eventspage-views"] : "";
 
     if(is_array($uvviews)){
         $uvviewsmenu = "<ul>";
@@ -59,9 +59,9 @@ function urvenue_ws_events_views(){ // Axl UWS-7416
 */
 // function uws_events_controls(){
 function urvenue_ws_events_controls(){ // Axl UWS-7416
-    global $uws_core_lib;
+    global $urvenue_ws_core_lib;
 
-    $uvdateselectortype = $uws_core_lib["events"]["eventspage-dateselector"]; //"datepicker-date", "datepicker-range", "month-dropdown", "month-arrows"
+    $uvdateselectortype = $urvenue_ws_core_lib["events"]["eventspage-dateselector"]; //"datepicker-date", "datepicker-range", "month-dropdown", "month-arrows"
 
     if($uvdateselectortype == "datepicker-date"){
         // $uvinitialddate = uws_get_events_initial_date("M j, Y");
@@ -149,11 +149,11 @@ function urvenue_ws_events_controls(){ // Axl UWS-7416
 /*Get List of views menu*/
 // function uws_get_events_view_menu(){
 function urvenue_ws_get_events_view_menu(){ // Axl UWS-7416
-    global $uws_core_lib;
+    global $urvenue_ws_core_lib;
 
     $uvviewsmenu = "";
     $uvviewordered = array();
-    $uvviews = (isset($uws_core_lib["events"])) ? $uws_core_lib["events"]["eventspage-views"] : "";
+    $uvviews = (isset($urvenue_ws_core_lib["events"])) ? $urvenue_ws_core_lib["events"]["eventspage-views"] : "";
 
     if(is_array($uvviews)){
         $uvviewsmenu = "<ul>";
@@ -181,10 +181,10 @@ function urvenue_ws_get_events_view_menu(){ // Axl UWS-7416
 // Get list of months for calendar dropdown
 // function uws_get_monthslis($uvcurrentdate = ""){
 function urvenue_ws_get_monthslis($uvcurrentdate = ""){ // Axl UWS-7416
-    global $uws_core_lib, $uws_today;
+    global $urvenue_ws_core_lib, $urvenue_ws_today;
 
-    $uvcurrentdate = ($uvcurrentdate) ? $uvcurrentdate : $uws_today;
-    $uvnmonths = $uws_core_lib["events"]["eventspage-monthsrange"];
+    $uvcurrentdate = ($uvcurrentdate) ? $uvcurrentdate : $urvenue_ws_today;
+    $uvnmonths = $urvenue_ws_core_lib["events"]["eventspage-monthsrange"];
     $uvmonthslis = "";
     $uvfirstmonthclass = "uwscurrent";
     
@@ -210,10 +210,10 @@ function urvenue_ws_get_monthslis($uvcurrentdate = ""){ // Axl UWS-7416
 // Get string with the months to navigate with arrows
 // function uws_get_monthsoptsstring($uvcurrentdate = ""){
 function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){ // Axl UWS-7416
-    global $uws_core_lib, $uws_today;
+    global $urvenue_ws_core_lib, $urvenue_ws_today;
 
-    $uvcurrentdate = ($uvcurrentdate) ? $uvcurrentdate : $uws_today;
-    $uvnmonths = $uws_core_lib["events"]["eventspage-monthsrange"];
+    $uvcurrentdate = ($uvcurrentdate) ? $uvcurrentdate : $urvenue_ws_today;
+    $uvnmonths = $urvenue_ws_core_lib["events"]["eventspage-monthsrange"];
     $uvmonthsstring = "";
 
     $uvmonthlidate = $uvcurrentdate;
@@ -240,10 +240,10 @@ function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){ // Axl UWS-7416
 */
 // function uws_get_events_max_date($uvdateformat = ""){
 function urvenue_ws_get_events_max_date($uvdateformat = ""){ // Axl UWS-7416
-    global $uws_core_lib, $uws_today;
+    global $urvenue_ws_core_lib, $urvenue_ws_today;
 
-    $uvnmonths = (isset($uws_core_lib["events"]) and $uws_core_lib["events"]["eventspage-monthsrange"]) ? $uws_core_lib["events"]["eventspage-monthsrange"] : 6;
-    $uvmaxdate = date("Y-m-d", strtotime($uws_today . " +$uvnmonths months"));
+    $uvnmonths = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["eventspage-monthsrange"]) ? $urvenue_ws_core_lib["events"]["eventspage-monthsrange"] : 6;
+    $uvmaxdate = date("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months"));
 
     if($uvdateformat)
         $uvmaxdate = date($uvdateformat, strtotime($uvmaxdate));
@@ -256,11 +256,11 @@ function urvenue_ws_get_events_max_date($uvdateformat = ""){ // Axl UWS-7416
 */
 // function uws_get_events_initial_date($uvdateformat = ""){
 function urvenue_ws_get_events_initial_date($uvdateformat = ""){ // Axl UWS-7416
-    global $uws_core_lib, $uws_today;
+    global $urvenue_ws_core_lib, $urvenue_ws_today;
 
-    $uvlibeventsinitialdate = (isset($uws_core_lib["events"]) and $uws_core_lib["events"]["global-initaldate"]) ? $uws_core_lib["events"]["global-initaldate"] : $uws_today;
+    $uvlibeventsinitialdate = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["global-initaldate"]) ? $urvenue_ws_core_lib["events"]["global-initaldate"] : $urvenue_ws_today;
     
-    if($uvlibeventsinitialdate < $uws_today) $uvlibeventsinitialdate = $uws_today;
+    if($uvlibeventsinitialdate < $urvenue_ws_today) $uvlibeventsinitialdate = $urvenue_ws_today;
 
     if($uvdateformat)
         $uvlibeventsinitialdate = date($uvdateformat, strtotime($uvlibeventsinitialdate));
@@ -274,11 +274,11 @@ function urvenue_ws_get_events_initial_date($uvdateformat = ""){ // Axl UWS-7416
 */
 // function uws_get_events_endinit_date($uvdateformat = ""){
 function urvenue_ws_get_events_endinit_date($uvdateformat = ""){ // Axl UWS-7416
-    global $uws_core_lib;
+    global $urvenue_ws_core_lib;
 
     // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
     $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
-    $uvnmonths = (isset($uws_core_lib["events"]) and $uws_core_lib["events"]["global-nmonths"]) ? $uws_core_lib["events"]["global-nmonths"] : 2;
+    $uvnmonths = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["global-nmonths"]) ? $urvenue_ws_core_lib["events"]["global-nmonths"] : 2;
     $uvenddate = date("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months"));
 
     if($uvdateformat)

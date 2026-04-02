@@ -1,10 +1,13 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-define('UWS_SECURITY_MAX_BODY', 1024 * 1024);
-define('UWS_SECURITY_BLOCK', true);
+// define('UWS_SECURITY_MAX_BODY', 1024 * 1024);
+define('URVENUE_WS_SECURITY_MAX_BODY', 1024 * 1024); // Axl UWS-7416
+// define('UWS_SECURITY_BLOCK', true);
+define('URVENUE_WS_SECURITY_BLOCK', true); // Axl UWS-7416
 
-$uws_patterns = array_values(array_unique([
+// $uws_patterns = array_values(array_unique([
+$urvenue_ws_patterns = array_values(array_unique([ // Axl UWS-7416
     '/DBMS_PIPE/i',
     '/RECEIVE_MESSAGE/i',
     '/CHR\(\d+\)/i',
@@ -92,12 +95,13 @@ function urvenue_ws_security_matches(array $patterns, $haystack, &$which = null)
 
 // function uws_security_check_params_injection(){
 function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
-    global $uws_patterns;
+    global $urvenue_ws_patterns;
 
-    $max = UWS_SECURITY_MAX_BODY;
+    // $max = UWS_SECURITY_MAX_BODY;
+    $max = URVENUE_WS_SECURITY_MAX_BODY; // Axl UWS-7416
     $bodyRaw = @file_get_contents('php://input', false, null, 0, $max + 1);
     if ($bodyRaw === false) $bodyRaw = '';
-    $GLOBALS['UWS_RAW_BODY'] = $bodyRaw;
+    $GLOBALS['URVENUE_WS_RAW_BODY'] = $bodyRaw; // Axl UWS-7416
 
     $param_parts = [];
     foreach ($_GET as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v);
@@ -138,7 +142,7 @@ function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
     }
 
     foreach ($haystacks as $hv) {
-        foreach ($uws_patterns as $p) {
+        foreach ($urvenue_ws_patterns as $p) {
             if (@preg_match($p, $hv)) {
                 http_response_code(403);
                 exit('Forbidden');

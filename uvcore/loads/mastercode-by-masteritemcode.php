@@ -5,33 +5,33 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // uws_check_nonce("uwspackages");
 urvenue_ws_check_nonce("uwspackages"); // Axl UWS-7416
 
-// $uvmasteritemcode = uws_cleanup_request("masteritemcode");
-$uvmasteritemcode = urvenue_ws_cleanup_request("masteritemcode"); // Axl UWS-7416
-// $uvvenuecode = uws_cleanup_request("venuecode");
-$uvvenuecode = urvenue_ws_cleanup_request("venuecode"); // Axl UWS-7416
-// $uvdate = uws_cleanup_request("date");
-$uvdate = urvenue_ws_cleanup_request("date"); // Axl UWS-7416
+// $urvenue_ws_masteritemcode = uws_cleanup_request("masteritemcode");
+$urvenue_ws_masteritemcode = urvenue_ws_cleanup_request("masteritemcode"); // Axl UWS-7416
+// $urvenue_ws_venuecode = uws_cleanup_request("venuecode");
+$urvenue_ws_venuecode = urvenue_ws_cleanup_request("venuecode"); // Axl UWS-7416
+// $urvenue_ws_date = uws_cleanup_request("date");
+$urvenue_ws_date = urvenue_ws_cleanup_request("date"); // Axl UWS-7416
 
-$uvmasteritemcodeinfo = array(
-    "masteritemcode" => $uvmasteritemcode,
-    "venuecode" => $uvvenuecode,
-    "date" => $uvdate
+$urvenue_ws_masteritemcodeinfo = array(
+    "masteritemcode" => $urvenue_ws_masteritemcode,
+    "venuecode" => $urvenue_ws_venuecode,
+    "date" => $urvenue_ws_date
 );
 
-// $uvmastercode = uws_get_mastercode_by_masteritemcode($uvmasteritemcodeinfo);
-$uvmastercode = urvenue_ws_get_mastercode_by_masteritemcode($uvmasteritemcodeinfo); // Axl UWS-7416
+// $urvenue_ws_mastercode = uws_get_mastercode_by_masteritemcode($urvenue_ws_masteritemcodeinfo);
+$urvenue_ws_mastercode = urvenue_ws_get_mastercode_by_masteritemcode($urvenue_ws_masteritemcodeinfo); // Axl UWS-7416
 
 //test no mastercode found
-//$uvmastercode = "";
+//$urvenue_ws_mastercode = "";
 
-$uvreturn = array(
-    "mastercode" => $uvmastercode,
+$urvenue_ws_return = array(
+    "mastercode" => $urvenue_ws_mastercode,
 );
     
 // @Axl
-// $uvreturnjson = json_encode($uvreturn);
-$uvreturnjson = wp_json_encode($uvreturn);
+// $urvenue_ws_returnjson = json_encode($urvenue_ws_return);
+$urvenue_ws_returnjson = wp_json_encode($urvenue_ws_return);
 // @Axl End
 header('Content-Type: application/json');
-// echo($uvreturnjson);
-echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
+// echo($urvenue_ws_returnjson);
+echo( $urvenue_ws_returnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 add_shortcode("uws_itinerary", function($atts, $content = null){
-    global $uws_path;
+    global $urvenue_ws_path;
 
     ob_start();
 
@@ -17,7 +17,7 @@ add_shortcode("uws_itinerary", function($atts, $content = null){
     wp_enqueue_script('uws-itinerary-scripts');
     wp_enqueue_script('litepicker');
 
-    include_once($uws_path . "/includes/itinerary-functions.php");
+    include_once($urvenue_ws_path . "/includes/itinerary-functions.php");
     // uws_itinerary();
     urvenue_ws_itinerary(); // Axl UWS-7416
 

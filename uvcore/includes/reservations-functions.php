@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // function uws_inquiry_form($uvargs = "")
 function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
 {
-    global $uws_core_lib, $uws_today;
+    global $urvenue_ws_core_lib, $urvenue_ws_today;
 
     // $uwsinqformhtml = uws_get_template("/reservations/inquiry-form");
     $uwsinqformhtml = urvenue_ws_get_template("/reservations/inquiry-form"); // Axl UWS-7416
@@ -29,19 +29,19 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
     $uvdefaulttermslink = "https://www.urvenue.com/legal/terms-conditions/";
 
     // Privacy Policy link
-    // $uvprivacylink = (is_array($uws_core_lib) and isset($uws_core_lib["pages"]["privacy"]) and $uws_core_lib["pages"]["privacy"] and uws_is_wordpress()) ? get_permalink($uws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink;
-    $uvprivacylink = (is_array($uws_core_lib) and isset($uws_core_lib["pages"]["privacy"]) and $uws_core_lib["pages"]["privacy"] and urvenue_ws_is_wordpress()) ? get_permalink($uws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink; // Axl UWS-7416
+    // $uvprivacylink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["privacy"]) and $urvenue_ws_core_lib["pages"]["privacy"] and uws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink;
+    $uvprivacylink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["privacy"]) and $urvenue_ws_core_lib["pages"]["privacy"] and urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink; // Axl UWS-7416
 
     // Terms link
-    // $uvtermslink = (is_array($uws_core_lib) and isset($uws_core_lib["pages"]["terms"]) and $uws_core_lib["pages"]["terms"] and uws_is_wordpress()) ? get_permalink($uws_core_lib["pages"]["terms"]) : $uvdefaulttermslink;
-    $uvtermslink = (is_array($uws_core_lib) and isset($uws_core_lib["pages"]["terms"]) and $uws_core_lib["pages"]["terms"] and urvenue_ws_is_wordpress()) ? get_permalink($uws_core_lib["pages"]["terms"]) : $uvdefaulttermslink; // Axl UWS-7416
+    // $uvtermslink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["terms"]) and $urvenue_ws_core_lib["pages"]["terms"] and uws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["terms"]) : $uvdefaulttermslink;
+    $uvtermslink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["terms"]) and $urvenue_ws_core_lib["pages"]["terms"] and urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["terms"]) : $uvdefaulttermslink; // Axl UWS-7416
 
-    if (is_array($uws_core_lib["venues"])) {
+    if (is_array($urvenue_ws_core_lib["venues"])) {
         $uvvenueselectorclass = ($uvvenuekeycodes and $uvvenuekeycodes != "all") ? "uwsisspecificvenue" : "";
         $uvvenueselector = "<div class='uws-inputcont $uvvenueselectorclass'><label for='unvinqvenue'>Venue*</label><select id='unvinqvenue' name='venue' class='uwsjs-inq-selectvenue' required>";
         $uvvenueselector .= "<option value=''>Select a Venue</option>";
 
-        foreach ($uws_core_lib["venues"] as $uvvenuekey => $uvvenue) {
+        foreach ($urvenue_ws_core_lib["venues"] as $uvvenuekey => $uvvenue) {
             $uvvenuename = (isset($uvvenue["venueforcealias"]) and $uvvenue["venueforcealias"] and $uvvenue['venuealias']) ? $uvvenue['venuealias'] : $uvvenue["venuename"];
 
             $uvvenueselector .= "<option value='$uvvenuekey' data-venuecode='{$uvvenue["venuecode"]}' data-manageentid='{$uvvenue["manageentid"]}'>$uvvenuename</option>";
@@ -83,12 +83,12 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
         $uvvenueselector .= "<div class='uws-inputcont uws-leadtypeselector $uvleadtypeselectorclass'><label for='uwsinqleadtype'>Request Type*</label><div class='uwsdy-leadtypeselector'>$uvleadtypeselector</div></div>";
     }
 
-    $uvdpinitialdate = date("M j, Y", strtotime($uws_today));
+    $uvdpinitialdate = date("M j, Y", strtotime($urvenue_ws_today));
     $uvinqdateselector = "
     <div class='uws-inputcont uws-isdateinput'>
         <div class='uws-inquiry-dpinput uws-dropdown-cont'>
             <label for='uwsinqddate'>Date*</label>
-            <a id='uwsinqddate' href='#uws-open-inquiry-dateselection' data-date='$uws_today' class='uwsjs-trigger-dropdown uwsinput uwshascalincon $uvopendaysclass'>
+            <a id='uwsinqddate' href='#uws-open-inquiry-dateselection' data-date='$urvenue_ws_today' class='uwsjs-trigger-dropdown uwsinput uwshascalincon $uvopendaysclass'>
                 <i class='uwsicon-calendar' role='presentation'></i>
                 <span class='uwsdy-inq-ddate'>Select Date</span>
             </a>
@@ -181,15 +181,15 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
 // function uws_inquiry_get_leadtypes($uvargs)
 function urvenue_ws_inquiry_get_leadtypes($uvargs) // Axl UWS-7416
 {
-    global $uws_feeds_lib;
+    global $urvenue_ws_feeds_lib;
 
     $uvleadtypeslist = "";
     // $uvmanageentid = uws_get_arg($uvargs, "manageentid", "");
     $uvmanageentid = urvenue_ws_get_arg($uvargs, "manageentid", ""); // Axl UWS-7416
     // $uvvenueid = uws_get_arg($uvargs, "venueid", "");
     $uvvenueid = urvenue_ws_get_arg($uvargs, "venueid", ""); // Axl UWS-7416
-    $uvgetleadsurl = $uws_feeds_lib["inquiry-leadtypes"]["url"];
-    $uvgetleadsexpiration = $uws_feeds_lib["inquiry-leadtypes"]["expiration"];
+    $uvgetleadsurl = $urvenue_ws_feeds_lib["inquiry-leadtypes"]["url"];
+    $uvgetleadsexpiration = $urvenue_ws_feeds_lib["inquiry-leadtypes"]["expiration"];
 
     $uvparams = "venue=" . $uvvenueid;
     $uvgetleadsurl = str_replace(

@@ -1,12 +1,12 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-global $uws_path;
+global $urvenue_ws_path;
 
 // @egt [UWS-7297]
-// $nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : ''; // Axl UWS-7418
-$nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // Axl UWS-7418
-switch ($nonceaction) {
+// $urvenue_ws_nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : ''; // Axl UWS-7418
+$urvenue_ws_nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // Axl UWS-7418
+switch ($urvenue_ws_nonceaction) {
     case 'uwsinventory':
         // uws_check_nonce("uwsinventory");
         urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
@@ -23,36 +23,36 @@ switch ($nonceaction) {
         wp_send_json_error(['message' => 'Invalid action'], 400);
 }
 
-// $uvdate = uws_cleanup_request("date");
-$uvdate = urvenue_ws_cleanup_request("date"); // Axl UWS-7416
-// $uvvenuecode = uws_cleanup_request("venuecode");
-$uvvenuecode = urvenue_ws_cleanup_request("venuecode"); // Axl UWS-7416
-// $uvecozone = uws_cleanup_request("ecozone", "ECZ0");
-$uvecozone = urvenue_ws_cleanup_request("ecozone", "ECZ0"); // Axl UWS-7416
-// $uvglobaltype = uws_cleanup_request("globaltype");
-$uvglobaltype = urvenue_ws_cleanup_request("globaltype"); // Axl UWS-7416
-// $uvmixecozones = uws_cleanup_request("mixecozones");
-$uvmixecozones = urvenue_ws_cleanup_request("mixecozones"); // Axl UWS-7416
+// $urvenue_ws_date = uws_cleanup_request("date");
+$urvenue_ws_date = urvenue_ws_cleanup_request("date"); // Axl UWS-7416
+// $urvenue_ws_venuecode = uws_cleanup_request("venuecode");
+$urvenue_ws_venuecode = urvenue_ws_cleanup_request("venuecode"); // Axl UWS-7416
+// $urvenue_ws_ecozone = uws_cleanup_request("ecozone", "ECZ0");
+$urvenue_ws_ecozone = urvenue_ws_cleanup_request("ecozone", "ECZ0"); // Axl UWS-7416
+// $urvenue_ws_globaltype = uws_cleanup_request("globaltype");
+$urvenue_ws_globaltype = urvenue_ws_cleanup_request("globaltype"); // Axl UWS-7416
+// $urvenue_ws_mixecozones = uws_cleanup_request("mixecozones");
+$urvenue_ws_mixecozones = urvenue_ws_cleanup_request("mixecozones"); // Axl UWS-7416
 
-$uvreturn = array();
+$urvenue_ws_return = array();
 
-if($uvdate and $uvvenuecode and $uvecozone){
-    $uvargs = array(
-        "date" => $uvdate,
-        "venuecode" => $uvvenuecode,
-        "ecozone" => $uvecozone,
-        "globaltype" => $uvglobaltype,
-        "mixecozones" => $uvmixecozones,
+if($urvenue_ws_date and $urvenue_ws_venuecode and $urvenue_ws_ecozone){
+    $urvenue_ws_args = array(
+        "date" => $urvenue_ws_date,
+        "venuecode" => $urvenue_ws_venuecode,
+        "ecozone" => $urvenue_ws_ecozone,
+        "globaltype" => $urvenue_ws_globaltype,
+        "mixecozones" => $urvenue_ws_mixecozones,
     );
-    // $uvmonthnoinventorydates = uws_get_month_noinventory_dates($uvargs);
-    $uvmonthnoinventorydates = urvenue_ws_get_month_noinventory_dates($uvargs); // Axl UWS-7416
-    $uvreturn["availabilityinfo"] = $uvmonthnoinventorydates;
+    // $urvenue_ws_monthnoinventorydates = uws_get_month_noinventory_dates($urvenue_ws_args);
+    $urvenue_ws_monthnoinventorydates = urvenue_ws_get_month_noinventory_dates($urvenue_ws_args); // Axl UWS-7416
+    $urvenue_ws_return["availabilityinfo"] = $urvenue_ws_monthnoinventorydates;
 }
     
 // @Axl
-// $uvreturnjson = json_encode($uvreturn);
-$uvreturnjson = wp_json_encode($uvreturn);
+// $urvenue_ws_returnjson = json_encode($urvenue_ws_return);
+$urvenue_ws_returnjson = wp_json_encode($urvenue_ws_return);
 // @Axl End
 header('Content-Type: application/json');
-// echo($uvreturnjson);
-echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
+// echo($urvenue_ws_returnjson);
+echo( $urvenue_ws_returnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

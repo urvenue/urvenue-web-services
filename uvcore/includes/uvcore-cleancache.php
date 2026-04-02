@@ -1,9 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if(!is_array($uws_core_lib) && !is_array($uws_feeds_lib)) exit;
+if(!is_array($urvenue_ws_core_lib) && !is_array($urvenue_ws_feeds_lib)) exit;
 
-$uvwpecreds = $uws_core_lib["cache"];
+// $uvwpecreds = $uws_core_lib["cache"];
+$urvenue_ws_wpecreds = $urvenue_ws_core_lib["cache"]; // Axl UWS-7416
 
 // If cacheword exists, update it
 // update_option('cacheword', 'uv' . uniqid());
@@ -12,34 +13,34 @@ update_option('urvenue_ws_cacheword', 'uv' . uniqid()); // Axl UWS-7416
 // Custom WP Engine Clear Cache
 // function uvclear_wpengine_cache() {
 function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
-    global $uvvenuecodes, $uvwpecreds, $uws_core_lib, $uws_feeds_lib, $uws_today;
+    global $urvenue_ws_venuecodes, $urvenue_ws_wpecreds, $urvenue_ws_core_lib, $urvenue_ws_feeds_lib, $urvenue_ws_today;
 
     $uvdefaultmessage = 'UrVenue local cache cleared.';
     // $uws_core_lib["system"]["cache-word"] = get_option('cacheword');
-    $uws_core_lib["system"]["cache-word"] = get_option('urvenue_ws_cacheword'); // Axl UWS-7416
+    $urvenue_ws_core_lib["system"]["cache-word"] = get_option('urvenue_ws_cacheword'); // Axl UWS-7416
 
     // UV FEED
     // Dates
-    // $uvlatestdate = uws_get_events_endinit_date("Y-m-d", $uws_today);
-    $uvlatestdate = urvenue_ws_get_events_endinit_date("Y-m-d", $uws_today); // Axl UWS-7416
+    // $uvlatestdate = uws_get_events_endinit_date("Y-m-d", $urvenue_ws_today);
+    $uvlatestdate = urvenue_ws_get_events_endinit_date("Y-m-d", $urvenue_ws_today); // Axl UWS-7416
     $uvfeedtodate = date("Y-m-d", strtotime($uvlatestdate . " +7 days"));
-    $uvfeeddates = "fromdate={$uws_today}&todate={$uvfeedtodate}";
+    $uvfeeddates = "fromdate={$urvenue_ws_today}&todate={$uvfeedtodate}";
 
     // Venue codes
-    $uvvenueslist = $uws_core_lib['venues'];
+    $uvvenueslist = $urvenue_ws_core_lib['venues'];
     $uvvenueslength = (is_array($uvvenueslist)) ? count($uvvenueslist) : 0;
-    $uvvenuecodes = ($uvvenueslength > 1) ? implode(',', array_column($uvvenueslist, 'venuecode')) : reset($uws_core_lib['venues'])['venuecode'];
+    $urvenue_ws_venuecodes = ($uvvenueslength > 1) ? implode(',', array_column($uvvenueslist, 'venuecode')) : reset($urvenue_ws_core_lib['venues'])['venuecode'];
 
     // UV Feed Params
-    $uvfeedparams = $uvfeeddates . "&venuecodes={$uvvenuecodes}&cacheword=" . $uws_core_lib["system"]["cache-word"];
+    $uvfeedparams = $uvfeeddates . "&venuecodes={$urvenue_ws_venuecodes}&cacheword=" . $urvenue_ws_core_lib["system"]["cache-word"];
 
     // Feed URL
-    $uvfeedurl = str_replace('{params}', $uvfeedparams, $uws_feeds_lib['urquery']['url']);
+    $uvfeedurl = str_replace('{params}', $uvfeedparams, $urvenue_ws_feeds_lib['urquery']['url']);
 
     // WP Engine API
-    $uvwpengineuser = $uvwpecreds['username'];
-	$uvwpenginepwd = $uvwpecreds['password'];
-    $install_id = $uvwpecreds['wpeinst'];
+    $uvwpengineuser = $urvenue_ws_wpecreds['username'];
+	$uvwpenginepwd = $urvenue_ws_wpecreds['password'];
+    $install_id = $urvenue_ws_wpecreds['wpeinst'];
 	$uvwpenginecreds = $uvwpengineuser . ":" . $uvwpenginepwd;
 
     // Set the API endpoint URL
@@ -186,10 +187,10 @@ add_action('template_redirect', 'urvenue_ws_template_redirect'); // Axl UWS-7416
 
 // function clear_cache_endpoint_callback() {
 function urvenue_ws_clear_cache_callback() { // Axl UWS-7416
-    global $uvwpecreds;
+    global $urvenue_ws_wpecreds;
 
-    // if (isset($_GET['apikey']) && $_GET['apikey'] == $uvwpecreds['cacheapikey']) { // Axl UWS-7418
-    if (isset($_GET['apikey']) && sanitize_text_field( wp_unslash( $_GET['apikey'] ) ) == $uvwpecreds['cacheapikey']) { // Axl UWS-7418
+    // if (isset($_GET['apikey']) && $_GET['apikey'] == $urvenue_ws_wpecreds['cacheapikey']) { // Axl UWS-7418
+    if (isset($_GET['apikey']) && sanitize_text_field( wp_unslash( $_GET['apikey'] ) ) == $urvenue_ws_wpecreds['cacheapikey']) { // Axl UWS-7418
         // uvclear_wpengine_cache();
         urvenue_ws_clear_wpengine_cache(); // Axl UWS-7416
         

@@ -8,143 +8,169 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 */
 
 
-$uvs_uvcorepath = realpath(dirname(__FILE__));
+// $uvs_uvcorepath = realpath(dirname(__FILE__));
+$urvenue_ws_uvcorepath = realpath(dirname(__FILE__)); // Axl UWS-7416
 // $uvs_uvcoreurl = "//" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]; // Axl UWS-7416
 // $uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( $_SERVER["HTTP_HOST"] ) ) . sanitize_text_field( wp_unslash( $_SERVER["REQUEST_URI"] ) ); // Axl UWS-7418
-$uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( isset( $_SERVER["HTTP_HOST"] ) ? $_SERVER["HTTP_HOST"] : '' ) ) . sanitize_text_field( wp_unslash( isset( $_SERVER["REQUEST_URI"] ) ? $_SERVER["REQUEST_URI"] : '' ) ); // Axl UWS-7418
-$uvs_uvcoreurl = strtok($uvs_uvcoreurl, '?');
-$uvs_uvcoreurl = str_replace("/setup.php", "", $uvs_uvcoreurl);
+// $uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( isset( $_SERVER["HTTP_HOST"] ) ? $_SERVER["HTTP_HOST"] : '' ) ) . sanitize_text_field( wp_unslash( isset( $_SERVER["REQUEST_URI"] ) ? $_SERVER["REQUEST_URI"] : '' ) ); // Axl UWS-7418
+$urvenue_ws_uvcoreurl = "//" . sanitize_text_field( wp_unslash( isset( $_SERVER["HTTP_HOST"] ) ? $_SERVER["HTTP_HOST"] : '' ) ) . sanitize_text_field( wp_unslash( isset( $_SERVER["REQUEST_URI"] ) ? $_SERVER["REQUEST_URI"] : '' ) ); // Axl UWS-7416
+$urvenue_ws_uvcoreurl = strtok($urvenue_ws_uvcoreurl, '?');
+$urvenue_ws_uvcoreurl = str_replace("/setup.php", "", $urvenue_ws_uvcoreurl);
 
 // $uvpath = isset($path) ? $path : $_REQUEST["path"]; // Axl UWS-7416
-$uvpath = isset($path) ? $path : sanitize_text_field( wp_unslash( $_REQUEST["path"] ?? '' ) ); // Axl UWS-7418
+// $uvpath = isset($path) ? $path : sanitize_text_field( wp_unslash( $_REQUEST["path"] ?? '' ) ); // Axl UWS-7418
+$urvenue_ws_uvpath = isset($path) ? $path : sanitize_text_field( wp_unslash( $_REQUEST["path"] ?? '' ) ); // Axl UWS-7416
 // $uvurl = isset($url) ? $url : $_REQUEST["url"]; // Axl UWS-7416
-$uvurl = isset($url) ? $url : esc_url_raw( wp_unslash( $_REQUEST["url"] ?? '' ) ); // Axl UWS-7418
+// $uvurl = isset($url) ? $url : esc_url_raw( wp_unslash( $_REQUEST["url"] ?? '' ) ); // Axl UWS-7418
+$urvenue_ws_uvurl = isset($url) ? $url : esc_url_raw( wp_unslash( $_REQUEST["url"] ?? '' ) ); // Axl UWS-7416
 // $uvlibrary = isset($library) ? $library : $_REQUEST["library"]; // Axl UWS-7416
-$uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_REQUEST["library"] ?? '' ) ); // Axl UWS-7418
+// $uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_REQUEST["library"] ?? '' ) ); // Axl UWS-7418
+$urvenue_ws_uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_REQUEST["library"] ?? '' ) ); // Axl UWS-7416
 // $uvwrite = isset($write) ? $white : $_REQUEST["write"]; // Axl UWS-7416
-$uvwrite = isset($write) ? $write : absint( $_REQUEST["write"] ?? 0 ); // Axl UWS-7418
+// $uvwrite = isset($write) ? $write : absint( $_REQUEST["write"] ?? 0 ); // Axl UWS-7418
+$urvenue_ws_uvwrite = isset($write) ? $write : absint( $_REQUEST["write"] ?? 0 ); // Axl UWS-7416
 
 
 // if($_REQUEST["manual"]){ // Axl UWS-7416
 if( isset( $_REQUEST["manual"] ) && sanitize_text_field( wp_unslash( $_REQUEST["manual"] ) ) ){ // Axl UWS-7418
-	$uvslibinfojson = file_get_contents("uvcore.lib.json");
+	// $uvslibinfojson = file_get_contents("uvcore.lib.json");
+	$urvenue_ws_uvslibinfojson = file_get_contents("uvcore.lib.json"); // Axl UWS-7416
 
-	$uvslib = json_decode($uvslibinfojson, true);
+	// $uvslib = json_decode($uvslibinfojson, true);
+	$urvenue_ws_uvslib = json_decode($urvenue_ws_uvslibinfojson, true); // Axl UWS-7416
 
 	// if(is_array($uvslib["system"]) and (!$_REQUEST["nconf"])) // Axl UWS-7416
-	if(is_array($uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // Axl UWS-7418
-		header("location: $uvurl" . "/admin.php");
+	if(is_array($urvenue_ws_uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // Axl UWS-7416
+		header("location: $urvenue_ws_uvurl" . "/admin.php");
 }
 	
-if($uvwrite == 1){
-	$uvs_lib = array(
+if($urvenue_ws_uvwrite == 1){
+	// $uvs_lib = array(
+	$urvenue_ws_uvs_lib = array( // Axl UWS-7416
 		"system" => array(
-			"path" => $uvpath,
-			"url" => $uvurl,
-			"library" => $uvlibrary
+			"path" => $urvenue_ws_uvpath,
+			"url" => $urvenue_ws_uvurl,
+			"library" => $urvenue_ws_uvlibrary
 		)
 	);
 	// @Axl
 	// $uvs_lib = json_encode($uvs_lib);
-	$uvs_lib = wp_json_encode($uvs_lib);
+	$urvenue_ws_uvs_lib = wp_json_encode($urvenue_ws_uvs_lib); // Axl UWS-7416
 	// @Axl End
 
-	$fp = fopen("$uvlibrary", "w+");
-	fwrite($fp, $uvs_lib);
-	fclose($fp);
-	
-	header("location: $uvurl" . "/admin.php");
-	
+	// $fp = fopen("$uvlibrary", "w+");
+	$urvenue_ws_fp = fopen("$urvenue_ws_uvlibrary", "w+"); // Axl UWS-7416
+	fwrite($urvenue_ws_fp, $urvenue_ws_uvs_lib);
+	fclose($urvenue_ws_fp);
+
+	header("location: $urvenue_ws_uvurl" . "/admin.php");
+
 	exit();
 }
 
-$uverrorshtml = "";
-$uvmanualwritehtml = "";
-$uvaddsubmitvarscript = "";
-$uvpathok = false;
+// $uverrorshtml = "";
+$urvenue_ws_uverrorshtml = ""; // Axl UWS-7416
+// $uvmanualwritehtml = "";
+$urvenue_ws_uvmanualwritehtml = ""; // Axl UWS-7416
+// $uvaddsubmitvarscript = "";
+$urvenue_ws_uvaddsubmitvarscript = ""; // Axl UWS-7416
+// $uvpathok = false;
+$urvenue_ws_uvpathok = false; // Axl UWS-7416
 
-if($uvpath){
-	if(file_exists($uvpath)){
-		$uvpathclass = "uvs-setupfield-ok";
-		$uvpathok = true;
+if($urvenue_ws_uvpath){
+	if(file_exists($urvenue_ws_uvpath)){
+		// $uvpathclass = "uvs-setupfield-ok";
+		$urvenue_ws_uvpathclass = "uvs-setupfield-ok"; // Axl UWS-7416
+		$urvenue_ws_uvpathok = true;
 	}
 	else{
-		$uvpathclass = "uvs-setupfield-nok";
-		$uverrorshtml = "<div class='uvs-setup-error'><strong>UvCore Path</strong> is not an existing folder, make sure you use the correct directory.</div>";
-	}	
+		// $uvpathclass = "uvs-setupfield-nok";
+		$urvenue_ws_uvpathclass = "uvs-setupfield-nok"; // Axl UWS-7416
+		$urvenue_ws_uverrorshtml = "<div class='uvs-setup-error'><strong>UvCore Path</strong> is not an existing folder, make sure you use the correct directory.</div>";
+	}
 }
 
 /*
 	Permissions for files: 664 - 666(uv)
 	Permissions for folder: 775 - 777(uv)
 */
-if($uvlibrary){
-	if(file_exists($uvlibrary)){
-		if(is_writable($uvlibrary)){
-			$uvlibraryclass = "uvs-setupfield-ok";
-			if($uvpathok)
-				$uvaddsubmitvarscript = "uvsetupsubmit = true;";
+if($urvenue_ws_uvlibrary){
+	if(file_exists($urvenue_ws_uvlibrary)){
+		if(is_writable($urvenue_ws_uvlibrary)){
+			// $uvlibraryclass = "uvs-setupfield-ok";
+			$urvenue_ws_uvlibraryclass = "uvs-setupfield-ok"; // Axl UWS-7416
+			if($urvenue_ws_uvpathok)
+				$urvenue_ws_uvaddsubmitvarscript = "uvsetupsubmit = true;";
 		}
 		else{
-			$uvlibraryclass = "uvs-setupfield-wng";
-			$uverrorshtml .= "<div class='uvs-setup-warning'><strong>Library File</strong> is not writable, please try editing the files permissions or edit the file manually.</div>";
-			
-			if($uvpathok)
-				$uvmanualwritehtml = "<button class='uvs-btn uvs-btn-s uvsjs-btn-setup-manually' type='button'>Write File Manually</button>";
+			// $uvlibraryclass = "uvs-setupfield-wng";
+			$urvenue_ws_uvlibraryclass = "uvs-setupfield-wng"; // Axl UWS-7416
+			$urvenue_ws_uverrorshtml .= "<div class='uvs-setup-warning'><strong>Library File</strong> is not writable, please try editing the files permissions or edit the file manually.</div>";
+
+			if($urvenue_ws_uvpathok)
+				$urvenue_ws_uvmanualwritehtml = "<button class='uvs-btn uvs-btn-s uvsjs-btn-setup-manually' type='button'>Write File Manually</button>";
 		}
 	}
-	else if($uvpath and is_writable($uvpath)){
-		if($uvpathok)
-			$uvaddsubmitvarscript = "uvsetupsubmit = true;";
+	else if($urvenue_ws_uvpath and is_writable($urvenue_ws_uvpath)){
+		if($urvenue_ws_uvpathok)
+			$urvenue_ws_uvaddsubmitvarscript = "uvsetupsubmit = true;";
 	}
 	else{
-		$uvlibraryclass = "uvs-setupfield-nok";
-		$uverrorshtml .= "<div class='uvs-setup-error'><strong>Library File</strong> does not exist. Please create the file.</div>";
-	}	
+		// $uvlibraryclass = "uvs-setupfield-nok";
+		$urvenue_ws_uvlibraryclass = "uvs-setupfield-nok"; // Axl UWS-7416
+		$urvenue_ws_uverrorshtml .= "<div class='uvs-setup-error'><strong>Library File</strong> does not exist. Please create the file.</div>";
+	}
 }
 
-if($uvurl){
-	$uvs_lib = array(
+if($urvenue_ws_uvurl){
+	// $uvs_lib = array(
+	$urvenue_ws_uvs_lib = array( // Axl UWS-7416
 		"system" => array(
-			"path" => $uvpath,
-			"url" => $uvurl,
-			"library" => $uvlibrary
+			"path" => $urvenue_ws_uvpath,
+			"url" => $urvenue_ws_uvurl,
+			"library" => $urvenue_ws_uvlibrary
 		)
 	);
 	// @Axl
 	// $uvs_lib = json_encode($uvs_lib);
-	$uvs_lib = wp_json_encode($uvs_lib);
+	$urvenue_ws_uvs_lib = wp_json_encode($urvenue_ws_uvs_lib); // Axl UWS-7416
 	// @Axl End
 
-	$uvurlscript = "";
+	// $uvurlscript = "";
+	$urvenue_ws_uvurlscript = ""; // Axl UWS-7416
 
 	// @egt [UWS-7264]
-	add_action('wp_footer', function () use ($uvurl, $uvs_lib, $uvaddsubmitvarscript) {
+	add_action('wp_footer', function () use ($urvenue_ws_uvurl, $urvenue_ws_uvs_lib, $urvenue_ws_uvaddsubmitvarscript) {
 		// echo "<script>var uvcoreinput = '$uvurl'; var uvcorejsonlib = '$uvs_lib'; $uvaddsubmitvarscript</script>";
 		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated inline JS with internal variables // Axl UWS-7416
 		echo "
 			<script>
-				var uvcoreinput = '$uvurl';
-				var uvcorejsonlib = '$uvs_lib';
-				$uvaddsubmitvarscript
+				var uvcoreinput = '$urvenue_ws_uvurl';
+				var uvcorejsonlib = '$urvenue_ws_uvs_lib';
+				$urvenue_ws_uvaddsubmitvarscript
 			</script>
 		";
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	});
 }
 
-$uvs_uvcorepath = ($uvpath) ? $uvpath : $uvs_uvcorepath;
-$uvs_uvcoreurl = ($uvurl) ? $uvurl : $uvs_uvcoreurl;
-$uvs_libexit = false;
+// $uvs_uvcorepath = ($uvpath) ? $uvpath : $uvs_uvcorepath;
+$urvenue_ws_uvcorepath = ($urvenue_ws_uvpath) ? $urvenue_ws_uvpath : $urvenue_ws_uvcorepath; // Axl UWS-7416
+// $uvs_uvcoreurl = ($uvurl) ? $uvurl : $uvs_uvcoreurl;
+$urvenue_ws_uvcoreurl = ($urvenue_ws_uvurl) ? $urvenue_ws_uvurl : $urvenue_ws_uvcoreurl; // Axl UWS-7416
+// $uvs_libexit = false;
+$urvenue_ws_uvs_libexit = false; // Axl UWS-7416
 
-if(file_exists("uvcore.lib.json") and !$uvpath){
-	$uvslibinfojson = file_get_contents("uvcore.lib.json");
-	
-	$uvslib = json_decode($uvslibinfojson, true);
-	
+if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
+	// $uvslibinfojson = file_get_contents("uvcore.lib.json");
+	$urvenue_ws_uvslibinfojson = file_get_contents("uvcore.lib.json"); // Axl UWS-7416
+
+	// $uvslib = json_decode($uvslibinfojson, true);
+	$urvenue_ws_uvslib = json_decode($urvenue_ws_uvslibinfojson, true); // Axl UWS-7416
+
 	// if(is_array($uvslib["system"]) and (!$_REQUEST["nconf"])) // Axl UWS-7416
-	if(is_array($uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // Axl UWS-7418
-		$uvs_libexit = true;
+	if(is_array($urvenue_ws_uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // Axl UWS-7416
+		$urvenue_ws_uvs_libexit = true;
 }
 
 ?>
@@ -206,7 +232,7 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 	<div class="uvs-content">
 		<div class="uvs-setupbox uvs-boxpanel">
 			
-			<?php if(!$uvs_libexit){ ?>
+			<?php if(!$urvenue_ws_uvs_libexit){ ?>
 			<p>Welcome to UvCore. This is the initial configuration. Please, edit the information if necessary and click the button.</p>
 			
 			<form id="uvs-form-setup" method="post" action="setup.php">
@@ -214,29 +240,29 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 				<input id="uvs-input-manuallib" type="hidden" name="manual" value="0">
 				
 				<div class="uvs-setupfields">
-					<div class="uvs-setupfield <?php /* Old: echo $uvpathclass; */ echo esc_attr( $uvpathclass ); ?> uvs-clearfix">
+					<div class="uvs-setupfield <?php /* Old: echo $uvpathclass; */ echo esc_attr( $urvenue_ws_uvpathclass ); ?> uvs-clearfix">
 						<div><label for="path">UvCore Path</label></div>
-						<div><input id="path" class="uvsjs-copytoinput" data-addafter="/uvcore.lib.json" data-target="#library" type="text" name="path" value="<?php /* Old: echo $uvs_uvcorepath; */ echo esc_attr( $uvs_uvcorepath ); ?>"></div>
+						<div><input id="path" class="uvsjs-copytoinput" data-addafter="/uvcore.lib.json" data-target="#library" type="text" name="path" value="<?php /* Old: echo $uvs_uvcorepath; */ echo esc_attr( $urvenue_ws_uvcorepath ); ?>"></div>
 					</div>
 					<div class="uvs-setupfield uvs-clearfix">
 						<div><label for="url">UvCore URL</label></div>
-						<div><input id="url" type="text" name="url" value="<?php /* Old: echo $uvs_uvcoreurl; */ echo esc_attr( $uvs_uvcoreurl ); ?>"></div>
+						<div><input id="url" type="text" name="url" value="<?php /* Old: echo $uvs_uvcoreurl; */ echo esc_attr( $urvenue_ws_uvcoreurl ); ?>"></div>
 					</div>
-					<div class="uvs-setupfield <?php /* Old: echo $uvlibraryclass; */ echo esc_attr( $uvlibraryclass ); ?> uvs-clearfix">
+					<div class="uvs-setupfield <?php /* Old: echo $uvlibraryclass; */ echo esc_attr( $urvenue_ws_uvlibraryclass ); ?> uvs-clearfix">
 						<div><label for="library">Library File</label></div>
-						<div><input id="library" type="text" name="library" value="<?php /* Old: echo $uvs_uvcorepath; */ echo esc_attr( $uvs_uvcorepath ); ?>/uvcore.lib.json" readonly></div>
+						<div><input id="library" type="text" name="library" value="<?php /* Old: echo $uvs_uvcorepath; */ echo esc_attr( $urvenue_ws_uvcorepath ); ?>/uvcore.lib.json" readonly></div>
 					</div>
 				</div>
 				
 				<div class="uvs-setup-errors">
 					<?php // @Axl ?>
-					<?php /* echo $uverrorshtml; */ echo wp_kses_post( $uverrorshtml ); ?>
+					<?php /* echo $uverrorshtml; */ echo wp_kses_post( $urvenue_ws_uverrorshtml ); ?>
 					<?php // @Axl End ?>
 				</div>
 				
 				<div class="uvs-setupbuttons">
 					<?php // @Axl ?>
-					<?php /* echo $uvmanualwritehtml; */ echo wp_kses_post( $uvmanualwritehtml ); ?>
+					<?php /* echo $uvmanualwritehtml; */ echo wp_kses_post( $urvenue_ws_uvmanualwritehtml ); ?>
 					<?php // @Axl End ?>
 					<button class="uvs-btn uvs-btn-p" type="submit">Submit</button>
 				</div>
@@ -259,7 +285,7 @@ if(file_exists("uvcore.lib.json") and !$uvpath){
 	
 	
 	<?php // @Axl ?>
-	<?php /* echo $uvurlscript; */ echo wp_kses_post( $uvurlscript ); ?>
+	<?php /* echo $uvurlscript; */ echo wp_kses_post( $urvenue_ws_uvurlscript ); ?>
 	<?php // @Axl End ?>
 </body>
 </html>

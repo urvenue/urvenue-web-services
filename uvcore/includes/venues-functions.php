@@ -7,15 +7,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 */
 // function uws_get_venueinfo($uvvenuecode = ""){
 function urvenue_ws_get_venueinfo($uvvenuecode = ""){ // Axl UWS-7416
-    global $uws_today;
+    global $urvenue_ws_today;
 
     $uvvenuesinfo = "";
 
     if($uvvenuecode){
         $uvterms = array(
             "venuecode" => $uvvenuecode,
-            "caldate" => $uws_today,
-            "todate" => $uws_today,
+            "caldate" => $urvenue_ws_today,
+            "todate" => $urvenue_ws_today,
         );
         // $uvapidata = uws_get_feed("inventorylist-venues", $uvterms);
         $uvapidata = urvenue_ws_get_feed("inventorylist-venues", $uvterms); // Axl UWS-7416
@@ -36,15 +36,15 @@ function urvenue_ws_get_venueinfo($uvvenuecode = ""){ // Axl UWS-7416
 */
 // function uws_get_venuesinfo($uvvenuecode = ""){
 function urvenue_ws_get_venuesinfo($uvvenuecode = ""){ // Axl UWS-7416
-    global $uws_today;
+    global $urvenue_ws_today;
 
     $uvvenuesinfo = "";
 
     if($uvvenuecode){
         $uvterms = array(
             "venuecode" => $uvvenuecode,
-            "caldate" => $uws_today,
-            "todate" => $uws_today,
+            "caldate" => $urvenue_ws_today,
+            "todate" => $urvenue_ws_today,
         );
         // $uvapidata = uws_get_feed("inventorylist-venues", $uvterms);
         $uvapidata = urvenue_ws_get_feed("inventorylist-venues", $uvterms); // Axl UWS-7416
@@ -103,22 +103,22 @@ function urvenue_ws_get_venue_array($uvvenue){ // Axl UWS-7416
 */
 // function uws_get_venue_images($uvimages){
 function urvenue_ws_get_venue_images($uvimages){ // Axl UWS-7416
-    global $uws_core_lib;
+    global $urvenue_ws_core_lib;
 
     $uvimagesreturn = "";
 
-    if(is_array($uws_core_lib["venueimages"])){
+    if(is_array($urvenue_ws_core_lib["venueimages"])){
         $uvimagesreturn = array();
 
-        foreach($uws_core_lib["venueimages"] as $uvimageloccode => $uvimageprior){
+        foreach($urvenue_ws_core_lib["venueimages"] as $uvimageloccode => $uvimageprior){
             $uvlocimage = "";
 
             if(is_array($uvimageprior)){
-                $uvthishideifnomatch = $uws_core_lib["venueimages"][$uvimageloccode . "-hideifnomatch"];
-                $uvthisuseplaceholder = $uws_core_lib["venueimages"][$uvimageloccode . "-useplaceholder"];
-                $uvthisplaceholcerurl = $uws_core_lib["venueimages"][$uvimageloccode . "-placeholderurl"];
-                $uvthisreturnmultiple = (isset($uws_core_lib["venueimages"][$uvimageloccode . "-returnmultiple"])) ? $uws_core_lib["venueimages"][$uvimageloccode . "-returnmultiple"] : 0;
-                $uvthissizecode = $uws_core_lib["venueimages"][$uvimageloccode . "-sizecode"];
+                $uvthishideifnomatch = $urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-hideifnomatch"];
+                $uvthisuseplaceholder = $urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-useplaceholder"];
+                $uvthisplaceholcerurl = $urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-placeholderurl"];
+                $uvthisreturnmultiple = (isset($urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-returnmultiple"])) ? $urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-returnmultiple"] : 0;
+                $uvthissizecode = $urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-sizecode"];
 
                 // $uvlocimage = uws_get_flyersbypriority($uvimages, $uvimageprior, $uvthishideifnomatch, $uvthisreturnmultiple);
                 $uvlocimage = urvenue_ws_get_flyersbypriority($uvimages, $uvimageprior, $uvthishideifnomatch, $uvthisreturnmultiple); // Axl UWS-7416
@@ -152,8 +152,8 @@ function urvenue_ws_get_venue_images($uvimages){ // Axl UWS-7416
                     $uvlocimage = $uvlocimagearray;
                 }
 
-                if(!is_array($uvlocimage) and $uvthisuseplaceholder and ($uvthisplaceholcerurl or $uws_core_lib["venueimages"]["placeholderurl"])){
-                    $uvthisplaceholder = ($uvthisplaceholcerurl) ? $uvthisplaceholcerurl : $uws_core_lib["venueimages"]["placeholderurl"];
+                if(!is_array($uvlocimage) and $uvthisuseplaceholder and ($uvthisplaceholcerurl or $urvenue_ws_core_lib["venueimages"]["placeholderurl"])){
+                    $uvthisplaceholder = ($uvthisplaceholcerurl) ? $uvthisplaceholcerurl : $urvenue_ws_core_lib["venueimages"]["placeholderurl"];
 
                     $uvlocimage = array(
                         "url" => $uvthisplaceholder,

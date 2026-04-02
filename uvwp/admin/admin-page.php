@@ -1,6 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-$uvsinitialtab = "dashboard";
+// $uvsinitialtab = "dashboard";
+$urvenue_ws_initialtab = "dashboard"; // Axl UWS-7416
 
 // @egt [UWS-7264]
 // function uvwp_adminpage_styles() {
@@ -38,12 +39,12 @@ add_action('admin_enqueue_scripts', 'urvenue_ws_adminpage_styles'); // Axl UWS-7
 	</div>
 
 	<div class="uvs-logo">
-		<a href="https://urvenue.com/"><img src="<?php /* Old: echo $uvs_url; */ echo esc_url( $uvs_url ); ?>/assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
+		<a href="https://urvenue.com/"><img src="<?php /* Old: echo $urvenue_ws_url; */ echo esc_url( $urvenue_ws_url ); ?>/assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
 	</div>
 	
 	<div class="uvs-content">
-		<?php if($uvs_libexits){
-			include_once($uvs_path . "/system/admin/admin-box.php");
+		<?php if($urvenue_ws_libexits){
+			include_once($urvenue_ws_uvs_path . "/system/admin/admin-box.php");
 		} else{ ?>
 			<div class="uvs-boxpanel uvs-blockcenter uvs-maxw800">
 				<p class="uvs-text-center">Sorry the library is empty, start the initial setup or contact support@urvenue.com</p>
@@ -59,11 +60,11 @@ add_action('admin_enqueue_scripts', 'urvenue_ws_adminpage_styles'); // Axl UWS-7
 <?php
 
 // @egt [UWS-7264]
-// add_action('wp_footer', function () use ($uvs_core_lib) {
-add_action('admin_footer', function () use ($uvs_core_lib) { // Axl UWS-7416
+// add_action('wp_footer', function () use ($urvenue_ws_core_lib) {
+add_action('admin_footer', function () use ($urvenue_ws_core_lib) { // Axl UWS-7416
 	// @Axl
-	// echo "<script>var uvs_core_lib = " . json_encode($uvs_core_lib) . ";</script>";
-	echo "<script>var uvs_core_lib = " . wp_json_encode($uvs_core_lib) . ";</script>";
+	// echo "<script>var uvs_core_lib = " . json_encode($urvenue_ws_core_lib) . ";</script>";
+	echo "<script>var uvs_core_lib = " . wp_json_encode($urvenue_ws_core_lib) . ";</script>";
 	// @Axl End
 });
 

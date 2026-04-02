@@ -24,7 +24,7 @@
     </div>
 
     <div class="uvs-admin-apiconfig-actions">
-        <button class="uvs-btn uvs-btn-p uvsjs-checkapiconfig" type="button" data-checkapiconfig="<?php /* Old: echo $uvs_admin_lib["loads"]["checkapiconfig"]; */ echo esc_url( $uvs_admin_lib["loads"]["checkapiconfig"] ); ?>">Submit</button>
+        <button class="uvs-btn uvs-btn-p uvsjs-checkapiconfig" type="button" data-checkapiconfig="<?php /* Old: echo $urvenue_ws_adm_admin_lib["loads"]["checkapiconfig"]; */ echo esc_url( $urvenue_ws_adm_admin_lib["loads"]["checkapiconfig"] ); ?>">Submit</button>
         <div class="uv-loader-uvicon"></div>
     </div>
 </div>

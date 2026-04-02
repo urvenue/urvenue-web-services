@@ -5,64 +5,64 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // uws_check_nonce("uwsevents");
 urvenue_ws_check_nonce("uwsevents"); // Axl UWS-7416
 
-// $uvfromdate = uws_cleanup_request("date");
-$uvfromdate = urvenue_ws_cleanup_request("date"); // Axl UWS-7416
-// $uvtodate = uws_cleanup_request("enddate");
-$uvtodate = urvenue_ws_cleanup_request("enddate"); // Axl UWS-7416
-// $uvvenue = uws_cleanup_request("venue");
-$uvvenue = urvenue_ws_cleanup_request("venue"); // Axl UWS-7416
-// $uvnopredates = uws_cleanup_request("nopredates");
-$uvnopredates = urvenue_ws_cleanup_request("nopredates"); // Axl UWS-7416
-// $uvbuttonlabel = uws_cleanup_request("btnlabel");
-$uvbuttonlabel = urvenue_ws_cleanup_request("btnlabel"); // Axl UWS-7416
-// $uvviews = (isset($_REQUEST["views"])) ? explode(",", uws_cleanup_var($_REQUEST["views"])) : null;
-// $uvviews = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var($_REQUEST["views"])) : null; // Axl UWS-7416
-// $uvviews = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) )) : null; // Axl UWS-7418
-// $uvviews = (isset($_REQUEST["views"])) ? explode(",", sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7418
-$uvviews = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7416
-// $uvdefaultview = $_REQUEST["defaultview"] ? uws_cleanup_var($_REQUEST["defaultview"]) : "";
-// $uvdefaultview = $_REQUEST["defaultview"] ? urvenue_ws_cleanup_var($_REQUEST["defaultview"]) : ""; // Axl UWS-7416
-// $uvdefaultview = (isset($_REQUEST["defaultview"]) && $_REQUEST["defaultview"]) ? urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) : ""; // Axl UWS-7418
-// $uvdefaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7418
-$uvdefaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7416
+// $urvenue_ws_fromdate = uws_cleanup_request("date");
+$urvenue_ws_fromdate = urvenue_ws_cleanup_request("date"); // Axl UWS-7416
+// $urvenue_ws_todate = uws_cleanup_request("enddate");
+$urvenue_ws_todate = urvenue_ws_cleanup_request("enddate"); // Axl UWS-7416
+// $urvenue_ws_venue = uws_cleanup_request("venue");
+$urvenue_ws_venue = urvenue_ws_cleanup_request("venue"); // Axl UWS-7416
+// $urvenue_ws_nopredates = uws_cleanup_request("nopredates");
+$urvenue_ws_nopredates = urvenue_ws_cleanup_request("nopredates"); // Axl UWS-7416
+// $urvenue_ws_buttonlabel = uws_cleanup_request("btnlabel");
+$urvenue_ws_buttonlabel = urvenue_ws_cleanup_request("btnlabel"); // Axl UWS-7416
+// $urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", uws_cleanup_var($_REQUEST["views"])) : null;
+// $urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var($_REQUEST["views"])) : null; // Axl UWS-7416
+// $urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) )) : null; // Axl UWS-7418
+// $urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7418
+$urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7416
+// $urvenue_ws_defaultview = $_REQUEST["defaultview"] ? uws_cleanup_var($_REQUEST["defaultview"]) : "";
+// $urvenue_ws_defaultview = $_REQUEST["defaultview"] ? urvenue_ws_cleanup_var($_REQUEST["defaultview"]) : ""; // Axl UWS-7416
+// $urvenue_ws_defaultview = (isset($_REQUEST["defaultview"]) && $_REQUEST["defaultview"]) ? urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) : ""; // Axl UWS-7418
+// $urvenue_ws_defaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7418
+$urvenue_ws_defaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7416
 //$uvnowrap = uws_cleanup_request("nowrap");
 
-$uvargs = array(
-    "fromdate" => $uvfromdate,
-    "todate" => $uvtodate,
-    //"venue" => $uvvenue,
-    "nopredates" => $uvnopredates,
+$urvenue_ws_args = array(
+    "fromdate" => $urvenue_ws_fromdate,
+    "todate" => $urvenue_ws_todate,
+    //"venue" => $urvenue_ws_venue,
+    "nopredates" => $urvenue_ws_nopredates,
     "nowrap" => true,
 );
 
-if (is_array($uvviews) && count($uvviews) > 0)
-    $uvargs["views"] = $uvviews;
+if (is_array($urvenue_ws_views) && count($urvenue_ws_views) > 0)
+    $urvenue_ws_args["views"] = $urvenue_ws_views;
 
-if($uvdefaultview)
-    $uvargs["defaultview"] = $uvdefaultview;
+if($urvenue_ws_defaultview)
+    $urvenue_ws_args["defaultview"] = $urvenue_ws_defaultview;
 
-if($uvbuttonlabel)
-    $uvargs["buttonlabel"] = $uvbuttonlabel;
+if($urvenue_ws_buttonlabel)
+    $urvenue_ws_args["buttonlabel"] = $urvenue_ws_buttonlabel;
 
-if(strpos($uvvenue, 'VEN') !== false)//if venue is venuecodes and not venue internal uvcore key
-    $uvargs["venuecodes"] = $uvvenue;
+if(strpos($urvenue_ws_venue, 'VEN') !== false)//if venue is venuecodes and not venue internal uvcore key
+    $urvenue_ws_args["venuecodes"] = $urvenue_ws_venue;
 else
-    $uvargs["venue"] = $uvvenue;
+    $urvenue_ws_args["venue"] = $urvenue_ws_venue;
 
 
-// $uveventsviews = uws_events_views($uvargs, true);
-$uveventsviews = urvenue_ws_events_views($uvargs, true); // Axl UWS-7416
-$uveventsviews["nextloaddate"] = date("Y-m-d", strtotime($uveventsviews["todate"] . " +1 day"));
+// $urvenue_ws_eventsviews = uws_events_views($urvenue_ws_args, true);
+$urvenue_ws_eventsviews = urvenue_ws_events_views($urvenue_ws_args, true); // Axl UWS-7416
+$urvenue_ws_eventsviews["nextloaddate"] = date("Y-m-d", strtotime($urvenue_ws_eventsviews["todate"] . " +1 day"));
 
-$uvreturnjson = "";
+$urvenue_ws_returnjson = "";
 
-if(is_array($uveventsviews)){
+if(is_array($urvenue_ws_eventsviews)){
     // @Axl
-    // $uvreturnjson = json_encode($uveventsviews);
-    $uvreturnjson = wp_json_encode($uveventsviews);
+    // $urvenue_ws_returnjson = json_encode($urvenue_ws_eventsviews);
+    $urvenue_ws_returnjson = wp_json_encode($urvenue_ws_eventsviews);
     // @Axl End
 }
 
 header('Content-Type: application/json');
-// echo($uvreturnjson);
-echo( $uvreturnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
+// echo($urvenue_ws_returnjson);
+echo( $urvenue_ws_returnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416

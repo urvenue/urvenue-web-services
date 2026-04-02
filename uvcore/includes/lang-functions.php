@@ -10,26 +10,26 @@ if (function_exists('add_action'))
 
 // function uws_set_cur_lang() {
 function urvenue_ws_set_cur_lang() { // Axl UWS-7416
-    global $uvcurlang;
-    $uvcurlang = "en";
+    global $urvenue_ws_curlang;
+    $urvenue_ws_curlang = "en";
 
     // if (uws_is_wordpress()) {
     if (urvenue_ws_is_wordpress()) { // Axl UWS-7416
-        
+
 		// Check for WPML
-        if (apply_filters('wpml_current_language', null)) {
-            $uvcurlang = apply_filters('wpml_current_language', null);
+        if (apply_filters('wpml_current_language', null)) { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Third-party WPML filter
+            $urvenue_ws_curlang = apply_filters('wpml_current_language', null); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Third-party WPML filter
         }
         // Check for Polylang
         elseif (function_exists('pll_current_language')) {
-            $uvcurlang = pll_current_language();
-        } 
+            $urvenue_ws_curlang = pll_current_language();
+        }
         // Fallback to pll_the_languages if pll_current_language is not available
         elseif (function_exists('pll_the_languages')) {
             $languages = pll_the_languages(array('raw' => 1));
             foreach ($languages as $language) {
                 if ($language['current_lang']) {
-                    $uvcurlang = $language['slug'];
+                    $urvenue_ws_curlang = $language['slug'];
                     break;
                 }
             }
@@ -42,54 +42,55 @@ function urvenue_ws_set_cur_lang() { // Axl UWS-7416
 */
 // function uws_get_cur_lang(){
 function urvenue_ws_get_cur_lang(){ // Axl UWS-7416
-	global $uvcurlang;
+	global $urvenue_ws_curlang;
 
-	// if(!$uvcurlang) uws_set_cur_lang();
-	if(!$uvcurlang) urvenue_ws_set_cur_lang(); // Axl UWS-7416
+	// if(!$urvenue_ws_curlang) uws_set_cur_lang();
+	if(!$urvenue_ws_curlang) urvenue_ws_set_cur_lang(); // Axl UWS-7416
 
-    return $uvcurlang;
+    return $urvenue_ws_curlang;
 }
 
 /*Get traslation based on key
     Requires: Key of the translation
     Returns: Traslated text for the current language if exists
 */
-$uws_langvars = $uws_langvars_en = "";
+// $uws_langvars = $uws_langvars_en = "";
+$urvenue_ws_langvars = $urvenue_ws_langvars_en = ""; // Axl UWS-7416
 // function uws_lang($uvkey){
 function urvenue_ws_lang($uvkey){ // Axl UWS-7416
-	global $uws_langvars, $uws_path, $uws_langvars_en;
+	global $urvenue_ws_langvars, $urvenue_ws_path, $urvenue_ws_langvars_en;
 
     // $uvcurlang = uws_get_cur_lang();
-    $uvcurlang = urvenue_ws_get_cur_lang(); // Axl UWS-7416
+    $urvenue_ws_curlang = urvenue_ws_get_cur_lang(); // Axl UWS-7416
 
-	if(!$uws_langvars){
-		$uvlangfile = $uws_path . "/langs/" . $uvcurlang . ".json";
-		
+	if(!$urvenue_ws_langvars){
+		$uvlangfile = $urvenue_ws_path . "/langs/" . $urvenue_ws_curlang . ".json";
+
 		if(file_exists($uvlangfile)){
 			// $uvlangjson = uws_api_call($uvlangfile, 1);
 			$uvlangjson = urvenue_ws_api_call($uvlangfile, 1); // Axl UWS-7416
-			$uws_langvars = json_decode($uvlangjson, true);
+			$urvenue_ws_langvars = json_decode($uvlangjson, true);
 		}
 		else{
-			$uvlangfile = $uws_path . "/langs/en.json";
+			$uvlangfile = $urvenue_ws_path . "/langs/en.json";
 			// $uvlangjson = uws_api_call($uvlangfile, 1);
 			$uvlangjson = urvenue_ws_api_call($uvlangfile, 1); // Axl UWS-7416
-			$uws_langvars = json_decode($uvlangjson, true);
+			$urvenue_ws_langvars = json_decode($uvlangjson, true);
 		}
 	}
 
-	$uvlangtext = (isset($uws_langvars[$uvkey])) ? $uws_langvars[$uvkey] : $uvkey;
+	$uvlangtext = (isset($urvenue_ws_langvars[$uvkey])) ? $urvenue_ws_langvars[$uvkey] : $uvkey;
 
-	if(!$uws_langvars[$uvkey]){
-		if(!$uws_langvars_en){
-			$uvlangfile = $uws_path . "/langs/en.json";
+	if(!$urvenue_ws_langvars[$uvkey]){
+		if(!$urvenue_ws_langvars_en){
+			$uvlangfile = $urvenue_ws_path . "/langs/en.json";
 			// $uvlangjson = uws_api_call($uvlangfile, 1);
 			$uvlangjson = urvenue_ws_api_call($uvlangfile, 1); // Axl UWS-7416
-			$uws_langvars_en = json_decode($uvlangjson, true);
+			$urvenue_ws_langvars_en = json_decode($uvlangjson, true);
 		}
 
-		if($uws_langvars_en[$uvkey])
-			$uvlangtext = $uws_langvars_en[$uvkey];
+		if($urvenue_ws_langvars_en[$uvkey])
+			$uvlangtext = $urvenue_ws_langvars_en[$uvkey];
 	}
 
 	return $uvlangtext;
@@ -102,9 +103,9 @@ function urvenue_ws_lang($uvkey){ // Axl UWS-7416
 // function uws_lang_date($uvddate){
 function urvenue_ws_lang_date($uvddate){ // Axl UWS-7416
     // $uvcurlang = uws_get_cur_lang();
-    $uvcurlang = urvenue_ws_get_cur_lang(); // Axl UWS-7416
+    $urvenue_ws_curlang = urvenue_ws_get_cur_lang(); // Axl UWS-7416
 
-	if($uvcurlang and $uvcurlang != "en"){
+	if($urvenue_ws_curlang and $urvenue_ws_curlang != "en"){
 		// $uvlangfulldate = uws_lang("uv-date-fullday");
 		$uvlangfulldate = urvenue_ws_lang("uv-date-fullday"); // Axl UWS-7416
 		// $uvlangfullmonths = uws_lang("uv-date-fullmonth");

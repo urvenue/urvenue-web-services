@@ -1,33 +1,42 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-$uws_core_version = "1.0.52";
-$uvs_envicode = "api";
-$uvs_adminbox_tabs = array("venues", "inventory", "status", "flyers", "map","events-event", "events-list", "events-global", "events-calendar", "events-agenda", "events-slider", "dashboard", "artists-artistpage", "artists-list", "pages", "api", "seo", "cache", "ui-color-palette", "notifications");
+// $uws_core_version = "1.0.52";
+$urvenue_ws_adm_core_version = "1.0.52"; // Axl UWS-7416
+// $uvs_envicode = "api";
+$urvenue_ws_adm_envicode = "api"; // Axl UWS-7416
+// $uvs_adminbox_tabs = array("venues", "inventory", "status", "flyers", "map","events-event", "events-list", "events-global", "events-calendar", "events-agenda", "events-slider", "dashboard", "artists-artistpage", "artists-list", "pages", "api", "seo", "cache", "ui-color-palette", "notifications");
+$urvenue_ws_adm_adminbox_tabs = array("venues", "inventory", "status", "flyers", "map","events-event", "events-list", "events-global", "events-calendar", "events-agenda", "events-slider", "dashboard", "artists-artistpage", "artists-list", "pages", "api", "seo", "cache", "ui-color-palette", "notifications"); // Axl UWS-7416
 
 // $uvs_proxyurl = uvs_get_proxyurl();
-$uvs_proxyurl = urvenue_ws_adm_get_proxyurl(); // Axl UWS-7416
+$urvenue_ws_adm_proxyurl = urvenue_ws_adm_get_proxyurl(); // Axl UWS-7416
 
-$uvs_admin_lib = array(
+// $uvs_admin_lib = array(
+$urvenue_ws_adm_admin_lib = array( // Axl UWS-7416
 	"loads" => array(
-		"checkveaid" => $uvs_proxyurl . "?action=uvpx&uvaction=uvsp_veaidinfo",
-		"adminsave" => $uvs_proxyurl . "?action=uvpx&uvaction=uvsp_adminsave",
-		"checkapiconfig" => $uvs_proxyurl . "?action=uvpx&uvaction=uvsp_checkapiconfig",
+		"checkveaid" => $urvenue_ws_adm_proxyurl . "?action=uvpx&uvaction=uvsp_veaidinfo",
+		"adminsave" => $urvenue_ws_adm_proxyurl . "?action=uvpx&uvaction=uvsp_adminsave",
+		"checkapiconfig" => $urvenue_ws_adm_proxyurl . "?action=uvpx&uvaction=uvsp_checkapiconfig",
 	)
 );
 
-$uvs_flyertypes_lib = array("Flyer", "Action Shot", "Avatar", "Back of Flyer", "Background", "Caricature", "Crowd", "Guest", "Head Shot", "Header", "Item", "Logo", "Marquee Images", "Menu", "Profile Picture", "Promotional", "Secondary Flyer", "Social", "View", "Visit");
+// $uvs_flyertypes_lib = array("Flyer", "Action Shot", "Avatar", "Back of Flyer", "Background", "Caricature", "Crowd", "Guest", "Head Shot", "Header", "Item", "Logo", "Marquee Images", "Menu", "Profile Picture", "Promotional", "Secondary Flyer", "Social", "View", "Visit");
+$urvenue_ws_adm_flyertypes_lib = array("Flyer", "Action Shot", "Avatar", "Back of Flyer", "Background", "Caricature", "Crowd", "Guest", "Head Shot", "Header", "Item", "Logo", "Marquee Images", "Menu", "Profile Picture", "Promotional", "Secondary Flyer", "Social", "View", "Visit"); // Axl UWS-7416
 
-$uvs_flyersratios_lib = array("Vertical", "Square", "Horizontal", "Banner");
+// $uvs_flyersratios_lib = array("Vertical", "Square", "Horizontal", "Banner");
+$urvenue_ws_adm_flyersratios_lib = array("Vertical", "Square", "Horizontal", "Banner"); // Axl UWS-7416
 
-$uvs_admin_feeds = array(
+// $uvs_admin_feeds = array(
+$urvenue_ws_adm_admin_feeds = array( // Axl UWS-7416
 	"venueinfo" => "https://uvtix.com/api/v3/{params}/venues.json",
 	"microsite" => "https://{envicode}.urvenue.me/v1/microsite/user/json/?apikey={apikey}&sourcecode={sourcecode}&sourceloc={sourceloc}&{params}",
 );
 
-$uvs_cleanchars = array('ě' => 'e', 'Ě' => 'E', 'š' => 's', 'Š' => 'S', 'č' => 'c', 'Č' => 'C', 'ř' => 'r', 'Ř' => 'R', 'ž' => 'z', 'Ž' => 'Z', 'ý' => 'y', 'Ý' => 'Y', 'á' => 'a', 'Á' => 'A', 'í' => 'i', 'Í' => 'I', 'é' => 'e', 'É' => 'E', 'ú' => 'u', 'ů' => 'u', 'Ů' => 'U', 'ď' => 'd', 'Ď' => 'D', 'ť' => 't', 'Ť' => 'T', 'ň' => 'n', 'Ň' => 'N', 'ü' => 'u');
+// $uvs_cleanchars = array('ě' => 'e', 'Ě' => 'E', 'š' => 's', 'Š' => 'S', 'č' => 'c', 'Č' => 'C', 'ř' => 'r', 'Ř' => 'R', 'ž' => 'z', 'Ž' => 'Z', 'ý' => 'y', 'Ý' => 'Y', 'á' => 'a', 'Á' => 'A', 'í' => 'i', 'Í' => 'I', 'é' => 'e', 'É' => 'E', 'ú' => 'u', 'ů' => 'u', 'Ů' => 'U', 'ď' => 'd', 'Ď' => 'D', 'ť' => 't', 'Ť' => 'T', 'ň' => 'n', 'Ň' => 'N', 'ü' => 'u');
+$urvenue_ws_adm_cleanchars = array('ě' => 'e', 'Ě' => 'E', 'š' => 's', 'Š' => 'S', 'č' => 'c', 'Č' => 'C', 'ř' => 'r', 'Ř' => 'R', 'ž' => 'z', 'Ž' => 'Z', 'ý' => 'y', 'Ý' => 'Y', 'á' => 'a', 'Á' => 'A', 'í' => 'i', 'Í' => 'I', 'é' => 'e', 'É' => 'E', 'ú' => 'u', 'ů' => 'u', 'Ů' => 'U', 'ď' => 'd', 'Ď' => 'D', 'ť' => 't', 'Ť' => 'T', 'ň' => 'n', 'Ň' => 'N', 'ü' => 'u'); // Axl UWS-7416
 
-$uvs_admin_fields = array(
+// $uvs_admin_fields = array(
+$urvenue_ws_adm_admin_fields = array( // Axl UWS-7416
 	"events->global-source" => array(
 		"type" => "select",
 		"name" => "events[global-source]",
@@ -458,12 +467,12 @@ $uvs_admin_fields = array(
 	"artists->artist-imagetype" => array(
 		"type" => "select",
 		"name" => "artists[artist-imagetype]",
-		"values" => $uvs_flyertypes_lib,
+		"values" => $urvenue_ws_adm_flyertypes_lib,
 	),
 	"artists->artist-imageratio" => array(
 		"type" => "select",
 		"name" => "artists[artist-imageratio]",
-		"values" => $uvs_flyersratios_lib,
+		"values" => $urvenue_ws_adm_flyersratios_lib,
 	),
 	"artists->artist-listview" => array(
 		"type" => "select",

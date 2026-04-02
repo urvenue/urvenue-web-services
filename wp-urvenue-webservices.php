@@ -14,17 +14,22 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 
 /* UvCore Global Vars */
-$uws_corepath = plugin_dir_path(__FILE__) . "uvcore";
-$uws_coreurl = plugin_dir_url(__FILE__) . "uvcore";
+// $uws_corepath = plugin_dir_path(__FILE__) . "uvcore";
+$urvenue_ws_corepath = plugin_dir_path(__FILE__) . "uvcore"; // Axl UWS-7416
+// $uws_coreurl = plugin_dir_url(__FILE__) . "uvcore";
+$urvenue_ws_coreurl = plugin_dir_url(__FILE__) . "uvcore"; // Axl UWS-7416
 
-$uvwp_path = plugin_dir_path(__FILE__) . "uvwp";
-$uvwp_url = plugin_dir_url(__FILE__) . "uvwp";
+// $uvwp_path = plugin_dir_path(__FILE__) . "uvwp";
+$urvenue_ws_uvwp_path = plugin_dir_path(__FILE__) . "uvwp"; // Axl UWS-7416
+// $uvwp_url = plugin_dir_url(__FILE__) . "uvwp";
+$urvenue_ws_uvwp_url = plugin_dir_url(__FILE__) . "uvwp"; // Axl UWS-7416
 
-$uws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm
+// $uws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm
+$urvenue_ws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm // Axl UWS-7416
 
-include_once($uws_corepath . "/system/uvs-admin-init.php");
-include_once($uws_corepath . "/init-uvcore.php");
-include_once($uvwp_path . "/includes/init-uvwp.php");
+include_once($urvenue_ws_corepath . "/system/uvs-admin-init.php");
+include_once($urvenue_ws_corepath . "/init-uvcore.php");
+include_once($urvenue_ws_uvwp_path . "/includes/init-uvwp.php");
 
 // Add Settings link to plugin
 // add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'uwswpplug_add_settings_link');
@@ -41,9 +46,9 @@ function urvenue_ws_add_settings_link($links) { // Axl UWS-7416
 add_action('admin_bar_menu', 'urvenue_ws_add_cache_link', 999); // Axl UWS-7416
 // function uwswpplug_add_cache_link($wp_admin_bar) {
 function urvenue_ws_add_cache_link($wp_admin_bar) { // Axl UWS-7416
-    global $uws_core_lib;
+    global $urvenue_ws_core_lib;
 
-    if(!is_admin() || !isset($uws_core_lib['system']['apikey']) || (isset($uws_core_lib['system']['apikey']) && $uws_core_lib['system']['apikey'] === '')) return;
+    if(!is_admin() || !isset($urvenue_ws_core_lib['system']['apikey']) || (isset($urvenue_ws_core_lib['system']['apikey']) && $urvenue_ws_core_lib['system']['apikey'] === '')) return;
     
     $args = array(
         // 'id' => 'uws_cache_link',

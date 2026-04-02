@@ -3,20 +3,24 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // autogenerate cache apikey only 1 time, if not exists
 // $uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("uvs_cacheapikey") : "";
-$uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("urvenue_ws_cacheapikey") : ""; // Axl UWS-7416
-$uvsiteURL = (function_exists('get_option') and function_exists('add_menu_page')) ? get_site_url() : "";
+// $uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("urvenue_ws_cacheapikey") : ""; // Axl UWS-7416
+$urvenue_ws_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("urvenue_ws_cacheapikey") : ""; // Axl UWS-7416
+// $uvsiteURL = (function_exists('get_option') and function_exists('add_menu_page')) ? get_site_url() : "";
+$urvenue_ws_siteURL = (function_exists('get_option') and function_exists('add_menu_page')) ? get_site_url() : ""; // Axl UWS-7416
 
-if(!$uvs_cacheapikey && function_exists('get_option') and function_exists('add_menu_page')){
-    $uvs_cacheapikey = md5(uniqid(rand(), true));
+if(!$urvenue_ws_cacheapikey && function_exists('get_option') and function_exists('add_menu_page')){
+    $urvenue_ws_cacheapikey = md5(uniqid(rand(), true)); // Axl UWS-7416
     // update_option("uvs_cacheapikey", $uvs_cacheapikey);
-    update_option("urvenue_ws_cacheapikey", $uvs_cacheapikey); // Axl UWS-7416
+    update_option("urvenue_ws_cacheapikey", $urvenue_ws_cacheapikey); // Axl UWS-7416
 }
 
 if(isset($uv_uwscore_overwrite_lib_defaults) and is_array($uv_uwscore_overwrite_lib_defaults)){
-    $uv_core_defaults_lib = $uv_uwscore_overwrite_lib_defaults;
+    // $urvenue_ws_core_defaults_lib = $uv_uwscore_overwrite_lib_defaults;
+    $urvenue_ws_core_defaults_lib = $uv_uwscore_overwrite_lib_defaults; // Axl UWS-7416
 }
 else{
-    $uv_core_defaults_lib = array(
+    // $urvenue_ws_core_defaults_lib = array(
+    $urvenue_ws_core_defaults_lib = array( // Axl UWS-7416
         "system" => array(
             "sourceloc" => "uwscore",
             "sourcecode" => "public",
@@ -304,8 +308,8 @@ else{
             "username" => "",
             "password" => "",
             "wpeinst" => "", // WP Engine installation ID
-            "apikey" => "$uvs_cacheapikey",
-            "endpoint" => "$uvsiteURL/apis/uvclearcache/?apikey=$uvs_cacheapikey",
+            "apikey" => "$urvenue_ws_cacheapikey",
+            "endpoint" => "$urvenue_ws_siteURL/apis/uvclearcache/?apikey=$urvenue_ws_cacheapikey",
         ),
         "notifications" => array(
             "enable" => 0,
@@ -315,7 +319,8 @@ else{
     );
 }
 
-$uws_website_notices_types = array(
+// $urvenue_ws_website_notices_types = array(
+$urvenue_ws_website_notices_types = array( // Axl UWS-7416
     "noevents" => array(
         "message_template" => 
         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n".
@@ -486,4 +491,5 @@ $uws_website_notices_types = array(
     ),
 );
 
-$uws_cleanchars_lib = array('ě' => 'e', 'Ě' => 'E', 'š' => 's', 'Š' => 'S', 'č' => 'c', 'Č' => 'C', 'ř' => 'r', 'Ř' => 'R', 'ž' => 'z', 'Ž' => 'Z', 'ý' => 'y', 'Ý' => 'Y', 'á' => 'a', 'Á' => 'A', 'í' => 'i', 'Í' => 'I', 'é' => 'e', 'É' => 'E', 'ú' => 'u', 'ů' => 'u', 'Ů' => 'U', 'ď' => 'd', 'Ď' => 'D', 'ť' => 't', 'Ť' => 'T', 'ň' => 'n', 'Ň' => 'N', 'ü' => 'u');
+// $urvenue_ws_cleanchars_lib = array(
+$urvenue_ws_cleanchars_lib = array('ě' => 'e', 'Ě' => 'E', 'š' => 's', 'Š' => 'S', 'č' => 'c', 'Č' => 'C', 'ř' => 'r', 'Ř' => 'R', 'ž' => 'z', 'Ž' => 'Z', 'ý' => 'y', 'Ý' => 'Y', 'á' => 'a', 'Á' => 'A', 'í' => 'i', 'Í' => 'I', 'é' => 'e', 'É' => 'E', 'ú' => 'u', 'ů' => 'u', 'Ů' => 'U', 'ď' => 'd', 'Ď' => 'D', 'ť' => 't', 'Ť' => 'T', 'ň' => 'n', 'Ň' => 'N', 'ü' => 'u');

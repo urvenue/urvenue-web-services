@@ -21,7 +21,7 @@ function urvenue_ws_packages($uvargs = ""){ // Axl UWS-7416
 */
 // function uws_get_packages($uvargs = ""){
 function urvenue_ws_get_packages($uvargs = ""){ // Axl UWS-7416
-    global $uws_today;
+    global $urvenue_ws_today;
 
     $uvpackageshtml = "";
     // $uvvenuecode = uws_get_arg($uvargs, "venuecode", "");
@@ -29,8 +29,8 @@ function urvenue_ws_get_packages($uvargs = ""){ // Axl UWS-7416
     // $uvdate = uws_get_arg($uvargs, "date", uws_get_events_initial_date("Y-m-d"));
     $uvdate = urvenue_ws_get_arg($uvargs, "date", urvenue_ws_get_events_initial_date("Y-m-d")); // Axl UWS-7416
 
-    // If $uvdate is set and is in the past, use $uws_today instead
-	$uvdate = ($uvdate && strtotime($uvdate) < strtotime($uws_today)) ? $uws_today : $uvdate;
+    // If $uvdate is set and is in the past, use $urvenue_ws_today instead
+	$uvdate = ($uvdate && strtotime($uvdate) < strtotime($urvenue_ws_today)) ? $urvenue_ws_today : $uvdate;
 
     // $uvtodate = uws_get_arg($uvargs, "todate", uws_get_events_endinit_date("Y-m-d", $uvdate));
     $uvtodate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate)); // Axl UWS-7416
