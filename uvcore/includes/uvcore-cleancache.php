@@ -23,7 +23,8 @@ function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
     // Dates
     // $uvlatestdate = uws_get_events_endinit_date("Y-m-d", $urvenue_ws_today);
     $uvlatestdate = urvenue_ws_get_events_endinit_date("Y-m-d", $urvenue_ws_today); // Axl UWS-7416
-    $uvfeedtodate = date("Y-m-d", strtotime($uvlatestdate . " +7 days"));
+    // $uvfeedtodate = date("Y-m-d", strtotime($uvlatestdate . " +7 days"));
+    $uvfeedtodate = gmdate("Y-m-d", strtotime($uvlatestdate . " +7 days")); // Axl UWS-7416
     $uvfeeddates = "fromdate={$urvenue_ws_today}&todate={$uvfeedtodate}";
 
     // Venue codes

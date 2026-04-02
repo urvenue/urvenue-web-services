@@ -11,8 +11,10 @@ function urvenue_ws_get_experiences_date_filter($uvargs = ""){ // Axl UWS-7416
     // $uvdate = uws_get_arg($uvargs, "date", $urvenue_ws_today);
     $uvdate = urvenue_ws_get_arg($uvargs, "date", $urvenue_ws_today); // Axl UWS-7416
 
-    $uvinitialddate = date("F j, Y", strtotime($uvdate));
-    $uvmaxdate = date("Y-m-d", strtotime($uvdate . " +3 months"));
+    // $uvinitialddate = date("F j, Y", strtotime($uvdate));
+    $uvinitialddate = gmdate("F j, Y", strtotime($uvdate)); // Axl UWS-7416
+    // $uvmaxdate = date("Y-m-d", strtotime($uvdate . " +3 months"));
+    $uvmaxdate = gmdate("Y-m-d", strtotime($uvdate . " +3 months")); // Axl UWS-7416
 
     $uvcontrolshtml = "
         <div class='uws-experiences-controls uws-integration' data-mindate='$urvenue_ws_today' data-date='$uvdate' data-maxdate='$uvmaxdate'>
@@ -152,7 +154,8 @@ function urvenue_ws_get_experiences_list($uvexperiences){ // Axl UWS-7416
             $uvitemurl = urvenue_ws_get_item_url($uvitem); // Axl UWS-7416
             $uvitimage = (isset($uvitem["image"])) ? $uvitem["image"] : "";
             $uvitdur = (isset($uvitem["activityduration"])) ? $uvitem["activityduration"] : "";
-            $uvddate = date($urvenue_ws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"]));
+            // $uvddate = date($urvenue_ws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"]));
+            $uvddate = gmdate($urvenue_ws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"])); // Axl UWS-7416
 
             $uvcapacitylabel = ($uvitem["capacity"] > 1) ? "Guests" : "Guest";
             //$uvdstartdtime = ($uvitem["startuvtime"]) ? uws_get_formattime($uvitem["startuvtime"]) : "";

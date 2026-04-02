@@ -59,7 +59,8 @@ if (is_array($urvenue_ws_events) && count($urvenue_ws_events) > 0) {
 
             // $urvenue_ws_usedate = $uvevent["date"];
             $urvenue_ws_usedate = $urvenue_ws_event["date"]; // Axl UWS-7634
-            $urvenue_ws_ddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($urvenue_ws_usedate));
+            // $urvenue_ws_ddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($urvenue_ws_usedate));
+            $urvenue_ws_ddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($urvenue_ws_usedate)); // Axl UWS-7416
 
             if (!isset($urvenue_ws_dates[$urvenue_ws_usedate])) {
                 $urvenue_ws_dates[$urvenue_ws_usedate] = array();

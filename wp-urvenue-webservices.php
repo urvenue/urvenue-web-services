@@ -25,7 +25,8 @@ $urvenue_ws_uvwp_path = plugin_dir_path(__FILE__) . "uvwp"; // Axl UWS-7416
 $urvenue_ws_uvwp_url = plugin_dir_url(__FILE__) . "uvwp"; // Axl UWS-7416
 
 // $uws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm
-$urvenue_ws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm // Axl UWS-7416
+// $urvenue_ws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm // Axl UWS-7416
+$urvenue_ws_today = gmdate("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm // Axl UWS-7416
 
 include_once($urvenue_ws_corepath . "/system/uvs-admin-init.php");
 include_once($urvenue_ws_corepath . "/init-uvcore.php");

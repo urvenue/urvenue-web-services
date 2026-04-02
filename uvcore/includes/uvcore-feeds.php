@@ -187,7 +187,8 @@ function urvenue_ws_update_feeds_infofile($uvfeedinfo){ // Axl UWS-7416
 
 		if(!file_exists($uvfeedsinfofilepath)){//Check if feeds info file exists if not create it
 			$uvclearfeedstime = $uvtimenow + $urvenue_ws_feedscleartime;
-			$uvdclearfeedstime = date("Y-m-d H:i:s", $uvclearfeedstime);
+			// $uvdclearfeedstime = date("Y-m-d H:i:s", $uvclearfeedstime);
+			$uvdclearfeedstime = gmdate("Y-m-d H:i:s", $uvclearfeedstime); // Axl UWS-7416
 		
 			$uvfeedsinfofilearray = array(
 				"clearfeedstime" => $uvclearfeedstime,
@@ -568,7 +569,8 @@ function urvenue_ws_check_min_events($uvresponse, $uvfeedurl){ // Axl UWS-7416
 		// Get initial date of events
 		// $uvinitialdate = uws_get_events_initial_date("Y-m-d");
 		$uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
-		$uvfromnormalized = date("Y-m-d", strtotime($uvfromdate));
+		// $uvfromnormalized = date("Y-m-d", strtotime($uvfromdate));
+		$uvfromnormalized = gmdate("Y-m-d", strtotime($uvfromdate)); // Axl UWS-7416
 		if($uvinitialdate && $uvfromnormalized !== $uvinitialdate){
 			return true; // skip min-events validation for non-initial ranges
 		}

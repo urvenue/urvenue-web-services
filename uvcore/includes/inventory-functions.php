@@ -143,7 +143,8 @@ function urvenue_ws_get_eventinventory_list($uveventdata, $uvargs = "") // Axl U
             // $uv3dmapbtntemplate = uws_get_template("inventory/inventory-3dmap-button");
             $uv3dmapbtntemplate = urvenue_ws_get_template("inventory/inventory-3dmap-button"); // Axl UWS-7416
             $uv3dmapbtndateformat = ($uvintegration) ? "D, M j, Y" : $urvenue_ws_core_lib["inventory"]["global-dateformat"];
-            $uvedmapddate =  date($uv3dmapbtndateformat, strtotime($uveventdata["date"]));
+            // $uvedmapddate =  date($uv3dmapbtndateformat, strtotime($uveventdata["date"]));
+            $uvedmapddate =  gmdate($uv3dmapbtndateformat, strtotime($uveventdata["date"])); // Axl UWS-7416
             // $uvmapicon = uws_get_icon("pin");
             $uvmapicon = urvenue_ws_get_icon("pin"); // Axl UWS-7416
             $uv3dmapbtn = str_replace(
@@ -1191,7 +1192,8 @@ function urvenue_ws_get_eventinventory_list_feed($uveventdata, $uvglobaltype = "
                 }
             }
 
-            $uvsdate = date("ymd", strtotime($uveventdata["date"]));
+            // $uvsdate = date("ymd", strtotime($uveventdata["date"]));
+            $uvsdate = gmdate("ymd", strtotime($uveventdata["date"])); // Axl UWS-7416
             $uveventiventorynodes = $uveventecolist = $uvmasterlist = "";
 
             if ($uvinventorylistfeedinv and $uvinventorylistfeedinv["D" . $uvsdate] and $uvinventorylistfeedinv["D" . $uvsdate]["tree"] and $uvinventorylistfeedinv["D" . $uvsdate]["tree"]["nodes"])
@@ -1273,7 +1275,7 @@ function urvenue_ws_get_inventory_single_ecozone($uvinventorylistfeed, $uveventd
     if ($uvinventorylistfeed and $uveventdata) {
         // $uvecozone = uws_standardize_ecozone($uveventdata["ecozone"]);
         $uvecozone = urvenue_ws_standardize_ecozone($uveventdata["ecozone"]); // Axl UWS-7416
-        $uvecolist = $uvinventorylistfeed["uv"]["data"]["inventory"]["D" . date("ymd", strtotime($uveventdata["date"]))]["venues"][$uveventdata["venuecode"]]["ecolist"];
+        $uvecolist = $uvinventorylistfeed["uv"]["data"]["inventory"]["D" . gmdate("ymd", strtotime($uveventdata["date"]))]["venues"][$uveventdata["venuecode"]]["ecolist"]; // Axl UWS-7416
         $uvnewecolist = array();
 
         if ($uvecolist and is_array($uvecolist)) {
@@ -1303,7 +1305,7 @@ function urvenue_ws_get_inventory_single_ecozone($uvinventorylistfeed, $uveventd
             }
         }
 
-        $uvinventorylistfeed["uv"]["data"]["inventory"]["D" . date("ymd", strtotime($uveventdata["date"]))]["venues"][$uveventdata["venuecode"]]["ecolist"] = $uvnewecolist;
+        $uvinventorylistfeed["uv"]["data"]["inventory"]["D" . gmdate("ymd", strtotime($uveventdata["date"]))]["venues"][$uveventdata["venuecode"]]["ecolist"] = $uvnewecolist; // Axl UWS-7416
     }
 
     return $uvinventorylistfeed;
@@ -1387,7 +1389,8 @@ function urvenue_ws_inventory_microcode_items($uvargs = "") // Axl UWS-7416
     $uvitems = "";
     // $uvdate = uws_get_arg($uvargs, "date", $urvenue_ws_today);
     $uvdate = urvenue_ws_get_arg($uvargs, "date", $urvenue_ws_today); // Axl UWS-7416
-    $uvsdate = date("ymd", strtotime($uvdate));
+    // $uvsdate = date("ymd", strtotime($uvdate));
+    $uvsdate = gmdate("ymd", strtotime($uvdate)); // Axl UWS-7416
     $uvmicrocode = $urvenue_ws_core_lib["system"]["microcode"];
     $uvfeedtoken = "venuecode=MIC" . $uvmicrocode . "&caldate=" . $uvdate . "&todate=" . $uvdate;
     // $uvinventorylistfeed = uws_get_feed("inventorylist", $uvfeedtoken);
@@ -1898,7 +1901,8 @@ function urvenue_ws_get_summitemshtml($uvcartitems = "", $uvitems = "") // Axl U
         $uvsummitemsgroups = array();
 
         foreach ($uvcartitems as $uvitemcartcode => $uvcartitem) {
-            $uvcartitemddate = date($uvdateformat, strtotime($uvcartitem["caldate"]));
+            // $uvcartitemddate = date($uvdateformat, strtotime($uvcartitem["caldate"]));
+            $uvcartitemddate = gmdate($uvdateformat, strtotime($uvcartitem["caldate"])); // Axl UWS-7416
             $uvgrouptitle = $uvcartitemddate . " @ " . $uvcartitem["venuename"];
             $uvitemsymbol = $uvcartitem["currency_symbol"];
             $uvdpricelabel = "Subtotal";
@@ -2008,7 +2012,8 @@ function urvenue_ws_get_cart_eventscodes($uvcartitems) // Axl UWS-7416
             // $uvevecozone = uws_standardize_ecozone($uvcartitem["ecozone"]);
             $uvevecozone = urvenue_ws_standardize_ecozone($uvcartitem["ecozone"]); // Axl UWS-7416
             $uvevecozone = str_replace("ECZ", "", $uvevecozone);
-            $uvevsdate = date("Ymd", strtotime($uvcartitem["caldate"]));
+            // $uvevsdate = date("Ymd", strtotime($uvcartitem["caldate"]));
+            $uvevsdate = gmdate("Ymd", strtotime($uvcartitem["caldate"])); // Axl UWS-7416
             $uvevcode = "EVE" . $uvcartitem["venueid"] . $uvevecozone . $uvevsdate;
 
             if (!in_array($uvevcode, $uveventscodes))
@@ -2190,7 +2195,8 @@ function urvenue_ws_get_dropcartv2html($uvcartitems = "", $uvitems = "", $uvcart
             // $uvevecozone = uws_standardize_ecozone($uvcartitem["ecozone"]);
             $uvevecozone = urvenue_ws_standardize_ecozone($uvcartitem["ecozone"]); // Axl UWS-7416
             $uvevecozone = str_replace("ECZ", "", $uvevecozone);
-            $uvevsdate = date("Ymd", strtotime($uvcartitem["caldate"]));
+            // $uvevsdate = date("Ymd", strtotime($uvcartitem["caldate"]));
+            $uvevsdate = gmdate("Ymd", strtotime($uvcartitem["caldate"])); // Axl UWS-7416
             $uvevcode = "EVE" . $uvcartitem["venueid"] . $uvevecozone . $uvevsdate;
 
             $uvcartitemhtml = str_replace(
@@ -2236,7 +2242,8 @@ function urvenue_ws_get_dropcartv2html($uvcartitems = "", $uvitems = "", $uvcart
         if (is_array($uvdategroups)) {
             foreach ($uvdategroups as $uvdategroup) {
                 $uvvenuediv = ($urvenue_ws_core_lib["events"]["global-addvenuename"]) ? "<div class='uwsvenuename'>" . $uvdategroup["info"]["venuename"] . "</div>" : "";
-                $uvgroupddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdategroup["info"]["date"]));
+                // $uvgroupddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdategroup["info"]["date"]));
+                $uvgroupddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdategroup["info"]["date"])); // Axl UWS-7416
                 // $uvgroupddate = uws_lang_date($uvgroupddate);
                 $uvgroupddate = urvenue_ws_lang_date($uvgroupddate); // Axl UWS-7416
 
@@ -2405,7 +2412,8 @@ function urvenue_ws_get_dropcarthtml($uvcartitems = "", $uvitems = "", $uvcartco
         if (is_array($uvdategroups)) {
             foreach ($uvdategroups as $uvdategroup) {
                 $uvvenuediv = ($urvenue_ws_core_lib["events"]["global-addvenuename"]) ? "<div class='uwsvenuename'>" . $uvdategroup["info"]["venuename"] . "</div>" : "";
-                $uvgroupddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdategroup["info"]["date"]));
+                // $uvgroupddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdategroup["info"]["date"]));
+                $uvgroupddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdategroup["info"]["date"])); // Axl UWS-7416
                 // $uvgroupddate = uws_lang_date($uvgroupddate);
                 $uvgroupddate = urvenue_ws_lang_date($uvgroupddate); // Axl UWS-7416
 
@@ -2968,8 +2976,10 @@ function urvenue_ws_replace_item_vars($uvitem, $uvtemplate) // Axl UWS-7416
         $uvcreditstype = (isset($uvitem["globaltype"]) and $uvitem["globaltype"] == "opentable") ? "uv+ot" : "";
         // $uvcredits = uws_get_uwscredits($uvcreditstype);
         $uvcredits = urvenue_ws_get_uwscredits($uvcreditstype); // Axl UWS-7416
-        $uvmaxdate = date("Y-m-d", strtotime($urvenue_ws_today . " +4 months"));
-        $uvddate = date($urvenue_ws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"]));
+        // $uvmaxdate = date("Y-m-d", strtotime($urvenue_ws_today . " +4 months"));
+        $uvmaxdate = gmdate("Y-m-d", strtotime($urvenue_ws_today . " +4 months")); // Axl UWS-7416
+        // $uvddate = date($urvenue_ws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"]));
+        $uvddate = gmdate($urvenue_ws_core_lib["inventory"]["global-dateformat"], strtotime($uvitem["caldate"])); // Axl UWS-7416
         // $uvcapacitylabel = ($uvitem["capacity"] > 1) ? uws_lang("guests") : uws_lang("guest");
         $uvcapacitylabel = ($uvitem["capacity"] > 1) ? urvenue_ws_lang("guests") : urvenue_ws_lang("guest"); // Axl UWS-7416
         // $uvitemguestsel = uws_get_item_guests_select($uvitem);
@@ -4109,8 +4119,10 @@ function urvenue_ws_get_month_noinventory_dates($uvargs = "") { // Axl UWS-7416
     $uvuseeczdetails = ($uvecozone > 2) ? 1 : 0;
     // $uvecozone = uws_standardize_old_ecozone($uvecozone);
     $uvecozone = urvenue_ws_standardize_old_ecozone($uvecozone); // Axl UWS-7416
-    $uvfromdate = date("Y-m-01", strtotime($uvdate));
-    $uvtodate = date("Y-m-t", strtotime($uvdate));
+    // $uvfromdate = date("Y-m-01", strtotime($uvdate));
+    $uvfromdate = gmdate("Y-m-01", strtotime($uvdate)); // Axl UWS-7416
+    // $uvtodate = date("Y-m-t", strtotime($uvdate));
+    $uvtodate = gmdate("Y-m-t", strtotime($uvdate)); // Axl UWS-7416
     // $uvglobaltype = uws_get_arg($uvargs, "globaltype");
     $uvglobaltype = urvenue_ws_get_arg($uvargs, "globaltype"); // Axl UWS-7416
     // $uvmixecozones = uws_get_arg($uvargs, "mixecozones");
@@ -4135,7 +4147,8 @@ function urvenue_ws_get_month_noinventory_dates($uvargs = "") { // Axl UWS-7416
 
         foreach ($uvloopperiod as $uvthisdate) {
             $uvthedate = $uvthisdate->format('Y-m-d');
-            $uvsdate = date("Ymd", strtotime($uvthedate));
+            // $uvsdate = date("Ymd", strtotime($uvthedate));
+            $uvsdate = gmdate("Ymd", strtotime($uvthedate)); // Axl UWS-7416
 
             if($uvmixecozones){//Mix all ecozones, if one ecozone has inventory it won't be on "noinventorydates"
                 $uvdatehasitems = 0;
@@ -4184,8 +4197,10 @@ function urvenue_ws_get_month_closed_dates($uvargs = "") // Axl UWS-7416
     $uvecozone = urvenue_ws_get_arg($uvargs, "ecozone"); // Axl UWS-7416
     // $uvecozone = uws_standardize_old_ecozone($uvecozone);
     $uvecozone = urvenue_ws_standardize_old_ecozone($uvecozone); // Axl UWS-7416
-    $uvfromdate = date("Y-m-01", strtotime($uvdate));
-    $uvtodate = date("Y-m-t", strtotime($uvdate));
+    // $uvfromdate = date("Y-m-01", strtotime($uvdate));
+    $uvfromdate = gmdate("Y-m-01", strtotime($uvdate)); // Axl UWS-7416
+    // $uvtodate = date("Y-m-t", strtotime($uvdate));
+    $uvtodate = gmdate("Y-m-t", strtotime($uvdate)); // Axl UWS-7416
 
     $uvfeedtoken = "venuecode=" . $uvvenuecode . "&startdate=" . $uvfromdate . "&todate=" . $uvtodate . "&ecozones=" . $uvecozone;
     // $uvavailabilityfeed = uws_get_feed("gxnavailability", $uvfeedtoken);
@@ -4206,7 +4221,8 @@ function urvenue_ws_get_month_closed_dates($uvargs = "") // Axl UWS-7416
 
         foreach ($uvloopperiod as $uvthisdate) {
             $uvthedate = $uvthisdate->format('Y-m-d');
-            $uvsdate = date("Ymd", strtotime($uvthedate));
+            // $uvsdate = date("Ymd", strtotime($uvthedate));
+            $uvsdate = gmdate("Ymd", strtotime($uvthedate)); // Axl UWS-7416
             $uvdateinvinfo = $uvinventorydates["D" . $uvsdate][$uvecozone];
 
             if (is_array($uvdateinvinfo) && ($uvdateinvinfo["status"] != "Open"))
@@ -4452,7 +4468,7 @@ function urvenue_ws_get_inventorywidget($uvargs) // Axl UWS-7416
     $uvdate = ($uws_tempstartdate != "") ? $uws_tempstartdate : urvenue_ws_get_arg($uvargs, "date", $uws_startdate); // Axl UWS-7416
 
     // $uws_maxdate = ($uws_maxdays) ? date("Y-m-d", strtotime("+" . $uws_maxdays . " days")) : uws_get_events_max_date("Y-m-d");
-    $uws_maxdate = ($uws_maxdays) ? date("Y-m-d", strtotime("+" . $uws_maxdays . " days")) : urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
+    $uws_maxdate = ($uws_maxdays) ? gmdate("Y-m-d", strtotime("+" . $uws_maxdays . " days")) : urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
     $uws_enddate = ($uws_maxdate) ? $uws_maxdate : $uws_enddate;
     $uws_enddate = isset($uvargs['end-date']) ? $uvargs['end-date'] : $uws_enddate;
 
@@ -4462,7 +4478,8 @@ function urvenue_ws_get_inventorywidget($uvargs) // Axl UWS-7416
 
     $uwsstartdateformat = str_replace("-", "", $uws_startdate);
 
-    $uwsinitddate = date('M j, Y', strtotime($uvdate));
+    // $uwsinitddate = date('M j, Y', strtotime($uvdate));
+    $uwsinitddate = gmdate('M j, Y', strtotime($uvdate)); // Axl UWS-7416
 
     /* Ecozone Settings */
     // $uvecozone = uws_get_arg($uvargs, "ecozone", "ECZ000");
@@ -4501,12 +4518,14 @@ function urvenue_ws_get_inventorywidget($uvargs) // Axl UWS-7416
 
     if ($uvsearchnextavdate and is_array($uws_no_inventory_dates) && isset($uws_no_inventory_dates["noinventorydates"]) && in_array($uvdate, $uws_no_inventory_dates["noinventorydates"])) {
         while (in_array($uvdate, $uws_no_inventory_dates["noinventorydates"])) {
-            $uvdate = date('Y-m-d', strtotime($uvdate . ' +1 day'));
+            // $uvdate = date('Y-m-d', strtotime($uvdate . ' +1 day'));
+            $uvdate = gmdate('Y-m-d', strtotime($uvdate . ' +1 day')); // Axl UWS-7416
         }
 
         $uws_startdate = $uvdate;
         $uwsstartdateformat = str_replace("-", "", $uws_startdate);
-        $uwsinitddate = date('M j, Y', strtotime($uvdate));
+        // $uwsinitddate = date('M j, Y', strtotime($uvdate));
+    $uwsinitddate = gmdate('M j, Y', strtotime($uvdate)); // Axl UWS-7416
     }
 
     /* Custom Message Settings*/

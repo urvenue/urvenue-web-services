@@ -61,7 +61,7 @@ if($urvenue_ws_path){
 
 	if(!urvenue_ws_is_wordpress())
 		// $uws_feeds_debug = (isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) ) and (sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) ) == date("j"))) ? 1 : 0; // Axl UWS-7418
-		$urvenue_ws_feeds_debug = (isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) ) and (sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) ) == date("j"))) ? 1 : 0; // Axl UWS-7416
+		$urvenue_ws_feeds_debug = (isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) ) and (sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) ) == gmdate("j"))) ? 1 : 0; // Axl UWS-7416
 	else
 		// $uws_feeds_debug = 0;
 		$urvenue_ws_feeds_debug = 0; // Axl UWS-7416

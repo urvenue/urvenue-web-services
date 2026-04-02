@@ -12,8 +12,10 @@ function urvenue_ws_itinerary(){ // Axl UWS-7416
     $uvguestinfo = urvenue_ws_get_dummyapi("guestinfo"); // Axl UWS-7416
     // $uvitineraryconttemp = uws_get_template("itinerary/itinerary-container");
     $uvitineraryconttemp = urvenue_ws_get_template("itinerary/itinerary-container"); // Axl UWS-7416
-    $uvresstartddate = date("M j", strtotime($uvguestinfo["reservationinfo"]["checkin"]));
-    $uvresendddate = date("M j, Y", strtotime($uvguestinfo["reservationinfo"]["checkout"]));
+    // $uvresstartddate = date("M j", strtotime($uvguestinfo["reservationinfo"]["checkin"]));
+    $uvresstartddate = gmdate("M j", strtotime($uvguestinfo["reservationinfo"]["checkin"])); // Axl UWS-7416
+    // $uvresendddate = date("M j, Y", strtotime($uvguestinfo["reservationinfo"]["checkout"]));
+    $uvresendddate = gmdate("M j, Y", strtotime($uvguestinfo["reservationinfo"]["checkout"])); // Axl UWS-7416
     //$uvstartdate = uws_get_arg($uvargs, "date", $uvguestinfo["reservationinfo"]["checkin"]);
     //$uvenddate = date("Ymd", strtotime($uvstartdate . " +5 days"));
 
@@ -83,8 +85,10 @@ function urvenue_ws_get_itinerary_weekview($uvguestinfo, $uvargs = ""){ // Axl U
         //Create week headers
         $uvweekheader = "<div class='uwshourlabel'></div>";
         for($i=0; $i<$uvndates; $i++){
-            $uvdweekday = date("D", strtotime($uvdate . " +$i days"));
-            $uvmonthdday = date("d", strtotime($uvdate . " +$i days"));
+            // $uvdweekday = date("D", strtotime($uvdate . " +$i days"));
+            $uvdweekday = gmdate("D", strtotime($uvdate . " +$i days")); // Axl UWS-7416
+            // $uvmonthdday = date("d", strtotime($uvdate . " +$i days"));
+            $uvmonthdday = gmdate("d", strtotime($uvdate . " +$i days")); // Axl UWS-7416
 
             $uvweekheader .= "
                 <div class='uwsweekviewcol uwsddate'>
@@ -107,7 +111,8 @@ function urvenue_ws_get_itinerary_weekview($uvguestinfo, $uvargs = ""){ // Axl U
             $uvweekrows .= "<div class='uwsweekviewrow uws-weekview-insttime-$uvinsttime'><div class='uwshourlabel'><span class='uwstimelabel'>$uvdtime</span></div>";
             for($j=0; $j<$uvndates; $j++){
                 $uvittimeitems = "";
-                $uvthiscoldate = date("Ymd", strtotime($uvdate . " +$j days"));
+                // $uvthiscoldate = date("Ymd", strtotime($uvdate . " +$j days"));
+                $uvthiscoldate = gmdate("Ymd", strtotime($uvdate . " +$j days")); // Axl UWS-7416
                 $uvniitems = (isset($uvitineraryitemslist["ITD" . $uvinsttime . $uvthiscoldate]) and is_array($uvitineraryitemslist["ITD" . $uvinsttime . $uvthiscoldate])) ? count($uvitineraryitemslist["ITD" . $uvinsttime . $uvthiscoldate]) : 0;
 
                 if(isset($uvitineraryitemslist["ITD" . $uvinsttime . $uvthiscoldate]) and is_array($uvitineraryitemslist["ITD" . $uvinsttime . $uvthiscoldate])){
@@ -160,7 +165,8 @@ function urvenue_ws_replace_itinerary_item_vars($uvititem, $uvtemplate, $uvguest
         $uvititemimage = (isset($uvititem["image"]) and $uvititem["image"]) ? $uvititem["image"] : "";
         // $uvititemguestscircles = (isset($uvititem["guests"]) and $uvguestinfo) ? uws_get_guestscircles($uvguestinfo, $uvititem["guests"]) : "";
         $uvititemguestscircles = (isset($uvititem["guests"]) and $uvguestinfo) ? urvenue_ws_get_guestscircles($uvguestinfo, $uvititem["guests"]) : ""; // Axl UWS-7416
-        $uvdateddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvititem["date"]));
+        // $uvdateddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvititem["date"]));
+        $uvdateddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvititem["date"])); // Axl UWS-7416
         // $uvitemdtimes = uws_get_formattime($uvititem["starttime"]);
         $uvitemdtimes = urvenue_ws_get_formattime($uvititem["starttime"]); // Axl UWS-7416
         // $uvitemdtimes = (isset($uvititem["endtime"]) and $uvititem["starttime"]) ? $uvitemdtimes . " - " . uws_get_formattime($uvititem["endtime"]) : $uvitemdtimes;
@@ -241,13 +247,15 @@ function urvenue_ws_get_itineraryitemlist($uvguestinfo, $uvkeytype = ""){ // Axl
 
     if(is_array($uvguestinfo)){
         //Add checkin and checkout items
-        $uvcheckininstimedt = substr($uvguestinfo["reservationinfo"]["checkintime"], 0, 3) . date("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkin"]));
-        $uvcheckininsdt = date("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkin"]));
+        $uvcheckininstimedt = substr($uvguestinfo["reservationinfo"]["checkintime"], 0, 3) . gmdate("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkin"])); // Axl UWS-7416
+        // $uvcheckininsdt = date("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkin"]));
+        $uvcheckininsdt = gmdate("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkin"])); // Axl UWS-7416
         $uvcheckinitd = ($uvkeytype == "onlydate") ? "ITD" . $uvcheckininsdt : "ITD" . $uvcheckininstimedt;
         $uvcheckinitd = ($uvkeytype == "iniq") ? "ITDcheckin" : $uvcheckinitd;
 
-        $uvcheckoutstimedt = substr($uvguestinfo["reservationinfo"]["checkouttime"], 0, 3) . date("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkout"]));
-        $uvcheckoutsdt = date("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkout"]));
+        $uvcheckoutstimedt = substr($uvguestinfo["reservationinfo"]["checkouttime"], 0, 3) . gmdate("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkout"])); // Axl UWS-7416
+        // $uvcheckoutsdt = date("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkout"]));
+        $uvcheckoutsdt = gmdate("Ymd", strtotime($uvguestinfo["reservationinfo"]["checkout"])); // Axl UWS-7416
         $uvcheckoutitd = ($uvkeytype == "onlydate") ? "ITD" . $uvcheckoutsdt : "ITD" . $uvcheckoutstimedt;
         $uvcheckoutitd = ($uvkeytype == "iniq") ? "ITDcheckout" : $uvcheckoutitd;
 
@@ -281,8 +289,9 @@ function urvenue_ws_get_itineraryitemlist($uvguestinfo, $uvkeytype = ""){ // Axl
 
         //Add activities items
         foreach($uvguestinfo["itinerary"] as $uviacid => $uviact){
-            $uviactinsttimedt = substr($uviact["starttime"], 0, 3) . date("Ymd", strtotime($uviact["date"]));
-            $uviactinstdt = date("Ymd", strtotime($uviact["date"]));
+            $uviactinsttimedt = substr($uviact["starttime"], 0, 3) . gmdate("Ymd", strtotime($uviact["date"])); // Axl UWS-7416
+            // $uviactinstdt = date("Ymd", strtotime($uviact["date"]));
+            $uviactinstdt = gmdate("Ymd", strtotime($uviact["date"])); // Axl UWS-7416
             $uviactinstitduniq = "ITD" . $uviacid;
             $uviactinstitd = ($uvkeytype == "onlydate") ? "ITD" . $uviactinstdt : "ITD" . $uviactinsttimedt;
             $uviactinstitd = ($uvkeytype == "iniq") ? $uviactinstitduniq : $uviactinstitd;
@@ -296,8 +305,9 @@ function urvenue_ws_get_itineraryitemlist($uvguestinfo, $uvkeytype = ""){ // Axl
 
         //Add offers items
         foreach($uvguestinfo["offers"] as $uvoffid => $uvoffer){
-            $uvioffinsttimedt = substr($uvoffer["starttime"], 0, 3) . date("Ymd", strtotime($uvoffer["date"]));
-            $uvioffinstdt = date("Ymd", strtotime($uvoffer["date"]));
+            $uvioffinsttimedt = substr($uvoffer["starttime"], 0, 3) . gmdate("Ymd", strtotime($uvoffer["date"])); // Axl UWS-7416
+            // $uvioffinstdt = date("Ymd", strtotime($uvoffer["date"]));
+            $uvioffinstdt = gmdate("Ymd", strtotime($uvoffer["date"])); // Axl UWS-7416
             $uvioffinstitduniq = "ITD" . $uvoffid;
             $uvioffinstitd = ($uvkeytype == "onlydate") ? "ITD" . $uvioffinstdt : "ITD" . $uvioffinsttimedt;
             $uvioffinstitd = ($uvkeytype == "iniq") ? $uvioffinstitduniq : $uvioffinstitd;
@@ -377,10 +387,14 @@ function urvenue_ws_get_itinerary_dayview($uvguestinfo, $uvargs = ""){ // Axl UW
 
         for($i=0; $i<$uvndates; $i++){
             $uvdateititems = $uvittimeitems = "";
-            $uvdatedday = date("l", strtotime($uvdate . " +$i days"));
-            $uvdatedate = date("Y-m-d", strtotime($uvdate . " +$i days"));
-            $uvdateddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate . " +$i days"));
-            $uvthissdate = date("Ymd", strtotime($uvdate . " +$i days"));
+            // $uvdatedday = date("l", strtotime($uvdate . " +$i days"));
+            $uvdatedday = gmdate("l", strtotime($uvdate . " +$i days")); // Axl UWS-7416
+            // $uvdatedate = date("Y-m-d", strtotime($uvdate . " +$i days"));
+            $uvdatedate = gmdate("Y-m-d", strtotime($uvdate . " +$i days")); // Axl UWS-7416
+            // $uvdateddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate . " +$i days"));
+            $uvdateddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate . " +$i days")); // Axl UWS-7416
+            // $uvthissdate = date("Ymd", strtotime($uvdate . " +$i days"));
+            $uvthissdate = gmdate("Ymd", strtotime($uvdate . " +$i days")); // Axl UWS-7416
             $uvniitems = (is_array($uvitineraryitemslist["ITD" . $uvthissdate])) ? count($uvitineraryitemslist["ITD" . $uvthissdate]) : 0;
             $uvdayviewclass = ($uvcheckoutdate == $uvdatedate) ? "uwsislastbookdate" : "";
 
@@ -471,9 +485,12 @@ function urvenue_ws_get_itinerary_daytimeview($uvguestinfo, $uvargs = ""){ // Ax
         // $uvmaxhour = uws_get_arg($uvargs, "minhour", "12300");
         $uvmaxhour = urvenue_ws_get_arg($uvargs, "minhour", "12300"); // Axl UWS-7416
 
-        $uvdatedday = date("l", strtotime($uvdate));
-        $uvdateddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate));
-        $uvdatedate = date("Y-m-d", strtotime($uvdate));
+        // $uvdatedday = date("l", strtotime($uvdate));
+        $uvdatedday = gmdate("l", strtotime($uvdate)); // Axl UWS-7416
+        // $uvdateddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate));
+        $uvdateddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvdate)); // Axl UWS-7416
+        // $uvdatedate = date("Y-m-d", strtotime($uvdate));
+        $uvdatedate = gmdate("Y-m-d", strtotime($uvdate)); // Axl UWS-7416
 
         $uvcheckoutdate = $uvguestinfo["reservationinfo"]["checkout"];
         $uvdayviewclass = ($uvcheckoutdate == $uvdatedate) ? "uwsislastbookdate" : "";
@@ -494,7 +511,8 @@ function urvenue_ws_get_itinerary_daytimeview($uvguestinfo, $uvargs = ""){ // Ax
             $uvdaytimerows .= "<div class='uwsdaytimerow uws-daytimeview-insttime-$uvinsttime'><div class='uwshourlabel'><span class='uwstimelabel'>$uvdtime</span></div>";
 
             $uvittimeitems = "";
-            $uvthisrowdate = date("Ymd", strtotime($uvdate));
+            // $uvthisrowdate = date("Ymd", strtotime($uvdate));
+            $uvthisrowdate = gmdate("Ymd", strtotime($uvdate)); // Axl UWS-7416
 
             $uvniitems = (isset($uvitineraryitemslist["ITD" . $uvinsttime . $uvthisrowdate])) ? count($uvitineraryitemslist["ITD" . $uvinsttime . $uvthisrowdate]) : 0;
 
@@ -585,8 +603,10 @@ function urvenue_ws_get_invmonths($uvstartdate, $uvenddate){ // Axl UWS-7416
     $uvnmonths = 1;
 
     if($uvstartdate and $uvenddate){
-        $uvstartmonth = date("n", strtotime($uvstartdate)) / 1;
-        $uvendmonth = date("n", strtotime($uvenddate)) / 1;
+        // $uvstartmonth = date("n", strtotime($uvstartdate)) / 1;
+        $uvstartmonth = gmdate("n", strtotime($uvstartdate)) / 1; // Axl UWS-7416
+        // $uvendmonth = date("n", strtotime($uvenddate)) / 1;
+        $uvendmonth = gmdate("n", strtotime($uvenddate)) / 1; // Axl UWS-7416
 
         if($uvstartmonth > $uvendmonth)
             $uvendmonth = $uvendmonth + 12;

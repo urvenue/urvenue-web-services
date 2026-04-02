@@ -71,7 +71,8 @@ if($urvenue_ws_date and $urvenue_ws_venuecode and $urvenue_ws_ecozone){
 
     // $urvenue_ws_standardeco = uws_standardize_ecozone($urvenue_ws_ecozone);
     $urvenue_ws_standardeco = urvenue_ws_standardize_ecozone($urvenue_ws_ecozone); // Axl UWS-7416
-    $urvenue_ws_eventcode = "EVE" . str_replace("VEN", "", $urvenue_ws_venuecode) . str_replace("ECZ", "", $urvenue_ws_standardeco) . date("Ymd", strtotime($urvenue_ws_date));
+    // $urvenue_ws_eventcode = "EVE" . str_replace("VEN", "", $urvenue_ws_venuecode) . str_replace("ECZ", "", $urvenue_ws_standardeco) . date("Ymd", strtotime($urvenue_ws_date));
+    $urvenue_ws_eventcode = "EVE" . str_replace("VEN", "", $urvenue_ws_venuecode) . str_replace("ECZ", "", $urvenue_ws_standardeco) . gmdate("Ymd", strtotime($urvenue_ws_date)); // Axl UWS-7416
     $urvenue_ws_return["eventcode"] = $urvenue_ws_eventcode;
 }
 

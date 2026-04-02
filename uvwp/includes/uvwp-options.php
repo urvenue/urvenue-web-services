@@ -622,7 +622,8 @@ if (class_exists('RankMath')) {
 // function uwswpplug_add_sitemap_events($sitemap_index) {
 function urvenue_ws_add_sitemap_events($sitemap_index) { // Axl UWS-7416
     $uveventssmp = '';
-    $uvlastmod = date('c', time());
+    // $uvlastmod = date('c', time());
+    $uvlastmod = gmdate('c', time()); // Axl UWS-7416
 
     $uveventssmp .= '<sitemap>' . "\n";
     $uveventssmp .= '<loc>' . site_url() .'/events-sitemap.xml</loc>' . "\n";
@@ -648,7 +649,8 @@ function urvenue_ws_sitemap_events() { // Axl UWS-7416
     $uvevents = urvenue_ws_get_events(); // Axl UWS-7416
     
     if(is_array($uvevents)) {
-        $uvlastmod = date('c', time());
+        // $uvlastmod = date('c', time());
+        $uvlastmod = gmdate('c', time()); // Axl UWS-7416
         
         foreach($uvevents as $uvevent) {
             $uws_eventurl = $uvevent["event-url"];
