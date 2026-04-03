@@ -5,9 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //print_r($urvenue_ws_core_lib);
 
 // $urvenue_ws_adm_apikey = $_REQUEST["apikey"]; // Axl UWS-7418
-$urvenue_ws_adm_apikey = isset( $_REQUEST["apikey"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["apikey"] ) ) : ''; // Axl UWS-7418
+// $urvenue_ws_adm_apikey = isset( $_REQUEST["apikey"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["apikey"] ) ) : ''; // Axl UWS-7418
+$urvenue_ws_adm_apikey = isset( $_REQUEST["apikey"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["apikey"] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin config check load; admin capability check handles authorization // Axl UWS-7416
 // $urvenue_ws_adm_microcode = $_REQUEST["microcode"]; // Axl UWS-7418
-$urvenue_ws_adm_microcode = isset( $_REQUEST["microcode"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["microcode"] ) ) : ''; // Axl UWS-7418
+// $urvenue_ws_adm_microcode = isset( $_REQUEST["microcode"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["microcode"] ) ) : ''; // Axl UWS-7418
+$urvenue_ws_adm_microcode = isset( $_REQUEST["microcode"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["microcode"] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin config check load; admin capability check handles authorization // Axl UWS-7416
 $urvenue_ws_adm_sourcecode = $urvenue_ws_core_lib["system"]["sourcecode"];
 $urvenue_ws_adm_sourceloc = $urvenue_ws_core_lib["system"]["sourceloc"];
 

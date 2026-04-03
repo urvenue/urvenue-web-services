@@ -3233,7 +3233,8 @@ function urvenue_ws_normalize_item_to_replace($uvitem) // Axl UWS-7416
 
         //Add placeholders for now
         // if ($_REQUEST["apireq"]) { // Axl UWS-7418
-        if (isset($_REQUEST["apireq"]) && sanitize_text_field( wp_unslash( $_REQUEST["apireq"] ) )) { // Axl UWS-7418
+        // if (isset($_REQUEST["apireq"]) && sanitize_text_field( wp_unslash( $_REQUEST["apireq"] ) )) { // Axl UWS-7418
+        if (isset($_REQUEST["apireq"]) && sanitize_text_field( wp_unslash( $_REQUEST["apireq"] ) )) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only flag controlling placeholder data, no state change // Axl UWS-7416
             $uvitemreturn["primaryaddon"] = array(
                 "itemname" => "Gingerbread Kits",
                 "min" => 1,

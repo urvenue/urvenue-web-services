@@ -12,10 +12,12 @@ $urvenue_ws_envicode = (isset($urvenue_ws_core_lib["system"]["use-staging"]) and
 
 // $uws_envicode = (isset($_REQUEST["uvstaging"]) and $_REQUEST["uvstaging"]) ? "apistaging" : $uws_envicode;
 // $urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and $_REQUEST["uvstaging"]) ? "apistaging" : $urvenue_ws_envicode; // Axl UWS-7416
-$urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvstaging"] ) )) ? "apistaging" : $urvenue_ws_envicode; // Axl UWS-7418
+// $urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvstaging"] ) )) ? "apistaging" : $urvenue_ws_envicode; // Axl UWS-7418
+$urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvstaging"] ) )) ? "apistaging" : $urvenue_ws_envicode; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only environment override flag, no state change // Axl UWS-7416
 // $uws_envicode = (isset($_REQUEST["uvenvicode"]) and $_REQUEST["uvenvicode"]) ? $_REQUEST["uvenvicode"] : $uws_envicode;
 // $urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and $_REQUEST["uvenvicode"]) ? $_REQUEST["uvenvicode"] : $urvenue_ws_envicode; // Axl UWS-7416
-$urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) )) ? sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) ) : $urvenue_ws_envicode; // Axl UWS-7418
+// $urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) )) ? sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) ) : $urvenue_ws_envicode; // Axl UWS-7418
+$urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) )) ? sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) ) : $urvenue_ws_envicode; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only environment code override, no state change // Axl UWS-7416
 
 //API Vars
 // $uws_apikey = (isset($uws_apikey) and $uws_apikey) ? $uws_apikey : $uws_core_lib["system"]["apikey"];

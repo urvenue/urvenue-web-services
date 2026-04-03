@@ -191,7 +191,8 @@ function urvenue_ws_clear_cache_callback() { // Axl UWS-7416
     global $urvenue_ws_wpecreds;
 
     // if (isset($_GET['apikey']) && $_GET['apikey'] == $urvenue_ws_wpecreds['cacheapikey']) { // Axl UWS-7418
-    if (isset($_GET['apikey']) && sanitize_text_field( wp_unslash( $_GET['apikey'] ) ) == $urvenue_ws_wpecreds['cacheapikey']) { // Axl UWS-7418
+    // if (isset($_GET['apikey']) && sanitize_text_field( wp_unslash( $_GET['apikey'] ) ) == $urvenue_ws_wpecreds['cacheapikey']) { // Axl UWS-7418
+    if (isset($_GET['apikey']) && sanitize_text_field( wp_unslash( $_GET['apikey'] ) ) == $urvenue_ws_wpecreds['cacheapikey']) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- API key auth used instead of nonce for cache-clear endpoint // Axl UWS-7416
         // uvclear_wpengine_cache();
         urvenue_ws_clear_wpengine_cache(); // Axl UWS-7416
         

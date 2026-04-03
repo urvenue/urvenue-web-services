@@ -5,7 +5,8 @@ global $urvenue_ws_path;
 
 // @egt [UWS-7297]
 // $urvenue_ws_nonceaction = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : ''; // Axl UWS-7418
-$urvenue_ws_nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // Axl UWS-7418
+// $urvenue_ws_nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // Axl UWS-7418
+$urvenue_ws_nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading action to determine which nonce to verify in the switch below // Axl UWS-7416
 switch ($urvenue_ws_nonceaction) {
     case 'uwsinventory':
         // uws_check_nonce("uwsinventory");

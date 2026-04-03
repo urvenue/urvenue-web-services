@@ -65,7 +65,8 @@ if($urvenue_ws_popitemmodule == "membership"){
 }
 
 // if($_REQUEST["returnprox"]) // Axl UWS-7418
-if(isset($_REQUEST["returnprox"]) && sanitize_text_field( wp_unslash( $_REQUEST["returnprox"] ) )) // Axl UWS-7418
+// if(isset($_REQUEST["returnprox"]) && sanitize_text_field( wp_unslash( $_REQUEST["returnprox"] ) )) // Axl UWS-7418
+if(isset($_REQUEST["returnprox"]) && sanitize_text_field( wp_unslash( $_REQUEST["returnprox"] ) )) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified via urvenue_ws_check_nonce("uwsinventory") above // Axl UWS-7416
     // $urvenue_ws_return["proxies"] = uws_get_proxies("inventory");
     $urvenue_ws_return["proxies"] = urvenue_ws_get_proxies("inventory"); // Axl UWS-7416
     

@@ -767,6 +767,7 @@ function urvenue_ws_send_integration_alert($uvalerttype, $uvfeedurl = "", $uvdet
 
 // if(!uws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"])
 // if(!urvenue_ws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"]) // Axl UWS-7416
-if(!urvenue_ws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvclearcache"] ) )) // Axl UWS-7418
+// if(!urvenue_ws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvclearcache"] ) )) // Axl UWS-7418
+if(!urvenue_ws_is_wordpress() and isset($_REQUEST["uvclearcache"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvclearcache"] ) )) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Only runs in non-WordPress context; nonce not applicable // Axl UWS-7416
     // uws_clean_cached_feeds();
     urvenue_ws_clean_cached_feeds(); // Axl UWS-7416

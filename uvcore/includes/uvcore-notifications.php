@@ -48,7 +48,8 @@ function urvenue_ws_clear_notice_throttling($uvalerttype = 'noevents') { // Axl 
 // uws_test_notices();
 // uws_website_notices_send("noevents", "");
 // if(isset($_REQUEST['uwsclearthrottle'])) uws_clear_notice_throttling();
-if(isset($_REQUEST['uwsclearthrottle'])) urvenue_ws_clear_notice_throttling(); // Axl UWS-7416
+// if(isset($_REQUEST['uwsclearthrottle'])) urvenue_ws_clear_notice_throttling(); // Axl UWS-7416
+if(isset($_REQUEST['uwsclearthrottle'])) urvenue_ws_clear_notice_throttling(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Debug utility URL parameter, no user-facing state change // Axl UWS-7416
 
 // function uws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){
 function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){ // Axl UWS-7416
