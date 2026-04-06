@@ -46,7 +46,8 @@ $urvenue_ws_manageentid = urvenue_ws_cleanup_request("manageentid"); // Axl UWS-
 // $urvenue_ws_subtotalagree = uws_cleanup_request("subtotalagree");
 $urvenue_ws_subtotalagree = urvenue_ws_cleanup_request("subtotalagree"); // Axl UWS-7416
 // $urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? $_REQUEST["subinfo"] : ""; // Axl UWS-7418
-$urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // Axl UWS-7418
+// $urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // Axl UWS-7418
+$urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified via urvenue_ws_check_nonce("uwsinventory") above // Axl UWS-7416
 $urvenue_ws_apicartcode = $urvenue_ws_cartcount = "";
 $urvenue_ws_return = array();
 

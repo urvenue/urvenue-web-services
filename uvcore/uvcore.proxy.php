@@ -4,7 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 $urvenue_ws_isproxy = 1; // Axl UWS-7634
 // $urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : $_REQUEST["uvaction"]; // Axl UWS-7418
 // $urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // Axl UWS-7418
-$urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // Axl UWS-7634
+// $urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // Axl UWS-7634
+$urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Proxy dispatcher reads action to route request; nonce verified per action handler // Axl UWS-7416
 
 if ($urvenue_ws_action == "uvsp_checkproxyurl") {
 	echo ("uv1");

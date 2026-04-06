@@ -60,7 +60,7 @@ function urvenue_ws_shortcode_experiences($atts, $content = null){ // Axl UWS-74
 	wp_enqueue_style('uws-inventory-styles');
 	wp_enqueue_style('litepicker');
 
-	if(isset($_REQUEST["apireq"]))
+	if(isset($_REQUEST["apireq"])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only flag controlling asset enqueue, no state change // Axl UWS-7416
 		wp_enqueue_style('uws-apireq');
 
 	//include scripts
@@ -68,7 +68,7 @@ function urvenue_ws_shortcode_experiences($atts, $content = null){ // Axl UWS-74
 	wp_enqueue_script('uws-experiences-scripts');
 	wp_enqueue_script('litepicker');
 
-	if(isset($_REQUEST["apireq"]))
+	if(isset($_REQUEST["apireq"])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only flag controlling asset enqueue, no state change // Axl UWS-7416
         wp_enqueue_script('uws-apireq');
     
     include_once($urvenue_ws_path . "/includes/experiences-functions.php");

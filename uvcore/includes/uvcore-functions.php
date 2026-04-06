@@ -751,14 +751,14 @@ function urvenue_ws_check_nonce($uvnonce) { // Axl UWS-7416
 // @egt [UWS-7297]
 // function uws_cleanup_request(string $uv_request, string $uv_default = ''): string {
 function urvenue_ws_cleanup_request(string $uv_request, string $uv_default = ''): string { // Axl UWS-7416
-    if(!isset($_REQUEST[$uv_request])) {
+    if(!isset($_REQUEST[$uv_request])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Generic helper; nonce verification is caller's responsibility // Axl UWS-7416
         return $uv_default;
     }
 
     // return uws_cleanup_var(
     return urvenue_ws_cleanup_var( // Axl UWS-7416
         sanitize_text_field(
-            wp_unslash($_REQUEST[$uv_request])
+            wp_unslash($_REQUEST[$uv_request]) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Generic helper; nonce verification is caller's responsibility // Axl UWS-7416
         )
     );
 }

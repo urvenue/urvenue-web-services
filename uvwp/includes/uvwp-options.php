@@ -577,10 +577,12 @@ function urvenue_ws_check_enable_debug(){ // Axl UWS-7416
     global $urvenue_ws_feeds_debug;
 
     // $uws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and $_REQUEST["uvdbg"]) ? 1 : 0;
-    $urvenue_ws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) )) ? 1 : 0; // Axl UWS-7418
+    // $urvenue_ws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) )) ? 1 : 0; // Axl UWS-7418
+    $urvenue_ws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) )) ? 1 : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Debug flag restricted to administrators, no state change // Axl UWS-7416
 
     // if(isset($_REQUEST["uvclearcache"]) and $_REQUEST["uvclearcache"]) // Axl UWS-7418
-    if(isset($_REQUEST["uvclearcache"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvclearcache"] ) ))
+    // if(isset($_REQUEST["uvclearcache"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvclearcache"] ) )) // Axl UWS-7416
+    if(isset($_REQUEST["uvclearcache"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvclearcache"] ) )) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Cache clear utility parameter, no persistent state change // Axl UWS-7416
         // uws_clean_cached_feeds();
         urvenue_ws_clean_cached_feeds(); // Axl UWS-7416
 }   

@@ -19,12 +19,14 @@ $urvenue_ws_buttonlabel = urvenue_ws_cleanup_request("btnlabel"); // Axl UWS-741
 // $urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var($_REQUEST["views"])) : null; // Axl UWS-7416
 // $urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) )) : null; // Axl UWS-7418
 // $urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7418
-$urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7416
+// $urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["views"] ) ) )) : null; // Axl UWS-7416
+$urvenue_ws_views = (isset($_REQUEST["views"])) ? explode(",", urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["views"] ) ) )) : null; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified via urvenue_ws_check_nonce("uwsevents") above // Axl UWS-7416
 // $urvenue_ws_defaultview = $_REQUEST["defaultview"] ? uws_cleanup_var($_REQUEST["defaultview"]) : "";
 // $urvenue_ws_defaultview = $_REQUEST["defaultview"] ? urvenue_ws_cleanup_var($_REQUEST["defaultview"]) : ""; // Axl UWS-7416
 // $urvenue_ws_defaultview = (isset($_REQUEST["defaultview"]) && $_REQUEST["defaultview"]) ? urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) : ""; // Axl UWS-7418
 // $urvenue_ws_defaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7418
-$urvenue_ws_defaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7416
+// $urvenue_ws_defaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // Axl UWS-7416
+$urvenue_ws_defaultview = (isset($_REQUEST["defaultview"]) && sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) )) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["defaultview"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified via urvenue_ws_check_nonce("uwsevents") above // Axl UWS-7416
 //$uvnowrap = uws_cleanup_request("nowrap");
 
 $urvenue_ws_args = array(

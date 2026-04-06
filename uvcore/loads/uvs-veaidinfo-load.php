@@ -5,9 +5,11 @@ if($urvenue_ws_libexits)
 	include_once($urvenue_ws_uvs_path . "/system/uvs-admin-init.php");
 
 // $urvenue_ws_adm_ve = isset($urvenue_ws_adm_ve) ? $urvenue_ws_adm_ve : $_REQUEST["uvsve"]; // Axl UWS-7418
-$urvenue_ws_adm_ve = isset($urvenue_ws_adm_ve) ? $urvenue_ws_adm_ve : ( isset( $_REQUEST["uvsve"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsve"] ) ) : '' ); // Axl UWS-7418
+// $urvenue_ws_adm_ve = isset($urvenue_ws_adm_ve) ? $urvenue_ws_adm_ve : ( isset( $_REQUEST["uvsve"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsve"] ) ) : '' ); // Axl UWS-7418
+$urvenue_ws_adm_ve = isset($urvenue_ws_adm_ve) ? $urvenue_ws_adm_ve : ( isset( $_REQUEST["uvsve"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsve"] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin load file; admin capability check handles authorization // Axl UWS-7416
 // $urvenue_ws_adm_nv = isset($urvenue_ws_adm_nv) ? $urvenue_ws_adm_nv : $_REQUEST["uvsnv"]; // Axl UWS-7418
-$urvenue_ws_adm_nv = isset($urvenue_ws_adm_nv) ? $urvenue_ws_adm_nv : ( isset( $_REQUEST["uvsnv"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsnv"] ) ) : '' ); // Axl UWS-7418
+// $urvenue_ws_adm_nv = isset($urvenue_ws_adm_nv) ? $urvenue_ws_adm_nv : ( isset( $_REQUEST["uvsnv"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsnv"] ) ) : '' ); // Axl UWS-7418
+$urvenue_ws_adm_nv = isset($urvenue_ws_adm_nv) ? $urvenue_ws_adm_nv : ( isset( $_REQUEST["uvsnv"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvsnv"] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin load file; admin capability check handles authorization // Axl UWS-7416
 $urvenue_ws_adm_venueinfofeedurl = $urvenue_ws_adm_admin_feeds["venueinfo"];
 $urvenue_ws_adm_venueinfofeedurl = str_replace("{params}", "ve" . $urvenue_ws_adm_ve, $urvenue_ws_adm_venueinfofeedurl);
 

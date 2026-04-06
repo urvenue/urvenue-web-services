@@ -2224,7 +2224,8 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
     // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var($_REQUEST["venuecode"]) : ""; // Axl UWS-7416
     // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["venuecode"] ) ) : ""; // Axl UWS-7418
     // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // Axl UWS-7418
-    $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // Axl UWS-7416
+    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // Axl UWS-7416
+    $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for event display filtering, no state change // Axl UWS-7416
 
     if(isset($urvenue_ws_core_lib["system"]) and isset($urvenue_ws_core_lib["system"]["use-market-events"]) and isset($urvenue_ws_core_lib["system"]["use-market-eventsvenues"]) and !$urvenue_ws_core_lib["system"]["use-market-eventsvenues"] and $urvenue_ws_core_lib["system"]["use-market-events"] and isset($urvenue_ws_core_lib["events"]["market-events-venueid"]) and $urvenue_ws_core_lib["events"]["market-events-venueid"] and $uvgetvenuecode){
         // $uveventcodedata = uws_get_eventcode_data($uveventcode);

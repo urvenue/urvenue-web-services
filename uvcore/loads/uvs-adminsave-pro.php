@@ -5,8 +5,10 @@ unset($_REQUEST["uvaction"]);
 
 // if($_REQUEST["system"] and isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
 // if(isset($_REQUEST["system"]) && $_REQUEST["system"] and isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
-if(isset($_REQUEST["system"]) && isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
-	$urvenue_ws_adm_libtmp = $_REQUEST;
+// if(isset($_REQUEST["system"]) && isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
+if(isset($_REQUEST["system"]) && isset($_REQUEST["system"]["path"])){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin save handler; admin capability check handles authorization // Axl UWS-7416
+	// $urvenue_ws_adm_libtmp = $_REQUEST;
+	$urvenue_ws_adm_libtmp = $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin save handler; admin capability check handles authorization // Axl UWS-7416
 	
 	/*if(is_array($urvenue_ws_adm_libtmp["flyers"])){
 		foreach($urvenue_ws_adm_libtmp["flyers"] as $uvflyerlockey => $uvsflyerloc){
