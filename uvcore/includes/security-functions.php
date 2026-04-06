@@ -105,7 +105,8 @@ function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
 
     $param_parts = [];
     foreach ($_GET as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Intentionally scanning raw request data for WAF/security pattern detection // Axl UWS-7416
-    foreach ($_POST as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v);
+    // foreach ($_POST as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v);
+    foreach ($_POST as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Intentionally scanning raw POST data for WAF/security pattern detection // Axl UWS-7416
     $params_string = implode('&', $param_parts);
 
     // $ct = $_SERVER['CONTENT_TYPE'] ?? ($_SERVER['HTTP_CONTENT_TYPE'] ?? ''); // Axl UWS-7418
