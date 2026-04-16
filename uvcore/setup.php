@@ -193,6 +193,8 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 	<?php
 		// @egt [UWS-7264]
 		add_action('setup_enqueue_scripts', function(){
+			global $urvenue_ws_assetsversion;
+
 			$uvbaseurl = plugin_dir_url( __FILE__ );
 
 			$uvwp_setup_css = "
@@ -210,20 +212,20 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 			";
 
 			// wp_register_style('uvwp_setup_styles', '');
-			wp_register_style('urvenue_ws_setup_styles', ''); // Axl UWS-7416
+			wp_register_style('urvenue_ws_setup_styles', '', array(), $urvenue_ws_assetsversion); // Axl UWS-7416
 			// wp_enqueue_style('uvwp_setup_styles');
 			wp_enqueue_style('urvenue_ws_setup_styles'); // Axl UWS-7416
 			// wp_add_inline_style('uvwp_setup_styles', $uvwp_setup_css);
 			wp_add_inline_style('urvenue_ws_setup_styles', $uvwp_setup_css); // Axl UWS-7416
 
-			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), null, 'all');
-			wp_enqueue_style('setup-css', $uvbaseurl . 'assets/css/setup.css', array(), null, 'all');
-			wp_enqueue_style('uwsicons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), null, 'all');
+			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), $urvenue_ws_assetsversion, 'all');
+			wp_enqueue_style('setup-css', $uvbaseurl . 'assets/css/setup.css', array(), $urvenue_ws_assetsversion, 'all');
+			wp_enqueue_style('uwsicons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
 
 			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), null, true);
-			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate'), null, true);
-			wp_enqueue_script('setup', $uvbaseurl . 'assets/js/setup.js', array('jquery', 'jquery-validate'), null, true);
+			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), $urvenue_ws_assetsversion, true);
+			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate'), $urvenue_ws_assetsversion, true);
+			wp_enqueue_script('setup', $uvbaseurl . 'assets/js/setup.js', array('jquery', 'jquery-validate'), $urvenue_ws_assetsversion, true);
 		});
 	?>
 </head>

@@ -1,6 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+global $urvenue_ws_assetsversion;
+
 if($urvenue_ws_libexits)
 	include_once($urvenue_ws_uvs_path . "/system/uvs-admin-init.php");
 
@@ -61,7 +63,7 @@ if(is_array($urvenue_ws_adm_venueinfofeed) and is_array($urvenue_ws_adm_venueinf
 	$urvenue_ws_adm_pendchanges_script = 'urvenue_ws_adm_pendchanges = true;'; // Axl UWS-7416
 
 	// wp_register_script('uvs_pendchanges', false, array(), null, true);
-	wp_register_script('urvenue_ws_adm_pendchanges', false, array(), null, true); // Axl UWS-7416
+	wp_register_script('urvenue_ws_adm_pendchanges', false, array(), $urvenue_ws_assetsversion, true); // Axl UWS-7416
 	// wp_enqueue_script('uvs_pendchanges');
 	wp_enqueue_script('urvenue_ws_adm_pendchanges'); // Axl UWS-7416
 	// wp_add_inline_script('uvs_pendchanges', "(function () { {$urvenue_ws_adm_pendchanges_script} })();");
