@@ -84,7 +84,7 @@ function urvenue_ws_events($uvargs = ""){ // Axl UWS-7416
 // function uws_events_views($uvargs = "", $uvreturnarray = false)
 function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UWS-7416
 {
-    global $urvenue_ws_core_lib;
+    global $urvenue_ws_core_lib, $urvenue_ws_assetsversion;
 
     // $uvdate = uws_get_arg($uvargs, "date", "");
     $uvdate = urvenue_ws_get_arg($uvargs, "date", ""); // Axl UWS-7416
@@ -194,7 +194,7 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
                         // @egt [UWS-7264]
                         $uvcalcellwidth_script = 'const uvcalcellwidth = document.querySelector(".uws-events-views").offsetWidth / 7; document.documentElement.style.setProperty("--uws-cal-cell-minheight", uvcalcellwidth + "px");';
                         
-                        wp_register_script('uvcalcellwidth', false, array(), null, true);
+                        wp_register_script('uvcalcellwidth', false, array(), $urvenue_ws_assetsversion, true);
                         wp_enqueue_script('uvcalcellwidth');
                         wp_add_inline_script('uvcalcellwidth', "(function () { {$uvcalcellwidth_script} })();"); //add css var to add min height to cells
 

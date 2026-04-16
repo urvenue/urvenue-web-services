@@ -19,6 +19,8 @@ $urvenue_ws_initialtab = "dashboard";
 	<?php
 		// @egt [UWS-7264]
 		add_action('admin_enqueue_scripts', function(){
+			global $urvenue_ws_assetsversion;
+
 			$uvbaseurl = plugin_dir_url( __FILE__ );
 
 			$uvwp_admin_css = "
@@ -36,20 +38,20 @@ $urvenue_ws_initialtab = "dashboard";
 			";
 
 			// wp_register_style('uvwp_admin_styles', '');
-			wp_register_style('urvenue_ws_admin_styles', ''); // Axl UWS-7416
+			wp_register_style('urvenue_ws_admin_styles', '', array(), $urvenue_ws_assetsversion); // Axl UWS-7416
 			// wp_enqueue_style('uvwp_admin_styles');
 			wp_enqueue_style('urvenue_ws_admin_styles'); // Axl UWS-7416
 			// wp_add_inline_style('uvwp_admin_styles', $uvwp_admin_css);
 			wp_add_inline_style('urvenue_ws_admin_styles', $uvwp_admin_css); // Axl UWS-7416
 
-			wp_enqueue_style('flatpickr-css', $uvbaseurl . 'assets/css/flatpickr.min.css', array(), null, 'all');
-			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), null, 'all');
-			wp_enqueue_style('uwsicons-css', '$uvbaseurl . assets/css/uwsicons.css', array(), null, 'all');
+			wp_enqueue_style('flatpickr-css', $uvbaseurl . 'assets/css/flatpickr.min.css', array(), $urvenue_ws_assetsversion, 'all');
+			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), $urvenue_ws_assetsversion, 'all');
+			wp_enqueue_style('uwsicons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
 
 			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), null, true);
-			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate', 'flatpickr'), null, true);
-			wp_enqueue_script('flatpickr', $uvbaseurl . 'assets/js/flatpickr.min.js', array(), null, true);
+			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), $urvenue_ws_assetsversion, true);
+			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate', 'flatpickr'), $urvenue_ws_assetsversion, true);
+			wp_enqueue_script('flatpickr', $uvbaseurl . 'assets/js/flatpickr.min.js', array(), $urvenue_ws_assetsversion, true);
 		});
 	?>
 </head>

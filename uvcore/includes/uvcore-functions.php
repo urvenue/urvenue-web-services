@@ -87,10 +87,10 @@ function urvenue_ws_get_share_links($uvshareurl){ // Axl UWS-7416
 //updated with enqueue for @egt [UWS-7264]
 // function uws_include_styles(){
 function urvenue_ws_core_include_styles(){ // Axl UWS-7416
-    global $urvenue_ws_url;
-	
-	wp_enqueue_style('uvcore-css', $urvenue_ws_url . '/assets/css/uvcore.css', array(), null, 'all');
-    wp_enqueue_style('uwsicons-css', $urvenue_ws_url . '/assets/css/uwsicons.css', array(), null, 'all');
+    global $urvenue_ws_url, $urvenue_ws_assetsversion;
+
+	wp_enqueue_style('uvcore-css', $urvenue_ws_url . '/assets/css/uvcore.css', array(), $urvenue_ws_assetsversion, 'all');
+    wp_enqueue_style('uwsicons-css', $urvenue_ws_url . '/assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
 }
 // add_action('wp_enqueue_scripts', 'uws_include_styles');
 
@@ -98,12 +98,11 @@ function urvenue_ws_core_include_styles(){ // Axl UWS-7416
 //updated with enqueue for @egt [UWS-7264]
 // function uws_include_scripts(){
 function urvenue_ws_core_include_scripts(){ // Axl UWS-7416
-    global $urvenue_ws_url;
+    global $urvenue_ws_url, $urvenue_ws_assetsversion;
 
-	wp_register_script('uvcore-js',  $urvenue_ws_url . '/assets/js/uvcore.js', array(), null, array('strategy' => 'async'));
+	wp_register_script('uvcore-js',  $urvenue_ws_url . '/assets/js/uvcore.js', array(), $urvenue_ws_assetsversion, array('strategy' => 'async', 'in_footer' => true));
 	wp_enqueue_script('uvcore-js');
-}
-// add_action('wp_enqueue_scripts', 'uws_include_scripts');
+}// add_action('wp_enqueue_scripts', 'uws_include_scripts');
 
 /*Get css vars script
     Returns: string with css vars form global styles
@@ -452,7 +451,7 @@ function urvenue_ws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = ".
 */
 // function uws_get_proxies_script($uvproxysection = ""){
 function urvenue_ws_get_proxies_script($uvproxysection = ""){ // Axl UWS-7416
-	global $urvenue_ws_proxies_lib;
+	global $urvenue_ws_proxies_lib, $urvenue_ws_assetsversion;
 
 	$uvproxies = $urvenue_ws_proxies_lib;
 
@@ -470,7 +469,7 @@ function urvenue_ws_get_proxies_script($uvproxysection = ""){ // Axl UWS-7416
 	$uws_proxies_script = "window.urvenue_ws_proxies = window.urvenue_ws_proxies || {}; urvenue_ws_proxies = $uvproxiesjson;"; // Axl UWS-7416
 
 	// wp_register_script('uws_proxies', false, array(), null, true);
-	wp_register_script('urvenue_ws_proxies', false, array(), null, true); // Axl UWS-7416
+	wp_register_script('urvenue_ws_proxies', false, array(), $urvenue_ws_assetsversion, true); // Axl UWS-7416
 	// wp_enqueue_script('uws_proxies');
 	wp_enqueue_script('urvenue_ws_proxies'); // Axl UWS-7416
 	// wp_add_inline_script('uws_proxies', "(function () { {$uws_proxies_script} })();");
@@ -609,7 +608,7 @@ function urvenue_ws_get_proxyurl(){ // Axl UWS-7416
 */
 // function uws_get_proxy_script(){
 function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
-	global $urvenue_ws_config_addproxyparams;
+	global $urvenue_ws_config_addproxyparams, $urvenue_ws_assetsversion;
 
 	// $uvproxy = uws_get_proxyurl();
 	$uvproxy = urvenue_ws_get_proxyurl(); // Axl UWS-7416
@@ -628,7 +627,7 @@ function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
 
 	// wp_register_script('uws_proxy', false, array(), null, true);
 	// wp_register_script('urvenue_ws_proxy', false, array(), null, true);
-	wp_register_script('uws_proxy', false, array(), null, true); // Axl UWS-7416
+	wp_register_script('uws_proxy', false, array(), $urvenue_ws_assetsversion, true); // Axl UWS-7416
 	// wp_enqueue_script('uws_proxy');
 	// wp_enqueue_script('urvenue_ws_proxy');
 	wp_enqueue_script('uws_proxy'); // Axl UWS-7416
