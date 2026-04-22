@@ -3192,7 +3192,8 @@ function urvenue_ws_get_item_fullinfohtml($uvitem) // Axl UWS-7416
 // function uws_count_words_without_html($uvstring)
 function urvenue_ws_count_words_without_html($uvstring) // Axl UWS-7416
 {
-    $uvstring = strip_tags($uvstring);
+    // $uvstring = strip_tags($uvstring); // Axl UWS-7416
+    $uvstring = wp_strip_all_tags($uvstring); // Axl UWS-7416
     $uvstring = preg_replace('/\s+/', ' ', $uvstring);
     $uvstring = trim($uvstring);
     $uvwords = explode(" ", $uvstring);

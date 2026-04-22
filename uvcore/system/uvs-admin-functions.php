@@ -145,16 +145,26 @@ function urvenue_ws_adm_pullfeed($uvsfileurl){ // Axl UWS-7416
 function urvenue_ws_adm_admin_save_lib($uvslib){ // Axl UWS-7416
 	global $urvenue_ws_lib_path;
 
+	global $wp_filesystem; // Axl UWS-7416
+	if ( ! function_exists( 'WP_Filesystem' ) ) { // Axl UWS-7416
+		require_once ABSPATH . 'wp-admin/includes/file.php'; // Axl UWS-7416
+	} // Axl UWS-7416
+	if ( empty( $wp_filesystem ) ) { // Axl UWS-7416
+		WP_Filesystem(); // Axl UWS-7416
+	} // Axl UWS-7416
+
 	// if(uvs_is_wordpress()){
 	if(urvenue_ws_adm_is_wordpress()){ // Axl UWS-7416
 		// update_option("uvcore_lib", $uvslib);
 		update_option("urvenue_ws_uvcore_lib", $uvslib); // Axl UWS-7416
 		echo("saved");
 	}
-	else if(is_writable($urvenue_ws_lib_path)){
-		$fp = fopen("$urvenue_ws_lib_path", "w+");
-		fwrite($fp, $uvslib);
-		fclose($fp);
+	// else if(is_writable($urvenue_ws_lib_path)){ // Axl UWS-7416
+	else if( $wp_filesystem->is_writable( $urvenue_ws_lib_path ) ){ // Axl UWS-7416
+		// $fp = fopen("$urvenue_ws_lib_path", "w+"); // Axl UWS-7416
+		// fwrite($fp, $uvslib); // Axl UWS-7416
+		// fclose($fp); // Axl UWS-7416
+		$wp_filesystem->put_contents( $urvenue_ws_lib_path, $uvslib ); // Axl UWS-7416
 
 		echo("saved");
 	}

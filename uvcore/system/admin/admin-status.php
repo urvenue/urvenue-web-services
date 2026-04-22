@@ -9,14 +9,23 @@ $urvenue_ws_phpversion = $urvenue_ws_phpvermatch[0]; // Axl UWS-7634
 // $uvslibfile = $urvenue_ws_core_lib["system"]["library"];
 $urvenue_ws_libfile = $urvenue_ws_core_lib["system"]["library"]; // Axl UWS-7634
 // if(is_writable($uvslibfile))
-if(is_writable($urvenue_ws_libfile)) // Axl UWS-7634
+// if(is_writable($urvenue_ws_libfile)) // Axl UWS-7416
+global $wp_filesystem;
+if ( ! function_exists( 'WP_Filesystem' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+}
+if ( empty( $wp_filesystem ) ) {
+	WP_Filesystem();
+}
+if( $wp_filesystem->is_writable( $urvenue_ws_libfile ) ) // Axl UWS-7416
 	// $urvenue_ws_libiswrhtml = "<span class='uvsok'>Yes</span>";
 	$urvenue_ws_libiswrhtml = "<span class='uvsok'>Yes</span>"; // Axl UWS-7634
 else
 	// $urvenue_ws_libiswrhtml = "<span class='uvsbad'>No</span>";
 	$urvenue_ws_libiswrhtml = "<span class='uvsbad'>No</span>"; // Axl UWS-7634
 
-if($urvenue_ws_feeds_path and is_writable($urvenue_ws_feeds_path))
+// if($urvenue_ws_feeds_path and is_writable($urvenue_ws_feeds_path)) // Axl UWS-7416
+if($urvenue_ws_feeds_path and $wp_filesystem->is_writable( $urvenue_ws_feeds_path )) // Axl UWS-7416
 	// $urvenue_ws_feedsiswrhtml = "<span class='uvsok'>Working Properly</span>";
 	$urvenue_ws_feedsiswrhtml = "<span class='uvsok'>Working Properly</span>"; // Axl UWS-7634
 else
