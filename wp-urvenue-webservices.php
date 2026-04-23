@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Plugin Name: UrVenue Web Services
  * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
  * Description: UrVenue Integrations: Events, Inventory.
- * Version:     1.2.2
+ * Version:     1.2.3
  * Author:      UrVenue / UWS, uvwebservices
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later
