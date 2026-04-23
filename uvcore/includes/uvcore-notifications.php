@@ -41,7 +41,8 @@ function urvenue_ws_clear_notice_throttling($uvalerttype = 'noevents') { // Axl 
     // $uvthrottlefile = sys_get_temp_dir() . '/uws_throttle_' . $uvthrottlekey . '.txt';
     $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt'; // Axl UWS-7416
     if (file_exists($uvthrottlefile))
-        unlink($uvthrottlefile);
+        // unlink($uvthrottlefile); // Axl UWS-7416
+        wp_delete_file($uvthrottlefile); // Axl UWS-7416
 }
 
 // Uncomment to run tests:

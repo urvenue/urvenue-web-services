@@ -9,7 +9,8 @@ $urvenue_ws_cacheapikey = (function_exists('get_option') and function_exists('ad
 $urvenue_ws_siteURL = (function_exists('get_option') and function_exists('add_menu_page')) ? get_site_url() : ""; // Axl UWS-7416
 
 if(!$urvenue_ws_cacheapikey && function_exists('get_option') and function_exists('add_menu_page')){
-    $urvenue_ws_cacheapikey = md5(uniqid(rand(), true)); // Axl UWS-7416
+    // $urvenue_ws_cacheapikey = md5(uniqid(rand(), true)); // Axl UWS-7416
+    $urvenue_ws_cacheapikey = md5(uniqid(wp_rand(), true)); // Axl UWS-7416
     // update_option("uvs_cacheapikey", $uvs_cacheapikey);
     update_option("urvenue_ws_cacheapikey", $urvenue_ws_cacheapikey); // Axl UWS-7416
 }

@@ -9,7 +9,8 @@ $urvenue_ws_assetsversion = "1.0.52"; // Axl UWS-7416
 // $uvurlpath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Axl UWS-7416
 // $uvurlpath = parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ); // Axl UWS-7418
 // $uvurlpath = parse_url( sanitize_text_field( wp_unslash( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '' ) ), PHP_URL_PATH ); // Axl UWS-7418
-$urvenue_ws_uvurlpath = parse_url( sanitize_text_field( wp_unslash( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '' ) ), PHP_URL_PATH ); // Axl UWS-7416
+// $urvenue_ws_uvurlpath = parse_url( sanitize_text_field( wp_unslash( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '' ) ), PHP_URL_PATH ); // Axl UWS-7416
+$urvenue_ws_uvurlpath = wp_parse_url( sanitize_text_field( wp_unslash( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '' ) ), PHP_URL_PATH ); // Axl UWS-7416
 
 // if(isset($_REQUEST["uvwpdeleteuvcorelib"]) and $_REQUEST["uvwpdeleteuvcorelib"]) // Axl UWS-7418
 // if(isset($_REQUEST["uvwpdeleteuvcorelib"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvwpdeleteuvcorelib"] ) )) // Axl UWS-7418

@@ -113,7 +113,8 @@ function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = 
 	$uvfeedfullpath = $uvfeedcachefolder . "/" . $uvfeedhash . "." . $uvfeedfiletype;
 
 	if(!file_exists("$uvfeedcachefolder"))
-		mkdir($uvfeedcachefolder, 0777);
+		// mkdir($uvfeedcachefolder, 0777); // Axl UWS-7416
+		wp_mkdir_p($uvfeedcachefolder); // Axl UWS-7416
     
     if(file_exists("$uvfeedfullpath")){ //Check if local file exists
         $uvfileexpiresat = filemtime($uvfeedfullpath) + $uvfeedexpiration;
@@ -209,19 +210,20 @@ function urvenue_ws_update_feeds_infofile($uvfeedinfo){ // Axl UWS-7416
 		$uvfeedsinfofilejson = wp_json_encode($uvfeedsinfofilearray);
 		// @Axl End
 
-		if(is_writable($uvfeedcachefolder)){
-			/*$fp = fopen("$uvfeedsinfofilepath", "w+");
-			fwrite($fp, $uvfeedsinfofilejson);
-			fclose($fp);*/
-
-			$fp = @fopen($uvfeedsinfofilepath, "w+");
-			if ($fp === false) {
+		// if(is_writable($uvfeedcachefolder)){ // Axl UWS-7416
+		global $wp_filesystem;
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		if ( empty( $wp_filesystem ) ) {
+			WP_Filesystem();
+		}
+		if( $wp_filesystem->is_writable( $uvfeedcachefolder ) ){ // Axl UWS-7416
+			// $fp = @fopen($uvfeedsinfofilepath, "w+"); // Axl UWS-7416
+			// if ($fp === false) { ... } else { fwrite($fp, $uvfeedsinfofilejson); fclose($fp); } // Axl UWS-7416
+			if ( false === $wp_filesystem->put_contents( $uvfeedsinfofilepath, $uvfeedsinfofilejson ) ) { // Axl UWS-7416
 				if($urvenue_ws_feeds_debug)
-					// uws_feed_debug_msg("Failed to open file for writing: $uvfeedsinfofilepath. Permission denied or path incorrect.<br>");
 					urvenue_ws_feed_debug_msg("Failed to open file for writing: $uvfeedsinfofilepath. Permission denied or path incorrect.<br>"); // Axl UWS-7416
-			} else {
-				fwrite($fp, $uvfeedsinfofilejson);
-				fclose($fp);
 			}
 		}
 
@@ -303,12 +305,21 @@ function urvenue_ws_create_feed_file($uvfeedurl, $uvfeedfullpath, $uvfeedexpirat
 	
 		// Only delete old cache if we're not keeping it
 		if(file_exists("$uvfeedfullpath") && !$uvkeepoldcache)
-			unlink("$uvfeedfullpath");
+			// unlink("$uvfeedfullpath"); // Axl UWS-7416
+			wp_delete_file("$uvfeedfullpath"); // Axl UWS-7416
 
 		if($uvvalidfeedcheck){
-			$fp = fopen("$uvfeedfullpath", "w+");
-			fwrite($fp, $uvfilecontent);
-			fclose($fp);
+			// $fp = fopen("$uvfeedfullpath", "w+"); // Axl UWS-7416
+			// fwrite($fp, $uvfilecontent); // Axl UWS-7416
+			// fclose($fp); // Axl UWS-7416
+			global $wp_filesystem;
+			if ( ! function_exists( 'WP_Filesystem' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+			}
+			if ( empty( $wp_filesystem ) ) {
+				WP_Filesystem();
+			}
+			$wp_filesystem->put_contents( "$uvfeedfullpath", $uvfilecontent ); // Axl UWS-7416
 		}
 		
 		// If keeping old cache, return the old cached content
@@ -439,14 +450,24 @@ function urvenue_ws_clean_cached_feeds(){ // Axl UWS-7416
 			$uvfiles = glob($uvcachedir . '/{,.}*', GLOB_BRACE);
 			foreach($uvfiles as $uvfile){
 				if(is_file($uvfile)){
-					if(is_writable($uvfile)){
-						if(@unlink($uvfile))
+					// if(is_writable($uvfile)){ // Axl UWS-7416
+					global $wp_filesystem;
+					if ( ! function_exists( 'WP_Filesystem' ) ) {
+						require_once ABSPATH . 'wp-admin/includes/file.php';
+					}
+					if ( empty( $wp_filesystem ) ) {
+						WP_Filesystem();
+					}
+					if( $wp_filesystem->is_writable( $uvfile ) ){ // Axl UWS-7416
+						// if(@unlink($uvfile)) // Axl UWS-7416
+						if( wp_delete_file( $uvfile ) ) // Axl UWS-7416
 							$uvfilescount++;
 					}
 				}
 			}
 
-            if(@rmdir($uvcachedir) and $urvenue_ws_feeds_debug)
+            // if(@rmdir($uvcachedir) and $urvenue_ws_feeds_debug) // Axl UWS-7416
+            if( $wp_filesystem->rmdir( $uvcachedir ) && $urvenue_ws_feeds_debug ) // Axl UWS-7416
 				// uws_feed_debug_msg("Cache folder deleted: $uvcachedir");
 				urvenue_ws_feed_debug_msg("Cache folder deleted: $uvcachedir"); // Axl UWS-7416
 			else if($urvenue_ws_feeds_debug)
@@ -500,7 +521,15 @@ function urvenue_ws_feeds_cache_is_writable(){ // Axl UWS-7416
 
     $uvfeedscacheiswritable = 0;
 
-    if($urvenue_ws_feeds_path and is_writable($urvenue_ws_feeds_path))
+    // if($urvenue_ws_feeds_path and is_writable($urvenue_ws_feeds_path)) // Axl UWS-7416
+    global $wp_filesystem;
+    if ( ! function_exists( 'WP_Filesystem' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+    }
+    if ( empty( $wp_filesystem ) ) {
+        WP_Filesystem();
+    }
+    if($urvenue_ws_feeds_path and $wp_filesystem->is_writable( $urvenue_ws_feeds_path )) // Axl UWS-7416
         $uvfeedscacheiswritable = 1;
 
     return $uvfeedscacheiswritable;
@@ -535,8 +564,9 @@ function urvenue_ws_check_min_events($uvresponse, $uvfeedurl){ // Axl UWS-7416
 	if($uvminevents <= 1) return true;
 	
 	// Extract from and to dates from URL - support multiple parameter formats
-	parse_str(parse_url($uvfeedurl, PHP_URL_QUERY), $uvqueryparams);
-	
+	// parse_str(parse_url($uvfeedurl, PHP_URL_QUERY), $uvqueryparams); // Axl UWS-7416
+	parse_str(wp_parse_url($uvfeedurl, PHP_URL_QUERY), $uvqueryparams); // Axl UWS-7416
+
 	$uvfromdate = null;
 	$uvtodate = null;
 	$uvdaysrequested = null;
@@ -640,8 +670,9 @@ function urvenue_ws_validate_schedules_integrity($uvschedules, $uvfeedurl){ // A
 	}
 	
 	// Extract from and to dates from URL - support multiple parameter formats
-	parse_str(parse_url($uvfeedurl, PHP_URL_QUERY), $uvqueryparams);
-	
+	// parse_str(parse_url($uvfeedurl, PHP_URL_QUERY), $uvqueryparams); // Axl UWS-7416
+	parse_str(wp_parse_url($uvfeedurl, PHP_URL_QUERY), $uvqueryparams); // Axl UWS-7416
+
 	// Check for 'from'/'to', 'fromdate'/'todate', or 'caldate' parameters
 	$uvfromdate = null;
 	$uvtodate = null;

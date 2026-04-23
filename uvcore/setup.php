@@ -65,9 +65,17 @@ if($urvenue_ws_uvwrite == 1){
 	// @Axl End
 
 	// $fp = fopen("$uvlibrary", "w+");
-	$urvenue_ws_fp = fopen("$urvenue_ws_uvlibrary", "w+"); // Axl UWS-7416
-	fwrite($urvenue_ws_fp, $urvenue_ws_uvs_lib);
-	fclose($urvenue_ws_fp);
+	// $urvenue_ws_fp = fopen("$urvenue_ws_uvlibrary", "w+"); // Axl UWS-7416
+	// fwrite($urvenue_ws_fp, $urvenue_ws_uvs_lib); // Axl UWS-7416
+	// fclose($urvenue_ws_fp); // Axl UWS-7416
+	global $wp_filesystem;
+	if ( ! function_exists( 'WP_Filesystem' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+	}
+	if ( empty( $wp_filesystem ) ) {
+		WP_Filesystem();
+	}
+	$wp_filesystem->put_contents( $urvenue_ws_uvlibrary, $urvenue_ws_uvs_lib ); // Axl UWS-7416
 
 	header("location: $urvenue_ws_uvurl" . "/admin.php");
 
@@ -100,9 +108,18 @@ if($urvenue_ws_uvpath){
 	Permissions for files: 664 - 666(uv)
 	Permissions for folder: 775 - 777(uv)
 */
+global $wp_filesystem; // Axl UWS-7416
+if ( ! function_exists( 'WP_Filesystem' ) ) { // Axl UWS-7416
+	require_once ABSPATH . 'wp-admin/includes/file.php'; // Axl UWS-7416
+} // Axl UWS-7416
+if ( empty( $wp_filesystem ) ) { // Axl UWS-7416
+	WP_Filesystem(); // Axl UWS-7416
+} // Axl UWS-7416
+
 if($urvenue_ws_uvlibrary){
 	if(file_exists($urvenue_ws_uvlibrary)){
-		if(is_writable($urvenue_ws_uvlibrary)){
+		// if(is_writable($urvenue_ws_uvlibrary)){ // Axl UWS-7416
+		if( $wp_filesystem->is_writable( $urvenue_ws_uvlibrary ) ){ // Axl UWS-7416
 			// $uvlibraryclass = "uvs-setupfield-ok";
 			$urvenue_ws_uvlibraryclass = "uvs-setupfield-ok"; // Axl UWS-7416
 			if($urvenue_ws_uvpathok)
@@ -117,7 +134,8 @@ if($urvenue_ws_uvlibrary){
 				$urvenue_ws_uvmanualwritehtml = "<button class='uvs-btn uvs-btn-s uvsjs-btn-setup-manually' type='button'>Write File Manually</button>";
 		}
 	}
-	else if($urvenue_ws_uvpath and is_writable($urvenue_ws_uvpath)){
+	// else if($urvenue_ws_uvpath and is_writable($urvenue_ws_uvpath)){ // Axl UWS-7416
+	else if($urvenue_ws_uvpath and $wp_filesystem->is_writable( $urvenue_ws_uvpath )){ // Axl UWS-7416
 		if($urvenue_ws_uvpathok)
 			$urvenue_ws_uvaddsubmitvarscript = "uvsetupsubmit = true;";
 	}

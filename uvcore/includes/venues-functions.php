@@ -88,7 +88,8 @@ function urvenue_ws_get_venue_array($uvvenue){ // Axl UWS-7416
         $uvvenueprovince = isset($uvvenuearray["province"]) ? $uvvenuearray["province"] : "";
         $uvvenuezip = isset($uvvenuearray["zip"]) ? $uvvenuearray["zip"] : "";
         $uvvenuearray["venueaddress"] = ($uvvenuearray["city"]) ? $uvvenueaddress . "<br>" . $uvvenuearray["city"] . ", " . $uvvenueprovince . " " . $uvvenuezip : $uvvenueaddress;
-        $uvvenuegmapurl = strip_tags($uvvenuearray["venueaddress"]);
+        // $uvvenuegmapurl = strip_tags($uvvenuearray["venueaddress"]); // Axl UWS-7416
+        $uvvenuegmapurl = wp_strip_all_tags($uvvenuearray["venueaddress"]); // Axl UWS-7416
         $uvvenuearray["venuegmapurl"] = "https://www.google.com/maps/search/?api=1&query=" . urlencode($uvvenuegmapurl);
         $uvvenuearray["venueimages"] = $uvvenueimages;
         $uvvenuearray["venue-url"] = $uvvenueurl;

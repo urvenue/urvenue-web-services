@@ -1416,7 +1416,8 @@ function urvenue_ws_get_featured_events_array($uvapidata, $uvargs = ""){ // Axl 
                 $uvvenueid = str_replace("VEN", "", $uvvenuecode);
                 $uvvenueinfo = $uvapidata["uv"]["data"]["venues"][$uvvenuecode];
                 $uveventfulladdress = ($uvvenueinfo["info"]["city"]) ? $uvvenueinfo["info"]["address"] . "<br>" . $uvvenueinfo["info"]["city"] . ", " . $uvvenueinfo["info"]["province"] . " " . $uvvenueinfo["info"]["zip"] : $uvvenueinfo["info"]["address"];
-                $uvvenuegmapurl = strip_tags($uveventfulladdress);
+                // $uvvenuegmapurl = strip_tags($uveventfulladdress); // Axl UWS-7416
+                $uvvenuegmapurl = wp_strip_all_tags($uveventfulladdress); // Axl UWS-7416
                 $uvvenuegmapurl = "https://www.google.com/maps/search/?api=1&query=" . urlencode($uvvenuegmapurl);
                 $uvvenuemanageentid = $uvvenueresellerid = $uvvenueprividerid = $uvvenueinfo["info"]["manageentid"];
 
@@ -2458,7 +2459,8 @@ function urvenue_ws_get_event_seo(){ // Axl UWS-7416
         $uvsitetitle = urvenue_ws_get_site_title() ? urvenue_ws_get_site_title() : $uveventinfo["venuename"]; // Axl UWS-7416
         $uvseotitle = str_replace("{sitetitle}", $uvsitetitle, $uvseotitle);
         // $uvseodescription = ($uveventinfo["shortdescr"]) ? strip_tags($uveventinfo["shortdescr"]) : (($uveventinfo["descr"]) ? strip_tags($uveventinfo["descr"]) : strip_tags(uws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seodescription"])));
-        $uvseodescription = ($uveventinfo["shortdescr"]) ? strip_tags($uveventinfo["shortdescr"]) : (($uveventinfo["descr"]) ? strip_tags($uveventinfo["descr"]) : strip_tags(urvenue_ws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seodescription"]))); // Axl UWS-7416
+        // $uvseodescription = ($uveventinfo["shortdescr"]) ? strip_tags($uveventinfo["shortdescr"]) : (($uveventinfo["descr"]) ? strip_tags($uveventinfo["descr"]) : strip_tags(urvenue_ws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seodescription"]))); // Axl UWS-7416
+        $uvseodescription = ($uveventinfo["shortdescr"]) ? wp_strip_all_tags($uveventinfo["shortdescr"]) : (($uveventinfo["descr"]) ? wp_strip_all_tags($uveventinfo["descr"]) : wp_strip_all_tags(urvenue_ws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seodescription"]))); // Axl UWS-7416
 
         $uveventseo = array(
             "title" => $uvseotitle,
