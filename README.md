@@ -34,6 +34,20 @@ You need a UrVenue account, with you account get an `API key` and a `Microcode`,
 Constact with our sales services to request a demo: https://www.urvenue.com/request-demo/
 
 == Changelog ==
+= 1.2.3 =
+* Updates for WP security
+
+= 1.2.2 =
+* Remove eval
+
+= 1.2.1 =
+* Library upgrade.
+
+= 1.2.0 =
+* Contributors update.
+
+= 1.0.52 =
+* Transparent price.
 
 = 1.0.5 =
 * Hybrid Widget - Look for Specific Ecozone
