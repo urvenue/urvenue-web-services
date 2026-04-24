@@ -452,3 +452,16 @@ function uwsDebounce(uvfunc, uvdelay) {
     clearTimeout(uws_debounce_timer);
     uws_debounce_timer = setTimeout(() => uvfunc.apply(this, arguments), uvdelay);
 }
+//Loading images: with class .uwsimgloading and add class .uwsloaded when they are loaded (for fade in effect)
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.uwsimgloading').forEach(function (img) {
+    if (img.complete) {
+      img.classList.add('uwsloaded');
+      return;
+    }
+
+    img.addEventListener('load', function () {
+      img.classList.add('uwsloaded');
+    });
+  });
+});

@@ -163,7 +163,9 @@ function urvenue_ws_shortcode_events_list($atts, $content = null) { // Axl UWS-7
 	else
 		$uvthisviewhtml = "<div class='uws-nocontent'>No Events to Show</div>";
 
-	echo($uvthisviewhtml);
+	//before just echo
+	echo wp_kses_post($uvthisviewhtml);
+	//echo($uvthisviewhtml);
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -508,7 +510,8 @@ function urvenue_ws_shortcode_inventorywidget($atts, $content = null) // Axl UWS
 	);
 
 	// echo uws_inventorywidget($uvargs);
-	echo urvenue_ws_inventorywidget($uvargs); // Axl UWS-7416
+	// echo urvenue_ws_inventorywidget($uvargs); // Axl UWS-7416
+	echo wp_kses_post(urvenue_ws_inventorywidget($uvargs)); // Axl UWS-7416
 ?>
 
 	<?php
