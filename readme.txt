@@ -34,50 +34,88 @@ UrVenue Web Services connects your WordPress site with the [UrVenue](https://www
 * `[uws_packages]` - Packages listing with booking.
 * `[uws_guest_itinerary]` - Guest itinerary view.
 
-= External Service =
+= External Services =
 
-This plugin connects to external services to provide event, inventory, checkout and optional cache purge functionality.
+This plugin connects to external services to provide event, inventory, checkout, reservation, and optional cache-purge functionality. Below is a full disclosure of each service, what data is sent, when it is sent, and links to the service's terms of service and privacy policy.
 
 1) UrVenue / UvTix API
 Service: UrVenue API (UvTix)
-URL: https://uvtix.com/api/
-Purpose: Retrieve venue/event/inventory data used by the plugin.
-Data sent: Request parameters such as venue identifiers, source codes, and API key (if configured).
-Data received: Venue/event/inventory data in JSON format.
+URL: https://uvtix.com/api/ and https://{envicode}.urvenue.me/
+Purpose: Retrieve venue, event, and inventory data displayed by the plugin shortcodes; manage cart and checkout operations; submit inquiry forms.
+Data sent: API key, source code (sourcecode), source location (sourceloc), venue/item identifiers, and — for inquiry form submissions — visitor-entered contact information (name, email, phone, opt-in flag).
+When: On every page where a plugin shortcode is active, and when visitors interact with cart or inquiry forms.
+Terms of Service: https://www.urvenue.com/legal/terms-conditions/
+Privacy Policy: https://www.urvenue.com/privacy-policy/
 
-2) UrVenue Microsite API
-Service: UrVenue Microsite API
-URL: https://{envicode}.urvenue.me/
-Purpose: Retrieve microsite user/venue data used by the plugin.
-Data sent: API key (if configured), sourcecode, sourceloc, and request parameters.
-Data received: JSON payload with microsite data.
-
-3) Checkout / Booking service (Booketing / UrVenue checkout)
-Service: Booking/Checkout
+2) Booking / Checkout service (Booketing)
+Service: Booketing — UrVenue's hosted checkout platform
 URL: https://booketing.com/
-Purpose: Redirect users to cart/checkout/payment/success pages.
-Data sent: Query parameters such as cart code, sourcecode, sourceloc, manageentid, resellerid, providerid, language, and optional environment parameters.
-Data received: Checkout pages rendered by the external service.
+Purpose: Redirect visitors to the cart, checkout, payment, and booking-confirmation pages hosted by Booketing.
+Data sent: Cart code, sourcecode, sourceloc, manageentid, resellerid, providerid, language, and optional environment parameters — transmitted as URL query parameters during the redirect.
+When: When a visitor proceeds to checkout from an inventory or reservation item.
+Terms of Service: https://booketing.com/terms/
+Privacy Policy: https://booketing.com/privacy/
 
-4) Google Maps (link generation)
-Service: Google Maps Search
-URL: https://www.google.com/maps/search/?api=1
-Purpose: Generate a Google Maps link for venue locations.
-Data sent: Query parameter containing venue name/address.
-Data received: Map search results displayed by Google Maps.
+3) SevenRooms reservation widget
+Service: SevenRooms
+URL: https://www.sevenrooms.com/reservations/
+Purpose: Display an embedded reservation iframe for venues that use SevenRooms as their reservation provider.
+Data sent: Venue identifier (SevenRooms venue ID) and the selected reservation date, transmitted as URL parameters when the iframe loads in the visitor's browser directly from SevenRooms servers.
+When: Only when a visitor interacts with a venue item configured to use SevenRooms as its reservation vendor.
+Terms of Service: https://sevenrooms.com/terms-of-service/
+Privacy Policy: https://sevenrooms.com/privacy-policy/
 
-5) WP Engine Cache Purge (optional)
+4) OpenTable reservation widget
+Service: OpenTable
+URL: https://www.opentable.com/restref/client/
+Purpose: Display an embedded reservation iframe for venues that use OpenTable as their reservation provider.
+Data sent: Restaurant identifier (rid/restref), default party size, selected date and time, and display preferences (language, color scheme) — transmitted as URL parameters when the iframe loads in the visitor's browser directly from OpenTable servers.
+When: Only when a visitor interacts with a venue item configured to use OpenTable as its reservation vendor.
+Terms of Service: https://www.opentable.com/legal/terms-and-conditions
+Privacy Policy: https://www.opentable.com/legal/privacy-policy
+
+5) Google Maps and Google Calendar (link generation only)
+Service: Google Maps / Google Calendar
+URLs: https://www.google.com/maps/search/?api=1 and https://www.google.com/calendar/event
+Purpose: Generate a "Get Directions" link to a venue on Google Maps, and an "Add to Google Calendar" link for event pages. No request is made to Google unless the visitor clicks one of these links.
+Data sent: For Maps — venue name/address as a URL query parameter. For Calendar — event name, start/end dates, and venue location as URL parameters.
+When: When a visitor clicks the Google Maps or Google Calendar link on a venue or event page.
+Terms of Service: https://policies.google.com/terms
+Privacy Policy: https://policies.google.com/privacy
+
+6) WP Engine Cache Purge (optional)
 Service: WP Engine API
 URL: https://api.wpengineapi.com/
-Purpose: Purge cache for WP Engine installs (only if the site is hosted on WP Engine and the feature is enabled/configured).
-Data sent: Install ID and authentication headers configured by the site administrator.
-Data received: API response confirming purge status.
+Purpose: Purge the page cache for sites hosted on WP Engine. This feature is only active when the site is hosted on WP Engine and the administrator has enabled and configured it in the plugin settings.
+Data sent: WP Engine install ID and administrator-configured API credentials (username and password) transmitted in the Authorization header; cache type (page/object/CDN) in the request body.
+When: Triggered by an administrator action or automatically after a feed refresh — only if the WP Engine cache integration is configured.
+Terms of Service: https://wpengine.com/legal/terms-of-service/
+Privacy Policy: https://wpengine.com/legal/privacy/
 
-This plugin connects to the **UrVenue API** (https://api.urvenue.com/) to retrieve event data, venue information, and inventory. All event and booking data is fetched from and processed through UrVenue servers.
+7) Webhook notifications (optional, site-administrator-configured)
+Service: User-defined webhook endpoint (e.g., Slack, Microsoft Teams, or a custom service)
+URL: Configured by the site administrator in the plugin settings.
+Purpose: Send alert notifications to the webhook URL when plugin alert conditions occur (e.g., empty inventory feed).
+Data sent: Alert message text and optional error or API response details, sent via HTTP POST to the administrator-provided URL.
+When: Only if notifications are enabled and a webhook URL is configured; throttled to one request per alert type every 30 minutes.
+Note: This service is entirely controlled by the site administrator. The plugin developer has no visibility into the destination or data transmitted.
 
-* UrVenue website: [https://www.urvenue.com/](https://www.urvenue.com/)
-* Terms of Service: [https://www.urvenue.com/legal/terms-conditions/](https://www.urvenue.com/legal/terms-conditions/)
-* Privacy Policy: [https://www.urvenue.com/privacy-policy/](https://www.urvenue.com/privacy-policy/)
+8) Facebook Pixel event tracking (conditional — requires site-level setup by site owner)
+Service: Meta / Facebook
+URL: https://www.facebook.com/
+Purpose: Push ecommerce events (AddToCart) to a Facebook Pixel already installed on the site, enabling the site owner to track inventory interactions in Meta Ads Manager.
+Data sent: Ecommerce event name ("AddToCart"), item ID, item name, price (USD), and quantity — relayed to the Facebook Pixel script already present on the page.
+When: When a visitor adds an item to the cart. This only fires if the site owner has independently installed the Facebook Pixel on their site; the plugin does not load or inject the Facebook Pixel script itself.
+Terms of Service: https://www.facebook.com/legal/terms
+Privacy Policy: https://www.facebook.com/privacy/policy/
+
+---
+
+This plugin connects to the UrVenue platform to retrieve event data, venue information, and inventory. All event and booking data is fetched from and processed through UrVenue servers.
+
+* UrVenue website: https://www.urvenue.com/
+* Terms of Service: https://www.urvenue.com/legal/terms-conditions/
+* Privacy Policy: https://www.urvenue.com/privacy-policy/
 
 
 
