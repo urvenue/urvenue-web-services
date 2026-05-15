@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="UrVenue WS Plugin">
+	<rule ref="WordPress.Security.NonceVerification">
+		<properties>
+			<property name="customNonceVerificationFunctions" type="array">
+				<element value="urvenue_ws_check_nonce"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

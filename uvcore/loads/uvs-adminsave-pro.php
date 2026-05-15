@@ -1,6 +1,14 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+if ( ! current_user_can( 'manage_options' ) ) { // Axl UWS-8152
+	wp_send_json_error( array( 'message' => 'Insufficient permissions' ), 403 ); // Axl UWS-8152
+} // Axl UWS-8152
+if ( ! isset( $_POST['uvsp_adminsave_nonce'] ) || // Axl UWS-8152
+     ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['uvsp_adminsave_nonce'] ) ), 'uvsp_adminsave_action' ) ) { // Axl UWS-8152
+	wp_send_json_error( array( 'message' => 'Invalid nonce' ), 403 ); // Axl UWS-8152
+} // Axl UWS-8152
+
 unset($_REQUEST["uvaction"]);
 
 // if($_REQUEST["system"] and isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
@@ -8,7 +16,8 @@ unset($_REQUEST["uvaction"]);
 // if(isset($_REQUEST["system"]) && isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
 if(isset($_REQUEST["system"]) && isset($_REQUEST["system"]["path"])){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin save handler; admin capability check handles authorization // Axl UWS-7416
 	// $urvenue_ws_adm_libtmp = $_REQUEST;
-	$urvenue_ws_adm_libtmp = $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin save handler; admin capability check handles authorization // Axl UWS-7416
+	// $urvenue_ws_adm_libtmp = $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin save handler; admin capability check handles authorization // Axl UWS-7416
+	$urvenue_ws_adm_libtmp = $_POST; // Axl UWS-8152
 	
 	/*if(is_array($urvenue_ws_adm_libtmp["flyers"])){
 		foreach($urvenue_ws_adm_libtmp["flyers"] as $uvflyerlockey => $uvsflyerloc){

@@ -1,6 +1,11 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+if ( ! current_user_can( 'manage_options' ) ) { // Axl UWS-8152
+	wp_send_json_error( array( 'message' => 'Insufficient permissions' ), 403 ); // Axl UWS-8152
+} // Axl UWS-8152
+urvenue_ws_check_nonce( 'uvsp_checkapiconfig' ); // Axl UWS-8152
+
 //print_r($_REQUEST);
 //print_r($urvenue_ws_core_lib);
 
