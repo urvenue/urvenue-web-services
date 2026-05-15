@@ -14,7 +14,7 @@ $urvenue_ws_venueslisthtml = urvenue_ws_adm_admin_venues_list_html(); // Axl UWS
 			<input id="veaid" class="uvs-input-big uvs-maxw150" type="text" name="veaid" value="" placeholder="VEA Venue ID">
 		</div>
 		<div class="uvs-admin-opt-inputbtn-btn uvs-admin-opt-inputbtn-btnbig">
-			<button class="uvs-btn uvs-btn-p uvsjs-checkvenueid" data-loadertarget=".uvs-venuecheckloader" data-checkurl="<?php /* Old: echo $urvenue_ws_adm_admin_lib["loads"]["checkveaid"]; */ echo esc_url( $urvenue_ws_adm_admin_lib["loads"]["checkveaid"] ); ?>" type="button">Check</button>
+			<button class="uvs-btn uvs-btn-p uvsjs-checkvenueid" data-loadertarget=".uvs-venuecheckloader" data-checkurl="<?php /* Old: echo $urvenue_ws_adm_admin_lib["loads"]["checkveaid"]; */ /* echo esc_url( $urvenue_ws_adm_admin_lib["loads"]["checkveaid"] ); // Axl UWS-8152 */ echo esc_url( add_query_arg( 'uws_nonce', wp_create_nonce( 'uvsp_veaidinfo' ), $urvenue_ws_adm_admin_lib["loads"]["checkveaid"] ) ); // Axl UWS-8152 ?>" type="button">Check</button>
 			<div class="uvs-venuecheckloader uv-loader-uvicon"></div>
 		</div>
 	</div>-->

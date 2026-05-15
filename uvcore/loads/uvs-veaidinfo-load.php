@@ -1,6 +1,16 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+if ( ! current_user_can( 'manage_options' ) ) { // Axl UWS-8152
+	echo "<div class='uvs-admin-errormsg'>Insufficient permissions.</div>"; // Axl UWS-8152
+	exit; // Axl UWS-8152
+} // Axl UWS-8152
+if ( ! isset( $_REQUEST['uws_nonce'] ) || // Axl UWS-8152
+     ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['uws_nonce'] ) ), 'uvsp_veaidinfo' ) ) { // Axl UWS-8152
+	echo "<div class='uvs-admin-errormsg'>Invalid security token.</div>"; // Axl UWS-8152
+	exit; // Axl UWS-8152
+} // Axl UWS-8152
+
 global $urvenue_ws_assetsversion;
 
 if($urvenue_ws_libexits)
