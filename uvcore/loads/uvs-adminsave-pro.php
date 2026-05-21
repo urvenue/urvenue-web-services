@@ -14,10 +14,17 @@ unset($_REQUEST["uvaction"]);
 // if($_REQUEST["system"] and isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
 // if(isset($_REQUEST["system"]) && $_REQUEST["system"] and isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
 // if(isset($_REQUEST["system"]) && isset($_REQUEST["system"]["path"])){ // Axl UWS-7418
-if(isset($_REQUEST["system"]) && isset($_REQUEST["system"]["path"])){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin save handler; admin capability check handles authorization // Axl UWS-7416
+// if(isset($_REQUEST["system"]) && isset($_REQUEST["system"]["path"])){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin save handler; admin capability check handles authorization // Axl UWS-7416
+if(isset($_POST["system"]) && isset($_POST["system"]["path"])){ // Axl UWS-8150
 	// $urvenue_ws_adm_libtmp = $_REQUEST;
 	// $urvenue_ws_adm_libtmp = $_REQUEST; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin save handler; admin capability check handles authorization // Axl UWS-7416
-	$urvenue_ws_adm_libtmp = $_POST; // Axl UWS-8152
+	// $urvenue_ws_adm_libtmp = $_POST; // Axl UWS-8152
+	$urvenue_ws_adm_libtmp = wp_unslash( $_POST ); // Axl UWS-8150
+	array_walk_recursive( $urvenue_ws_adm_libtmp, function( &$value ) { // Axl UWS-8150
+		if ( is_string( $value ) ) { // Axl UWS-8150
+			$value = sanitize_text_field( $value ); // Axl UWS-8150
+		} // Axl UWS-8150
+	} ); // Axl UWS-8150
 	
 	/*if(is_array($urvenue_ws_adm_libtmp["flyers"])){
 		foreach($urvenue_ws_adm_libtmp["flyers"] as $uvflyerlockey => $uvsflyerloc){

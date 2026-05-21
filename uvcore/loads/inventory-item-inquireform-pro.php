@@ -10,7 +10,29 @@ urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
 $urvenue_ws_apiurl = $urvenue_ws_feeds_lib["inventory-inquiry"]["url"];
 
 // $urvenue_ws_data = $_POST;
-$urvenue_ws_data = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified via urvenue_ws_check_nonce("uwsinventory") above // Axl UWS-7416
+// $urvenue_ws_data = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified via urvenue_ws_check_nonce("uwsinventory") above // Axl UWS-7416
+$urvenue_ws_data = array( // Axl UWS-8150
+    'manageentid'  => isset( $_POST['manageentid'] )  ? sanitize_text_field( wp_unslash( $_POST['manageentid'] ) )  : '',
+    'venueid'      => isset( $_POST['venueid'] )      ? sanitize_text_field( wp_unslash( $_POST['venueid'] ) )      : '',
+    'caldate'      => isset( $_POST['caldate'] )      ? sanitize_text_field( wp_unslash( $_POST['caldate'] ) )      : '',
+    'itemcode'     => isset( $_POST['itemcode'] )     ? sanitize_text_field( wp_unslash( $_POST['itemcode'] ) )     : '',
+    'booktypeid'   => isset( $_POST['booktypeid'] )   ? sanitize_text_field( wp_unslash( $_POST['booktypeid'] ) )   : '',
+    'globaltype'   => isset( $_POST['globaltype'] )   ? sanitize_text_field( wp_unslash( $_POST['globaltype'] ) )   : '',
+    'mastercode'   => isset( $_POST['mastercode'] )   ? sanitize_text_field( wp_unslash( $_POST['mastercode'] ) )   : '',
+    'itemname'     => isset( $_POST['itemname'] )     ? sanitize_text_field( wp_unslash( $_POST['itemname'] ) )     : '',
+    'partyname'    => isset( $_POST['partyname'] )    ? sanitize_text_field( wp_unslash( $_POST['partyname'] ) )    : '',
+    'fname'        => isset( $_POST['fname'] )        ? sanitize_text_field( wp_unslash( $_POST['fname'] ) )        : '',
+    'lname'        => isset( $_POST['lname'] )        ? sanitize_text_field( wp_unslash( $_POST['lname'] ) )        : '',
+    'email'        => isset( $_POST['email'] )        ? sanitize_email( wp_unslash( $_POST['email'] ) )             : '',
+    'phonecode'    => isset( $_POST['phonecode'] )    ? sanitize_text_field( wp_unslash( $_POST['phonecode'] ) )    : '',
+    'phonenumber'  => isset( $_POST['phonenumber'] )  ? sanitize_text_field( wp_unslash( $_POST['phonenumber'] ) )  : '',
+    'partysize'    => isset( $_POST['partysize'] )    ? sanitize_text_field( wp_unslash( $_POST['partysize'] ) )    : '',
+    'loyality'     => isset( $_POST['loyality'] )     ? sanitize_text_field( wp_unslash( $_POST['loyality'] ) )     : '',
+    'budget'       => isset( $_POST['budget'] )       ? sanitize_text_field( wp_unslash( $_POST['budget'] ) )       : '',
+    'comments'     => isset( $_POST['comments'] )     ? sanitize_textarea_field( wp_unslash( $_POST['comments'] ) ) : '',
+    'optin'        => isset( $_POST['optin'] )        ? sanitize_text_field( wp_unslash( $_POST['optin'] ) )        : '',
+    'optinpriv'    => isset( $_POST['optinpriv'] )    ? sanitize_text_field( wp_unslash( $_POST['optinpriv'] ) )    : '',
+); // Axl UWS-8150
 $urvenue_ws_data["phone"] = ($urvenue_ws_data["phonecode"] and $urvenue_ws_data["phonenumber"]) ? $urvenue_ws_data["phonecode"] . "." . $urvenue_ws_data["phonenumber"] : "";
 // $urvenue_ws_data["optinemail"] = (isset($_REQUEST["optin"])) ? $_REQUEST["optin"] : ""; // Axl UWS-7418
 // $urvenue_ws_data["optinemail"] = (isset($_REQUEST["optin"])) ? sanitize_text_field( wp_unslash( $_REQUEST["optin"] ) ) : ""; // Axl UWS-7418
