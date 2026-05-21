@@ -396,6 +396,8 @@ function urvenue_ws_get_phonecode_options($uvphonecode = ""){ // Axl UWS-7416
 function urvenue_ws_get_uwscredits($uvcreditstype = ""){ // Axl UWS-7416
 	global $urvenue_ws_core_lib, $uws_config_uitheme, $urvenue_ws_theme_vars, $urvenue_ws_url;
 
+	if(!$urvenue_ws_core_lib["system"]["show-credits"]) return ""; // Axl UWS-8146
+
 	$uvuitheme = $urvenue_ws_core_lib["ui"]["uitheme"];
 	$uvuitheme = ($urvenue_ws_theme_vars[$uvuitheme]) ? $uvuitheme : "light";
 	$uvuitheme = ($uws_config_uitheme) ? $uws_config_uitheme : $uvuitheme;

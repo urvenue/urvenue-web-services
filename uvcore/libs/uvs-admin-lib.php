@@ -514,6 +514,10 @@ $urvenue_ws_adm_admin_fields = array( // Axl UWS-7416
 		"type" => "switchui",
 		"name" => "system[use-staging]",
 	),
+	"system->show-credits" => array( // Axl UWS-8146
+		"type" => "switchui",
+		"name" => "system[show-credits]",
+	),
 	"cache->wpeinst" => array(
 		"type" => "text",
 		"name" => "cache[wpeinst]",

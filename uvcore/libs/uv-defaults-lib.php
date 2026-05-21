@@ -37,6 +37,7 @@ else{
             "use-staging" => 0,
             "use-cartv2" => 0,
             "checkouttype" => "microsite",
+            "show-credits" => 0, // Axl UWS-8146
         ),
         "events" => array(
             "global-source" => "all",
