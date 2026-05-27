@@ -625,7 +625,8 @@ function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
 	// @egt [UWS-7264]
 	// $uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';";
 	// $uws_proxy_script = "window.urvenue_ws_proxy = window.urvenue_ws_proxy || {}; urvenue_ws_proxy = '$uvproxy';";
-	$uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';"; // Axl UWS-7416
+	// $uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';"; // Axl UWS-7416
+	$uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '" . esc_js( esc_url( $uvproxy ) ) . "';"; // Axl UWS-8151
 
 	// wp_register_script('uws_proxy', false, array(), null, true);
 	// wp_register_script('urvenue_ws_proxy', false, array(), null, true);

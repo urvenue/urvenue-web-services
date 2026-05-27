@@ -57,25 +57,49 @@ function urvenue_ws_events($uvargs = ""){ // Axl UWS-7416
     // if(uws_get_arg($uvargs, "performer", ""))
     if(urvenue_ws_get_arg($uvargs, "performer", "")) // Axl UWS-7416
         // $uvaddattr .= " data-initperfomer='" . uws_get_arg($uvargs, "performer", "") . "'";
-        $uvaddattr .= " data-initperfomer='" . urvenue_ws_get_arg($uvargs, "performer", "") . "'"; // Axl UWS-7416
+        // $uvaddattr .= " data-initperfomer='" . urvenue_ws_get_arg($uvargs, "performer", "") . "'"; // Axl UWS-7416
+        $uvaddattr .= " data-initperfomer='" . esc_attr( urvenue_ws_get_arg($uvargs, "performer", "") ) . "'"; // Axl UWS-8151
 
     //Enddate only for range datepicker
     $uvdataenddate = ($urvenue_ws_core_lib["events"]["eventspage-dateselector"] == "datepicker-range") ? $uvenddate : "";
 
+    // Axl UWS-8151 -- escapar atributos al construir el HTML
+    $uvuitheme_esc          = esc_attr( $uvuitheme );
+    $uvinitialdate_esc      = esc_attr( $uvinitialdate );
+    $uvdataenddate_esc      = esc_attr( $uvdataenddate );
+    $uvmaxdate_esc          = esc_attr( $uvmaxdate );
+    $uvvenuefiltercodes_esc = esc_attr( $uvvenuefiltercodes );
+    $uvupdateurl_esc        = intval( $uvupdateurl );
+    $uvbuttonlabel_esc      = esc_attr( $uvbuttonlabel );
+    $uvactionsclass_esc     = esc_attr( $uvactionsclass );
+    $uvnextloaddate_esc     = esc_attr( $uvnextloaddate );
+
+    // $uveventshtml = "
+    // <div class='uws-integration uws-events $uvuitheme' data-filter-date='$uvinitialdate' data-filter-enddate='$uvdataenddate' data-filter-maxdate='$uvmaxdate' data-filter-venue='$uvvenuefiltercodes' data-update-url='$uvupdateurl' data-buttonlabel='$uvbuttonlabel' $uvaddattr>
+    //     $uveventsactions
+    //     <div class='uws-events-views'>$uveventsviews</div>
+    //     <div class='uws-events-actions $uvactionsclass'>
+    //         <button class='uws-btn uws-btn-s uwsjs-events-loadmore' data-load-date='$uvnextloaddate'>Load More</button>
+    //         <div class='uws-events-loadmoremsg'>No More Events To Show</div>
+    //         <div class='uws-loader-uvicon'></div>
+    //     </div>
+    // </div>
+    // "; // Axl UWS-7416
     $uveventshtml = "
-    <div class='uws-integration uws-events $uvuitheme' data-filter-date='$uvinitialdate' data-filter-enddate='$uvdataenddate' data-filter-maxdate='$uvmaxdate' data-filter-venue='$uvvenuefiltercodes' data-update-url='$uvupdateurl' data-buttonlabel='$uvbuttonlabel' $uvaddattr>
-        $uveventsactions
-        <div class='uws-events-views'>$uveventsviews</div>
-        <div class='uws-events-actions $uvactionsclass'>
-            <button class='uws-btn uws-btn-s uwsjs-events-loadmore' data-load-date='$uvnextloaddate'>Load More</button>
+    <div class='uws-integration uws-events {$uvuitheme_esc}' data-filter-date='{$uvinitialdate_esc}' data-filter-enddate='{$uvdataenddate_esc}' data-filter-maxdate='{$uvmaxdate_esc}' data-filter-venue='{$uvvenuefiltercodes_esc}' data-update-url='{$uvupdateurl_esc}' data-buttonlabel='{$uvbuttonlabel_esc}' {$uvaddattr}>
+        {$uveventsactions}
+        <div class='uws-events-views'>{$uveventsviews}</div>
+        <div class='uws-events-actions {$uvactionsclass_esc}'>
+            <button class='uws-btn uws-btn-s uwsjs-events-loadmore' data-load-date='{$uvnextloaddate_esc}'>Load More</button>
             <div class='uws-events-loadmoremsg'>No More Events To Show</div>
             <div class='uws-loader-uvicon'></div>
         </div>
     </div>
-    ";
+    "; // Axl UWS-8151
 
     // echo $uveventshtml;
-    echo $uveventshtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
+    // echo $uveventshtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
+    echo wp_kses_post( $uveventshtml ); // Axl UWS-8151
 }
 
 /*Get events views
@@ -2333,7 +2357,8 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
     $uveventhtml = urvenue_ws_apply_filters("urvenue_ws_event_page_after_replace", $uveventhtml, $uveventinfo); // Axl UWS-7416
 
     // echo $uveventhtml;
-    echo $uveventhtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
+    // echo $uveventhtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
+    echo wp_kses_post( $uveventhtml ); // Axl UWS-8151
 }
 
 /*Get event schema

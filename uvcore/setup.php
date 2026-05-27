@@ -182,14 +182,19 @@ if($urvenue_ws_uvurl){
 	add_action('wp_footer', function () use ($urvenue_ws_uvurl, $urvenue_ws_uvs_lib, $urvenue_ws_uvaddsubmitvarscript) {
 		// echo "<script>var uvcoreinput = '$uvurl'; var uvcorejsonlib = '$uvs_lib'; $uvaddsubmitvarscript</script>";
 		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated inline JS with internal variables // Axl UWS-7416
-		echo "
-			<script>
-				var uvcoreinput = '$urvenue_ws_uvurl';
-				var uvcorejsonlib = '$urvenue_ws_uvs_lib';
-				$urvenue_ws_uvaddsubmitvarscript
-			</script>
-		";
+		// echo "
+		// 	<script>
+		// 		var uvcoreinput = '$urvenue_ws_uvurl';
+		// 		var uvcorejsonlib = '$urvenue_ws_uvs_lib';
+		// 		$urvenue_ws_uvaddsubmitvarscript
+		// 	</script>
+		// "; // Axl UWS-7416
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo "<script>\n"; // Axl UWS-8151
+		echo "var uvcoreinput = '" . esc_js( esc_url( $urvenue_ws_uvurl ) ) . "';\n"; // Axl UWS-8151
+		echo "var uvcorejsonlib = '" . esc_js( $urvenue_ws_uvs_lib ) . "';\n"; // Axl UWS-8151
+		echo $urvenue_ws_uvaddsubmitvarscript . "\n"; // Axl UWS-8151 -- literal JS interno, sin datos externos
+		echo "</script>\n"; // Axl UWS-8151
 	});
 }
 

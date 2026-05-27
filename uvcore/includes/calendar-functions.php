@@ -88,31 +88,50 @@ function urvenue_ws_events_controls(){ // Axl UWS-7416
         $uvendddate = urvenue_ws_get_events_endinit_date("M j, Y"); // Axl UWS-7416
         // $uvenddate = uws_get_events_endinit_date("Y-m-d");
         $uvenddate = urvenue_ws_get_events_endinit_date("Y-m-d"); // Axl UWS-7416
+        // $uvcalmonthselhtml = "
+        // <div class='uws-events-dpinput uws-dropdown-cont uwshascalincon'>
+        //     <label for='uwsfilterrange'>Date Range</label>
+        //     <i class='uwsicon-calendar'></i>
+        //     <input id='uwsfilterrange' class='uwsjs-trigger-dropdown' name='uwsfilterrange' type='text' value='$uvinitialddate - $uvendddate' data-date='$uvinitialdate' data-enddate='$uvenddate' readonly>
+        //     <div class='uws-dropdown'>
+        //         <div class='uws-dp-filterdaterange'></div>
+        //         <div class='uws-dp-filterdaterange-label'>Select Range</div>
+        //     </div>
+        // </div>
+        // "; // Axl UWS-7416
         $uvcalmonthselhtml = "
         <div class='uws-events-dpinput uws-dropdown-cont uwshascalincon'>
             <label for='uwsfilterrange'>Date Range</label>
             <i class='uwsicon-calendar'></i>
-            <input id='uwsfilterrange' class='uwsjs-trigger-dropdown' name='uwsfilterrange' type='text' value='$uvinitialddate - $uvendddate' data-date='$uvinitialdate' data-enddate='$uvenddate' readonly>
+            <input id='uwsfilterrange' class='uwsjs-trigger-dropdown' name='uwsfilterrange' type='text' value='" . esc_attr( $uvinitialddate . ' - ' . $uvendddate ) . "' data-date='" . esc_attr( $uvinitialdate ) . "' data-enddate='" . esc_attr( $uvenddate ) . "' readonly>
             <div class='uws-dropdown'>
                 <div class='uws-dp-filterdaterange'></div>
                 <div class='uws-dp-filterdaterange-label'>Select Range</div>
             </div>
         </div>
-        ";
+        "; // Axl UWS-8151
     }
     else if($uvdateselectortype == "month-dropdown"){
         // $uvinitialddate = uws_get_events_initial_date("F Y");
         $uvinitialddate = urvenue_ws_get_events_initial_date("F Y"); // Axl UWS-7416
         // $uvmonthslist = uws_get_monthslis();
         $uvmonthslist = urvenue_ws_get_monthslis(); // Axl UWS-7416
+        // $uvcalmonthselhtml = "
+        // <div class='uws-dropdown-cont'>
+        //     <a href='#uws-openmonthselection' class='uwsjs-trigger-dropdown' aria-label='Select Month'><span class='uwsdy-dropvalue'>$uvinitialddate</span></a>
+        //     <div class='uws-dropdown'>
+        //         <ul>$uvmonthslist</ul>
+        //     </div>
+        // </div>
+        // "; // Axl UWS-7416
         $uvcalmonthselhtml = "
         <div class='uws-dropdown-cont'>
-            <a href='#uws-openmonthselection' class='uwsjs-trigger-dropdown' aria-label='Select Month'><span class='uwsdy-dropvalue'>$uvinitialddate</span></a>
+            <a href='#uws-openmonthselection' class='uwsjs-trigger-dropdown' aria-label='Select Month'><span class='uwsdy-dropvalue'>" . esc_html( $uvinitialddate ) . "</span></a>
             <div class='uws-dropdown'>
-                <ul>$uvmonthslist</ul>
+                <ul>{$uvmonthslist}</ul>
             </div>
         </div>
-        ";
+        "; // Axl UWS-8151
     }
     else{//Month Arrows
         // $uvinitialddate = uws_get_events_initial_date("F Y");
@@ -201,7 +220,8 @@ function urvenue_ws_get_monthslis($uvcurrentdate = ""){ // Axl UWS-7416
 
         $uvmonthlifdate = ($uvmonthlifdate < $uvcurrentdate) ? $uvcurrentdate : $uvmonthlifdate;
 
-        $uvmonthslis .= "<li class='$uvfirstmonthclass'><button class='uwsjs-events-selectmonth' aria-label='Select $uvmonthlimname' type='button' data-date='$uvmonthlifdate'>$uvmonthlimname $uvmonthliyear</button></li>";
+        // $uvmonthslis .= "<li class='$uvfirstmonthclass'><button class='uwsjs-events-selectmonth' aria-label='Select $uvmonthlimname' type='button' data-date='$uvmonthlifdate'>$uvmonthlimname $uvmonthliyear</button></li>"; // Axl UWS-7416
+        $uvmonthslis .= "<li class='" . esc_attr( $uvfirstmonthclass ) . "'><button class='uwsjs-events-selectmonth' aria-label='Select " . esc_attr( $uvmonthlimname ) . "' type='button' data-date='" . esc_attr( $uvmonthlifdate ) . "'>" . esc_html( $uvmonthlimname ) . ' ' . esc_html( $uvmonthliyear ) . "</button></li>"; // Axl UWS-8151
 
         $uvmonthlidate = strtotime("+1 month", $uvmonthlidate);
         $uvfirstmonthclass = "";
