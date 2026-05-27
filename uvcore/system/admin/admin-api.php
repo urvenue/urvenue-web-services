@@ -16,6 +16,7 @@ $urvenue_ws_apimicrocode = urvenue_ws_adm_get_adminfieldhtml("system->microcode"
 // $urvenue_ws_adminusestaging = uvs_get_adminfieldhtml("system->use-staging");
 // $urvenue_ws_adminusestaging = urvenue_ws_adm_get_adminfieldhtml("system->use-staging"); // Axl UWS-7416
 $urvenue_ws_adminusestaging = urvenue_ws_adm_get_adminfieldhtml("system->use-staging"); // Axl UWS-7634
+$urvenue_ws_adminshowcredits = urvenue_ws_adm_get_adminfieldhtml("system->show-credits"); // Axl UWS-8146
 ?>
 <div id="uvs-admin-api" class="uvs-admin-opt-section <?php /* Old: echo $urvenue_ws_admin_optstabs_state['api']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['api'] ); ?>">
     <div class="uvs-admin-opt-title">API Info</div>
@@ -69,6 +70,12 @@ $urvenue_ws_adminusestaging = urvenue_ws_adm_get_adminfieldhtml("system->use-sta
 			<?php /* Old: echo wp_kses( $urvenue_ws_adminusestaging, uvs_allowed_admin_html() ); */ ?>
 			<?php echo wp_kses( $urvenue_ws_adminusestaging, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
 			<?php // @Axl End ?>
+		</div>
+    </div>
+	<div class="uvs-infolist-item uvs-clearfix">
+		<div class="uvsname">Show Attribution Logos <small>Enable to display "Powered By" credit logos on the frontend (UrVenue, OpenTable, Book4Time). Disabled by default.</small></div>
+		<div class="uvsvalue">
+			<?php echo wp_kses( $urvenue_ws_adminshowcredits, urvenue_ws_adm_allowed_admin_html() ); // Axl UWS-8146 ?>
 		</div>
     </div>
 </div>
