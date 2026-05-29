@@ -7,8 +7,8 @@ With the Wordpress.org rules
 Contributors: urvenue
 Tags: hospitality, nightlife, tickets, booking, ticketing, events, calendar
 Requires at least: 5.0.0
-Tested up to: 5.0
-Stable tag: 5.0
+Tested up to: 7.0
+Stable tag: 1.2.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,9 @@ You need a UrVenue account, with you account get an `API key` and a `Microcode`,
 Constact with our sales services to request a demo: https://www.urvenue.com/request-demo/
 
 == Changelog ==
+= 1.2.4 =
+* Bug fixes and security patch.
+
 = 1.2.3 =
 * Updates for WP security
 
