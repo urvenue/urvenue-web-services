@@ -3,8 +3,8 @@
 Contributors: UrVenue, UvWebServices
 Tags: events, booking, calendar, tickets, hospitality
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 1.2.3
+Tested up to: 7.0
+Stable tag: 1.2.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -176,6 +176,9 @@ Yes, the plugin integrates with the UrVenue inventory system, allowing visitors 
 4. Interactive venue map with zoom and pan controls.
 
 == Changelog ==
+= 1.2.4 =
+* Bug fixes and security patch.
+
 = 1.2.3 =
 * Updates for WP security
 = 1.2.2 =

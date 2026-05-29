@@ -1,11 +1,12 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if (!defined('ABSPATH'))
+    exit; // Exit if accessed directly
 
 /**
  * Plugin Name: UrVenue Web Services
  * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
  * Description: UrVenue Integrations: Events, Inventory.
- * Version:     1.2.3
+ * Version:     1.2.4
  * Author:      UrVenue / UWS, uvwebservices
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later
@@ -36,7 +37,8 @@ include_once($urvenue_ws_uvwp_path . "/includes/init-uvwp.php");
 // add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'uwswpplug_add_settings_link');
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'urvenue_ws_add_settings_link'); // Axl UWS-7416
 // function uwswpplug_add_settings_link($links) {
-function urvenue_ws_add_settings_link($links) { // Axl UWS-7416
+function urvenue_ws_add_settings_link($links)
+{ // Axl UWS-7416
     $settings_link = '<a href="admin.php?page=urvenue_opts">Settings</a>';
     array_unshift($links, $settings_link);
     return $links;
@@ -46,11 +48,13 @@ function urvenue_ws_add_settings_link($links) { // Axl UWS-7416
 // add_action('admin_bar_menu', 'uwswpplug_add_cache_link', 999);
 add_action('admin_bar_menu', 'urvenue_ws_add_cache_link', 999); // Axl UWS-7416
 // function uwswpplug_add_cache_link($wp_admin_bar) {
-function urvenue_ws_add_cache_link($wp_admin_bar) { // Axl UWS-7416
+function urvenue_ws_add_cache_link($wp_admin_bar)
+{ // Axl UWS-7416
     global $urvenue_ws_core_lib;
 
-    if(!is_admin() || !isset($urvenue_ws_core_lib['system']['apikey']) || (isset($urvenue_ws_core_lib['system']['apikey']) && $urvenue_ws_core_lib['system']['apikey'] === '')) return;
-    
+    if (!is_admin() || !isset($urvenue_ws_core_lib['system']['apikey']) || (isset($urvenue_ws_core_lib['system']['apikey']) && $urvenue_ws_core_lib['system']['apikey'] === ''))
+        return;
+
     $args = array(
         // 'id' => 'uws_cache_link',
         'id' => 'urvenue_ws_cache_link', // Axl UWS-7416
