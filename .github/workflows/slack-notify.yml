@@ -1,20 +1,32 @@
 name: Notify Slack on Deploy
+
 on:
   push:
     branches:
       - main
+      - staging
+      # - development   # Uncomment to enable development notifications
 
 jobs:
   notify:
     runs-on: ubuntu-latest
-
     steps:
       - name: Send Slack Notification
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            EMOJI="🚀"
+            ENV="Production"
+          elif [ "${{ github.ref_name }}" = "staging" ]; then
+            EMOJI="🔧"
+            ENV="Staging"
+          else
+            EMOJI="🛠️"
+            ENV="Development"
+          fi
           curl -X POST -H 'Content-type: application/json' \
           --data "{
-            \"text\": \"🚀 Deployment triggered\n📦 Repository: ${{ github.repository }}\n👤 Pushed by: ${{ github.actor }}\n📝 Commit: ${{ github.event.head_commit.message }}\n🔗 https://github.com/${{ github.repository }}/commit/${{ github.sha }}\"
+            \"text\": \"$EMOJI $ENV deployment triggered\n📦 Repository: ${{ github.repository }}\n👤 Pushed by: ${{ github.actor }}\n🌿 Branch: ${{ github.ref_name }}\n📝 Commit: ${{ github.event.head_commit.message }}\n🔗 https://github.com/${{ github.repository }}/commit/${{ github.sha }}\"
           }" \
           $SLACK_WEBHOOK_URL
