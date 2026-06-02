@@ -1,0 +1,21 @@
+name: Deploy to WP Engine Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP lint
+        run: find . -name "*.php" -not -path "./node_modules/*" | xargs -n1 php -l
+
+      - name: Deploy to WPE Production
+        uses: wpengine/github-action-wpe-site-deploy@v3
+        with:
+          WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_PROD_SSHG_KEY_PRIVATE }}
+          WPE_ENV: ${{ vars.WPE_PROD_ENV }}
