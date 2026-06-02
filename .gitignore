@@ -47,9 +47,6 @@ wp-config.php
 !/wp-content/plugins/urvenue-web-services/**
 
 # All themes
-#
-# Note: If you wish to whitelist themes,
-# uncomment the next line
 /wp-content/themes
 
 # Custom
