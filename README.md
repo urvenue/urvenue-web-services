@@ -34,6 +34,7 @@ You need a UrVenue account, with you account get an `API key` and a `Microcode`,
 Constact with our sales services to request a demo: https://www.urvenue.com/request-demo/
 
 == Changelog ==
+
 = 1.2.4 =
 * Bug fixes and security patch.
 
