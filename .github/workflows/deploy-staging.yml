@@ -1,9 +1,9 @@
-name: Deploy to WP Engine Production
+name: Deploy to WP Engine Staging
 
 on:
   push:
     branches:
-      - main
+      - staging
 
 jobs:
   deploy:
@@ -14,8 +14,8 @@ jobs:
       - name: PHP lint
         run: find . -name "*.php" -not -path "./node_modules/*" | xargs -n1 php -l
 
-      - name: Deploy to WPE Production
+      - name: Deploy to WPE Staging
         uses: wpengine/github-action-wpe-site-deploy@v3
         with:
-          WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_PROD_SSHG_KEY_PRIVATE }}
-          WPE_ENV: ${{ vars.WPE_PROD_ENV }}
+          WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_STG_SSHG_KEY_PRIVATE }}
+          WPE_ENV: ${{ vars.WPE_STG_ENV }}
