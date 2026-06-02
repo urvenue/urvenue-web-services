@@ -1,5 +1,5 @@
 # wp-urvenue-web-plugin
-Repository to Update the Plugin: WP Urvenue Webservices 
+Repository to Update the Plugin: Urvenue Web Services 
 With the Wordpress.org rules
 
 === UrVenue Web Services ===
