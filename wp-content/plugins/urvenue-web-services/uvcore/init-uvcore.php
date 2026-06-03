@@ -5,7 +5,7 @@ if (!defined('ABSPATH'))
 // $uws_coredir = realpath(__DIR__);
 $urvenue_ws_coredir = realpath(__DIR__); // Axl UWS-7416
 // $uv_assetsversion = "1.0.52";
-$urvenue_ws_assetsversion = "1.2.4"; // Axl UWS-7416
+$urvenue_ws_assetsversion = "1.2.5"; // Axl UWS-7416
 
 // $uvurlpath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Axl UWS-7416
 // $uvurlpath = parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ); // Axl UWS-7418
