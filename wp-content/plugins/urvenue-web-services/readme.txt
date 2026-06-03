@@ -141,7 +141,7 @@ This plugin includes the following third-party libraries in their minified/compr
 * **jQuery** v3.3.1 - [Source Code](https://github.com/jquery/jquery/tree/3.3.1) - MIT License
 * **Flatpickr** v4.6.6 - [Source Code](https://github.com/flatpickr/flatpickr/tree/v4.6.6) - MIT License
 * **Hammer.JS** v2.0.8 - [Source Code](https://github.com/hammerjs/hammer.js/tree/v2.0.8) - MIT License
-* **jQuery Validation Plugin** v1.21.5 - [Source Code](https://github.com/jquery-validation/jquery-validation/tree/1.21.0) - MIT License
+* **jQuery Validation Plugin** v1.22.1 - [Source Code](https://github.com/jquery-validation/jquery-validation/tree/1.22.1) - MIT License
 * **Litepicker** v2.0.12 - [Source Code](https://github.com/wakirin/Litepicker/tree/2.0.12) - MIT License
 * **svg-pan-zoom** v3.6.1 - [Source Code](https://github.com/ariutta/svg-pan-zoom/tree/3.6.1) - BSD-2-Clause License
 * **noUiSlider** v15.6.1 - [Source Code](https://github.com/leongersen/noUiSlider/tree/15.6.1) - MIT License
