@@ -4,7 +4,7 @@ Contributors: UrVenue, UvWebServices
 Tags: events, booking, calendar, tickets, hospitality
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -26,13 +26,13 @@ UrVenue Web Services connects your WordPress site with the [UrVenue](https://www
 
 = Available Shortcodes =
 
-* `[uws_events]` - Events calendar, agenda, and list views.
-* `[uws_event]` - Single event page with details and inventory.
-* `[uws_map]` - Interactive venue map with inventory.
-* `[uws_inventory_item_page]` - Individual inventory item page.
-* `[uws_reservations]` - Reservations form.
-* `[uws_packages]` - Packages listing with booking.
-* `[uws_guest_itinerary]` - Guest itinerary view.
+* `[urvenue_ws_events]` - Events calendar, agenda, and list views.
+* `[urvenue_ws_event]` - Single event page with details and inventory.
+* `[urvenue_ws_map]` - Interactive venue map with inventory.
+* `[urvenue_ws_inventory_item_page]` - Individual inventory item page.
+* `[urvenue_ws_inquiry]` - Reservations / inquiry form.
+* `[urvenue_ws_packages]` - Packages listing with booking.
+* `[urvenue_ws_itinerary]` - Guest itinerary view.
 
 = External Services =
 
@@ -125,7 +125,7 @@ This plugin connects to the UrVenue platform to retrieve event data, venue infor
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Go to the UrVenue settings page and enter your **API Key** and **Microcode** provided by UrVenue.
 4. Create pages and assign them in the UrVenue settings for events, single event, map, and inventory item pages.
-5. Add the shortcodes to your pages (e.g., `[uws_events]` for the events page).
+5. Add the shortcodes to your pages (e.g., `[urvenue_ws_events]` for the events page).
 
 == Source Code and Build Information ==
 

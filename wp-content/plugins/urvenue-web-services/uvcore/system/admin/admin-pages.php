@@ -19,18 +19,18 @@ $urvenue_ws_pagepriv = urvenue_ws_adm_get_adminfieldhtml("pages->privacy"); // A
 // $urvenue_ws_pageterms = urvenue_ws_adm_get_adminfieldhtml("pages->terms"); // Axl UWS-7416
 $urvenue_ws_pageterms = urvenue_ws_adm_get_adminfieldhtml("pages->terms"); // Axl UWS-7634
 
-// $urvenue_ws_eventstext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_events]</strong></small>" : "";
-// $urvenue_ws_eventstext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_events]</strong></small>" : ""; // Axl UWS-7416
-$urvenue_ws_eventstext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_events]</strong></small>" : ""; // Axl UWS-7634
-// $urvenue_ws_eventtext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_event]</strong></small>" : "";
-// $urvenue_ws_eventtext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_event]</strong></small>" : ""; // Axl UWS-7416
-$urvenue_ws_eventtext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_event]</strong></small>" : ""; // Axl UWS-7634
-// $urvenue_ws_maptext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_map]</strong></small>" : "";
-// $urvenue_ws_maptext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_map]</strong></small>" : ""; // Axl UWS-7416
-$urvenue_ws_maptext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_map]</strong></small>" : ""; // Axl UWS-7634
-// $urvenue_ws_itempagetext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[uws_inventory_item_page]</strong></small>" : "";
-// $urvenue_ws_itempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_inventory_item_page]</strong></small>" : ""; // Axl UWS-7416
-$urvenue_ws_itempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[uws_inventory_item_page]</strong></small>" : ""; // Axl UWS-7634
+// $urvenue_ws_eventstext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_events]</strong></small>" : "";
+// $urvenue_ws_eventstext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_events]</strong></small>" : ""; // Axl UWS-7416
+$urvenue_ws_eventstext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_events]</strong></small>" : ""; // Axl UWS-7634
+// $urvenue_ws_eventtext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_event]</strong></small>" : "";
+// $urvenue_ws_eventtext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_event]</strong></small>" : ""; // Axl UWS-7416
+$urvenue_ws_eventtext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_event]</strong></small>" : ""; // Axl UWS-7634
+// $urvenue_ws_maptext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_map]</strong></small>" : "";
+// $urvenue_ws_maptext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_map]</strong></small>" : ""; // Axl UWS-7416
+$urvenue_ws_maptext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_map]</strong></small>" : ""; // Axl UWS-7634
+// $urvenue_ws_itempagetext = (uvs_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_inventory_item_page]</strong></small>" : "";
+// $urvenue_ws_itempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_inventory_item_page]</strong></small>" : ""; // Axl UWS-7416
+$urvenue_ws_itempagetext = (urvenue_ws_adm_is_wordpress()) ? " <small>Shortcode: <strong>[urvenue_ws_inventory_item_page]</strong></small>" : ""; // Axl UWS-7634
 ?>
 <div id="uvs-admin-pages" class="uvs-admin-opt-section <?php /* Old: echo $urvenue_ws_admin_optstabs_state['pages']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['pages'] ); ?>">
     <div class="uvs-admin-opt-title">Integration Pages</div>

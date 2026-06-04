@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if(!is_array($urvenue_ws_core_lib) && !is_array($urvenue_ws_feeds_lib)) exit;
 
-// $uvwpecreds = $uws_core_lib["cache"];
+// $uvwpecreds = $urvenue_ws_core_lib["cache"];
 $urvenue_ws_wpecreds = $urvenue_ws_core_lib["cache"]; // Axl UWS-7416
 
 // If cacheword exists, update it
@@ -16,7 +16,7 @@ function urvenue_ws_clear_wpengine_cache() { // Axl UWS-7416
     global $urvenue_ws_venuecodes, $urvenue_ws_wpecreds, $urvenue_ws_core_lib, $urvenue_ws_feeds_lib, $urvenue_ws_today;
 
     $uvdefaultmessage = 'UrVenue local cache cleared.';
-    // $uws_core_lib["system"]["cache-word"] = get_option('cacheword');
+    // $urvenue_ws_core_lib["system"]["cache-word"] = get_option('cacheword');
     $urvenue_ws_core_lib["system"]["cache-word"] = get_option('urvenue_ws_cacheword'); // Axl UWS-7416
 
     // UV FEED

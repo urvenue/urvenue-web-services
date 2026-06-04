@@ -62,3 +62,11 @@ local-xdebuginfo.php
 
 /wp-content/plugins/urvenue-web-services/uvcore/uvfeeds/global/
 .DS_Store
+.wpe-pull-ignore
+.wpe-push-ignore
+apple-touch-icon-precomposed.png
+apple-touch-icon.png
+favicon.ico
+wp-content/advanced-cache.php
+wp-content/debug.log.1.gz
+wp-content/plugins/urvenue-web-services/CLAUDE.md

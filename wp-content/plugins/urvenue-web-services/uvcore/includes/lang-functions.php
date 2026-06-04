@@ -54,7 +54,7 @@ function urvenue_ws_get_cur_lang(){ // Axl UWS-7416
     Requires: Key of the translation
     Returns: Traslated text for the current language if exists
 */
-// $uws_langvars = $uws_langvars_en = "";
+// $urvenue_ws_langvars = $urvenue_ws_langvars_en = "";
 $urvenue_ws_langvars = $urvenue_ws_langvars_en = ""; // Axl UWS-7416
 // function uws_lang($uvkey){
 function urvenue_ws_lang($uvkey){ // Axl UWS-7416

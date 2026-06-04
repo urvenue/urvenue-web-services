@@ -115,8 +115,8 @@ uwsChangeListener(".uwsjs-inq-selectvenue", function (e) {
     var uvleadtypesproxy = uws_proxy + "&uvaction=uwspx_getinquiryleadtypes&venuecode=" + uvvenuecode + "&manageentid=" + uvmanageentid;
 
     // @egt [UWS-7297]
-    if(typeof uwsreservationsvars !== "undefined" && uwsreservationsvars.targetNonce) {
-        uvleadtypesproxy = uvleadtypesproxy + "&uws_nonce=" + encodeURIComponent(uwsreservationsvars.targetNonce);
+    if(typeof urvenue_ws_reservations_vars !== "undefined" && urvenue_ws_reservations_vars.targetNonce) {
+        uvleadtypesproxy = uvleadtypesproxy + "&uws_nonce=" + encodeURIComponent(urvenue_ws_reservations_vars.targetNonce);
     }
 
     let uvrequest = new XMLHttpRequest();
@@ -199,8 +199,8 @@ function uwsInitInquiryForm(uvform) {
             let uvformdata = new FormData(uvform);
 
             // @egt [UWS-7297]
-            if(typeof uwsreservationsvars !== "undefined" && uwsreservationsvars.targetNonce) {
-                uvformproxy = uvformproxy + "&uws_nonce=" + encodeURIComponent(uwsreservationsvars.targetNonce);
+            if(typeof urvenue_ws_reservations_vars !== "undefined" && urvenue_ws_reservations_vars.targetNonce) {
+                uvformproxy = uvformproxy + "&uws_nonce=" + encodeURIComponent(urvenue_ws_reservations_vars.targetNonce);
             }
 
             if (uvformdata.get('fname') && uvformdata.get('lname')) {
@@ -271,8 +271,8 @@ function uwsInqueryUpdateMonth(uvcheckdate) {
         uvcloseddatesproxy = uvcloseddatesproxy + "&date=" + uws_datp + "&venuecode=" + uvvenuecode;
 
         // @egt [UWS-7297]
-        if(typeof uwsreservationsvars !== "undefined" && uwsreservationsvars.targetNonce) {
-            uvcloseddatesproxy = uvcloseddatesproxy + "&uws_nonce=" + encodeURIComponent(uwsreservationsvars.targetNonce);
+        if(typeof urvenue_ws_reservations_vars !== "undefined" && urvenue_ws_reservations_vars.targetNonce) {
+            uvcloseddatesproxy = uvcloseddatesproxy + "&uws_nonce=" + encodeURIComponent(urvenue_ws_reservations_vars.targetNonce);
         }
 
         let uvrequest = new XMLHttpRequest();

@@ -494,8 +494,8 @@ function uwsEventsFilter() {
         uveventsload = uveventsload + "&microcode=" + uws_inventory.microcode;
 
     // @egt [UWS-7297]
-    if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
-        uveventsload = uveventsload + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+    if(typeof urvenue_ws_events_vars !== "undefined" && urvenue_ws_events_vars.targetNonce) {
+        uveventsload = uveventsload + "&uws_nonce=" + encodeURIComponent(urvenue_ws_events_vars.targetNonce);
     }
 
     let uvrequest = new XMLHttpRequest();
@@ -651,8 +651,8 @@ function uwsEventsLoadMore() {
         uveventsload = uveventsload + "&microcode=" + uws_inventory.microcode;
 
     // @egt [UWS-7297]
-    if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
-        uveventsload = uveventsload + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+    if(typeof urvenue_ws_events_vars !== "undefined" && urvenue_ws_events_vars.targetNonce) {
+        uveventsload = uveventsload + "&uws_nonce=" + encodeURIComponent(urvenue_ws_events_vars.targetNonce);
     }
 
     let uvrequest = new XMLHttpRequest();
@@ -775,8 +775,8 @@ function uwsLoadDynamicEvents() {
         let uvdynaeventsurl = uws_proxy + "&uvaction=uwspx_loaddynamicevents&eventcodes=" + uveventcodes + "&templates=" + uvtemplates;
         
         // @egt [UWS-7297]
-        if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
-            uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+        if(typeof urvenue_ws_events_vars !== "undefined" && urvenue_ws_events_vars.targetNonce) {
+            uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(urvenue_ws_events_vars.targetNonce);
         }
         
         let uvrequest = new XMLHttpRequest();
@@ -937,8 +937,8 @@ function uwsLoadDPEvent(uvelem, uvdate, uvenddate, uvvenuecode) {
     uvelem.classList.add("uwsloading");
 
     // @egt [UWS-7297]
-    if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
-        uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+    if(typeof urvenue_ws_events_vars !== "undefined" && urvenue_ws_events_vars.targetNonce) {
+        uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(urvenue_ws_events_vars.targetNonce);
     }
 
     let uvrequest = new XMLHttpRequest();
@@ -1011,8 +1011,8 @@ function uwsLoadDPEvents(uvelem, uvdate, uvenddate, uvvenuecode, uvdp = null) {
     uvelem.classList.add("uwsloading");
     
     // @egt [UWS-7297]
-    if(typeof uwseventsvars !== "undefined" && uwseventsvars.targetNonce) {
-        uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(uwseventsvars.targetNonce);
+    if(typeof urvenue_ws_events_vars !== "undefined" && urvenue_ws_events_vars.targetNonce) {
+        uvdynaeventsurl = uvdynaeventsurl + "&uws_nonce=" + encodeURIComponent(urvenue_ws_events_vars.targetNonce);
     }
 
     let uvrequest = new XMLHttpRequest();

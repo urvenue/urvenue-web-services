@@ -2,8 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwsevents");
-urvenue_ws_check_nonce("uwsevents"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_events");
+urvenue_ws_check_nonce("urvenue_ws_events"); // Axl UWS-7416
 
 // $urvenue_ws_fromdate = uws_cleanup_request("date");
 $urvenue_ws_fromdate = urvenue_ws_cleanup_request("date"); // Axl UWS-7416

@@ -6,8 +6,8 @@ global $urvenue_ws_path, $urvenue_ws_config_uitheme;
 include_once($urvenue_ws_path . "/includes/map-functions.php");
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwsmap");
-urvenue_ws_check_nonce("uwsmap"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_map");
+urvenue_ws_check_nonce("urvenue_ws_map"); // Axl UWS-7416
 
 // $urvenue_ws_date = uws_cleanup_request("date");
 $urvenue_ws_date = urvenue_ws_cleanup_request("date"); // Axl UWS-7416

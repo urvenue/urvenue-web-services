@@ -7,11 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 */
 // function uws_map($uvargs = ""){
 function urvenue_ws_map($uvargs = ""){ // Axl UWS-7416
-    // global $uws_hooks;
+    // global $urvenue_ws_hooks;
     global $urvenue_ws_hooks; // Axl UWS-7634
 
-    // if(isset($uws_hooks['uws_map_replace'])){ //replace map integration on hook action
-    // if(isset($uws_hooks['urvenue_ws_map_replace'])){ //replace map integration on hook action // Axl UWS-7416
+    // if(isset($urvenue_ws_hooks['uws_map_replace'])){ //replace map integration on hook action
+    // if(isset($urvenue_ws_hooks['urvenue_ws_map_replace'])){ //replace map integration on hook action // Axl UWS-7416
     if(isset($urvenue_ws_hooks['urvenue_ws_map_replace'])){ //replace map integration on hook action // Axl UWS-7634
         // $uveventcode = uws_get_eventcode();
         $uveventcode = urvenue_ws_get_eventcode(); // Axl UWS-7416
@@ -87,7 +87,7 @@ function urvenue_ws_get_map_view_menu(){ // Axl UWS-7416
 */
 // function uws_get_map($uvargs = ""){
 function urvenue_ws_get_map($uvargs = ""){ // Axl UWS-7416
-    global $urvenue_ws_today, $uws_config_mapdpmaxdate, $urvenue_ws_core_lib;
+    global $urvenue_ws_today, $urvenue_ws_config_mapdpmaxdate, $urvenue_ws_core_lib;
 
     // $uvprimvenue = uws_get_primary_venue();
     $uvprimvenue = urvenue_ws_get_primary_venue(); // Axl UWS-7416
@@ -110,7 +110,7 @@ function urvenue_ws_get_map($uvargs = ""){ // Axl UWS-7416
     $uvmapselsstring = urvenue_ws_get_map_selsstring($uvargs); // Axl UWS-7416
     // $uvmaxdate = uws_get_events_max_date("Y-m-d");
     $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
-    $uvmaxdate = ($uws_config_mapdpmaxdate) ? $uws_config_mapdpmaxdate : $uvmaxdate;
+    $uvmaxdate = ($urvenue_ws_config_mapdpmaxdate) ? $urvenue_ws_config_mapdpmaxdate : $uvmaxdate;
     // $uvtheme = uws_get_theme();
     $uvtheme = urvenue_ws_get_theme(); // Axl UWS-7416
 
@@ -608,17 +608,17 @@ function urvenue_ws_get_map_stage($uvargs){ // Axl UWS-7416
 //Get Admission items for map
 // function uws_map_get_admission($uvitems, $uvecozone = ""){
 function urvenue_ws_map_get_admission($uvitems, $uvecozone = ""){ // Axl UWS-7416
-    global $urvenue_ws_core_lib, $uws_config_mapshowadm, $uws_config_mapsnameadm, $uws_config_mapamdgt, $uws_config_mapadm_every_ecozone;
+    global $urvenue_ws_core_lib, $urvenue_ws_config_mapshowadm, $urvenue_ws_config_mapsnameadm, $urvenue_ws_config_mapamdgt, $urvenue_ws_config_mapadm_every_ecozone;
 
     
     $uvmapadm = (isset($urvenue_ws_core_lib["map"]) and isset($urvenue_ws_core_lib["map"]["mappage-addadmissionopt"]) and $urvenue_ws_core_lib["map"]["mappage-addadmissionopt"]) ? $urvenue_ws_core_lib["map"]["mappage-addadmissionopt"] : "";
-    $uvmapadm = ($uws_config_mapshowadm) ? $uws_config_mapshowadm : $uvmapadm;
-    $uvmapadmname = ($uws_config_mapsnameadm) ? $uws_config_mapsnameadm : "Admissions";
-    $uvmapamdgt = ($uws_config_mapamdgt) ? $uws_config_mapamdgt : "admission";
+    $uvmapadm = ($urvenue_ws_config_mapshowadm) ? $urvenue_ws_config_mapshowadm : $uvmapadm;
+    $uvmapadmname = ($urvenue_ws_config_mapsnameadm) ? $urvenue_ws_config_mapsnameadm : "Admissions";
+    $uvmapamdgt = ($urvenue_ws_config_mapamdgt) ? $urvenue_ws_config_mapamdgt : "admission";
 
     $uvonlyadmitems = array();
 	$uvmapadmlisthtml = "";
-    $uvmapadm_every_ecozone = ($uws_config_mapadm_every_ecozone) ? $uws_config_mapadm_every_ecozone : false;
+    $uvmapadm_every_ecozone = ($urvenue_ws_config_mapadm_every_ecozone) ? $urvenue_ws_config_mapadm_every_ecozone : false;
 
     if(is_array($uvitems)){
         $uvmapadmgts = array_map('trim', explode(',', $uvmapamdgt));

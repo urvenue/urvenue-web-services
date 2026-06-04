@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $urvenue_ws_feeds_debug, $urvenue_ws_actionlinks_lib, $urvenue_ws_feeds_lib;
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwsinventory");
-urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_inventory");
+urvenue_ws_check_nonce("urvenue_ws_inventory"); // Axl UWS-7416
 
 // $urvenue_ws_cartcode = uws_cleanup_request("cartcode");
 $urvenue_ws_cartcode = urvenue_ws_cleanup_request("cartcode"); // Axl UWS-7416
@@ -47,7 +47,7 @@ $urvenue_ws_manageentid = urvenue_ws_cleanup_request("manageentid"); // Axl UWS-
 $urvenue_ws_subtotalagree = urvenue_ws_cleanup_request("subtotalagree"); // Axl UWS-7416
 // $urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? $_REQUEST["subinfo"] : ""; // Axl UWS-7418
 // $urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // Axl UWS-7418
-$urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified via urvenue_ws_check_nonce("uwsinventory") above // Axl UWS-7416
+$urvenue_ws_subinfo = (isset($_REQUEST["subinfo"])) ? sanitize_text_field( wp_unslash( $_REQUEST["subinfo"] ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified via urvenue_ws_check_nonce("urvenue_ws_inventory") above // Axl UWS-7416
 $urvenue_ws_apicartcode = $urvenue_ws_cartcount = "";
 $urvenue_ws_return = array();
 

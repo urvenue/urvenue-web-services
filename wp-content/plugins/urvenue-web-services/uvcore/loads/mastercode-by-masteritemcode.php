@@ -2,8 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwspackages");
-urvenue_ws_check_nonce("uwspackages"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_packages");
+urvenue_ws_check_nonce("urvenue_ws_packages"); // Axl UWS-7416
 
 // $urvenue_ws_masteritemcode = uws_cleanup_request("masteritemcode");
 $urvenue_ws_masteritemcode = urvenue_ws_cleanup_request("masteritemcode"); // Axl UWS-7416

@@ -90,7 +90,7 @@ function urvenue_ws_core_include_styles(){ // Axl UWS-7416
     global $urvenue_ws_url, $urvenue_ws_assetsversion;
 
 	wp_enqueue_style('uvcore-css', $urvenue_ws_url . '/assets/css/uvcore.css', array(), $urvenue_ws_assetsversion, 'all');
-    wp_enqueue_style('uwsicons-css', $urvenue_ws_url . '/assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
+    wp_enqueue_style('urvenue-ws-icons-css', $urvenue_ws_url . '/assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
 }
 // add_action('wp_enqueue_scripts', 'uws_include_styles');
 
@@ -109,7 +109,7 @@ function urvenue_ws_core_include_scripts(){ // Axl UWS-7416
 */ 
 // function uws_get_css_vars(){
 function urvenue_ws_get_css_vars(){ // Axl UWS-7416
-	global $urvenue_ws_theme_vars, $urvenue_ws_poptheme_vars, $urvenue_ws_core_lib, $uws_config_uitheme, $uws_config_uipoptheme;
+	global $urvenue_ws_theme_vars, $urvenue_ws_poptheme_vars, $urvenue_ws_core_lib, $urvenue_ws_config_uitheme, $urvenue_ws_config_uipoptheme;
 
 	$uvcssstyles = "";
 	$uvcssvars = "";
@@ -117,11 +117,11 @@ function urvenue_ws_get_css_vars(){ // Axl UWS-7416
 	// print_r($urvenue_ws_core_lib);
 	$uvuitheme = $urvenue_ws_core_lib["ui"]["uitheme"];
 	$uvuitheme = ($urvenue_ws_theme_vars[$uvuitheme]) ? $uvuitheme : "light";
-	$uvuitheme = ($uws_config_uitheme) ? $uws_config_uitheme : $uvuitheme;
+	$uvuitheme = ($urvenue_ws_config_uitheme) ? $urvenue_ws_config_uitheme : $uvuitheme;
 
 	$uvuipoptheme = $urvenue_ws_core_lib["ui"]["uipoptheme"];
 	$uvuipoptheme = ($urvenue_ws_poptheme_vars[$uvuipoptheme]) ? $uvuipoptheme : "light";
-	$uvuipoptheme = ($uws_config_uipoptheme) ? $uws_config_uipoptheme : $uvuipoptheme;
+	$uvuipoptheme = ($urvenue_ws_config_uipoptheme) ? $urvenue_ws_config_uipoptheme : $uvuipoptheme;
 	
 	if(is_array($urvenue_ws_theme_vars[$uvuitheme])){
 		foreach($urvenue_ws_theme_vars[$uvuitheme] as $uvuivarkey => $uvuivar){
@@ -131,20 +131,20 @@ function urvenue_ws_get_css_vars(){ // Axl UWS-7416
 		// add accentcolor
 		if($urvenue_ws_theme_vars[$uvuitheme]["accentcolor"]){
 			$uwsaccentcolor = ($urvenue_ws_core_lib["ui"]["accentcolor"]) ? $urvenue_ws_core_lib["ui"]["accentcolor"] : $urvenue_ws_theme_vars[$uvuitheme]["accentcolor"];
-			$uws_accentcolor_opacity = ($uvuitheme == "light") ? $uwsaccentcolor . '1F' : $uwsaccentcolor . '66';	
-			$uws_accentcolor_opacitylight = ($uvuitheme == "light") ? $uwsaccentcolor . '14' : $uwsaccentcolor . '42';
-			$uws_primarycolor = $urvenue_ws_theme_vars[$uvuitheme]["primary-color"]; //($urvenue_ws_core_lib["ui"]["primarycolor"]) ? $urvenue_ws_core_lib["ui"]["primarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["primary-color"];		
-			$uws_secondarycolor = $urvenue_ws_theme_vars[$uvuitheme]["secondary-color"]; //($urvenue_ws_core_lib["ui"]["secondarycolor"]) ? $urvenue_ws_core_lib["ui"]["secondarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["secondary-color"];
+			$urvenue_ws_accentcolor_opacity = ($uvuitheme == "light") ? $uwsaccentcolor . '1F' : $uwsaccentcolor . '66';	
+			$urvenue_ws_accentcolor_opacitylight = ($uvuitheme == "light") ? $uwsaccentcolor . '14' : $uwsaccentcolor . '42';
+			$urvenue_ws_primarycolor = $urvenue_ws_theme_vars[$uvuitheme]["primary-color"]; //($urvenue_ws_core_lib["ui"]["primarycolor"]) ? $urvenue_ws_core_lib["ui"]["primarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["primary-color"];		
+			$urvenue_ws_secondarycolor = $urvenue_ws_theme_vars[$uvuitheme]["secondary-color"]; //($urvenue_ws_core_lib["ui"]["secondarycolor"]) ? $urvenue_ws_core_lib["ui"]["secondarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["secondary-color"];
 			
-			$uvcssvars .= "--uws-main-color: $uws_primarycolor; ";
-			$uvcssvars .= "--uws-primary-color: $uws_primarycolor; ";
-			$uvcssvars .= "--uws-secondary-color: $uws_secondarycolor; ";
-			$uvcssvars .= "--uws-subtle-color: $uws_secondarycolor; ";
+			$uvcssvars .= "--uws-main-color: $urvenue_ws_primarycolor; ";
+			$uvcssvars .= "--uws-primary-color: $urvenue_ws_primarycolor; ";
+			$uvcssvars .= "--uws-secondary-color: $urvenue_ws_secondarycolor; ";
+			$uvcssvars .= "--uws-subtle-color: $urvenue_ws_secondarycolor; ";
 			$uvcssvars .= "--uws-accentcolorcust: $uwsaccentcolor; ";
-			$uvcssvars .= "--uws-accentcoloropac: $uws_accentcolor_opacity; ";
-			$uvcssvars .= "--uws-accentcoloropaclight: $uws_accentcolor_opacitylight; ";
-			$uvcssvars .= "--uws-input-bg: $uws_accentcolor_opacity; ";
-			$uvcssvars .= "--uws-dropdown-elemhovder: $uws_accentcolor_opacity; ";
+			$uvcssvars .= "--uws-accentcoloropac: $urvenue_ws_accentcolor_opacity; ";
+			$uvcssvars .= "--uws-accentcoloropaclight: $urvenue_ws_accentcolor_opacitylight; ";
+			$uvcssvars .= "--uws-input-bg: $urvenue_ws_accentcolor_opacity; ";
+			$uvcssvars .= "--uws-dropdown-elemhovder: $urvenue_ws_accentcolor_opacity; ";
 		}
 	}
 
@@ -157,14 +157,14 @@ function urvenue_ws_get_css_vars(){ // Axl UWS-7416
 		// uipoptheme and popaccentcolor
 		if($urvenue_ws_poptheme_vars[$uvuitheme]["popaccentcolor"]){
 			$uwspopaccentcolor = ($urvenue_ws_core_lib["ui"]["popaccentcolor"]) ? $urvenue_ws_core_lib["ui"]["popaccentcolor"] : $urvenue_ws_poptheme_vars[$uvuipoptheme]["popaccentcolor"];
-			$uws_popaccentcolor_lopacity = $uwspopaccentcolor . '1F'; // Adding 1F for 12% opacity in hex
-			$uws_popaccentcolor_opacity = $uwspopaccentcolor . '66'; // Adding 66 for 40% opacity in hex
+			$urvenue_ws_popaccentcolor_lopacity = $uwspopaccentcolor . '1F'; // Adding 1F for 12% opacity in hex
+			$urvenue_ws_popaccentcolor_opacity = $uwspopaccentcolor . '66'; // Adding 66 for 40% opacity in hex
 			
 			$uvcssvars .= "--uws-popaccentcolorcust: $uwspopaccentcolor; ";
-			$uvcssvars .= "--uws-popaccentcolorlopac: $uws_popaccentcolor_lopacity; ";
-			$uvcssvars .= "--uws-popaccentcoloropac: $uws_popaccentcolor_opacity; ";
-			$uvcssvars .= "--uws-popinput-bg: $uws_popaccentcolor_opacity; ";
-			$uvcssvars .= "--uws-popdropdown-elemhovder: $uws_popaccentcolor_opacity; ";
+			$uvcssvars .= "--uws-popaccentcolorlopac: $urvenue_ws_popaccentcolor_lopacity; ";
+			$uvcssvars .= "--uws-popaccentcoloropac: $urvenue_ws_popaccentcolor_opacity; ";
+			$uvcssvars .= "--uws-popinput-bg: $urvenue_ws_popaccentcolor_opacity; ";
+			$uvcssvars .= "--uws-popdropdown-elemhovder: $urvenue_ws_popaccentcolor_opacity; ";
 		}
 	}
 
@@ -241,7 +241,7 @@ function urvenue_ws_get_arg($uvargs, $uvargcode, $uvargdef = ""){ // Axl UWS-741
 */
 // function uws_get_template($uvtemplate){
 function urvenue_ws_get_template($uvtemplate){ // Axl UWS-7416
-	global $urvenue_ws_path, $uws_alttemplatepath, $urvenue_ws_core_lib;
+	global $urvenue_ws_path, $urvenue_ws_alttemplatepath, $urvenue_ws_core_lib;
 
 	$uvtemplatecontent = "";
 
@@ -266,13 +266,13 @@ function urvenue_ws_get_template($uvtemplate){ // Axl UWS-7416
 			// $uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
 			$uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
 
-		if($uws_alttemplatepath and file_exists($uws_alttemplatepath . "/" . $uvtemplate . ".html"))
-			$uvteamplatepath = $uws_alttemplatepath . "/" . $uvtemplate . ".html";
+		if($urvenue_ws_alttemplatepath and file_exists($urvenue_ws_alttemplatepath . "/" . $uvtemplate . ".html"))
+			$uvteamplatepath = $urvenue_ws_alttemplatepath . "/" . $uvtemplate . ".html";
 
-		// if($uws_alttemplatepath and uws_get_cur_lang() != "en" and file_exists($uws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
-		if($uws_alttemplatepath and urvenue_ws_get_cur_lang() != "en" and file_exists($uws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html")) // Axl UWS-7416
-			// $uvteamplatepath = $uws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
-			$uvteamplatepath = $uws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
+		// if($urvenue_ws_alttemplatepath and uws_get_cur_lang() != "en" and file_exists($urvenue_ws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
+		if($urvenue_ws_alttemplatepath and urvenue_ws_get_cur_lang() != "en" and file_exists($urvenue_ws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html")) // Axl UWS-7416
+			// $uvteamplatepath = $urvenue_ws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
+			$uvteamplatepath = $urvenue_ws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
 
 		if(file_exists($uvteamplatepath)){
 			// $uvtemplatecontent  = uws_api_call($uvteamplatepath, 1);
@@ -394,13 +394,13 @@ function urvenue_ws_get_phonecode_options($uvphonecode = ""){ // Axl UWS-7416
 */
 // function uws_get_uwscredits($uvcreditstype = ""){
 function urvenue_ws_get_uwscredits($uvcreditstype = ""){ // Axl UWS-7416
-	global $urvenue_ws_core_lib, $uws_config_uitheme, $urvenue_ws_theme_vars, $urvenue_ws_url;
+	global $urvenue_ws_core_lib, $urvenue_ws_config_uitheme, $urvenue_ws_theme_vars, $urvenue_ws_url;
 
 	if(!$urvenue_ws_core_lib["system"]["show-credits"]) return ""; // Axl UWS-8146
 
 	$uvuitheme = $urvenue_ws_core_lib["ui"]["uitheme"];
 	$uvuitheme = ($urvenue_ws_theme_vars[$uvuitheme]) ? $uvuitheme : "light";
-	$uvuitheme = ($uws_config_uitheme) ? $uws_config_uitheme : $uvuitheme;
+	$uvuitheme = ($urvenue_ws_config_uitheme) ? $urvenue_ws_config_uitheme : $uvuitheme;
 
 	$uvextracreditlogo = ($uvcreditstype == "uv+ot" or $uvcreditstype == "ot") ? "<a href='https://www.opentable.com/' target='_blank'><img src='/wp-content/plugins/wp-urvenue-webservices/uvcore/assets/images/external/opentablelogo.svg' class='uwspowbyot' alt='Powered By OpenTable'></a>" : "";
 	$uvextracreditlogo = ($uvcreditstype == "bk4") ? "<a href='https://book4time.com/' target='_blank'><img src='$urvenue_ws_url/assets/images/b4t-logo.svg' class='uwspwby-bk4' alt='Powered By book4time'></a>" : $uvextracreditlogo;
@@ -467,15 +467,15 @@ function urvenue_ws_get_proxies_script($uvproxysection = ""){ // Axl UWS-7416
 	$uvproxiesscript = "";
 
 	// @egt [UWS-7264]
-	// $uws_proxies_script = "window.uws_proxies = window.uws_proxies || {}; uws_proxies = $uvproxiesjson;";
-	$uws_proxies_script = "window.urvenue_ws_proxies = window.urvenue_ws_proxies || {}; urvenue_ws_proxies = $uvproxiesjson;"; // Axl UWS-7416
+	// $urvenue_ws_proxies_script = "window.uws_proxies = window.uws_proxies || {}; uws_proxies = $uvproxiesjson;";
+	$urvenue_ws_proxies_script = "window.urvenue_ws_proxies = window.urvenue_ws_proxies || {}; urvenue_ws_proxies = $uvproxiesjson;"; // Axl UWS-7416
 
 	// wp_register_script('uws_proxies', false, array(), null, true);
 	wp_register_script('urvenue_ws_proxies', false, array(), $urvenue_ws_assetsversion, true); // Axl UWS-7416
 	// wp_enqueue_script('uws_proxies');
 	wp_enqueue_script('urvenue_ws_proxies'); // Axl UWS-7416
-	// wp_add_inline_script('uws_proxies', "(function () { {$uws_proxies_script} })();");
-	wp_add_inline_script('urvenue_ws_proxies', "(function () { {$uws_proxies_script} })();"); // Axl UWS-7416
+	// wp_add_inline_script('uws_proxies', "(function () { {$urvenue_ws_proxies_script} })();");
+	wp_add_inline_script('urvenue_ws_proxies', "(function () { {$urvenue_ws_proxies_script} })();"); // Axl UWS-7416
 
 	return $uvproxiesscript;
 }
@@ -591,14 +591,14 @@ function urvenue_ws_uvtimetominutes($uvtime){ // Axl UWS-7416
 /*Get proxy url*/
 // function uws_get_proxyurl(){
 function urvenue_ws_get_proxyurl(){ // Axl UWS-7416
-	global $urvenue_ws_url, $uws_config_proxyurl;
+	global $urvenue_ws_url, $urvenue_ws_config_proxyurl;
 
 	$uvproxyurl = "";
 	// if(uws_is_wordpress())//is wordpress
 	if(urvenue_ws_is_wordpress())//is wordpress // Axl UWS-7416
 		$uvproxyurl = admin_url('admin-ajax.php');
-	else if($uws_config_proxyurl)
-		$uvproxyurl = $uws_config_proxyurl;
+	else if($urvenue_ws_config_proxyurl)
+		$uvproxyurl = $urvenue_ws_config_proxyurl;
 	else
 		$uvproxyurl = $urvenue_ws_url . "/uvcore.proxy.php";
 
@@ -623,20 +623,20 @@ function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
 	$uvproxiesscript = "";
 
 	// @egt [UWS-7264]
-	// $uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';";
-	// $uws_proxy_script = "window.urvenue_ws_proxy = window.urvenue_ws_proxy || {}; urvenue_ws_proxy = '$uvproxy';";
-	// $uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';"; // Axl UWS-7416
-	$uws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '" . esc_js( esc_url( $uvproxy ) ) . "';"; // Axl UWS-8151
+	// $urvenue_ws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';";
+	// $urvenue_ws_proxy_script = "window.urvenue_ws_proxy = window.urvenue_ws_proxy || {}; urvenue_ws_proxy = '$uvproxy';";
+	// $urvenue_ws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';"; // Axl UWS-7416
+	$urvenue_ws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '" . esc_js( esc_url( $uvproxy ) ) . "';"; // Axl UWS-8151
 
-	// wp_register_script('uws_proxy', false, array(), null, true);
+	// wp_register_script('urvenue-ws-proxy', false, array(), null, true);
 	// wp_register_script('urvenue_ws_proxy', false, array(), null, true);
-	wp_register_script('uws_proxy', false, array(), $urvenue_ws_assetsversion, true); // Axl UWS-7416
-	// wp_enqueue_script('uws_proxy');
+	wp_register_script('urvenue-ws-proxy', false, array(), $urvenue_ws_assetsversion, true); // Axl UWS-7416
+	// wp_enqueue_script('urvenue-ws-proxy');
 	// wp_enqueue_script('urvenue_ws_proxy');
-	wp_enqueue_script('uws_proxy'); // Axl UWS-7416
-	// wp_add_inline_script('uws_proxy', "(function () { {$uws_proxy_script} })();");
-	// wp_add_inline_script('urvenue_ws_proxy', "(function () { {$uws_proxy_script} })();");
-	wp_add_inline_script('uws_proxy', "(function () { {$uws_proxy_script} })();"); // Axl UWS-7416
+	wp_enqueue_script('urvenue-ws-proxy'); // Axl UWS-7416
+	// wp_add_inline_script('urvenue-ws-proxy', "(function () { {$urvenue_ws_proxy_script} })();");
+	// wp_add_inline_script('urvenue_ws_proxy', "(function () { {$urvenue_ws_proxy_script} })();");
+	wp_add_inline_script('urvenue-ws-proxy', "(function () { {$urvenue_ws_proxy_script} })();"); // Axl UWS-7416
 
 	return $uvproxiesscript;
 }
@@ -720,22 +720,22 @@ function urvenue_ws_cleanup_var($uvstring){ // Axl UWS-7416
 
 // function uws_get_theme() {
 function urvenue_ws_get_theme() { // Axl UWS-7416
-	global $urvenue_ws_core_lib, $uws_config_uitheme, $urvenue_ws_theme_vars;
+	global $urvenue_ws_core_lib, $urvenue_ws_config_uitheme, $urvenue_ws_theme_vars;
 
 	$uvuitheme = $urvenue_ws_core_lib["ui"]["uitheme"];
 	$uvuitheme = ($urvenue_ws_theme_vars[$uvuitheme]) ? $uvuitheme : "light";
-	$uvuitheme = ($uws_config_uitheme) ? $uws_config_uitheme : $uvuitheme;
+	$uvuitheme = ($urvenue_ws_config_uitheme) ? $urvenue_ws_config_uitheme : $uvuitheme;
 
 	return "uws-" . $uvuitheme;
 }
 
 // function uws_get_popup_theme() {
 function urvenue_ws_get_popup_theme() { // Axl UWS-7416
-	global $urvenue_ws_core_lib, $uws_config_uipoptheme, $urvenue_ws_poptheme_vars;
+	global $urvenue_ws_core_lib, $urvenue_ws_config_uipoptheme, $urvenue_ws_poptheme_vars;
 
 	$uvuipotheme = $urvenue_ws_core_lib["ui"]["uipoptheme"];
 	$uvuipotheme = ($urvenue_ws_poptheme_vars[$uvuipotheme]) ? $uvuipotheme : "light";
-	$uvuipotheme = ($uws_config_uipoptheme) ? $uws_config_uipoptheme : $uvuipotheme;
+	$uvuipotheme = ($urvenue_ws_config_uipoptheme) ? $urvenue_ws_config_uipoptheme : $uvuipotheme;
 
 	return "uws-" . $uvuipotheme;
 }

@@ -211,12 +211,12 @@ function urvenue_ws_get_venue_imagesarray($uvimages){ // Axl UWS-7416
 */
 // function uws_get_venue_url($uvvenue, $uvlinkcode = "venue"){
 function urvenue_ws_get_venue_url($uvvenue, $uvlinkcode = "venue"){ // Axl UWS-7416
-    global $uws_config_venueurl;
+    global $urvenue_ws_config_venueurl;
 
     $uvvenueurl = "#";
 
-    if(isset($uws_config_venueurl) and $uws_config_venueurl){
-        $uvbaseurl = $uws_config_venueurl;
+    if(isset($urvenue_ws_config_venueurl) and $urvenue_ws_config_venueurl){
+        $uvbaseurl = $urvenue_ws_config_venueurl;
         // $uvvenuenameurl = uws_get_linkstring($uvvenue["name"]);
         $uvvenuenameurl = urvenue_ws_get_linkstring($uvvenue["name"]); // Axl UWS-7416
 

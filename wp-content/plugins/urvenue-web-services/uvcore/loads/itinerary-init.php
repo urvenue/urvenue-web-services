@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $urvenue_ws_path;
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwsitinerary");
-urvenue_ws_check_nonce("uwsitinerary"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_itinerary");
+urvenue_ws_check_nonce("urvenue_ws_itinerary"); // Axl UWS-7416
 
 include_once($urvenue_ws_path . "/includes/itinerary-functions.php");
 

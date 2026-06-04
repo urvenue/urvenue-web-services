@@ -26,14 +26,14 @@ function urvenue_ws_include_adminstyles(){ // Axl UWS-7416
     wp_register_style('uvwp-admin', $urvenue_ws_uvwp_url . '/assets/css/uvwp-admin.css', false, $urvenue_ws_assetsversion);
 	wp_enqueue_style('uvwp-admin');
 
-	wp_register_style('uvs-systembase', $urvenue_ws_url . '/assets/css/system-base.css', false, $urvenue_ws_assetsversion);
-	wp_enqueue_style('uvs-systembase');
+	wp_register_style('urvenue-ws-systembase', $urvenue_ws_url . '/assets/css/system-base.css', false, $urvenue_ws_assetsversion);
+	wp_enqueue_style('urvenue-ws-systembase');
 
-    wp_register_style('uvs-system', $urvenue_ws_url . '/assets/css/system.css', false, $urvenue_ws_assetsversion);
-	wp_enqueue_style('uvs-system');
+    wp_register_style('urvenue-ws-system', $urvenue_ws_url . '/assets/css/system.css', false, $urvenue_ws_assetsversion);
+	wp_enqueue_style('urvenue-ws-system');
 
-    wp_register_style('uv-icons', $urvenue_ws_url . '/assets/css/uwsicons.css', false, $urvenue_ws_assetsversion);
-	wp_enqueue_style('uv-icons');
+    wp_register_style('urvenue-ws-icons', $urvenue_ws_url . '/assets/css/uwsicons.css', false, $urvenue_ws_assetsversion);
+	wp_enqueue_style('urvenue-ws-icons');
 
     wp_register_style('flatpickr', $urvenue_ws_url . '/assets/css/flatpickr.min.css', false, $urvenue_ws_assetsversion);
     wp_enqueue_style('flatpickr');
@@ -51,8 +51,8 @@ function urvenue_ws_include_adminscripts(){ // Axl UWS-7416
     wp_register_script('jquery-validate', $urvenue_ws_url . '/assets/js/jquery.validate.min.js', array('jquery'), 1, true);
     wp_enqueue_script('jquery-validate');
 
-    wp_register_script('uvs-admin', $urvenue_ws_url . '/assets/js/admin.js', array('jquery', 'wp-color-picker'), 1, true);
-    wp_enqueue_script('uvs-admin');
+    wp_register_script('urvenue-ws-admin', $urvenue_ws_url . '/assets/js/admin.js', array('jquery', 'wp-color-picker'), 1, true);
+    wp_enqueue_script('urvenue-ws-admin');
 
     wp_register_script('flatpickr', $urvenue_ws_url . '/assets/js/flatpickr.min.js', false, 1, true);
     wp_enqueue_script('flatpickr');
@@ -74,43 +74,43 @@ function urvenue_ws_include_styles(){ // Axl UWS-7416
     global $urvenue_ws_coreurl, $urvenue_ws_assetsversion, $urvenue_ws_core_lib;
 	
     //Global Styles, included on all pages
-    wp_register_style('uwscore-styles', $urvenue_ws_coreurl . '/assets/css/uwscore.css', false, $urvenue_ws_assetsversion);
-    wp_enqueue_style('uwscore-styles');
+    wp_register_style('urvenue-ws-core-styles', $urvenue_ws_coreurl . '/assets/css/uwscore.css', false, $urvenue_ws_assetsversion);
+    wp_enqueue_style('urvenue-ws-core-styles');
 
-    wp_register_style('uws-icons-styles', $urvenue_ws_coreurl . '/assets/css/uwsicons.css', false, $urvenue_ws_assetsversion);
-    wp_enqueue_style('uws-icons-styles');
+    wp_register_style('urvenue-ws-icons-styles', $urvenue_ws_coreurl . '/assets/css/uwsicons.css', false, $urvenue_ws_assetsversion);
+    wp_enqueue_style('urvenue-ws-icons-styles');
 
     //Specific pages styles
-    wp_register_style('uws-events-styles', $urvenue_ws_coreurl . '/assets/css/events.css', false, $urvenue_ws_assetsversion);
-    wp_register_style('uws-event-styles', $urvenue_ws_coreurl . '/assets/css/event.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-events-styles', $urvenue_ws_coreurl . '/assets/css/events.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-event-styles', $urvenue_ws_coreurl . '/assets/css/event.css', false, $urvenue_ws_assetsversion);
     wp_register_style('litepicker', $urvenue_ws_coreurl . '/assets/css/litepicker.min.css', false, 1);
     wp_register_style('nouislider', $urvenue_ws_coreurl . '/assets/css/nouislider.min.css', false, 1);
-    wp_register_style('uws-inventory-styles', $urvenue_ws_coreurl . '/assets/css/uwsinventory.css', false, $urvenue_ws_assetsversion);
-    wp_register_style('uws-experiences-styles', $urvenue_ws_coreurl . '/assets/css/experiences.css', false, $urvenue_ws_assetsversion);
-    wp_register_style('uws-invitempage-styles', $urvenue_ws_coreurl . '/assets/css/invitempage.css', false, $urvenue_ws_assetsversion);
-    wp_register_style('uws-itinerary-styles', $urvenue_ws_coreurl . '/assets/css/itinerary.css', false, $urvenue_ws_assetsversion);
-    wp_register_style('uws-map-styles', $urvenue_ws_coreurl . '/assets/css/map.css', false, $urvenue_ws_assetsversion);
-    wp_register_style('uws-reservations-styles', $urvenue_ws_coreurl . '/assets/css/reservations.css', false, $urvenue_ws_assetsversion);
-    wp_register_style('uws-apireq', $urvenue_ws_coreurl . '/assets/css/apireq.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-inventory-styles', $urvenue_ws_coreurl . '/assets/css/uwsinventory.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-experiences-styles', $urvenue_ws_coreurl . '/assets/css/experiences.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-invitempage-styles', $urvenue_ws_coreurl . '/assets/css/invitempage.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-itinerary-styles', $urvenue_ws_coreurl . '/assets/css/itinerary.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-map-styles', $urvenue_ws_coreurl . '/assets/css/map.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-reservations-styles', $urvenue_ws_coreurl . '/assets/css/reservations.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-apireq', $urvenue_ws_coreurl . '/assets/css/apireq.css', false, $urvenue_ws_assetsversion);
     wp_register_style('perfect-scrollbar', $urvenue_ws_coreurl . '/assets/css/perfect-scrollbar.css', false, 1);
-    wp_register_style('uws-memberships', $urvenue_ws_coreurl . '/assets/css/memberships.css', false, $urvenue_ws_assetsversion);
-    wp_register_style('uws-packages', $urvenue_ws_coreurl . '/assets/css/packages.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-memberships', $urvenue_ws_coreurl . '/assets/css/memberships.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-packages', $urvenue_ws_coreurl . '/assets/css/packages.css', false, $urvenue_ws_assetsversion);
 
     if(is_array($urvenue_ws_core_lib) and $urvenue_ws_core_lib["pages"]["events"] and is_page($urvenue_ws_core_lib["pages"]["events"])){//pre include events page styles
         //include styles
-        wp_enqueue_style('uws-events-styles');
+        wp_enqueue_style('urvenue-ws-events-styles');
         wp_enqueue_style('litepicker');
     }
     else if(is_array($urvenue_ws_core_lib) and $urvenue_ws_core_lib["pages"]["singleevent"]  and is_page($urvenue_ws_core_lib["pages"]["singleevent"])){// pre include event page styles
         //include styles
-        wp_enqueue_style('uws-event-styles');
-        wp_enqueue_style('uws-inventory-styles');
+        wp_enqueue_style('urvenue-ws-event-styles');
+        wp_enqueue_style('urvenue-ws-inventory-styles');
         wp_enqueue_style('litepicker');
     }
     else if(is_array($urvenue_ws_core_lib) and $urvenue_ws_core_lib["pages"]["map"]  and is_page($urvenue_ws_core_lib["pages"]["map"])){// pre include map page styles
         //include styles
-        wp_enqueue_style('uws-map-styles');
-        wp_enqueue_style('uws-inventory-styles');
+        wp_enqueue_style('urvenue-ws-map-styles');
+        wp_enqueue_style('urvenue-ws-inventory-styles');
         wp_enqueue_style('litepicker');
         wp_enqueue_style('nouislider');
     }
@@ -156,89 +156,89 @@ function urvenue_ws_include_scripts(){ // Axl UWS-7416
     global $urvenue_ws_coreurl, $urvenue_ws_assetsversion, $urvenue_ws_core_lib;
 
     //Global Styles, included on all pages
-	wp_register_script('uwscore-scripts', $urvenue_ws_coreurl . '/assets/js/uwscore.js', false, $urvenue_ws_assetsversion, true);
+	wp_register_script('urvenue-ws-core-scripts', $urvenue_ws_coreurl . '/assets/js/uwscore.js', false, $urvenue_ws_assetsversion, true);
 
     //Specific pages scrips
-    wp_register_script('uws-events-scripts', $urvenue_ws_coreurl . '/assets/js/events.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-events-scripts', $urvenue_ws_coreurl . '/assets/js/events.js', false, $urvenue_ws_assetsversion, true);
     // @egt [UWS-7297]
-    wp_localize_script('uws-events-scripts', 'uwseventsvars', array(
-        'targetNonce' => wp_create_nonce('uwsevents'),
+    wp_localize_script('urvenue-ws-events-scripts', 'urvenue_ws_events_vars', array(
+        'targetNonce' => wp_create_nonce('urvenue_ws_events'),
     ));
 
     wp_register_script('litepicker', $urvenue_ws_coreurl . '/assets/js/litepicker.min.js', false, 1, true);
     wp_register_script('nouislider', $urvenue_ws_coreurl . '/assets/js/nouislider.min.js', false, 1, true);
     wp_register_script('hammer', $urvenue_ws_coreurl . '/assets/js/hammer.min.js', false, 1, true);
 
-    wp_register_script('uws-inventory-scripts', $urvenue_ws_coreurl . '/assets/js/uwsinventory.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-inventory-scripts', $urvenue_ws_coreurl . '/assets/js/uwsinventory.js', false, $urvenue_ws_assetsversion, true);
     // @egt [UWS-7297]
-    wp_localize_script('uws-inventory-scripts', 'uwsinventoryvars', array(
-        'targetNonce' => wp_create_nonce('uwsinventory'),
+    wp_localize_script('urvenue-ws-inventory-scripts', 'urvenue_ws_inventory_vars', array(
+        'targetNonce' => wp_create_nonce('urvenue_ws_inventory'),
     ));
 
-    wp_register_script('uws-experiences-scripts', $urvenue_ws_coreurl . '/assets/js/experiences.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-experiences-scripts', $urvenue_ws_coreurl . '/assets/js/experiences.js', false, $urvenue_ws_assetsversion, true);
     // @egt [UWS-7297]
-    wp_localize_script('uws-experiences-scripts', 'uwsexperiencesvars', array(
-        'targetNonce' => wp_create_nonce('uwsexperiences'),
+    wp_localize_script('urvenue-ws-experiences-scripts', 'urvenue_ws_experiences_vars', array(
+        'targetNonce' => wp_create_nonce('urvenue_ws_experiences'),
     ));
 
-    wp_register_script('uws-invitempage-scripts', $urvenue_ws_coreurl . '/assets/js/invitempage.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-invitempage-scripts', $urvenue_ws_coreurl . '/assets/js/invitempage.js', false, $urvenue_ws_assetsversion, true);
 
-	wp_register_script('uws-itinerary-scripts', $urvenue_ws_coreurl . '/assets/js/itinerary.js', false, $urvenue_ws_assetsversion, true);
+	wp_register_script('urvenue-ws-itinerary-scripts', $urvenue_ws_coreurl . '/assets/js/itinerary.js', false, $urvenue_ws_assetsversion, true);
     // @egt [UWS-7297]
-    wp_localize_script('uws-itinerary-scripts', 'uwsitineraryvars', array(
-        'targetNonce' => wp_create_nonce('uwsitinerary'),
+    wp_localize_script('urvenue-ws-itinerary-scripts', 'urvenue_ws_itinerary_vars', array(
+        'targetNonce' => wp_create_nonce('urvenue_ws_itinerary'),
     ));
 
-    wp_register_script('uws-map-scripts', $urvenue_ws_coreurl . '/assets/js/map.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-map-scripts', $urvenue_ws_coreurl . '/assets/js/map.js', false, $urvenue_ws_assetsversion, true);
     // @egt [UWS-7297]
-    wp_localize_script('uws-map-scripts', 'uwsmapvars', array(
-        'targetNonce' => wp_create_nonce('uwsmap'),
+    wp_localize_script('urvenue-ws-map-scripts', 'urvenue_ws_map_vars', array(
+        'targetNonce' => wp_create_nonce('urvenue_ws_map'),
     ));
 
-    wp_register_script('uws-reservations-scripts', $urvenue_ws_coreurl . '/assets/js/reservations.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-reservations-scripts', $urvenue_ws_coreurl . '/assets/js/reservations.js', false, $urvenue_ws_assetsversion, true);
     // @egt [UWS-7297]
-    wp_localize_script('uws-reservations-scripts', 'uwsreservationsvars', array(
-        'targetNonce' => wp_create_nonce('uwsreservations'),
+    wp_localize_script('urvenue-ws-reservations-scripts', 'urvenue_ws_reservations_vars', array(
+        'targetNonce' => wp_create_nonce('urvenue_ws_reservations'),
     ));
 
-    wp_register_script('uws-hooks-ga4dl', $urvenue_ws_coreurl . '/assets/js/hooks-ga4dl.js', false, 1, true);
-    wp_register_script('uws-mapzoom', $urvenue_ws_coreurl . '/assets/js/mapzoom.min.js', false, 1, true);
-    wp_register_script('uws-mapthumbview', $urvenue_ws_coreurl . '/assets/js/mapthumbview.js', false, $urvenue_ws_assetsversion, true);
-    wp_register_script('uws-apireq', $urvenue_ws_coreurl . '/assets/js/apireq.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-hooks-ga4dl', $urvenue_ws_coreurl . '/assets/js/hooks-ga4dl.js', false, 1, true);
+    wp_register_script('urvenue-ws-mapzoom', $urvenue_ws_coreurl . '/assets/js/mapzoom.min.js', false, 1, true);
+    wp_register_script('urvenue-ws-mapthumbview', $urvenue_ws_coreurl . '/assets/js/mapthumbview.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-apireq', $urvenue_ws_coreurl . '/assets/js/apireq.js', false, $urvenue_ws_assetsversion, true);
     wp_register_script('perfect-scrollbar', $urvenue_ws_coreurl . '/assets/js/perfect-scrollbar.min.js', false, 1, true);
     wp_register_script('pristine', $urvenue_ws_coreurl . '/assets/js/validate.min.js', false, 1, true);
-    wp_register_script('uws-memberships', $urvenue_ws_coreurl . '/assets/js/memberships.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-memberships', $urvenue_ws_coreurl . '/assets/js/memberships.js', false, $urvenue_ws_assetsversion, true);
 
-    wp_register_script('uws-packages', $urvenue_ws_coreurl . '/assets/js/packages.js', false, $urvenue_ws_assetsversion, true);
+    wp_register_script('urvenue-ws-packages', $urvenue_ws_coreurl . '/assets/js/packages.js', false, $urvenue_ws_assetsversion, true);
     // @egt [UWS-7297]
-    wp_localize_script('uws-packages', 'uwspackagesvars', array(
-        'targetNonce' => wp_create_nonce('uwspackages'),
+    wp_localize_script('urvenue-ws-packages', 'urvenue_ws_packages_vars', array(
+        'targetNonce' => wp_create_nonce('urvenue_ws_packages'),
     ));
 
-    wp_enqueue_script('uwscore-scripts');
-    wp_enqueue_script('uws-inventory-scripts');
+    wp_enqueue_script('urvenue-ws-core-scripts');
+    wp_enqueue_script('urvenue-ws-inventory-scripts');
 
     if(is_array($urvenue_ws_core_lib) and $urvenue_ws_core_lib["pages"]["events"] and is_page($urvenue_ws_core_lib["pages"]["events"])){//pre include events page scripts
         //include scripts
-        wp_enqueue_script('uws-events-scripts');
+        wp_enqueue_script('urvenue-ws-events-scripts');
         wp_enqueue_script('litepicker');
     }
     else if(is_array($urvenue_ws_core_lib) and $urvenue_ws_core_lib["pages"]["singleevent"]  and is_page($urvenue_ws_core_lib["pages"]["singleevent"])){// pre include event page scripts
         //include scripts
-	    wp_enqueue_script('uwscore-scripts');
-	    wp_enqueue_script('uws-inventory-scripts');
+	    wp_enqueue_script('urvenue-ws-core-scripts');
+	    wp_enqueue_script('urvenue-ws-inventory-scripts');
         wp_enqueue_script('pristine');
         wp_enqueue_script('litepicker');
-        wp_enqueue_script('uws-events-scripts');
+        wp_enqueue_script('urvenue-ws-events-scripts');
     }
     else if(is_array($urvenue_ws_core_lib) and $urvenue_ws_core_lib["pages"]["map"]  and is_page($urvenue_ws_core_lib["pages"]["map"])){// pre include map page scripts
         //include scripts
-        wp_enqueue_script('uws-inventory-scripts');
+        wp_enqueue_script('urvenue-ws-inventory-scripts');
         wp_enqueue_script('litepicker');
         wp_enqueue_script('nouislider');
         wp_enqueue_script('hammer');
-        wp_enqueue_script('uws-mapzoom');
-        wp_enqueue_script('uws-mapthumbview');
+        wp_enqueue_script('urvenue-ws-mapzoom');
+        wp_enqueue_script('urvenue-ws-mapthumbview');
         wp_enqueue_script('pristine');
     }
 }
@@ -246,10 +246,10 @@ function urvenue_ws_include_scripts(){ // Axl UWS-7416
 add_action("wp_enqueue_scripts", "urvenue_ws_include_scripts"); // Axl UWS-7416
 
 //Add proxy files
-// add_action('wp_ajax_nopriv_uvpx', 'uvwp_proxy');
-add_action('wp_ajax_nopriv_uvpx', 'urvenue_ws_proxy'); // Axl UWS-7416
-// add_action('wp_ajax_uvpx', 'uvwp_proxy');
-add_action('wp_ajax_uvpx', 'urvenue_ws_proxy'); // Axl UWS-7416
+// add_action('wp_ajax_nopriv_urvenue_ws_proxy', 'uvwp_proxy');
+add_action('wp_ajax_nopriv_urvenue_ws_proxy', 'urvenue_ws_proxy'); // Axl UWS-7416
+// add_action('wp_ajax_urvenue_ws_proxy', 'uvwp_proxy');
+add_action('wp_ajax_urvenue_ws_proxy', 'urvenue_ws_proxy'); // Axl UWS-7416
 // function uvwp_proxy(){
 function urvenue_ws_proxy(){ // Axl UWS-7416
 	global $urvenue_ws_corepath, $urvenue_ws_uvs_path, $urvenue_ws_adm_admin_feeds, $urvenue_ws_core_lib, $urvenue_ws_adm_envicode;
@@ -271,9 +271,9 @@ function urvenue_ws_add_query_vars($query_vars){ // Axl UWS-7416
 }
 
 // @egt [UWS-7297] 
-// moved flush and nonce check to wp_ajax_uvpx since lifecycle for init is too early and wont let nonce check work properly
-// add_action('wp_ajax_uvpx', 'uvpx_ajax_handler');
-add_action('wp_ajax_uvpx', 'urvenue_ws_ajax_handler'); // Axl UWS-7416
+// moved flush and nonce check to wp_ajax_urvenue_ws_proxy since lifecycle for init is too early and wont let nonce check work properly
+// add_action('wp_ajax_urvenue_ws_proxy', 'uvpx_ajax_handler');
+add_action('wp_ajax_urvenue_ws_proxy', 'urvenue_ws_ajax_handler'); // Axl UWS-7416
 // function uvpx_ajax_handler() {
 function urvenue_ws_ajax_handler() { // Axl UWS-7416
     if(!isset($_POST['uvsp_adminsave_nonce']) ||
@@ -576,7 +576,7 @@ add_action('plugins_loaded', 'urvenue_ws_check_enable_debug'); // Axl UWS-7416
 function urvenue_ws_check_enable_debug(){ // Axl UWS-7416
     global $urvenue_ws_feeds_debug;
 
-    // $uws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and $_REQUEST["uvdbg"]) ? 1 : 0;
+    // $urvenue_ws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and $_REQUEST["uvdbg"]) ? 1 : 0;
     // $urvenue_ws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) )) ? 1 : 0; // Axl UWS-7418
     $urvenue_ws_feeds_debug = (current_user_can('administrator') and isset($_REQUEST["uvdbg"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvdbg"] ) )) ? 1 : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Debug flag restricted to administrators, no state change // Axl UWS-7416
 
@@ -645,7 +645,7 @@ function urvenue_ws_add_sitemap_events($sitemap_index) { // Axl UWS-7416
  */
 // function uwswpplug_sitemap_events() {
 function urvenue_ws_sitemap_events() { // Axl UWS-7416
-    global $wpseo_sitemaps;
+    global $wpseo_sitemaps; // External global owned by the Yoast SEO plugin, not this plugin; do not prefix.
     
     $uveventsmp = '';
     // $uvevents = uws_get_events();
@@ -656,8 +656,8 @@ function urvenue_ws_sitemap_events() { // Axl UWS-7416
         $uvlastmod = gmdate('c', time()); // Axl UWS-7416
         
         foreach($uvevents as $uvevent) {
-            $uws_eventurl = $uvevent["event-url"];
-            $uveventsmp .= "<url><loc>$uws_eventurl</loc><lastmod>$uvlastmod</lastmod></url>";
+            $urvenue_ws_eventurl = $uvevent["event-url"];
+            $uveventsmp .= "<url><loc>$urvenue_ws_eventurl</loc><lastmod>$uvlastmod</lastmod></url>";
         }
     }
     
