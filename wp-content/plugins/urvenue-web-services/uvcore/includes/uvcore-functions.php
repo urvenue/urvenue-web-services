@@ -615,9 +615,9 @@ function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
 	// $uvproxy = uws_get_proxyurl();
 	$uvproxy = urvenue_ws_get_proxyurl(); // Axl UWS-7416
 	if (strpos($uvproxy, '?') === false)
-		$uvproxy .= "?action=uvpx";
+		$uvproxy .= "?action=urvenue_ws_proxy";
 	else
-		$uvproxy .= "&action=uvpx";
+		$uvproxy .= "&action=urvenue_ws_proxy";
 
 	$uvproxy .= $urvenue_ws_config_addproxyparams;
 	$uvproxiesscript = "";
