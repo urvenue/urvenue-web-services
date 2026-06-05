@@ -121,8 +121,8 @@ function uwsMapLoad(uvmapelem) {
         uvmaploadurl = uvmaploadurl + "&poptheme=" + uws_map.poptheme_aux;
 
     // @egt [UWS-7297]
-    if(typeof uwsmapvars !== "undefined" && uwsmapvars.targetNonce) {
-        uvmaploadurl = uvmaploadurl + "&uws_nonce=" + encodeURIComponent(uwsmapvars.targetNonce);
+    if(typeof urvenue_ws_map_vars !== "undefined" && urvenue_ws_map_vars.targetNonce) {
+        uvmaploadurl = uvmaploadurl + "&uws_nonce=" + encodeURIComponent(urvenue_ws_map_vars.targetNonce);
     }
 
     let uvrequest = new XMLHttpRequest();
@@ -268,8 +268,8 @@ function uwsMapDPUpdateMonth() {
         uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&date=" + uws_map.dpcurrentmont + "&venuecode=" + uvvenuecode + "&ecozone=" + uvecozone + uvaddmixeco;
 
         // @egt [UWS-7297]
-        if(typeof uwsmapvars !== "undefined" && uwsmapvars.targetNonce) {
-            uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&uws_nonce=" + encodeURIComponent(uwsmapvars.targetNonce);
+        if(typeof urvenue_ws_map_vars !== "undefined" && urvenue_ws_map_vars.targetNonce) {
+            uvnoinventorydatesproxy = uvnoinventorydatesproxy + "&uws_nonce=" + encodeURIComponent(urvenue_ws_map_vars.targetNonce);
         }
 
         let uvrequest = new XMLHttpRequest();

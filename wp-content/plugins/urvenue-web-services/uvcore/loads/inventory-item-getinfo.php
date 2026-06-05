@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $urvenue_ws_proxies_lib;
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwsinventory");
-urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_inventory");
+urvenue_ws_check_nonce("urvenue_ws_inventory"); // Axl UWS-7416
 
 // $uvmastercode = uws_cleanup_request("mastercode");
 // $uvmastercode = urvenue_ws_cleanup_request("mastercode"); // Axl UWS-7416

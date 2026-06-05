@@ -8,17 +8,17 @@ global $urvenue_ws_path;
 // $urvenue_ws_nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // Axl UWS-7418
 $urvenue_ws_nonceaction = isset($_REQUEST['action']) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading action to determine which nonce to verify in the switch below // Axl UWS-7416
 switch ($urvenue_ws_nonceaction) {
-    case 'uwsinventory':
-        // uws_check_nonce("uwsinventory");
-        urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
+    case 'urvenue_ws_inventory':
+        // uws_check_nonce("urvenue_ws_inventory");
+        urvenue_ws_check_nonce("urvenue_ws_inventory"); // Axl UWS-7416
         break;
-    case 'uwsmap':
-        // uws_check_nonce("uwsmap");
-        urvenue_ws_check_nonce("uwsmap"); // Axl UWS-7416
+    case 'urvenue_ws_map':
+        // uws_check_nonce("urvenue_ws_map");
+        urvenue_ws_check_nonce("urvenue_ws_map"); // Axl UWS-7416
         break;
-    case 'uwspackages':
-        // uws_check_nonce("uwspackages");
-        urvenue_ws_check_nonce("uwspackages"); // Axl UWS-7416
+    case 'urvenue_ws_packages':
+        // uws_check_nonce("urvenue_ws_packages");
+        urvenue_ws_check_nonce("urvenue_ws_packages"); // Axl UWS-7416
         break;
     default:
         wp_send_json_error(['message' => 'Invalid action'], 400);

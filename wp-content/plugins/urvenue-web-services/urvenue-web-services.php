@@ -6,7 +6,7 @@ if (!defined('ABSPATH'))
  * Plugin Name: UrVenue Web Services
  * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
  * Description: UrVenue Integrations: Events, Inventory.
- * Version:     1.2.5
+ * Version:     1.2.6
  * Author:      UrVenue / UWS, uvwebservices
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later
@@ -15,9 +15,9 @@ if (!defined('ABSPATH'))
  */
 
 /* UvCore Global Vars */
-// $uws_corepath = plugin_dir_path(__FILE__) . "uvcore";
+// $urvenue_ws_corepath = plugin_dir_path(__FILE__) . "uvcore";
 $urvenue_ws_corepath = plugin_dir_path(__FILE__) . "uvcore"; // Axl UWS-7416
-// $uws_coreurl = plugin_dir_url(__FILE__) . "uvcore";
+// $urvenue_ws_coreurl = plugin_dir_url(__FILE__) . "uvcore";
 $urvenue_ws_coreurl = plugin_dir_url(__FILE__) . "uvcore"; // Axl UWS-7416
 
 // $uvwp_path = plugin_dir_path(__FILE__) . "uvwp";
@@ -25,7 +25,7 @@ $urvenue_ws_uvwp_path = plugin_dir_path(__FILE__) . "uvwp"; // Axl UWS-7416
 // $uvwp_url = plugin_dir_url(__FILE__) . "uvwp";
 $urvenue_ws_uvwp_url = plugin_dir_url(__FILE__) . "uvwp"; // Axl UWS-7416
 
-// $uws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm
+// $urvenue_ws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm
 // $urvenue_ws_today = date("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm // Axl UWS-7416
 $urvenue_ws_today = gmdate("Y-m-d", strtotime("-5 hours", strtotime(current_time("Y-m-d H:i:s")))); //Avoid hiding events at 12pm // Axl UWS-7416
 

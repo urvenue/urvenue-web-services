@@ -38,7 +38,7 @@ function urvenue_ws_get_eventcode_data($uveventcode) // Axl UWS-7416
 // function uws_get_eventinventory_list($uveventdata, $uvargs = "")
 function urvenue_ws_get_eventinventory_list($uveventdata, $uvargs = "") // Axl UWS-7416
 {
-    global $uws_config_inventorynoitems_msg, $urvenue_ws_core_lib, $uvintegration, $uws_config_addonvenues;
+    global $urvenue_ws_config_inventorynoitems_msg, $urvenue_ws_core_lib, $uvintegration, $urvenue_ws_config_addonvenues;
 
     // $uvglobaltype = uws_get_arg($uvargs, "globaltype");
     $uvglobaltype = urvenue_ws_get_arg($uvargs, "globaltype"); // Axl UWS-7416
@@ -63,7 +63,7 @@ function urvenue_ws_get_eventinventory_list($uveventdata, $uvargs = "") // Axl U
 
     // Add-On Venues
     $uvaddonvenues = (isset($urvenue_ws_core_lib["events"]["addon-venues"]) && is_array($urvenue_ws_core_lib["events"]["addon-venues"]) && $urvenue_ws_core_lib["events"]["addon-venues"]) ? $urvenue_ws_core_lib["events"]["addon-venues"] : "";
-    $uvaddonvenues = ($uws_config_addonvenues && is_array($uws_config_addonvenues)) ? $uws_config_addonvenues : $uvaddonvenues;
+    $uvaddonvenues = ($urvenue_ws_config_addonvenues && is_array($urvenue_ws_config_addonvenues)) ? $urvenue_ws_config_addonvenues : $uvaddonvenues;
 
     if (is_array($uveventdata)) {
         $uvbooktypeslist = $uveventinventoryfeed = $uvhomeecozone = $uvhomeaddonvenues = $uvaddonvenuesinvfeed = $uvaddonevtvenuesinvfeed = "";
@@ -198,8 +198,8 @@ function urvenue_ws_get_eventinventory_list($uveventdata, $uvargs = "") // Axl U
         $uvnoitemsbtn = ($uvintegration) ? "<a href='#uws-change-bookingcal-date' class='uwsjs-bkcal-changedate uws-btn uws-btn-s uws-noitems-btn'><i class='uwsicon-calendar-empty'></i> <span>Select a different date</span></a>" : "";
 
         if (!isset($uveventdata["ticketsurl"]) or !$uveventdata["ticketsurl"]) {
-            if ($uws_config_inventorynoitems_msg)
-                $uvnoitemsmessage = $uws_config_inventorynoitems_msg . $uvnoitemsbtn;
+            if ($urvenue_ws_config_inventorynoitems_msg)
+                $uvnoitemsmessage = $urvenue_ws_config_inventorynoitems_msg . $uvnoitemsbtn;
             else
                 $uvnoitemsmessage = "
                     <div class='uws-inventory-list-noitmes'>
@@ -2682,15 +2682,15 @@ function urvenue_ws_get_itempagemastercode() // Axl UWS-7416
 // function uws_get_account_vars($uveventdata)
 function urvenue_ws_get_account_vars($uveventdata) // Axl UWS-7416
 {
-    global $uws_focemanageentid;
+    global $urvenue_ws_focemanageentid;
 
     $uvaccountvars = "";
 
-    if ($uws_focemanageentid)
+    if ($urvenue_ws_focemanageentid)
         $uvaccountvars = array(
-            "manageentid" => $uws_focemanageentid,
-            "providerid" => $uws_focemanageentid,
-            "resellerid" => $uws_focemanageentid,
+            "manageentid" => $urvenue_ws_focemanageentid,
+            "providerid" => $urvenue_ws_focemanageentid,
+            "resellerid" => $urvenue_ws_focemanageentid,
         );
 
     if (!is_array($uvaccountvars) and is_array($uveventdata) and isset($uveventdata["manageentid"]) and $uveventdata["manageentid"])
@@ -2730,18 +2730,18 @@ function urvenue_ws_get_account_vars($uveventdata) // Axl UWS-7416
 // function uws_get_apiwvar($uvlibfeedcode, $uvfeedtoken, $uveventdata = "")
 function urvenue_ws_get_apiwvar($uvlibfeedcode, $uvfeedtoken, $uveventdata = "") // Axl UWS-7416
 {
-    global $urvenue_ws_feeds_lib, $urvenue_ws_core_lib, $uws_focemanageentid;
+    global $urvenue_ws_feeds_lib, $urvenue_ws_core_lib, $urvenue_ws_focemanageentid;
 
     $uvfeed = $uvvenuelibinfo = "";
 
     $uvfeedurl = $urvenue_ws_feeds_lib[$uvlibfeedcode]["url"];
     $uvfeedexpiration = $urvenue_ws_feeds_lib[$uvlibfeedcode]["expiration"];
 
-    if ($uws_focemanageentid)
+    if ($urvenue_ws_focemanageentid)
         $uvvenuelibinfo = array(
-            "manageentid" => $uws_focemanageentid,
-            "providerid" => $uws_focemanageentid,
-            "resellerid" => $uws_focemanageentid,
+            "manageentid" => $urvenue_ws_focemanageentid,
+            "providerid" => $urvenue_ws_focemanageentid,
+            "resellerid" => $urvenue_ws_focemanageentid,
         );
     else if (is_array($uveventdata) and isset($uveventdata["manageentid"]) and $uveventdata["manageentid"])
         $uvvenuelibinfo = array(
@@ -2818,18 +2818,18 @@ function urvenue_ws_get_apiwvar($uvlibfeedcode, $uvfeedtoken, $uveventdata = "")
 // function uws_get_apiwvarurl($uvlibfeedcode, $uveventdata = "")
 function urvenue_ws_get_apiwvarurl($uvlibfeedcode, $uveventdata = "") // Axl UWS-7416
 {
-    global $urvenue_ws_feeds_lib, $urvenue_ws_core_lib, $uws_focemanageentid;
+    global $urvenue_ws_feeds_lib, $urvenue_ws_core_lib, $urvenue_ws_focemanageentid;
 
     $uvfeedurl = $uvvenuelibinfo = "";
 
     $uvfeedurl = $urvenue_ws_feeds_lib[$uvlibfeedcode]["url"];
     $uvfeedexpiration = $urvenue_ws_feeds_lib[$uvlibfeedcode]["expiration"];
 
-    if ($uws_focemanageentid)
+    if ($urvenue_ws_focemanageentid)
         $uvvenuelibinfo = array(
-            "manageentid" => $uws_focemanageentid,
-            "providerid" => $uws_focemanageentid,
-            "resellerid" => $uws_focemanageentid,
+            "manageentid" => $urvenue_ws_focemanageentid,
+            "providerid" => $urvenue_ws_focemanageentid,
+            "resellerid" => $urvenue_ws_focemanageentid,
         );
     else if (is_array($uveventdata) and isset($uveventdata["manageentid"]) and $uveventdata["manageentid"])
         $uvvenuelibinfo = array(
@@ -2960,7 +2960,7 @@ function urvenue_ws_get_bkgcheckout_links($uvcartcode, $uvaccountvars = "") // A
 // function uws_replace_item_vars($uvitem, $uvtemplate)
 function urvenue_ws_replace_item_vars($uvitem, $uvtemplate) // Axl UWS-7416
 {
-    global $urvenue_ws_core_lib, $urvenue_ws_today, $uws_config_menu;
+    global $urvenue_ws_core_lib, $urvenue_ws_today, $urvenue_ws_config_menu;
 
     $uvinvitem = "";
 
@@ -2991,8 +2991,8 @@ function urvenue_ws_replace_item_vars($uvitem, $uvtemplate) // Axl UWS-7416
         $uvshowdigitalmenu = (isset($urvenue_ws_core_lib["events"]["addon-bottles"]["showdigitalmenu"]) && $urvenue_ws_core_lib["events"]["addon-bottles"]["showdigitalmenu"]) 
             ? $urvenue_ws_core_lib["events"]["addon-bottles"]["showdigitalmenu"] 
             : false;
-        // $uvitembottlesel = ($uws_config_menu || $uvshowdigitalmenu) ? uws_get_item_bottlesel($uvitem) : "";
-        $uvitembottlesel = ($uws_config_menu || $uvshowdigitalmenu) ? urvenue_ws_get_item_bottlesel($uvitem) : ""; // Axl UWS-7416
+        // $uvitembottlesel = ($urvenue_ws_config_menu || $uvshowdigitalmenu) ? uws_get_item_bottlesel($uvitem) : "";
+        $uvitembottlesel = ($urvenue_ws_config_menu || $uvshowdigitalmenu) ? urvenue_ws_get_item_bottlesel($uvitem) : ""; // Axl UWS-7416
         // $uvitemactbtns = uws_get_item_actionsbtns($uvitem);
         $uvitemactbtns = urvenue_ws_get_item_actionsbtns($uvitem); // Axl UWS-7416
         // $uvitemaddons = uws_get_item_addons($uvitem);
@@ -3678,7 +3678,7 @@ function urvenue_ws_get_itembk4sel($uvargs = ""){ // Axl UWS-7416
 // function uws_get_item_bottlesel($uvitem)
 function urvenue_ws_get_item_bottlesel($uvitem) // Axl UWS-7416
 {
-    global $uws_config_menu_requiresumm, $urvenue_ws_core_lib;
+    global $urvenue_ws_config_menu_requiresumm, $urvenue_ws_core_lib;
 
     $uvbottleselectionbox = "";
     $uvbottleicon = "wine-bottle";
@@ -3689,7 +3689,7 @@ function urvenue_ws_get_item_bottlesel($uvitem) // Axl UWS-7416
         ? $urvenue_ws_core_lib["events"]["addon-bottles"]["showsummary"] 
         : false;
 
-    $uvbottletotals = ($uws_config_menu_requiresumm || $uvshowsummary) ? "<span class='uws-bottle-total'>Total <span class='uwsprice uwsdy-bottlestotal' data-symbol='$uvcurrencysymbol'></span></span>" : "";
+    $uvbottletotals = ($urvenue_ws_config_menu_requiresumm || $uvshowsummary) ? "<span class='uws-bottle-total'>Total <span class='uwsprice uwsdy-bottlestotal' data-symbol='$uvcurrencysymbol'></span></span>" : "";
 
     $uvbottleselectionbox = "
         <button class='uwsitemselbtn uwsbottleselector uwsjs-show-bottleselect'>
@@ -3708,7 +3708,7 @@ function urvenue_ws_get_item_bottlesel($uvitem) // Axl UWS-7416
 // function uws_get_itembottlesel($uvargs = "")
 function urvenue_ws_get_itembottlesel($uvargs = "") // Axl UWS-7416
 {
-    global $uws_config_menu_requiresumm, $urvenue_ws_core_lib;
+    global $urvenue_ws_config_menu_requiresumm, $urvenue_ws_core_lib;
 
     $uvbottlesel = $uvbottleicon = "";
     $uvbottledata = array();
@@ -3754,8 +3754,8 @@ function urvenue_ws_get_itembottlesel($uvargs = "") // Axl UWS-7416
             $uvbottleicon = urvenue_ws_get_dummyapi("icons/" . $uvbottleicon, "svg"); // Axl UWS-7416
 
             $uvrootid = $uvrootitem["id"];
-            $uvbottlessummclass = ($uws_config_menu_requiresumm || $uvshowsummary) ? "uwsdy-bottlessumm" : "";
-            $uvbottlessummreqclass = ($uws_config_menu_requiresumm || $uvshowsummary) ? "uwsdisabled" : "";
+            $uvbottlessummclass = ($urvenue_ws_config_menu_requiresumm || $uvshowsummary) ? "uwsdy-bottlessumm" : "";
+            $uvbottlessummreqclass = ($urvenue_ws_config_menu_requiresumm || $uvshowsummary) ? "uwsdisabled" : "";
             $uvbottlesel = "<div class='uwsselscreenbody $uvbottlessummclass'>
                                 <div class='uwslabel'>
                                     $uvbottleicon
@@ -3764,7 +3764,7 @@ function urvenue_ws_get_itembottlesel($uvargs = "") // Axl UWS-7416
 
             // $uvbottleslist = uws_get_menuitems_plainlist_html($uvmenusbypapa, $uvrootid, $uvvenueid, $uvcurrencysymbol);
             $uvbottleslist = urvenue_ws_get_menuitems_plainlist_html($uvmenusbypapa, $uvrootid, $uvvenueid, $uvcurrencysymbol); // Axl UWS-7416
-            $uvbottlessumm = ($uws_config_menu_requiresumm || $uvshowsummary) ? "<div class='uwsdy-bottleselinfo'>
+            $uvbottlessumm = ($urvenue_ws_config_menu_requiresumm || $uvshowsummary) ? "<div class='uwsdy-bottleselinfo'>
                         <div class='uwsdy-bottleselinfo-inner'>
                             <div class='uwslabel'>" . urvenue_ws_lang("Minimum Spend") . "</div>
                             <div class='uwsprice uwsdy-globalminspend' data-symbol='$uvcurrencysymbol' data-minspend='$uvminspend'>$uvminspend</div>
@@ -3974,7 +3974,7 @@ function urvenue_ws_get_itemotsel($uvargs = "") // Axl UWS-7416
 // function uws_get_item_actionsbtns($uvitem)
 function urvenue_ws_get_item_actionsbtns($uvitem) // Axl UWS-7416
 {
-    global $uws_config_menu;
+    global $urvenue_ws_config_menu;
 
     $uvitembtns = $uvitemcancelbutton = "";
 
@@ -4014,7 +4014,7 @@ function urvenue_ws_get_item_actionsbtns($uvitem) // Axl UWS-7416
 // function uws_get_numselbox($uvargs)
 function urvenue_ws_get_numselbox($uvargs) // Axl UWS-7416
 {
-    global $uws_config_guestsdropdown;
+    global $urvenue_ws_config_guestsdropdown;
 
     $uvselbox = $uvselboxitem = "";
 
@@ -4063,7 +4063,7 @@ function urvenue_ws_get_numselbox($uvargs) // Axl UWS-7416
         $uvaddreadonly = ($uvallowinputedit) ? "" : "readonly";
 
         // Use dropdown selector
-        if ($uws_config_guestsdropdown) {
+        if ($urvenue_ws_config_guestsdropdown) {
             $uvdropdownoptions = "";
             
             // If values array is provided, use those specific values
@@ -4435,20 +4435,20 @@ function urvenue_ws_get_inventorywidget($uvargs) // Axl UWS-7416
 {
     global $urvenue_ws_today;
 
-    $uws_venuecode = $uvargs['venuecode'];
+    $urvenue_ws_venuecode = $uvargs['venuecode'];
 
     /* Dates Settings */
     $onlyweekdays = $uvargs['onlyweekdays'];
 
-    $uws_args_mindate = $uvargs['min-date'];
+    $urvenue_ws_args_mindate = $uvargs['min-date'];
 
-    if(isset($uws_args_mindate) && $uws_args_mindate != "")
-        if($uws_args_mindate < $urvenue_ws_today)
-            $uws_args_mindate = $urvenue_ws_today;
+    if(isset($urvenue_ws_args_mindate) && $urvenue_ws_args_mindate != "")
+        if($urvenue_ws_args_mindate < $urvenue_ws_today)
+            $urvenue_ws_args_mindate = $urvenue_ws_today;
 
-    $uws_startdate = (!isset($uws_args_mindate) || $uws_args_mindate == "") ? $urvenue_ws_today : $uws_args_mindate;
+    $urvenue_ws_startdate = (!isset($urvenue_ws_args_mindate) || $urvenue_ws_args_mindate == "") ? $urvenue_ws_today : $urvenue_ws_args_mindate;
 
-    $uws_tempstartdate = ($uws_args_mindate != "") ?  $uws_args_mindate : "";
+    $urvenue_ws_tempstartdate = ($urvenue_ws_args_mindate != "") ?  $urvenue_ws_args_mindate : "";
 
     // $uvsearchnextavdate = uws_get_arg($uvargs, "search-next-available-date", 0);
     $uvsearchnextavdate = urvenue_ws_get_arg($uvargs, "search-next-available-date", 0); // Axl UWS-7416
@@ -4458,27 +4458,27 @@ function urvenue_ws_get_inventorywidget($uvargs) // Axl UWS-7416
         $allowedWeekdaysLower = array_map('strtolower', $allowedWeekdays);
 
         // Adjust date to next allowed weekday if needed
-        $adjustedDate = new DateTime($uws_startdate);
+        $adjustedDate = new DateTime($urvenue_ws_startdate);
         while (!in_array(strtolower($adjustedDate->format('l')), $allowedWeekdaysLower)) {
             $adjustedDate->modify('+1 day');
         }
-        $uws_startdate = $adjustedDate->format('Y-m-d');
+        $urvenue_ws_startdate = $adjustedDate->format('Y-m-d');
     }
-    $uws_maxdays = (!isset($uvargs['max-days']) or $uvargs['max-days'] == "") ? "" : $uvargs['max-days'];
+    $urvenue_ws_maxdays = (!isset($uvargs['max-days']) or $uvargs['max-days'] == "") ? "" : $uvargs['max-days'];
 
-    // $uvdate = ($uws_tempstartdate != "") ? $uws_tempstartdate : uws_get_arg($uvargs, "date", $uws_startdate);
-    $uvdate = ($uws_tempstartdate != "") ? $uws_tempstartdate : urvenue_ws_get_arg($uvargs, "date", $uws_startdate); // Axl UWS-7416
+    // $uvdate = ($urvenue_ws_tempstartdate != "") ? $urvenue_ws_tempstartdate : uws_get_arg($uvargs, "date", $urvenue_ws_startdate);
+    $uvdate = ($urvenue_ws_tempstartdate != "") ? $urvenue_ws_tempstartdate : urvenue_ws_get_arg($uvargs, "date", $urvenue_ws_startdate); // Axl UWS-7416
 
-    // $uws_maxdate = ($uws_maxdays) ? date("Y-m-d", strtotime("+" . $uws_maxdays . " days")) : uws_get_events_max_date("Y-m-d");
-    $uws_maxdate = ($uws_maxdays) ? gmdate("Y-m-d", strtotime("+" . $uws_maxdays . " days")) : urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
-    $uws_enddate = ($uws_maxdate) ? $uws_maxdate : $uws_enddate;
-    $uws_enddate = isset($uvargs['end-date']) ? $uvargs['end-date'] : $uws_enddate;
+    // $urvenue_ws_maxdate = ($urvenue_ws_maxdays) ? date("Y-m-d", strtotime("+" . $urvenue_ws_maxdays . " days")) : uws_get_events_max_date("Y-m-d");
+    $urvenue_ws_maxdate = ($urvenue_ws_maxdays) ? gmdate("Y-m-d", strtotime("+" . $urvenue_ws_maxdays . " days")) : urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
+    $urvenue_ws_enddate = ($urvenue_ws_maxdate) ? $urvenue_ws_maxdate : $urvenue_ws_enddate;
+    $urvenue_ws_enddate = isset($uvargs['end-date']) ? $uvargs['end-date'] : $urvenue_ws_enddate;
 
-    if (($uws_enddate != "") and $uws_maxdate > $uws_enddate) {
-        $uws_maxdate = $uws_enddate;
+    if (($urvenue_ws_enddate != "") and $urvenue_ws_maxdate > $urvenue_ws_enddate) {
+        $urvenue_ws_maxdate = $urvenue_ws_enddate;
     }
 
-    $uwsstartdateformat = str_replace("-", "", $uws_startdate);
+    $uwsstartdateformat = str_replace("-", "", $urvenue_ws_startdate);
 
     // $uwsinitddate = date('M j, Y', strtotime($uvdate));
     $uwsinitddate = gmdate('M j, Y', strtotime($uvdate)); // Axl UWS-7416
@@ -4493,53 +4493,53 @@ function urvenue_ws_get_inventorywidget($uvargs) // Axl UWS-7416
     $uvecozone3 = str_replace("ECZ", "", $uvecozone3);
 
     /* Globaltype Settings*/
-    $uws_globaltype = isset($uvargs['globaltype']) ? $uvargs['globaltype'] : "";
+    $urvenue_ws_globaltype = isset($uvargs['globaltype']) ? $uvargs['globaltype'] : "";
 
     /* Booktypename Settings */
-    $uws_booktypename = isset($uvargs['booktypename']) ? $uvargs['booktypename'] : "";
+    $urvenue_ws_booktypename = isset($uvargs['booktypename']) ? $uvargs['booktypename'] : "";
 
     /* Event Code Settings*/
-    $uwsstarteventcode = str_replace("VEN", "EVE", $uws_venuecode);
+    $uwsstarteventcode = str_replace("VEN", "EVE", $urvenue_ws_venuecode);
     $uwsstarteventcode = $uwsstarteventcode . $uvecozone3 . $uwsstartdateformat;
     // $uveventcode = uws_get_arg($uvargs, "eventcode", $uwsstarteventcode);
     $uveventcode = urvenue_ws_get_arg($uvargs, "eventcode", $uwsstarteventcode); // Axl UWS-7416
 
     // Check if the start date is a no inventory date
     $uwsnoinvargs = array(
-        "venuecode" => $uws_venuecode,
-        "date" => $uws_startdate,
+        "venuecode" => $urvenue_ws_venuecode,
+        "date" => $urvenue_ws_startdate,
         "ecozone" => $uvecozone3,
     );
 
      /* Mix Ecozones Settings */
-    $uws_mixecozones = (isset($uvargs['mixecozones']) and $uvargs['mixecozones'] == 1) ? 1 : 0;
-    if ($uws_mixecozones) $uwsnoinvargs["mixecozones"] = 1;
+    $urvenue_ws_mixecozones = (isset($uvargs['mixecozones']) and $uvargs['mixecozones'] == 1) ? 1 : 0;
+    if ($urvenue_ws_mixecozones) $uwsnoinvargs["mixecozones"] = 1;
 
-    // $uws_no_inventory_dates = uws_get_month_noinventory_dates($uwsnoinvargs);
-    $uws_no_inventory_dates = urvenue_ws_get_month_noinventory_dates($uwsnoinvargs); // Axl UWS-7416
+    // $urvenue_ws_no_inventory_dates = uws_get_month_noinventory_dates($uwsnoinvargs);
+    $urvenue_ws_no_inventory_dates = urvenue_ws_get_month_noinventory_dates($uwsnoinvargs); // Axl UWS-7416
 
-    if ($uvsearchnextavdate and is_array($uws_no_inventory_dates) && isset($uws_no_inventory_dates["noinventorydates"]) && in_array($uvdate, $uws_no_inventory_dates["noinventorydates"])) {
-        while (in_array($uvdate, $uws_no_inventory_dates["noinventorydates"])) {
+    if ($uvsearchnextavdate and is_array($urvenue_ws_no_inventory_dates) && isset($urvenue_ws_no_inventory_dates["noinventorydates"]) && in_array($uvdate, $urvenue_ws_no_inventory_dates["noinventorydates"])) {
+        while (in_array($uvdate, $urvenue_ws_no_inventory_dates["noinventorydates"])) {
             // $uvdate = date('Y-m-d', strtotime($uvdate . ' +1 day'));
             $uvdate = gmdate('Y-m-d', strtotime($uvdate . ' +1 day')); // Axl UWS-7416
         }
 
-        $uws_startdate = $uvdate;
-        $uwsstartdateformat = str_replace("-", "", $uws_startdate);
+        $urvenue_ws_startdate = $uvdate;
+        $uwsstartdateformat = str_replace("-", "", $urvenue_ws_startdate);
         // $uwsinitddate = date('M j, Y', strtotime($uvdate));
     $uwsinitddate = gmdate('M j, Y', strtotime($uvdate)); // Axl UWS-7416
     }
 
     /* Custom Message Settings*/
-    $uws_errortitle = (isset($uvargs['errortitle']) and $uvargs['errortitle'] != "") ? $uvargs['errortitle'] : "We are sorry.";
-    $uws_errorcontent = (isset($uvargs['errorcontent']) and $uvargs['errorcontent'] != "") ? $uvargs['errorcontent'] : "We could not find any available items for the selected date.";
+    $urvenue_ws_errortitle = (isset($uvargs['errortitle']) and $uvargs['errortitle'] != "") ? $uvargs['errortitle'] : "We are sorry.";
+    $urvenue_ws_errorcontent = (isset($uvargs['errorcontent']) and $uvargs['errorcontent'] != "") ? $uvargs['errorcontent'] : "We could not find any available items for the selected date.";
 
     /* Custom Buttons Search (optional) */
-    $uws_displaybuttonlabel = isset($uvargs['displaybuttonlabel']) ? $uvargs['displaybuttonlabel'] : "";
-    $uws_displaybutton = ($uvargs['displaybutton'] != "") ? "<div class='uws-gtwb-wrapper'><button class='uws-btn uws-btn-s uws-to-show-button'>$uws_displaybuttonlabel</button></div>" : "";
+    $urvenue_ws_displaybuttonlabel = isset($uvargs['displaybuttonlabel']) ? $uvargs['displaybuttonlabel'] : "";
+    $urvenue_ws_displaybutton = ($uvargs['displaybutton'] != "") ? "<div class='uws-gtwb-wrapper'><button class='uws-btn uws-btn-s uws-to-show-button'>$urvenue_ws_displaybuttonlabel</button></div>" : "";
 
     $uvwidgetclasses = "";
-    if ($uws_displaybutton != "") {
+    if ($urvenue_ws_displaybutton != "") {
         $uvwidgetclasses = "uws-hide-inventory";
     }
 
@@ -4562,7 +4562,7 @@ function urvenue_ws_get_inventorywidget($uvargs) // Axl UWS-7416
     if ($uvshoweventsdropdown)
         $uvdropdownfilters = "<div class='uwseventsel'></div>";
 
-    $uws_globaltype_widget = str_replace(
+    $urvenue_ws_globaltype_widget = str_replace(
         array(
             "{startdate}",
             "{max-date}",
@@ -4583,26 +4583,26 @@ function urvenue_ws_get_inventorywidget($uvargs) // Axl UWS-7416
             "{mixecozones}",
         ),
         array(
-            $uws_startdate,
-            $uws_maxdate,
+            $urvenue_ws_startdate,
+            $urvenue_ws_maxdate,
             $uwsinitddate,
             $uveventcode,
-            $uws_venuecode,
+            $urvenue_ws_venuecode,
             $uvecozone3,
-            $uws_globaltype,
-            $uws_errortitle,
-            $uws_errorcontent,
+            $urvenue_ws_globaltype,
+            $urvenue_ws_errortitle,
+            $urvenue_ws_errorcontent,
             $uvwidgetclasses,
-            $uws_displaybutton,
+            $urvenue_ws_displaybutton,
             $uvdate,
             $uvdropdownfilters,
             $uvshoweventsdropdown,
             $onlyweekdays,
-            $uws_booktypename,
-            $uws_mixecozones,
+            $urvenue_ws_booktypename,
+            $urvenue_ws_mixecozones,
         ),
         $uvwpglobalwidget
     );
 
-    return $uws_globaltype_widget;
+    return $urvenue_ws_globaltype_widget;
 }

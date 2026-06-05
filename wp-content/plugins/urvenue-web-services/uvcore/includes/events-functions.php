@@ -4,31 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /*Get Calendar implementation
     Returns: Prints html controls + events integration
 */
-// function uws_events($uvargs = ""){
-function urvenue_ws_events($uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_events($uvargs = ""){
     global $urvenue_ws_core_lib, $urvenue_ws_today;
 
-    // $uvdate = uws_get_arg($uvargs, "date", "");
-    $uvdate = urvenue_ws_get_arg($uvargs, "date", ""); // Axl UWS-7416
-    // $uvenddate = uws_get_arg($uvargs, "enddate", "");
-    $uvenddate = urvenue_ws_get_arg($uvargs, "enddate", ""); // Axl UWS-7416
-    // $uvbuttonlabel = uws_get_arg($uvargs, "buttonlabel");
-    $uvbuttonlabel = urvenue_ws_get_arg($uvargs, "buttonlabel"); // Axl UWS-7416
-    // $uvmaxdate = uws_get_events_max_date("Y-m-d");
-    $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
-    // $uvuitheme = uws_get_theme();
-    $uvuitheme = urvenue_ws_get_theme(); // Axl UWS-7416
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", "");
+    $uvenddate = urvenue_ws_get_arg($uvargs, "enddate", "");
+    $uvbuttonlabel = urvenue_ws_get_arg($uvargs, "buttonlabel");
+    $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d");
+    $uvuitheme = urvenue_ws_get_theme();
 
     if($uvdate){
         $uvinitialdate = $uvdate;
-        // $uvenddate = (!$uvenddate) ? uws_get_events_endinit_date("Y-m-d", $uvdate) : $uvenddate;
-        $uvenddate = (!$uvenddate) ? urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate) : $uvenddate; // Axl UWS-7416
+        $uvenddate = (!$uvenddate) ? urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate) : $uvenddate;
     }
     else{
-        // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
-        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
-        // $uvenddate = (!$uvenddate) ? uws_get_events_endinit_date("Y-m-d") : $uvenddate;
-        $uvenddate = (!$uvenddate) ? urvenue_ws_get_events_endinit_date("Y-m-d") : $uvenddate; // Axl UWS-7416
+        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d");
+        $uvenddate = (!$uvenddate) ? urvenue_ws_get_events_endinit_date("Y-m-d") : $uvenddate;
     }
     
     $uvinitialdate = ($uvinitialdate and $uvinitialdate < $uvmaxdate) ? $uvinitialdate : $uvmaxdate;
@@ -37,33 +28,23 @@ function urvenue_ws_events($uvargs = ""){ // Axl UWS-7416
     if($uvenddate and is_array($uvargs))
         $uvargs["todate"] = $uvenddate;
 
-    // $uvnextloaddate = date("Y-m-d", strtotime($uvenddate . " +1 day"));
-    $uvnextloaddate = gmdate("Y-m-d", strtotime($uvenddate . " +1 day")); // Axl UWS-7416
+    $uvnextloaddate = gmdate("Y-m-d", strtotime($uvenddate . " +1 day"));
 
-    // $uveventsactions = uws_events_controls($uvargs);
-    $uveventsactions = urvenue_ws_events_controls($uvargs); // Axl UWS-7416
-    // $uveventsviews = uws_events_views($uvargs);
-    $uveventsviews = urvenue_ws_events_views($uvargs); // Axl UWS-7416
-    //$uvproxiesscript = uws_get_proxies_script("uvcore-init");
+    $uveventsactions = urvenue_ws_events_controls($uvargs);
+    $uveventsviews = urvenue_ws_events_views($uvargs);
 
     $uvactionsclass = ($uvmaxdate > $uvenddate) ? "uwsactive" : "";
-    // $uvvenuekeycodes = uws_get_arg($uvargs, "venue", "all");
-    $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venue", "all"); // Axl UWS-7416
-    // $uvvenuefiltercodes = uws_get_arg($uvargs, "venuecodes", $uvvenuekeycodes);
-    $uvvenuefiltercodes = urvenue_ws_get_arg($uvargs, "venuecodes", $uvvenuekeycodes); // Axl UWS-7416
+    $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venue", "all");
+    $uvvenuefiltercodes = urvenue_ws_get_arg($uvargs, "venuecodes", $uvvenuekeycodes);
     $uvupdateurl = (isset($urvenue_ws_core_lib["events"]["global-updateurl"]) and $urvenue_ws_core_lib["events"]["global-updateurl"]) ? 1 : 0;
 
     $uvaddattr = "";
-    // if(uws_get_arg($uvargs, "performer", ""))
-    if(urvenue_ws_get_arg($uvargs, "performer", "")) // Axl UWS-7416
-        // $uvaddattr .= " data-initperfomer='" . uws_get_arg($uvargs, "performer", "") . "'";
-        // $uvaddattr .= " data-initperfomer='" . urvenue_ws_get_arg($uvargs, "performer", "") . "'"; // Axl UWS-7416
-        $uvaddattr .= " data-initperfomer='" . esc_attr( urvenue_ws_get_arg($uvargs, "performer", "") ) . "'"; // Axl UWS-8151
+    if(urvenue_ws_get_arg($uvargs, "performer", ""))
+        $uvaddattr .= " data-initperfomer='" . esc_attr( urvenue_ws_get_arg($uvargs, "performer", "") ) . "'";
 
     //Enddate only for range datepicker
     $uvdataenddate = ($urvenue_ws_core_lib["events"]["eventspage-dateselector"] == "datepicker-range") ? $uvenddate : "";
 
-    // Axl UWS-8151 -- escapar atributos al construir el HTML
     $uvuitheme_esc          = esc_attr( $uvuitheme );
     $uvinitialdate_esc      = esc_attr( $uvinitialdate );
     $uvdataenddate_esc      = esc_attr( $uvdataenddate );
@@ -74,17 +55,6 @@ function urvenue_ws_events($uvargs = ""){ // Axl UWS-7416
     $uvactionsclass_esc     = esc_attr( $uvactionsclass );
     $uvnextloaddate_esc     = esc_attr( $uvnextloaddate );
 
-    // $uveventshtml = "
-    // <div class='uws-integration uws-events $uvuitheme' data-filter-date='$uvinitialdate' data-filter-enddate='$uvdataenddate' data-filter-maxdate='$uvmaxdate' data-filter-venue='$uvvenuefiltercodes' data-update-url='$uvupdateurl' data-buttonlabel='$uvbuttonlabel' $uvaddattr>
-    //     $uveventsactions
-    //     <div class='uws-events-views'>$uveventsviews</div>
-    //     <div class='uws-events-actions $uvactionsclass'>
-    //         <button class='uws-btn uws-btn-s uwsjs-events-loadmore' data-load-date='$uvnextloaddate'>Load More</button>
-    //         <div class='uws-events-loadmoremsg'>No More Events To Show</div>
-    //         <div class='uws-loader-uvicon'></div>
-    //     </div>
-    // </div>
-    // "; // Axl UWS-7416
     $uveventshtml = "
     <div class='uws-integration uws-events {$uvuitheme_esc}' data-filter-date='{$uvinitialdate_esc}' data-filter-enddate='{$uvdataenddate_esc}' data-filter-maxdate='{$uvmaxdate_esc}' data-filter-venue='{$uvvenuefiltercodes_esc}' data-update-url='{$uvupdateurl_esc}' data-buttonlabel='{$uvbuttonlabel_esc}' {$uvaddattr}>
         {$uveventsactions}
@@ -95,40 +65,30 @@ function urvenue_ws_events($uvargs = ""){ // Axl UWS-7416
             <div class='uws-loader-uvicon'></div>
         </div>
     </div>
-    "; // Axl UWS-8151
+    ";
 
-    // echo $uveventshtml;
-    // echo $uveventshtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
-    echo wp_kses_post( $uveventshtml ); // Axl UWS-8151
+    echo wp_kses_post( $uveventshtml );
 }
 
 /*Get events views
     Optional: returnarray(set to true to return the html for each view in an array)
 */
-// function uws_events_views($uvargs = "", $uvreturnarray = false)
-function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UWS-7416
+function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false)
 {
     global $urvenue_ws_core_lib, $urvenue_ws_assetsversion;
 
-    // $uvdate = uws_get_arg($uvargs, "date", "");
-    $uvdate = urvenue_ws_get_arg($uvargs, "date", ""); // Axl UWS-7416
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", "");
 
     if ($uvdate) {
-        // $uvfromdate = uws_get_arg($uvargs, "fromdate", $uvdate);
-        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", $uvdate); // Axl UWS-7416
-        // $uvmaxdate = uws_get_arg($uvargs, "todate", uws_get_events_endinit_date("Y-m-d", $uvdate));
-        $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate)); // Axl UWS-7416
+        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", $uvdate);
+        $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate));
     } else {
-        // $uvfromdate = uws_get_arg($uvargs, "fromdate", uws_get_events_initial_date("Y-m-d"));
-        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", urvenue_ws_get_events_initial_date("Y-m-d")); // Axl UWS-7416
-        // $uvmaxdate = uws_get_arg($uvargs, "todate", uws_get_events_endinit_date("Y-m-d", $uvfromdate));
-        $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate)); // Axl UWS-7416
+        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", urvenue_ws_get_events_initial_date("Y-m-d"));
+        $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate));
     }
 
-    // $uvnowrap = uws_get_arg($uvargs, "nowrap", "");
-    $uvnowrap = urvenue_ws_get_arg($uvargs, "nowrap", ""); // Axl UWS-7416
-    // $uvtodate = date("Y-m-d", strtotime($uvmaxdate . " +7 days")); //Get more events to fill last calendar row
-    $uvtodate = gmdate("Y-m-d", strtotime($uvmaxdate . " +7 days")); //Get more events to fill last calendar row // Axl UWS-7416
+    $uvnowrap = urvenue_ws_get_arg($uvargs, "nowrap", "");
+    $uvtodate = gmdate("Y-m-d", strtotime($uvmaxdate . " +7 days"));
 
     //todate = end date to call on the API
     //maxdate = maximum date to show on the events list
@@ -142,18 +102,15 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
         );
     }
 
-    // $uvevents = uws_get_events($uvargs);
-    $uvevents = urvenue_ws_get_events($uvargs); // Axl UWS-7416
+    $uvevents = urvenue_ws_get_events($uvargs);
 
     $uvviewshtml = $uvviewsreturn = $uveventsschemainline = "";
     $uvviewsarray = array();
     $uvviews = (isset($urvenue_ws_core_lib["events"])) ? $urvenue_ws_core_lib["events"]["eventspage-views"] : "";
-    // $uvdefaultview = uws_get_arg($uvargs, "defaultview", "");
-    $uvdefaultview = urvenue_ws_get_arg($uvargs, "defaultview", ""); // Axl UWS-7416
+    $uvdefaultview = urvenue_ws_get_arg($uvargs, "defaultview", "");
 
     // Process views parameter if provided (for consistent behavior across endpoints)
-    // $uvviewsparams = uws_get_arg($uvargs, "views", "");
-    $uvviewsparams = urvenue_ws_get_arg($uvargs, "views", ""); // Axl UWS-7416
+    $uvviewsparams = urvenue_ws_get_arg($uvargs, "views", "");
     if ($uvviewsparams && is_array($uvviews)) {
         $uvdefaultviews = ['calendar', 'agenda', 'list'];
         $uvviewsarray_param = is_array($uvviewsparams) ? $uvviewsparams : explode(",", $uvviewsparams);
@@ -184,16 +141,14 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
             : reset($uvselviews);
             
         if ($uvcustdefaultview) {
-            // $uvviews = uws_set_default_view($uvviews, $uvcustdefaultview);
-            $uvviews = urvenue_ws_set_default_view($uvviews, $uvcustdefaultview); // Axl UWS-7416
+            $uvviews = urvenue_ws_set_default_view($uvviews, $uvcustdefaultview);
         }
     }
 
     if (is_array($uvviews)) {
 
         if ($uvdefaultview) {
-            // $uvviews = uws_set_default_view($uvviews, $uvdefaultview);
-            $uvviews = urvenue_ws_set_default_view($uvviews, $uvdefaultview); // Axl UWS-7416
+            $uvviews = urvenue_ws_set_default_view($uvviews, $uvdefaultview);
         } elseif (isset($uvargs["view"]) && $uvargs["view"] != "") {
             $customView = $uvargs["view"];
             foreach ($uvviews as $key => &$singleview) {
@@ -212,20 +167,16 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
 
                 if ($uvviewkey == "calendar") {
                     if ($uvreturnarray) {
-                        // $uvviewsarray[$uvviewkey] = uws_calendar($uvevents, $uvargs);
-                        $uvviewsarray[$uvviewkey] = urvenue_ws_calendar($uvevents, $uvargs); // Axl UWS-7416
+                        $uvviewsarray[$uvviewkey] = urvenue_ws_calendar($uvevents, $uvargs);
                     } else {
-                        // @egt [UWS-7264]
                         $uvcalcellwidth_script = 'const uvcalcellwidth = document.querySelector(".uws-events-views").offsetWidth / 7; document.documentElement.style.setProperty("--uws-cal-cell-minheight", uvcalcellwidth + "px");';
                         
-                        wp_register_script('uvcalcellwidth', false, array(), $urvenue_ws_assetsversion, true);
-                        wp_enqueue_script('uvcalcellwidth');
-                        wp_add_inline_script('uvcalcellwidth', "(function () { {$uvcalcellwidth_script} })();"); //add css var to add min height to cells
+                        wp_register_script('urvenue-ws-calcellwidth', false, array(), $urvenue_ws_assetsversion, true);
+                        wp_enqueue_script('urvenue-ws-calcellwidth');
+                        wp_add_inline_script('urvenue-ws-calcellwidth', "(function () { {$uvcalcellwidth_script} })();"); //add css var to add min height to cells
 
-                        // $uvdaysnames = "<div class='uwscaldaysnames'><div>" . uws_lang("cal-monday") . "</div><div>" . uws_lang("cal-tuesday") . "</div><div>" . uws_lang("cal-wednesday") . "</div><div>" . uws_lang("cal-thursday") . "</div><div>" . uws_lang("cal-friday") . "</div><div>" . uws_lang("cal-saturday") . "</div><div>" . uws_lang("cal-sunday") . "</div></div>";
-                        $uvdaysnames = "<div class='uwscaldaysnames'><div>" . urvenue_ws_lang("cal-monday") . "</div><div>" . urvenue_ws_lang("cal-tuesday") . "</div><div>" . urvenue_ws_lang("cal-wednesday") . "</div><div>" . urvenue_ws_lang("cal-thursday") . "</div><div>" . urvenue_ws_lang("cal-friday") . "</div><div>" . urvenue_ws_lang("cal-saturday") . "</div><div>" . urvenue_ws_lang("cal-sunday") . "</div></div>"; // Axl UWS-7416
-                        // $uvviewhtml .= $uvdaysnames . "<div class='uws-events-calendar'>" . uws_calendar($uvevents, $uvargs) . "</div>";
-                        $uvviewhtml .= $uvdaysnames . "<div class='uws-events-calendar'>" . urvenue_ws_calendar($uvevents, $uvargs) . "</div>"; // Axl UWS-7416
+                        $uvdaysnames = "<div class='uwscaldaysnames'><div>" . urvenue_ws_lang("cal-monday") . "</div><div>" . urvenue_ws_lang("cal-tuesday") . "</div><div>" . urvenue_ws_lang("cal-wednesday") . "</div><div>" . urvenue_ws_lang("cal-thursday") . "</div><div>" . urvenue_ws_lang("cal-friday") . "</div><div>" . urvenue_ws_lang("cal-saturday") . "</div><div>" . urvenue_ws_lang("cal-sunday") . "</div></div>";
+                        $uvviewhtml .= $uvdaysnames . "<div class='uws-events-calendar'>" . urvenue_ws_calendar($uvevents, $uvargs) . "</div>";
                     }
                 } else {
                     $uvlistargs = array(
@@ -237,12 +188,10 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
                     if ($uvnowrap)
                         $uvlistargs["wrap-template"] = "{eventslist}";
 
-                    // if($uvbuttonlabel = uws_get_arg($uvargs, "buttonlabel"))
-                    if($uvbuttonlabel = urvenue_ws_get_arg($uvargs, "buttonlabel")) // Axl UWS-7416
+                    if($uvbuttonlabel = urvenue_ws_get_arg($uvargs, "buttonlabel"))
                         $uvlistargs["buttonlabel"] = $uvbuttonlabel;
                     
-                    // $uvthisviewhtml = uws_get_events_list($uvevents, $uvlistargs);
-                    $uvthisviewhtml = urvenue_ws_get_events_list($uvevents, $uvlistargs); // Axl UWS-7416
+                    $uvthisviewhtml = urvenue_ws_get_events_list($uvevents, $uvlistargs);
 
                     if ($uvreturnarray) {
                         $uvviewsarray[$uvviewkey] = $uvthisviewhtml;
@@ -263,21 +212,15 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
 
     // SEO Schema
     $uveventsseo = (is_array($uvevents)) ? array_slice($uvevents, 0, 10) : "";
-    // $uveventsschema = (is_array($uveventsseo)) ? uws_get_events_schema($uveventsseo) : "";
-    $uveventsschema = (is_array($uveventsseo)) ? urvenue_ws_get_events_schema($uveventsseo) : ""; // Axl UWS-7416
+    $uveventsschema = (is_array($uveventsseo)) ? urvenue_ws_get_events_schema($uveventsseo) : "";
 
     if ($uveventsschema) {
-        // @Axl
-        // $uveventsschemajson = json_encode($uveventsschema);
         $uveventsschemajson = wp_json_encode($uveventsschema);
-        // @Axl End
         $uveventsschemainline .= "";
         $uvviewshtml .= $uveventsschemainline;
 
-        // @egt [UWS-7264]
         add_action('wp_footer', function () use ($uveventsschemajson) {
-            // echo "<script type='application/ld+json'>$uveventsschemajson</script>";
-            echo "<script type='application/ld+json'>$uveventsschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output // Axl UWS-7416
+            echo "<script type='application/ld+json'>$uveventsschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output
         });
     }
 
@@ -297,8 +240,7 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false) // Axl UW
  * @param string $uvdefaultview The view key to set as default
  * @return array The modified views array
  */
-// function uws_set_default_view($uvviews, $uvdefaultview) {
-function urvenue_ws_set_default_view($uvviews, $uvdefaultview) { // Axl UWS-7416
+function urvenue_ws_set_default_view($uvviews, $uvdefaultview) {
     if (!is_array($uvviews) || !$uvdefaultview) {
         return $uvviews; // Return original if not an array or no default view provided
     }
@@ -314,31 +256,22 @@ function urvenue_ws_set_default_view($uvviews, $uvdefaultview) { // Axl UWS-7416
     Args: wrap-template(template key or html for wrap), item-template(template key or html for item)
     Returns: HTML with events
 */
-// function uws_get_events_list($uvevents, $uvargs = ""){
-function urvenue_ws_get_events_list($uvevents, $uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_get_events_list($uvevents, $uvargs = ""){
     $uveventslist = "";
 
-    // $uvmaxdate = uws_get_arg($uvargs, "maxdate", "");
-    $uvmaxdate = urvenue_ws_get_arg($uvargs, "maxdate", ""); // Axl UWS-7416
+    $uvmaxdate = urvenue_ws_get_arg($uvargs, "maxdate", "");
 
     if(is_array($uvevents) and count($uvevents)){
-        // $uvwraptemplatecode = uws_get_arg($uvargs, "wrap-template", "events/events-wrap-default");
-        $uvwraptemplatecode = urvenue_ws_get_arg($uvargs, "wrap-template", "events/events-wrap-default"); // Axl UWS-7416
-        // $uvitemtemplatecode = uws_get_arg($uvargs, "item-template", "events/events-item-default");
-        $uvitemtemplatecode = urvenue_ws_get_arg($uvargs, "item-template", "events/events-item-default"); // Axl UWS-7416
-        // $uvnevents = uws_get_arg($uvargs, "nevents", 200);
-        $uvnevents = urvenue_ws_get_arg($uvargs, "nevents", 200); // Axl UWS-7416
+        $uvwraptemplatecode = urvenue_ws_get_arg($uvargs, "wrap-template", "events/events-wrap-default");
+        $uvitemtemplatecode = urvenue_ws_get_arg($uvargs, "item-template", "events/events-item-default"); 
+        $uvnevents = urvenue_ws_get_arg($uvargs, "nevents", 200);
 
-        // $uvwraptemplate = ($uvwraptemplatecode) ? uws_get_template($uvwraptemplatecode) : "";
-        $uvwraptemplate = ($uvwraptemplatecode) ? urvenue_ws_get_template($uvwraptemplatecode) : ""; // Axl UWS-7416
-        // $uvitemtemplate = uws_get_template($uvitemtemplatecode);
-        $uvitemtemplate = urvenue_ws_get_template($uvitemtemplatecode); // Axl UWS-7416
+        $uvwraptemplate = ($uvwraptemplatecode) ? urvenue_ws_get_template($uvwraptemplatecode) : "";
+        $uvitemtemplate = urvenue_ws_get_template($uvitemtemplatecode);
         $uveventslistitems = "";
 
-        // $uvbtnlabel = uws_get_arg($uvargs, "buttonlabel", "");
-        $uvbtnlabel = urvenue_ws_get_arg($uvargs, "buttonlabel", ""); // Axl UWS-7416
-        // $uvbtnspanlabel = uws_get_arg($uvargs, "buttonspanlabel", "");
-        $uvbtnspanlabel = urvenue_ws_get_arg($uvargs, "buttonspanlabel", ""); // Axl UWS-7416
+        $uvbtnlabel = urvenue_ws_get_arg($uvargs, "buttonlabel", "");
+        $uvbtnspanlabel = urvenue_ws_get_arg($uvargs, "buttonspanlabel", "");
         
         $uvbtnspanlabel = (!$uvbtnspanlabel and !$uvbtnlabel) ? "Book<span> Now</span>" : $uvbtnspanlabel;
         $uvbtnspanlabel = (!$uvbtnspanlabel and $uvbtnlabel) ? $uvbtnlabel : "Book<span> Now</span>";
@@ -362,8 +295,7 @@ function urvenue_ws_get_events_list($uvevents, $uvargs = ""){ // Axl UWS-7416
 
             if($uveventcode === $uvmaineventcode) {
                 if($uvevent["date"] <= $uvmaxdate or !$uvmaxdate and $uvnevents){
-                    // $uveventitem = uws_replace_event_vars($uvevent, $uvitemtemplate);
-                    $uveventitem = urvenue_ws_replace_event_vars($uvevent, $uvitemtemplate); // Axl UWS-7416
+                    $uveventitem = urvenue_ws_replace_event_vars($uvevent, $uvitemtemplate);
                     $uveventslistitems .= $uveventitem;
 
                     $uvnevents--;
@@ -391,9 +323,8 @@ function urvenue_ws_get_events_list($uvevents, $uvargs = ""){ // Axl UWS-7416
 /*Replate events variables codes
     event(event array), template(html template with varriable codes)
 */
-// function uws_replace_event_vars($uvevent, $uvtemplate){
-function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){ // Axl UWS-7416
-    global $urvenue_ws_core_lib, $uws_config_cal_add_ecozone_data, $uws_config_cal_show_flyers, $uws_config_event_on_newtab;
+function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){
+    global $urvenue_ws_core_lib, $urvenue_ws_config_cal_add_ecozone_data, $urvenue_ws_config_cal_show_flyers, $urvenue_ws_config_event_on_newtab;
 
     $uvvenuekey = $uvevent["venuekey"];
     if(isset($urvenue_ws_core_lib["venues"]["$uvvenuekey"]["venueforcealias"]) and $urvenue_ws_core_lib["venues"]["$uvvenuekey"]["venueforcealias"]){
@@ -407,8 +338,7 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){ // Axl UWS-7416
     // $uvvenuealias = (isset($urvenue_ws_core_lib["venues"]["$uvvenuekey"]["venueforcealias"]) and $urvenue_ws_core_lib["venues"]["$uvvenuekey"]["venueforcealias"] and $urvenue_ws_core_lib["venues"]["$uvvenuekey"]["venuealias"]) ? $urvenue_ws_core_lib["venues"]["$uvvenuekey"]["venuealias"] : $uvevent["venuename"];
     $uvperformersclass = "";
     if(isset($uvevent["performers"]) and $uvevent["performers"]){
-        // $uvperformersclass = uws_get_performersclass($uvevent["performers"]);
-        $uvperformersclass = urvenue_ws_get_performersclass($uvevent["performers"]); // Axl UWS-7416
+        $uvperformersclass = urvenue_ws_get_performersclass($uvevent["performers"]);
     }
     $uvevtdescrdefault = "";
     //$uvevtdescrdefault = "See " . $uvevent["name"] . " at " . $uvevent["venuename"] . " on ".date("l, F d, Y", strtotime($uvevent["date"]))."<br>";
@@ -417,37 +347,32 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){ // Axl UWS-7416
 
     $uveventitem = "";
     // $uvddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvevent["date"]));
-    $uvddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvevent["date"])); // Axl UWS-7416
+    $uvddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvevent["date"]));
     $uvvenuediv = ($urvenue_ws_core_lib["events"]["global-addvenuename"]) ? "<div class='uwsvenuename uws-venkey-{venuekey}'>" . $uvvenuename . "</div>" : "";
     $uveventinfodiv = ($uvevent["descr"]) ? "<div class='uwseventdescr'><div class='uwstitle'>Event Info</div><div class='uwsdescr'>" . $uvevent["descr"] . "</div></div>" : "";
-    // $uveventdescrtoggle = ($uvevent["descr"] && strlen($uvevent["descr"]) > 250) ? "<button class='uwsjs-descr-toggle uwsreadmore' aria-label='" . uws_lang('read-more') . "'>" . uws_lang('read-more') . "</button><button class='uwsjs-descr-toggle uwsreadless' aria-label='" . uws_lang('read-less') . "'>" . uws_lang('read-less') . "</button>" : "";
-    $uveventdescrtoggle = ($uvevent["descr"] && strlen($uvevent["descr"]) > 250) ? "<button class='uwsjs-descr-toggle uwsreadmore' aria-label='" . urvenue_ws_lang('read-more') . "'>" . urvenue_ws_lang('read-more') . "</button><button class='uwsjs-descr-toggle uwsreadless' aria-label='" . urvenue_ws_lang('read-less') . "'>" . urvenue_ws_lang('read-less') . "</button>" : ""; // Axl UWS-7416
+    $uveventdescrtoggle = ($uvevent["descr"] && strlen($uvevent["descr"]) > 250) ? "<button class='uwsjs-descr-toggle uwsreadmore' aria-label='" . urvenue_ws_lang('read-more') . "'>" . urvenue_ws_lang('read-more') . "</button><button class='uwsjs-descr-toggle uwsreadless' aria-label='" . urvenue_ws_lang('read-less') . "'>" . urvenue_ws_lang('read-less') . "</button>" : "";
     $uveventdescrdiv = ($uvevent["descr"]) ? "<div class='uws-event-description'><div class='uwseventdescr'><div class='uwsdescr uwsclamptext uwsclamp-3'>" . $uvevent["descr"] . "$uveventdescrtoggle</div></div></div>" : "";
     $uvdstarttime = ($uvevent["dstarttime"]) ? $uvevent["dstarttime"] : "";
     $uvdstarttimediv = ($uvdstarttime) ? "<div class='uwsdtime'>" . $uvdstarttime . "</div>" : "";
     $uvddoorsopen = ($uvevent["ndoorsopen"]) ? substr($uvevent["ndoorsopen"], 1,4) : "";
     // $uvddoorsopen = ($uvddoorsopen) ? date("g:i A", strtotime($uvddoorsopen)) : "";
-    $uvddoorsopen = ($uvddoorsopen) ? gmdate("g:i A", strtotime($uvddoorsopen)) : ""; // Axl UWS-7416
+    $uvddoorsopen = ($uvddoorsopen) ? gmdate("g:i A", strtotime($uvddoorsopen)) : "";
     $uvddoorsopendiv = ($uvddoorsopen) ? "<div class='uwsddoorsopen'><span>Doors Open: </span>" . $uvddoorsopen . "</div>" : "";
-    // $uvsharelinks = uws_get_share_links($uvevent["event-page-url"]);
-    $uvsharelinks = urvenue_ws_get_share_links($uvevent["event-page-url"]); // Axl UWS-7416
+    $uvsharelinks = urvenue_ws_get_share_links($uvevent["event-page-url"]);
     // $eventgcalstartdate = date("Ymd", strtotime($uvevent["date"]));
-    $eventgcalstartdate = gmdate("Ymd", strtotime($uvevent["date"])); // Axl UWS-7416
+    $eventgcalstartdate = gmdate("Ymd", strtotime($uvevent["date"]));
     // $eventgcalenddate = date("Ymd", strtotime($uvevent["date"]));
-    $eventgcalenddate = gmdate("Ymd", strtotime($uvevent["date"])); // Axl UWS-7416
+    $eventgcalenddate = gmdate("Ymd", strtotime($uvevent["date"]));
     $uvgooglecalendarlink = "https://www.google.com/calendar/event?action=TEMPLATE&text=" . urlencode($uvevent["name"]) . "&details=" . urlencode($uvevent["name"]) . "&dates={$eventgcalstartdate}/{$eventgcalenddate}&location=" . urlencode($uvevent["venuename"]);
     $uveventcontclasses = (isset($uvevent["isnoevent"]) and $uvevent["isnoevent"]) ? "uwsisnoevent" : "";
     $uveventcontclasses = (!(isset($uvevent["flyers"]["eventpage"]["url"]) and $uvevent["flyers"]["eventpage"]["url"])) ? $uveventcontclasses . " uwsnoflyer" : $uveventcontclasses;
     $uveventsliderfull = $uvevent["flyers"]["slider"]["full"];
-    // $uvtheme = uws_get_theme();
-    $uvtheme = urvenue_ws_get_theme(); // Axl UWS-7416
-    // $uveventdp = uws_get_event_datesel($uvevent["date"], $uvevent["venuecode"]);
-    $uveventdp = urvenue_ws_get_event_datesel($uvevent["date"], $uvevent["venuecode"]); // Axl UWS-7416
-    // $uveventdpicon = "<div class='uwsdpicon'>" . uws_get_icon("caret") . "</div>";
-    $uveventdpicon = "<div class='uwsdpicon'>" . urvenue_ws_get_icon("caret") . "</div>"; // Axl UWS-7416
+    $uvtheme = urvenue_ws_get_theme();
+    $uveventdp = urvenue_ws_get_event_datesel($uvevent["date"], $uvevent["venuecode"]);
+    $uveventdpicon = "<div class='uwsdpicon'>" . urvenue_ws_get_icon("caret") . "</div>";
 
-    $uveventecozone = (isset($uvevent["ecozone"]) and $uvevent["ecozone"] and $uws_config_cal_add_ecozone_data) ? "data-ecozone='" . $uvevent["ecozone"] . "'" : "";
-    $uveventaddflyer = (isset($uvevent["flyers"]["calendar"]["url"]) && $uvevent["flyers"]["calendar"]["url"] && $uws_config_cal_show_flyers)
+    $uveventecozone = (isset($uvevent["ecozone"]) and $uvevent["ecozone"] and $urvenue_ws_config_cal_add_ecozone_data) ? "data-ecozone='" . $uvevent["ecozone"] . "'" : "";
+    $uveventaddflyer = (isset($uvevent["flyers"]["calendar"]["url"]) && $uvevent["flyers"]["calendar"]["url"] && $urvenue_ws_config_cal_show_flyers)
         ? "<div class='uwsflyercont uws-ratio-" . $uvevent["flyers"]["calendar"]["ratio"] . "'>
             <img class='uwsimgloading' src='" . $uvevent["flyers"]["calendar"]["url"] . "' alt='" . $uvevent["name"] . " - Flyer' onload=\"this.classList.add('uwsloaded'); this.closest('li').classList.add('uwsloaded')\">
            </div>"
@@ -477,7 +402,7 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){ // Axl UWS-7416
         }
     }
 
-    $uveventtarget = ($uws_config_event_on_newtab) ? " target='_blank' rel='noopener'" : "";
+    $uveventtarget = ($urvenue_ws_config_event_on_newtab) ? " target='_blank' rel='noopener'" : "";
  
     $uveventitem = str_replace(
         array(
@@ -547,18 +472,14 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){ // Axl UWS-7416
             $uvevent["flyers"]["custom1"]["url"],
             $uvevent["flyers"]["custom2"]["url"],
             $uvevent["flyers"]["slidermobile"]["url"],
-            // uws_lang_date($uvddate),
-            urvenue_ws_lang_date($uvddate), // Axl UWS-7416
+            urvenue_ws_lang_date($uvddate),
             $uvvenuediv,
-            // uws_lang_date(date("D", strtotime($uvevent["date"]))),
-            urvenue_ws_lang_date(gmdate("D", strtotime($uvevent["date"]))), // Axl UWS-7416
-            gmdate("l", strtotime($uvevent["date"])), // Axl UWS-7416
-            gmdate("j", strtotime($uvevent["date"])), // Axl UWS-7416
-            // uws_lang_date(date("M", strtotime($uvevent["date"]))),
-            urvenue_ws_lang_date(gmdate("M", strtotime($uvevent["date"]))), // Axl UWS-7416
-            gmdate("F", strtotime($uvevent["date"])), // Axl UWS-7416
-            // uws_lang_date(date("Y", strtotime($uvevent["date"]))),
-            urvenue_ws_lang_date(gmdate("Y", strtotime($uvevent["date"]))), // Axl UWS-7416
+            urvenue_ws_lang_date(gmdate("D", strtotime($uvevent["date"]))),
+            gmdate("l", strtotime($uvevent["date"])),
+            gmdate("j", strtotime($uvevent["date"])),
+            urvenue_ws_lang_date(gmdate("M", strtotime($uvevent["date"]))),
+            gmdate("F", strtotime($uvevent["date"])),
+            urvenue_ws_lang_date(gmdate("Y", strtotime($uvevent["date"]))),
             $uveventinfodiv,
             $uvdstarttimediv,
             $uvevent["venueaddress"],
@@ -589,8 +510,7 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){ // Axl UWS-7416
         $uvtemplate
     );
 
-    // $uveventitem = uws_apply_filters("uws_event_after_replace", $uveventitem, $uvevent);
-    $uveventitem = urvenue_ws_apply_filters("urvenue_ws_event_after_replace", $uveventitem, $uvevent); // Axl UWS-7416
+    $uveventitem = urvenue_ws_apply_filters("urvenue_ws_event_after_replace", $uveventitem, $uvevent);
 
     return $uveventitem;
 }
@@ -598,24 +518,18 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){ // Axl UWS-7416
 /*Get date selector field
     Returns: HTML with date selector
 */
-// function uws_get_event_datesel($uvdate = "", $uvvenuecode = ""){
-function urvenue_ws_get_event_datesel($uvdate = "", $uvvenuecode = ""){ // Axl UWS-7416
-    // $uvmindate = date('Y-m-01', strtotime(uws_get_events_initial_date("Y-m-d")));
-    $uvmindate = gmdate('Y-m-01', strtotime(urvenue_ws_get_events_initial_date("Y-m-d"))); // Axl UWS-7416
-    // $uvmaxdate = uws_get_events_max_date("Y-m-d");
-    $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
+function urvenue_ws_get_event_datesel($uvdate = "", $uvvenuecode = ""){
+    $uvmindate = gmdate('Y-m-01', strtotime(urvenue_ws_get_events_initial_date("Y-m-d")));
+    $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d");
     // $uvfromdate = date('Y-m-01', strtotime($uvdate));
-    $uvfromdate = gmdate('Y-m-01', strtotime($uvdate)); // Axl UWS-7416
+    $uvfromdate = gmdate('Y-m-01', strtotime($uvdate));
     // $uvtodate = date("Y-m-t", strtotime($uvdate));
-    $uvtodate = gmdate("Y-m-t", strtotime($uvdate)); // Axl UWS-7416
+    $uvtodate = gmdate("Y-m-t", strtotime($uvdate));
     // $uvddate = date("M j, Y", strtotime($uvdate));
-    $uvddate = gmdate("M j, Y", strtotime($uvdate)); // Axl UWS-7416
-    // $uvchangeeventdatelabel = uws_lang("change-event-date");
-    $uvchangeeventdatelabel = urvenue_ws_lang("change-event-date"); // Axl UWS-7416
-    // $uvddatelang = uws_lang_date($uvddate);
-    $uvddatelang = urvenue_ws_lang_date($uvddate); // Axl UWS-7416
-    // $uvpoptheme = uws_get_popup_theme();
-    $uvpoptheme = urvenue_ws_get_popup_theme(); // Axl UWS-7416
+    $uvddate = gmdate("M j, Y", strtotime($uvdate));
+    $uvchangeeventdatelabel = urvenue_ws_lang("change-event-date");
+    $uvddatelang = urvenue_ws_lang_date($uvddate);
+    $uvpoptheme = urvenue_ws_get_popup_theme();
 
     $uveventcontrols = "
         <div class='uws-event-dpinput uwshascalincon uws-dropdown-cont' data-poptheme='$uvpoptheme'>
@@ -639,34 +553,25 @@ function urvenue_ws_get_event_datesel($uvdate = "", $uvvenuecode = ""){ // Axl U
 /*Get events calendar view
     Requires: events:(array with urvenue events)
 */
-// function uws_calendar($uvevents, $uvargs = ""){
-function urvenue_ws_calendar($uvevents, $uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_calendar($uvevents, $uvargs = ""){
     global $urvenue_ws_core_lib;
 
-    // $uvfromdate = uws_get_arg($uvargs, "fromdate", uws_get_events_initial_date("Y-m-d"));
-    $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", urvenue_ws_get_events_initial_date("Y-m-d")); // Axl UWS-7416
-    // $uvtodate = uws_get_arg($uvargs, "todate", uws_get_events_endinit_date("Y-m-d", $uvfromdate));
-    $uvtodate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate)); // Axl UWS-7416
-    // $uvmaxdate = uws_get_arg($uvargs, "maxdate", $uvtodate);
-    $uvmaxdate = urvenue_ws_get_arg($uvargs, "maxdate", $uvtodate); // Axl UWS-7416
-    // $uvnopredates = uws_get_arg($uvargs, "nopredates", "");
-    $uvnopredates = urvenue_ws_get_arg($uvargs, "nopredates", ""); // Axl UWS-7416
+    $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", urvenue_ws_get_events_initial_date("Y-m-d"));
+    $uvtodate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate));
+    $uvmaxdate = urvenue_ws_get_arg($uvargs, "maxdate", $uvtodate);
+    $uvnopredates = urvenue_ws_get_arg($uvargs, "nopredates", "");
 
-    // $uvevents = (is_array($uvevents)) ? uws_eventskeys_to_date($uvevents) : $uvevents;
-    $uvevents = (is_array($uvevents)) ? urvenue_ws_eventskeys_to_date($uvevents) : $uvevents; // Axl UWS-7416
-    // $uvcelltemplate = uws_get_template("events/events-calendar-cell-default");
-    $uvcelltemplate = urvenue_ws_get_template("events/events-calendar-cell-default"); // Axl UWS-7416
-    // $uvsingletemplate = uws_get_template("events/events-calendar-single-default");
-    $uvsingletemplate = urvenue_ws_get_template("events/events-calendar-single-default"); // Axl UWS-7416
-    // $uvcellmobilelinktemplate = uws_get_template("events/calendar-cell-mobile-link");
-    $uvcellmobilelinktemplate = urvenue_ws_get_template("events/calendar-cell-mobile-link"); // Axl UWS-7416
+    $uvevents = (is_array($uvevents)) ? urvenue_ws_eventskeys_to_date($uvevents) : $uvevents;
+    $uvcelltemplate = urvenue_ws_get_template("events/events-calendar-cell-default");
+    $uvsingletemplate = urvenue_ws_get_template("events/events-calendar-single-default");
+    $uvcellmobilelinktemplate = urvenue_ws_get_template("events/calendar-cell-mobile-link");
     $uvcalendarcells = $uvncells = $uvcellclass = "";
 
     //get start date monday
-    $uvcalstartdate = (gmdate("N", strtotime($uvfromdate)) != 1 and !$uvnopredates) ? gmdate('Y-m-d', strtotime('previous monday', strtotime($uvfromdate))) : $uvfromdate; // Axl UWS-7416
+    $uvcalstartdate = (gmdate("N", strtotime($uvfromdate)) != 1 and !$uvnopredates) ? gmdate('Y-m-d', strtotime('previous monday', strtotime($uvfromdate))) : $uvfromdate;
     $uvcalstartdatetms = strtotime($uvcalstartdate);
 
-    $uvcalenddate = (gmdate("N", strtotime($uvmaxdate)) != 7 and !$uvnopredates) ? gmdate('Y-m-d', strtotime('next sunday', strtotime($uvmaxdate))) : $uvmaxdate; // Axl UWS-7416
+    $uvcalenddate = (gmdate("N", strtotime($uvmaxdate)) != 7 and !$uvnopredates) ? gmdate('Y-m-d', strtotime('next sunday', strtotime($uvmaxdate))) : $uvmaxdate;
     $uvcalenddatetms = strtotime($uvcalenddate);
 
     $uvcaldaysbetween = $uvcalenddatetms - $uvcalstartdatetms;
@@ -674,13 +579,13 @@ function urvenue_ws_calendar($uvevents, $uvargs = ""){ // Axl UWS-7416
 
     for($i=0; $i<=$uvcaldaysbetween; $i++){//124 max 4 months loaded
         // $uvceldate = date("Y-m-d", $uvcalstartdatetms);
-        $uvceldate = gmdate("Y-m-d", $uvcalstartdatetms); // Axl UWS-7416
+        $uvceldate = gmdate("Y-m-d", $uvcalstartdatetms);
 		// $uvcelldate = date("M j", $uvcalstartdatetms);
-		$uvcelldate = gmdate("M j", $uvcalstartdatetms); // Axl UWS-7416
+		$uvcelldate = gmdate("M j", $uvcalstartdatetms);
 		// $uvcellsdate = date("Ymd", $uvcalstartdatetms);
-		$uvcellsdate = gmdate("Ymd", $uvcalstartdatetms); // Axl UWS-7416
+		$uvcellsdate = gmdate("Ymd", $uvcalstartdatetms);
         // $uvcellddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvcalstartdatetms));
-        $uvcellddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvcalstartdatetms)); // Axl UWS-7416
+        $uvcellddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvcalstartdatetms));
 
         $uvcalendarcell = $uvcelleventslist = $uvcellmobilelink = "";
         $uvcellevents = (is_array($uvevents) and isset($uvevents["D" . $uvcellsdate])) ? $uvevents["D" . $uvcellsdate] : "";
@@ -692,12 +597,10 @@ function urvenue_ws_calendar($uvevents, $uvargs = ""){ // Axl UWS-7416
                 "wrap-template" => "<div class='uwsinstructions'><span>Select Event</span></div><ul class='uws-cal-multi-default'>{eventslist}</ul>",
                 "item-template" => "events/events-calendar-list-default"
             );
-            // $uvcelleventslist = uws_get_events_list($uvcellevents, $uvlistargs);
-            $uvcelleventslist = urvenue_ws_get_events_list($uvcellevents, $uvlistargs); // Axl UWS-7416
+            $uvcelleventslist = urvenue_ws_get_events_list($uvcellevents, $uvlistargs);
         }
         else if($uvcellnevents){ //When there is only 1 event
-            // $uvcelleventslist = uws_replace_event_vars($uvcellevents[0], $uvsingletemplate);
-            $uvcelleventslist = urvenue_ws_replace_event_vars($uvcellevents[0], $uvsingletemplate); // Axl UWS-7416
+            $uvcelleventslist = urvenue_ws_replace_event_vars($uvcellevents[0], $uvsingletemplate);
         }
         
         if($uvcelleventslist){ //add mobile link only when date has events
@@ -712,8 +615,7 @@ function urvenue_ws_calendar($uvevents, $uvargs = ""){ // Axl UWS-7416
                 ),
                 array(
                     $uvcellsdate,
-                    // uws_lang_date($uvcellddate),
-                    urvenue_ws_lang_date($uvcellddate), // Axl UWS-7416
+                    urvenue_ws_lang_date($uvcellddate),
                 ),
                 $uvcellmobilelinktemplate
             );
@@ -730,8 +632,7 @@ function urvenue_ws_calendar($uvevents, $uvargs = ""){ // Axl UWS-7416
             array(
                 $uvcelleventslist,
                 $uvcellsdate,
-                // uws_lang_date($uvcelldate),
-                urvenue_ws_lang_date($uvcelldate), // Axl UWS-7416
+                urvenue_ws_lang_date($uvcelldate),
                 $uvcellclass,
                 $uvcellmobilelink,
             ),
@@ -743,7 +644,7 @@ function urvenue_ws_calendar($uvevents, $uvargs = ""){ // Axl UWS-7416
         
         if($uvceldate >= $uvmaxdate){
             // $uvcurndate = date("N", strtotime($uvceldate));
-            $uvcurndate = gmdate("N", strtotime($uvceldate)); // Axl UWS-7416
+            $uvcurndate = gmdate("N", strtotime($uvceldate));
             $uvmissingcells = 7 - $uvcurndate;
             $uvmissingcells = ($uvmissingcells < 0) ? "0" : $uvmissingcells;
             $i = $uvcaldaysbetween - $uvmissingcells;
@@ -762,8 +663,7 @@ function urvenue_ws_calendar($uvevents, $uvargs = ""){ // Axl UWS-7416
 /*Change array keys to events dates
     Requires: events:(array with urvenue events)
 */
-// function uws_eventskeys_to_date($uvevents){
-function urvenue_ws_eventskeys_to_date($uvevents){ // Axl UWS-7416
+function urvenue_ws_eventskeys_to_date($uvevents){
     $uveventsreturn = "";
 
     if(is_array($uvevents) and count($uvevents)){
@@ -774,7 +674,7 @@ function urvenue_ws_eventskeys_to_date($uvevents){ // Axl UWS-7416
 
             if($uveventcode === $uvmaineventcode) {
                 // $uveventsdate = date("Ymd", strtotime($uvevent["date"]));
-                $uveventsdate = gmdate("Ymd", strtotime($uvevent["date"])); // Axl UWS-7416
+                $uveventsdate = gmdate("Ymd", strtotime($uvevent["date"]));
                 $uveventsreturn["D" . $uveventsdate][] = $uvevent;
             }
         }
@@ -786,49 +686,39 @@ function urvenue_ws_eventskeys_to_date($uvevents){ // Axl UWS-7416
 /*Get events filter/controls
     Returns: Controls html
 */
-// function uws_events_controls($uvargs){
-function urvenue_ws_events_controls($uvargs){ // Axl UWS-7416
-    global $urvenue_ws_core_lib, $uws_config_events_disabled_dates;
+function urvenue_ws_events_controls($uvargs){
+    global $urvenue_ws_core_lib, $urvenue_ws_config_events_disabled_dates;
 
     $uvdateselectortype = $urvenue_ws_core_lib["events"]["eventspage-dateselector"]; //"datepicker-date", "datepicker-range", "month-dropdown", "month-arrows"
     $uvdateselectorclass = $uvdateloader = $uvdateselectorattrs = "";
 
-    // $uvdate = uws_get_arg($uvargs, "date", "");
-    $uvdate = urvenue_ws_get_arg($uvargs, "date", ""); // Axl UWS-7416
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", "");
     if($uvdate){
         // $uvinitialddate = date("M j, Y", strtotime($uvdate));
-        $uvinitialddate = gmdate("M j, Y", strtotime($uvdate)); // Axl UWS-7416
+        $uvinitialddate = gmdate("M j, Y", strtotime($uvdate));
         $uvinitialdate = $uvdate;
     }
     else{
-        // $uvinitialddate = uws_get_events_initial_date("M j, Y");
-        $uvinitialddate = urvenue_ws_get_events_initial_date("M j, Y"); // Axl UWS-7416
-        // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
-        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
+        $uvinitialddate = urvenue_ws_get_events_initial_date("M j, Y");
+        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d");
     }
 
     $uvsetdisableddates = (isset($urvenue_ws_core_lib["events"]["noinventorydates-enabled"]) and $urvenue_ws_core_lib["events"]["noinventorydates-enabled"]) ? $urvenue_ws_core_lib["events"]["noinventorydates-enabled"] : 0;
-    $uvsetdisableddates = ($uws_config_events_disabled_dates) ? $uws_config_events_disabled_dates : $uvsetdisableddates;
+    $uvsetdisableddates = ($urvenue_ws_config_events_disabled_dates) ? $urvenue_ws_config_events_disabled_dates : $uvsetdisableddates;
 
     if($uvsetdisableddates) {
-        // $uvvenuekeycode = uws_get_arg($uvargs, "venue", "all");
-        $uvvenuekeycode = urvenue_ws_get_arg($uvargs, "venue", "all"); // Axl UWS-7416
-        // $urvenue_ws_venuecodes = uws_get_arg($uvargs, "venuecodes", "");
-        $urvenue_ws_venuecodes = urvenue_ws_get_arg($uvargs, "venuecodes", ""); // Axl UWS-7416
-        // $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : uws_get_venuecodes_string($uvvenuekeycode);
-        $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : urvenue_ws_get_venuecodes_string($uvvenuekeycode); // Axl UWS-7416
-        // $uvmaxdate = uws_get_events_max_date("Y-m-d");
-        $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
+        $uvvenuekeycode = urvenue_ws_get_arg($uvargs, "venue", "all");
+        $urvenue_ws_venuecodes = urvenue_ws_get_arg($uvargs, "venuecodes", "");
+        $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : urvenue_ws_get_venuecodes_string($uvvenuekeycode);
+        $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d");
         // $uvfromdate = date('Y-m-01', strtotime($uvinitialdate));
-        $uvfromdate = gmdate('Y-m-01', strtotime($uvinitialdate)); // Axl UWS-7416
+        $uvfromdate = gmdate('Y-m-01', strtotime($uvinitialdate));
         // $uvtodate = date("Y-m-t", strtotime($uvinitialdate));
-        $uvtodate = gmdate("Y-m-t", strtotime($uvinitialdate)); // Axl UWS-7416
+        $uvtodate = gmdate("Y-m-t", strtotime($uvinitialdate));
         // $uvddate = date("M j, Y", strtotime($uvinitialdate));
-        $uvddate = gmdate("M j, Y", strtotime($uvinitialdate)); // Axl UWS-7416
-        // $uvchangeeventsdatelabel = uws_lang("change-events-date");
-        $uvchangeeventsdatelabel = urvenue_ws_lang("change-events-date"); // Axl UWS-7416
-        // $uvddatelang = uws_lang_date($uvddate);
-        $uvddatelang = urvenue_ws_lang_date($uvddate); // Axl UWS-7416
+        $uvddate = gmdate("M j, Y", strtotime($uvinitialdate));
+        $uvchangeeventsdatelabel = urvenue_ws_lang("change-events-date");
+        $uvddatelang = urvenue_ws_lang_date($uvddate);
 
         $uvdateselectorclass = "uws-disableddates";
         $uvdateloader = "<div class='uws-loader-uvicon'></div>";
@@ -852,15 +742,11 @@ function urvenue_ws_events_controls($uvargs){ // Axl UWS-7416
     }
     else if($uvdateselectortype == "datepicker-range"){
         // $uvinitialddate = date("M j", strtotime($uvinitialdate));
-        $uvinitialddate = gmdate("M j", strtotime($uvinitialdate)); // Axl UWS-7416
-        // $uvenddate = uws_get_arg($uvargs, "enddate", "");
-        $uvenddate = urvenue_ws_get_arg($uvargs, "enddate", ""); // Axl UWS-7416
-        // $uvendddate = ($uvenddate) ? date("M j, Y", strtotime($uvenddate)) : uws_get_events_endinit_date("M j, Y");
-        $uvendddate = ($uvenddate) ? gmdate("M j, Y", strtotime($uvenddate)) : urvenue_ws_get_events_endinit_date("M j, Y"); // Axl UWS-7416
-        // $uvenddate = (!$uvenddate) ? uws_get_events_endinit_date("Y-m-d") : $uvenddate;
-        $uvenddate = (!$uvenddate) ? urvenue_ws_get_events_endinit_date("Y-m-d") : $uvenddate; // Axl UWS-7416
-        // $uvrangeddate = uws_lang_date("$uvinitialddate - $uvendddate");
-        $uvrangeddate = urvenue_ws_lang_date("$uvinitialddate - $uvendddate"); // Axl UWS-7416
+        $uvinitialddate = gmdate("M j", strtotime($uvinitialdate));
+        $uvenddate = urvenue_ws_get_arg($uvargs, "enddate", "");
+        $uvendddate = ($uvenddate) ? gmdate("M j, Y", strtotime($uvenddate)) : urvenue_ws_get_events_endinit_date("M j, Y");
+        $uvenddate = (!$uvenddate) ? urvenue_ws_get_events_endinit_date("Y-m-d") : $uvenddate;
+        $uvrangeddate = urvenue_ws_lang_date("$uvinitialddate - $uvendddate");
 
         $uvcalmonthselhtml = "
         <div class='uws-events-dpinput uws-dropdown-cont uwshascalincon'>
@@ -872,15 +758,12 @@ function urvenue_ws_events_controls($uvargs){ // Axl UWS-7416
                 <div class='uws-dp-filterdaterange-label'>" . urvenue_ws_lang("select-range") . "</div>
             </div>
         </div>
-        "; // Axl UWS-7416
+        ";
     }
     else if($uvdateselectortype == "month-dropdown"){
-        // $uvinitialddate = uws_get_events_initial_date("F Y");
-        $uvinitialddate = urvenue_ws_get_events_initial_date("F Y"); // Axl UWS-7416
-        // $uvinitialddate = uws_lang_date($uvinitialddate);
-        $uvinitialddate = urvenue_ws_lang_date($uvinitialddate); // Axl UWS-7416
-        // $uvmonthslist = uws_get_monthslis();
-        $uvmonthslist = urvenue_ws_get_monthslis(); // Axl UWS-7416
+        $uvinitialddate = urvenue_ws_get_events_initial_date("F Y");
+        $uvinitialddate = urvenue_ws_lang_date($uvinitialddate);
+        $uvmonthslist = urvenue_ws_get_monthslis();
         $uvcalmonthselhtml = "
         <div class='uws-dropdown-cont uwshascalincon'>
             <i class='uwsicon-calendar'></i>
@@ -892,12 +775,9 @@ function urvenue_ws_events_controls($uvargs){ // Axl UWS-7416
         ";
     }
     else{//Month Arrows
-        // $uvinitialddate = uws_get_events_initial_date("F Y");
-        $uvinitialddate = urvenue_ws_get_events_initial_date("F Y"); // Axl UWS-7416
-        // $uvinitialdate = uws_get_events_initial_date("Y-m-d");
-        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
-        // $uvmonthsstring = uws_get_monthsoptsstring();
-        $uvmonthsstring = urvenue_ws_get_monthsoptsstring(); // Axl UWS-7416
+        $uvinitialddate = urvenue_ws_get_events_initial_date("F Y");
+        $uvinitialdate = urvenue_ws_get_events_initial_date("Y-m-d");
+        $uvmonthsstring = urvenue_ws_get_monthsoptsstring();
         $uvcalmonthselhtml = "
         <div class='uwsmonthssteps'>
             <div class='uwsmonthsstepsbtns' data-currentdate='$uvinitialdate' data-months='$uvmonthsstring'>
@@ -909,34 +789,27 @@ function urvenue_ws_events_controls($uvargs){ // Axl UWS-7416
         ";
     }
 
-    // $uveventsviewmenu = uws_get_events_view_menu($uvargs);
-    $uveventsviewmenu = urvenue_ws_get_events_view_menu($uvargs); // Axl UWS-7416
+    $uveventsviewmenu = urvenue_ws_get_events_view_menu($uvargs);
     $uveventsviewmenuhtml = $uveventsviewmenu["menu"];
     $uveventsviewmenuselected = $uveventsviewmenu["selected"];
   
     //Venues Dropdowns
     $uvvenuesdropdown = "";
     if($urvenue_ws_core_lib["events"]["eventspage-addvenuefilter"]){
-        // $uvvenuekeycodes = uws_get_arg($uvargs, "venue", "all");
-        $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venue", "all"); // Axl UWS-7416
-        // $uvnvenues = (uws_get_arg($uvargs, "venuecodes", "")) ? count(array_filter(explode(',', uws_get_arg($uvargs, "venuecodes", "")), fn($v) => trim($v) !== '')) : 0;
-        $uvnvenues = (urvenue_ws_get_arg($uvargs, "venuecodes", "")) ? count(array_filter(explode(',', urvenue_ws_get_arg($uvargs, "venuecodes", "")), fn($v) => trim($v) !== '')) : 0; // Axl UWS-7416
+        $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venue", "all");
+        $uvnvenues = (urvenue_ws_get_arg($uvargs, "venuecodes", "")) ? count(array_filter(explode(',', urvenue_ws_get_arg($uvargs, "venuecodes", "")), fn($v) => trim($v) !== '')) : 0;
 
         if(!is_array($urvenue_ws_core_lib["venues"]) and $uvnvenues > 0)
-            // $uvvenuekeycodes = uws_get_arg($uvargs, "venuecodes", "all");
-            $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venuecodes", "all"); // Axl UWS-7416
+            $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venuecodes", "all");
 
-        // $uvvenuesinfilter = (uws_get_arg($uvargs, "venuesinfilter", "")) ? uws_get_arg($uvargs, "venuesinfilter", "") : $uvvenuekeycodes;
-        $uvvenuesinfilter = (urvenue_ws_get_arg($uvargs, "venuesinfilter", "")) ? urvenue_ws_get_arg($uvargs, "venuesinfilter", "") : $uvvenuekeycodes; // Axl UWS-7416
+        $uvvenuesinfilter = (urvenue_ws_get_arg($uvargs, "venuesinfilter", "")) ? urvenue_ws_get_arg($uvargs, "venuesinfilter", "") : $uvvenuekeycodes;
         $uvallcurrent = ($uvvenuekeycodes == "all") ? "uwscurrent" : "";
-        // $uvvenueslist = uws_get_venueslis($uvvenuesinfilter, "", $uvargs);
-        $uvvenueslist = urvenue_ws_get_venueslis($uvvenuesinfilter, "", $uvargs); // Axl UWS-7416
+        $uvvenueslist = urvenue_ws_get_venueslis($uvvenuesinfilter, "", $uvargs);
         $uvselectedvenues = explode(",", $uvvenuesinfilter);
         $uvfilterclass = (is_array($uvselectedvenues) and count($uvselectedvenues) > 1) ? "uwsismultiselected" : "";
         $uvallvenueskey = (is_array($uvselectedvenues) and count($uvselectedvenues) > 1) ? $uvvenuesinfilter : "all";
 
-        // $uvselectedvenuename = (uws_get_venuename_byvenuekey($uvvenuekeycodes)) ? uws_get_venuename_byvenuekey($uvvenuekeycodes) : "All Venues";
-        $uvselectedvenuename = (urvenue_ws_get_venuename_byvenuekey($uvvenuekeycodes)) ? urvenue_ws_get_venuename_byvenuekey($uvvenuekeycodes) : "All Venues"; // Axl UWS-7416
+        $uvselectedvenuename = (urvenue_ws_get_venuename_byvenuekey($uvvenuekeycodes)) ? urvenue_ws_get_venuename_byvenuekey($uvvenuekeycodes) : "All Venues";
 
         $uvvenuesdropdown = "
         <div class='uwsvenuesel'>
@@ -957,8 +830,7 @@ function urvenue_ws_events_controls($uvargs){ // Axl UWS-7416
     $uvperformersdropdown = "";
     if($urvenue_ws_core_lib["events"]["global-addperformerfilter"]){
         $uvargs["onlyevents"] = 1;
-        // $uvperformerlist = uws_get_performerlis($uvargs);
-        $uvperformerlist = urvenue_ws_get_performerlis($uvargs); // Axl UWS-7416
+        $uvperformerlist = urvenue_ws_get_performerlis($uvargs);
 
         if($uvperformerlist)
             $uvperformersdropdown = "
@@ -1005,8 +877,7 @@ function urvenue_ws_events_controls($uvargs){ // Axl UWS-7416
 }
 
 /*Get List of views menu*/
-// function uws_get_events_view_menu($uvargs = "")
-function urvenue_ws_get_events_view_menu($uvargs = "") // Axl UWS-7416
+function urvenue_ws_get_events_view_menu($uvargs = "")
 {
     global $urvenue_ws_core_lib;
 
@@ -1015,13 +886,11 @@ function urvenue_ws_get_events_view_menu($uvargs = "") // Axl UWS-7416
     $uvviewselected = "";
     $uvviewordered = array();
     $uvviews = (isset($urvenue_ws_core_lib["events"])) ? $urvenue_ws_core_lib["events"]["eventspage-views"] : "";
-    // $uvdefaultview = uws_get_arg($uvargs, "defaultview", "");
-    $uvdefaultview = urvenue_ws_get_arg($uvargs, "defaultview", ""); // Axl UWS-7416
+    $uvdefaultview = urvenue_ws_get_arg($uvargs, "defaultview", "");
 
     if (is_array($uvviews)) {
         if ($uvdefaultview)
-            // $uvviews = uws_set_default_view($uvviews, $uvdefaultview);
-            $uvviews = urvenue_ws_set_default_view($uvviews, $uvdefaultview); // Axl UWS-7416
+            $uvviews = urvenue_ws_set_default_view($uvviews, $uvdefaultview);
 
         $uvviewsmenu = "<ul>";
 
@@ -1036,8 +905,7 @@ function urvenue_ws_get_events_view_menu($uvargs = "") // Axl UWS-7416
 
         foreach ($uvviewordered as $uvview) {
             $uvviewkey = isset($uvview["key"]) ? $uvview["key"] : '';
-            // $uvviewlabel = uws_lang($uvview["label"]);
-            $uvviewlabel = urvenue_ws_lang($uvview["label"]); // Axl UWS-7416
+            $uvviewlabel = urvenue_ws_lang($uvview["label"]);
 
             // Determine active view:
             if (!empty($uvargs['view'])) {
@@ -1049,8 +917,7 @@ function urvenue_ws_get_events_view_menu($uvargs = "") // Axl UWS-7416
             $uvviewclass = $isActive ? "uvsactive" : "";
             $uvviewliclass = $isActive ? "uwscurrent" : "";
 
-            // $uvviewsmenu .= "<li class='$uvviewliclass'><a class='uwsjs-events-changeview $uvviewclass' href='#uws-view-$uvviewkey' data-view='$uvviewkey' aria-label='" . uws_lang("change-view-to") . " $uvviewlabel'><i class='" . $uvview["icon"] . "'></i><span> $uvviewlabel</span></a></li>";
-            $uvviewsmenu .= "<li class='$uvviewliclass'><a class='uwsjs-events-changeview $uvviewclass' href='#uws-view-$uvviewkey' data-view='$uvviewkey' aria-label='" . urvenue_ws_lang("change-view-to") . " $uvviewlabel'><i class='" . $uvview["icon"] . "'></i><span> $uvviewlabel</span></a></li>"; // Axl UWS-7416
+            $uvviewsmenu .= "<li class='$uvviewliclass'><a class='uwsjs-events-changeview $uvviewclass' href='#uws-view-$uvviewkey' data-view='$uvviewkey' aria-label='" . urvenue_ws_lang("change-view-to") . " $uvviewlabel'><i class='" . $uvview["icon"] . "'></i><span> $uvviewlabel</span></a></li>";
 
             if ($isActive) {
                 $uvviewselected = "<i class='" . $uvview["icon"] . "'></i><span> $uvviewlabel</span>";
@@ -1071,8 +938,7 @@ function urvenue_ws_get_events_view_menu($uvargs = "") // Axl UWS-7416
 /*Get list of venues
     Optional: selected(selected venuecode), actionclass(class for the all the link elements), 
 */
-// function uws_get_venueslis($uvselected = "", $uvactionclass = ""){
-function urvenue_ws_get_venueslis($uvselected = "", $uvactionclass = ""){ // Axl UWS-7416
+function urvenue_ws_get_venueslis($uvselected = "", $uvactionclass = ""){
     global $urvenue_ws_core_lib, $urvenue_ws_today;
 
     $uvvenueslist = "";
@@ -1103,8 +969,7 @@ function urvenue_ws_get_venueslis($uvselected = "", $uvactionclass = ""){ // Axl
             "venuecode" => $uvargs["venuecodes"],
         );
 
-        // $uvapidata = uws_get_feed($uveventsapiname, $uvterms);
-        $uvapidata = urvenue_ws_get_feed($uveventsapiname, $uvterms); // Axl UWS-7416
+        $uvapidata = urvenue_ws_get_feed($uveventsapiname, $uvterms);
 
         if(is_array($uvapidata) and $uvapidata["uv"]["success"]["status"] == "success" and is_array($uvapidata["uv"]["data"]["venues"])){
             $uvvenuesdata = $uvapidata["uv"]["data"]["venues"];
@@ -1124,12 +989,10 @@ function urvenue_ws_get_venueslis($uvselected = "", $uvactionclass = ""){ // Axl
     Requires: eventcode
     Returns: venueinfo from urquery api
 */
-// function uws_get_venueinfo_by_eventcode($uveventcode){
-function urvenue_ws_get_venueinfo_by_eventcode($uveventcode){ // Axl UWS-7416
+function urvenue_ws_get_venueinfo_by_eventcode($uveventcode){
     $uvvenueinforeturn = "";
 
-    // $uveventcodedata = uws_get_eventcode_data($uveventcode);
-    $uveventcodedata = urvenue_ws_get_eventcode_data($uveventcode); // Axl UWS-7416
+    $uveventcodedata = urvenue_ws_get_eventcode_data($uveventcode);
     $uvterms = array(
         "venuecode" => $uveventcodedata["venuecode"],
         "ecozone" => $uveventcodedata["ecozone"],
@@ -1137,10 +1000,8 @@ function urvenue_ws_get_venueinfo_by_eventcode($uveventcode){ // Axl UWS-7416
         "todate" => $uveventcodedata["date"],
     );
 
-    // $uvfeeddata = uws_get_feed("inventory-eventsonly", $uvterms);
-    $uvfeeddata = urvenue_ws_get_feed("inventory-eventsonly", $uvterms); // Axl UWS-7416
-    // $uveventdatavars = uws_get_eventcode_data($uveventcode);
-    $uveventdatavars = urvenue_ws_get_eventcode_data($uveventcode); // Axl UWS-7416
+    $uvfeeddata = urvenue_ws_get_feed("inventory-eventsonly", $uvterms);
+    $uveventdatavars = urvenue_ws_get_eventcode_data($uveventcode);
 
     if(is_array($uvfeeddata) and $uvfeeddata["uv"]["success"]["status"] == "success" and $uvfeeddata["uv"]["data"]["venues"]){
 		$uvvenueinforeturn = $uvfeeddata["uv"]["data"]["venues"][$uveventdatavars["venuecode"]];
@@ -1150,8 +1011,7 @@ function urvenue_ws_get_venueinfo_by_eventcode($uveventcode){ // Axl UWS-7416
 }
 
 // Get list of months for calendar dropdown
-// function uws_get_monthslis($uvcurrentdate = ""){
-function urvenue_ws_get_monthslis($uvcurrentdate = ""){ // Axl UWS-7416
+function urvenue_ws_get_monthslis($uvcurrentdate = ""){
     global $urvenue_ws_core_lib, $urvenue_ws_today;
 
     $uvcurrentdate = ($uvcurrentdate) ? $uvcurrentdate : $urvenue_ws_today;
@@ -1164,11 +1024,10 @@ function urvenue_ws_get_monthslis($uvcurrentdate = ""){ // Axl UWS-7416
 
     for($i=0; $i<$uvnmonths; $i++){
         // $uvmonthlifdate = date("Y-m-01", $uvmonthlidate);
-        $uvmonthlifdate = gmdate("Y-m-01", $uvmonthlidate); // Axl UWS-7416
-        // $uvmonthlimname = uws_lang_date(date("F", $uvmonthlidate));
-        $uvmonthlimname = urvenue_ws_lang_date(gmdate("F", $uvmonthlidate)); // Axl UWS-7416
+        $uvmonthlifdate = gmdate("Y-m-01", $uvmonthlidate);
+        $uvmonthlimname = urvenue_ws_lang_date(gmdate("F", $uvmonthlidate));
         // $uvmonthliyear = date("Y", $uvmonthlidate);
-        $uvmonthliyear = gmdate("Y", $uvmonthlidate); // Axl UWS-7416
+        $uvmonthliyear = gmdate("Y", $uvmonthlidate);
 
         $uvmonthlifdate = ($uvmonthlifdate < $uvcurrentdate) ? $uvcurrentdate : $uvmonthlifdate;
 
@@ -1182,8 +1041,7 @@ function urvenue_ws_get_monthslis($uvcurrentdate = ""){ // Axl UWS-7416
 }
 
 // Get string with the months to navigate with arrows
-// function uws_get_monthsoptsstring($uvcurrentdate = ""){
-function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){ // Axl UWS-7416
+function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){
     global $urvenue_ws_core_lib, $urvenue_ws_today;
 
     $uvcurrentdate = ($uvcurrentdate) ? $uvcurrentdate : $urvenue_ws_today;
@@ -1195,11 +1053,11 @@ function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){ // Axl UWS-7416
 
     for($i=0; $i<$uvnmonths; $i++){
         // $uvmonthlifdate = date("Y-m-01", $uvmonthlidate);
-        $uvmonthlifdate = gmdate("Y-m-01", $uvmonthlidate); // Axl UWS-7416
+        $uvmonthlifdate = gmdate("Y-m-01", $uvmonthlidate);
         // $uvmonthlimname = date("F", $uvmonthlidate);
-        $uvmonthlimname = gmdate("F", $uvmonthlidate); // Axl UWS-7416
+        $uvmonthlimname = gmdate("F", $uvmonthlidate);
         // $uvmonthliyear = date("Y", $uvmonthlidate);
-        $uvmonthliyear = gmdate("Y", $uvmonthlidate); // Axl UWS-7416
+        $uvmonthliyear = gmdate("Y", $uvmonthlidate);
 
         $uvmonthlifdate = ($uvmonthlifdate < $uvcurrentdate) ? $uvcurrentdate : $uvmonthlifdate;
         $uvmonthsstring .= $uvmonthlifdate . ",";
@@ -1215,21 +1073,20 @@ function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){ // Axl UWS-7416
 /*Get Events Max Date
     Optional: dateformat
 */
-// function uws_get_events_max_date($uvdateformat = ""){
-function urvenue_ws_get_events_max_date($uvdateformat = ""){ // Axl UWS-7416
-    global $urvenue_ws_core_lib, $urvenue_ws_today, $uws_config_cal_nmonths;
+function urvenue_ws_get_events_max_date($uvdateformat = ""){
+    global $urvenue_ws_core_lib, $urvenue_ws_today, $urvenue_ws_config_cal_nmonths;
 
     $uvnmonths = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["eventspage-monthsrange"]) ? $urvenue_ws_core_lib["events"]["eventspage-monthsrange"] : 6;
-    $uvnmonths = ($uws_config_cal_nmonths) ? $uws_config_cal_nmonths : $uvnmonths;
+    $uvnmonths = ($urvenue_ws_config_cal_nmonths) ? $urvenue_ws_config_cal_nmonths : $uvnmonths;
     // $uvmaxdate = date("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months"));
-    $uvmaxdate = gmdate("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months")); // Axl UWS-7416
+    $uvmaxdate = gmdate("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months"));
 
     if(isset($urvenue_ws_core_lib["system"]["global-maxdate"]) and $urvenue_ws_core_lib["system"]["global-maxdate"])
         $uvmaxdate = $urvenue_ws_core_lib["system"]["global-maxdate"];
 
     if($uvdateformat)
         // $uvmaxdate = date($uvdateformat, strtotime($uvmaxdate));
-        $uvmaxdate = gmdate($uvdateformat, strtotime($uvmaxdate)); // Axl UWS-7416
+        $uvmaxdate = gmdate($uvdateformat, strtotime($uvmaxdate));
 
     return $uvmaxdate;
 }
@@ -1237,8 +1094,7 @@ function urvenue_ws_get_events_max_date($uvdateformat = ""){ // Axl UWS-7416
 /*Get Events Initial Date
     Optional: dateformat
 */
-// function uws_get_events_initial_date($uvdateformat = ""){
-function urvenue_ws_get_events_initial_date($uvdateformat = ""){ // Axl UWS-7416
+function urvenue_ws_get_events_initial_date($uvdateformat = ""){
     global $urvenue_ws_core_lib, $urvenue_ws_today;
 
     $uvlibeventsinitialdate = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["global-initaldate"]) ? $urvenue_ws_core_lib["events"]["global-initaldate"] : $urvenue_ws_today;
@@ -1247,7 +1103,7 @@ function urvenue_ws_get_events_initial_date($uvdateformat = ""){ // Axl UWS-7416
 
     if($uvdateformat)
         // $uvlibeventsinitialdate = date($uvdateformat, strtotime($uvlibeventsinitialdate));
-        $uvlibeventsinitialdate = gmdate($uvdateformat, strtotime($uvlibeventsinitialdate)); // Axl UWS-7416
+        $uvlibeventsinitialdate = gmdate($uvdateformat, strtotime($uvlibeventsinitialdate));
 
     return $uvlibeventsinitialdate;
 }
@@ -1256,22 +1112,19 @@ function urvenue_ws_get_events_initial_date($uvdateformat = ""){ // Axl UWS-7416
     Returns: enddate = initial date + number of months to load (global-nmonths)
     Optional: dateformat
 */
-// function uws_get_events_endinit_date($uvdateformat = "", $uvdate = ""){
-function urvenue_ws_get_events_endinit_date($uvdateformat = "", $uvdate = ""){ // Axl UWS-7416
+function urvenue_ws_get_events_endinit_date($uvdateformat = "", $uvdate = ""){
     global $urvenue_ws_core_lib;
 
-    // $uvinitialdate = ($uvdate) ? $uvdate : uws_get_events_initial_date("Y-m-d");
-    $uvinitialdate = ($uvdate) ? $uvdate : urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
+    $uvinitialdate = ($uvdate) ? $uvdate : urvenue_ws_get_events_initial_date("Y-m-d");
     $uvnmonths = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["global-nmonths"]) ? $urvenue_ws_core_lib["events"]["global-nmonths"] : 2;
     // $uvenddate = date("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months"));
-    $uvenddate = gmdate("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months")); // Axl UWS-7416
-    // $uvmaxdate = uws_get_events_max_date("Y-m-d");
-    $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d"); // Axl UWS-7416
+    $uvenddate = gmdate("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months"));
+    $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d");
     $uvenddate = ($uvenddate > $uvmaxdate) ? $uvmaxdate : $uvenddate;
 
     if($uvdateformat)
         // $uvenddate = date($uvdateformat, strtotime($uvenddate));
-        $uvenddate = gmdate($uvdateformat, strtotime($uvenddate)); // Axl UWS-7416
+        $uvenddate = gmdate($uvdateformat, strtotime($uvenddate));
 
     return $uvenddate;
 }
@@ -1280,34 +1133,24 @@ function urvenue_ws_get_events_endinit_date($uvdateformat = "", $uvdate = ""){ /
     Optional: args(arguments for events)
     Args: fromdate, todate, venue (venuekeycode, "all")
 */
-// function uws_get_events($uvargs = ""){
-function urvenue_ws_get_events($uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_get_events($uvargs = ""){
     global $urvenue_ws_core_lib;
 
-    // $uvvenuekeycode = uws_get_arg($uvargs, "venue", "all");
-    $uvvenuekeycode = urvenue_ws_get_arg($uvargs, "venue", "all"); // Axl UWS-7416
-    // $urvenue_ws_venuecodes = uws_get_arg($uvargs, "venuecodes", "");
-    $urvenue_ws_venuecodes = urvenue_ws_get_arg($uvargs, "venuecodes", ""); // Axl UWS-7416
-    // $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : uws_get_venuecodes_string($uvvenuekeycode);
-    $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : urvenue_ws_get_venuecodes_string($uvvenuekeycode); // Axl UWS-7416
+    $uvvenuekeycode = urvenue_ws_get_arg($uvargs, "venue", "all");
+    $urvenue_ws_venuecodes = urvenue_ws_get_arg($uvargs, "venuecodes", "");
+    $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : urvenue_ws_get_venuecodes_string($uvvenuekeycode);
 
-    // $uvdate = uws_get_arg($uvargs, "date", "");
-    $uvdate = urvenue_ws_get_arg($uvargs, "date", ""); // Axl UWS-7416
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", "");
     if($uvdate){
-        // $uvfromdate = uws_get_arg($uvargs, "fromdate", $uvdate);
-        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", $uvdate); // Axl UWS-7416
-        // $uvtodate = uws_get_arg($uvargs, "todate", uws_get_events_endinit_date("Y-m-d", $uvdate));
-        $uvtodate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate)); // Axl UWS-7416
+        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", $uvdate);
+        $uvtodate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate));
     }
     else{
-        // $uvfromdate = uws_get_arg($uvargs, "fromdate", uws_get_events_initial_date("Y-m-d"));
-        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", urvenue_ws_get_events_initial_date("Y-m-d")); // Axl UWS-7416
-        // $uvtodate = uws_get_arg($uvargs, "todate", uws_get_events_endinit_date("Y-m-d", $uvfromdate));
-        $uvtodate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate)); // Axl UWS-7416
+        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", urvenue_ws_get_events_initial_date("Y-m-d"));
+        $uvtodate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate));
     }
 
-    // $uveventsgroup = uws_get_arg($uvargs, "eventsgroup", "");
-    $uveventsgroup = urvenue_ws_get_arg($uvargs, "eventsgroup", ""); // Axl UWS-7416
+    $uveventsgroup = urvenue_ws_get_arg($uvargs, "eventsgroup", "");
 
     $uveventsapiname = "inventory-eventsonly";
 
@@ -1350,22 +1193,17 @@ function urvenue_ws_get_events($uvargs = ""){ // Axl UWS-7416
         unset($uvterms["venuecode"]);
     }
 
-    // $uveventsdata = uws_get_feed($uveventsapiname, $uvterms);
-    $uveventsdata = urvenue_ws_get_feed($uveventsapiname, $uvterms); // Axl UWS-7416
+    $uveventsdata = urvenue_ws_get_feed($uveventsapiname, $uvterms);
 
     if(isset($urvenue_ws_core_lib["system"]) and isset($urvenue_ws_core_lib["system"]["use-market-events"]) and $urvenue_ws_core_lib["system"]["use-market-events"] and isset($urvenue_ws_core_lib["events"]["market-events-venueid"]) and $urvenue_ws_core_lib["events"]["market-events-venueid"])
-        // $uveventsdata = uws_preprocess_market_events($uveventsdata);
-        $uveventsdata = urvenue_ws_preprocess_market_events($uveventsdata); // Axl UWS-7416
+        $uveventsdata = urvenue_ws_preprocess_market_events($uveventsdata);
 
     if($uveventsgroup == "featured")
-        // $uveventsarray = uws_get_featured_events_array($uveventsdata, $uvargs);
-        $uveventsarray = urvenue_ws_get_featured_events_array($uveventsdata, $uvargs); // Axl UWS-7416
+        $uveventsarray = urvenue_ws_get_featured_events_array($uveventsdata, $uvargs);
     else
-        // $uveventsarray = uws_get_events_array($uveventsdata, $uvargs);
-        $uveventsarray = urvenue_ws_get_events_array($uveventsdata, $uvargs); // Axl UWS-7416
+        $uveventsarray = urvenue_ws_get_events_array($uveventsdata, $uvargs);
 
-    // $uveventsarray = uws_apply_filters("uws_events_before_return_list", $uveventsarray);
-    $uveventsarray = urvenue_ws_apply_filters("urvenue_ws_events_before_return_list", $uveventsarray); // Axl UWS-7416
+    $uveventsarray = urvenue_ws_apply_filters("urvenue_ws_events_before_return_list", $uveventsarray);
 
     return $uveventsarray;
 }
@@ -1374,12 +1212,10 @@ function urvenue_ws_get_events($uvargs = ""){ // Axl UWS-7416
     Requires: eventcode
     Returns: Array with event info
 */
-// function uws_get_event($uveventcode, $uvargs = ""){
-function urvenue_ws_get_event($uveventcode, $uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_get_event($uveventcode, $uvargs = ""){
     $uveventreturnarray = "";
 
-    // $uveventcodedata = uws_get_eventcode_data($uveventcode);
-    $uveventcodedata = urvenue_ws_get_eventcode_data($uveventcode); // Axl UWS-7416
+    $uveventcodedata = urvenue_ws_get_eventcode_data($uveventcode);
     $uvterms = array(
         "venuecode" => $uveventcodedata["venuecode"],
         "ecozone" => $uveventcodedata["ecozone"],
@@ -1387,25 +1223,21 @@ function urvenue_ws_get_event($uveventcode, $uvargs = ""){ // Axl UWS-7416
         "todate" => $uveventcodedata["date"],
     );
 
-    // $uveventdata = uws_get_feed("inventory-eventsonly", $uvterms);
-    $uveventdata = urvenue_ws_get_feed("inventory-eventsonly", $uvterms); // Axl UWS-7416
+    $uveventdata = urvenue_ws_get_feed("inventory-eventsonly", $uvterms);
 
     if(!is_array($uvargs))
         $uvargs = array();
     
     $uvargs["forcereturneventcode"] = $uveventcode;
 
-    // $uveventarray = uws_get_events_array($uveventdata, $uvargs);
-    $uveventarray = urvenue_ws_get_events_array($uveventdata, $uvargs); // Axl UWS-7416
+    $uveventarray = urvenue_ws_get_events_array($uveventdata, $uvargs);
 
     if(is_array($uveventarray) and isset($uveventarray[$uveventcode]) and is_array($uveventarray[$uveventcode]))
         $uveventreturnarray = $uveventarray[$uveventcode];
 
     //Build Ecozones Map
-    // if(uws_get_arg($uvargs, "returnecozonesmap")){
-    if(urvenue_ws_get_arg($uvargs, "returnecozonesmap")){ // Axl UWS-7416
-        // $uveventecozonesmap = uws_get_event_ecozonemap($uveventdata, $uveventcode);
-        $uveventecozonesmap = urvenue_ws_get_event_ecozonemap($uveventdata, $uveventcode); // Axl UWS-7416
+    if(urvenue_ws_get_arg($uvargs, "returnecozonesmap")){
+        $uveventecozonesmap = urvenue_ws_get_event_ecozonemap($uveventdata, $uveventcode);
 
         $uveventreturnarray = array(
             "event" => $uveventreturnarray,
@@ -1419,18 +1251,15 @@ function urvenue_ws_get_event($uveventcode, $uvargs = ""){ // Axl UWS-7416
 /*Precess API data and returns array based on featured events
     Requires: apidata(Raw data from API)
 */
-// function uws_get_featured_events_array($uvapidata, $uvargs = ""){
-function urvenue_ws_get_featured_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_get_featured_events_array($uvapidata, $uvargs = ""){
     global $urvenue_ws_core_lib;
 
     $uvevents = "";
-    // $uvvenueskeysbycode = uws_get_venuekesybycode();
-    $uvvenueskeysbycode = urvenue_ws_get_venuekesybycode(); // Axl UWS-7416
+    $uvvenueskeysbycode = urvenue_ws_get_venuekesybycode();
 
     if(is_array($uvapidata) and $uvapidata["uv"]["success"]["status"] == "success"){
 		$uvfeatured = $uvapidata["uv"]["data"]["featured"];
-        // $uvnevents = uws_get_arg($uvargs, "nevents", 200);
-        $uvnevents = urvenue_ws_get_arg($uvargs, "nevents", 200); // Axl UWS-7416
+        $uvnevents = urvenue_ws_get_arg($uvargs, "nevents", 200);
 
         if(is_array($uvfeatured)){
             $uvevents = array();
@@ -1440,21 +1269,17 @@ function urvenue_ws_get_featured_events_array($uvapidata, $uvargs = ""){ // Axl 
                 $uvvenueid = str_replace("VEN", "", $uvvenuecode);
                 $uvvenueinfo = $uvapidata["uv"]["data"]["venues"][$uvvenuecode];
                 $uveventfulladdress = ($uvvenueinfo["info"]["city"]) ? $uvvenueinfo["info"]["address"] . "<br>" . $uvvenueinfo["info"]["city"] . ", " . $uvvenueinfo["info"]["province"] . " " . $uvvenueinfo["info"]["zip"] : $uvvenueinfo["info"]["address"];
-                // $uvvenuegmapurl = strip_tags($uveventfulladdress); // Axl UWS-7416
-                $uvvenuegmapurl = wp_strip_all_tags($uveventfulladdress); // Axl UWS-7416
+                $uvvenuegmapurl = wp_strip_all_tags($uveventfulladdress);
                 $uvvenuegmapurl = "https://www.google.com/maps/search/?api=1&query=" . urlencode($uvvenuegmapurl);
                 $uvvenuemanageentid = $uvvenueresellerid = $uvvenueprividerid = $uvvenueinfo["info"]["manageentid"];
 
                 $uvevent = $uvfeaturedevent;
                 $uvincludeevent = 1;
-                // $uveventplainflyers = uws_get_event_flyersarray($uvevent["flyers"]);
-                $uveventplainflyers = urvenue_ws_get_event_flyersarray($uvevent["flyers"]); // Axl UWS-7416
+                $uveventplainflyers = urvenue_ws_get_event_flyersarray($uvevent["flyers"]);
 
-                // $uvflyeraspects = uws_get_arg($uvargs, "flyeraspects", "");
-                $uvflyeraspects = urvenue_ws_get_arg($uvargs, "flyeraspects", ""); // Axl UWS-7416
+                $uvflyeraspects = urvenue_ws_get_arg($uvargs, "flyeraspects", "");
                 if(is_array($uvflyeraspects)){
-                    // $uvaspectsflyers = uws_get_flyersbypriority($uveventplainflyers, $uvflyeraspects);
-                    $uvaspectsflyers = urvenue_ws_get_flyersbypriority($uveventplainflyers, $uvflyeraspects); // Axl UWS-7416
+                    $uvaspectsflyers = urvenue_ws_get_flyersbypriority($uveventplainflyers, $uvflyeraspects);
                     if(!$uvaspectsflyers)
                         $uvincludeevent = 0;
                     else
@@ -1462,24 +1287,18 @@ function urvenue_ws_get_featured_events_array($uvapidata, $uvargs = ""){ // Axl 
                 }
 
                 if($uvincludeevent){
-                    // $uvdefaultlink = uws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]);
-                    $uvdefaultlink = urvenue_ws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]); // Axl UWS-7416
+                    $uvdefaultlink = urvenue_ws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]);
 
-                    // $uvevent = uws_normalize_event($uvevent);
-                    $uvevent = urvenue_ws_normalize_event($uvevent); // Axl UWS-7416
-                    // $uvevent["dstarttime"] = uws_get_formattime($uvevent["nstarttime"]);
-                    $uvevent["dstarttime"] = urvenue_ws_get_formattime($uvevent["nstarttime"]); // Axl UWS-7416
+                    $uvevent = urvenue_ws_normalize_event($uvevent);
+                    $uvevent["dstarttime"] = urvenue_ws_get_formattime($uvevent["nstarttime"]);
                     $uvevent["venuekey"] = $uvvenueskeysbycode["$uvvenuecode"];
                     $uvevent["venueaddress"] = $uveventfulladdress;
                     $uvevent["venuegmapurl"] = $uvvenuegmapurl;
                     $uvevent["ecozone"] = "";
-                    // $uvevent["flyers"] = uws_get_event_flyers($uveventplainflyers);
-                    $uvevent["flyers"] = urvenue_ws_get_event_flyers($uveventplainflyers); // Axl UWS-7416
+                    $uvevent["flyers"] = urvenue_ws_get_event_flyers($uveventplainflyers);
                     $uvevent["event-url"] = $uvdefaultlink;
-                    // $uvevent["event-page-url"] = uws_get_event_url($uvevent, "event");
-                    $uvevent["event-page-url"] = urvenue_ws_get_event_url($uvevent, "event"); // Axl UWS-7416
-                    // $uvevent["map-url"] = uws_get_event_url($uvevent, "map");
-                    $uvevent["map-url"] = urvenue_ws_get_event_url($uvevent, "map"); // Axl UWS-7416
+                    $uvevent["event-page-url"] = urvenue_ws_get_event_url($uvevent, "event");
+                    $uvevent["map-url"] = urvenue_ws_get_event_url($uvevent, "map");
                     $uvevent["venue-default-manageentid"] = $uvvenuemanageentid;
                     $uvevent["venue-default-resellerid"] = $uvvenueresellerid;
                     $uvevent["venue-default-providerid"] = $uvvenueprividerid;
@@ -1501,8 +1320,7 @@ function urvenue_ws_get_featured_events_array($uvapidata, $uvargs = ""){ // Axl 
     Requires: eventsdata
     Returns: Array with schedules normal array (DXXXXXX -> VENXXXXXX -> ECOZONE -> EVENT)
 */
-// function uws_preprocess_market_events($uveventsdata){
-function urvenue_ws_preprocess_market_events($uveventsdata){ // Axl UWS-7416
+function urvenue_ws_preprocess_market_events($uveventsdata){
     $uvschedulesarray = "";
 
     if(is_array($uveventsdata) and $uveventsdata["uv"]["data"]){
@@ -1511,14 +1329,13 @@ function urvenue_ws_preprocess_market_events($uveventsdata){ // Axl UWS-7416
         foreach($uveventsdata["uv"]["data"] as $uvmarketevent){
             $uvmarketeventdate = $uvmarketevent["caldate"];
             // $uvmarketeventsdate = date("ymd", strtotime($uvmarketeventdate));
-            $uvmarketeventsdate = gmdate("ymd", strtotime($uvmarketeventdate)); // Axl UWS-7416
+            $uvmarketeventsdate = gmdate("ymd", strtotime($uvmarketeventdate));
             // $uvmarketeventsldate = date("Ymd", strtotime($uvmarketeventdate));
-            $uvmarketeventsldate = gmdate("Ymd", strtotime($uvmarketeventdate)); // Axl UWS-7416
+            $uvmarketeventsldate = gmdate("Ymd", strtotime($uvmarketeventdate));
             $uvmarketeventvencode = "VEN" . $uvmarketevent["venueid"];
             $uvmarketeventecozone = "ECZ" . $uvmarketevent["ecozoneid"];
             $uvmarketevent["eventcode"] = "EVE" . $uvmarketevent["venueid"] . $uvmarketevent["ecozoneid"] . $uvmarketeventsldate;
-            // $uvmarketevent["flyers"] = uws_preprocess_market_flyers($uvmarketevent["flyers"]);
-            $uvmarketevent["flyers"] = urvenue_ws_preprocess_market_flyers($uvmarketevent["flyers"]); // Axl UWS-7416
+            $uvmarketevent["flyers"] = urvenue_ws_preprocess_market_flyers($uvmarketevent["flyers"]);
 
             if(!isset($uvschedulesarray["D" . $uvmarketeventsdate]))
                 $uvschedulesarray["D" . $uvmarketeventsdate] = array();
@@ -1549,8 +1366,7 @@ function urvenue_ws_preprocess_market_events($uveventsdata){ // Axl UWS-7416
     Requires: marketeventflyers
     Returns: Array with flyers normal array (Flyers -> IMT -> array)
 */
-// function uws_preprocess_market_flyers($uvmarketflyers){
-function urvenue_ws_preprocess_market_flyers($uvmarketflyers){ // Axl UWS-7416
+function urvenue_ws_preprocess_market_flyers($uvmarketflyers){
     $uvflyers = "";
 
     if(is_array($uvmarketflyers) and is_array($uvmarketflyers["event"])){
@@ -1572,21 +1388,18 @@ function urvenue_ws_preprocess_market_flyers($uvmarketflyers){ // Axl UWS-7416
 /*Process API data and returns array with events
     Requires: apidata(Raw data from API)
 */
-// function uws_get_events_array($uvapidata, $uvargs = ""){
-function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){
     global $urvenue_ws_core_lib;
 
     $uvevents = "";
-    // $uvvenueskeysbycode = uws_get_venuekesybycode();
-    $uvvenueskeysbycode = urvenue_ws_get_venuekesybycode(); // Axl UWS-7416
+    $uvvenueskeysbycode = urvenue_ws_get_venuekesybycode();
 
     if(is_array($uvapidata) and $uvapidata["uv"]["success"]["status"] == "success"){
 		$uvschedules = $uvapidata["uv"]["data"]["schedules"];
         $uvinventory = (isset($uvapidata["uv"]["data"]["inventory"])) ? $uvapidata["uv"]["data"]["inventory"] : "";
         $uvevents = array();
 
-        // $uvnevents = uws_get_arg($uvargs, "nevents", 200);
-        $uvnevents = urvenue_ws_get_arg($uvargs, "nevents", 200); // Axl UWS-7416
+        $uvnevents = urvenue_ws_get_arg($uvargs, "nevents", 200);
 
         if(is_array($uvschedules)){
             foreach($uvschedules as $uvschedulekey => $uvscheduleitem){
@@ -1599,8 +1412,7 @@ function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
                     foreach($uvscheduleitem as $uvscehdulevenuecode => $uvschedulevenue){
                         $uvscehduleveaid = str_replace("VEN", "", $uvscehdulevenuecode);
                         $uvvenueinfo = $uvapidata["uv"]["data"]["venues"][$uvscehdulevenuecode];
-                        // $uvvenueinfo = ($uvvenueinfo and is_array($uvvenueinfo)) ? uws_get_venue_array($uvvenueinfo) : $uvvenueinfo;
-                        $uvvenueinfo = ($uvvenueinfo and is_array($uvvenueinfo)) ? urvenue_ws_get_venue_array($uvvenueinfo) : $uvvenueinfo; // Axl UWS-7416
+                        $uvvenueinfo = ($uvvenueinfo and is_array($uvvenueinfo)) ? urvenue_ws_get_venue_array($uvvenueinfo) : $uvvenueinfo;
                         $uveventfulladdress = $uvvenueinfo["venueaddress"];
                         $uvvenueaddress = (isset($uvvenueinfo["address"])) ? $uvvenueinfo["address"] : "";
                         $uvvenueprovince = (isset($uvvenueinfo["province"])) ? $uvvenueinfo["province"] : "";
@@ -1622,8 +1434,7 @@ function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
 
                         if(is_array($uvschedulevenue)){
                             foreach($uvschedulevenue as $uvecozone => $uvscheduleeco){
-                                // $uvforcereturneventcode = uws_get_arg($uvargs, "forcereturneventcode");
-                                $uvforcereturneventcode = urvenue_ws_get_arg($uvargs, "forcereturneventcode"); // Axl UWS-7416
+                                $uvforcereturneventcode = urvenue_ws_get_arg($uvargs, "forcereturneventcode");
 
                                 if($uvscheduleeco["status"] != "Closed"){
                                     if(isset($uvscheduleeco["event"]) and is_array($uvscheduleeco["event"]) and isset($uvscheduleeco["event"]["caldate"])){
@@ -1640,10 +1451,8 @@ function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
                                         }
 
                                         $uvevent = $uvscheduleeco["event"];
-                                        // $uvevent = uws_normalize_event($uvevent);
-                                        $uvevent = urvenue_ws_normalize_event($uvevent); // Axl UWS-7416
-                                        // $uvevent["dstarttime"] = uws_get_formattime($uvevent["nstarttime"]);
-                                        $uvevent["dstarttime"] = urvenue_ws_get_formattime($uvevent["nstarttime"]); // Axl UWS-7416
+                                        $uvevent = urvenue_ws_normalize_event($uvevent);
+                                        $uvevent["dstarttime"] = urvenue_ws_get_formattime($uvevent["nstarttime"]);
                                         $uvevent["venuecode"] = $uvscehdulevenuecode;
                                         $uvevent["venuekey"] = isset($uvvenueskeysbycode["$uvscehdulevenuecode"]) ? $uvvenueskeysbycode["$uvscehdulevenuecode"] : $uvscehdulevenuecode;
                                         $uvevent["venueaddress"] = $uveventfulladdress;
@@ -1655,18 +1464,13 @@ function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
                                         $uvevent["eventcode"] = $uvscheduleeco["eventcode"];
                                         $uvevent["maineventcode"] = $uvscheduleeco["maineventcode"];
                                         $uvevent["venue-marketareacode"] = $uvvenuemarketcode;
-                                        // $uvevent["flyers"] = uws_get_event_flyersarray($uvevent["flyers"]);
-                                        $uvevent["flyers"] = urvenue_ws_get_event_flyersarray($uvevent["flyers"]); // Axl UWS-7416
-                                        // $uvevent["flyers"] = uws_get_event_flyers($uvevent["flyers"]);
-                                        $uvevent["flyers"] = urvenue_ws_get_event_flyers($uvevent["flyers"]); // Axl UWS-7416
+                                        $uvevent["flyers"] = urvenue_ws_get_event_flyersarray($uvevent["flyers"]);
+                                        $uvevent["flyers"] = urvenue_ws_get_event_flyers($uvevent["flyers"]);
                                         $uvevent["venue-default-manageentid"] = $uvvenuemanageentid;
-                                        // $uvdefaultlink = uws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]);
-                                        $uvdefaultlink = urvenue_ws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]); // Axl UWS-7416
+                                        $uvdefaultlink = urvenue_ws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]);
                                         $uvevent["event-url"] = $uvdefaultlink;
-                                        // $uvevent["event-page-url"] = uws_get_event_url($uvevent, "event");
-                                        $uvevent["event-page-url"] = urvenue_ws_get_event_url($uvevent, "event"); // Axl UWS-7416
-                                        // $uvevent["map-url"] = uws_get_event_url($uvevent, "map");
-                                        $uvevent["map-url"] = urvenue_ws_get_event_url($uvevent, "map"); // Axl UWS-7416
+                                        $uvevent["event-page-url"] = urvenue_ws_get_event_url($uvevent, "event");
+                                        $uvevent["map-url"] = urvenue_ws_get_event_url($uvevent, "map");
                                         $uvevent["venue-default-resellerid"] = $uvvenueresellerid;
                                         $uvevent["venue-default-providerid"] = $uvvenueprividerid;
                                         $uvevent["venue-url"] = $uvvenueurl;
@@ -1681,8 +1485,7 @@ function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
 
                                         //add stocks to events
                                         if(isset($urvenue_ws_core_lib["events"]) and isset($urvenue_ws_core_lib["system"]["include-stocks-on-events"]) and $urvenue_ws_core_lib["system"]["include-stocks-on-events"]){
-                                            // $uveventstocks = uws_get_event_stocks($uvinventory, $uvscheduleeco["eventcode"]);
-                                            $uveventstocks = urvenue_ws_get_event_stocks($uvinventory, $uvscheduleeco["eventcode"]); // Axl UWS-7416
+                                            $uveventstocks = urvenue_ws_get_event_stocks($uvinventory, $uvscheduleeco["eventcode"]);
                                             $uvevents[$uvscheduleeco["eventcode"]]["stocks"] = $uveventstocks;
                                         }
 
@@ -1706,13 +1509,10 @@ function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
                                         );
                                         $uvevent["venue-marketareacode"] = $uvvenuemarketcode;
                                         $uvevent["venue-default-manageentid"] = $uvvenuemanageentid;
-                                        // $uvdefaultlink = uws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]);
-                                        $uvdefaultlink = urvenue_ws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]); // Axl UWS-7416
+                                        $uvdefaultlink = urvenue_ws_get_event_url($uvevent, $urvenue_ws_core_lib["events"]["global-defaulteventurl"]);
                                         $uvevent["event-url"] = $uvdefaultlink;
-                                        // $uvevent["event-page-url"] = uws_get_event_url($uvevent, "event");
-                                        $uvevent["event-page-url"] = urvenue_ws_get_event_url($uvevent, "event"); // Axl UWS-7416
-                                        // $uvevent["map-url"] = uws_get_event_url($uvevent, "map");
-                                        $uvevent["map-url"] = urvenue_ws_get_event_url($uvevent, "map"); // Axl UWS-7416
+                                        $uvevent["event-page-url"] = urvenue_ws_get_event_url($uvevent, "event");
+                                        $uvevent["map-url"] = urvenue_ws_get_event_url($uvevent, "map");
                                         $uvevent["venue-default-resellerid"] = $uvvenueresellerid;
                                         $uvevent["venue-default-providerid"] = $uvvenueprividerid;
                                         $uvevent["venue-url"] = $uvvenueurl;
@@ -1749,8 +1549,7 @@ function urvenue_ws_get_events_array($uvapidata, $uvargs = ""){ // Axl UWS-7416
     Requires: apidata(Raw data from API)
     Returns: array with ecozones in case it has related eczones, returns nothing if it doesn't have related ecozones
 */
-// function uws_get_event_ecozonemap($uvapidata, $uveventcode){
-function urvenue_ws_get_event_ecozonemap($uvapidata, $uveventcode){ // Axl UWS-7416
+function urvenue_ws_get_event_ecozonemap($uvapidata, $uveventcode){
     global $urvenue_ws_core_lib;
 
     $uvecozonesmap = "";
@@ -1760,10 +1559,9 @@ function urvenue_ws_get_event_ecozonemap($uvapidata, $uveventcode){ // Axl UWS-7
 		$uvschedules = $uvapidata["uv"]["data"]["schedules"];
 
         if(is_array($uvschedules)){
-            // $uveventdata = uws_get_eventcode_data($uveventcode);
-            $uveventdata = urvenue_ws_get_eventcode_data($uveventcode); // Axl UWS-7416
+            $uveventdata = urvenue_ws_get_eventcode_data($uveventcode);
             // $uvsdate = date("ymd", strtotime($uveventdata["date"]));
-            $uvsdate = gmdate("ymd", strtotime($uveventdata["date"])); // Axl UWS-7416
+            $uvsdate = gmdate("ymd", strtotime($uveventdata["date"]));
 
             //reroute to maineventcode in case the eventcode is different than maineventcode
             if(isset($uvschedules["D" . $uvsdate]) and isset($uvschedules["D" . $uvsdate][$uveventdata["venuecode"]]) and isset($uvschedules["D" . $uvsdate][$uveventdata["venuecode"]][$uveventdata["ecozone"]]) and isset($uvschedules["D" . $uvsdate][$uveventdata["venuecode"]][$uveventdata["ecozone"]]["eventcode"]) and isset($uvschedules["D" . $uvsdate][$uveventdata["venuecode"]][$uveventdata["ecozone"]]["maineventcode"]) and ($uvschedules["D" . $uvsdate][$uveventdata["venuecode"]][$uveventdata["ecozone"]]["eventcode"] != $uvschedules["D" . $uvsdate][$uveventdata["venuecode"]][$uveventdata["ecozone"]]["maineventcode"])){
@@ -1810,18 +1608,15 @@ function urvenue_ws_get_event_ecozonemap($uvapidata, $uveventcode){ // Axl UWS-7
     Requires: inventory (inventory array from inventorylist with filters=data:events), eventcode
     Returns: array with booktypes for the event
 */
-// function uws_get_event_stocks($uvinventory, $uveventcode){
-function urvenue_ws_get_event_stocks($uvinventory, $uveventcode){ // Axl UWS-7416
+function urvenue_ws_get_event_stocks($uvinventory, $uveventcode){
     $uveventstocks = "";
 
     
     if(is_array($uvinventory) and $uveventcode){
-        // $uveventdata = uws_get_eventcode_data($uveventcode);
-        $uveventdata = urvenue_ws_get_eventcode_data($uveventcode); // Axl UWS-7416
-        // $uveventecozone = uws_standardize_ecozone($uveventdata["ecozone"]);
-        $uveventecozone = urvenue_ws_standardize_ecozone($uveventdata["ecozone"]); // Axl UWS-7416
+        $uveventdata = urvenue_ws_get_eventcode_data($uveventcode);
+        $uveventecozone = urvenue_ws_standardize_ecozone($uveventdata["ecozone"]);
         // $uvsdate = date("ymd", strtotime($uveventdata["date"]));
-        $uvsdate = gmdate("ymd", strtotime($uveventdata["date"])); // Axl UWS-7416
+        $uvsdate = gmdate("ymd", strtotime($uveventdata["date"]));
 
         if(isset($uvinventory["D" . $uvsdate]) and isset($uvinventory["D" . $uvsdate]["venues"][$uveventdata["venuecode"]]) and isset($uvinventory["D" . $uvsdate]["venues"][$uveventdata["venuecode"]]["ecozones"][$uveventecozone]) and isset($uvinventory["D" . $uvsdate]["venues"][$uveventdata["venuecode"]]["ecozones"][$uveventecozone]["booktypes"]))
             $uveventstocks = $uvinventory["D" . $uvsdate]["venues"][$uveventdata["venuecode"]]["ecozones"][$uveventecozone]["booktypes"];
@@ -1834,51 +1629,43 @@ function urvenue_ws_get_event_stocks($uvinventory, $uveventcode){ // Axl UWS-741
     Requires: event(event data array)
     Optional: linkcode(event or map, depending on what link is required)
 */
-// function uws_get_event_url($uvevent, $uvlinkcode = "event"){
-function urvenue_ws_get_event_url($uvevent, $uvlinkcode = "event"){ // Axl UWS-7416
-    global $urvenue_ws_core_lib, $uws_config_customeventurl, $uws_config_manageentid, $uws_config_custommapurl, $uws_config_microcode;
+function urvenue_ws_get_event_url($uvevent, $uvlinkcode = "event"){
+    global $urvenue_ws_core_lib, $urvenue_ws_config_customeventurl, $urvenue_ws_config_manageentid, $urvenue_ws_config_custommapurl, $urvenue_ws_config_microcode;
 
     $uvlinkcode = ($uvlinkcode == "event") ? "singleevent" : $uvlinkcode;
-    // $uvbaseurl = (uws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"][$uvlinkcode]) : $urvenue_ws_core_lib["pages"][$uvlinkcode];
-    $uvbaseurl = (urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"][$uvlinkcode]) : $urvenue_ws_core_lib["pages"][$uvlinkcode]; // Axl UWS-7416
+    $uvbaseurl = (urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"][$uvlinkcode]) : $urvenue_ws_core_lib["pages"][$uvlinkcode];
     $uvbaseurl = $uvbaseurl . "{eventcode}/{eventnameurl}/";
     
     // Ensure trailing slash
     if (substr($uvbaseurl, -1) !== '/') $uvbaseurl .= '/';
     
-    $uvmanageentid = ($uws_config_manageentid) ? $uws_config_manageentid : (isset($uvevent["venue-default-manageentid"]) ? $uvevent["venue-default-manageentid"] : "");
+    $uvmanageentid = ($urvenue_ws_config_manageentid) ? $urvenue_ws_config_manageentid : (isset($uvevent["venue-default-manageentid"]) ? $uvevent["venue-default-manageentid"] : "");
     
-    if($uws_config_customeventurl and $uvlinkcode == "singleevent")
-        $uvbaseurl = $uws_config_customeventurl;
-    else if($uws_config_custommapurl and $uvlinkcode == "map")
-        $uvbaseurl = $uws_config_custommapurl;
+    if($urvenue_ws_config_customeventurl and $uvlinkcode == "singleevent")
+        $uvbaseurl = $urvenue_ws_config_customeventurl;
+    else if($urvenue_ws_config_custommapurl and $uvlinkcode == "map")
+        $uvbaseurl = $urvenue_ws_config_custommapurl;
 
     //Check if there are event pages map
-    // if(uws_is_wordpress() and is_array($uvevent) and isset($uvevent["venuecode"]) and isset($urvenue_ws_core_lib["eventpagesmap"]) and isset($urvenue_ws_core_lib["eventpagesmap"][$uvevent["venuecode"]]) and isset($urvenue_ws_core_lib["eventpagesmap"][$uvevent["venuecode"]][$uvlinkcode])){
-    if(urvenue_ws_is_wordpress() and is_array($uvevent) and isset($uvevent["venuecode"]) and isset($urvenue_ws_core_lib["eventpagesmap"]) and isset($urvenue_ws_core_lib["eventpagesmap"][$uvevent["venuecode"]]) and isset($urvenue_ws_core_lib["eventpagesmap"][$uvevent["venuecode"]][$uvlinkcode])){ // Axl UWS-7416
+    if(urvenue_ws_is_wordpress() and is_array($uvevent) and isset($uvevent["venuecode"]) and isset($urvenue_ws_core_lib["eventpagesmap"]) and isset($urvenue_ws_core_lib["eventpagesmap"][$uvevent["venuecode"]]) and isset($urvenue_ws_core_lib["eventpagesmap"][$uvevent["venuecode"]][$uvlinkcode])){
         $uvbaseurl = get_permalink($urvenue_ws_core_lib["eventpagesmap"][$uvevent["venuecode"]][$uvlinkcode]);
         $uvbaseurl = $uvbaseurl . "{eventcode}/{eventnameurl}/";
     }
 
-    //Check if there is event page map for languages uws_get_cur_lang
-    // if(uws_is_wordpress() and is_array($uvevent) and isset($urvenue_ws_core_lib["eventpagesmap"]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"][uws_get_cur_lang()]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"][uws_get_cur_lang()][$uvlinkcode])){
-    if(urvenue_ws_is_wordpress() and is_array($uvevent) and isset($urvenue_ws_core_lib["eventpagesmap"]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"][urvenue_ws_get_cur_lang()]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"][urvenue_ws_get_cur_lang()][$uvlinkcode])){ // Axl UWS-7416
-        // $uvbaseurl = get_permalink($urvenue_ws_core_lib["eventpagesmap"]["langs"][uws_get_cur_lang()][$uvlinkcode]);
-        $uvbaseurl = get_permalink($urvenue_ws_core_lib["eventpagesmap"]["langs"][urvenue_ws_get_cur_lang()][$uvlinkcode]); // Axl UWS-7416
+    if(urvenue_ws_is_wordpress() and is_array($uvevent) and isset($urvenue_ws_core_lib["eventpagesmap"]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"][urvenue_ws_get_cur_lang()]) and isset($urvenue_ws_core_lib["eventpagesmap"]["langs"][urvenue_ws_get_cur_lang()][$uvlinkcode])){
+        $uvbaseurl = get_permalink($urvenue_ws_core_lib["eventpagesmap"]["langs"][urvenue_ws_get_cur_lang()][$uvlinkcode]);
         $uvbaseurl = $uvbaseurl . "{eventcode}/{eventnameurl}/";
     }
 
     $uveventurl = "#";
 
     if(is_array($uvevent)){
-        // $uveventnameurl = uws_get_linkstring($uvevent["name"]);
-        $uveventnameurl = urvenue_ws_get_linkstring($uvevent["name"]); // Axl UWS-7416
-        // $uveventvenuenameurl = uws_get_linkstring($uvevent["venuename"]);
-        $uveventvenuenameurl = urvenue_ws_get_linkstring($uvevent["venuename"]); // Axl UWS-7416
+        $uveventnameurl = urvenue_ws_get_linkstring($uvevent["name"]);
+        $uveventvenuenameurl = urvenue_ws_get_linkstring($uvevent["venuename"]);
         $uvvenueid = str_replace("VEN", "", $uvevent["venuecode"]);
         $uv5venueid = (isset($uvevent["uv5venueid"])) ? $uvevent["uv5venueid"] : "";
         // $uvssdate = date("ymd", strtotime($uvevent["date"]));
-        $uvssdate = gmdate("ymd", strtotime($uvevent["date"])); // Axl UWS-7416
+        $uvssdate = gmdate("ymd", strtotime($uvevent["date"]));
 
         $uveventurl = str_replace(
             array(
@@ -1899,15 +1686,14 @@ function urvenue_ws_get_event_url($uvevent, $uvlinkcode = "event"){ // Axl UWS-7
                 $uvmanageentid,
                 $uv5venueid,
                 $uvssdate,
-                $uws_config_microcode,
+                $urvenue_ws_config_microcode,
                 $uveventvenuenameurl,
                 $uvevent["venuecode"],
             ),
             $uvbaseurl);
     }
 
-    // $uveventurl = uws_apply_filters("uws_event_before_return_url", $uveventurl, $uvevent);
-    $uveventurl = urvenue_ws_apply_filters("urvenue_ws_event_before_return_url", $uveventurl, $uvevent); // Axl UWS-7416
+    $uveventurl = urvenue_ws_apply_filters("urvenue_ws_event_before_return_url", $uveventurl, $uvevent);
 
     return $uveventurl;
 }
@@ -1915,8 +1701,7 @@ function urvenue_ws_get_event_url($uvevent, $uvlinkcode = "event"){ // Axl UWS-7
 /*Get event flyers for different places
     Requires: flyers(plain flyers array)
 */
-// function uws_get_event_flyers($uvflyers){
-function urvenue_ws_get_event_flyers($uvflyers){ // Axl UWS-7416
+function urvenue_ws_get_event_flyers($uvflyers){
     global $urvenue_ws_core_lib;
 
     $uvflyersreturn = "";
@@ -1933,8 +1718,7 @@ function urvenue_ws_get_event_flyers($uvflyers){ // Axl UWS-7416
                 $uvthisplaceholcerurl = $urvenue_ws_core_lib["flyers"][$uvflyerloccode . "-placeholderurl"];
                 $uvthissizecode = $urvenue_ws_core_lib["flyers"][$uvflyerloccode . "-sizecode"];
 
-                // $uvlocflyer = uws_get_flyersbypriority($uvflyers, $uvflyerprior, $uvthishideifnomatch);
-                $uvlocflyer = urvenue_ws_get_flyersbypriority($uvflyers, $uvflyerprior, $uvthishideifnomatch); // Axl UWS-7416
+                $uvlocflyer = urvenue_ws_get_flyersbypriority($uvflyers, $uvflyerprior, $uvthishideifnomatch);
 
                 if(is_array($uvlocflyer)){
                     $uvflyerurl = $uvlocflyer["path"] . "/$uvthissizecode/" . $uvlocflyer["file"];
@@ -1978,9 +1762,8 @@ function urvenue_ws_get_event_flyers($uvflyers){ // Axl UWS-7416
 /*Compare Flyer priorities and flyers array
     Requires: flyers(plain flyers array), flyerprior(array with flyers priority), forcematch(1 if the flyer must match), returnmultiple(1 if multiple flyers should be returned)
 */
-// function uws_get_flyersbypriority($uvflyers, $uvflyerprior, $uvforcematch = 0, $uvreturnmultiple = 0){
-function urvenue_ws_get_flyersbypriority($uvflyers, $uvflyerprior, $uvforcematch = 0, $uvreturnmultiple = 0){ // Axl UWS-7416
-    global $uws_config_flyercode;
+function urvenue_ws_get_flyersbypriority($uvflyers, $uvflyerprior, $uvforcematch = 0, $uvreturnmultiple = 0){
+    global $urvenue_ws_config_flyercode;
     
     $uvflyer = "";
 
@@ -1994,7 +1777,7 @@ function urvenue_ws_get_flyersbypriority($uvflyers, $uvflyerprior, $uvforcematch
                 $uvflyerpr["bgtype"] = (isset($uvflyerpr["bgtype"])) ? $uvflyerpr["bgtype"] : "any";
                 $uvthisflyerbgtype = (isset($uvthisflyer)) ? $uvthisflyer["bgtype"] : "any";
 
-                if(($uws_config_flyercode and $uvthisflyer["imagetypename"] == $uws_config_flyercode) || ($uvthisflyer["imagerationame"] == $uvflyerpr["ratio"] or $uvflyerpr["ratio"] == "any") and ($uvthisflyer["imagetypename"] == $uvflyerpr["type"]) and ($uvthisflyerbgtype == $uvflyerpr["bgtype"] or $uvflyerpr["bgtype"] == "any")){
+                if(($urvenue_ws_config_flyercode and $uvthisflyer["imagetypename"] == $urvenue_ws_config_flyercode) || ($uvthisflyer["imagerationame"] == $uvflyerpr["ratio"] or $uvflyerpr["ratio"] == "any") and ($uvthisflyer["imagetypename"] == $uvflyerpr["type"]) and ($uvthisflyerbgtype == $uvflyerpr["bgtype"] or $uvflyerpr["bgtype"] == "any")){
                     $uvtheflyerpr = array(
                         "path" => $uvthisflyer["path"],
                         "file" => $uvthisflyer["file"],
@@ -2051,8 +1834,7 @@ function urvenue_ws_get_flyersbypriority($uvflyers, $uvflyerprior, $uvforcematch
 /*Get plain flyers array
     Requires: flyers(Raw event flyers array)
 */
-// function uws_get_event_flyersarray($uvflyers){
-function urvenue_ws_get_event_flyersarray($uvflyers){ // Axl UWS-7416
+function urvenue_ws_get_event_flyersarray($uvflyers){
 	if(is_array($uvflyers)){
 		$uvfluyersarray = array();
 		foreach($uvflyers as $uvflyertypekey => $uvflyertypearray){
@@ -2072,26 +1854,22 @@ function urvenue_ws_get_event_flyersarray($uvflyers){ // Axl UWS-7416
 /*Get Dropdown of events for a date and venue
     Requires: eventdata(date, ecozone, venuecode)
 */
-// function uws_get_date_events_dropdown($uveventdata){
-function urvenue_ws_get_date_events_dropdown($uveventdata){ // Axl UWS-7416
+function urvenue_ws_get_date_events_dropdown($uveventdata){
     $uveventsdropdown = "";
 
     if(is_array($uveventdata) and isset($uveventdata["date"]) and isset($uveventdata["ecozone"]) and isset($uveventdata["venuecode"])){
-        // $uvselecozone = uws_standardize_ecozone($uveventdata["ecozone"]);
-        $uvselecozone = urvenue_ws_standardize_ecozone($uveventdata["ecozone"]); // Axl UWS-7416
+        $uvselecozone = urvenue_ws_standardize_ecozone($uveventdata["ecozone"]);
         $uvterms = array(
             "fromdate" => $uveventdata["date"],
             "todate" => $uveventdata["date"],
             "venuecodes" => $uveventdata["venuecode"],
         );
-        // $uvdateevents = uws_get_events($uvterms);
-        $uvdateevents = urvenue_ws_get_events($uvterms); // Axl UWS-7416
+        $uvdateevents = urvenue_ws_get_events($uvterms);
 
         $uvdateeventsarray = array();
         if(is_array($uvdateevents)){
             foreach($uvdateevents as $uvdateevent){
-                // $uvdateeventecozone = uws_standardize_ecozone($uvdateevent["ecozone"]);
-                $uvdateeventecozone = urvenue_ws_standardize_ecozone($uvdateevent["ecozone"]); // Axl UWS-7416
+                $uvdateeventecozone = urvenue_ws_standardize_ecozone($uvdateevent["ecozone"]);
                 $uvdateeventsarray[$uvdateeventecozone] = array(
                     "name" => $uvdateevent["name"],
                     "eventcode" => $uvdateevent["eventcode"],
@@ -2133,8 +1911,7 @@ function urvenue_ws_get_date_events_dropdown($uveventdata){ // Axl UWS-7416
 /*Normalize event array, removes all unused variables
     Requires: event(Raw data event array)
 */
-// function uws_normalize_event($uvevent){
-function urvenue_ws_normalize_event($uvevent){ // Axl UWS-7416
+function urvenue_ws_normalize_event($uvevent){
     $uveventreturn = "";
 
     if(is_array($uvevent)){
@@ -2158,8 +1935,7 @@ function urvenue_ws_normalize_event($uvevent){ // Axl UWS-7416
 /*Get venues codes in an string to use as API parameter
     Optional: venuekey(key that identifies the venue)
 */
-// function uws_get_venuecodes_string($uvvenuekey = "all"){
-function urvenue_ws_get_venuecodes_string($uvvenuekey = "all"){ // Axl UWS-7416
+function urvenue_ws_get_venuecodes_string($uvvenuekey = "all"){
     global $urvenue_ws_core_lib;
 
     $uvvenuescodesstring = "";
@@ -2195,8 +1971,7 @@ function urvenue_ws_get_venuecodes_string($uvvenuekey = "all"){ // Axl UWS-7416
 
 /*Get venues keys in an array by venuecode
 */
-// function uws_get_venuekesybycode(){
-function urvenue_ws_get_venuekesybycode(){ // Axl UWS-7416
+function urvenue_ws_get_venuekesybycode(){
     global $urvenue_ws_core_lib;
 
     if(isset($urvenue_ws_core_lib["venues"]) and is_array($urvenue_ws_core_lib["venues"])){
@@ -2212,8 +1987,7 @@ function urvenue_ws_get_venuekesybycode(){ // Axl UWS-7416
 /*Get primary venue
     Returns: array with primary venue from library
 */
-// function uws_get_primary_venue(){
-function urvenue_ws_get_primary_venue(){ // Axl UWS-7416
+function urvenue_ws_get_primary_venue(){
     global $urvenue_ws_core_lib;
 
     $uvprimaryvenue = "";
@@ -2238,27 +2012,19 @@ function urvenue_ws_get_primary_venue(){ // Axl UWS-7416
 /*Get event implementation
     Returns: Prints html of event page + inventory
 */
-// function uws_event($uvargs = ""){
-function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_event($uvargs = ""){
     global $urvenue_ws_core_lib;
 
     $uveventhtml = $uveventinfo = "";
-    // $uveventcode = uws_get_arg($uvargs, "eventcode", uws_get_eventcode());
-    $uveventcode = urvenue_ws_get_arg($uvargs, "eventcode", urvenue_ws_get_eventcode()); // Axl UWS-7416
-    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? uws_cleanup_var($_REQUEST["venuecode"]) : "";
-    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var($_REQUEST["venuecode"]) : ""; // Axl UWS-7416
-    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["venuecode"] ) ) : ""; // Axl UWS-7418
-    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? sanitize_text_field( urvenue_ws_cleanup_var( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // Axl UWS-7418
-    // $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // Axl UWS-7416
-    $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for event display filtering, no state change // Axl UWS-7416
+    $uveventcode = urvenue_ws_get_arg($uvargs, "eventcode", urvenue_ws_get_eventcode());
+    $uvgetvenuecode = (isset($_REQUEST["venuecode"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venuecode"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for event display filtering, no state change
 
     if(isset($urvenue_ws_core_lib["system"]) and isset($urvenue_ws_core_lib["system"]["use-market-events"]) and isset($urvenue_ws_core_lib["system"]["use-market-eventsvenues"]) and !$urvenue_ws_core_lib["system"]["use-market-eventsvenues"] and $urvenue_ws_core_lib["system"]["use-market-events"] and isset($urvenue_ws_core_lib["events"]["market-events-venueid"]) and $urvenue_ws_core_lib["events"]["market-events-venueid"] and $uvgetvenuecode){
-        // $uveventcodedata = uws_get_eventcode_data($uveventcode);
-        $uveventcodedata = urvenue_ws_get_eventcode_data($uveventcode); // Axl UWS-7416
+        $uveventcodedata = urvenue_ws_get_eventcode_data($uveventcode);
         
         if(is_array($uveventcodedata)){
             $uveventcodedata["venuecode"] = $uvgetvenuecode;
-            $uveventcode = "EVE" . str_replace("VEN", "", $uvgetvenuecode) . str_replace("ECZ", "", $uveventcodedata["ecozone"]) . gmdate("Ymd", strtotime($uveventcodedata["date"])); // Axl UWS-7416
+            $uveventcode = "EVE" . str_replace("VEN", "", $uvgetvenuecode) . str_replace("ECZ", "", $uveventcodedata["ecozone"]) . gmdate("Ymd", strtotime($uveventcodedata["date"]));
         }
     }
 
@@ -2270,30 +2036,23 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
             $uvusemarket = 1;
     }
     else{
-        // $uveventinfo = ($uveventcode) ? uws_get_event($uveventcode) : "";
-        $uveventinfo = ($uveventcode) ? urvenue_ws_get_event($uveventcode) : ""; // Axl UWS-7416
+        $uveventinfo = ($uveventcode) ? urvenue_ws_get_event($uveventcode) : "";
     }
 
     if(is_array($uveventinfo)){
         $uveventschemainline = "";
-        // $uvaddschema = (uws_get_arg($uvargs, "template")) ? 0 : 1;
-        $uvaddschema = (urvenue_ws_get_arg($uvargs, "template")) ? 0 : 1; // Axl UWS-7416
-        // $uvgeteventschema = ($uvaddschema) ? uws_get_eventschema($uveventinfo) : "";
-        $uvgeteventschema = ($uvaddschema) ? urvenue_ws_get_eventschema($uveventinfo) : ""; // Axl UWS-7416
+        $uvaddschema = (urvenue_ws_get_arg($uvargs, "template")) ? 0 : 1;
+        $uvgeteventschema = ($uvaddschema) ? urvenue_ws_get_eventschema($uveventinfo) : "";
 
         $uveventlayout = $urvenue_ws_core_lib["events"]["event-layout"]; //full-header or container
         $uveventscolumns = $urvenue_ws_core_lib["events"]["event-columns"]; //inventory-flyer or flyer-inventory
-        // $uvtemplatename = uws_get_arg($uvargs, "template", "event/event-" . $uveventlayout);
-        $uvtemplatename = urvenue_ws_get_arg($uvargs, "template", "event/event-" . $uveventlayout); // Axl UWS-7416
+        $uvtemplatename = urvenue_ws_get_arg($uvargs, "template", "event/event-" . $uveventlayout);
 
-        // $uveventtemple = uws_get_template($uvtemplatename);
-        $uveventtemple = urvenue_ws_get_template($uvtemplatename); // Axl UWS-7416
-        // $uveventconthtml = uws_replace_event_vars($uveventinfo, $uveventtemple);
-        $uveventconthtml = urvenue_ws_replace_event_vars($uveventinfo, $uveventtemple); // Axl UWS-7416
+        $uveventtemple = urvenue_ws_get_template($uvtemplatename);
+        $uveventconthtml = urvenue_ws_replace_event_vars($uveventinfo, $uveventtemple);
         $uveventinventoryblock = "<div class='uwsjs-loadeventinventory uws-event-inventory' data-eventcode='$uveventcode'><div class='uws-integration uws-inventory-stage uwsdy-cartactive-class uws-inventory-stage-1 uwsloading' data-instance='1'><div class='uws-inventoryloader'><div class='uwsloadingmsg'><div class='uws-loader-uvicon'></div><div class='uwsloadingtxt'>Loading Experiences...</div></div><div class='uwsloadingbkt'></div><div class='uwsloadingbitem'></div><div class='uwsloadingbitem'></div><div class='uwsloadingbkt'></div></div><div class='uws-inventory-load'></div></div></div>";
         $uveventconthtml = str_replace("{eventinventoryblock}", $uveventinventoryblock, $uveventconthtml);
         
-        //$uveventproxiesscript = uws_get_proxies_script("inventory-init");
 
         if($uvgeteventschema){
             // @Axl
@@ -2302,10 +2061,9 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
             // @Axl End
 	        $uveventschemainline .= "";
 
-            // @egt [UWS-7264]
             add_action('wp_footer', function () use ($uvgeteventschemajson) {
                 // echo "<script type='application/ld+json'>$uvgeteventschemajson</script>";
-                echo "<script type='application/ld+json'>$uvgeteventschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output // Axl UWS-7416
+                echo "<script type='application/ld+json'>$uvgeteventschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output
             });
         }
 
@@ -2321,16 +2079,13 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
         $uvterms = array(
             "eventcode" => $uveventcode,
         );
-        // $uveventcodedata = uws_get_eventcode_data($uveventcode);
-        $uveventcodedata = urvenue_ws_get_eventcode_data($uveventcode); // Axl UWS-7416
-        // $uveventvenuesfeed = uws_get_feed($uvfeedtouse, $uvterms);
-        $uveventvenuesfeed = urvenue_ws_get_feed($uvfeedtouse, $uvterms); // Axl UWS-7416
+        $uveventcodedata = urvenue_ws_get_eventcode_data($uveventcode);
+        $uveventvenuesfeed = urvenue_ws_get_feed($uvfeedtouse, $uvterms);
 
         $uvargs = array(
             "forcereturneventcode" => $uveventcode,
         );
-        // $uveventarray = uws_get_events_array($uveventvenuesfeed, $uvargs);
-        $uveventarray = urvenue_ws_get_events_array($uveventvenuesfeed, $uvargs); // Axl UWS-7416
+        $uveventarray = urvenue_ws_get_events_array($uveventvenuesfeed, $uvargs);
         $uvvenuesarray = "";
 
         if(isset($uveventvenuesfeed["uv"]["data"]["venues"])){
@@ -2338,8 +2093,7 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
 
             if(is_array($uveventvenuesfeed["uv"]["data"]["venues"])){
                 foreach($uveventvenuesfeed["uv"]["data"]["venues"] as $uvvenuecode => $uvvenue){
-                    // $uvvenuearray = uws_get_venue_array($uvvenue);
-                    $uvvenuearray = urvenue_ws_get_venue_array($uvvenue); // Axl UWS-7416
+                    $uvvenuearray = urvenue_ws_get_venue_array($uvvenue);
 
                     $uvvenuesarray[$uvvenuecode] = $uvvenuearray;
                 }
@@ -2353,20 +2107,17 @@ function urvenue_ws_event($uvargs = ""){ // Axl UWS-7416
         );
     }
 
-    // $uveventhtml = uws_apply_filters("uws_event_page_after_replace", $uveventhtml, $uveventinfo);
-    $uveventhtml = urvenue_ws_apply_filters("urvenue_ws_event_page_after_replace", $uveventhtml, $uveventinfo); // Axl UWS-7416
+    $uveventhtml = urvenue_ws_apply_filters("urvenue_ws_event_page_after_replace", $uveventhtml, $uveventinfo);
 
     // echo $uveventhtml;
-    // echo $uveventhtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-generated HTML markup // Axl UWS-7416
-    echo wp_kses_post( $uveventhtml ); // Axl UWS-8151
+    echo wp_kses_post( $uveventhtml );
 }
 
 /*Get event schema
     Requires: Event info array
     Returns: Array with event data schema markup
 */
-// function uws_get_eventschema($uvevent = ""){
-function urvenue_ws_get_eventschema($uvevent = ""){ // Axl UWS-7416
+function urvenue_ws_get_eventschema($uvevent = ""){
     global $urvenue_ws_today;
 
     $uveventschema = "";
@@ -2382,8 +2133,6 @@ function urvenue_ws_get_eventschema($uvevent = ""){ // Axl UWS-7416
         );
 
         //YY-MM-DDTHH:MM:SS Not recommeded by google, if no timezone we can't add time
-        //$uvstarttime = uws_get_iso_time($uvevent["date"], $uvevent["nstarttime"]);
-        //$uvendtime = uws_get_iso_time($uvevent["date"], $uvevent["nendtime"]);
 
         $uveventschema = array(
             "@context" => "http://schema.org",
@@ -2431,11 +2180,9 @@ function urvenue_ws_get_eventschema($uvevent = ""){ // Axl UWS-7416
                 "name" => $uvevent["performername"]
             );
         //if($uvevent["ndoorsopen"])
-            //$uveventschema["doorTime"] = uws_get_iso_time($uvevent["date"], $uvevent["ndoorsopen"]);
     }
 
-    // $uveventschema = uws_apply_filters("uws_event_before_return_schema", $uvevent, $uveventschema);
-    $uveventschema = urvenue_ws_apply_filters("urvenue_ws_event_before_return_schema", $uvevent, $uveventschema); // Axl UWS-7416
+    $uveventschema = urvenue_ws_apply_filters("urvenue_ws_event_before_return_schema", $uvevent, $uveventschema);
 
     return $uveventschema;
 }
@@ -2446,16 +2193,14 @@ function urvenue_ws_get_eventschema($uvevent = ""){ // Axl UWS-7416
  * @param array $uvevents An array of events.
  * @return array|string An array of event schemas if input is an array, otherwise an empty string.
  */
-// function uws_get_events_schema($uvevents){
-function urvenue_ws_get_events_schema($uvevents){ // Axl UWS-7416
+function urvenue_ws_get_events_schema($uvevents){
     $uveventsschema = "";
 
     if(is_array($uvevents)){
         $uveventsschema = array();
 
         foreach($uvevents as $uvevent){
-            // $uveventschema = uws_get_eventschema($uvevent);
-            $uveventschema = urvenue_ws_get_eventschema($uvevent); // Axl UWS-7416
+            $uveventschema = urvenue_ws_get_eventschema($uvevent);
             $uveventsschema[] = $uveventschema;
         }
     }
@@ -2466,26 +2211,19 @@ function urvenue_ws_get_events_schema($uvevents){ // Axl UWS-7416
 /*Get event SEO info
     Returns: Array with seo metatags
 */
-// function uws_get_event_seo(){
-function urvenue_ws_get_event_seo(){ // Axl UWS-7416
+function urvenue_ws_get_event_seo(){
     global $urvenue_ws_core_lib;
 
     $uveventseo = "";
 
-    // $uveventcode = uws_get_eventcode();
-    $uveventcode = urvenue_ws_get_eventcode(); // Axl UWS-7416
-    // $uveventinfo = ($uveventcode) ? uws_get_event($uveventcode) : "";
-    $uveventinfo = ($uveventcode) ? urvenue_ws_get_event($uveventcode) : ""; // Axl UWS-7416
+    $uveventcode = urvenue_ws_get_eventcode();
+    $uveventinfo = ($uveventcode) ? urvenue_ws_get_event($uveventcode) : "";
 
     if(is_array($uveventinfo)){
-        // $uvseotitle = uws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seotitle"]);
-        $uvseotitle = urvenue_ws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seotitle"]); // Axl UWS-7416
-        // $uvsitetitle = uws_get_site_title() ? uws_get_site_title() : $uveventinfo["venuename"];
-        $uvsitetitle = urvenue_ws_get_site_title() ? urvenue_ws_get_site_title() : $uveventinfo["venuename"]; // Axl UWS-7416
+        $uvseotitle = urvenue_ws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seotitle"]);
+        $uvsitetitle = urvenue_ws_get_site_title() ? urvenue_ws_get_site_title() : $uveventinfo["venuename"];
         $uvseotitle = str_replace("{sitetitle}", $uvsitetitle, $uvseotitle);
-        // $uvseodescription = ($uveventinfo["shortdescr"]) ? strip_tags($uveventinfo["shortdescr"]) : (($uveventinfo["descr"]) ? strip_tags($uveventinfo["descr"]) : strip_tags(uws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seodescription"])));
-        // $uvseodescription = ($uveventinfo["shortdescr"]) ? strip_tags($uveventinfo["shortdescr"]) : (($uveventinfo["descr"]) ? strip_tags($uveventinfo["descr"]) : strip_tags(urvenue_ws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seodescription"]))); // Axl UWS-7416
-        $uvseodescription = ($uveventinfo["shortdescr"]) ? wp_strip_all_tags($uveventinfo["shortdescr"]) : (($uveventinfo["descr"]) ? wp_strip_all_tags($uveventinfo["descr"]) : wp_strip_all_tags(urvenue_ws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seodescription"]))); // Axl UWS-7416
+        $uvseodescription = ($uveventinfo["shortdescr"]) ? wp_strip_all_tags($uveventinfo["shortdescr"]) : (($uveventinfo["descr"]) ? wp_strip_all_tags($uveventinfo["descr"]) : wp_strip_all_tags(urvenue_ws_replace_event_vars($uveventinfo, $urvenue_ws_core_lib["seo"]["seodescription"])));
 
         $uveventseo = array(
             "title" => $uvseotitle,
@@ -2501,12 +2239,10 @@ function urvenue_ws_get_event_seo(){ // Axl UWS-7416
 /*Get site title
     Returns: Site title if it's wordpress
 */
-// function uws_get_site_title(){
-function urvenue_ws_get_site_title(){ // Axl UWS-7416
+function urvenue_ws_get_site_title(){
     $uvsitetitle = "";
 
-    // if(uws_is_wordpress())
-    if(urvenue_ws_is_wordpress()) // Axl UWS-7416
+    if(urvenue_ws_is_wordpress())
         $uvsitetitle = get_bloginfo( 'name' );
 
     return $uvsitetitle;
@@ -2515,17 +2251,15 @@ function urvenue_ws_get_site_title(){ // Axl UWS-7416
 /*Get eventcode from url vars
     Returns: eventcode
 */
-// function uws_get_eventcode(){
-function urvenue_ws_get_eventcode(){ // Axl UWS-7416
+function urvenue_ws_get_eventcode(){
     $uveventcode = "";
 
-    // if(uws_is_wordpress())
-    if(urvenue_ws_is_wordpress()) // Axl UWS-7416
+    if(urvenue_ws_is_wordpress())
         $uveventcode = get_query_var('eventcode');
     else{
-        global $uws_eventcode;
+        global $urvenue_ws_eventcode;
 
-        $uveventcode = $uws_eventcode;
+        $uveventcode = $urvenue_ws_eventcode;
     }
         
 
@@ -2537,17 +2271,15 @@ function urvenue_ws_get_eventcode(){ // Axl UWS-7416
     requires: venuename
     returns: eventcode
 */
-// function uws_get_next_eventcode($uvvenuekey){
-function urvenue_ws_get_next_eventcode($uvvenuekey){ // Axl UWS-7416
+function urvenue_ws_get_next_eventcode($uvvenuekey){
     $uveventcode = "";
 
     $uvargs = array(
         "venue" => $uvvenuekey,
-        "fromdate" => gmdate("Y-m-d"), // Axl UWS-7416
+        "fromdate" => gmdate("Y-m-d"),
         "nevents" => 10
     );
-    // $uvevents = uws_get_events($uvargs);
-    $uvevents = urvenue_ws_get_events($uvargs); // Axl UWS-7416
+    $uvevents = urvenue_ws_get_events($uvargs);
     $uvevent = reset($uvevents);
 
     if(is_array($uvevent))
@@ -2559,8 +2291,7 @@ function urvenue_ws_get_next_eventcode($uvvenuekey){ // Axl UWS-7416
 /*Get performers codes in an string to use as class
     Returns: performers class
 */
-// function uws_get_performersclass($uvperformers){
-function urvenue_ws_get_performersclass($uvperformers){ // Axl UWS-7416
+function urvenue_ws_get_performersclass($uvperformers){
     $uvperformersclass = "";
 
     if(is_array($uvperformers)){
@@ -2575,47 +2306,34 @@ function urvenue_ws_get_performersclass($uvperformers){ // Axl UWS-7416
 /*Get performers list for calendar controls
     Returns: performers list
 */
-// function uws_get_performerlis($uvargs = ""){
-function urvenue_ws_get_performerlis($uvargs = ""){ // Axl UWS-7416
+function urvenue_ws_get_performerlis($uvargs = ""){
     $uvperformerlist = "";
-    // $uvvenuekeycode = uws_get_arg($uvargs, "venue", "all");
-    $uvvenuekeycode = urvenue_ws_get_arg($uvargs, "venue", "all"); // Axl UWS-7416
-    // $uvvenuesinfilter = (uws_get_arg($uvargs, "venuesinfilter", "")) ? uws_get_arg($uvargs, "venuesinfilter", "") : $uvvenuekeycode;
-    $uvvenuesinfilter = (urvenue_ws_get_arg($uvargs, "venuesinfilter", "")) ? urvenue_ws_get_arg($uvargs, "venuesinfilter", "") : $uvvenuekeycode; // Axl UWS-7416
-    // $urvenue_ws_venuecodes = uws_get_arg($uvargs, "venuecodes", "");
-    $urvenue_ws_venuecodes = urvenue_ws_get_arg($uvargs, "venuecodes", ""); // Axl UWS-7416
-    // $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : uws_get_venuecodes_string($uvvenuesinfilter);
-    $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : urvenue_ws_get_venuecodes_string($uvvenuesinfilter); // Axl UWS-7416
-    // $uvonlyevents = uws_get_arg($uvargs, "onlyevents", 0);
-    $uvonlyevents = urvenue_ws_get_arg($uvargs, "onlyevents", 0); // Axl UWS-7416
+    $uvvenuekeycode = urvenue_ws_get_arg($uvargs, "venue", "all");
+    $uvvenuesinfilter = (urvenue_ws_get_arg($uvargs, "venuesinfilter", "")) ? urvenue_ws_get_arg($uvargs, "venuesinfilter", "") : $uvvenuekeycode;
+    $urvenue_ws_venuecodes = urvenue_ws_get_arg($uvargs, "venuecodes", "");
+    $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : urvenue_ws_get_venuecodes_string($uvvenuesinfilter);
+    $uvonlyevents = urvenue_ws_get_arg($uvargs, "onlyevents", 0);
 
-    // $uvdate = uws_get_arg($uvargs, "date", "");
-    $uvdate = urvenue_ws_get_arg($uvargs, "date", ""); // Axl UWS-7416
+    $uvdate = urvenue_ws_get_arg($uvargs, "date", "");
     if($uvdate){
-        // $uvfromdate = uws_get_arg($uvargs, "fromdate", $uvdate);
-        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", $uvdate); // Axl UWS-7416
-        // $uvmaxdate = uws_get_arg($uvargs, "todate", uws_get_events_endinit_date("Y-m-d", $uvdate));
-        $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate)); // Axl UWS-7416
+        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", $uvdate);
+        $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvdate));
     }
     else{
-        // $uvfromdate = uws_get_arg($uvargs, "fromdate", uws_get_events_initial_date("Y-m-d"));
-        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", urvenue_ws_get_events_initial_date("Y-m-d")); // Axl UWS-7416
-        // $uvmaxdate = uws_get_arg($uvargs, "todate", uws_get_events_endinit_date("Y-m-d", $uvfromdate));
-        $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate)); // Axl UWS-7416
+        $uvfromdate = urvenue_ws_get_arg($uvargs, "fromdate", urvenue_ws_get_events_initial_date("Y-m-d"));
+        $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate));
     }
 
     // $uvtodate = date("Y-m-d", strtotime($uvmaxdate . " +7 days"));
-    $uvtodate = gmdate("Y-m-d", strtotime($uvmaxdate . " +7 days")); // Axl UWS-7416
+    $uvtodate = gmdate("Y-m-d", strtotime($uvmaxdate . " +7 days"));
 
     $uvterms = array(
         "venuecode" => $uvvenuescodesstring,
         "caldate" => $uvfromdate,
         "todate" => $uvtodate,
     );
-    // $uveventperformerfeed = uws_get_feed("inventory-eventsonly", $uvterms);
-    $uveventperformerfeed = urvenue_ws_get_feed("inventory-eventsonly", $uvterms); // Axl UWS-7416
-    // $uveventperformers = (isset($uveventperformerfeed["uv"]["data"]["performers"])) ? uws_sort_performers($uveventperformerfeed["uv"]["data"]["performers"]) : '';
-    $uveventperformers = (isset($uveventperformerfeed["uv"]["data"]["performers"])) ? urvenue_ws_sort_performers($uveventperformerfeed["uv"]["data"]["performers"]) : ''; // Axl UWS-7416
+    $uveventperformerfeed = urvenue_ws_get_feed("inventory-eventsonly", $uvterms);
+    $uveventperformers = (isset($uveventperformerfeed["uv"]["data"]["performers"])) ? urvenue_ws_sort_performers($uveventperformerfeed["uv"]["data"]["performers"]) : '';
 
     if(is_array($uveventperformers)){
         foreach($uveventperformers as $uveventperformer){
@@ -2650,8 +2368,7 @@ function urvenue_ws_get_performerlis($uvargs = ""){ // Axl UWS-7416
  * @param array $uveventperformers The array of performers.
  * @return array The sorted array of performers.
  */
-// function uws_sort_performers($uveventperformers){
-function urvenue_ws_sort_performers($uveventperformers){ // Axl UWS-7416
+function urvenue_ws_sort_performers($uveventperformers){
     $uvperformers = array();
 
     foreach($uveventperformers as $key => $row){

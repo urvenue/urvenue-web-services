@@ -18,7 +18,7 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
     $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venue", "all"); // Axl UWS-7416
     $uvvenueid = $uvmanageentid = "";
     $uvvenueselector = "";
-    $uws_redirect_to = isset($uvargs['redirect_to']) ? $uvargs['redirect_to'] : "";
+    $urvenue_ws_redirect_to = isset($uvargs['redirect_to']) ? $uvargs['redirect_to'] : "";
     $uvnamefields = isset($uvargs['namefields']) ? $uvargs['namefields'] : "";
     $uvopendays = isset($uvargs['opendays']) ? $uvargs['opendays'] : "";
     $uvopendaysclass = "";
@@ -158,7 +158,7 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
             $uvinqdateselector,
             $uvprivacylink,
             $uvtermslink,
-            $uws_redirect_to,
+            $urvenue_ws_redirect_to,
             $uvpartyfield,
             $uvopendays,
         ),

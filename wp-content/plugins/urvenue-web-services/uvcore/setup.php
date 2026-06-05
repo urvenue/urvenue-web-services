@@ -256,13 +256,13 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 			// wp_add_inline_style('uvwp_setup_styles', $uvwp_setup_css);
 			wp_add_inline_style('urvenue_ws_setup_styles', $uvwp_setup_css); // Axl UWS-7416
 
-			wp_enqueue_style('system-css', $uvbaseurl . 'assets/css/system.css', array(), $urvenue_ws_assetsversion, 'all');
+			wp_enqueue_style('urvenue-ws-system-css', $uvbaseurl . 'assets/css/system.css', array(), $urvenue_ws_assetsversion, 'all');
 			wp_enqueue_style('setup-css', $uvbaseurl . 'assets/css/setup.css', array(), $urvenue_ws_assetsversion, 'all');
-			wp_enqueue_style('uwsicons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
+			wp_enqueue_style('urvenue-ws-icons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
 
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), $urvenue_ws_assetsversion, true);
-			wp_enqueue_script('admin', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate'), $urvenue_ws_assetsversion, true);
+			wp_enqueue_script('urvenue-ws-admin-scripts', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate'), $urvenue_ws_assetsversion, true);
 			wp_enqueue_script('setup', $uvbaseurl . 'assets/js/setup.js', array('jquery', 'jquery-validate'), $urvenue_ws_assetsversion, true);
 		});
 	?>
