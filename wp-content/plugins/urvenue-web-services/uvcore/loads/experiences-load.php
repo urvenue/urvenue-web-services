@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $urvenue_ws_path, $urvenue_ws_today;
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwsexperiences");
-urvenue_ws_check_nonce("uwsexperiences"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_experiences");
+urvenue_ws_check_nonce("urvenue_ws_experiences"); // Axl UWS-7416
 
 include_once($urvenue_ws_path . "/includes/experiences-functions.php");
 

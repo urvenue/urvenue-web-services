@@ -6,7 +6,7 @@ define('URVENUE_WS_SECURITY_MAX_BODY', 1024 * 1024); // Axl UWS-7416
 // define('UWS_SECURITY_BLOCK', true);
 define('URVENUE_WS_SECURITY_BLOCK', true); // Axl UWS-7416
 
-// $uws_patterns = array_values(array_unique([
+// $urvenue_ws_patterns = array_values(array_unique([
 $urvenue_ws_patterns = array_values(array_unique([ // Axl UWS-7416
     '/DBMS_PIPE/i',
     '/RECEIVE_MESSAGE/i',

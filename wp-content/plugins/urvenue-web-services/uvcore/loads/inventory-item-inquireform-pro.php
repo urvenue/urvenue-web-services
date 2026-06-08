@@ -4,13 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $urvenue_ws_feeds_lib;
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwsinventory");
-urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_inventory");
+urvenue_ws_check_nonce("urvenue_ws_inventory"); // Axl UWS-7416
 
 $urvenue_ws_apiurl = $urvenue_ws_feeds_lib["inventory-inquiry"]["url"];
 
 // $urvenue_ws_data = $_POST;
-// $urvenue_ws_data = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified via urvenue_ws_check_nonce("uwsinventory") above // Axl UWS-7416
+// $urvenue_ws_data = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified via urvenue_ws_check_nonce("urvenue_ws_inventory") above // Axl UWS-7416
 $urvenue_ws_data = array( // Axl UWS-8150
     'manageentid'  => isset( $_POST['manageentid'] )  ? sanitize_text_field( wp_unslash( $_POST['manageentid'] ) )  : '',
     'venueid'      => isset( $_POST['venueid'] )      ? sanitize_text_field( wp_unslash( $_POST['venueid'] ) )      : '',
@@ -36,7 +36,7 @@ $urvenue_ws_data = array( // Axl UWS-8150
 $urvenue_ws_data["phone"] = ($urvenue_ws_data["phonecode"] and $urvenue_ws_data["phonenumber"]) ? $urvenue_ws_data["phonecode"] . "." . $urvenue_ws_data["phonenumber"] : "";
 // $urvenue_ws_data["optinemail"] = (isset($_REQUEST["optin"])) ? $_REQUEST["optin"] : ""; // Axl UWS-7418
 // $urvenue_ws_data["optinemail"] = (isset($_REQUEST["optin"])) ? sanitize_text_field( wp_unslash( $_REQUEST["optin"] ) ) : ""; // Axl UWS-7418
-$urvenue_ws_data["optinemail"] = (isset($_REQUEST["optin"])) ? sanitize_text_field( wp_unslash( $_REQUEST["optin"] ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified via urvenue_ws_check_nonce("uwsinventory") above // Axl UWS-7416
+$urvenue_ws_data["optinemail"] = (isset($_REQUEST["optin"])) ? sanitize_text_field( wp_unslash( $_REQUEST["optin"] ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified via urvenue_ws_check_nonce("urvenue_ws_inventory") above // Axl UWS-7416
 
 unset($urvenue_ws_data["action"]);
 unset($urvenue_ws_data["uvaction"]);

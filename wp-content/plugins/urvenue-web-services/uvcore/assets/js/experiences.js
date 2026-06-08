@@ -51,8 +51,8 @@ function uwsExpLoadDate(){
 	let uvexperiencesurl = uws_proxy + "&uvaction=uwspx_loadexperiences" + "&date=" + uvexpelem.getAttribute("data-date");
 
 	// @egt [UWS-7297]
-	if(typeof uwsexperiencesvars !== "undefined" && uwsexperiencesvars.targetNonce) {
-		uvexperiencesurl = uvexperiencesurl + "&uws_nonce=" + encodeURIComponent(uwsexperiencesvars.targetNonce);
+	if(typeof urvenue_ws_experiences_vars !== "undefined" && urvenue_ws_experiences_vars.targetNonce) {
+		uvexperiencesurl = uvexperiencesurl + "&uws_nonce=" + encodeURIComponent(urvenue_ws_experiences_vars.targetNonce);
 	}
 
     let uvrequest = new XMLHttpRequest();

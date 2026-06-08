@@ -13,14 +13,14 @@ function urvenue_ws_shortcode_experiences_date_filter($atts, $content = null){ /
 	ob_start();
 
 	//include styles
-    wp_enqueue_style('uwscore-styles');
-	wp_enqueue_style('uws-experiences-styles');
+    wp_enqueue_style('urvenue-ws-core-styles');
+	wp_enqueue_style('urvenue-ws-experiences-styles');
 	wp_enqueue_style('litepicker');
-	wp_enqueue_style('uws-icons-styles');
+	wp_enqueue_style('urvenue-ws-icons-styles');
 
 	//include scripts
-	wp_enqueue_script('uwscore-scripts');
-	wp_enqueue_script('uws-experiences-scripts');
+	wp_enqueue_script('urvenue-ws-core-scripts');
+	wp_enqueue_script('urvenue-ws-experiences-scripts');
 	wp_enqueue_script('litepicker');
     
     include_once($urvenue_ws_path . "/includes/experiences-functions.php");
@@ -37,8 +37,8 @@ function urvenue_ws_shortcode_experiences_date_filter($atts, $content = null){ /
 
 	return $content;
 }
-// add_shortcode("uws_experiences_date_filter", "shrotcode_uws_experiences_date_filter");
-add_shortcode("uws_experiences_date_filter", "urvenue_ws_shortcode_experiences_date_filter"); // Axl UWS-7416
+// add_shortcode("urvenue_ws_experiences_date_filter", "shrotcode_uws_experiences_date_filter");
+add_shortcode("urvenue_ws_experiences_date_filter", "urvenue_ws_shortcode_experiences_date_filter"); // Axl UWS-7416
 
 //Experiences Filters + List
 // function shrotcode_uws_experiences($atts, $content = null){
@@ -54,22 +54,22 @@ function urvenue_ws_shortcode_experiences($atts, $content = null){ // Axl UWS-74
 	ob_start();
 
 	//include styles
-    wp_enqueue_style('uwscore-styles');
-	wp_enqueue_style('uws-experiences-styles');
-	wp_enqueue_style('uws-icons-styles');
-	wp_enqueue_style('uws-inventory-styles');
+    wp_enqueue_style('urvenue-ws-core-styles');
+	wp_enqueue_style('urvenue-ws-experiences-styles');
+	wp_enqueue_style('urvenue-ws-icons-styles');
+	wp_enqueue_style('urvenue-ws-inventory-styles');
 	wp_enqueue_style('litepicker');
 
 	if(isset($_REQUEST["apireq"])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only flag controlling asset enqueue, no state change // Axl UWS-7416
-		wp_enqueue_style('uws-apireq');
+		wp_enqueue_style('urvenue-ws-apireq');
 
 	//include scripts
-	wp_enqueue_script('uwscore-scripts');
-	wp_enqueue_script('uws-experiences-scripts');
+	wp_enqueue_script('urvenue-ws-core-scripts');
+	wp_enqueue_script('urvenue-ws-experiences-scripts');
 	wp_enqueue_script('litepicker');
 
 	if(isset($_REQUEST["apireq"])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only flag controlling asset enqueue, no state change // Axl UWS-7416
-        wp_enqueue_script('uws-apireq');
+        wp_enqueue_script('urvenue-ws-apireq');
     
     include_once($urvenue_ws_path . "/includes/experiences-functions.php");
 
@@ -96,8 +96,8 @@ function urvenue_ws_shortcode_experiences($atts, $content = null){ // Axl UWS-74
 
 	return $content;
 }
-// add_shortcode("uws_experiences", "shrotcode_uws_experiences");
-add_shortcode("uws_experiences", "urvenue_ws_shortcode_experiences"); // Axl UWS-7416
+// add_shortcode("urvenue_ws_experiences", "shrotcode_uws_experiences");
+add_shortcode("urvenue_ws_experiences", "urvenue_ws_shortcode_experiences"); // Axl UWS-7416
 
 
 //Related Experiences
@@ -112,10 +112,10 @@ function urvenue_ws_shortcode_related_experiences($atts, $content = null){ // Ax
 	ob_start();
 
 	//include styles
-    wp_enqueue_style('uwscore-styles');
-	wp_enqueue_style('uws-experiences-styles');
-	wp_enqueue_style('uws-icons-styles');
-	wp_enqueue_style('uws-inventory-styles');
+    wp_enqueue_style('urvenue-ws-core-styles');
+	wp_enqueue_style('urvenue-ws-experiences-styles');
+	wp_enqueue_style('urvenue-ws-icons-styles');
+	wp_enqueue_style('urvenue-ws-inventory-styles');
     
     include_once($urvenue_ws_path . "/includes/experiences-functions.php");
 
@@ -132,5 +132,5 @@ function urvenue_ws_shortcode_related_experiences($atts, $content = null){ // Ax
 
 	return $content;
 }
-// add_shortcode("uws_related_experiences", "shrotcode_uws_related_experiences");
-add_shortcode("uws_related_experiences", "urvenue_ws_shortcode_related_experiences"); // Axl UWS-7416
+// add_shortcode("urvenue_ws_related_experiences", "shrotcode_uws_related_experiences");
+add_shortcode("urvenue_ws_related_experiences", "urvenue_ws_shortcode_related_experiences"); // Axl UWS-7416

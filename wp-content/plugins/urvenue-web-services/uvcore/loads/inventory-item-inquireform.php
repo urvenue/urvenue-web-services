@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $urvenue_ws_core_lib;
 
 // @egt [UWS-7297]
-// uws_check_nonce("uwsinventory");
-urvenue_ws_check_nonce("uwsinventory"); // Axl UWS-7416
+// uws_check_nonce("urvenue_ws_inventory");
+urvenue_ws_check_nonce("urvenue_ws_inventory"); // Axl UWS-7416
 
 // $urvenue_ws_managementid = uws_cleanup_request("manageentid");
 $urvenue_ws_managementid = urvenue_ws_cleanup_request("manageentid"); // Axl UWS-7416

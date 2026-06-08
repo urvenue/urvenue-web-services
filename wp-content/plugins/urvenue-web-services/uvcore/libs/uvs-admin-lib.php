@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// $uws_core_version = "1.0.52";
+// $urvenue_ws_core_version = "1.0.52";
 $urvenue_ws_adm_core_version = "1.0.52"; // Axl UWS-7416
 // $uvs_envicode = "api";
 $urvenue_ws_adm_envicode = "api"; // Axl UWS-7416
@@ -14,9 +14,9 @@ $urvenue_ws_adm_proxyurl = urvenue_ws_adm_get_proxyurl(); // Axl UWS-7416
 // $uvs_admin_lib = array(
 $urvenue_ws_adm_admin_lib = array( // Axl UWS-7416
 	"loads" => array(
-		"checkveaid" => $urvenue_ws_adm_proxyurl . "?action=uvpx&uvaction=uvsp_veaidinfo",
-		"adminsave" => $urvenue_ws_adm_proxyurl . "?action=uvpx&uvaction=uvsp_adminsave",
-		"checkapiconfig" => $urvenue_ws_adm_proxyurl . "?action=uvpx&uvaction=uvsp_checkapiconfig",
+		"checkveaid" => $urvenue_ws_adm_proxyurl . "?action=urvenue_ws_proxy&uvaction=uvsp_veaidinfo",
+		"adminsave" => $urvenue_ws_adm_proxyurl . "?action=urvenue_ws_proxy&uvaction=uvsp_adminsave",
+		"checkapiconfig" => $urvenue_ws_adm_proxyurl . "?action=urvenue_ws_proxy&uvaction=uvsp_checkapiconfig",
 	)
 );
 

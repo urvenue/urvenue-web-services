@@ -88,7 +88,7 @@ function urvenue_ws_call_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = ""){ /
 */
 // function uws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = ""){
 function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = ""){ // Axl UWS-7416
-	global $urvenue_ws_feeds_path, $urvenue_ws_feeds_debug, $uws_config_manageentid;
+	global $urvenue_ws_feeds_path, $urvenue_ws_feeds_debug, $urvenue_ws_config_manageentid;
 
 	$uvfileexpiresat = $uvfilelastupdate = "";
     $uvfeefilenof = $uvupdateinfofile = false;
@@ -105,8 +105,8 @@ function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = 
     
     $uvfeedhash = hash('md5', $uvfeedurl);
 
-	if($uws_config_manageentid and preg_match("/^\d+$/", $uws_config_manageentid))
-		$uvfeedcachefolder = $urvenue_ws_feeds_path . "/" . $uws_config_manageentid;
+	if($urvenue_ws_config_manageentid and preg_match("/^\d+$/", $urvenue_ws_config_manageentid))
+		$uvfeedcachefolder = $urvenue_ws_feeds_path . "/" . $urvenue_ws_config_manageentid;
 	else
 		$uvfeedcachefolder = $urvenue_ws_feeds_path . "/global";
     
@@ -174,13 +174,13 @@ function urvenue_ws_get_cached_feed($uvfeedurl, $uvfeedexpiration, $uvfeedkey = 
 */
 // function uws_update_feeds_infofile($uvfeedinfo){
 function urvenue_ws_update_feeds_infofile($uvfeedinfo){ // Axl UWS-7416
-	global $urvenue_ws_feeds_path, $urvenue_ws_feedscleartime, $uws_config_manageentid, $urvenue_ws_feeds_debug;
+	global $urvenue_ws_feeds_path, $urvenue_ws_feedscleartime, $urvenue_ws_config_manageentid, $urvenue_ws_feeds_debug;
 
 	if($urvenue_ws_feeds_path and is_array($uvfeedinfo)){
 		$uvtimenow = time();
 
-		if($uws_config_manageentid and preg_match("/^\d+$/", $uws_config_manageentid))
-			$uvfeedcachefolder = $urvenue_ws_feeds_path . "/" . $uws_config_manageentid;
+		if($urvenue_ws_config_manageentid and preg_match("/^\d+$/", $urvenue_ws_config_manageentid))
+			$uvfeedcachefolder = $urvenue_ws_feeds_path . "/" . $urvenue_ws_config_manageentid;
 		else
 			$uvfeedcachefolder = $urvenue_ws_feeds_path . "/global";
 
@@ -435,12 +435,12 @@ function urvenue_ws_get_feed_nocache($uvfeedurl, $uvfeedkey = ""){ // Axl UWS-74
 /*Deletes all cache files*/
 // function uws_clean_cached_feeds(){
 function urvenue_ws_clean_cached_feeds(){ // Axl UWS-7416
-	global $urvenue_ws_feeds_path, $uws_config_manageentid, $urvenue_ws_feeds_debug;
+	global $urvenue_ws_feeds_path, $urvenue_ws_config_manageentid, $urvenue_ws_feeds_debug;
 
 	if($urvenue_ws_feeds_path){
         //$uvcachedir = "$urvenue_ws_feeds_path/global";
-		if($uws_config_manageentid and preg_match("/^\d+$/", $uws_config_manageentid))
-			$uvcachedir = $urvenue_ws_feeds_path . "/" . $uws_config_manageentid;
+		if($urvenue_ws_config_manageentid and preg_match("/^\d+$/", $urvenue_ws_config_manageentid))
+			$uvcachedir = $urvenue_ws_feeds_path . "/" . $urvenue_ws_config_manageentid;
 		else
 			$uvcachedir = $urvenue_ws_feeds_path . "/global";
 
