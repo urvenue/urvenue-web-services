@@ -2055,10 +2055,7 @@ function urvenue_ws_event($uvargs = ""){
         
 
         if($uvgeteventschema){
-            // @Axl
-            // $uvgeteventschemajson = json_encode($uvgeteventschema);
             $uvgeteventschemajson = wp_json_encode($uvgeteventschema);
-            // @Axl End
 	        $uveventschemainline .= "";
 
             add_action('wp_footer', function () use ($uvgeteventschemajson) {

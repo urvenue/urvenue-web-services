@@ -1,11 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-// $uvsinitialtab = "dashboard";
-$urvenue_ws_initialtab = "dashboard"; // Axl UWS-7416
 
-// @egt [UWS-7264]
-// function uvwp_adminpage_styles() {
-function urvenue_ws_adminpage_styles() { // Axl UWS-7416
+$urvenue_ws_initialtab = "dashboard";
+
+function urvenue_ws_adminpage_styles() {
     global $urvenue_ws_assetsversion;
 
     $uvwp_admin_css = "
@@ -23,15 +21,11 @@ function urvenue_ws_adminpage_styles() { // Axl UWS-7416
 		}
 	";
 
-    // wp_register_style('uvwp_admin_styles', false);
-    wp_register_style('urvenue_ws_admin_styles', false, array(), $urvenue_ws_assetsversion); // Axl UWS-7416
-    // wp_enqueue_style('uvwp_admin_styles');
-    wp_enqueue_style('urvenue_ws_admin_styles'); // Axl UWS-7416
-    // wp_add_inline_style('uvwp_admin_styles', $uvwp_admin_css);
-    wp_add_inline_style('urvenue_ws_admin_styles', $uvwp_admin_css); // Axl UWS-7416
+    wp_register_style('urvenue_ws_admin_styles', false, array(), $urvenue_ws_assetsversion);
+    wp_enqueue_style('urvenue_ws_admin_styles');
+    wp_add_inline_style('urvenue_ws_admin_styles', $uvwp_admin_css);
 }
-// add_action('wp_enqueue_scripts', 'uvwp_adminpage_styles');
-add_action('admin_enqueue_scripts', 'urvenue_ws_adminpage_styles'); // Axl UWS-7416
+add_action('admin_enqueue_scripts', 'urvenue_ws_adminpage_styles');
 
 ?>
 
@@ -41,7 +35,7 @@ add_action('admin_enqueue_scripts', 'urvenue_ws_adminpage_styles'); // Axl UWS-7
 	</div>
 
 	<div class="uvs-logo">
-		<a href="https://urvenue.com/"><img src="<?php /* Old: echo $urvenue_ws_url; */ echo esc_url( $urvenue_ws_url ); ?>/assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
+		<a href="https://urvenue.com/"><img src="<?php echo esc_url( $urvenue_ws_url ); ?>/assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
 	</div>
 	
 	<div class="uvs-content">

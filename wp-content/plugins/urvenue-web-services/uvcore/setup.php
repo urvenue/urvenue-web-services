@@ -8,81 +8,46 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 */
 
 
-// $uvs_uvcorepath = realpath(dirname(__FILE__));
-$urvenue_ws_uvcorepath = realpath(dirname(__FILE__)); // Axl UWS-7416
-// $uvs_uvcoreurl = "//" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]; // Axl UWS-7416
-// $uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( $_SERVER["HTTP_HOST"] ) ) . sanitize_text_field( wp_unslash( $_SERVER["REQUEST_URI"] ) ); // Axl UWS-7418
-// $uvs_uvcoreurl = "//" . sanitize_text_field( wp_unslash( isset( $_SERVER["HTTP_HOST"] ) ? $_SERVER["HTTP_HOST"] : '' ) ) . sanitize_text_field( wp_unslash( isset( $_SERVER["REQUEST_URI"] ) ? $_SERVER["REQUEST_URI"] : '' ) ); // Axl UWS-7418
-$urvenue_ws_uvcoreurl = "//" . sanitize_text_field( wp_unslash( isset( $_SERVER["HTTP_HOST"] ) ? $_SERVER["HTTP_HOST"] : '' ) ) . sanitize_text_field( wp_unslash( isset( $_SERVER["REQUEST_URI"] ) ? $_SERVER["REQUEST_URI"] : '' ) ); // Axl UWS-7416
+$urvenue_ws_uvcorepath = realpath(dirname(__FILE__));
+$urvenue_ws_uvcoreurl = "//" . sanitize_text_field( wp_unslash( isset( $_SERVER["HTTP_HOST"] ) ? $_SERVER["HTTP_HOST"] : '' ) ) . sanitize_text_field( wp_unslash( isset( $_SERVER["REQUEST_URI"] ) ? $_SERVER["REQUEST_URI"] : '' ) );
 $urvenue_ws_uvcoreurl = strtok($urvenue_ws_uvcoreurl, '?');
 $urvenue_ws_uvcoreurl = str_replace("/setup.php", "", $urvenue_ws_uvcoreurl);
 
-// $uvpath = isset($path) ? $path : $_REQUEST["path"]; // Axl UWS-7416
-// $uvpath = isset($path) ? $path : sanitize_text_field( wp_unslash( $_REQUEST["path"] ?? '' ) ); // Axl UWS-7418
-// $urvenue_ws_uvpath = isset($path) ? $path : sanitize_text_field( wp_unslash( $_REQUEST["path"] ?? '' ) ); // Axl UWS-7416
-// $urvenue_ws_uvpath = isset($path) ? $path : sanitize_text_field( wp_unslash( $_REQUEST["path"] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page // Axl UWS-7416
-$urvenue_ws_uvpath = isset($path) ? $path : ''; // Axl UWS-8152
-// $uvurl = isset($url) ? $url : $_REQUEST["url"]; // Axl UWS-7416
-// $uvurl = isset($url) ? $url : esc_url_raw( wp_unslash( $_REQUEST["url"] ?? '' ) ); // Axl UWS-7418
-// $urvenue_ws_uvurl = isset($url) ? $url : esc_url_raw( wp_unslash( $_REQUEST["url"] ?? '' ) ); // Axl UWS-7416
-// $urvenue_ws_uvurl = isset($url) ? $url : esc_url_raw( wp_unslash( $_REQUEST["url"] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page // Axl UWS-7416
-$urvenue_ws_uvurl = isset($url) ? $url : ''; // Axl UWS-8152
-// $uvlibrary = isset($library) ? $library : $_REQUEST["library"]; // Axl UWS-7416
-// $uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_REQUEST["library"] ?? '' ) ); // Axl UWS-7418
-// $urvenue_ws_uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_REQUEST["library"] ?? '' ) ); // Axl UWS-7416
-// $urvenue_ws_uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_REQUEST["library"] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page // Axl UWS-7416
-$urvenue_ws_uvlibrary = isset($library) ? $library : ''; // Axl UWS-8152
-// $uvwrite = isset($write) ? $white : $_REQUEST["write"]; // Axl UWS-7416
-// $uvwrite = isset($write) ? $write : absint( $_REQUEST["write"] ?? 0 ); // Axl UWS-7418
-// $urvenue_ws_uvwrite = isset($write) ? $write : absint( $_REQUEST["write"] ?? 0 ); // Axl UWS-7416
-// $urvenue_ws_uvwrite = isset($write) ? $write : absint( $_REQUEST["write"] ?? 0 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page // Axl UWS-7416
-$urvenue_ws_uvwrite = isset($write) ? $write : 0; // Axl UWS-8152
+$urvenue_ws_uvpath = isset($path) ? $path : '';
+$urvenue_ws_uvurl = isset($url) ? $url : '';
+$urvenue_ws_uvlibrary = isset($library) ? $library : '';
+$urvenue_ws_uvwrite = isset($write) ? $write : 0;
 
-if ( isset( $_POST['urvenue_ws_setup_nonce'] ) ) { // Axl UWS-8152
+if ( isset( $_POST['urvenue_ws_setup_nonce'] ) ) {
 	if ( ! current_user_can( 'manage_options' ) ||
-	     ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['urvenue_ws_setup_nonce'] ) ), 'urvenue_ws_setup_action' ) ) { // Axl UWS-8152
-		wp_die( 'Invalid security token.', '', array( 'response' => 403 ) ); // Axl UWS-8152
-	} // Axl UWS-8152
-	$urvenue_ws_uvpath    = isset($path)    ? $path    : sanitize_text_field( wp_unslash( $_POST["path"]    ?? '' ) ); // Axl UWS-8152
-	$urvenue_ws_uvurl     = isset($url)     ? $url     : esc_url_raw( wp_unslash( $_POST["url"]              ?? '' ) ); // Axl UWS-8152
-	$urvenue_ws_uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_POST["library"] ?? '' ) ); // Axl UWS-8152
-	$urvenue_ws_uvwrite   = isset($write)   ? $write   : absint( $_POST["write"] ?? 0 ); // Axl UWS-8152
+	     ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['urvenue_ws_setup_nonce'] ) ), 'urvenue_ws_setup_action' ) ) {
+		wp_die( 'Invalid security token.', '', array( 'response' => 403 ) );
+	}
+	$urvenue_ws_uvpath    = isset($path)    ? $path    : sanitize_text_field( wp_unslash( $_POST["path"]    ?? '' ) );
+	$urvenue_ws_uvurl     = isset($url)     ? $url     : esc_url_raw( wp_unslash( $_POST["url"]              ?? '' ) );
+	$urvenue_ws_uvlibrary = isset($library) ? $library : sanitize_text_field( wp_unslash( $_POST["library"] ?? '' ) );
+	$urvenue_ws_uvwrite   = isset($write)   ? $write   : absint( $_POST["write"] ?? 0 );
 
-	// if($_REQUEST["manual"]){ // Axl UWS-7416
-	// if( isset( $_REQUEST["manual"] ) && sanitize_text_field( wp_unslash( $_REQUEST["manual"] ) ) ){ // Axl UWS-7418
-	// if( isset( $_REQUEST["manual"] ) && sanitize_text_field( wp_unslash( $_REQUEST["manual"] ) ) ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page // Axl UWS-7416
-	if ( isset( $_POST["manual"] ) && sanitize_text_field( wp_unslash( $_POST["manual"] ) ) ) { // Axl UWS-8152
-		// $uvslibinfojson = file_get_contents("uvcore.lib.json");
-		$urvenue_ws_uvslibinfojson = file_get_contents("uvcore.lib.json"); // Axl UWS-7416
+	if ( isset( $_POST["manual"] ) && sanitize_text_field( wp_unslash( $_POST["manual"] ) ) ) {
+		$urvenue_ws_uvslibinfojson = file_get_contents("uvcore.lib.json");
 
-		// $uvslib = json_decode($uvslibinfojson, true);
-		$urvenue_ws_uvslib = json_decode($urvenue_ws_uvslibinfojson, true); // Axl UWS-7416
+		$urvenue_ws_uvslib = json_decode($urvenue_ws_uvslibinfojson, true);
 
-		// if(is_array($uvslib["system"]) and (!$_REQUEST["nconf"])) // Axl UWS-7416
-		// if(is_array($urvenue_ws_uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // Axl UWS-7416
-		if(is_array($urvenue_ws_uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page // Axl UWS-7416
+		if(is_array($urvenue_ws_uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page
 			header("location: $urvenue_ws_uvurl" . "/admin.php");
 	}
-} // Axl UWS-8152
+}
 	
 if($urvenue_ws_uvwrite == 1){
-	// $uvs_lib = array(
-	$urvenue_ws_uvs_lib = array( // Axl UWS-7416
+	$urvenue_ws_uvs_lib = array(
 		"system" => array(
 			"path" => $urvenue_ws_uvpath,
 			"url" => $urvenue_ws_uvurl,
 			"library" => $urvenue_ws_uvlibrary
 		)
 	);
-	// @Axl
-	// $uvs_lib = json_encode($uvs_lib);
-	$urvenue_ws_uvs_lib = wp_json_encode($urvenue_ws_uvs_lib); // Axl UWS-7416
-	// @Axl End
+	$urvenue_ws_uvs_lib = wp_json_encode($urvenue_ws_uvs_lib);
 
-	// $fp = fopen("$uvlibrary", "w+");
-	// $urvenue_ws_fp = fopen("$urvenue_ws_uvlibrary", "w+"); // Axl UWS-7416
-	// fwrite($urvenue_ws_fp, $urvenue_ws_uvs_lib); // Axl UWS-7416
-	// fclose($urvenue_ws_fp); // Axl UWS-7416
 	global $wp_filesystem;
 	if ( ! function_exists( 'WP_Filesystem' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -90,31 +55,25 @@ if($urvenue_ws_uvwrite == 1){
 	if ( empty( $wp_filesystem ) ) {
 		WP_Filesystem();
 	}
-	$wp_filesystem->put_contents( $urvenue_ws_uvlibrary, $urvenue_ws_uvs_lib ); // Axl UWS-7416
+	$wp_filesystem->put_contents( $urvenue_ws_uvlibrary, $urvenue_ws_uvs_lib );
 
 	header("location: $urvenue_ws_uvurl" . "/admin.php");
 
 	exit();
 }
 
-// $uverrorshtml = "";
-$urvenue_ws_uverrorshtml = ""; // Axl UWS-7416
-// $uvmanualwritehtml = "";
-$urvenue_ws_uvmanualwritehtml = ""; // Axl UWS-7416
-// $uvaddsubmitvarscript = "";
-$urvenue_ws_uvaddsubmitvarscript = ""; // Axl UWS-7416
-// $uvpathok = false;
-$urvenue_ws_uvpathok = false; // Axl UWS-7416
+$urvenue_ws_uverrorshtml = "";
+$urvenue_ws_uvmanualwritehtml = "";
+$urvenue_ws_uvaddsubmitvarscript = "";
+$urvenue_ws_uvpathok = false;
 
 if($urvenue_ws_uvpath){
 	if(file_exists($urvenue_ws_uvpath)){
-		// $uvpathclass = "uvs-setupfield-ok";
-		$urvenue_ws_uvpathclass = "uvs-setupfield-ok"; // Axl UWS-7416
+		$urvenue_ws_uvpathclass = "uvs-setupfield-ok";
 		$urvenue_ws_uvpathok = true;
 	}
 	else{
-		// $uvpathclass = "uvs-setupfield-nok";
-		$urvenue_ws_uvpathclass = "uvs-setupfield-nok"; // Axl UWS-7416
+		$urvenue_ws_uvpathclass = "uvs-setupfield-nok";
 		$urvenue_ws_uverrorshtml = "<div class='uvs-setup-error'><strong>UvCore Path</strong> is not an existing folder, make sure you use the correct directory.</div>";
 	}
 }
@@ -123,79 +82,64 @@ if($urvenue_ws_uvpath){
 	Permissions for files: 664 - 666(uv)
 	Permissions for folder: 775 - 777(uv)
 */
-global $wp_filesystem; // Axl UWS-7416
-if ( ! function_exists( 'WP_Filesystem' ) ) { // Axl UWS-7416
-	require_once ABSPATH . 'wp-admin/includes/file.php'; // Axl UWS-7416
-} // Axl UWS-7416
-if ( empty( $wp_filesystem ) ) { // Axl UWS-7416
-	WP_Filesystem(); // Axl UWS-7416
-} // Axl UWS-7416
+global $wp_filesystem;
+if ( ! function_exists( 'WP_Filesystem' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+}
+if ( empty( $wp_filesystem ) ) {
+	WP_Filesystem();
+}
 
 if($urvenue_ws_uvlibrary){
 	if(file_exists($urvenue_ws_uvlibrary)){
-		// if(is_writable($urvenue_ws_uvlibrary)){ // Axl UWS-7416
-		if( $wp_filesystem->is_writable( $urvenue_ws_uvlibrary ) ){ // Axl UWS-7416
-			// $uvlibraryclass = "uvs-setupfield-ok";
-			$urvenue_ws_uvlibraryclass = "uvs-setupfield-ok"; // Axl UWS-7416
+		if( $wp_filesystem->is_writable( $urvenue_ws_uvlibrary ) ){
+			$urvenue_ws_uvlibraryclass = "uvs-setupfield-ok";
 			if($urvenue_ws_uvpathok)
 				$urvenue_ws_uvaddsubmitvarscript = "uvsetupsubmit = true;";
 		}
 		else{
-			// $uvlibraryclass = "uvs-setupfield-wng";
-			$urvenue_ws_uvlibraryclass = "uvs-setupfield-wng"; // Axl UWS-7416
+			$urvenue_ws_uvlibraryclass = "uvs-setupfield-wng";
 			$urvenue_ws_uverrorshtml .= "<div class='uvs-setup-warning'><strong>Library File</strong> is not writable, please try editing the files permissions or edit the file manually.</div>";
 
 			if($urvenue_ws_uvpathok)
 				$urvenue_ws_uvmanualwritehtml = "<button class='uvs-btn uvs-btn-s uvsjs-btn-setup-manually' type='button'>Write File Manually</button>";
 		}
 	}
-	// else if($urvenue_ws_uvpath and is_writable($urvenue_ws_uvpath)){ // Axl UWS-7416
-	else if($urvenue_ws_uvpath and $wp_filesystem->is_writable( $urvenue_ws_uvpath )){ // Axl UWS-7416
+	else if($urvenue_ws_uvpath and $wp_filesystem->is_writable( $urvenue_ws_uvpath )){
 		if($urvenue_ws_uvpathok)
 			$urvenue_ws_uvaddsubmitvarscript = "uvsetupsubmit = true;";
 	}
 	else{
-		// $uvlibraryclass = "uvs-setupfield-nok";
-		$urvenue_ws_uvlibraryclass = "uvs-setupfield-nok"; // Axl UWS-7416
+		$urvenue_ws_uvlibraryclass = "uvs-setupfield-nok";
 		$urvenue_ws_uverrorshtml .= "<div class='uvs-setup-error'><strong>Library File</strong> does not exist. Please create the file.</div>";
 	}
 }
 
 if($urvenue_ws_uvurl){
-	// $uvs_lib = array(
-	$urvenue_ws_uvs_lib = array( // Axl UWS-7416
+	$urvenue_ws_uvs_lib = array(
 		"system" => array(
 			"path" => $urvenue_ws_uvpath,
 			"url" => $urvenue_ws_uvurl,
 			"library" => $urvenue_ws_uvlibrary
 		)
 	);
-	// @Axl
-	// $uvs_lib = json_encode($uvs_lib);
-	$urvenue_ws_uvs_lib = wp_json_encode($urvenue_ws_uvs_lib); // Axl UWS-7416
-	// @Axl End
+	
+	$urvenue_ws_uvs_lib = wp_json_encode($urvenue_ws_uvs_lib);
+	 End
 
-	// $uvurlscript = "";
-	$urvenue_ws_uvurlscript = ""; // Axl UWS-7416
+	$urvenue_ws_uvurlscript = "";
 }
 
-// $uvs_uvcorepath = ($uvpath) ? $uvpath : $uvs_uvcorepath;
-$urvenue_ws_uvcorepath = ($urvenue_ws_uvpath) ? $urvenue_ws_uvpath : $urvenue_ws_uvcorepath; // Axl UWS-7416
-// $uvs_uvcoreurl = ($uvurl) ? $uvurl : $uvs_uvcoreurl;
-$urvenue_ws_uvcoreurl = ($urvenue_ws_uvurl) ? $urvenue_ws_uvurl : $urvenue_ws_uvcoreurl; // Axl UWS-7416
-// $uvs_libexit = false;
-$urvenue_ws_uvs_libexit = false; // Axl UWS-7416
+$urvenue_ws_uvcorepath = ($urvenue_ws_uvpath) ? $urvenue_ws_uvpath : $urvenue_ws_uvcorepath;
+$urvenue_ws_uvcoreurl = ($urvenue_ws_uvurl) ? $urvenue_ws_uvurl : $urvenue_ws_uvcoreurl;
+$urvenue_ws_uvs_libexit = false;
 
 if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
-	// $uvslibinfojson = file_get_contents("uvcore.lib.json");
-	$urvenue_ws_uvslibinfojson = file_get_contents("uvcore.lib.json"); // Axl UWS-7416
+	$urvenue_ws_uvslibinfojson = file_get_contents("uvcore.lib.json");
 
-	// $uvslib = json_decode($uvslibinfojson, true);
-	$urvenue_ws_uvslib = json_decode($urvenue_ws_uvslibinfojson, true); // Axl UWS-7416
+	$urvenue_ws_uvslib = json_decode($urvenue_ws_uvslibinfojson, true);
 
-	// if(is_array($uvslib["system"]) and (!$_REQUEST["nconf"])) // Axl UWS-7416
-	// if(is_array($urvenue_ws_uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // Axl UWS-7416
-	if(is_array($urvenue_ws_uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page // Axl UWS-7416
+	if(is_array($urvenue_ws_uvslib["system"]) and ( !isset( $_REQUEST["nconf"] ) || !sanitize_text_field( wp_unslash( $_REQUEST["nconf"] ) ) )) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Setup wizard config form; admin-only page
 		$urvenue_ws_uvs_libexit = true;
 }
 
@@ -210,7 +154,6 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 	<title>UvCore | Setup</title>
 	
 	<?php
-		// @egt [UWS-7264]
 		add_action('setup_enqueue_scripts', function(){
 			global $urvenue_ws_assetsversion, $urvenue_ws_uvurl, $urvenue_ws_uvs_lib, $urvenue_ws_uvaddsubmitvarscript;
 
@@ -230,12 +173,9 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 				}
 			";
 
-			// wp_register_style('uvwp_setup_styles', '');
-			wp_register_style('urvenue_ws_setup_styles', '', array(), $urvenue_ws_assetsversion); // Axl UWS-7416
-			// wp_enqueue_style('uvwp_setup_styles');
-			wp_enqueue_style('urvenue_ws_setup_styles'); // Axl UWS-7416
-			// wp_add_inline_style('uvwp_setup_styles', $uvwp_setup_css);
-			wp_add_inline_style('urvenue_ws_setup_styles', $uvwp_setup_css); // Axl UWS-7416
+			wp_register_style('urvenue_ws_setup_styles', '', array(), $urvenue_ws_assetsversion);
+			wp_enqueue_style('urvenue_ws_setup_styles');
+			wp_add_inline_style('urvenue_ws_setup_styles', $uvwp_setup_css);
 
 			wp_enqueue_style('urvenue-ws-system-css', $uvbaseurl . 'assets/css/system.css', array(), $urvenue_ws_assetsversion, 'all');
 			wp_enqueue_style('setup-css', $uvbaseurl . 'assets/css/setup.css', array(), $urvenue_ws_assetsversion, 'all');
@@ -273,33 +213,33 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 			<form id="uvs-form-setup" method="post" action="setup.php">
 				<input id="uvs-input-write" type="hidden" name="write" value="0">
 				<input id="uvs-input-manuallib" type="hidden" name="manual" value="0">
-				<?php wp_nonce_field( 'urvenue_ws_setup_action', 'urvenue_ws_setup_nonce' ); // Axl UWS-8152 ?>
+				<?php wp_nonce_field( 'urvenue_ws_setup_action', 'urvenue_ws_setup_nonce' ); ?>
 				
 				<div class="uvs-setupfields">
-					<div class="uvs-setupfield <?php /* Old: echo $uvpathclass; */ echo esc_attr( $urvenue_ws_uvpathclass ); ?> uvs-clearfix">
+					<div class="uvs-setupfield <?php echo esc_attr( $urvenue_ws_uvpathclass ); ?> uvs-clearfix">
 						<div><label for="path">UvCore Path</label></div>
-						<div><input id="path" class="uvsjs-copytoinput" data-addafter="/uvcore.lib.json" data-target="#library" type="text" name="path" value="<?php /* Old: echo $uvs_uvcorepath; */ echo esc_attr( $urvenue_ws_uvcorepath ); ?>"></div>
+						<div><input id="path" class="uvsjs-copytoinput" data-addafter="/uvcore.lib.json" data-target="#library" type="text" name="path" value="<?php echo esc_attr( $urvenue_ws_uvcorepath ); ?>"></div>
 					</div>
 					<div class="uvs-setupfield uvs-clearfix">
 						<div><label for="url">UvCore URL</label></div>
-						<div><input id="url" type="text" name="url" value="<?php /* Old: echo $uvs_uvcoreurl; */ echo esc_attr( $urvenue_ws_uvcoreurl ); ?>"></div>
+						<div><input id="url" type="text" name="url" value="<?php echo esc_attr( $urvenue_ws_uvcoreurl ); ?>"></div>
 					</div>
-					<div class="uvs-setupfield <?php /* Old: echo $uvlibraryclass; */ echo esc_attr( $urvenue_ws_uvlibraryclass ); ?> uvs-clearfix">
+					<div class="uvs-setupfield <?php echo esc_attr( $urvenue_ws_uvlibraryclass ); ?> uvs-clearfix">
 						<div><label for="library">Library File</label></div>
-						<div><input id="library" type="text" name="library" value="<?php /* Old: echo $uvs_uvcorepath; */ echo esc_attr( $urvenue_ws_uvcorepath ); ?>/uvcore.lib.json" readonly></div>
+						<div><input id="library" type="text" name="library" value="<?php echo esc_attr( $urvenue_ws_uvcorepath ); ?>/uvcore.lib.json" readonly></div>
 					</div>
 				</div>
 				
 				<div class="uvs-setup-errors">
-					<?php // @Axl ?>
-					<?php /* echo $uverrorshtml; */ echo wp_kses_post( $urvenue_ws_uverrorshtml ); ?>
-					<?php // @Axl End ?>
+					<?php  ?>
+					<?php echo wp_kses_post( $urvenue_ws_uverrorshtml ); ?>
+					<?php  End ?>
 				</div>
 				
 				<div class="uvs-setupbuttons">
-					<?php // @Axl ?>
-					<?php /* echo $uvmanualwritehtml; */ echo wp_kses_post( $urvenue_ws_uvmanualwritehtml ); ?>
-					<?php // @Axl End ?>
+					<?php  ?>
+					<?php echo wp_kses_post( $urvenue_ws_uvmanualwritehtml ); ?>
+					<?php  End ?>
 					<button class="uvs-btn uvs-btn-p" type="submit">Submit</button>
 				</div>
 			</form>	
@@ -320,8 +260,8 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 	</div>
 	
 	
-	<?php // @Axl ?>
-	<?php /* echo $uvurlscript; */ echo wp_kses_post( $urvenue_ws_uvurlscript ); ?>
-	<?php // @Axl End ?>
+	<?php  ?>
+	<?php echo wp_kses_post( $urvenue_ws_uvurlscript ); ?>
+	<?php  End ?>
 </body>
 </html>
