@@ -125,7 +125,6 @@ if($urvenue_ws_uvurl){
 	);
 	
 	$urvenue_ws_uvs_lib = wp_json_encode($urvenue_ws_uvs_lib);
-	 End
 
 	$urvenue_ws_uvurlscript = "";
 }
