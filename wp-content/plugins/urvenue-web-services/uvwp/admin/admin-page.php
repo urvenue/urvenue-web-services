@@ -35,7 +35,7 @@ add_action('admin_enqueue_scripts', 'urvenue_ws_adminpage_styles');
 	</div>
 
 	<div class="uvs-logo">
-		<a href="https://urvenue.com/"><img src="<?php echo esc_url( $urvenue_ws_url ); ?>/assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
+		<a href="https://urvenue.com/"><img src="<?php echo esc_url( $urvenue_ws_coreurl ); ?>/assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
 	</div>
 	
 	<div class="uvs-content">
