@@ -1,13 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// define('UWS_SECURITY_MAX_BODY', 1024 * 1024);
-define('URVENUE_WS_SECURITY_MAX_BODY', 1024 * 1024); // Axl UWS-7416
-// define('UWS_SECURITY_BLOCK', true);
-define('URVENUE_WS_SECURITY_BLOCK', true); // Axl UWS-7416
+define('URVENUE_WS_SECURITY_MAX_BODY', 1024 * 1024);
+define('URVENUE_WS_SECURITY_BLOCK', true);
 
-// $urvenue_ws_patterns = array_values(array_unique([
-$urvenue_ws_patterns = array_values(array_unique([ // Axl UWS-7416
+$urvenue_ws_patterns = array_values(array_unique([
     '/DBMS_PIPE/i',
     '/RECEIVE_MESSAGE/i',
     '/CHR\(\d+\)/i',
@@ -76,13 +73,11 @@ $urvenue_ws_patterns = array_values(array_unique([ // Axl UWS-7416
     '/%25/i',
 ]));
 
-// function uws_security_log($msg) {
-function urvenue_ws_security_log($msg) { // Axl UWS-7416
+function urvenue_ws_security_log($msg) {
     error_log('[UWS_SECURITY] ' . $msg);
 }
 
-// function uws_security_matches(array $patterns, $haystack, &$which = null) {
-function urvenue_ws_security_matches(array $patterns, $haystack, &$which = null) { // Axl UWS-7416
+function urvenue_ws_security_matches(array $patterns, $haystack, &$which = null) {
     if (!is_string($haystack) || $haystack === '') return false;
     foreach ($patterns as $p) {
         if (@preg_match($p, $haystack, $m)) {
@@ -93,31 +88,24 @@ function urvenue_ws_security_matches(array $patterns, $haystack, &$which = null)
     return false;
 }
 
-// function uws_security_check_params_injection(){
-function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
+function urvenue_ws_security_check_params_injection(){
     global $urvenue_ws_patterns;
 
-    // $max = UWS_SECURITY_MAX_BODY;
-    $max = URVENUE_WS_SECURITY_MAX_BODY; // Axl UWS-7416
-    $bodyRaw = @file_get_contents('php://input', false, null, 0, $max + 1);
+    $max = URVENUE_WS_SECURITY_MAX_BODY;
+    $bodyRaw = @file_get_contents('php://input', false, null, 0, $max + 1); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- raw request body stream, not a remote file
     if ($bodyRaw === false) $bodyRaw = '';
-    $GLOBALS['URVENUE_WS_RAW_BODY'] = $bodyRaw; // Axl UWS-7416
+    $GLOBALS['URVENUE_WS_RAW_BODY'] = $bodyRaw;
 
     $param_parts = [];
-    foreach ($_GET as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Intentionally scanning raw request data for WAF/security pattern detection // Axl UWS-7416
-    // foreach ($_POST as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v);
-    foreach ($_POST as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Intentionally scanning raw POST data for WAF/security pattern detection // Axl UWS-7416
+    foreach ($_GET as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Intentionally scanning raw request data for WAF/security pattern detection
+    foreach ($_POST as $k => $v) $param_parts[] = $k . '=' . (is_array($v) ? implode(',', $v) : (string)$v); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Intentionally scanning raw POST data for WAF/security pattern detection
     $params_string = implode('&', $param_parts);
 
-    // $ct = $_SERVER['CONTENT_TYPE'] ?? ($_SERVER['HTTP_CONTENT_TYPE'] ?? ''); // Axl UWS-7418
-    $ct = sanitize_text_field( wp_unslash( $_SERVER['CONTENT_TYPE'] ?? ($_SERVER['HTTP_CONTENT_TYPE'] ?? '') ) ); // Axl UWS-7418
+    $ct = sanitize_text_field( wp_unslash( $_SERVER['CONTENT_TYPE'] ?? ($_SERVER['HTTP_CONTENT_TYPE'] ?? '') ) );
     $body_to_check = $body_decoded = '';
     if (stripos($ct, 'application/json') !== false) {
         $data = @json_decode($bodyRaw, true);
-        // @Axl
-        // $body_to_check = $body_decoded = is_array($data) ? json_encode($data) : $bodyRaw;
         $body_to_check = $body_decoded = is_array($data) ? wp_json_encode($data) : $bodyRaw;
-        // @Axl End
     } elseif (stripos($ct, 'application/x-www-form-urlencoded') !== false) {
         $body_to_check = $bodyRaw;
         $body_decoded  = urldecode($bodyRaw);
@@ -128,8 +116,7 @@ function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
 
     $combined_raw     = trim($params_string . ' ' . $body_to_check);
     $combined_decoded = trim($params_string . ' ' . $body_decoded);
-    // $query_raw        = $_SERVER['QUERY_STRING'] ?? ''; // Axl UWS-7418
-    $query_raw        = sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ?? '' ) ); // Axl UWS-7418
+    $query_raw        = sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ?? '' ) );
     $query_decoded    = urldecode($query_raw);
 
     $haystacks = [
@@ -138,7 +125,7 @@ function urvenue_ws_security_check_params_injection(){ // Axl UWS-7416
         'combined_raw'    => $combined_raw,
         'combined_decoded'=> $combined_decoded,
     ];
-    foreach ($_GET as $k => $v) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Intentionally scanning raw GET data for WAF/security pattern detection // Axl UWS-7416
+    foreach ($_GET as $k => $v) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Intentionally scanning raw GET data for WAF/security pattern detection
         $haystacks["GET:$k"] = is_array($v) ? implode(',', $v) : (string)$v;
     }
 

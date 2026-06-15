@@ -1,29 +1,44 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+/* Reads a local file through the WordPress filesystem API.
+	Requires: uvfilepath (local filesystem path)
+	Returns: file contents as string, or false if missing/unreadable
+*/
+function urvenue_ws_read_file($uvfilepath){
+	if(!$uvfilepath or !file_exists($uvfilepath))
+		return false;
+
+	global $wp_filesystem;
+	if ( ! function_exists( 'WP_Filesystem' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+	}
+	if ( empty( $wp_filesystem ) ) {
+		WP_Filesystem();
+	}
+
+	return $wp_filesystem->get_contents( $uvfilepath );
+}
+
 // Get uvcore library, set global variables
-// function uws_get_core_library(){
-function urvenue_ws_get_core_library(){ // Axl UWS-7416
+function urvenue_ws_get_core_library(){
 	global $urvenue_ws_path, $urvenue_ws_core_defaults_lib;
 	
 	$uvscorelibarray = "";
 	
-	// if(uws_is_wordpress()){//if is wordpress
-	if(urvenue_ws_is_wordpress()){//if is wordpress // Axl UWS-7416
-        // $uvscorelibjson = get_option("uvcore_lib");
-        $uvscorelibjson = get_option("urvenue_ws_uvcore_lib"); // Axl UWS-7416
+	if(urvenue_ws_is_wordpress()){//if is wordpress
+        $uvscorelibjson = get_option("urvenue_ws_uvcore_lib");
         $uvscorelibarray = json_decode($uvscorelibjson, true);
     }
 	if($urvenue_ws_path and file_exists($urvenue_ws_path . "/uvcore.lib.json")){
-		$uvscorelibjson = file_get_contents($urvenue_ws_path . "/uvcore.lib.json");
+		$uvscorelibjson = urvenue_ws_read_file($urvenue_ws_path . "/uvcore.lib.json");
 		$uvscorelibarray = json_decode($uvscorelibjson, true);
 	}
 	
 	if(!is_array($uvscorelibarray) or !is_array($uvscorelibarray["system"]))
 		$uvscorelibarray = false;
 
-	// $uvscorelibarray = (is_array($uvscorelibarray)) ? uws_lib_add_defaults($uvscorelibarray) : $urvenue_ws_core_defaults_lib;
-	$uvscorelibarray = (is_array($uvscorelibarray)) ? urvenue_ws_lib_add_defaults($uvscorelibarray) : $urvenue_ws_core_defaults_lib; // Axl UWS-7416
+	$uvscorelibarray = (is_array($uvscorelibarray)) ? urvenue_ws_lib_add_defaults($uvscorelibarray) : $urvenue_ws_core_defaults_lib;
 
 	//Set Basic Variables if they are not pressent
 	if(is_array($uvscorelibarray) and !isset($uvscorelibarray["system"]["path"]))
@@ -35,21 +50,19 @@ function urvenue_ws_get_core_library(){ // Axl UWS-7416
 		
 	return $uvscorelibarray;
 }
-// function uws_get_today(){
-function urvenue_ws_get_today(){ // Axl UWS-7416
+
+function urvenue_ws_get_today(){
     global $urvenue_ws_today;
 
-    $uvtoday = ($urvenue_ws_today) ? $urvenue_ws_today : gmdate("Y-m-d"); // Axl UWS-7416
+    $uvtoday = ($urvenue_ws_today) ? $urvenue_ws_today : gmdate("Y-m-d");
 
     return $uvtoday;
 }
 
 // Add default values to library
-// function uws_lib_add_defaults($uvcorelibarray){
-function urvenue_ws_lib_add_defaults($uvcorelibarray){ // Axl UWS-7416
+function urvenue_ws_lib_add_defaults($uvcorelibarray){
     global $urvenue_ws_core_defaults_lib;
 
-    //$uvnewcorelibarray = array_merge($urvenue_ws_core_defaults_lib, $uvcorelibarray);
 	$uvnewcorelibarray = $uvcorelibarray;
 
 	if(is_array($urvenue_ws_core_defaults_lib)){
@@ -66,8 +79,7 @@ function urvenue_ws_lib_add_defaults($uvcorelibarray){ // Axl UWS-7416
     return $uvnewcorelibarray;
 }
 
-// function uws_get_share_links($uvshareurl){
-function urvenue_ws_get_share_links($uvshareurl){ // Axl UWS-7416
+function urvenue_ws_get_share_links($uvshareurl){
 	$uvsharelinks = "";
 
 	if($uvshareurl){
@@ -84,31 +96,25 @@ function urvenue_ws_get_share_links($uvshareurl){ // Axl UWS-7416
 }
 
 // Include styles on head
-//updated with enqueue for @egt [UWS-7264]
-// function uws_include_styles(){
-function urvenue_ws_core_include_styles(){ // Axl UWS-7416
+function urvenue_ws_core_include_styles(){
     global $urvenue_ws_url, $urvenue_ws_assetsversion;
 
 	wp_enqueue_style('uvcore-css', $urvenue_ws_url . '/assets/css/uvcore.css', array(), $urvenue_ws_assetsversion, 'all');
     wp_enqueue_style('urvenue-ws-icons-css', $urvenue_ws_url . '/assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
 }
-// add_action('wp_enqueue_scripts', 'uws_include_styles');
 
-// Include styles on head 
-//updated with enqueue for @egt [UWS-7264]
-// function uws_include_scripts(){
-function urvenue_ws_core_include_scripts(){ // Axl UWS-7416
+// Include styles on head
+function urvenue_ws_core_include_scripts(){
     global $urvenue_ws_url, $urvenue_ws_assetsversion;
 
 	wp_register_script('uvcore-js',  $urvenue_ws_url . '/assets/js/uvcore.js', array(), $urvenue_ws_assetsversion, array('strategy' => 'async', 'in_footer' => true));
 	wp_enqueue_script('uvcore-js');
-}// add_action('wp_enqueue_scripts', 'uws_include_scripts');
+}
 
 /*Get css vars script
     Returns: string with css vars form global styles
 */ 
-// function uws_get_css_vars(){
-function urvenue_ws_get_css_vars(){ // Axl UWS-7416
+function urvenue_ws_get_css_vars(){
 	global $urvenue_ws_theme_vars, $urvenue_ws_poptheme_vars, $urvenue_ws_core_lib, $urvenue_ws_config_uitheme, $urvenue_ws_config_uipoptheme;
 
 	$uvcssstyles = "";
@@ -174,8 +180,7 @@ function urvenue_ws_get_css_vars(){ // Axl UWS-7416
 }
 
 /*Check if is wordpress*/
-// function uws_is_wordpress(){
-function urvenue_ws_is_wordpress(){ // Axl UWS-7416
+function urvenue_ws_is_wordpress(){
 	$uviswordpress = 0;
 
 	if(function_exists('get_option') and function_exists('add_menu_page'))
@@ -185,10 +190,8 @@ function urvenue_ws_is_wordpress(){ // Axl UWS-7416
 }
 
 /*Get string returns string for url*/
-// function uws_get_linkstring($string){
-function urvenue_ws_get_linkstring($string){ // Axl UWS-7416
-    // $string = uws_get_string2u($string, "-");
-    $string = urvenue_ws_get_string2u($string, "-"); // Axl UWS-7416
+function urvenue_ws_get_linkstring($string){
+    $string = urvenue_ws_get_string2u($string, "-");
     $string = preg_replace("|[^a-zA-Z0-9_]|", "-", $string);
     $string = preg_replace("|-+|", "-", $string);
     
@@ -204,8 +207,7 @@ function urvenue_ws_get_linkstring($string){ // Axl UWS-7416
 }
 
 /*Clean special chars*/
-// function uws_get_string2u($string, $uchar){
-function urvenue_ws_get_string2u($string, $uchar){ // Axl UWS-7416
+function urvenue_ws_get_string2u($string, $uchar){
     global $urvenue_ws_cleanchars_lib;
  
     if(!$uchar)
@@ -224,8 +226,7 @@ function urvenue_ws_get_string2u($string, $uchar){ // Axl UWS-7416
 /*Get argument by code
 	Requires: args(var with args), argcode(code for the argument), argdef(default value for the argument)
 */
-// function uws_get_arg($uvargs, $uvargcode, $uvargdef = ""){
-function urvenue_ws_get_arg($uvargs, $uvargcode, $uvargdef = ""){ // Axl UWS-7416
+function urvenue_ws_get_arg($uvargs, $uvargcode, $uvargdef = ""){
 	$uvthearg = "";
 
 	if(is_array($uvargs) and isset($uvargs[$uvargcode]) and $uvargs[$uvargcode])
@@ -239,8 +240,7 @@ function urvenue_ws_get_arg($uvargs, $uvargcode, $uvargdef = ""){ // Axl UWS-741
 /*Get template content
 	Requires: template(template code or html template)
 */
-// function uws_get_template($uvtemplate){
-function urvenue_ws_get_template($uvtemplate){ // Axl UWS-7416
+function urvenue_ws_get_template($uvtemplate){
 	global $urvenue_ws_path, $urvenue_ws_alttemplatepath, $urvenue_ws_core_lib;
 
 	$uvtemplatecontent = "";
@@ -252,31 +252,23 @@ function urvenue_ws_get_template($uvtemplate){ // Axl UWS-7416
 		$uvcustomtemplatename = (isset($urvenue_ws_core_lib["system"]["templates-custom-folder"])) ? $urvenue_ws_core_lib["system"]["templates-custom-folder"] : "uwstemplates";
 		$uvteamplatepath = $urvenue_ws_path . "/includes/templates/" . $uvtemplate . ".html";
 		
-		// if(uws_get_cur_lang() != "en" and file_exists($urvenue_ws_path . "/includes/templates/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
-		if(urvenue_ws_get_cur_lang() != "en" and file_exists($urvenue_ws_path . "/includes/templates/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html")) // Axl UWS-7416
-			// $uvteamplatepath = $urvenue_ws_path . "/includes/templates/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
-			$uvteamplatepath = $urvenue_ws_path . "/includes/templates/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
+		if(urvenue_ws_get_cur_lang() != "en" and file_exists($urvenue_ws_path . "/includes/templates/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"))
+			$uvteamplatepath = $urvenue_ws_path . "/includes/templates/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html";
 
-		// if(uws_is_wordpress() and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename .  "/" . $uvtemplate . ".html"))
-		if(urvenue_ws_is_wordpress() and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename .  "/" . $uvtemplate . ".html")) // Axl UWS-7416
+		if(urvenue_ws_is_wordpress() and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename .  "/" . $uvtemplate . ".html"))
 			$uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/" . $uvtemplate . ".html";
 
-		// if(uws_is_wordpress() and uws_get_cur_lang() != "en" and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
-		if(urvenue_ws_is_wordpress() and urvenue_ws_get_cur_lang() != "en" and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html")) // Axl UWS-7416
-			// $uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
-			$uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
+		if(urvenue_ws_is_wordpress() and urvenue_ws_get_cur_lang() != "en" and file_exists(get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"))
+			$uvteamplatepath = get_stylesheet_directory() . "/" . $uvcustomtemplatename . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html";
 
 		if($urvenue_ws_alttemplatepath and file_exists($urvenue_ws_alttemplatepath . "/" . $uvtemplate . ".html"))
 			$uvteamplatepath = $urvenue_ws_alttemplatepath . "/" . $uvtemplate . ".html";
 
-		// if($urvenue_ws_alttemplatepath and uws_get_cur_lang() != "en" and file_exists($urvenue_ws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html"))
-		if($urvenue_ws_alttemplatepath and urvenue_ws_get_cur_lang() != "en" and file_exists($urvenue_ws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html")) // Axl UWS-7416
-			// $uvteamplatepath = $urvenue_ws_alttemplatepath . "/langs/" . uws_get_cur_lang() . "/" . $uvtemplate . ".html";
-			$uvteamplatepath = $urvenue_ws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"; // Axl UWS-7416
+		if($urvenue_ws_alttemplatepath and urvenue_ws_get_cur_lang() != "en" and file_exists($urvenue_ws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html"))
+			$uvteamplatepath = $urvenue_ws_alttemplatepath . "/langs/" . urvenue_ws_get_cur_lang() . "/" . $uvtemplate . ".html";
 
 		if(file_exists($uvteamplatepath)){
-			// $uvtemplatecontent  = uws_api_call($uvteamplatepath, 1);
-			$uvtemplatecontent  = urvenue_ws_api_call($uvteamplatepath, 1); // Axl UWS-7416
+			$uvtemplatecontent  = urvenue_ws_api_call($uvteamplatepath, 1);
 		}
 	}
 
@@ -287,8 +279,7 @@ function urvenue_ws_get_template($uvtemplate){ // Axl UWS-7416
 	Requires: Name of the dummy
 	Returns: Array with the dummy content
 */
-// function uws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){
-function urvenue_ws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){ // Axl UWS-7416
+function urvenue_ws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){
 	global $urvenue_ws_path;
 
 	$uvdummycontent = "";
@@ -297,8 +288,7 @@ function urvenue_ws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){ // A
 		$uvdummypath = $urvenue_ws_path . "/libs/dummies/" . $uvdummycode . "." . $uvdummytype;
 
 		if(file_exists($uvdummypath)){
-			// $uvdummycontent  = uws_api_call($uvdummypath, 1);
-			$uvdummycontent  = urvenue_ws_api_call($uvdummypath, 1); // Axl UWS-7416
+			$uvdummycontent  = urvenue_ws_api_call($uvdummypath, 1);
 			if($uvdummycontent and $uvdummytype == "json")
 				$uvdummycontent = json_decode($uvdummycontent, 1);
 		}
@@ -310,8 +300,7 @@ function urvenue_ws_get_dummyapi($uvdummycode = "", $uvdummytype = "json"){ // A
 /*Get svg icon 
 	Requires: Icon key
 */
-// function uws_get_icon($uviconkey = ""){
-function urvenue_ws_get_icon($uviconkey = ""){ // Axl UWS-7416
+function urvenue_ws_get_icon($uviconkey = ""){
 	global $urvenue_ws_path;
 
 	$uvicon = "";
@@ -320,8 +309,7 @@ function urvenue_ws_get_icon($uviconkey = ""){ // Axl UWS-7416
 		$uviconpath = $urvenue_ws_path . "/includes/icons/" . $uviconkey . ".svg";
 
 		if(file_exists($uviconpath)){
-			// $uvicon  = uws_api_call($uviconpath, 1);
-			$uvicon  = urvenue_ws_api_call($uviconpath, 1); // Axl UWS-7416
+			$uvicon  = urvenue_ws_api_call($uviconpath, 1);
 		}
 	}
 
@@ -332,8 +320,7 @@ function urvenue_ws_get_icon($uviconkey = ""){ // Axl UWS-7416
 	Requires: Array with the list to show
 	Returns: html with the list (only <li>)
 */
-// function uws_get_optionslist($uvlist, $uvselected = "", $uvtype = "", $uvnolink = ""){
-function urvenue_ws_get_optionslist($uvlist, $uvselected = "", $uvtype = "", $uvnolink = ""){ // Axl UWS-7416
+function urvenue_ws_get_optionslist($uvlist, $uvselected = "", $uvtype = "", $uvnolink = ""){
 	$uvlisthtml = "";
 
 	if(is_array($uvlist)){
@@ -363,13 +350,11 @@ function urvenue_ws_get_optionslist($uvlist, $uvselected = "", $uvtype = "", $uv
     Optional: selected phone code, format: [US]+1
     Returns: html with phone code options
 */
-// function uws_get_phonecode_options($uvphonecode = ""){
-function urvenue_ws_get_phonecode_options($uvphonecode = ""){ // Axl UWS-7416
+function urvenue_ws_get_phonecode_options($uvphonecode = ""){
     $uvphonecodeopts = "";
     $uvphonecode = ($uvphonecode == "") ? "[US]+1" : $uvphonecode;
 
-    // $uvphonecodes = uws_get_dummyapi("phonecodes");
-    $uvphonecodes = urvenue_ws_get_dummyapi("phonecodes"); // Axl UWS-7416
+    $uvphonecodes = urvenue_ws_get_dummyapi("phonecodes");
 
     if(is_array($uvphonecodes)){
         preg_match('/\[(.*?)\]/', $uvphonecode, $uvmatches);
@@ -392,11 +377,10 @@ function urvenue_ws_get_phonecode_options($uvphonecode = ""){ // Axl UWS-7416
 	Optional: creditstype(kind of credits to show)
 	Returns: html with powered by urvenue
 */
-// function uws_get_uwscredits($uvcreditstype = ""){
-function urvenue_ws_get_uwscredits($uvcreditstype = ""){ // Axl UWS-7416
+function urvenue_ws_get_uwscredits($uvcreditstype = ""){
 	global $urvenue_ws_core_lib, $urvenue_ws_config_uitheme, $urvenue_ws_theme_vars, $urvenue_ws_url;
 
-	if(!$urvenue_ws_core_lib["system"]["show-credits"]) return ""; // Axl UWS-8146
+	if(!$urvenue_ws_core_lib["system"]["show-credits"]) return "";
 
 	$uvuitheme = $urvenue_ws_core_lib["ui"]["uitheme"];
 	$uvuitheme = ($urvenue_ws_theme_vars[$uvuitheme]) ? $uvuitheme : "light";
@@ -413,8 +397,7 @@ function urvenue_ws_get_uwscredits($uvcreditstype = ""){ // Axl UWS-7416
 	Optional: proxysection(section to return, example: events)
 	Returns: Proxy array for given key
 */
-// function uws_get_proxies($uvproxysection = ""){
-function urvenue_ws_get_proxies($uvproxysection = ""){ // Axl UWS-7416
+function urvenue_ws_get_proxies($uvproxysection = ""){
 	global $urvenue_ws_proxies_lib;
 
 	$uvproxies = "";
@@ -433,8 +416,7 @@ function urvenue_ws_get_proxies($uvproxysection = ""){ // Axl UWS-7416
  * @param string $uvmore The string to append if the text is trimmed.
  * @return string The trimmed string.
  */
-// function uws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = "..."){
-function urvenue_ws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = "..."){ // Axl UWS-7416
+function urvenue_ws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = "..."){
     $uvtext = preg_replace('/<.*?>/', ' $0 ', $uvtext);
     $uvwordsarray = preg_split('/\s+/', $uvtext, -1, PREG_SPLIT_NO_EMPTY);
     $uvwordcount = count($uvwordsarray);
@@ -451,8 +433,7 @@ function urvenue_ws_trim_words_with_html($uvtext, $uvmaxwords = 50, $uvmore = ".
 	Optional: proxysection(section to return, example: events)
 	Returns: Proxy script html
 */
-// function uws_get_proxies_script($uvproxysection = ""){
-function urvenue_ws_get_proxies_script($uvproxysection = ""){ // Axl UWS-7416
+function urvenue_ws_get_proxies_script($uvproxysection = ""){
 	global $urvenue_ws_proxies_lib, $urvenue_ws_assetsversion;
 
 	$uvproxies = $urvenue_ws_proxies_lib;
@@ -460,22 +441,14 @@ function urvenue_ws_get_proxies_script($uvproxysection = ""){ // Axl UWS-7416
 	if($uvproxysection and is_array($urvenue_ws_proxies_lib[$uvproxysection]))
 		$uvproxies = $urvenue_ws_proxies_lib[$uvproxysection];
 
-	// @Axl
-	// $uvproxiesjson = json_encode($uvproxies);
 	$uvproxiesjson = wp_json_encode($uvproxies);
-	// @Axl End
 	$uvproxiesscript = "";
 
-	// @egt [UWS-7264]
-	// $urvenue_ws_proxies_script = "window.uws_proxies = window.uws_proxies || {}; uws_proxies = $uvproxiesjson;";
-	$urvenue_ws_proxies_script = "window.urvenue_ws_proxies = window.urvenue_ws_proxies || {}; urvenue_ws_proxies = $uvproxiesjson;"; // Axl UWS-7416
+	$urvenue_ws_proxies_script = "window.urvenue_ws_proxies = window.urvenue_ws_proxies || {}; urvenue_ws_proxies = $uvproxiesjson;";
 
-	// wp_register_script('uws_proxies', false, array(), null, true);
-	wp_register_script('urvenue_ws_proxies', false, array(), $urvenue_ws_assetsversion, true); // Axl UWS-7416
-	// wp_enqueue_script('uws_proxies');
-	wp_enqueue_script('urvenue_ws_proxies'); // Axl UWS-7416
-	// wp_add_inline_script('uws_proxies', "(function () { {$urvenue_ws_proxies_script} })();");
-	wp_add_inline_script('urvenue_ws_proxies', "(function () { {$urvenue_ws_proxies_script} })();"); // Axl UWS-7416
+	wp_register_script('urvenue_ws_proxies', false, array(), $urvenue_ws_assetsversion, true);
+	wp_enqueue_script('urvenue_ws_proxies');
+	wp_add_inline_script('urvenue_ws_proxies', "(function () { {$urvenue_ws_proxies_script} })();");
 
 	return $uvproxiesscript;
 }
@@ -483,13 +456,11 @@ function urvenue_ws_get_proxies_script($uvproxysection = ""){ // Axl UWS-7416
 /*Get time formated
 	Required: time (time on uv format "12200" first digit 1 = same day, 2 = after midnight, las 4 params: HHMM)
 */
-// function uws_get_formattime($uvtime, $uvreturnarray = 0){
-function urvenue_ws_get_formattime($uvtime, $uvreturnarray = 0){ // Axl UWS-7416
+function urvenue_ws_get_formattime($uvtime, $uvreturnarray = 0){
 	$uvdtime = "";
 
 	if($uvtime){
-    	// $uvdtime = date("g:ia", strtotime(substr($uvtime, 1, 4)));
-    	$uvdtime = gmdate("g:ia", strtotime(substr($uvtime, 1, 4))); // Axl UWS-7416
+    	$uvdtime = gmdate("g:ia", strtotime(substr($uvtime, 1, 4)));
 		$uvisaftermid = (substr($uvtime, 0, 1) == "2") ? 1 : 0;
 
 		if($uvreturnarray)
@@ -508,8 +479,7 @@ function urvenue_ws_get_formattime($uvtime, $uvreturnarray = 0){ // Axl UWS-7416
 	Required: date, time (time on uv format "12200" first digit 1 = same day, 2 = after midnight, las 4 params: HHMM): 
 	Returns: YYYY-MM-DDThh:mm:ss
 */
-// function uws_get_iso_time($uvdate = "", $uvtime = ""){
-function urvenue_ws_get_iso_time($uvdate = "", $uvtime = ""){ // Axl UWS-7416
+function urvenue_ws_get_iso_time($uvdate = "", $uvtime = ""){
 	$uvisotime = "";
 
 	if($uvdate){
@@ -517,11 +487,9 @@ function urvenue_ws_get_iso_time($uvdate = "", $uvtime = ""){ // Axl UWS-7416
 
 		if($uvtime){
 			if(substr($uvtime, 0, 1) == "2")
-				// $uvisotime = date("Y-m-d", strtotime($uvisotime . " +1 day"));
-				$uvisotime = gmdate("Y-m-d", strtotime($uvisotime . " +1 day")); // Axl UWS-7416
+				$uvisotime = gmdate("Y-m-d", strtotime($uvisotime . " +1 day"));
 
-			// $uvtimeiso = date("H:i:s", strtotime(substr($uvtime, 1, 4)));
-			$uvtimeiso = gmdate("H:i:s", strtotime(substr($uvtime, 1, 4))); // Axl UWS-7416
+			$uvtimeiso = gmdate("H:i:s", strtotime(substr($uvtime, 1, 4)));
 			$uvisotime = $uvisotime . "T" . $uvtimeiso;
 		}
 	}
@@ -532,8 +500,7 @@ function urvenue_ws_get_iso_time($uvdate = "", $uvtime = ""){ // Axl UWS-7416
 /*Get duration format
 	Required: minutes
 */
-// function uws_get_formatduration($uvminutes = ""){
-function urvenue_ws_get_formatduration($uvminutes = ""){ // Axl UWS-7416
+function urvenue_ws_get_formatduration($uvminutes = ""){
 	$uvdduration = "";
 
 	if($uvminutes){
@@ -548,9 +515,8 @@ function urvenue_ws_get_formatduration($uvminutes = ""){ // Axl UWS-7416
 	Required: time (time on uv format "12200" first digit 1 = same day, 2 = after midnight, las 4 params: HHMM), minutes to add
 	Returns: formated time
 */
-// function uws_add_minutestotime($uvtime, $uvminutes){
-function urvenue_ws_add_minutestotime($uvtime, $uvminutes){ // Axl UWS-7416
-	$uvnewtime = substr($uvtime, 0, 1) . gmdate("Hi", strtotime(substr($uvtime, 1, 4) . " +$uvminutes minutes")); // Axl UWS-7416
+function urvenue_ws_add_minutestotime($uvtime, $uvminutes){
+	$uvnewtime = substr($uvtime, 0, 1) . gmdate("Hi", strtotime(substr($uvtime, 1, 4) . " +$uvminutes minutes"));
 
 	return $uvnewtime;
 }
@@ -559,15 +525,12 @@ function urvenue_ws_add_minutestotime($uvtime, $uvminutes){ // Axl UWS-7416
     Requires: starttime(uv format), endtime(uv format), frequency(minutes)
     Returns: n time slots on the range of time
 */
-// function uws_get_ntimerows($uvstarttime, $uvendtime, $uvfrequency = 60){
-function urvenue_ws_get_ntimerows($uvstarttime, $uvendtime, $uvfrequency = 60){ // Axl UWS-7416
+function urvenue_ws_get_ntimerows($uvstarttime, $uvendtime, $uvfrequency = 60){
     $uvntimerows = 0;
 
     if($uvstarttime and $uvendtime and $uvfrequency){
-        // $uvstarttimeminutes = uws_uvtimetominutes($uvstarttime);
-        $uvstarttimeminutes = urvenue_ws_uvtimetominutes($uvstarttime); // Axl UWS-7416
-        // $uvendtimeminutes = uws_uvtimetominutes($uvendtime);
-        $uvendtimeminutes = urvenue_ws_uvtimetominutes($uvendtime); // Axl UWS-7416
+        $uvstarttimeminutes = urvenue_ws_uvtimetominutes($uvstarttime);
+        $uvendtimeminutes = urvenue_ws_uvtimetominutes($uvendtime);
 
         $uvntimerows = floor(($uvendtimeminutes - $uvstarttimeminutes) / $uvfrequency);
     }
@@ -579,8 +542,7 @@ function urvenue_ws_get_ntimerows($uvstarttime, $uvendtime, $uvfrequency = 60){ 
 	Required: time (time on uv format "12200" first digit 1 = same day, 2 = after midnight, las 4 params: HHMM), minutes to add
 	Returns: n minutes
 */
-// function uws_uvtimetominutes($uvtime){
-function urvenue_ws_uvtimetominutes($uvtime){ // Axl UWS-7416
+function urvenue_ws_uvtimetominutes($uvtime){
     $uvfactor = substr($uvtime, 0, 1) / 1;
     $uvhours = substr($uvtime, 1, 2) / 1;
     $uvminutes = substr($uvtime, 3, 2) / 1;
@@ -589,13 +551,11 @@ function urvenue_ws_uvtimetominutes($uvtime){ // Axl UWS-7416
 }
 
 /*Get proxy url*/
-// function uws_get_proxyurl(){
-function urvenue_ws_get_proxyurl(){ // Axl UWS-7416
+function urvenue_ws_get_proxyurl(){
 	global $urvenue_ws_url, $urvenue_ws_config_proxyurl;
 
 	$uvproxyurl = "";
-	// if(uws_is_wordpress())//is wordpress
-	if(urvenue_ws_is_wordpress())//is wordpress // Axl UWS-7416
+	if(urvenue_ws_is_wordpress())//is wordpress
 		$uvproxyurl = admin_url('admin-ajax.php');
 	else if($urvenue_ws_config_proxyurl)
 		$uvproxyurl = $urvenue_ws_config_proxyurl;
@@ -608,12 +568,10 @@ function urvenue_ws_get_proxyurl(){ // Axl UWS-7416
 /*Get main proxy script
 	Returns: html script with main uws proxy
 */
-// function uws_get_proxy_script(){
-function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
+function urvenue_ws_get_proxy_script(){
 	global $urvenue_ws_config_addproxyparams, $urvenue_ws_assetsversion;
 
-	// $uvproxy = uws_get_proxyurl();
-	$uvproxy = urvenue_ws_get_proxyurl(); // Axl UWS-7416
+	$uvproxy = urvenue_ws_get_proxyurl();
 	if (strpos($uvproxy, '?') === false)
 		$uvproxy .= "?action=urvenue_ws_proxy";
 	else
@@ -622,21 +580,11 @@ function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
 	$uvproxy .= $urvenue_ws_config_addproxyparams;
 	$uvproxiesscript = "";
 
-	// @egt [UWS-7264]
-	// $urvenue_ws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';";
-	// $urvenue_ws_proxy_script = "window.urvenue_ws_proxy = window.urvenue_ws_proxy || {}; urvenue_ws_proxy = '$uvproxy';";
-	// $urvenue_ws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '$uvproxy';"; // Axl UWS-7416
 	$urvenue_ws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '" . esc_js( esc_url( $uvproxy ) ) . "';"; // Axl UWS-8151
 
-	// wp_register_script('urvenue-ws-proxy', false, array(), null, true);
-	// wp_register_script('urvenue_ws_proxy', false, array(), null, true);
-	wp_register_script('urvenue-ws-proxy', false, array(), $urvenue_ws_assetsversion, true); // Axl UWS-7416
-	// wp_enqueue_script('urvenue-ws-proxy');
-	// wp_enqueue_script('urvenue_ws_proxy');
-	wp_enqueue_script('urvenue-ws-proxy'); // Axl UWS-7416
-	// wp_add_inline_script('urvenue-ws-proxy', "(function () { {$urvenue_ws_proxy_script} })();");
-	// wp_add_inline_script('urvenue_ws_proxy', "(function () { {$urvenue_ws_proxy_script} })();");
-	wp_add_inline_script('urvenue-ws-proxy', "(function () { {$urvenue_ws_proxy_script} })();"); // Axl UWS-7416
+	wp_register_script('urvenue-ws-proxy', false, array(), $urvenue_ws_assetsversion, true);
+	wp_enqueue_script('urvenue-ws-proxy');
+	wp_add_inline_script('urvenue-ws-proxy', "(function () { {$urvenue_ws_proxy_script} })();");
 
 	return $uvproxiesscript;
 }
@@ -645,8 +593,7 @@ function urvenue_ws_get_proxy_script(){ // Axl UWS-7416
 	Requires: venuecode
 	Returns: Array with venue info
 */
-// function uws_get_venuelibinfo_byvenuecode($uvvenuecode){
-function urvenue_ws_get_venuelibinfo_byvenuecode($uvvenuecode){ // Axl UWS-7416
+function urvenue_ws_get_venuelibinfo_byvenuecode($uvvenuecode){
 	global $urvenue_ws_core_lib;
 
 	$uvvenueinfo = "";
@@ -667,8 +614,7 @@ function urvenue_ws_get_venuelibinfo_byvenuecode($uvvenuecode){ // Axl UWS-7416
 	Requires: venuekey
 	Returns: string with name of the venue
 */
-// function uws_get_venuename_byvenuekey($uvvenuekey){
-function urvenue_ws_get_venuename_byvenuekey($uvvenuekey){ // Axl UWS-7416
+function urvenue_ws_get_venuename_byvenuekey($uvvenuekey){
 	global $urvenue_ws_core_lib;
 
 	$uvvenuename = "";
@@ -685,8 +631,7 @@ function urvenue_ws_get_venuename_byvenuekey($uvvenuekey){ // Axl UWS-7416
 /*Cleanup string variables to make requests
 	Requires: uvstring
 */
-// function uws_cleanup_var($uvstring){
-function urvenue_ws_cleanup_var($uvstring){ // Axl UWS-7416
+function urvenue_ws_cleanup_var($uvstring){
 	while(substr($uvstring, -1) == "\\")
   		$uvstring = substr($uvstring, 0, -1);
 
@@ -718,8 +663,7 @@ function urvenue_ws_cleanup_var($uvstring){ // Axl UWS-7416
 	return $uvstring;
 }
 
-// function uws_get_theme() {
-function urvenue_ws_get_theme() { // Axl UWS-7416
+function urvenue_ws_get_theme() {
 	global $urvenue_ws_core_lib, $urvenue_ws_config_uitheme, $urvenue_ws_theme_vars;
 
 	$uvuitheme = $urvenue_ws_core_lib["ui"]["uitheme"];
@@ -729,8 +673,7 @@ function urvenue_ws_get_theme() { // Axl UWS-7416
 	return "uws-" . $uvuitheme;
 }
 
-// function uws_get_popup_theme() {
-function urvenue_ws_get_popup_theme() { // Axl UWS-7416
+function urvenue_ws_get_popup_theme() {
 	global $urvenue_ws_core_lib, $urvenue_ws_config_uipoptheme, $urvenue_ws_poptheme_vars;
 
 	$uvuipotheme = $urvenue_ws_core_lib["ui"]["uipoptheme"];
@@ -740,27 +683,20 @@ function urvenue_ws_get_popup_theme() { // Axl UWS-7416
 	return "uws-" . $uvuipotheme;
 }
 
-// @egt [UWS-7297]
-// function uws_check_nonce($uvnonce) {
-function urvenue_ws_check_nonce($uvnonce) { // Axl UWS-7416
-	// if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) {
-	// if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce(wp_unslash($_REQUEST['uws_nonce']), $uvnonce)) { // Axl UWS-7416
+function urvenue_ws_check_nonce($uvnonce) {
 	if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['uws_nonce'] ) ), $uvnonce)) { // Axl UWS-7418
 		wp_send_json_error(array('message' => 'Invalid nonce'), 403);
 	}
 }
 
-// @egt [UWS-7297]
-// function uws_cleanup_request(string $uv_request, string $uv_default = ''): string {
-function urvenue_ws_cleanup_request(string $uv_request, string $uv_default = ''): string { // Axl UWS-7416
-    if(!isset($_REQUEST[$uv_request])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Generic helper; nonce verification is caller's responsibility // Axl UWS-7416
+function urvenue_ws_cleanup_request(string $uv_request, string $uv_default = ''): string {
+    if(!isset($_REQUEST[$uv_request])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Generic helper; nonce verification is caller's responsibility
         return $uv_default;
     }
 
-    // return uws_cleanup_var(
-    return urvenue_ws_cleanup_var( // Axl UWS-7416
+    return urvenue_ws_cleanup_var(
         sanitize_text_field(
-            wp_unslash($_REQUEST[$uv_request]) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Generic helper; nonce verification is caller's responsibility // Axl UWS-7416
+            wp_unslash($_REQUEST[$uv_request]) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Generic helper; nonce verification is caller's responsibility
         )
     );
 }
