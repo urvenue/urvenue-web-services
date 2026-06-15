@@ -61,13 +61,6 @@ add_action('admin_enqueue_scripts', 'urvenue_ws_adminpage_styles'); // Axl UWS-7
 
 <?php
 
-// @egt [UWS-7264]
-// add_action('wp_footer', function () use ($urvenue_ws_core_lib) {
-add_action('admin_footer', function () use ($urvenue_ws_core_lib) { // Axl UWS-7416
-	// @Axl
-	// echo "<script>var uvs_core_lib = " . json_encode($urvenue_ws_core_lib) . ";</script>";
-	echo "<script>var uvs_core_lib = " . wp_json_encode($urvenue_ws_core_lib) . ";</script>";
-	// @Axl End
-});
+wp_localize_script('urvenue-ws-admin', 'uvs_core_lib', $urvenue_ws_core_lib);
 
 ?>

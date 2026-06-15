@@ -220,7 +220,7 @@ function urvenue_ws_events_views($uvargs = "", $uvreturnarray = false)
         $uvviewshtml .= $uveventsschemainline;
 
         add_action('wp_footer', function () use ($uveventsschemajson) {
-            echo "<script type='application/ld+json'>$uveventsschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output
+            wp_print_inline_script_tag( $uveventsschemajson, array( 'type' => 'application/ld+json' ) );
         });
     }
 
@@ -2062,8 +2062,7 @@ function urvenue_ws_event($uvargs = ""){
 	        $uveventschemainline .= "";
 
             add_action('wp_footer', function () use ($uvgeteventschemajson) {
-                // echo "<script type='application/ld+json'>$uvgeteventschemajson</script>";
-                echo "<script type='application/ld+json'>$uvgeteventschemajson</script>"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD structured data output
+                wp_print_inline_script_tag( $uvgeteventschemajson, array( 'type' => 'application/ld+json' ) );
             });
         }
 
