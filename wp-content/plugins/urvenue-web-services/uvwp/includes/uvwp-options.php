@@ -17,39 +17,39 @@ function urvenue_ws_options_page(){
     );
 }
 
-function urvenue_ws_include_adminstyles(){ 
-    global $urvenue_ws_uvwp_url, $urvenue_ws_url, $urvenue_ws_assetsversion;
+function urvenue_ws_include_adminstyles(){
+    global $urvenue_ws_uvwp_url, $urvenue_ws_coreurl, $urvenue_ws_assetsversion;
 
     wp_register_style('uvwp-admin', $urvenue_ws_uvwp_url . '/assets/css/uvwp-admin.css', false, $urvenue_ws_assetsversion);
 	wp_enqueue_style('uvwp-admin');
 
-	wp_register_style('urvenue-ws-systembase', $urvenue_ws_url . '/assets/css/system-base.css', false, $urvenue_ws_assetsversion);
+	wp_register_style('urvenue-ws-systembase', $urvenue_ws_coreurl . '/assets/css/system-base.css', false, $urvenue_ws_assetsversion);
 	wp_enqueue_style('urvenue-ws-systembase');
 
-    wp_register_style('urvenue-ws-system', $urvenue_ws_url . '/assets/css/system.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-system', $urvenue_ws_coreurl . '/assets/css/system.css', false, $urvenue_ws_assetsversion);
 	wp_enqueue_style('urvenue-ws-system');
 
-    wp_register_style('urvenue-ws-icons', $urvenue_ws_url . '/assets/css/uwsicons.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('urvenue-ws-icons', $urvenue_ws_coreurl . '/assets/css/uwsicons.css', false, $urvenue_ws_assetsversion);
 	wp_enqueue_style('urvenue-ws-icons');
 
-    wp_register_style('flatpickr', $urvenue_ws_url . '/assets/css/flatpickr.min.css', false, $urvenue_ws_assetsversion);
+    wp_register_style('flatpickr', $urvenue_ws_coreurl . '/assets/css/flatpickr.min.css', false, $urvenue_ws_assetsversion);
     wp_enqueue_style('flatpickr');
 
 }
 add_action('admin_enqueue_scripts', 'urvenue_ws_include_adminstyles'); 
 
-function urvenue_ws_include_adminscripts(){ 
-    global $urvenue_ws_url;
+function urvenue_ws_include_adminscripts(){
+    global $urvenue_ws_coreurl;
 
     wp_enqueue_style( 'wp-color-picker' );
 
-    wp_register_script('jquery-validate', $urvenue_ws_url . '/assets/js/jquery.validate.min.js', array('jquery'), 1, true);
+    wp_register_script('jquery-validate', $urvenue_ws_coreurl . '/assets/js/jquery.validate.min.js', array('jquery'), 1, true);
     wp_enqueue_script('jquery-validate');
 
-    wp_register_script('urvenue-ws-admin', $urvenue_ws_url . '/assets/js/admin.js', array('jquery', 'wp-color-picker'), 1, true);
+    wp_register_script('urvenue-ws-admin', $urvenue_ws_coreurl . '/assets/js/admin.js', array('jquery', 'wp-color-picker'), 1, true);
     wp_enqueue_script('urvenue-ws-admin');
 
-    wp_register_script('flatpickr', $urvenue_ws_url . '/assets/js/flatpickr.min.js', false, 1, true);
+    wp_register_script('flatpickr', $urvenue_ws_coreurl . '/assets/js/flatpickr.min.js', false, 1, true);
     wp_enqueue_script('flatpickr');
 }
 add_action('admin_enqueue_scripts', 'urvenue_ws_include_adminscripts'); 
@@ -68,6 +68,7 @@ function urvenue_ws_include_styles(){
     //Global Styles, included on all pages
     wp_register_style('urvenue-ws-core-styles', $urvenue_ws_coreurl . '/assets/css/uwscore.css', false, $urvenue_ws_assetsversion);
     wp_enqueue_style('urvenue-ws-core-styles');
+    wp_add_inline_style('urvenue-ws-core-styles', urvenue_ws_get_css_vars());
 
     wp_register_style('urvenue-ws-icons-styles', $urvenue_ws_coreurl . '/assets/css/uwsicons.css', false, $urvenue_ws_assetsversion);
     wp_enqueue_style('urvenue-ws-icons-styles');
@@ -108,14 +109,6 @@ function urvenue_ws_include_styles(){
     }
 }
 add_action('wp_enqueue_scripts', 'urvenue_ws_include_styles'); 
-
-//Add <head> styles for css vars
-function urvenue_ws_add_head_styles(){
-    $uvcssvars = urvenue_ws_get_css_vars(); 
-
-    echo '<style>' . wp_strip_all_tags( $uvcssvars ) . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS output; wp_strip_all_tags() prevents HTML/script injection
-}
-add_action('wp_head', 'urvenue_ws_add_head_styles', 50); 
 
 //Add scripts to footer
 function urvenue_ws_add_footer_scripts(){
