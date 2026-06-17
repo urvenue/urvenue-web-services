@@ -2,58 +2,48 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // Testing function - remove after testing
-// function uws_test_notices() {
-function urvenue_ws_test_notices() { // Axl UWS-7416
+function urvenue_ws_test_notices() {
     echo "Testing notice system...\n";
     
     // Test 1: First call should send
     echo "Test 1 (should send): ";
-    // $result1 = uws_website_notices_send("noevents", "Test notification #1");
-    $result1 = urvenue_ws_website_notices_send("noevents", "Test notification #1"); // Axl UWS-7416
+    $result1 = urvenue_ws_website_notices_send("noevents", "Test notification #1");
     echo $result1 ? "✅ SENT\n" : "❌ NOT SENT\n";
     
     // Test 2: Immediate second call should NOT send (throttled)
     echo "Test 2 (should NOT send - throttled): ";
-    // $result2 = uws_website_notices_send("noevents", "Test notification #2");
-    $result2 = urvenue_ws_website_notices_send("noevents", "Test notification #2"); // Axl UWS-7416
+    $result2 = urvenue_ws_website_notices_send("noevents", "Test notification #2");
     echo $result2 ? "✅ SENT\n" : "❌ NOT SENT\n";
     
     // Test 3: Different type should send
     echo "Test 3 (different type, should send): ";
-    // $result3 = uws_website_notices_send("Custom test message", "Different type test");
-    $result3 = urvenue_ws_website_notices_send("Custom test message", "Different type test"); // Axl UWS-7416
+    $result3 = urvenue_ws_website_notices_send("Custom test message", "Different type test");
     echo $result3 ? "✅ SENT\n" : "❌ NOT SENT\n";
     
     echo "Wait 2+ minutes and run again to test throttle expiration...\n";
 }
 
 // Function to clear throttling for testing
-// function uws_clear_notice_throttling($uvalerttype = 'noevents') {
-function urvenue_ws_clear_notice_throttling($uvalerttype = 'noevents') { // Axl UWS-7416
-    // $uvthrottlekey = 'uws_notice_' . preg_replace('/[^a-z0-9_]/i', '_', $uvalerttype);
-    $uvthrottlekey = 'urvenue_ws_notice_' . preg_replace('/[^a-z0-9_]/i', '_', $uvalerttype); // Axl UWS-7416
+function urvenue_ws_clear_notice_throttling($uvalerttype = 'noevents') {
+    $uvthrottlekey = 'urvenue_ws_notice_' . preg_replace('/[^a-z0-9_]/i', '_', $uvalerttype);
     
     // Clear WordPress transient
     if (function_exists('delete_transient'))
         delete_transient($uvthrottlekey);
     
     // Clear file fallback
-    // $uvthrottlefile = sys_get_temp_dir() . '/uws_throttle_' . $uvthrottlekey . '.txt';
-    $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt'; // Axl UWS-7416
+    $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt';
     if (file_exists($uvthrottlefile))
-        // unlink($uvthrottlefile); // Axl UWS-7416
-        wp_delete_file($uvthrottlefile); // Axl UWS-7416
+        wp_delete_file($uvthrottlefile);
 }
 
 // Uncomment to run tests:
 // uws_test_notices();
 // uws_website_notices_send("noevents", "");
-// if(isset($_REQUEST['uwsclearthrottle'])) uws_clear_notice_throttling();
-// if(isset($_REQUEST['uwsclearthrottle'])) urvenue_ws_clear_notice_throttling(); // Axl UWS-7416
-if(isset($_REQUEST['uwsclearthrottle'])) urvenue_ws_clear_notice_throttling(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Debug utility URL parameter, no user-facing state change // Axl UWS-7416
+if(isset($_REQUEST['uwsclearthrottle'])) urvenue_ws_clear_notice_throttling(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Debug utility URL parameter, no user-facing state change
 
 // function uws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){
-function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){ // Axl UWS-7416
+function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){
     global $urvenue_ws_website_notices_types, $urvenue_ws_core_lib;
 
     $uvenablenotice = (isset($urvenue_ws_core_lib["notifications"]["enable"]) and $urvenue_ws_core_lib["notifications"]["enable"]) ? $urvenue_ws_core_lib["notifications"]["enable"] : 0;
@@ -72,7 +62,6 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
                 $uvnoticemsg = isset($urvenue_ws_website_notices_types[$uvnoticemsg]['message_template']) 
                     ? $urvenue_ws_website_notices_types[$uvnoticemsg]['message_template'] 
                     : $urvenue_ws_website_notices_types['default']['message_template'];
-                // $uvsiteurl = function_exists('get_site_url') ? get_site_url() : $_SERVER['HTTP_HOST']; // Axl UWS-7418
                 $uvsiteurl = function_exists('get_site_url') ? get_site_url() : sanitize_text_field( wp_unslash( isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : '' ) ); // Axl UWS-7418
                 $uvnoticemsg = str_replace('{website_url}', $uvsiteurl, $uvnoticemsg);
             }
@@ -86,14 +75,12 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
             $uvnoticetype = 'custom_' . substr(md5($uvnoticemsg), 0, 12);
             $uvnoticemsg = trim((string)$uvnoticemsg);
 
-            // $uvsiteurl = function_exists('get_site_url') ? get_site_url() : $_SERVER['HTTP_HOST']; // Axl UWS-7418
             $uvsiteurl = function_exists('get_site_url') ? get_site_url() : sanitize_text_field( wp_unslash( isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : '' ) ); // Axl UWS-7418
             $uvnoticemsg = str_replace('{website_url}', $uvsiteurl, $uvnoticemsg);
         }
 
         // 30-minute throttle using WP transients with file fallback
-        // $uvthrottlekey = 'uws_notice_' . preg_replace('/[^a-z0-9_]/i', '_', $uvnoticetype);
-        $uvthrottlekey = 'urvenue_ws_notice_' . preg_replace('/[^a-z0-9_]/i', '_', $uvnoticetype); // Axl UWS-7416
+        $uvthrottlekey = 'urvenue_ws_notice_' . preg_replace('/[^a-z0-9_]/i', '_', $uvnoticetype);
         $uvisthrottled = false;
 
         // First check WordPress transients
@@ -103,10 +90,9 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
 
         // If not throttled by transients, check file fallback
         if (!$uvisthrottled) {
-            // $uvthrottlefile = sys_get_temp_dir() . '/uws_throttle_' . $uvthrottlekey . '.txt';
-            $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt'; // Axl UWS-7416
+            $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt';
             if (file_exists($uvthrottlefile)) {
-                $file_time = (int)file_get_contents($uvthrottlefile);
+                $file_time = (int)urvenue_ws_read_file($uvthrottlefile);
                 $current_time = time();
                 // Check if file is less than 30 minutes old
                 if (($current_time - $file_time) < (30 * 60)) {
@@ -129,10 +115,7 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
         // Only add details if it's not already part of the processed message
         if(!is_string($uvnoticedetails) || (is_string($uvnoticedetails) && empty($uvnoticedetails))){
             if (is_array($uvnoticedetails) || is_object($uvnoticedetails)) {
-                // @Axl
-                // $uvdetails = json_encode($uvnoticedetails, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
                 $uvdetails = wp_json_encode($uvnoticedetails, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
-                // @Axl End
             } else {
                 $uvdetails = trim((string)$uvnoticedetails);
             }
@@ -146,30 +129,12 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
             'text' => $uvnoticemsg,
         );
 
-        // TESTING @Axl
-        // $ch = curl_init($uvwebhook);
-        // curl_setopt_array($ch, array(
-        //     CURLOPT_POST           => true,
-        //     CURLOPT_HTTPHEADER     => array('Content-Type: application/json; charset=utf-8'),
-        //     CURLOPT_POSTFIELDS     => json_encode($uvpayload),
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_CONNECTTIMEOUT => 5,
-        //     CURLOPT_TIMEOUT        => 8,
-        // ));
-
-        // @Axl
-        // 'body' => json_encode($uvpayload),
         $uvwpresponse = wp_remote_post($uvwebhook, array(
             'headers' => array('Content-Type' => 'application/json; charset=utf-8'),
             'body' => wp_json_encode($uvpayload),
             'timeout' => 8,
         ));
-        // @Axl End
 
-        // TESTING @Axl
-        // curl_exec($ch);
-        // $uvisok = !curl_errno($ch) && ((int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE) >= 200) && ((int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE) < 300);
-        // curl_close($ch);
         $uvisok = !is_wp_error($uvwpresponse) && ((int)wp_remote_retrieve_response_code($uvwpresponse) >= 200) && ((int)wp_remote_retrieve_response_code($uvwpresponse) < 300);
 
         if ($uvisok) {
@@ -182,8 +147,7 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
             }
 
             // Also create file fallback for cache-resistant throttling
-            // $uvthrottlefile = sys_get_temp_dir() . '/uws_throttle_' . $uvthrottlekey . '.txt';
-            $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt'; // Axl UWS-7416
+            $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt';
             file_put_contents($uvthrottlefile, time());
 
             return true;
