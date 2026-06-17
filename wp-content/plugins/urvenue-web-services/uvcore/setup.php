@@ -29,7 +29,14 @@ if ( isset( $_POST['urvenue_ws_setup_nonce'] ) ) {
 	$urvenue_ws_uvwrite   = isset($write)   ? $write   : absint( $_POST["write"] ?? 0 );
 
 	if ( isset( $_POST["manual"] ) && sanitize_text_field( wp_unslash( $_POST["manual"] ) ) ) {
-		$urvenue_ws_uvslibinfojson = file_get_contents("uvcore.lib.json");
+		global $wp_filesystem;
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		if ( empty( $wp_filesystem ) ) {
+			WP_Filesystem();
+		}
+		$urvenue_ws_uvslibinfojson = $wp_filesystem->get_contents("uvcore.lib.json");
 
 		$urvenue_ws_uvslib = json_decode($urvenue_ws_uvslibinfojson, true);
 
@@ -134,7 +141,10 @@ $urvenue_ws_uvcoreurl = ($urvenue_ws_uvurl) ? $urvenue_ws_uvurl : $urvenue_ws_uv
 $urvenue_ws_uvs_libexit = false;
 
 if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
-	$urvenue_ws_uvslibinfojson = file_get_contents("uvcore.lib.json");
+	if ( empty( $wp_filesystem ) ) {
+		WP_Filesystem();
+	}
+	$urvenue_ws_uvslibinfojson = $wp_filesystem->get_contents("uvcore.lib.json");
 
 	$urvenue_ws_uvslib = json_decode($urvenue_ws_uvslibinfojson, true);
 
