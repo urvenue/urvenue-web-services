@@ -4,7 +4,7 @@ Contributors: UrVenue, UvWebServices
 Tags: events, booking, calendar, tickets, hospitality
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.2.6
+Stable tag: 1.2.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -190,7 +190,7 @@ Yes, the plugin integrates with the UrVenue inventory system, allowing visitors 
 
 == Changelog ==
 
-= 1.2.6 =
+= 1.2.5 =
 * Added full external services disclosure in readme to comply with WordPress.org plugin guidelines.
 * Security improvements and bug fixes.
 
