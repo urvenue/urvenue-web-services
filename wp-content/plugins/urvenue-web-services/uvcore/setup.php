@@ -240,15 +240,11 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 				</div>
 				
 				<div class="uvs-setup-errors">
-					<?php  ?>
 					<?php echo wp_kses_post( $urvenue_ws_uverrorshtml ); ?>
-					<?php  End ?>
 				</div>
 				
 				<div class="uvs-setupbuttons">
-					<?php  ?>
 					<?php echo wp_kses_post( $urvenue_ws_uvmanualwritehtml ); ?>
-					<?php  End ?>
 					<button class="uvs-btn uvs-btn-p" type="submit">Submit</button>
 				</div>
 			</form>	
@@ -269,8 +265,6 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 	</div>
 	
 	
-	<?php  ?>
 	<?php echo wp_kses_post( $urvenue_ws_uvurlscript ); ?>
-	<?php  End ?>
 </body>
 </html>
