@@ -3,7 +3,7 @@ if (!defined('ABSPATH'))
 	exit; // Exit if accessed directly
 
 $urvenue_ws_coredir = realpath(__DIR__);
-$urvenue_ws_assetsversion = "1.2.6";
+$urvenue_ws_assetsversion = "1.2.5";
 
 $urvenue_ws_uvurlpath = wp_parse_url(sanitize_text_field(wp_unslash(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '')), PHP_URL_PATH);
 
@@ -16,10 +16,10 @@ if (function_exists('get_option')) {//is wordpress
 	$urvenue_ws_libexits = true;
 } else if (file_exists("$urvenue_ws_coredir/uvcore.lib.json")) {
 	global $wp_filesystem;
-	if ( ! function_exists( 'WP_Filesystem' ) ) {
+	if (!function_exists('WP_Filesystem')) {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 	}
-	if ( empty( $wp_filesystem ) ) {
+	if (empty($wp_filesystem)) {
 		WP_Filesystem();
 	}
 	$urvenue_ws_uvlibinfojson = $wp_filesystem->get_contents("$urvenue_ws_coredir/uvcore.lib.json");
