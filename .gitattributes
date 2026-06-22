@@ -1,2 +1,0 @@
-# Staging-only workflows — keep main's version on merge
-.github/workflows/deploy-staging.yml merge=ours
