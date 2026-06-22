@@ -1,87 +1,109 @@
-/* UrVenue - aa   v 1.0 */
+/* UrVenue - aa   ver: 2.0 */
 
-.uvs-setupbox{
+.uvs-setupbox {
 	max-width: 800px;
 	margin-left: auto;
 	margin-right: auto;
 }
-.uvs-setupbox p:last-child{margin-bottom: 0;}
-.uvs-setupfields{padding-top: 15px;}
-.uvs-setupfield{
+
+.uvs-setupbox p:last-child {
+	margin-bottom: 0;
+}
+
+.uvs-setupfields {
+	padding-top: 15px;
+}
+
+.uvs-setupfield {
 	position: relative;
 	margin-bottom: 20px;
 	font-size: 14px;
 	padding-left: 30px;
 }
-.uvs-setupfield > div{
+
+.uvs-setupfield>div {
 	position: relative;
 	float: left;
 }
-.uvs-setupfield > div:first-child{width: 150px;}
-.uvs-setupfield > div:last-child{
+
+.uvs-setupfield>div:first-child {
+	width: 150px;
+}
+
+.uvs-setupfield>div:last-child {
 	width: calc(100% - 150px);
 	padding-left: 20px;
 }
-.uvs-setupfield label{
+
+.uvs-setupfield label {
 	display: block;
 	width: 100%;
 	line-height: 37px;
 	font-weight: bold;
 	overflow: hidden;
-	
+
 	text-overflow: ellipsis;
-    white-space: nowrap;
+	white-space: nowrap;
 }
-.uvs-setupbuttons{
+
+.uvs-setupbuttons {
 	text-align: right;
 	margin-top: 20px;
 }
-.uvs-setupfield-ok:before, .uvs-setupfield-nok:before, .uvs-setupfield-wng:before{
+
+.uvs-setupfield-ok:before,
+.uvs-setupfield-nok:before,
+.uvs-setupfield-wng:before {
 	position: absolute;
 	content: "\61";
 	left: 0;
 	top: 11px;
 	display: block;
 	font-family: "uwsicon";
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 18px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 18px;
 }
-.uvs-setupfield-ok:before{
+
+.uvs-setupfield-ok:before {
 	content: "\e821";
 	color: green;
 }
-.uvs-setupfield-nok:before{
+
+.uvs-setupfield-nok:before {
 	content: "\e808";
 	color: red;
 }
-.uvs-setupfield-wng:before{
+
+.uvs-setupfield-wng:before {
 	content: "\e803";
 	color: orange;
 }
-.uvs-setup-errors > div{
+
+.uvs-setup-errors>div {
 	border: dashed 1px #000000;
 	padding: 10px;
 	margin-bottom: 15px;
 	font-size: 12px;
 }
-.uvs-setup-error{border-color: red!important;}
-.uvs-setup-warning{border-color: orange!important;}
-.uvs-setup-errors > div:last-child{margin-bottom: 0;}
-.uvs-btn-setup-manually{display: none;}
 
+.uvs-setup-error {
+	border-color: red !important;
+}
 
+.uvs-setup-warning {
+	border-color: orange !important;
+}
 
+.uvs-setup-errors>div:last-child {
+	margin-bottom: 0;
+}
 
-
-
-
-
-
-
-
+.uvs-btn-setup-manually {
+	display: none;
+}
