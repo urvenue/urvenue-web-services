@@ -36,8 +36,8 @@ Constact with our sales services to request a demo: https://www.urvenue.com/requ
 == Changelog ==
 
 = 1.2.5 =
-* Security patch and bug fixes
-* Renoval eval
+* Added full external services disclosure in readme to comply with WordPress.org plugin guidelines.
+* Security improvements and bug fixes.
 
 = 1.2.4 =
 * Bug fixes and security patch.
