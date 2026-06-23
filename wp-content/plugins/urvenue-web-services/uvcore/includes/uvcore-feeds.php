@@ -467,7 +467,11 @@ function urvenue_ws_feeds_cache_is_writable(){
 
 /*Shows Debug Message*/
 function urvenue_ws_feed_debug_msg($uwsmsg){
-    echo "<pre class='uwsdebugpre'><code>UVDebug: " . esc_html( $uwsmsg ) . "</code></pre>";
+    if ( wp_doing_ajax() ) {
+        error_log( 'UVDebug: ' . $uwsmsg );
+    } else {
+        echo "<pre class='uwsdebugpre'><code>UVDebug: " . esc_html( $uwsmsg ) . "</code></pre>";
+    }
 }
 
 /**
