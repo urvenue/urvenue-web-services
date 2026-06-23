@@ -7,9 +7,6 @@ $urvenue_ws_assetsversion = "1.2.5";
 
 $urvenue_ws_uvurlpath = wp_parse_url(sanitize_text_field(wp_unslash(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '')), PHP_URL_PATH);
 
-if (isset($_REQUEST["uvwpdeleteuvcorelib"]) and sanitize_text_field(wp_unslash($_REQUEST["uvwpdeleteuvcorelib"]))) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin debug utility, no state change beyond option delete
-	delete_option("urvenue_ws_uvcore_lib");
-
 //Check if is wordpress
 if (function_exists('get_option')) {//is wordpress
 	$urvenue_ws_path = $urvenue_ws_corepath;
@@ -50,10 +47,7 @@ if ($urvenue_ws_path) {
 
 	$urvenue_ws_feeds_path = $urvenue_ws_uvs_path . "/uvfeeds";
 
-	if (!urvenue_ws_is_wordpress())
-		$urvenue_ws_feeds_debug = (isset($_REQUEST["uvdbg"]) and sanitize_text_field(wp_unslash($_REQUEST["uvdbg"])) and (sanitize_text_field(wp_unslash($_REQUEST["uvdbg"])) == gmdate("j"))) ? 1 : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only debug flag for non-WordPress context, no state change
-	else
-		$urvenue_ws_feeds_debug = 0;
+	$urvenue_ws_feeds_debug = 0;
 
 	$urvenue_ws_core_lib = urvenue_ws_get_core_library();
 	$urvenue_ws_url = $urvenue_ws_core_lib["system"]["url"];
