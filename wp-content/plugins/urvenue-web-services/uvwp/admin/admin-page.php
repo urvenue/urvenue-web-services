@@ -55,6 +55,6 @@ add_action('admin_enqueue_scripts', 'urvenue_ws_adminpage_styles');
 
 <?php
 
-wp_localize_script('urvenue-ws-admin', 'uvs_core_lib', $urvenue_ws_core_lib);
+wp_localize_script('urvenue-ws-admin', 'urvenue_ws_core_lib', $urvenue_ws_core_lib);
 
 ?>
