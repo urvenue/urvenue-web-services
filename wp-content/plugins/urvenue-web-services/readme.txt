@@ -4,7 +4,7 @@ Contributors: UrVenue, UvWebServices
 Tags: events, booking, calendar, tickets, hospitality
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -52,7 +52,7 @@ When: On every page where a plugin shortcode is active; and when a visitor inter
 
 * UrVenue website: https://www.urvenue.com/
 * Terms of Service: https://www.urvenue.com/legal/terms-conditions/
-* Privacy Policy: https://www.urvenue.com/privacy-policy/
+* Privacy Policy: https://urvenue.me/privacy-policy
 
 = 2. Booketing — Checkout and Payment Platform =
 
@@ -189,6 +189,9 @@ Yes, the plugin integrates with the UrVenue inventory system, allowing visitors 
 4. Interactive venue map with zoom and pan controls.
 
 == Changelog ==
+
+= 1.2.6 =
+* Fixed external services privacy policy URL to point to the correct urvenue.me domain, resolving WordPress.org plugin review requirement.
 
 = 1.2.5 =
 * Added full external services disclosure in readme to comply with WordPress.org plugin guidelines.
