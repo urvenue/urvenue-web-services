@@ -1,0 +1,2 @@
+# Production-only workflows — keep staging's version on merge
+.github/workflows/deploy-production.yml merge=ours
