@@ -70,7 +70,9 @@ When the WP Engine cache purge integration is enabled from the plugin's admin pa
 == Changelog ==
 
 = 1.2.6 =
+* Fixed external services privacy policy URL to point to the correct urvenue.me domain, resolving WordPress.org plugin review requirement.
 * Added full external services disclosure in readme to comply with WordPress.org plugin guidelines.
+* Security improvements and bug fixes.
 
 = 1.2.5 =
 * Security improvements and bug fixes.
