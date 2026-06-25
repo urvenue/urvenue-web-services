@@ -36,8 +36,6 @@ UrVenue Web Services connects your WordPress site with the [UrVenue](https://www
 
 This plugin connects to the UrVenue platform to retrieve event data, venue information, and inventory. All event and booking data is fetched from and processed through UrVenue servers. See the "External Services" section below for full disclosure.
 
-
-
 == External Services ==
 
 This plugin connects to the following external services to provide event display, inventory management, checkout, reservation, and optional cache-purge functionality. Below is a full disclosure of each service: what it does, what data is sent, when it is sent, and links to its terms of service and privacy policy.
@@ -192,6 +190,8 @@ Yes, the plugin integrates with the UrVenue inventory system, allowing visitors 
 
 = 1.2.6 =
 * Fixed external services privacy policy URL to point to the correct urvenue.me domain, resolving WordPress.org plugin review requirement.
+* Added full external services disclosure in readme to comply with WordPress.org plugin guidelines.
+* Security improvements and bug fixes.
 
 = 1.2.5 =
 * Added full external services disclosure in readme to comply with WordPress.org plugin guidelines.
@@ -202,8 +202,10 @@ Yes, the plugin integrates with the UrVenue inventory system, allowing visitors 
 
 = 1.2.3 =
 * Updates for WP security
+
 = 1.2.2 =
 * Remove eval
+
 = 1.2.1 =
 * Library upgrade.
 
