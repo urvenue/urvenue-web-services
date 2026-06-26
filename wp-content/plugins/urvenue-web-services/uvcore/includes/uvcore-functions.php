@@ -141,7 +141,7 @@ function urvenue_ws_get_css_vars(){
 		// add accentcolor
 		if($urvenue_ws_theme_vars[$uvuitheme]["accentcolor"]){
 			$uwsaccentcolor_raw = ($urvenue_ws_core_lib["ui"]["accentcolor"]) ? $urvenue_ws_core_lib["ui"]["accentcolor"] : $urvenue_ws_theme_vars[$uvuitheme]["accentcolor"];
-			$uwsaccentcolor = sanitize_hex_color( $uwsaccentcolor_raw ) ?: sanitize_hex_color( $urvenue_ws_theme_vars[$uvuitheme]["accentcolor"] );
+			$uwsaccentcolor = urvenue_ws_sanitize_css_value( $uwsaccentcolor_raw ) ?: urvenue_ws_sanitize_css_value( $urvenue_ws_theme_vars[$uvuitheme]["accentcolor"] );
 			$urvenue_ws_accentcolor_opacity = ($uvuitheme == "light") ? $uwsaccentcolor . '1F' : $uwsaccentcolor . '66';
 			$urvenue_ws_accentcolor_opacitylight = ($uvuitheme == "light") ? $uwsaccentcolor . '14' : $uwsaccentcolor . '42';
 			$urvenue_ws_primarycolor = urvenue_ws_sanitize_css_value( $urvenue_ws_theme_vars[$uvuitheme]["primary-color"] ); //($urvenue_ws_core_lib["ui"]["primarycolor"]) ? $urvenue_ws_core_lib["ui"]["primarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["primary-color"];
@@ -168,7 +168,7 @@ function urvenue_ws_get_css_vars(){
 		// uipoptheme and popaccentcolor
 		if($urvenue_ws_poptheme_vars[$uvuitheme]["popaccentcolor"]){
 			$uwspopaccentcolor_raw = ($urvenue_ws_core_lib["ui"]["popaccentcolor"]) ? $urvenue_ws_core_lib["ui"]["popaccentcolor"] : $urvenue_ws_poptheme_vars[$uvuipoptheme]["popaccentcolor"];
-			$uwspopaccentcolor = sanitize_hex_color( $uwspopaccentcolor_raw ) ?: sanitize_hex_color( $urvenue_ws_poptheme_vars[$uvuipoptheme]["popaccentcolor"] );
+			$uwspopaccentcolor = urvenue_ws_sanitize_css_value( $uwspopaccentcolor_raw ) ?: urvenue_ws_sanitize_css_value( $urvenue_ws_poptheme_vars[$uvuipoptheme]["popaccentcolor"] );
 			$urvenue_ws_popaccentcolor_lopacity = $uwspopaccentcolor . '1F'; // Adding 1F for 12% opacity in hex
 			$urvenue_ws_popaccentcolor_opacity = $uwspopaccentcolor . '66'; // Adding 66 for 40% opacity in hex
 
