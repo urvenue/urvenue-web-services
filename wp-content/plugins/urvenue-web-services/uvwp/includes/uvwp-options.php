@@ -92,6 +92,7 @@ function urvenue_ws_include_styles(){
     if(is_array($urvenue_ws_core_lib) and $urvenue_ws_core_lib["pages"]["events"] and is_page($urvenue_ws_core_lib["pages"]["events"])){//pre include events page styles
         //include styles
         wp_enqueue_style('urvenue-ws-events-styles');
+        wp_enqueue_style('urvenue-ws-inventory-styles');
         wp_enqueue_style('litepicker');
     }
     else if(is_array($urvenue_ws_core_lib) and $urvenue_ws_core_lib["pages"]["singleevent"]  and is_page($urvenue_ws_core_lib["pages"]["singleevent"])){// pre include event page styles

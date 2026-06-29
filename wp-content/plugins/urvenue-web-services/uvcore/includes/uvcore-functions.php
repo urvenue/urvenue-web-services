@@ -114,6 +114,10 @@ function urvenue_ws_core_include_scripts(){
 /*Get css vars script
     Returns: string with css vars form global styles
 */ 
+function urvenue_ws_sanitize_css_value( $value ) {
+	return preg_replace( '/[^a-zA-Z0-9 #%.,()_\/#-]/', '', (string) $value );
+}
+
 function urvenue_ws_get_css_vars(){
 	global $urvenue_ws_theme_vars, $urvenue_ws_poptheme_vars, $urvenue_ws_core_lib, $urvenue_ws_config_uitheme, $urvenue_ws_config_uipoptheme;
 
@@ -128,20 +132,21 @@ function urvenue_ws_get_css_vars(){
 	$uvuipoptheme = $urvenue_ws_core_lib["ui"]["uipoptheme"];
 	$uvuipoptheme = ($urvenue_ws_poptheme_vars[$uvuipoptheme]) ? $uvuipoptheme : "light";
 	$uvuipoptheme = ($urvenue_ws_config_uipoptheme) ? $urvenue_ws_config_uipoptheme : $uvuipoptheme;
-	
+
 	if(is_array($urvenue_ws_theme_vars[$uvuitheme])){
 		foreach($urvenue_ws_theme_vars[$uvuitheme] as $uvuivarkey => $uvuivar){
-			$uvcssvars .= "--uws-$uvuivarkey: $uvuivar; ";
+			$uvcssvars .= "--uws-" . sanitize_key( $uvuivarkey ) . ": " . urvenue_ws_sanitize_css_value( $uvuivar ) . "; ";
 		}
 
 		// add accentcolor
 		if($urvenue_ws_theme_vars[$uvuitheme]["accentcolor"]){
-			$uwsaccentcolor = ($urvenue_ws_core_lib["ui"]["accentcolor"]) ? $urvenue_ws_core_lib["ui"]["accentcolor"] : $urvenue_ws_theme_vars[$uvuitheme]["accentcolor"];
-			$urvenue_ws_accentcolor_opacity = ($uvuitheme == "light") ? $uwsaccentcolor . '1F' : $uwsaccentcolor . '66';	
+			$uwsaccentcolor_raw = ($urvenue_ws_core_lib["ui"]["accentcolor"]) ? $urvenue_ws_core_lib["ui"]["accentcolor"] : $urvenue_ws_theme_vars[$uvuitheme]["accentcolor"];
+			$uwsaccentcolor = urvenue_ws_sanitize_css_value( $uwsaccentcolor_raw ) ?: urvenue_ws_sanitize_css_value( $urvenue_ws_theme_vars[$uvuitheme]["accentcolor"] );
+			$urvenue_ws_accentcolor_opacity = ($uvuitheme == "light") ? $uwsaccentcolor . '1F' : $uwsaccentcolor . '66';
 			$urvenue_ws_accentcolor_opacitylight = ($uvuitheme == "light") ? $uwsaccentcolor . '14' : $uwsaccentcolor . '42';
-			$urvenue_ws_primarycolor = $urvenue_ws_theme_vars[$uvuitheme]["primary-color"]; //($urvenue_ws_core_lib["ui"]["primarycolor"]) ? $urvenue_ws_core_lib["ui"]["primarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["primary-color"];		
-			$urvenue_ws_secondarycolor = $urvenue_ws_theme_vars[$uvuitheme]["secondary-color"]; //($urvenue_ws_core_lib["ui"]["secondarycolor"]) ? $urvenue_ws_core_lib["ui"]["secondarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["secondary-color"];
-			
+			$urvenue_ws_primarycolor = urvenue_ws_sanitize_css_value( $urvenue_ws_theme_vars[$uvuitheme]["primary-color"] ); //($urvenue_ws_core_lib["ui"]["primarycolor"]) ? $urvenue_ws_core_lib["ui"]["primarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["primary-color"];
+			$urvenue_ws_secondarycolor = urvenue_ws_sanitize_css_value( $urvenue_ws_theme_vars[$uvuitheme]["secondary-color"] ); //($urvenue_ws_core_lib["ui"]["secondarycolor"]) ? $urvenue_ws_core_lib["ui"]["secondarycolor"] : $urvenue_ws_theme_vars[$uvuitheme]["secondary-color"];
+
 			$uvcssvars .= "--uws-main-color: $urvenue_ws_primarycolor; ";
 			$uvcssvars .= "--uws-primary-color: $urvenue_ws_primarycolor; ";
 			$uvcssvars .= "--uws-secondary-color: $urvenue_ws_secondarycolor; ";
@@ -157,15 +162,16 @@ function urvenue_ws_get_css_vars(){
 	// Add poptheme vars
 	if(is_array($urvenue_ws_poptheme_vars[$uvuipoptheme])){
 		foreach($urvenue_ws_poptheme_vars[$uvuipoptheme] as $uvuivarkey => $uvuivar){
-			$uvcssvars .= "--uws-$uvuivarkey: $uvuivar; ";
+			$uvcssvars .= "--uws-" . sanitize_key( $uvuivarkey ) . ": " . urvenue_ws_sanitize_css_value( $uvuivar ) . "; ";
 		}
 
 		// uipoptheme and popaccentcolor
 		if($urvenue_ws_poptheme_vars[$uvuitheme]["popaccentcolor"]){
-			$uwspopaccentcolor = ($urvenue_ws_core_lib["ui"]["popaccentcolor"]) ? $urvenue_ws_core_lib["ui"]["popaccentcolor"] : $urvenue_ws_poptheme_vars[$uvuipoptheme]["popaccentcolor"];
+			$uwspopaccentcolor_raw = ($urvenue_ws_core_lib["ui"]["popaccentcolor"]) ? $urvenue_ws_core_lib["ui"]["popaccentcolor"] : $urvenue_ws_poptheme_vars[$uvuipoptheme]["popaccentcolor"];
+			$uwspopaccentcolor = urvenue_ws_sanitize_css_value( $uwspopaccentcolor_raw ) ?: urvenue_ws_sanitize_css_value( $urvenue_ws_poptheme_vars[$uvuipoptheme]["popaccentcolor"] );
 			$urvenue_ws_popaccentcolor_lopacity = $uwspopaccentcolor . '1F'; // Adding 1F for 12% opacity in hex
 			$urvenue_ws_popaccentcolor_opacity = $uwspopaccentcolor . '66'; // Adding 66 for 40% opacity in hex
-			
+
 			$uvcssvars .= "--uws-popaccentcolorcust: $uwspopaccentcolor; ";
 			$uvcssvars .= "--uws-popaccentcolorlopac: $urvenue_ws_popaccentcolor_lopacity; ";
 			$uvcssvars .= "--uws-popaccentcoloropac: $urvenue_ws_popaccentcolor_opacity; ";
@@ -176,7 +182,7 @@ function urvenue_ws_get_css_vars(){
 
 	$uvcssstyles = ":root{" . $uvcssvars . "}";
 
-	return $uvcssstyles;
+	return wp_strip_all_tags( $uvcssstyles );
 }
 
 /*Check if is wordpress*/
