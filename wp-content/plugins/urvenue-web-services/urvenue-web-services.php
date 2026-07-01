@@ -6,7 +6,7 @@ if (!defined('ABSPATH'))
  * Plugin Name: UrVenue Web Services
  * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
  * Description: UrVenue Integrations: Events, Inventory.
- * Version:     1.2.5
+ * Version:     1.2.6
  * Author:      UrVenue / UWS, uvwebservices
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later
