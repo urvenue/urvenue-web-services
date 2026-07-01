@@ -30,11 +30,6 @@ function urvenue_ws_clear_notice_throttling($uvalerttype = 'noevents') {
     // Clear WordPress transient
     if (function_exists('delete_transient'))
         delete_transient($uvthrottlekey);
-    
-    // Clear file fallback
-    $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt';
-    if (file_exists($uvthrottlefile))
-        wp_delete_file($uvthrottlefile);
 }
 
 // Uncomment to run tests:
@@ -79,28 +74,14 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
             $uvnoticemsg = str_replace('{website_url}', $uvsiteurl, $uvnoticemsg);
         }
 
-        // 30-minute throttle using WP transients with file fallback
+        // Throttle using WP transients (stored in wp_options / object cache)
         $uvthrottlekey = 'urvenue_ws_notice_' . preg_replace('/[^a-z0-9_]/i', '_', $uvnoticetype);
         $uvisthrottled = false;
 
-        // First check WordPress transients
         if (function_exists('get_transient') && function_exists('set_transient')) {
             $uvisthrottled = (get_transient($uvthrottlekey) !== false);
         }
 
-        // If not throttled by transients, check file fallback
-        if (!$uvisthrottled) {
-            $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt';
-            if (file_exists($uvthrottlefile)) {
-                $file_time = (int)urvenue_ws_read_file($uvthrottlefile);
-                $current_time = time();
-                // Check if file is less than 30 minutes old
-                if (($current_time - $file_time) < (30 * 60)) {
-                    $uvisthrottled = true;
-                }
-            }
-        }
-        
         if ($uvisthrottled) {
             return false;
         }
@@ -141,14 +122,10 @@ function urvenue_ws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = "
             // mark sent in this request
             $uvsentinreq[$uvnoticetype] = true;
 
-            // start 4-min throttle window in WordPress transients (testing)
+            // start 30-min throttle window in WordPress transients
             if (function_exists('set_transient')) {
-                set_transient($uvthrottlekey, 1, 4 * MINUTE_IN_SECONDS);
+                set_transient($uvthrottlekey, 1, 30 * MINUTE_IN_SECONDS);
             }
-
-            // Also create file fallback for cache-resistant throttling
-            $uvthrottlefile = sys_get_temp_dir() . '/urvenue_ws_throttle_' . $uvthrottlekey . '.txt';
-            file_put_contents($uvthrottlefile, time());
 
             return true;
         }
