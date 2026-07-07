@@ -40,6 +40,12 @@ function urvenue_ws_get_core_library(){
 
 	$uvscorelibarray = (is_array($uvscorelibarray)) ? urvenue_ws_lib_add_defaults($uvscorelibarray) : $urvenue_ws_core_defaults_lib;
 
+	//Ensure a valid array with a system section even when defaults are unavailable (e.g. plugin activation sandbox scope)
+	if(!is_array($uvscorelibarray))
+		$uvscorelibarray = array("system" => array());
+	if(!isset($uvscorelibarray["system"]) or !is_array($uvscorelibarray["system"]))
+		$uvscorelibarray["system"] = array();
+
 	//Set Basic Variables if they are not pressent
 	if(is_array($uvscorelibarray) and !isset($uvscorelibarray["system"]["path"]))
 		$uvscorelibarray["system"]["path"] = "";

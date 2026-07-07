@@ -50,8 +50,8 @@ if ($urvenue_ws_path) {
 	$urvenue_ws_feeds_debug = 0;
 
 	$urvenue_ws_core_lib = urvenue_ws_get_core_library();
-	$urvenue_ws_url = $urvenue_ws_core_lib["system"]["url"];
-	$urvenue_ws_lib_path = $urvenue_ws_core_lib["system"]["library"];
+	$urvenue_ws_url = $urvenue_ws_core_lib["system"]["url"] ?? "";
+	$urvenue_ws_lib_path = $urvenue_ws_core_lib["system"]["library"] ?? "";
 	$urvenue_ws_today = urvenue_ws_get_today();
 
 	include_once($urvenue_ws_path . "/libs/uv-feeds-lib.php");
