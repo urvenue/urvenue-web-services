@@ -21,11 +21,11 @@ $urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and sanitize_key( wp_unsl
 
 //API Vars
 // $urvenue_ws_apikey = (isset($urvenue_ws_apikey) and $urvenue_ws_apikey) ? $urvenue_ws_apikey : $urvenue_ws_core_lib["system"]["apikey"];
-$urvenue_ws_apikey = (isset($urvenue_ws_apikey) and $urvenue_ws_apikey) ? $urvenue_ws_apikey : $urvenue_ws_core_lib["system"]["apikey"]; // Axl UWS-7416
+$urvenue_ws_apikey = (isset($urvenue_ws_apikey) and $urvenue_ws_apikey) ? $urvenue_ws_apikey : ( $urvenue_ws_core_lib["system"]["apikey"] ?? "" );
 // $urvenue_ws_sourcecode = (isset($urvenue_ws_sourcecode) and $urvenue_ws_sourcecode) ? $urvenue_ws_sourcecode : $urvenue_ws_core_lib["system"]["sourcecode"];
-$urvenue_ws_sourcecode = (isset($urvenue_ws_sourcecode) and $urvenue_ws_sourcecode) ? $urvenue_ws_sourcecode : $urvenue_ws_core_lib["system"]["sourcecode"]; // Axl UWS-7416
+$urvenue_ws_sourcecode = (isset($urvenue_ws_sourcecode) and $urvenue_ws_sourcecode) ? $urvenue_ws_sourcecode : ( $urvenue_ws_core_lib["system"]["sourcecode"] ?? "" );
 // $urvenue_ws_sourceloc = (isset($urvenue_ws_sourceloc) and $urvenue_ws_sourceloc) ? $urvenue_ws_sourceloc : $urvenue_ws_core_lib["system"]["sourceloc"];
-$urvenue_ws_sourceloc = (isset($urvenue_ws_sourceloc) and $urvenue_ws_sourceloc) ? $urvenue_ws_sourceloc : $urvenue_ws_core_lib["system"]["sourceloc"]; // Axl UWS-7416
+$urvenue_ws_sourceloc = (isset($urvenue_ws_sourceloc) and $urvenue_ws_sourceloc) ? $urvenue_ws_sourceloc : ( $urvenue_ws_core_lib["system"]["sourceloc"] ?? "" );
 
 // $urvenue_ws_bkgaddsubd = ($urvenue_ws_envicode == "apistaging") ? "staging." : "";
 $urvenue_ws_bkgaddsubd = ($urvenue_ws_envicode == "apistaging") ? "staging." : ""; // Axl UWS-7416
