@@ -1,28 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// Testing function - remove after testing
-function urvenue_ws_test_notices() {
-    echo "Testing notice system...\n";
-    
-    // Test 1: First call should send
-    echo "Test 1 (should send): ";
-    $result1 = urvenue_ws_website_notices_send("noevents", "Test notification #1");
-    echo $result1 ? "✅ SENT\n" : "❌ NOT SENT\n";
-    
-    // Test 2: Immediate second call should NOT send (throttled)
-    echo "Test 2 (should NOT send - throttled): ";
-    $result2 = urvenue_ws_website_notices_send("noevents", "Test notification #2");
-    echo $result2 ? "✅ SENT\n" : "❌ NOT SENT\n";
-    
-    // Test 3: Different type should send
-    echo "Test 3 (different type, should send): ";
-    $result3 = urvenue_ws_website_notices_send("Custom test message", "Different type test");
-    echo $result3 ? "✅ SENT\n" : "❌ NOT SENT\n";
-    
-    echo "Wait 2+ minutes and run again to test throttle expiration...\n";
-}
-
 // Function to clear throttling for testing
 function urvenue_ws_clear_notice_throttling($uvalerttype = 'noevents') {
     $uvthrottlekey = 'urvenue_ws_notice_' . preg_replace('/[^a-z0-9_]/i', '_', $uvalerttype);
@@ -32,9 +10,6 @@ function urvenue_ws_clear_notice_throttling($uvalerttype = 'noevents') {
         delete_transient($uvthrottlekey);
 }
 
-// Uncomment to run tests:
-// uws_test_notices();
-// uws_website_notices_send("noevents", "");
 if(isset($_REQUEST['uwsclearthrottle'])) urvenue_ws_clear_notice_throttling(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Debug utility URL parameter, no user-facing state change
 
 // function uws_website_notices_send($uvnoticemsg = "", $uvnoticedetails = ""){
