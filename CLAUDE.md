@@ -2,7 +2,7 @@
 
 Plugin WordPress que actúa como **bridge** entre el CMS y la plataforma UrVenue (UvTix API). No almacena datos de negocio localmente: su responsabilidad es configuración, caché de feeds, renderizado via shortcodes, y seguridad de la capa WP.
 
-**Versión actual:** 1.2.6  
+**Versión actual:** 1.2.7  
 **PHP mínimo:** 7.4  
 **Plugin root:** `wp-content/plugins/urvenue-web-services/`
 
@@ -199,7 +199,7 @@ $urvenue_ws_today          // Fecha actual (GMT-5h para evitar ocultar eventos a
 $urvenue_ws_core_lib       // Array maestro de configuración (cargado desde wp_options)
 $urvenue_ws_url            // URL base de la API UrVenue
 $urvenue_ws_feeds_debug    // Flag de debug (1 = activo)
-$urvenue_ws_assetsversion  // Versión de assets para cache busting ("1.2.6")
+$urvenue_ws_assetsversion  // Versión de assets para cache busting ("1.2.7")
 ```
 
 ---
