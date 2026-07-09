@@ -3,7 +3,7 @@ if (!defined('ABSPATH'))
 	exit; // Exit if accessed directly
 
 $urvenue_ws_coredir = realpath(__DIR__);
-$urvenue_ws_assetsversion = "1.2.6";
+$urvenue_ws_assetsversion = "1.2.7";
 
 $urvenue_ws_uvurlpath = wp_parse_url(sanitize_text_field(wp_unslash(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '')), PHP_URL_PATH);
 
