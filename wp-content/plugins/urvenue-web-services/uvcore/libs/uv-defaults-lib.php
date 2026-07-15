@@ -2,26 +2,19 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // autogenerate cache apikey only 1 time, if not exists
-// $uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("uvs_cacheapikey") : "";
-// $uvs_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("urvenue_ws_cacheapikey") : ""; // Axl UWS-7416
-$urvenue_ws_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("urvenue_ws_cacheapikey") : ""; // Axl UWS-7416
-// $uvsiteURL = (function_exists('get_option') and function_exists('add_menu_page')) ? get_site_url() : "";
-$urvenue_ws_siteURL = (function_exists('get_option') and function_exists('add_menu_page')) ? get_site_url() : ""; // Axl UWS-7416
+$urvenue_ws_cacheapikey = (function_exists('get_option') and function_exists('add_menu_page')) ? get_option("urvenue_ws_cacheapikey") : "";
+$urvenue_ws_siteURL = (function_exists('get_option') and function_exists('add_menu_page')) ? get_site_url() : "";
 
 if(!$urvenue_ws_cacheapikey && function_exists('get_option') and function_exists('add_menu_page')){
-    // $urvenue_ws_cacheapikey = md5(uniqid(rand(), true)); // Axl UWS-7416
-    $urvenue_ws_cacheapikey = md5(uniqid(wp_rand(), true)); // Axl UWS-7416
-    // update_option("uvs_cacheapikey", $uvs_cacheapikey);
-    update_option("urvenue_ws_cacheapikey", $urvenue_ws_cacheapikey); // Axl UWS-7416
+    $urvenue_ws_cacheapikey = md5(uniqid(wp_rand(), true));
+    update_option("urvenue_ws_cacheapikey", $urvenue_ws_cacheapikey);
 }
 
 if(isset($uv_uwscore_overwrite_lib_defaults) and is_array($uv_uwscore_overwrite_lib_defaults)){
-    // $urvenue_ws_core_defaults_lib = $uv_uwscore_overwrite_lib_defaults;
-    $urvenue_ws_core_defaults_lib = $uv_uwscore_overwrite_lib_defaults; // Axl UWS-7416
+    $urvenue_ws_core_defaults_lib = $uv_uwscore_overwrite_lib_defaults;
 }
 else{
-    // $urvenue_ws_core_defaults_lib = array(
-    $urvenue_ws_core_defaults_lib = array( // Axl UWS-7416
+    $urvenue_ws_core_defaults_lib = array(
         "system" => array(
             "sourceloc" => "uwscore",
             "sourcecode" => "public",
@@ -37,7 +30,7 @@ else{
             "use-staging" => 0,
             "use-cartv2" => 0,
             "checkouttype" => "microsite",
-            "show-credits" => 0, // Axl UWS-8146
+            "show-credits" => 0,
         ),
         "events" => array(
             "global-source" => "all",
@@ -321,8 +314,7 @@ else{
     );
 }
 
-// $urvenue_ws_website_notices_types = array(
-$urvenue_ws_website_notices_types = array( // Axl UWS-7416
+$urvenue_ws_website_notices_types = array(
     "noevents" => array(
         "message_template" => 
         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n".
@@ -493,5 +485,4 @@ $urvenue_ws_website_notices_types = array( // Axl UWS-7416
     ),
 );
 
-// $urvenue_ws_cleanchars_lib = array(
 $urvenue_ws_cleanchars_lib = array('ě' => 'e', 'Ě' => 'E', 'š' => 's', 'Š' => 'S', 'č' => 'c', 'Č' => 'C', 'ř' => 'r', 'Ř' => 'R', 'ž' => 'z', 'Ž' => 'Z', 'ý' => 'y', 'Ý' => 'Y', 'á' => 'a', 'Á' => 'A', 'í' => 'i', 'Í' => 'I', 'é' => 'e', 'É' => 'E', 'ú' => 'u', 'ů' => 'u', 'Ů' => 'U', 'ď' => 'd', 'Ď' => 'D', 'ť' => 't', 'Ť' => 'T', 'ň' => 'n', 'Ň' => 'N', 'ü' => 'u');

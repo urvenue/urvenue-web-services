@@ -1,13 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// $urvenue_ws_proxyurl = uws_get_proxyurl();
-$urvenue_ws_proxyurl = urvenue_ws_get_proxyurl(); // Axl UWS-7416
-// $urvenue_ws_config_addproxyparams = (isset($urvenue_ws_config_addproxyparams) and $urvenue_ws_config_addproxyparams) ? $urvenue_ws_config_addproxyparams : "";
-$urvenue_ws_config_addproxyparams = (isset($urvenue_ws_config_addproxyparams) and $urvenue_ws_config_addproxyparams) ? $urvenue_ws_config_addproxyparams : ""; // Axl UWS-7416
+$urvenue_ws_proxyurl = urvenue_ws_get_proxyurl();
+$urvenue_ws_config_addproxyparams = (isset($urvenue_ws_config_addproxyparams) and $urvenue_ws_config_addproxyparams) ? $urvenue_ws_config_addproxyparams : "";
 
-// $urvenue_ws_proxies_lib = array(
-$urvenue_ws_proxies_lib = array( // Axl UWS-7416
+$urvenue_ws_proxies_lib = array(
 	"uvcore-init" => array(
 		"inventory-init" => $urvenue_ws_proxyurl . "?action=urvenue_ws_proxy&uvaction=uwspx_inventoryinit",
 		"cartdrop" => $urvenue_ws_proxyurl . "?action=urvenue_ws_proxy&uvaction=uwspx_cartdrop",

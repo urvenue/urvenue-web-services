@@ -1,8 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// $urvenue_ws_theme_vars = array(
-$urvenue_ws_theme_vars = array( // Axl UWS-7416
+$urvenue_ws_theme_vars = array(
     "light" => array(
         "main-color" => "#111111",
         "primary-color" => "#111111",
@@ -79,8 +78,7 @@ $urvenue_ws_theme_vars = array( // Axl UWS-7416
     )
 );
 
-// $urvenue_ws_poptheme_vars = array(
-$urvenue_ws_poptheme_vars = array( // Axl UWS-7416
+$urvenue_ws_poptheme_vars = array(
     "light" => array(
         "popup-main-color" => "#111111",
         "popup-secondary-color" => "#FFFFFF",
