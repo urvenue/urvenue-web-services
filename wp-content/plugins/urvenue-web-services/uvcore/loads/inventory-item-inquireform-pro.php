@@ -63,4 +63,4 @@ $urvenue_ws_returnarray = array(
 
 $urvenue_ws_returnjson = wp_json_encode($urvenue_ws_returnarray);
 header('Content-Type: application/json');
-echo( $urvenue_ws_returnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode() // Axl UWS-7416
+echo( $urvenue_ws_returnjson ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON API response encoded with wp_json_encode()
