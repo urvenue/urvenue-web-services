@@ -128,12 +128,10 @@ else{
 
     /*if($urvenue_ws_cartcode){
         $urvenue_ws_cartparams = "cartcode=" . $urvenue_ws_cartcode . "&" . $urvenue_ws_cartparams;
-        // $urvenue_ws_cartfeedresponse = uws_get_apiwvar("cart-update", $urvenue_ws_cartparams, $urvenue_ws_vendata);
-        $urvenue_ws_cartfeedresponse = urvenue_ws_get_apiwvar("cart-update", $urvenue_ws_cartparams, $urvenue_ws_vendata); // Axl UWS-7416
+        $urvenue_ws_cartfeedresponse = urvenue_ws_get_apiwvar("cart-update", $urvenue_ws_cartparams, $urvenue_ws_vendata);
     }
     else{
-        // $urvenue_ws_cartfeedresponse = uws_get_apiwvar("cart-create", $urvenue_ws_cartparams, $urvenue_ws_vendata);
-        $urvenue_ws_cartfeedresponse = urvenue_ws_get_apiwvar("cart-create", $urvenue_ws_cartparams, $urvenue_ws_vendata); // Axl UWS-7416
+        $urvenue_ws_cartfeedresponse = urvenue_ws_get_apiwvar("cart-create", $urvenue_ws_cartparams, $urvenue_ws_vendata);
     }*/
 
     //Build Response
