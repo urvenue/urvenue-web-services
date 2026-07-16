@@ -6,15 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	@version: 1.0
 */
 
-// $uvsartistslistview = uvs_get_adminfieldhtml("artists->artist-listview");
-// $uvsartistslistview = urvenue_ws_adm_get_adminfieldhtml("artists->artist-listview"); // Axl UWS-7416
-$urvenue_ws_artistslistview = urvenue_ws_adm_get_adminfieldhtml("artists->artist-listview"); // Axl UWS-7634
-// $uvsartistsbuttonlabel = uvs_get_adminfieldhtml("artists->artist-buttonlabel");
-// $uvsartistsbuttonlabel = urvenue_ws_adm_get_adminfieldhtml("artists->artist-buttonlabel"); // Axl UWS-7416
-$urvenue_ws_artistsbuttonlabel = urvenue_ws_adm_get_adminfieldhtml("artists->artist-buttonlabel"); // Axl UWS-7634
+$urvenue_ws_artistslistview = urvenue_ws_adm_get_adminfieldhtml("artists->artist-listview");
+$urvenue_ws_artistsbuttonlabel = urvenue_ws_adm_get_adminfieldhtml("artists->artist-buttonlabel");
 ?>
-<?php // @Axl ?>
-<?php /* old: <div id="uvs-admin-artists-list" class="uvs-admin-opt-section [echo $urvenue_ws_admin_optstabs_state[artists-list]]"> */ ?>
 <div id="uvs-admin-artists-list" class="uvs-admin-opt-section <?php echo esc_attr( $urvenue_ws_admin_optstabs_state['artists-list'] ); ?>">
     <div class="uvs-admin-opt-title">Artist List</div>
     <div class="uvs-admin-opt-space"></div>
@@ -22,16 +16,13 @@ $urvenue_ws_artistsbuttonlabel = urvenue_ws_adm_get_adminfieldhtml("artists->art
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">List View</div>
 		<div class="uvsvalue">
-			<?php /* Old: echo wp_kses( $uvsartistslistview, uvs_allowed_admin_html() ); */ ?>
-			<?php /* Old: echo $uvsartistslistview; */ echo wp_kses( $urvenue_ws_artistslistview, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7634 ?>
+			<?php echo wp_kses( $urvenue_ws_artistslistview, urvenue_ws_adm_allowed_admin_html() ); ?>
 		</div>
     </div>
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">Button Label</div>
 		<div class="uvsvalue">
-			<?php /* Old: echo wp_kses( $uvsartistsbuttonlabel, uvs_allowed_admin_html() ); */ ?>
-			<?php /* Old: echo $uvsartistsbuttonlabel; */ echo wp_kses( $urvenue_ws_artistsbuttonlabel, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7634 ?>
+			<?php echo wp_kses( $urvenue_ws_artistsbuttonlabel, urvenue_ws_adm_allowed_admin_html() ); ?>
 		</div>
     </div>
 </div>
-<?php // @Axl End ?>

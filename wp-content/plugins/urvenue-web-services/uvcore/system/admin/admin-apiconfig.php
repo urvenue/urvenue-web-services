@@ -24,7 +24,7 @@
     </div>
 
     <div class="uvs-admin-apiconfig-actions">
-        <button class="uvs-btn uvs-btn-p uvsjs-checkapiconfig" type="button" data-checkapiconfig="<?php /* Old: echo $urvenue_ws_adm_admin_lib["loads"]["checkapiconfig"]; */ /* echo esc_url( $urvenue_ws_adm_admin_lib["loads"]["checkapiconfig"] ); // Axl UWS-8152 */ echo esc_url( add_query_arg( 'uws_nonce', wp_create_nonce( 'uvsp_checkapiconfig' ), $urvenue_ws_adm_admin_lib["loads"]["checkapiconfig"] ) ); // Axl UWS-8152 ?>">Submit</button>
+        <button class="uvs-btn uvs-btn-p uvsjs-checkapiconfig" type="button" data-checkapiconfig="<?php echo esc_url( add_query_arg( 'uws_nonce', wp_create_nonce( 'uvsp_checkapiconfig' ), $urvenue_ws_adm_admin_lib["loads"]["checkapiconfig"] ) ); ?>">Submit</button>
         <div class="uv-loader-uvicon"></div>
     </div>
 </div>
