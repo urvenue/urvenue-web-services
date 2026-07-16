@@ -18,8 +18,7 @@ add_shortcode("urvenue_ws_itinerary", function($atts, $content = null){
     wp_enqueue_script('litepicker');
 
     include_once($urvenue_ws_path . "/includes/itinerary-functions.php");
-    // uws_itinerary();
-    urvenue_ws_itinerary(); // Axl UWS-7416
+    urvenue_ws_itinerary();
 
 	$content = ob_get_contents();
 	ob_end_clean();
