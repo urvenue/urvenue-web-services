@@ -2,8 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 // Calendar
-// function shortcode_uws_events($atts, $content = null) {
-function urvenue_ws_shortcode_events($atts, $content = null) { // Axl UWS-7416
+function urvenue_ws_shortcode_events($atts, $content = null) {
 	$uvvenuescodes = (isset($atts['venues'])) ? $atts['venues'] : "";
 	$uvvenuesinfilter = (isset($atts['venuesinfilter'])) ? $atts['venuesinfilter'] : "";
 	$uvnevents = (isset($atts['nevents'])) ? $atts['nevents'] : "";
@@ -35,39 +34,26 @@ function urvenue_ws_shortcode_events($atts, $content = null) { // Axl UWS-7416
 		$uvargs["buttonlabel"] = $uvbtnlabel;
 
 	//add date filter if is set on the url
-	// $uvfilterdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-	// $uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var($_REQUEST["date"]) : ""; // Axl UWS-7416
-	// $uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["date"] ) ) ) : ""; // Axl UWS-7418
-	$uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["date"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change // Axl UWS-7416
+	$uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["date"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change
 	if ($uvfilterdate)
 		$uvargs["date"] = $uvfilterdate;
 
 	//add end date filter if is set on the url
-	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? uws_cleanup_var($_REQUEST["enddate"]) : "";
-	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var($_REQUEST["enddate"]) : ""; // Axl UWS-7416
-	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["enddate"] ) ) ) : ""; // Axl UWS-7418
-	$uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["enddate"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change // Axl UWS-7416
+	$uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["enddate"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change
 	if ($uvfilterenddate)
 		$uvargs["enddate"] = $uvfilterenddate;
 
 	//add venue filter if is set on the url
-	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? uws_cleanup_var($_REQUEST["venue"]) : "";
-	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var($_REQUEST["venue"]) : ""; // Axl UWS-7416
-	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venue"] ) ) ) : ""; // Axl UWS-7418
-	$uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venue"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change // Axl UWS-7416
+	$uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venue"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change
 	if ($uvfiltervenue)
 		$uvargs["venue"] = $uvfiltervenue;
 
 	//add performer filter if is set on the url
-	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? uws_cleanup_var($_REQUEST["performer"]) : "";
-	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var($_REQUEST["performer"]) : ""; // Axl UWS-7416
-	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["performer"] ) ) ) : ""; // Axl UWS-7418
-	$uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["performer"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change // Axl UWS-7416
+	$uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["performer"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change
 	if ($uvfilterperformer)
 		$uvargs["performer"] = $uvfilterperformer;
 
-	// uws_events($uvargs);
-	urvenue_ws_events($uvargs); // Axl UWS-7416
+	urvenue_ws_events($uvargs);
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -75,10 +61,9 @@ function urvenue_ws_shortcode_events($atts, $content = null) { // Axl UWS-7416
 	return $content;
 }
 // add_shortcode("urvenue_ws_events", "shortcode_uws_events");
-add_shortcode("urvenue_ws_events", "urvenue_ws_shortcode_events"); // Axl UWS-7416
+add_shortcode("urvenue_ws_events", "urvenue_ws_shortcode_events");
 
-// function shortcode_uws_events_list($atts, $content = null) {
-function urvenue_ws_shortcode_events_list($atts, $content = null) { // Axl UWS-7416
+function urvenue_ws_shortcode_events_list($atts, $content = null) {
 	global $urvenue_ws_core_lib;
 
 	$uvvenuescodes = (isset($atts['venues'])) ? $atts['venues'] : "";
@@ -108,39 +93,26 @@ function urvenue_ws_shortcode_events_list($atts, $content = null) { // Axl UWS-7
 	);
 
 	//add date filter if is set on the url
-	// $uvfilterdate = (isset($_REQUEST["date"])) ? uws_cleanup_var($_REQUEST["date"]) : "";
-	// $uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var($_REQUEST["date"]) : ""; // Axl UWS-7416
-	// $uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["date"] ) ) ) : ""; // Axl UWS-7418
-	$uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["date"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change // Axl UWS-7416
+	$uvfilterdate = (isset($_REQUEST["date"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["date"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change
 	if ($uvfilterdate)
 		$uvargs["date"] = $uvfilterdate;
 
 	//add end date filter if is set on the url
-	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? uws_cleanup_var($_REQUEST["enddate"]) : "";
-	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var($_REQUEST["enddate"]) : ""; // Axl UWS-7416
-	// $uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["enddate"] ) ) ) : ""; // Axl UWS-7418
-	$uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["enddate"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change // Axl UWS-7416
+	$uvfilterenddate = (isset($_REQUEST["enddate"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["enddate"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change
 	if ($uvfilterenddate)
 		$uvargs["enddate"] = $uvfilterenddate;
 
 	//add venue filter if is set on the url
-	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? uws_cleanup_var($_REQUEST["venue"]) : "";
-	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var($_REQUEST["venue"]) : ""; // Axl UWS-7416
-	// $uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venue"] ) ) ) : ""; // Axl UWS-7418
-	$uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venue"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change // Axl UWS-7416
+	$uvfiltervenue = (isset($_REQUEST["venue"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["venue"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change
 	if ($uvfiltervenue)
 		$uvargs["venue"] = $uvfiltervenue;
 
 	//add performer filter if is set on the url
-	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? uws_cleanup_var($_REQUEST["performer"]) : "";
-	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var($_REQUEST["performer"]) : ""; // Axl UWS-7416
-	// $uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["performer"] ) ) ) : ""; // Axl UWS-7418
-	$uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["performer"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change // Axl UWS-7416
+	$uvfilterperformer = (isset($_REQUEST["performer"])) ? urvenue_ws_cleanup_var( sanitize_text_field( wp_unslash( $_REQUEST["performer"] ) ) ) : ""; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only URL param for shortcode display filtering, no state change
 	if ($uvfilterperformer)
 		$uvargs["performer"] = $uvfilterperformer;
 
-	// $uvevents = uws_get_events($uvargs);
-	$uvevents = urvenue_ws_get_events($uvargs); // Axl UWS-7416
+	$uvevents = urvenue_ws_get_events($uvargs);
 	$uvlistargs = array(
 		"wrap-template" => "events/events-$useview-wrap-default",
 		"item-template" => "events/events-$useview-item-default",
@@ -150,8 +122,7 @@ function urvenue_ws_shortcode_events_list($atts, $content = null) { // Axl UWS-7
 	if($uvbtnlabel)
 		$uvlistargs["buttonlabel"] = $uvbtnlabel;
 
-	// $uvthisviewhtml = uws_get_events_list($uvevents, $uvlistargs);
-	$uvthisviewhtml = urvenue_ws_get_events_list($uvevents, $uvlistargs); // Axl UWS-7416
+	$uvthisviewhtml = urvenue_ws_get_events_list($uvevents, $uvlistargs);
 
 	if($uvthisviewhtml) {
 		if ($useview == "agenda") {
@@ -165,7 +136,6 @@ function urvenue_ws_shortcode_events_list($atts, $content = null) { // Axl UWS-7
 
 	//before just echo
 	echo wp_kses_post($uvthisviewhtml);
-	//echo($uvthisviewhtml);
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -173,11 +143,10 @@ function urvenue_ws_shortcode_events_list($atts, $content = null) { // Axl UWS-7
 	return $content;
 }
 // add_shortcode("urvenue_ws_events_list", "shortcode_uws_events_list");
-add_shortcode("urvenue_ws_events_list", "urvenue_ws_shortcode_events_list"); // Axl UWS-7416
+add_shortcode("urvenue_ws_events_list", "urvenue_ws_shortcode_events_list");
 
 // Slider
-// function shortcode_uws_events_slider($atts, $content = null)
-function urvenue_ws_shortcode_events_slider($atts, $content = null) // Axl UWS-7416
+function urvenue_ws_shortcode_events_slider($atts, $content = null)
 {
 	/*extract(shortcode_atts(array(
 		   "date" => date("Y-m-d"),
@@ -194,11 +163,10 @@ function urvenue_ws_shortcode_events_slider($atts, $content = null) // Axl UWS-7
 	return $content;
 }
 // add_shortcode("urvenue_ws_events_slider", "shortcode_uws_events_slider");
-add_shortcode("urvenue_ws_events_slider", "urvenue_ws_shortcode_events_slider"); // Axl UWS-7416
+add_shortcode("urvenue_ws_events_slider", "urvenue_ws_shortcode_events_slider");
 
 //Event
-// function shrotcode_uws_event($atts, $content = null)
-function urvenue_ws_shortcode_event($atts, $content = null) // Axl UWS-7416
+function urvenue_ws_shortcode_event($atts, $content = null)
 {
 	ob_start();
 
@@ -220,8 +188,7 @@ function urvenue_ws_shortcode_event($atts, $content = null) // Axl UWS-7416
 	wp_enqueue_script('urvenue-ws-hooks-ga4dl');
 	wp_enqueue_script('nouislider');
 
-	// uws_event();
-	urvenue_ws_event(); // Axl UWS-7416
+	urvenue_ws_event();
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -229,11 +196,10 @@ function urvenue_ws_shortcode_event($atts, $content = null) // Axl UWS-7416
 	return $content;
 }
 // add_shortcode("urvenue_ws_event", "shrotcode_uws_event");
-add_shortcode("urvenue_ws_event", "urvenue_ws_shortcode_event"); // Axl UWS-7416
+add_shortcode("urvenue_ws_event", "urvenue_ws_shortcode_event");
 
 //Inventory Item Header
-// function shrotcode_uws_inventory_item_header($atts, $content = null)
-function urvenue_ws_shortcode_inventory_item_header($atts, $content = null) // Axl UWS-7416
+function urvenue_ws_shortcode_inventory_item_header($atts, $content = null)
 {
 	ob_start();
 
@@ -247,8 +213,7 @@ function urvenue_ws_shortcode_inventory_item_header($atts, $content = null) // A
 	wp_enqueue_script('urvenue-ws-core-scripts');
 	wp_enqueue_script('urvenue-ws-inventory-scripts');
 
-	// uws_item_header();
-	urvenue_ws_item_header(); // Axl UWS-7416
+	urvenue_ws_item_header();
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -256,11 +221,10 @@ function urvenue_ws_shortcode_inventory_item_header($atts, $content = null) // A
 	return $content;
 }
 // add_shortcode("urvenue_ws_inventory_item_header", "shrotcode_uws_inventory_item_header");
-add_shortcode("urvenue_ws_inventory_item_header", "urvenue_ws_shortcode_inventory_item_header"); // Axl UWS-7416
+add_shortcode("urvenue_ws_inventory_item_header", "urvenue_ws_shortcode_inventory_item_header");
 
 //Inventory Item Page
-// function shrotcode_uws_inventory_item_page($atts, $content = null)
-function urvenue_ws_shortcode_inventory_item_page($atts, $content = null) // Axl UWS-7416
+function urvenue_ws_shortcode_inventory_item_page($atts, $content = null)
 {
 	ob_start();
 
@@ -280,8 +244,7 @@ function urvenue_ws_shortcode_inventory_item_page($atts, $content = null) // Axl
 	wp_enqueue_script('nouislider');
 	wp_enqueue_script('urvenue-ws-hooks-ga4dl');
 
-	// uws_item_page();
-	urvenue_ws_item_page(); // Axl UWS-7416
+	urvenue_ws_item_page();
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -289,11 +252,10 @@ function urvenue_ws_shortcode_inventory_item_page($atts, $content = null) // Axl
 	return $content;
 }
 // add_shortcode("urvenue_ws_inventory_item_page", "shrotcode_uws_inventory_item_page");
-add_shortcode("urvenue_ws_inventory_item_page", "urvenue_ws_shortcode_inventory_item_page"); // Axl UWS-7416
+add_shortcode("urvenue_ws_inventory_item_page", "urvenue_ws_shortcode_inventory_item_page");
 
 // Map
-// function shortcode_uws_map($atts, $content = null)
-function urvenue_ws_shortcode_map($atts, $content = null) // Axl UWS-7416
+function urvenue_ws_shortcode_map($atts, $content = null)
 {
 	global $urvenue_ws_path, $urvenue_ws_today;
 	ob_start();
@@ -322,18 +284,14 @@ function urvenue_ws_shortcode_map($atts, $content = null) // Axl UWS-7416
 	wp_enqueue_script('urvenue-ws-hooks-ga4dl');
 
 	$uveventdata = "";
-	// $uvdate = uws_get_events_initial_date("Y-m-d");
-	$uvdate = urvenue_ws_get_events_initial_date("Y-m-d"); // Axl UWS-7416
-	// $uveventcode = (isset($atts['eventcode'])) ? $atts['eventcode'] : uws_get_eventcode();
-	$uveventcode = (isset($atts['eventcode'])) ? $atts['eventcode'] : urvenue_ws_get_eventcode(); // Axl UWS-7416
+	$uvdate = urvenue_ws_get_events_initial_date("Y-m-d");
+	$uveventcode = (isset($atts['eventcode'])) ? $atts['eventcode'] : urvenue_ws_get_eventcode();
 
 	if ($uveventcode) {
-		// $uveventdata = uws_get_eventcode_data($uveventcode);
-		$uveventdata = urvenue_ws_get_eventcode_data($uveventcode); // Axl UWS-7416
+		$uveventdata = urvenue_ws_get_eventcode_data($uveventcode);
 	} else {
 		$uvecozone = "ECZ000";
-		// $uvecozone3 = uws_standardize_ecozone($uvecozone);
-		$uvecozone3 = urvenue_ws_standardize_ecozone($uvecozone); // Axl UWS-7416
+		$uvecozone3 = urvenue_ws_standardize_ecozone($uvecozone);
 		$uvecozone3 = str_replace("ECZ", "", $uvecozone3);
 
 		$uvstartdateformat = str_replace("-", "", $uvdate);
@@ -341,8 +299,7 @@ function urvenue_ws_shortcode_map($atts, $content = null) // Axl UWS-7416
 		if ($venuecode != "") {
 			$uvprimvenuecode = $venuecode;
 		} else {
-			// $uvprimvenue = uws_get_primary_venue();
-			$uvprimvenue = urvenue_ws_get_primary_venue(); // Axl UWS-7416
+			$uvprimvenue = urvenue_ws_get_primary_venue();
 			$uvprimvenuecode = (is_array($uvprimvenue)) ? $uvprimvenue["venuecode"] : "";
 		}
 
@@ -358,13 +315,11 @@ function urvenue_ws_shortcode_map($atts, $content = null) // Axl UWS-7416
 			"ecozone" => $uvecozone3,
 		);
 
-		// $urvenue_ws_no_inventory_dates = uws_get_month_noinventory_dates($uwsnoinvargs);
-		$urvenue_ws_no_inventory_dates = urvenue_ws_get_month_noinventory_dates($uwsnoinvargs); // Axl UWS-7416
+		$urvenue_ws_no_inventory_dates = urvenue_ws_get_month_noinventory_dates($uwsnoinvargs);
 
 		if (is_array($urvenue_ws_no_inventory_dates) && isset($urvenue_ws_no_inventory_dates["noinventorydates"]) && in_array($uvdate, $urvenue_ws_no_inventory_dates["noinventorydates"])) {
 			while (in_array($uvdate, $urvenue_ws_no_inventory_dates["noinventorydates"])) {
-				// $uvdate = date('Y-m-d', strtotime($uvdate . ' +1 day'));
-				$uvdate = gmdate('Y-m-d', strtotime($uvdate . ' +1 day')); // Axl UWS-7416
+				$uvdate = gmdate('Y-m-d', strtotime($uvdate . ' +1 day'));
 			}
 
 			$uvstartdate = $uvdate;
@@ -389,8 +344,7 @@ function urvenue_ws_shortcode_map($atts, $content = null) // Axl UWS-7416
 
 	include_once($urvenue_ws_path . "/includes/map-functions.php");
 
-	// uws_map($uveventdata);
-	urvenue_ws_map($uveventdata); // Axl UWS-7416
+	urvenue_ws_map($uveventdata);
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -398,15 +352,14 @@ function urvenue_ws_shortcode_map($atts, $content = null) // Axl UWS-7416
 	return $content;
 }
 // add_shortcode("urvenue_ws_map", "shortcode_uws_map");
-add_shortcode("urvenue_ws_map", "urvenue_ws_shortcode_map"); // Axl UWS-7416
+add_shortcode("urvenue_ws_map", "urvenue_ws_shortcode_map");
 
 
 include_once($urvenue_ws_uvwp_path . "/includes/uvwp-shortcodes-experiences.php");
 include_once($urvenue_ws_uvwp_path . "/includes/uvwp-shortcodes-guests.php");
 
 //Inquiry
-// function shortcode_uws_inquiry($atts, $content = null)
-function urvenue_ws_shortcode_inquiry($atts, $content = null) // Axl UWS-7416
+function urvenue_ws_shortcode_inquiry($atts, $content = null)
 {
 	global $urvenue_ws_path, $urvenue_ws_core_lib;
 	ob_start();
@@ -435,8 +388,7 @@ function urvenue_ws_shortcode_inquiry($atts, $content = null) // Axl UWS-7416
 		"opendays" => $uvopendays,
 	);
 
-	// uws_inquiry_form($uvargs);
-	urvenue_ws_inquiry_form($uvargs); // Axl UWS-7416
+	urvenue_ws_inquiry_form($uvargs);
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -444,12 +396,11 @@ function urvenue_ws_shortcode_inquiry($atts, $content = null) // Axl UWS-7416
 	return $content;
 }
 // add_shortcode("urvenue_ws_inquiry", "shortcode_uws_inquiry");
-add_shortcode("urvenue_ws_inquiry", "urvenue_ws_shortcode_inquiry"); // Axl UWS-7416
+add_shortcode("urvenue_ws_inquiry", "urvenue_ws_shortcode_inquiry");
 
 
 //[urvenue_ws_inventorywidget
-// function shortcode_uws_inventorywidget($atts, $content = null)
-function urvenue_ws_shortcode_inventorywidget($atts, $content = null) // Axl UWS-7416
+function urvenue_ws_shortcode_inventorywidget($atts, $content = null)
 {
 	global $urvenue_ws_path;
 	ob_start();
@@ -509,9 +460,7 @@ function urvenue_ws_shortcode_inventorywidget($atts, $content = null) // Axl UWS
 		"mixecozones" => $uvmixecozones,
 	);
 
-	// echo uws_inventorywidget($uvargs);
-	// echo urvenue_ws_inventorywidget($uvargs); // Axl UWS-7416
-	echo wp_kses_post(urvenue_ws_inventorywidget($uvargs)); // Axl UWS-7416
+	echo wp_kses_post(urvenue_ws_inventorywidget($uvargs));
 ?>
 
 	<?php
@@ -522,11 +471,10 @@ function urvenue_ws_shortcode_inventorywidget($atts, $content = null) // Axl UWS
 	return $content;
 }
 // add_shortcode("urvenue_ws_inventorywidget", "shortcode_uws_inventorywidget");
-add_shortcode("urvenue_ws_inventorywidget", "urvenue_ws_shortcode_inventorywidget"); // Axl UWS-7416
+add_shortcode("urvenue_ws_inventorywidget", "urvenue_ws_shortcode_inventorywidget");
 
 //[urvenue_ws_packages]
-// function shortcode_uws_packages($atts, $content = null)
-function urvenue_ws_shortcode_packages($atts, $content = null) // Axl UWS-7416
+function urvenue_ws_shortcode_packages($atts, $content = null)
 {
 	global $urvenue_ws_path, $urvenue_ws_today;
 	ob_start();
@@ -560,8 +508,7 @@ function urvenue_ws_shortcode_packages($atts, $content = null) // Axl UWS-7416
 		"todate" => $uvtodate
 	);
 
-	// uws_packages($uvargs);
-	urvenue_ws_packages($uvargs); // Axl UWS-7416
+	urvenue_ws_packages($uvargs);
 
 	$content = ob_get_contents();
 	ob_end_clean();
@@ -569,4 +516,4 @@ function urvenue_ws_shortcode_packages($atts, $content = null) // Axl UWS-7416
 	return $content;
 }
 // add_shortcode("urvenue_ws_packages", "shortcode_uws_packages");
-add_shortcode("urvenue_ws_packages", "urvenue_ws_shortcode_packages"); // Axl UWS-7416
+add_shortcode("urvenue_ws_packages", "urvenue_ws_shortcode_packages");

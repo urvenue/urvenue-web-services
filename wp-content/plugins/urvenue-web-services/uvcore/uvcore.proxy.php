@@ -1,11 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-// $uv_isproxy = 1;
-$urvenue_ws_isproxy = 1; // Axl UWS-7634
-// $urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : $_REQUEST["uvaction"]; // Axl UWS-7418
-// $urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // Axl UWS-7418
-// $urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // Axl UWS-7634
-$urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Proxy dispatcher reads action to route request; nonce verified per action handler // Axl UWS-7416
+$urvenue_ws_isproxy = 1;
+$urvenue_ws_action = isset($urvenue_ws_action) ? $urvenue_ws_action : ( isset( $_REQUEST["uvaction"] ) ? sanitize_text_field( wp_unslash( $_REQUEST["uvaction"] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Proxy dispatcher reads action to route request; nonce verified per action handler
 
 if ($urvenue_ws_action == "uvsp_checkproxyurl") {
 	echo ("uv1");
@@ -18,8 +14,7 @@ if (!$urvenue_ws_uvs_path) {
 
 //Check parameters to detect injection attacks
 include_once($urvenue_ws_corepath . "/includes/security-functions.php");
-// uws_security_check_params_injection();
-urvenue_ws_security_check_params_injection(); // Axl UWS-7416
+urvenue_ws_security_check_params_injection();
 
 if ($urvenue_ws_uvs_path) {
 	if ($urvenue_ws_action == "uvsp_veaidinfo")
@@ -83,5 +78,4 @@ if ($urvenue_ws_uvs_path) {
 	/*else
 		   // uvs_uverror("UVError 01-001: Proxy action not found.<br>");*/
 } else
-	// uvs_uverror("UVError 01-001: Proxy action not found.<br>");
-	urvenue_ws_adm_uverror("UVError 01-001: Proxy action not found.<br>"); // Axl UWS-7416
+	urvenue_ws_adm_uverror("UVError 01-001: Proxy action not found.<br>");

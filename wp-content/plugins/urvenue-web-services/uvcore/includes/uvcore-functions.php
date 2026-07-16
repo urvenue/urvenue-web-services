@@ -592,7 +592,7 @@ function urvenue_ws_get_proxy_script(){
 	$uvproxy .= $urvenue_ws_config_addproxyparams;
 	$uvproxiesscript = "";
 
-	$urvenue_ws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '" . esc_js( esc_url( $uvproxy ) ) . "';"; // Axl UWS-8151
+	$urvenue_ws_proxy_script = "window.uws_proxy = window.uws_proxy || {}; uws_proxy = '" . esc_js( esc_url( $uvproxy ) ) . "';";
 
 	wp_register_script('urvenue-ws-proxy', false, array(), $urvenue_ws_assetsversion, true);
 	wp_enqueue_script('urvenue-ws-proxy');
@@ -696,7 +696,7 @@ function urvenue_ws_get_popup_theme() {
 }
 
 function urvenue_ws_check_nonce($uvnonce) {
-	if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['uws_nonce'] ) ), $uvnonce)) { // Axl UWS-7418
+	if(!isset($_REQUEST['uws_nonce']) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['uws_nonce'] ) ), $uvnonce)) {
 		wp_send_json_error(array('message' => 'Invalid nonce'), 403);
 	}
 }
