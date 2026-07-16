@@ -346,7 +346,6 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){
     $uvevent["descr"] = ($uvevent["descr"]) ? $uvevent["descr"] : $uvevtdescrdefault;
 
     $uveventitem = "";
-    // $uvddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvevent["date"]));
     $uvddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvevent["date"]));
     $uvvenuediv = ($urvenue_ws_core_lib["events"]["global-addvenuename"]) ? "<div class='uwsvenuename uws-venkey-{venuekey}'>" . $uvvenuename . "</div>" : "";
     $uveventinfodiv = ($uvevent["descr"]) ? "<div class='uwseventdescr'><div class='uwstitle'>Event Info</div><div class='uwsdescr'>" . $uvevent["descr"] . "</div></div>" : "";
@@ -355,13 +354,10 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){
     $uvdstarttime = ($uvevent["dstarttime"]) ? $uvevent["dstarttime"] : "";
     $uvdstarttimediv = ($uvdstarttime) ? "<div class='uwsdtime'>" . $uvdstarttime . "</div>" : "";
     $uvddoorsopen = ($uvevent["ndoorsopen"]) ? substr($uvevent["ndoorsopen"], 1,4) : "";
-    // $uvddoorsopen = ($uvddoorsopen) ? date("g:i A", strtotime($uvddoorsopen)) : "";
     $uvddoorsopen = ($uvddoorsopen) ? gmdate("g:i A", strtotime($uvddoorsopen)) : "";
     $uvddoorsopendiv = ($uvddoorsopen) ? "<div class='uwsddoorsopen'><span>Doors Open: </span>" . $uvddoorsopen . "</div>" : "";
     $uvsharelinks = urvenue_ws_get_share_links($uvevent["event-page-url"]);
-    // $eventgcalstartdate = date("Ymd", strtotime($uvevent["date"]));
     $eventgcalstartdate = gmdate("Ymd", strtotime($uvevent["date"]));
-    // $eventgcalenddate = date("Ymd", strtotime($uvevent["date"]));
     $eventgcalenddate = gmdate("Ymd", strtotime($uvevent["date"]));
     $uvgooglecalendarlink = "https://www.google.com/calendar/event?action=TEMPLATE&text=" . urlencode($uvevent["name"]) . "&details=" . urlencode($uvevent["name"]) . "&dates={$eventgcalstartdate}/{$eventgcalenddate}&location=" . urlencode($uvevent["venuename"]);
     $uveventcontclasses = (isset($uvevent["isnoevent"]) and $uvevent["isnoevent"]) ? "uwsisnoevent" : "";
@@ -521,11 +517,8 @@ function urvenue_ws_replace_event_vars($uvevent, $uvtemplate){
 function urvenue_ws_get_event_datesel($uvdate = "", $uvvenuecode = ""){
     $uvmindate = gmdate('Y-m-01', strtotime(urvenue_ws_get_events_initial_date("Y-m-d")));
     $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d");
-    // $uvfromdate = date('Y-m-01', strtotime($uvdate));
     $uvfromdate = gmdate('Y-m-01', strtotime($uvdate));
-    // $uvtodate = date("Y-m-t", strtotime($uvdate));
     $uvtodate = gmdate("Y-m-t", strtotime($uvdate));
-    // $uvddate = date("M j, Y", strtotime($uvdate));
     $uvddate = gmdate("M j, Y", strtotime($uvdate));
     $uvchangeeventdatelabel = urvenue_ws_lang("change-event-date");
     $uvddatelang = urvenue_ws_lang_date($uvddate);
@@ -578,13 +571,9 @@ function urvenue_ws_calendar($uvevents, $uvargs = ""){
     $uvcaldaysbetween = round($uvcaldaysbetween / (60 * 60 * 24));
 
     for($i=0; $i<=$uvcaldaysbetween; $i++){//124 max 4 months loaded
-        // $uvceldate = date("Y-m-d", $uvcalstartdatetms);
         $uvceldate = gmdate("Y-m-d", $uvcalstartdatetms);
-		// $uvcelldate = date("M j", $uvcalstartdatetms);
 		$uvcelldate = gmdate("M j", $uvcalstartdatetms);
-		// $uvcellsdate = date("Ymd", $uvcalstartdatetms);
 		$uvcellsdate = gmdate("Ymd", $uvcalstartdatetms);
-        // $uvcellddate = date($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvcalstartdatetms));
         $uvcellddate = gmdate($urvenue_ws_core_lib["events"]["global-dateformat"], strtotime($uvcalstartdatetms));
 
         $uvcalendarcell = $uvcelleventslist = $uvcellmobilelink = "";
@@ -643,7 +632,6 @@ function urvenue_ws_calendar($uvevents, $uvargs = ""){
         $uvcalstartdatetms = strtotime("+1 day", $uvcalstartdatetms);
         
         if($uvceldate >= $uvmaxdate){
-            // $uvcurndate = date("N", strtotime($uvceldate));
             $uvcurndate = gmdate("N", strtotime($uvceldate));
             $uvmissingcells = 7 - $uvcurndate;
             $uvmissingcells = ($uvmissingcells < 0) ? "0" : $uvmissingcells;
@@ -673,7 +661,6 @@ function urvenue_ws_eventskeys_to_date($uvevents){
             $uvmaineventcode = $uvevent["maineventcode"];
 
             if($uveventcode === $uvmaineventcode) {
-                // $uveventsdate = date("Ymd", strtotime($uvevent["date"]));
                 $uveventsdate = gmdate("Ymd", strtotime($uvevent["date"]));
                 $uveventsreturn["D" . $uveventsdate][] = $uvevent;
             }
@@ -694,7 +681,6 @@ function urvenue_ws_events_controls($uvargs){
 
     $uvdate = urvenue_ws_get_arg($uvargs, "date", "");
     if($uvdate){
-        // $uvinitialddate = date("M j, Y", strtotime($uvdate));
         $uvinitialddate = gmdate("M j, Y", strtotime($uvdate));
         $uvinitialdate = $uvdate;
     }
@@ -711,11 +697,8 @@ function urvenue_ws_events_controls($uvargs){
         $urvenue_ws_venuecodes = urvenue_ws_get_arg($uvargs, "venuecodes", "");
         $uvvenuescodesstring = ($urvenue_ws_venuecodes) ? $urvenue_ws_venuecodes : urvenue_ws_get_venuecodes_string($uvvenuekeycode);
         $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d");
-        // $uvfromdate = date('Y-m-01', strtotime($uvinitialdate));
         $uvfromdate = gmdate('Y-m-01', strtotime($uvinitialdate));
-        // $uvtodate = date("Y-m-t", strtotime($uvinitialdate));
         $uvtodate = gmdate("Y-m-t", strtotime($uvinitialdate));
-        // $uvddate = date("M j, Y", strtotime($uvinitialdate));
         $uvddate = gmdate("M j, Y", strtotime($uvinitialdate));
         $uvchangeeventsdatelabel = urvenue_ws_lang("change-events-date");
         $uvddatelang = urvenue_ws_lang_date($uvddate);
@@ -741,7 +724,6 @@ function urvenue_ws_events_controls($uvargs){
         ";
     }
     else if($uvdateselectortype == "datepicker-range"){
-        // $uvinitialddate = date("M j", strtotime($uvinitialdate));
         $uvinitialddate = gmdate("M j", strtotime($uvinitialdate));
         $uvenddate = urvenue_ws_get_arg($uvargs, "enddate", "");
         $uvendddate = ($uvenddate) ? gmdate("M j, Y", strtotime($uvenddate)) : urvenue_ws_get_events_endinit_date("M j, Y");
@@ -1023,10 +1005,8 @@ function urvenue_ws_get_monthslis($uvcurrentdate = ""){
     $uvmonthlidate = strtotime($uvmonthlidate);
 
     for($i=0; $i<$uvnmonths; $i++){
-        // $uvmonthlifdate = date("Y-m-01", $uvmonthlidate);
         $uvmonthlifdate = gmdate("Y-m-01", $uvmonthlidate);
         $uvmonthlimname = urvenue_ws_lang_date(gmdate("F", $uvmonthlidate));
-        // $uvmonthliyear = date("Y", $uvmonthlidate);
         $uvmonthliyear = gmdate("Y", $uvmonthlidate);
 
         $uvmonthlifdate = ($uvmonthlifdate < $uvcurrentdate) ? $uvcurrentdate : $uvmonthlifdate;
@@ -1052,11 +1032,8 @@ function urvenue_ws_get_monthsoptsstring($uvcurrentdate = ""){
     $uvmonthlidate = strtotime($uvmonthlidate);
 
     for($i=0; $i<$uvnmonths; $i++){
-        // $uvmonthlifdate = date("Y-m-01", $uvmonthlidate);
         $uvmonthlifdate = gmdate("Y-m-01", $uvmonthlidate);
-        // $uvmonthlimname = date("F", $uvmonthlidate);
         $uvmonthlimname = gmdate("F", $uvmonthlidate);
-        // $uvmonthliyear = date("Y", $uvmonthlidate);
         $uvmonthliyear = gmdate("Y", $uvmonthlidate);
 
         $uvmonthlifdate = ($uvmonthlifdate < $uvcurrentdate) ? $uvcurrentdate : $uvmonthlifdate;
@@ -1078,14 +1055,12 @@ function urvenue_ws_get_events_max_date($uvdateformat = ""){
 
     $uvnmonths = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["eventspage-monthsrange"]) ? $urvenue_ws_core_lib["events"]["eventspage-monthsrange"] : 6;
     $uvnmonths = ($urvenue_ws_config_cal_nmonths) ? $urvenue_ws_config_cal_nmonths : $uvnmonths;
-    // $uvmaxdate = date("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months"));
     $uvmaxdate = gmdate("Y-m-d", strtotime($urvenue_ws_today . " +$uvnmonths months"));
 
     if(isset($urvenue_ws_core_lib["system"]["global-maxdate"]) and $urvenue_ws_core_lib["system"]["global-maxdate"])
         $uvmaxdate = $urvenue_ws_core_lib["system"]["global-maxdate"];
 
     if($uvdateformat)
-        // $uvmaxdate = date($uvdateformat, strtotime($uvmaxdate));
         $uvmaxdate = gmdate($uvdateformat, strtotime($uvmaxdate));
 
     return $uvmaxdate;
@@ -1102,7 +1077,6 @@ function urvenue_ws_get_events_initial_date($uvdateformat = ""){
     if($uvlibeventsinitialdate < $urvenue_ws_today) $uvlibeventsinitialdate = $urvenue_ws_today;
 
     if($uvdateformat)
-        // $uvlibeventsinitialdate = date($uvdateformat, strtotime($uvlibeventsinitialdate));
         $uvlibeventsinitialdate = gmdate($uvdateformat, strtotime($uvlibeventsinitialdate));
 
     return $uvlibeventsinitialdate;
@@ -1117,13 +1091,11 @@ function urvenue_ws_get_events_endinit_date($uvdateformat = "", $uvdate = ""){
 
     $uvinitialdate = ($uvdate) ? $uvdate : urvenue_ws_get_events_initial_date("Y-m-d");
     $uvnmonths = (isset($urvenue_ws_core_lib["events"]) and $urvenue_ws_core_lib["events"]["global-nmonths"]) ? $urvenue_ws_core_lib["events"]["global-nmonths"] : 2;
-    // $uvenddate = date("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months"));
     $uvenddate = gmdate("Y-m-d", strtotime($uvinitialdate . " +$uvnmonths months"));
     $uvmaxdate = urvenue_ws_get_events_max_date("Y-m-d");
     $uvenddate = ($uvenddate > $uvmaxdate) ? $uvmaxdate : $uvenddate;
 
     if($uvdateformat)
-        // $uvenddate = date($uvdateformat, strtotime($uvenddate));
         $uvenddate = gmdate($uvdateformat, strtotime($uvenddate));
 
     return $uvenddate;
@@ -1328,9 +1300,7 @@ function urvenue_ws_preprocess_market_events($uveventsdata){
 
         foreach($uveventsdata["uv"]["data"] as $uvmarketevent){
             $uvmarketeventdate = $uvmarketevent["caldate"];
-            // $uvmarketeventsdate = date("ymd", strtotime($uvmarketeventdate));
             $uvmarketeventsdate = gmdate("ymd", strtotime($uvmarketeventdate));
-            // $uvmarketeventsldate = date("Ymd", strtotime($uvmarketeventdate));
             $uvmarketeventsldate = gmdate("Ymd", strtotime($uvmarketeventdate));
             $uvmarketeventvencode = "VEN" . $uvmarketevent["venueid"];
             $uvmarketeventecozone = "ECZ" . $uvmarketevent["ecozoneid"];
@@ -1560,7 +1530,6 @@ function urvenue_ws_get_event_ecozonemap($uvapidata, $uveventcode){
 
         if(is_array($uvschedules)){
             $uveventdata = urvenue_ws_get_eventcode_data($uveventcode);
-            // $uvsdate = date("ymd", strtotime($uveventdata["date"]));
             $uvsdate = gmdate("ymd", strtotime($uveventdata["date"]));
 
             //reroute to maineventcode in case the eventcode is different than maineventcode
@@ -1615,7 +1584,6 @@ function urvenue_ws_get_event_stocks($uvinventory, $uveventcode){
     if(is_array($uvinventory) and $uveventcode){
         $uveventdata = urvenue_ws_get_eventcode_data($uveventcode);
         $uveventecozone = urvenue_ws_standardize_ecozone($uveventdata["ecozone"]);
-        // $uvsdate = date("ymd", strtotime($uveventdata["date"]));
         $uvsdate = gmdate("ymd", strtotime($uveventdata["date"]));
 
         if(isset($uvinventory["D" . $uvsdate]) and isset($uvinventory["D" . $uvsdate]["venues"][$uveventdata["venuecode"]]) and isset($uvinventory["D" . $uvsdate]["venues"][$uveventdata["venuecode"]]["ecozones"][$uveventecozone]) and isset($uvinventory["D" . $uvsdate]["venues"][$uveventdata["venuecode"]]["ecozones"][$uveventecozone]["booktypes"]))
@@ -1664,7 +1632,6 @@ function urvenue_ws_get_event_url($uvevent, $uvlinkcode = "event"){
         $uveventvenuenameurl = urvenue_ws_get_linkstring($uvevent["venuename"]);
         $uvvenueid = str_replace("VEN", "", $uvevent["venuecode"]);
         $uv5venueid = (isset($uvevent["uv5venueid"])) ? $uvevent["uv5venueid"] : "";
-        // $uvssdate = date("ymd", strtotime($uvevent["date"]));
         $uvssdate = gmdate("ymd", strtotime($uvevent["date"]));
 
         $uveventurl = str_replace(
@@ -2105,7 +2072,6 @@ function urvenue_ws_event($uvargs = ""){
 
     $uveventhtml = urvenue_ws_apply_filters("urvenue_ws_event_page_after_replace", $uveventhtml, $uveventinfo);
 
-    // echo $uveventhtml;
     echo wp_kses_post( $uveventhtml );
 }
 
@@ -2320,7 +2286,6 @@ function urvenue_ws_get_performerlis($uvargs = ""){
         $uvmaxdate = urvenue_ws_get_arg($uvargs, "todate", urvenue_ws_get_events_endinit_date("Y-m-d", $uvfromdate));
     }
 
-    // $uvtodate = date("Y-m-d", strtotime($uvmaxdate . " +7 days"));
     $uvtodate = gmdate("Y-m-d", strtotime($uvmaxdate . " +7 days"));
 
     $uvterms = array(

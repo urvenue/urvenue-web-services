@@ -5,17 +5,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     Optional: args: array with options: venue(default all on library)
     Returns: Prints html controls + events integration
 */
-// function uws_inquiry_form($uvargs = "")
-function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
+function urvenue_ws_inquiry_form($uvargs = "")
 {
     global $urvenue_ws_core_lib, $urvenue_ws_today;
 
-    // $uwsinqformhtml = uws_get_template("/reservations/inquiry-form");
-    $uwsinqformhtml = urvenue_ws_get_template("/reservations/inquiry-form"); // Axl UWS-7416
-    // $uvphonecodeopts = uws_get_phonecode_options();
-    $uvphonecodeopts = urvenue_ws_get_phonecode_options(); // Axl UWS-7416
-    // $uvvenuekeycodes = uws_get_arg($uvargs, "venue", "all");
-    $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venue", "all"); // Axl UWS-7416
+    $uwsinqformhtml = urvenue_ws_get_template("/reservations/inquiry-form");
+    $uvphonecodeopts = urvenue_ws_get_phonecode_options();
+    $uvvenuekeycodes = urvenue_ws_get_arg($uvargs, "venue", "all");
     $uvvenueid = $uvmanageentid = "";
     $uvvenueselector = "";
     $urvenue_ws_redirect_to = isset($uvargs['redirect_to']) ? $uvargs['redirect_to'] : "";
@@ -29,12 +25,10 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
     $uvdefaulttermslink = "https://www.urvenue.com/legal/terms-conditions/";
 
     // Privacy Policy link
-    // $uvprivacylink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["privacy"]) and $urvenue_ws_core_lib["pages"]["privacy"] and uws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink;
-    $uvprivacylink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["privacy"]) and $urvenue_ws_core_lib["pages"]["privacy"] and urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink; // Axl UWS-7416
+    $uvprivacylink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["privacy"]) and $urvenue_ws_core_lib["pages"]["privacy"] and urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["privacy"]) : $uvdefaultprivacylink;
 
     // Terms link
-    // $uvtermslink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["terms"]) and $urvenue_ws_core_lib["pages"]["terms"] and uws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["terms"]) : $uvdefaulttermslink;
-    $uvtermslink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["terms"]) and $urvenue_ws_core_lib["pages"]["terms"] and urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["terms"]) : $uvdefaulttermslink; // Axl UWS-7416
+    $uvtermslink = (is_array($urvenue_ws_core_lib) and isset($urvenue_ws_core_lib["pages"]["terms"]) and $urvenue_ws_core_lib["pages"]["terms"] and urvenue_ws_is_wordpress()) ? get_permalink($urvenue_ws_core_lib["pages"]["terms"]) : $uvdefaulttermslink;
 
     if (is_array($urvenue_ws_core_lib["venues"])) {
         $uvvenueselectorclass = ($uvvenuekeycodes and $uvvenuekeycodes != "all") ? "uwsisspecificvenue" : "";
@@ -62,8 +56,7 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
                 "manageentid" => $uvmanageentid,
                 "venueid" => $uvvenueid,
             );
-            // $uvleadtypes = uws_inquiry_get_leadtypes($uvleadtypesargs);
-            $uvleadtypes = urvenue_ws_inquiry_get_leadtypes($uvleadtypesargs); // Axl UWS-7416
+            $uvleadtypes = urvenue_ws_inquiry_get_leadtypes($uvleadtypesargs);
 
 
             if (is_array($uvleadtypes) and count($uvleadtypes)) {
@@ -83,8 +76,7 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
         $uvvenueselector .= "<div class='uws-inputcont uws-leadtypeselector $uvleadtypeselectorclass'><label for='uwsinqleadtype'>Request Type*</label><div class='uwsdy-leadtypeselector'>$uvleadtypeselector</div></div>";
     }
 
-    // $uvdpinitialdate = date("M j, Y", strtotime($urvenue_ws_today));
-    $uvdpinitialdate = gmdate("M j, Y", strtotime($urvenue_ws_today)); // Axl UWS-7416
+    $uvdpinitialdate = gmdate("M j, Y", strtotime($urvenue_ws_today));
     $uvinqdateselector = "
     <div class='uws-inputcont uws-isdateinput'>
         <div class='uws-inquiry-dpinput uws-dropdown-cont'>
@@ -165,30 +157,20 @@ function urvenue_ws_inquiry_form($uvargs = "") // Axl UWS-7416
         $uwsinqformhtml
     );
 
-    // @Axl
-    // echo "<div class='uws-integration uws-inquiryform-cont'>";
-    // echo $uwsinqformhtml;
-    // echo "<div class='uws-inquiry-statusmsg'><div class='uwsinqmsgbody uwsdy-inqmessage'></div></div>";
-    // echo "<div class='uws-loader-uvicon'></div>";
-    // echo "</div>";
     echo wp_kses_post( "<div class='uws-integration uws-inquiryform-cont'>" );
     echo wp_kses_post( $uwsinqformhtml );
     echo wp_kses_post( "<div class='uws-inquiry-statusmsg'><div class='uwsinqmsgbody uwsdy-inqmessage'></div></div>" );
     echo wp_kses_post( "<div class='uws-loader-uvicon'></div>" );
     echo wp_kses_post( "</div>" );
-    // @Axl End
 }
 
-// function uws_inquiry_get_leadtypes($uvargs)
-function urvenue_ws_inquiry_get_leadtypes($uvargs) // Axl UWS-7416
+function urvenue_ws_inquiry_get_leadtypes($uvargs)
 {
     global $urvenue_ws_feeds_lib;
 
     $uvleadtypeslist = "";
-    // $uvmanageentid = uws_get_arg($uvargs, "manageentid", "");
-    $uvmanageentid = urvenue_ws_get_arg($uvargs, "manageentid", ""); // Axl UWS-7416
-    // $uvvenueid = uws_get_arg($uvargs, "venueid", "");
-    $uvvenueid = urvenue_ws_get_arg($uvargs, "venueid", ""); // Axl UWS-7416
+    $uvmanageentid = urvenue_ws_get_arg($uvargs, "manageentid", "");
+    $uvvenueid = urvenue_ws_get_arg($uvargs, "venueid", "");
     $uvgetleadsurl = $urvenue_ws_feeds_lib["inquiry-leadtypes"]["url"];
     $uvgetleadsexpiration = $urvenue_ws_feeds_lib["inquiry-leadtypes"]["expiration"];
 
@@ -207,8 +189,7 @@ function urvenue_ws_inquiry_get_leadtypes($uvargs) // Axl UWS-7416
 
 
     $uvleadtypeslist = "";
-    // $uvleadtypesfeed = uws_get_feed($uvgetleadsurl, $uvgetleadsexpiration);
-    $uvleadtypesfeed = urvenue_ws_get_feed($uvgetleadsurl, $uvgetleadsexpiration); // Axl UWS-7416
+    $uvleadtypesfeed = urvenue_ws_get_feed($uvgetleadsurl, $uvgetleadsexpiration);
     if (is_array($uvleadtypesfeed) and $uvleadtypesfeed["uv"]["success"]["status"] == "success" and $uvleadtypesfeed["uv"]["data"]) {
         $uvleadtypeslist = $uvleadtypesfeed["uv"]["data"];
     }
