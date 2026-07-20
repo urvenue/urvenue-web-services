@@ -17,7 +17,6 @@ $urvenue_ws_initialtab = "dashboard";
 	<title>UvCore | Admin</title>
 	
 	<?php
-		// @egt [UWS-7264]
 		add_action('admin_enqueue_scripts', function(){
 			global $urvenue_ws_assetsversion;
 
@@ -37,12 +36,9 @@ $urvenue_ws_initialtab = "dashboard";
 				}
 			";
 
-			// wp_register_style('uvwp_admin_styles', '');
-			wp_register_style('urvenue_ws_admin_styles', '', array(), $urvenue_ws_assetsversion); // Axl UWS-7416
-			// wp_enqueue_style('uvwp_admin_styles');
-			wp_enqueue_style('urvenue_ws_admin_styles'); // Axl UWS-7416
-			// wp_add_inline_style('uvwp_admin_styles', $uvwp_admin_css);
-			wp_add_inline_style('urvenue_ws_admin_styles', $uvwp_admin_css); // Axl UWS-7416
+			wp_register_style('urvenue_ws_admin_styles', '', array(), $urvenue_ws_assetsversion);
+			wp_enqueue_style('urvenue_ws_admin_styles');
+			wp_add_inline_style('urvenue_ws_admin_styles', $uvwp_admin_css);
 
 			wp_enqueue_style('flatpickr-css', $uvbaseurl . 'assets/css/flatpickr.min.css', array(), $urvenue_ws_assetsversion, 'all');
 			wp_enqueue_style('urvenue-ws-system-css', $uvbaseurl . 'assets/css/system.css', array(), $urvenue_ws_assetsversion, 'all');

@@ -5,8 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     Requires: venuecode
     Returns: array with venue info
 */
-// function uws_get_venueinfo($uvvenuecode = ""){
-function urvenue_ws_get_venueinfo($uvvenuecode = ""){ // Axl UWS-7416
+function urvenue_ws_get_venueinfo($uvvenuecode = ""){
     global $urvenue_ws_today;
 
     $uvvenuesinfo = "";
@@ -17,13 +16,11 @@ function urvenue_ws_get_venueinfo($uvvenuecode = ""){ // Axl UWS-7416
             "caldate" => $urvenue_ws_today,
             "todate" => $urvenue_ws_today,
         );
-        // $uvapidata = uws_get_feed("inventorylist-venues", $uvterms);
-        $uvapidata = urvenue_ws_get_feed("inventorylist-venues", $uvterms); // Axl UWS-7416
+        $uvapidata = urvenue_ws_get_feed("inventorylist-venues", $uvterms);
 
         if(is_array($uvapidata) and $uvapidata["uv"]["success"]["status"] == "success"){
             if(is_array($uvapidata["uv"]["data"]["venues"]) and is_array($uvapidata["uv"]["data"]["venues"][$uvvenuecode]))
-                // $uvvenuesinfo = uws_get_venue_array($uvapidata["uv"]["data"]["venues"][$uvvenuecode]);
-                $uvvenuesinfo = urvenue_ws_get_venue_array($uvapidata["uv"]["data"]["venues"][$uvvenuecode]); // Axl UWS-7416
+                $uvvenuesinfo = urvenue_ws_get_venue_array($uvapidata["uv"]["data"]["venues"][$uvvenuecode]);
         }
     }
 
@@ -34,8 +31,7 @@ function urvenue_ws_get_venueinfo($uvvenuecode = ""){ // Axl UWS-7416
     Requires: venuecodes
     Returns: array with venue info
 */
-// function uws_get_venuesinfo($uvvenuecode = ""){
-function urvenue_ws_get_venuesinfo($uvvenuecode = ""){ // Axl UWS-7416
+function urvenue_ws_get_venuesinfo($uvvenuecode = ""){
     global $urvenue_ws_today;
 
     $uvvenuesinfo = "";
@@ -46,8 +42,7 @@ function urvenue_ws_get_venuesinfo($uvvenuecode = ""){ // Axl UWS-7416
             "caldate" => $urvenue_ws_today,
             "todate" => $urvenue_ws_today,
         );
-        // $uvapidata = uws_get_feed("inventorylist-venues", $uvterms);
-        $uvapidata = urvenue_ws_get_feed("inventorylist-venues", $uvterms); // Axl UWS-7416
+        $uvapidata = urvenue_ws_get_feed("inventorylist-venues", $uvterms);
 
         if(is_array($uvapidata) and $uvapidata["uv"]["success"]["status"] == "success"){
             $uvvenues = $uvapidata["uv"]["data"]["venues"];
@@ -55,8 +50,7 @@ function urvenue_ws_get_venuesinfo($uvvenuecode = ""){ // Axl UWS-7416
 
             if(is_array($uvvenues)){
                 foreach($uvvenues as $uvvenuecode => $uvvenue){
-                    // $uvvenuearray = uws_get_venue_array($uvvenue);
-                    $uvvenuearray = urvenue_ws_get_venue_array($uvvenue); // Axl UWS-7416
+                    $uvvenuearray = urvenue_ws_get_venue_array($uvvenue);
 
                     $uvvenuesinfo[$uvvenuecode] = $uvvenuearray;
                 }
@@ -72,24 +66,19 @@ function urvenue_ws_get_venuesinfo($uvvenuecode = ""){ // Axl UWS-7416
 /*Process API data and returns array with events
     Requires: apidata(Raw data from API)
 */
-// function uws_get_venue_array($uvvenue){
-function urvenue_ws_get_venue_array($uvvenue){ // Axl UWS-7416
+function urvenue_ws_get_venue_array($uvvenue){
     $uvvenuearray = "";
 
     if(is_array($uvvenue)){
         $uvvenuearray = $uvvenue["info"];
-        // $uvvenueurl = uws_get_venue_url($uvvenuearray);
-        $uvvenueurl = urvenue_ws_get_venue_url($uvvenuearray); // Axl UWS-7416
-        // $uvvenueimagesarray = uws_get_venue_imagesarray($uvvenue["images"]);
-        $uvvenueimagesarray = urvenue_ws_get_venue_imagesarray($uvvenue["images"]); // Axl UWS-7416
-        // $uvvenueimages = uws_get_venue_images($uvvenueimagesarray);
-        $uvvenueimages = urvenue_ws_get_venue_images($uvvenueimagesarray); // Axl UWS-7416
+        $uvvenueurl = urvenue_ws_get_venue_url($uvvenuearray);
+        $uvvenueimagesarray = urvenue_ws_get_venue_imagesarray($uvvenue["images"]);
+        $uvvenueimages = urvenue_ws_get_venue_images($uvvenueimagesarray);
         $uvvenueaddress = isset($uvvenuearray["address"]) ? $uvvenuearray["address"] : "";
         $uvvenueprovince = isset($uvvenuearray["province"]) ? $uvvenuearray["province"] : "";
         $uvvenuezip = isset($uvvenuearray["zip"]) ? $uvvenuearray["zip"] : "";
         $uvvenuearray["venueaddress"] = ($uvvenuearray["city"]) ? $uvvenueaddress . "<br>" . $uvvenuearray["city"] . ", " . $uvvenueprovince . " " . $uvvenuezip : $uvvenueaddress;
-        // $uvvenuegmapurl = strip_tags($uvvenuearray["venueaddress"]); // Axl UWS-7416
-        $uvvenuegmapurl = wp_strip_all_tags($uvvenuearray["venueaddress"]); // Axl UWS-7416
+        $uvvenuegmapurl = wp_strip_all_tags($uvvenuearray["venueaddress"]);
         $uvvenuearray["venuegmapurl"] = "https://www.google.com/maps/search/?api=1&query=" . urlencode($uvvenuegmapurl);
         $uvvenuearray["venueimages"] = $uvvenueimages;
         $uvvenuearray["venue-url"] = $uvvenueurl;
@@ -102,8 +91,7 @@ function urvenue_ws_get_venue_array($uvvenue){ // Axl UWS-7416
 /*Get venue images for different places
     Requires: venue images(plain venue images array)
 */
-// function uws_get_venue_images($uvimages){
-function urvenue_ws_get_venue_images($uvimages){ // Axl UWS-7416
+function urvenue_ws_get_venue_images($uvimages){
     global $urvenue_ws_core_lib;
 
     $uvimagesreturn = "";
@@ -121,8 +109,7 @@ function urvenue_ws_get_venue_images($uvimages){ // Axl UWS-7416
                 $uvthisreturnmultiple = (isset($urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-returnmultiple"])) ? $urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-returnmultiple"] : 0;
                 $uvthissizecode = $urvenue_ws_core_lib["venueimages"][$uvimageloccode . "-sizecode"];
 
-                // $uvlocimage = uws_get_flyersbypriority($uvimages, $uvimageprior, $uvthishideifnomatch, $uvthisreturnmultiple);
-                $uvlocimage = urvenue_ws_get_flyersbypriority($uvimages, $uvimageprior, $uvthishideifnomatch, $uvthisreturnmultiple); // Axl UWS-7416
+                $uvlocimage = urvenue_ws_get_flyersbypriority($uvimages, $uvimageprior, $uvthishideifnomatch, $uvthisreturnmultiple);
 
                 if(is_array($uvlocimage) and !$uvthisreturnmultiple){
                     $uvimageurl = $uvlocimage["path"] . "/$uvthissizecode/" . $uvlocimage["file"];
@@ -187,8 +174,7 @@ function urvenue_ws_get_venue_images($uvimages){ // Axl UWS-7416
 /*Get plain venue images array
     Requires: venue images(Raw venue images array)
 */
-// function uws_get_venue_imagesarray($uvimages){
-function urvenue_ws_get_venue_imagesarray($uvimages){ // Axl UWS-7416
+function urvenue_ws_get_venue_imagesarray($uvimages){
 	if(is_array($uvimages)){
 		$uvimagesarray = array();
 		foreach($uvimages as $uvimagetypekey => $uvimagetypearray){
@@ -209,16 +195,14 @@ function urvenue_ws_get_venue_imagesarray($uvimages){ // Axl UWS-7416
     Requires: venue(venue data array)
     Optional: linkcode(event or map, depending on what link is required)
 */
-// function uws_get_venue_url($uvvenue, $uvlinkcode = "venue"){
-function urvenue_ws_get_venue_url($uvvenue, $uvlinkcode = "venue"){ // Axl UWS-7416
+function urvenue_ws_get_venue_url($uvvenue, $uvlinkcode = "venue"){
     global $urvenue_ws_config_venueurl;
 
     $uvvenueurl = "#";
 
     if(isset($urvenue_ws_config_venueurl) and $urvenue_ws_config_venueurl){
         $uvbaseurl = $urvenue_ws_config_venueurl;
-        // $uvvenuenameurl = uws_get_linkstring($uvvenue["name"]);
-        $uvvenuenameurl = urvenue_ws_get_linkstring($uvvenue["name"]); // Axl UWS-7416
+        $uvvenuenameurl = urvenue_ws_get_linkstring($uvvenue["name"]);
 
         $uvvenueurl = str_replace(
             array(

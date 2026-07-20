@@ -1,11 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-// $urvenue_ws_venueslisthtml = uvs_admin_venues_list_html();
-// $urvenue_ws_venueslisthtml = urvenue_ws_adm_admin_venues_list_html(); // Axl UWS-7416
-$urvenue_ws_venueslisthtml = urvenue_ws_adm_admin_venues_list_html(); // Axl UWS-7634
+$urvenue_ws_venueslisthtml = urvenue_ws_adm_admin_venues_list_html();
 ?>
 
-<div id="uvs-admin-venues" class="uvs-admin-opt-section <?php /* Old: echo $urvenue_ws_admin_optstabs_state['venues']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['venues'] ); ?>">
+<div id="uvs-admin-venues" class="uvs-admin-opt-section <?php echo esc_attr( $urvenue_ws_admin_optstabs_state['venues'] ); ?>">
 	<div class="uvs-admin-opt-title">Venues</div>
 	<!--<div class="uvs-admin-opt-descr">Use your <strong>VEA Venue ID</strong> to make your initial configuration. If you don't know your ID contact: <a href='mailto:support@urvenue.com'>support@urvenue.com</a></div>
 	<div class="uvs-admin-opt-inputbtn uvs-maxw450 uvs-clearfix">
@@ -21,11 +19,7 @@ $urvenue_ws_venueslisthtml = urvenue_ws_adm_admin_venues_list_html(); // Axl UWS
 	<div class="uvs-admin-venuesmsg"></div>
 	<div class="uvs-admin-opt-linesep"></div>
 	<div id="uvs-admin-venuesinfo" class="uvs-admin-opt-infolist">
-		<?php // @Axl ?>
-		<?php /* Old: echo $urvenue_ws_venueslisthtml; */ ?>
-		<?php /* Old: echo wp_kses( $urvenue_ws_venueslisthtml, uvs_allowed_admin_html() ); */ ?>
-		<?php echo wp_kses( $urvenue_ws_venueslisthtml, urvenue_ws_adm_allowed_admin_html() );  // Axl UWS-7416 ?>
-		<?php // @Axl End ?>
+		<?php echo wp_kses( $urvenue_ws_venueslisthtml, urvenue_ws_adm_allowed_admin_html() ); ?>
 	</div>
 	<div class="uvs-admin-venues-actions">
         <span>Add a new Venue manually.</span>

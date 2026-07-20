@@ -691,7 +691,7 @@ function urvenue_ws_send_integration_alert($uvalerttype, $uvfeedurl = "", $uvdet
 	$uvmessage = $urvenue_ws_website_notices_types[$uvalerttype]["message_template"];
 	
 	// Get website URL
-	$uvsite_url = function_exists('get_site_url') ? get_site_url() : sanitize_text_field( wp_unslash( isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : 'Unknown' ) ); // Axl UWS-7418
+	$uvsite_url = function_exists('get_site_url') ? get_site_url() : sanitize_text_field( wp_unslash( isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : 'Unknown' ) );
 	
 	// Replace standard placeholders
 	$uvmessage = str_replace('{website_url}', $uvsite_url, $uvmessage);

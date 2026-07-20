@@ -5,61 +5,36 @@ global $urvenue_ws_core_lib;
 
 //$urvenue_ws_config_envicode = "apiuat"; //overwrite environment configuration, be careful
 
-// $urvenue_ws_envicode = (isset($urvenue_ws_config_envicode)) ? $urvenue_ws_config_envicode : "api";
-$urvenue_ws_envicode = (isset($urvenue_ws_config_envicode)) ? $urvenue_ws_config_envicode : "api"; // Axl UWS-7416
-// $urvenue_ws_envicode = (isset($urvenue_ws_core_lib["system"]["use-staging"]) and $urvenue_ws_core_lib["system"]["use-staging"]) ? "apistaging" : $urvenue_ws_envicode;
-$urvenue_ws_envicode = (isset($urvenue_ws_core_lib["system"]["use-staging"]) and $urvenue_ws_core_lib["system"]["use-staging"]) ? "apistaging" : $urvenue_ws_envicode; // Axl UWS-7416
+$urvenue_ws_envicode = (isset($urvenue_ws_config_envicode)) ? $urvenue_ws_config_envicode : "api";
+$urvenue_ws_envicode = (isset($urvenue_ws_core_lib["system"]["use-staging"]) and $urvenue_ws_core_lib["system"]["use-staging"]) ? "apistaging" : $urvenue_ws_envicode;
 
-// $urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and $_REQUEST["uvstaging"]) ? "apistaging" : $urvenue_ws_envicode;
-// $urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and $_REQUEST["uvstaging"]) ? "apistaging" : $urvenue_ws_envicode; // Axl UWS-7416
-// $urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvstaging"] ) )) ? "apistaging" : $urvenue_ws_envicode; // Axl UWS-7418
-$urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvstaging"] ) )) ? "apistaging" : $urvenue_ws_envicode; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only environment override flag, no state change // Axl UWS-7416
-// $urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and $_REQUEST["uvenvicode"]) ? $_REQUEST["uvenvicode"] : $urvenue_ws_envicode;
-// $urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and $_REQUEST["uvenvicode"]) ? $_REQUEST["uvenvicode"] : $urvenue_ws_envicode; // Axl UWS-7416
-// $urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) )) ? sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) ) : $urvenue_ws_envicode; // Axl UWS-7418
-$urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) )) ? sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) ) : $urvenue_ws_envicode; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only environment code override, no state change // Axl UWS-7416
+$urvenue_ws_envicode = (isset($_REQUEST["uvstaging"]) and sanitize_text_field( wp_unslash( $_REQUEST["uvstaging"] ) )) ? "apistaging" : $urvenue_ws_envicode; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only environment override flag, no state change
+$urvenue_ws_envicode = (isset($_REQUEST["uvenvicode"]) and sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) )) ? sanitize_key( wp_unslash( $_REQUEST["uvenvicode"] ) ) : $urvenue_ws_envicode; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only environment code override, no state change
 
 //API Vars
-// $urvenue_ws_apikey = (isset($urvenue_ws_apikey) and $urvenue_ws_apikey) ? $urvenue_ws_apikey : $urvenue_ws_core_lib["system"]["apikey"];
 $urvenue_ws_apikey = (isset($urvenue_ws_apikey) and $urvenue_ws_apikey) ? $urvenue_ws_apikey : ( $urvenue_ws_core_lib["system"]["apikey"] ?? "" );
-// $urvenue_ws_sourcecode = (isset($urvenue_ws_sourcecode) and $urvenue_ws_sourcecode) ? $urvenue_ws_sourcecode : $urvenue_ws_core_lib["system"]["sourcecode"];
 $urvenue_ws_sourcecode = (isset($urvenue_ws_sourcecode) and $urvenue_ws_sourcecode) ? $urvenue_ws_sourcecode : ( $urvenue_ws_core_lib["system"]["sourcecode"] ?? "" );
-// $urvenue_ws_sourceloc = (isset($urvenue_ws_sourceloc) and $urvenue_ws_sourceloc) ? $urvenue_ws_sourceloc : $urvenue_ws_core_lib["system"]["sourceloc"];
 $urvenue_ws_sourceloc = (isset($urvenue_ws_sourceloc) and $urvenue_ws_sourceloc) ? $urvenue_ws_sourceloc : ( $urvenue_ws_core_lib["system"]["sourceloc"] ?? "" );
 
-// $urvenue_ws_bkgaddsubd = ($urvenue_ws_envicode == "apistaging") ? "staging." : "";
-$urvenue_ws_bkgaddsubd = ($urvenue_ws_envicode == "apistaging") ? "staging." : ""; // Axl UWS-7416
-// $urvenue_ws_bkgaddsubd = ($urvenue_ws_envicode == "apiuat") ? "uat." : $urvenue_ws_bkgaddsubd;
-$urvenue_ws_bkgaddsubd = ($urvenue_ws_envicode == "apiuat") ? "uat." : $urvenue_ws_bkgaddsubd; // Axl UWS-7416
-// $urvenue_ws_bkgaddsubd = (isset($urvenue_ws_addbookingsubdomain) and $urvenue_ws_addbookingsubdomain) ? $urvenue_ws_addbookingsubdomain : $urvenue_ws_bkgaddsubd;
-$urvenue_ws_bkgaddsubd = (isset($urvenue_ws_addbookingsubdomain) and $urvenue_ws_addbookingsubdomain) ? $urvenue_ws_addbookingsubdomain : $urvenue_ws_bkgaddsubd; // Axl UWS-7416
+$urvenue_ws_bkgaddsubd = ($urvenue_ws_envicode == "apistaging") ? "staging." : "";
+$urvenue_ws_bkgaddsubd = ($urvenue_ws_envicode == "apiuat") ? "uat." : $urvenue_ws_bkgaddsubd;
+$urvenue_ws_bkgaddsubd = (isset($urvenue_ws_addbookingsubdomain) and $urvenue_ws_addbookingsubdomain) ? $urvenue_ws_addbookingsubdomain : $urvenue_ws_bkgaddsubd;
 
 // Remove double booketing
-// $urvenue_ws_bkgaddsubd = ($urvenue_ws_bkgaddsubd === "booketing.") ? "" : $urvenue_ws_bkgaddsubd;
-$urvenue_ws_bkgaddsubd = ($urvenue_ws_bkgaddsubd === "booketing.") ? "" : $urvenue_ws_bkgaddsubd; // Axl UWS-7416
+$urvenue_ws_bkgaddsubd = ($urvenue_ws_bkgaddsubd === "booketing.") ? "" : $urvenue_ws_bkgaddsubd;
 
-// $urvenue_ws_config_addurlstaging = (isset($urvenue_ws_config_addurlstaging) and $urvenue_ws_config_addurlstaging) ? $urvenue_ws_config_addurlstaging : "";
-$urvenue_ws_config_addurlstaging = (isset($urvenue_ws_config_addurlstaging) and $urvenue_ws_config_addurlstaging) ? $urvenue_ws_config_addurlstaging : ""; // Axl UWS-7416
-// $urvenue_ws_config_addcheckouturl = (isset($urvenue_ws_config_addcheckouturl) and $urvenue_ws_config_addcheckouturl) ? $urvenue_ws_config_addcheckouturl : "";
-$urvenue_ws_config_addcheckouturl = (isset($urvenue_ws_config_addcheckouturl) and $urvenue_ws_config_addcheckouturl) ? $urvenue_ws_config_addcheckouturl : ""; // Axl UWS-7416
+$urvenue_ws_config_addurlstaging = (isset($urvenue_ws_config_addurlstaging) and $urvenue_ws_config_addurlstaging) ? $urvenue_ws_config_addurlstaging : "";
+$urvenue_ws_config_addcheckouturl = (isset($urvenue_ws_config_addcheckouturl) and $urvenue_ws_config_addcheckouturl) ? $urvenue_ws_config_addcheckouturl : "";
 
-// $urvenue_ws_menuapikey = ($urvenue_ws_envicode == "apistaging") ? "VEFOHYHKCTCP" : "SREOCZRCGKNC";
-$urvenue_ws_menuapikey = ($urvenue_ws_envicode == "apistaging") ? "VEFOHYHKCTCP" : "SREOCZRCGKNC"; // Axl UWS-7416
-// $urvenue_ws_menuapikey = (isset($urvenue_ws_config_menuapikey) and $urvenue_ws_config_menuapikey)
-// 	? $urvenue_ws_config_menuapikey
-// 	: $urvenue_ws_menuapikey;
-$urvenue_ws_menuapikey = (isset($urvenue_ws_config_menuapikey) and $urvenue_ws_config_menuapikey) // Axl UWS-7416
+$urvenue_ws_menuapikey = ($urvenue_ws_envicode == "apistaging") ? "VEFOHYHKCTCP" : "SREOCZRCGKNC";
+$urvenue_ws_menuapikey = (isset($urvenue_ws_config_menuapikey) and $urvenue_ws_config_menuapikey)
 	? $urvenue_ws_config_menuapikey
 	: $urvenue_ws_menuapikey;
-// $urvenue_ws_menuapikey = (isset($urvenue_ws_core_lib["events"]["addon-bottles"]["menuapikey"]) and $urvenue_ws_core_lib["events"]["addon-bottles"]["menuapikey"])
-// 	? $urvenue_ws_core_lib["events"]["addon-bottles"]["menuapikey"]
-// 	: $urvenue_ws_menuapikey;
-$urvenue_ws_menuapikey = (isset($urvenue_ws_core_lib["events"]["addon-bottles"]["menuapikey"]) and $urvenue_ws_core_lib["events"]["addon-bottles"]["menuapikey"]) // Axl UWS-7416
+$urvenue_ws_menuapikey = (isset($urvenue_ws_core_lib["events"]["addon-bottles"]["menuapikey"]) and $urvenue_ws_core_lib["events"]["addon-bottles"]["menuapikey"])
 	? $urvenue_ws_core_lib["events"]["addon-bottles"]["menuapikey"]
 	: $urvenue_ws_menuapikey;
 
-// $urvenue_ws_feeds_lib = array(
-$urvenue_ws_feeds_lib = array( // Axl UWS-7416
+$urvenue_ws_feeds_lib = array(
     "urquery" => array(//Deprecated
 		"url" => "https://$urvenue_ws_envicode.urvenue.me/v1/urassistant/urquery/json/?apikey=$urvenue_ws_apikey&sourcecode=$urvenue_ws_sourcecode&sourceloc=$urvenue_ws_sourceloc&{params}",
 		"expiration" => 3600,
@@ -200,33 +175,23 @@ $urvenue_ws_feeds_lib = array( // Axl UWS-7416
 	),
 );
 
-// $urvenue_ws_feedscleartime = 86400;//172800 - 2 Days
-$urvenue_ws_feedscleartime = 86400;//172800 - 2 Days // Axl UWS-7416
+$urvenue_ws_feedscleartime = 86400;//172800 - 2 Days
 
-// $urvenue_ws_endcurlangparam = (uws_get_cur_lang() != "en") ? "&lang=" . uws_get_cur_lang() : "";
-$urvenue_ws_endcurlangparam = (urvenue_ws_get_cur_lang() != "en") ? "&lang=" . urvenue_ws_get_cur_lang() : ""; // Axl UWS-7416
-// $urvenue_ws_addcheckoutparams = $urvenue_ws_endcheckoutparams = $urvenue_ws_addurlstaging ="";
-$urvenue_ws_addcheckoutparams = $urvenue_ws_endcheckoutparams = $urvenue_ws_addurlstaging = ""; // Axl UWS-7416
-// if(urvenue_ws_get_cur_lang() != "en"){ // Axl UWS-7416
+$urvenue_ws_endcurlangparam = (urvenue_ws_get_cur_lang() != "en") ? "&lang=" . urvenue_ws_get_cur_lang() : "";
+$urvenue_ws_addcheckoutparams = $urvenue_ws_endcheckoutparams = $urvenue_ws_addurlstaging = "";
 if(urvenue_ws_get_cur_lang() != "en"){
-	// $urvenue_ws_addcheckoutparams = "?lang=" . uws_get_cur_lang();
-	$urvenue_ws_addcheckoutparams = "?lang=" . urvenue_ws_get_cur_lang(); // Axl UWS-7416
-	// $urvenue_ws_endcheckoutparams = "&lang=" . uws_get_cur_lang();
-	$urvenue_ws_endcheckoutparams = "&lang=" . urvenue_ws_get_cur_lang(); // Axl UWS-7416
+	$urvenue_ws_addcheckoutparams = "?lang=" . urvenue_ws_get_cur_lang();
+	$urvenue_ws_endcheckoutparams = "&lang=" . urvenue_ws_get_cur_lang();
 }
 else
-	$urvenue_ws_addurlstaging = str_replace("&", "?", $urvenue_ws_addurlstaging); // Axl UWS-7416
+	$urvenue_ws_addurlstaging = str_replace("&", "?", $urvenue_ws_addurlstaging);
 
 //$urvenue_ws_bkgaddsubd = "staging."; //overwrite booking checkout subdomain, be careful
-// $urvenue_ws_bkgaddhost = $urvenue_ws_config_chkhost ?? "booketing";
-$urvenue_ws_bkgaddhost = $urvenue_ws_config_chkhost ?? "booketing"; // Axl UWS-7416
-// $urvenue_ws_actionlinks_lib = array(
-$urvenue_ws_actionlinks_lib = array( // Axl UWS-7416
+$urvenue_ws_bkgaddhost = $urvenue_ws_config_chkhost ?? "booketing";
+$urvenue_ws_actionlinks_lib = array(
 	"microsite" => array(
-		// "checkout-carturl" => "https://{$urvenue_ws_bkgaddsubd}$urvenue_ws_bkgaddhost.com/checkout/cart/{cartcode}/?sourcecode=$urvenue_ws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}&noredirect=1{$urvenue_ws_config_addurlstaging}{$urvenue_ws_config_addcheckouturl}&lang=" . uws_get_cur_lang(),
-		"checkout-carturl" => "https://{$urvenue_ws_bkgaddsubd}$urvenue_ws_bkgaddhost.com/checkout/cart/{cartcode}/?sourcecode=$urvenue_ws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}&noredirect=1{$urvenue_ws_config_addurlstaging}{$urvenue_ws_config_addcheckouturl}&lang=" . urvenue_ws_get_cur_lang(), // Axl UWS-7416
-		// "checkout-checkurl" => "https://{$urvenue_ws_bkgaddsubd}$urvenue_ws_bkgaddhost.com/checkout/details/{cartcode}/?sourcecode=$urvenue_ws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}{$urvenue_ws_config_addurlstaging}{$urvenue_ws_config_addcheckouturl}&lang=" . uws_get_cur_lang(),
-		"checkout-checkurl" => "https://{$urvenue_ws_bkgaddsubd}$urvenue_ws_bkgaddhost.com/checkout/details/{cartcode}/?sourcecode=$urvenue_ws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}{$urvenue_ws_config_addurlstaging}{$urvenue_ws_config_addcheckouturl}&lang=" . urvenue_ws_get_cur_lang(), // Axl UWS-7416
+		"checkout-carturl" => "https://{$urvenue_ws_bkgaddsubd}$urvenue_ws_bkgaddhost.com/checkout/cart/{cartcode}/?sourcecode=$urvenue_ws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}&noredirect=1{$urvenue_ws_config_addurlstaging}{$urvenue_ws_config_addcheckouturl}&lang=" . urvenue_ws_get_cur_lang(),
+		"checkout-checkurl" => "https://{$urvenue_ws_bkgaddsubd}$urvenue_ws_bkgaddhost.com/checkout/details/{cartcode}/?sourcecode=$urvenue_ws_sourcecode&sourceloc={sourceloc}&manageents={manageentid}&resellerid={resellerid}&providerid={providerid}{$urvenue_ws_config_addurlstaging}{$urvenue_ws_config_addcheckouturl}&lang=" . urvenue_ws_get_cur_lang(),
 	),
 	"bk" => array(
 		"checkout-carturl" => "#uws-view-cart",

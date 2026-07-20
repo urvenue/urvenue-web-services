@@ -3,12 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $urvenue_ws_core_lib;
 
-// @egt [UWS-7297]
-// uws_check_nonce("urvenue_ws_inventory");
-urvenue_ws_check_nonce("urvenue_ws_inventory"); // Axl UWS-7416
+urvenue_ws_check_nonce("urvenue_ws_inventory");
 
-// $urvenue_ws_checkoutinfo = uws_cleanup_request("checkoutinfo");
-$urvenue_ws_checkoutinfo = urvenue_ws_cleanup_request("checkoutinfo"); // Axl UWS-7416
+$urvenue_ws_checkoutinfo = urvenue_ws_cleanup_request("checkoutinfo");
 $urvenue_ws_forcecheckotv1 = ($urvenue_ws_checkoutinfo == "forcecheckoutv1") ? 1 : 0;
 
 if($urvenue_ws_forcecheckotv1){
