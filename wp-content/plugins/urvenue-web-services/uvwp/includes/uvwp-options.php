@@ -39,12 +39,12 @@ function urvenue_ws_include_adminstyles(){
 add_action('admin_enqueue_scripts', 'urvenue_ws_include_adminstyles'); 
 
 function urvenue_ws_include_adminscripts(){
-    global $urvenue_ws_coreurl;
+    global $urvenue_ws_coreurl, $urvenue_ws_assetsversion;
 
-    wp_register_script('urvenue-ws-admin', $urvenue_ws_coreurl . '/assets/js/admin.js', array(), 1, true);
+    wp_register_script('urvenue-ws-admin', $urvenue_ws_coreurl . '/assets/js/admin.js', array(), $urvenue_ws_assetsversion, true);
     wp_enqueue_script('urvenue-ws-admin');
 
-    wp_register_script('flatpickr', $urvenue_ws_coreurl . '/assets/js/flatpickr.min.js', false, 1, true);
+    wp_register_script('flatpickr', $urvenue_ws_coreurl . '/assets/js/flatpickr.min.js', false, $urvenue_ws_assetsversion, true);
     wp_enqueue_script('flatpickr');
 }
 add_action('admin_enqueue_scripts', 'urvenue_ws_include_adminscripts'); 
