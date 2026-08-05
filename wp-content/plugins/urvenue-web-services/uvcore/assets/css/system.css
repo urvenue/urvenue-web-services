@@ -683,6 +683,19 @@
 	marker-start: 15px;
 }
 
+/* these action links carry no href on purpose (see urvenue_ws_adm_allowed_admin_html),
+   so the link affordance has to come from CSS */
+.uvs-admin-venueinf .actions a,
+.uvs-infolist-groupnoti .actions a,
+.uvs-admin-listorderandview-item .uvsactions a {
+	cursor: pointer;
+}
+
+.uvs-admin-venueinf .actions a,
+.uvs-infolist-groupnoti .actions a {
+	text-decoration: underline;
+}
+
 .uvs-admin-venueinf .actions a.uvsjs-triggervenueprimary {
 	color: #1a73e8;
 }
