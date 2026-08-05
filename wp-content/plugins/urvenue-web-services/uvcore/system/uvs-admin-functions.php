@@ -282,9 +282,14 @@ function urvenue_ws_adm_allowed_admin_html() {
 		'input'  => array( 'type' => true, 'id' => true, 'class' => true, 'name' => true, 'value' => true, 'data-value-on' => true, 'data-value-off' => true, 'placeholder' => true, 'readonly' => true, 'disabled' => true ),
 		'select' => array( 'id' => true, 'class' => true, 'name' => true ),
 		'option' => array( 'value' => true, 'selected' => true ),
-		'div'    => array( 'class' => true ),
+		'div'    => array( 'class' => true, 'style' => true, 'data-nflyerset' => true, 'data-flyerloc' => true ),
+		// no 'href': these are click-handled by class, and wp_kses turns the
+		// generated href='javascript:;' into href=';', which navigates away
+		'a'      => array( 'class' => true, 'aria-label' => true, 'data-isprimary' => true ),
+		'i'      => array( 'class' => true ),
 		'button' => array( 'type' => true, 'class' => true ),
 		'span'   => array( 'class' => true ),
+		'strong' => array(),
 	);
 }
 

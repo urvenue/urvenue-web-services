@@ -683,6 +683,19 @@
 	marker-start: 15px;
 }
 
+/* these action links carry no href on purpose (see urvenue_ws_adm_allowed_admin_html),
+   so the link affordance has to come from CSS */
+.uvs-admin-venueinf .actions a,
+.uvs-infolist-groupnoti .actions a,
+.uvs-admin-listorderandview-item .uvsactions a {
+	cursor: pointer;
+}
+
+.uvs-admin-venueinf .actions a,
+.uvs-infolist-groupnoti .actions a {
+	text-decoration: underline;
+}
+
 .uvs-admin-venueinf .actions a.uvsjs-triggervenueprimary {
 	color: #1a73e8;
 }
@@ -1197,18 +1210,46 @@ input[readonly].uvsjs-datepicker {
 	pointer-events: none;
 }
 
-/*.uvs-color-field{max-width: 170px;}*/
-.uvs-page .iris-picker .iris-square {
-	margin-right: 8%;
+.uvs-colorpicker {
+	display: inline-flex;
+	align-items: stretch;
+	gap: 8px;
 }
 
-.uvs-page .iris-picker .iris-strip {
-	max-height: 100%;
+.uvs-colorpicker .uvs-color-field {
+	flex: 0 1 auto;
+	max-width: 120px;
 }
 
-.uvs-page .wp-picker-container .iris-picker {
-	position: absolute;
-	z-index: 2;
+/* the swatch stretches so it always matches the text field height.
+   the selector outweighs the wp-admin input[type="color"] defaults on purpose */
+.uvs-colorpicker input.uvs-colorpicker-swatch {
+	flex: 0 0 auto;
+	align-self: stretch;
+	width: 44px;
+	height: auto;
+	min-height: 0;
+	margin: 0;
+	padding: 3px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background-color: #fafafa;
+	box-shadow: inset 0 1px 4px rgba(0, 0, 0, .07);
+	cursor: pointer;
+}
+
+.uvs-colorpicker-swatch::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+
+.uvs-colorpicker-swatch::-webkit-color-swatch {
+	border: none;
+	border-radius: 2px;
+}
+
+.uvs-colorpicker-swatch::-moz-color-swatch {
+	border: none;
+	border-radius: 2px;
 }
 
 /****/
