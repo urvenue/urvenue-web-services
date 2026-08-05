@@ -436,7 +436,10 @@ uwsClickListener(".uwsjs-inv-item-showtourlink", function (e) {
         uviframe.scrolling = 'no';
         uviframe.src = uvtourview;
         uviframe.onload = function () {
-            $('.uv-360-loading').removeClass('uv-360-loading');
+            const uv360loaders = document.querySelectorAll('.uv-360-loading');
+            Array.prototype.forEach.call(uv360loaders, function (el) {
+                el.classList.remove('uv-360-loading');
+            });
         };
         let uviframehtml = uviframe.outerHTML;
 

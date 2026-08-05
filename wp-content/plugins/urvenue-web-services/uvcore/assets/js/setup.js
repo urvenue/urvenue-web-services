@@ -6,40 +6,65 @@
 
 var uvsetupsubmit = false;
 
-jQuery(document).ready(function(){
-	if((typeof(uvcoreinput) != "undefined") && (uvcoreinput.length > 0)){
-		var uvsproxysuccess;
-			
-		jQuery.get(uvcoreinput + '/uvcore.proxy.php?uvaction=uvsp_checkproxyurl', function(data){
-			if(data == 'uv1')
-				uvsproxysuccess = true;
+function uvsSetupInit() {
+	if ((typeof (uvcoreinput) != "undefined") && (uvcoreinput.length > 0)) {
+		let uvsproxysuccess;
+
+		const uvrequest = new XMLHttpRequest();
+		uvrequest.open("GET", uvcoreinput + '/uvcore.proxy.php?uvaction=uvsp_checkproxyurl', true);
+
+		uvrequest.onload = function () {
+			if (this.status >= 200 && this.status < 400)
+				uvsproxysuccess = (this.response == 'uv1');
 			else
 				uvsproxysuccess = false;
-		}).fail(function(){
-			uvsproxysuccess = false;
-		}).always(function(){
-			if(uvsproxysuccess){
-				jQuery('#url').closest('.uvs-setupfield').addClass('uvs-setupfield-ok');
-				jQuery(".uvs-btn-setup-manually").show();
-				
-				if(uvsetupsubmit){
-					console.log("hola");
 
-					jQuery("#uvs-input-write").val("1");
-					jQuery("#uvs-form-setup").submit();
-				}
-			}
-			else{
-				jQuery('#url').closest('.uvs-setupfield').addClass('uvs-setupfield-nok');
-				jQuery(".uvs-setup-errors").append("<div class='uvs-setup-error'><strong>UvCore URL</strong> It was not possible to access the uvcore file, plesae verify the URL.</div>");
-			}
-		});
+			uvsSetupProxyResult(uvsproxysuccess);
+		};
+
+		uvrequest.onerror = function () {
+			uvsSetupProxyResult(false);
+		};
+
+		uvrequest.send();
 	}
-});
+}
 
-jQuery(document).on("click", ".uvsjs-btn-setup-manually", function(){
-	jQuery("#uvs-input-manuallib").val(1);
-	uvs_popup.addClass("uvs-jsonlibpop");
-	
+function uvsSetupProxyResult(uvsproxysuccess) {
+	const uvsurlfield = document.querySelector("#url");
+	const uvsurlcont = (uvsurlfield) ? uvsurlfield.closest(".uvs-setupfield") : null;
+
+	if (uvsproxysuccess) {
+		if (uvsurlcont) uvsurlcont.classList.add("uvs-setupfield-ok");
+
+		const uvsmanualbtns = document.querySelectorAll(".uvs-btn-setup-manually");
+		Array.prototype.forEach.call(uvsmanualbtns, function (el) {
+			el.style.display = "";
+		});
+
+		if (uvsetupsubmit) {
+			document.querySelector("#uvs-input-write").value = "1";
+			document.querySelector("#uvs-form-setup").submit();
+		}
+	}
+	else {
+		if (uvsurlcont) uvsurlcont.classList.add("uvs-setupfield-nok");
+
+		const uvssetuperrors = document.querySelector(".uvs-setup-errors");
+		if (uvssetuperrors)
+			uvssetuperrors.insertAdjacentHTML("beforeend", "<div class='uvs-setup-error'><strong>UvCore URL</strong> It was not possible to access the uvcore file, plesae verify the URL.</div>");
+	}
+}
+
+uvsClickListener(".uvsjs-btn-setup-manually", function () {
+	document.querySelector("#uvs-input-manuallib").value = 1;
+	uvs_popup.classList.add("uvs-jsonlibpop");
+
 	uvsDisplayMsg("<textarea class='uvs-libjson' rows='5'>" + uvcorejsonlib + "</textarea><div class='uvs-text-right uvs-mt20'><button class='uvsjs-copycliptoclip uvs-btn uvs-btn-p' data-target='.uvs-libjson'>Copy</button></div>", "White File Manually", "hidden", 600);
 });
+
+//kept at the end of the file so the listener above is already registered
+if (document.readyState != "loading")
+	uvsSetupInit();
+else
+	document.addEventListener("DOMContentLoaded", uvsSetupInit);
