@@ -565,27 +565,6 @@ uvsClickListener(".uvs-switch-ui", function () {
 
 	uvsswitchinput.dispatchEvent(new Event("change", { bubbles: true }));
 });
-uvsChangeListener(".uvsjs-controlfieldview", function () {
-	const uvscvtarget = this.dataset.target;
-	const uvscvshowon = this.dataset.showon;
-	const uvscvhideon = this.dataset.hideon;
-
-	if (this.value == uvscvshowon)
-		uvsQueryAll(uvscvtarget).forEach(function (el) {
-			el.style.display = "flex";
-		});
-	else if (this.value == uvscvhideon)
-		uvsQueryAll(uvscvtarget).forEach(function (el) {
-			el.style.display = "none";
-		});
-});
-uvsClickListener(".uvsjs-gotoadminoptpage", function () {
-	const uvsgototarget = this.dataset.target;
-
-	uvsQueryAll(".uvs-adminbox-mainmenu a[href='" + uvsgototarget + "']").forEach(function (el) {
-		el.click();
-	});
-});
 uvsClickListener(".uvs-admin-iconboxlist a", function (e) {
 	//e.preventDefault();
 
