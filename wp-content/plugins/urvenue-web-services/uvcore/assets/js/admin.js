@@ -2,55 +2,75 @@ var uvs_popup;
 var uvs_pendchanges = false;
 var uvs_admboxactmsgst = 0;
 
-jQuery(document).ready(function () {
-	jQuery("body").append("<div id='uvs-pop-up' class='uvs-pop-cont'><div class='uvs-pop-box'><a class='uvs-closepop uvsjs-closepop' href='javascript:;'><span class='uvs-hide'>Close</span><i class='uv-icon-cancel'></i></a><div class='uvs-pop-charge'></div></div></div>");
+function uvsAdminInit() {
+	document.body.insertAdjacentHTML("beforeend", "<div id='uvs-pop-up' class='uvs-pop-cont'><div class='uvs-pop-box'><a class='uvs-closepop uvsjs-closepop' href='javascript:;'><span class='uvs-hide'>Close</span><i class='uv-icon-cancel'></i></a><div class='uvs-pop-charge'></div></div></div>");
 
-	uvs_popup = jQuery("#uvs-pop-up");
+	uvs_popup = document.querySelector("#uvs-pop-up");
 
-	if (jQuery("#uvs-uvcoreadmin-form").length) {
-		jQuery("#uvs-uvcoreadmin-form").validate({
-			submitHandler: function (form) {
-				let uvvenuearevalid = 1;
-				const uvnewvenueselems = document.querySelectorAll(".uvs-admin-venueinf-vc-new");
-				Array.prototype.forEach.call(uvnewvenueselems, function (el, i) {
-					if (!el.querySelector(".uvsjs-spread-venuekey").value)
-						uvvenuearevalid = 0;
-				});
+	const uvsadminform = document.querySelector("#uvs-uvcoreadmin-form");
 
+	if (uvsadminform) {
+		uvsadminform.addEventListener("submit", function (e) {
+			e.preventDefault();
 
-				if (uvvenuearevalid) {
-					var uvsadminformobj = jQuery(form);
-					var uvsadmininfo = uvsadminformobj.find(".uvsjson").serialize();
-					var uvsadminaction = uvsadminformobj.attr("action");
+			if (!this.checkValidity()) {
+				this.reportValidity();
+				return;
+			}
 
-					uvsadminformobj.find(".uvs-adminbox-actions .uvs-adminbox-actions-btnset:last-child").addClass("active");
-					uvsadminformobj.find(".uvs-adminbox-actions .uvs-adminbox-actions-btnset:last-child .uvs-btn").attr("disabled", true);
+			let uvvenuearevalid = 1;
+			const uvnewvenueselems = document.querySelectorAll(".uvs-admin-venueinf-vc-new");
+			Array.prototype.forEach.call(uvnewvenueselems, function (el, i) {
+				if (!el.querySelector(".uvsjs-spread-venuekey").value)
+					uvvenuearevalid = 0;
+			});
 
-					jQuery.ajax({
-						url: uvsadminaction,
-						data: uvsadmininfo,
-						type: "POST",
-					})
-						.done(function (uvsresponse) {
-							if (uvsresponse == "saved") {
-								setTimeout(function () {
-									uvsadminformobj.find(".uvs-adminbox-actions .uvs-adminbox-actions-btnset:last-child").removeClass("active");
-									uvsadminformobj.find(".uvs-adminbox-actions .uvs-adminbox-actions-btnset:last-child .uvs-btn").attr("disabled", false);
+			if (uvvenuearevalid) {
+				const uvsadminformobj = this;
+				const uvsadmininfo = uvsSerializeFields(uvsadminformobj.querySelectorAll(".uvsjson"));
+				const uvsadminaction = uvsadminformobj.getAttribute("action");
 
-									uvAdminBoxActionMessage(uvsadminformobj, "Changes Saved");
-									uvs_pendchanges = 0;
-								}, 1500);
+				const uvsactionsbtnset = uvsadminformobj.querySelector(".uvs-adminbox-actions .uvs-adminbox-actions-btnset:last-child");
 
-								if (uvnewvenueselems.length) {
-									uvs_pendchanges = 0;
-									location.reload();
+				if (uvsactionsbtnset) {
+					uvsactionsbtnset.classList.add("active");
+					uvsQueryAll(".uvs-btn", uvsactionsbtnset).forEach(function (el) {
+						el.disabled = true;
+					});
+				}
+
+				let uvrequest = new XMLHttpRequest();
+				uvrequest.open("POST", uvsadminaction, true);
+				uvrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+				uvrequest.onload = function () {
+					if (this.status >= 200 && this.status < 400) {
+						if (this.response == "saved") {
+							setTimeout(function () {
+								if (uvsactionsbtnset) {
+									uvsactionsbtnset.classList.remove("active");
+									uvsQueryAll(".uvs-btn", uvsactionsbtnset).forEach(function (el) {
+										el.disabled = false;
+									});
 								}
+
+								uvAdminBoxActionMessage(uvsadminformobj, "Changes Saved");
+								uvs_pendchanges = 0;
+							}, 1500);
+
+							if (uvnewvenueselems.length) {
+								uvs_pendchanges = 0;
+								location.reload();
 							}
-						});
-				}
-				else {
-					alert("Venue key is required");
-				}
+						}
+					}
+				};
+				uvrequest.onerror = function () {
+					console.log("UVJS Error: Request Error");
+				};
+				uvrequest.send(uvsadmininfo);
+			}
+			else {
+				alert("Venue key is required");
 			}
 		});
 	}
@@ -59,54 +79,14 @@ jQuery(document).ready(function () {
 		uvsInitDatepicker();
 
 	//init colors
-	jQuery('.uvs-color-field').wpColorPicker({
-		change: function (event, ui) {
-			if (this.classList.contains("uvsjs-choosecolor")) {
-				if (uvs_popup && uvs_popup[0]) uvs_popup[0].classList.add("uvs-pop-ui");
-
-				const uvselcolor = ui.color.toString();
-
-				const uvthemesellook = this.closest(".uvs-infolist-item").previousElementSibling.querySelector("select.uvsjson");
-				const uvthemesel = (uvthemesellook) ? uvthemesellook.value : this.closest("#uvs-admin-ui-color-palette").querySelector(".uvsjson").value;
-				const uvthemeloader = this.closest(".uvs-infolist-item").querySelector(".uv-loader-uvicon");
-				const uvrecom = "We highly recommend to update the <b>Theme UI</b> color to match the selected Accent Color.";
-
-				uvthemeloader.classList.add("active");
-
-				if (uvthemesel == "dark") {
-					if (uvsGetContrast(uvselcolor, "#111111") < 4.5) {
-						setTimeout(() => {
-							uvsDisplayMsg(uvrecom, "Recommendation", "OK", 400);
-						}, 1200);
-					}
-
-					setTimeout(() => {
-						uvthemeloader.classList.remove("active");
-					}, 1200);
-				} else {
-					if (uvsGetContrast(uvselcolor, "#ffffff") < 4.5) {
-						setTimeout(() => {
-							uvsDisplayMsg(uvrecom, "Recommendation", "OK", 400);
-						}, 1200);
-					}
-
-					setTimeout(() => {
-						uvthemeloader.classList.remove("active");
-					}, 1200);
-				}
-			}
-
-			setTimeout(() => {
-				uvsHidePopup(uvs_popup);
-			}, 10000);
-		},
-	});
+	uvsInitColorFields();
 
 	//go to anchor tab
 	if (window.location.hash) {
-		jQuery(".uvs-adminbox-mainmenu a[href='" + window.location.hash + "']").click();
+		const uvshashtab = document.querySelector(".uvs-adminbox-mainmenu a[href='" + window.location.hash + "']");
+		if (uvshashtab) uvshashtab.click();
 	}
-});
+}
 
 //Check configuration
 uvsClickListener(".uvsjs-checkapiconfig", function () {
@@ -257,7 +237,7 @@ uvsClickListener(".uvsendpoint", function (e) {
 
 });
 
-// Remotely Clear Cache 
+// Remotely Clear Cache
 uvsClickListener(".uvsjs-clearcache", function (e) {
 
 	e.preventDefault();
@@ -289,7 +269,7 @@ uvsClickListener(".uvsjs-clearcache", function (e) {
 				let uvcachedata = uvresponse["uv"]["success"];
 				const uvcachestatus = uvcachedata["status"].toUpperCase();
 
-				if (uvs_popup && uvs_popup[0]) uvs_popup[0].classList.add("uvs-pop-cache");
+				if (uvs_popup) uvs_popup.classList.add("uvs-pop-cache");
 
 				uvsDisplayMsg(uvcachedata["message"], uvcachestatus, "CLOSE", 400);
 
@@ -346,13 +326,13 @@ uvsClickListener(".uvsjs-moveorderdown", function () {
 // Clean initial date input
 uvsClickListener(".uvsjs-clearinitialdatefield", function (e) {
 	e.preventDefault();
-  
+
 	const input = document.querySelector(
 	  "input[name='events[global-initaldate]']"
 	);
 	if (input) {
 	  input.value = "";
-  
+
 	  // Clear selected days in flatpickr
 	  const selectedDays = document.querySelectorAll(
 		".flatpickr-days .dayContainer .flatpickr-day.selected"
@@ -373,113 +353,159 @@ function uvsUpadeInputsOrder(uvnodeparent) {
 	});
 }
 
-jQuery(document).on("change", ".uvsjs-copytoinput", function () {
-	if (jQuery(this).data("target") != undefined) {
-		var uvsnewinput = jQuery(this).val() + jQuery(this).data("addafter");
+uvsChangeListener(".uvsjs-copytoinput", function () {
+	if (this.dataset.target != undefined) {
+		const uvsnewinput = this.value + this.dataset.addafter;
 
-		jQuery(jQuery(this).data("target")).val(uvsnewinput);
+		uvsQueryAll(this.dataset.target).forEach(function (el) {
+			el.value = uvsnewinput;
+		});
 	}
 });
-jQuery(document).on("click", ".uvsjs-copycliptoclip", function () {
-	var uvscliptarget = jQuery(this).data("target");
+uvsClickListener(".uvsjs-copycliptoclip", function () {
+	const uvscliptarget = document.querySelector(this.dataset.target);
 
-	jQuery(uvscliptarget).focus();
-	jQuery(uvscliptarget).select();
+	if (!uvscliptarget)
+		return;
 
-	var uvscopyclip = document.execCommand('copy');
+	uvscliptarget.focus();
+	uvscliptarget.select();
+
+	const uvscopyclip = document.execCommand('copy');
 	if (uvscopyclip) {
-		jQuery(this).html("Copied");
-		jQuery(this).attr("disabled", "disabled");
+		this.innerHTML = "Copied";
+		this.setAttribute("disabled", "disabled");
 	}
 	else {
 		alert("Sorry, I can't copy it. Copy manually");
-		jQuery(this).parent().hide();
+		this.parentNode.style.display = "none";
 	}
 });
-jQuery(document).on("click", ".uvs-adminbox-mainmenu li a", function (e) {
+uvsClickListener(".uvs-adminbox-mainmenu li a", function (e) {
 	//e.preventDefault();
 
-	jQuery(".uvs-adminbox-mainmenu li a").removeClass("active");
-	jQuery(this).addClass("active");
+	uvsQueryAll(".uvs-adminbox-mainmenu li a").forEach(function (el) {
+		el.classList.remove("active");
+	});
+	this.classList.add("active");
 
-	var uvstarget = jQuery(this).attr("href");
+	let uvstarget = this.getAttribute("href");
 	uvstarget = uvstarget.replace("#", "");
 
-	jQuery(".uvs-admin-opt-section").removeClass("active");
-	jQuery("#uvs-admin-" + uvstarget).addClass("active");
-});
-jQuery(document).on("click", ".uvsjs-checkvenueid", function () {
-	var uvsloadtarget = jQuery(this).data("loadertarget");
-	var uvscheckurl = jQuery(this).data("checkurl");
-	var uvsinputveaid = jQuery("#veaid").val();
+	uvsQueryAll(".uvs-admin-opt-section").forEach(function (el) {
+		el.classList.remove("active");
+	});
 
-	if (jQuery(".uvs-admin-venueinf-vc-" + uvsinputveaid).length > 0) {
-		jQuery(".uvs-admin-venuesmsg").html("");
-		jQuery(".uvs-admin-venuesmsg").append("<div class='uvs-admin-errormsg'>This Venue is already added</div>");
+	const uvssection = document.querySelector("#uvs-admin-" + uvstarget);
+	if (uvssection) uvssection.classList.add("active");
+});
+uvsClickListener(".uvsjs-checkvenueid", function () {
+	const uvsloadtarget = this.dataset.loadertarget;
+	const uvscheckurl = this.dataset.checkurl;
+	const uvsinputveaid = document.querySelector("#veaid").value;
+	const uvsvenuesmsg = document.querySelector(".uvs-admin-venuesmsg");
+
+	if (document.querySelectorAll(".uvs-admin-venueinf-vc-" + uvsinputveaid).length > 0) {
+		uvsvenuesmsg.innerHTML = "";
+		uvsvenuesmsg.insertAdjacentHTML("beforeend", "<div class='uvs-admin-errormsg'>This Venue is already added</div>");
 	}
 	else if (uvsinputveaid.length > 3 && /^\d+$/.test(uvsinputveaid)) {
-		jQuery(uvsloadtarget).addClass("active");
-		jQuery("#veaid").removeClass("uvs-error");
+		uvsQueryAll(uvsloadtarget).forEach(function (el) {
+			el.classList.add("active");
+		});
+		document.querySelector("#veaid").classList.remove("uvs-error");
 
-		var uvsnvenues = jQuery("#uvs-admin-venuesinfo .uvs-admin-venueinf").length;
+		const uvsnvenues = document.querySelectorAll("#uvs-admin-venuesinfo .uvs-admin-venueinf").length;
 
-		jQuery.get(uvscheckurl, {
+		const uvscheckparams = new URLSearchParams({
 			uvsve: uvsinputveaid,
 			uvsnv: uvsnvenues,
-		})
-			.done(function (uvresponse) {
-				jQuery(uvsloadtarget).removeClass("active");
+		});
+		const uvscheckfullurl = uvscheckurl + ((uvscheckurl.indexOf("?") > -1) ? "&" : "?") + uvscheckparams.toString();
+
+		let uvrequest = new XMLHttpRequest();
+		uvrequest.open('GET', uvscheckfullurl, true);
+		uvrequest.onload = function () {
+			if (this.status >= 200 && this.status < 400) {
+				const uvresponse = this.response;
+
+				uvsQueryAll(uvsloadtarget).forEach(function (el) {
+					el.classList.remove("active");
+				});
 
 				if (uvresponse.includes("uvs-admin-venueinf")) {
-					jQuery("#uvs-admin-venuesinfo").append(uvresponse);
-					jQuery(".uvs-admin-venuesmsg").find(".uvs-admin-errormsg").remove();
-					jQuery("#veaid").val("");
+					document.querySelector("#uvs-admin-venuesinfo").insertAdjacentHTML("beforeend", uvresponse);
+
+					uvsQueryAll(".uvs-admin-errormsg", uvsvenuesmsg).forEach(function (el) {
+						el.remove();
+					});
+
+					document.querySelector("#veaid").value = "";
 				}
 				else if (uvresponse.includes("uvs-admin-errormsg")) {
-					jQuery(".uvs-admin-venuesmsg").html("");
-					jQuery(".uvs-admin-venuesmsg").append(uvresponse);
+					uvsvenuesmsg.innerHTML = "";
+					uvsvenuesmsg.insertAdjacentHTML("beforeend", uvresponse);
 				}
-			});
+			}
+		};
+		uvrequest.onerror = function () {
+			console.log("UVJS Error: Request Error");
+		};
+		uvrequest.send();
 	}
 	else
-		jQuery("#veaid").addClass("uvs-error");
+		document.querySelector("#veaid").classList.add("uvs-error");
 });
-jQuery(document).on("click", ".uvsjs-removevenue", function () {
-	jQuery(this).closest(".uvs-admin-venueinf").remove();
+uvsClickListener(".uvsjs-removevenue", function () {
+	this.closest(".uvs-admin-venueinf").remove();
 	uvs_pendchanges = true;
 });
-jQuery(document).on("click", ".uvsjs-addflyerset", function () {
-	var uvsflyersettarget = jQuery(this).data("target");
-	var uvsflyersetlastkey = jQuery(uvsflyersettarget).find(".uvs-infolist-groupnoti:last-child").data("nflyerset");
+uvsClickListener(".uvsjs-addflyerset", function () {
+	const uvsflyersetcont = document.querySelector(this.dataset.target);
 
-	var uvsflyersetnewkey = (uvsflyersetlastkey / 1) + 1;
+	if (!uvsflyersetcont)
+		return;
 
-	var uvsflyertypeshtml = jQuery(uvsflyersettarget).find(".uvs-infolist-groupnoti:first-child select.uvsflyertype").html();
-	var uvsflyerratiohtml = jQuery(uvsflyersettarget).find(".uvs-infolist-groupnoti:first-child select.uvsflyerratio").html();
+	const uvsflyersetlast = uvsflyersetcont.querySelector(".uvs-infolist-groupnoti:last-child");
+	const uvsflyersetfirst = uvsflyersetcont.querySelector(".uvs-infolist-groupnoti:first-child");
+	const uvsflyersetany = uvsflyersetcont.querySelector(".uvs-infolist-groupnoti");
 
-	var uvsflyerloc = jQuery(uvsflyersettarget).find(".uvs-infolist-groupnoti").data("flyerloc");
+	if (!uvsflyersetlast || !uvsflyersetfirst || !uvsflyersetany)
+		return;
+
+	const uvsflyersetlastkey = uvsflyersetlast.dataset.nflyerset;
+
+	const uvsflyersetnewkey = (uvsflyersetlastkey / 1) + 1;
+
+	let uvsflyertypeshtml = uvsflyersetfirst.querySelector("select.uvsflyertype").innerHTML;
+	let uvsflyerratiohtml = uvsflyersetfirst.querySelector("select.uvsflyerratio").innerHTML;
+
+	const uvsflyerloc = uvsflyersetany.dataset.flyerloc;
 
 	uvsflyertypeshtml = uvsflyertypeshtml.replace("selected", "");
 	uvsflyerratiohtml = uvsflyerratiohtml.replace("selected", "");
 
-	var newflyerelement = "<div class='uvs-infolist-groupnoti' data-nflyerset='" + uvsflyersetnewkey + "' data-flyerloc='" + uvsflyerloc + "'><div class='uvs-infolist-item'><div class='uvsname'>Flyer Type:</div><div class='uvsvalue'><select class='uvsjson uvsflyertype' name='flyers[" + uvsflyerloc + "][" + uvsflyersetnewkey + "][type]'>" + uvsflyertypeshtml + "</select></div></div><div class='uvs-infolist-item'><div class='uvsname'>Flyer Ratio:</div><div class='uvsvalue'><select class='uvsjson uvsflyerration' name='flyers[" + uvsflyerloc + "][" + uvsflyersetnewkey + "][ratio]'>" + uvsflyerratiohtml + "</select></div></div><div class='actions'><a class='uvsjs-removeflyer' href='javascript:;'>Remove</a></div></div>";
+	const newflyerelement = "<div class='uvs-infolist-groupnoti' data-nflyerset='" + uvsflyersetnewkey + "' data-flyerloc='" + uvsflyerloc + "'><div class='uvs-infolist-item'><div class='uvsname'>Flyer Type:</div><div class='uvsvalue'><select class='uvsjson uvsflyertype' name='flyers[" + uvsflyerloc + "][" + uvsflyersetnewkey + "][type]'>" + uvsflyertypeshtml + "</select></div></div><div class='uvs-infolist-item'><div class='uvsname'>Flyer Ratio:</div><div class='uvsvalue'><select class='uvsjson uvsflyerration' name='flyers[" + uvsflyerloc + "][" + uvsflyersetnewkey + "][ratio]'>" + uvsflyerratiohtml + "</select></div></div><div class='actions'><a class='uvsjs-removeflyer' href='javascript:;'>Remove</a></div></div>";
 
-	jQuery(uvsflyersettarget).append(newflyerelement);
+	uvsflyersetcont.insertAdjacentHTML("beforeend", newflyerelement);
 
 	uvs_pendchanges = true;
 });
 
-jQuery(document).on("click", ".uvsjs-addnewvenue", function () {
-	var uvsnewvenuetarget = jQuery(this).data("target");
+uvsClickListener(".uvsjs-addnewvenue", function () {
+	const uvsnewvenuecont = document.querySelector(this.dataset.target);
+
+	if (!uvsnewvenuecont)
+		return;
 
 	const uvsnewvenuehtml = `<div class="uvs-admin-venueinf uvs-admin-venueinf-vc-new"><input class="uvsjson venueprimary" type="hidden" name="" data-inputname="venues[{venuekey}][isprimary]" value=""><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Venue KEY:</div><div class="uvsvalue"><input class="uvsjson uvsjs-spread-venuekey" type="text" name="" value="" data-inputname="venues[{venuekey}][venuekey]"></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Venue Logo:</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][logourl]" value=""></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Venue Name:</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][venuename]" value=""></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Venue Name Alias:</div><div class="uvsvalue"><input type="text" name="" data-inputname="venues[{venuekey}][venuealias]" value="" class="uvsjson"></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Use Alias as Venue Name:</div><div class="uvsvalue"><div class="uvs-switch-ui "><button class="uvsjs-trigger-switch" type="button"><span class="uvs-lb-on">Yes</span><span class="uvs-lb-off">No</span></button><input class="uvsjson" type="hidden" name="" data-inputname="venues[{venuekey}][venueforcealias]" value="" data-value-on="1" data-value-off=""></div></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Hide Events:</div><div class="uvsvalue"><div class="uvs-switch-ui "><button class="uvsjs-trigger-switch" type="button"><span class="uvs-lb-on">Yes</span><span class="uvs-lb-off">No</span></button><input class="uvsjson" type="hidden" name="" data-inputname="venues[{venuekey}][venuehideinevents]" value="" data-value-on="1" data-value-off=""></div></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Venue Code (VENXXXX):</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][venuecode]" value=""></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Manageentid:</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][manageentid]" value=""></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Providerid:</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][providerid]" value=""></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Resellerid:</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][resellerid]" value=""></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Venue ID:</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][urvenueid]" value=""></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">Client ID:</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][clientid]" value=""></div></div><div class="uvs-infolist-item uvs-clearfix"><div class="uvsname">UrVenue Server:</div><div class="uvsvalue"><input class="uvsjson" type="text" name="" data-inputname="venues[{venuekey}][uvserver]" value=""></div></div><div class="actions"><a class="uvsjs-removevenue" href="javascript:;">Remove</a></div></div>`;
 
-	jQuery(uvsnewvenuetarget).append(uvsnewvenuehtml);
+	uvsnewvenuecont.insertAdjacentHTML("beforeend", uvsnewvenuehtml);
 
 	uvs_pendchanges = true;
 });
 
-jQuery(document).on("change", ".uvsjs-spread-venuekey", function () {
+uvsChangeListener(".uvsjs-spread-venuekey", function () {
 	const uvvenuekey = this.value;
 	const uvjsoninputelems = this.closest(".uvs-admin-venueinf").querySelectorAll(".uvsjson");
 
@@ -490,60 +516,63 @@ jQuery(document).on("change", ".uvsjs-spread-venuekey", function () {
 	});
 });
 
-jQuery(document).on("change", ".uvsjson", function () {
+uvsChangeListener(".uvsjson", function () {
 	uvs_pendchanges = true;
 });
-jQuery(document).on("click", ".uvsjs-removeflyer", function () {
-	jQuery(this).closest(".uvs-infolist-groupnoti").remove();
+uvsClickListener(".uvsjs-removeflyer", function () {
+	this.closest(".uvs-infolist-groupnoti").remove();
 	uvs_pendchanges = true;
 });
-jQuery(document).on("click", ".uvsjs-triggervenueprimary", function () {
-	if (!jQuery(this).hasClass("active")) {
-		jQuery("#uvs-admin-venuesinfo .uvs-admin-venueinf").each(function () {
-			var uvsvenueitemtarget = jQuery(this);
-
-			uvsvenueitemtarget.find(".uvsjs-triggervenueprimary").removeClass("active").html("Make Primary");
-			uvsvenueitemtarget.find("input.venueprimary").val(0);
+uvsClickListener(".uvsjs-triggervenueprimary", function () {
+	if (!this.classList.contains("active")) {
+		uvsQueryAll("#uvs-admin-venuesinfo .uvs-admin-venueinf").forEach(function (uvsvenueitemtarget) {
+			uvsQueryAll(".uvsjs-triggervenueprimary", uvsvenueitemtarget).forEach(function (el) {
+				el.classList.remove("active");
+				el.innerHTML = "Make Primary";
+			});
+			uvsQueryAll("input.venueprimary", uvsvenueitemtarget).forEach(function (el) {
+				el.value = 0;
+			});
 		});
 
-		jQuery(this).closest(".uvs-admin-venueinf").find(".uvsjs-triggervenueprimary").addClass("active").html("Is Primary");
-		jQuery(this).closest(".uvs-admin-venueinf").find("input.venueprimary").val(1);
+		const uvsvenuecont = this.closest(".uvs-admin-venueinf");
+
+		uvsQueryAll(".uvsjs-triggervenueprimary", uvsvenuecont).forEach(function (el) {
+			el.classList.add("active");
+			el.innerHTML = "Is Primary";
+		});
+		uvsQueryAll("input.venueprimary", uvsvenuecont).forEach(function (el) {
+			el.value = 1;
+		});
 
 		uvs_pendchanges = true;
 	}
 });
-jQuery(document).on("click", ".uvs-switch-ui", function () {
-	if (jQuery(this).hasClass("uvs-on")) {
-		jQuery(this).removeClass("uvs-on");
-		var uvsinputnewval = jQuery(this).closest(".uvs-switch-ui").find("input").data("value-off");
-		jQuery(this).closest(".uvs-switch-ui").find("input").val(uvsinputnewval).change();
+uvsClickListener(".uvs-switch-ui", function () {
+	const uvsswitchinput = this.querySelector("input");
+
+	if (!uvsswitchinput)
+		return;
+
+	if (this.classList.contains("uvs-on")) {
+		this.classList.remove("uvs-on");
+		uvsswitchinput.value = uvsswitchinput.dataset.valueOff;
 	}
 	else {
-		jQuery(this).addClass("uvs-on");
-		var uvsinputnewval = jQuery(this).closest(".uvs-switch-ui").find("input").data("value-on");
-		jQuery(this).closest(".uvs-switch-ui").find("input").val(uvsinputnewval).change();
+		this.classList.add("uvs-on");
+		uvsswitchinput.value = uvsswitchinput.dataset.valueOn;
 	}
-});
-jQuery(document).on("change", ".uvsjs-controlfieldview", function () {
-	var uvscvtarget = jQuery(this).data("target");
-	var uvscvshowon = jQuery(this).data("showon");
-	var uvscvhideon = jQuery(this).data("hideon");
 
-	if (jQuery(this).val() == uvscvshowon)
-		jQuery(uvscvtarget).css("display", "flex");
-	else if (jQuery(this).val() == uvscvhideon)
-		jQuery(uvscvtarget).hide();
+	uvsswitchinput.dispatchEvent(new Event("change", { bubbles: true }));
 });
-jQuery(document).on("click", ".uvsjs-gotoadminoptpage", function () {
-	var uvsgototarget = jQuery(this).data("target");
-
-	jQuery(".uvs-adminbox-mainmenu a[href='" + uvsgototarget + "']").click();
-});
-jQuery(document).on("click", ".uvs-admin-iconboxlist a", function (e) {
+uvsClickListener(".uvs-admin-iconboxlist a", function (e) {
 	//e.preventDefault();
 
-	var uvsgototarget = jQuery(this).attr("href");
-	jQuery(".uvs-adminbox-mainmenu a[href='" + uvsgototarget + "']").click();
+	const uvsgototarget = this.getAttribute("href");
+
+	uvsQueryAll(".uvs-adminbox-mainmenu a[href='" + uvsgototarget + "']").forEach(function (el) {
+		el.click();
+	});
 });
 
 
@@ -559,48 +588,63 @@ function uvsInitDatepicker() {
 };
 function uvAdminBoxActionMessage(uvsadminformobj, uvsactionsmessage) {
 	clearTimeout(uvs_admboxactmsgst);
-	uvsadminformobj.find(".uvs-adminbox-actions .uvs-adminbox-actions-status").html(uvsactionsmessage).addClass("active");
+
+	const uvsactionsstatus = uvsadminformobj.querySelector(".uvs-adminbox-actions .uvs-adminbox-actions-status");
+
+	if (!uvsactionsstatus)
+		return;
+
+	uvsactionsstatus.innerHTML = uvsactionsmessage;
+	uvsactionsstatus.classList.add("active");
 
 	uvs_admboxactmsgst = setTimeout(function () {
-		uvsadminformobj.find(".uvs-adminbox-actions .uvs-adminbox-actions-status").removeClass("active");
+		uvsactionsstatus.classList.remove("active");
 	}, 4000);
 }
 
 
 
 /*POPUPS ACTIONS*/
-jQuery(document).on("click", ".uvs-pop-cont", function () {
-	uvsHidePopup(jQuery(this));
+uvsClickListener(".uvs-pop-cont", function () {
+	uvsHidePopup(this);
 });
-jQuery(document).on("click", ".uvsjs-closepop", function () {
-	uvsHidePopup(jQuery(this).closest(".uvs-pop-cont"), true);
+uvsClickListener(".uvsjs-closepop", function () {
+	uvsHidePopup(this.closest(".uvs-pop-cont"), true);
 });
 /***************/
 
 /*POPUPS FUNCTIONS*/
 function uvsClearPopup(uvspoptarget, uvspopcontent) {
 	uvspopcontent = (uvspopcontent != undefined) ? uvspopcontent : "";
-	uvspoptarget.find(".uvs-pop-charge").html(uvspopcontent);
+
+	const uvspopcharge = uvspoptarget.querySelector(".uvs-pop-charge");
+	if (uvspopcharge) uvspopcharge.innerHTML = uvspopcontent;
 }
 function uvsExpandPopup(uvspoptarget, uvspopexpand) {
-	uvspoptarget.find(".uvs-pop-box").css("max-width", uvspopexpand);
+	const uvspopbox = uvspoptarget.querySelector(".uvs-pop-box");
+	if (uvspopbox) uvspopbox.style.maxWidth = (typeof uvspopexpand == "number") ? uvspopexpand + "px" : uvspopexpand;
 }
 function uvsFadePopup(uvspoptarget) {
-	jQuery("html").addClass("uvs-pop-open");
-	uvspoptarget.addClass("visible");
+	document.documentElement.classList.add("uvs-pop-open");
+	uvspoptarget.classList.add("visible");
 }
 function uvsHidePopup(uvspoptarget, uvspopforceclose) {
 	uvspopforceclose = (uvspopforceclose != undefined) ? uvspopforceclose : false;
 
-	if ((uvspopforceclose) || ((uvspoptarget != undefined) && (uvspoptarget.find(".uvs-pop-box").length > 0) && (uvspoptarget.find(".uvs-pop-box:hover").length < 1))) {
-		if (uvspoptarget.hasClass("clearonclose"))
+	if (!uvspoptarget)
+		return;
+
+	const uvspopbox = uvspoptarget.querySelector(".uvs-pop-box");
+
+	if ((uvspopforceclose) || ((uvspopbox) && (!uvspopbox.matches(":hover")))) {
+		if (uvspoptarget.classList.contains("clearonclose"))
 			uvsClearPopup(uvspoptarget);
 
-		uvspoptarget.attr("class", "uvs-pop-cont");
-		jQuery("html").removeClass("uvs-pop-open");
+		uvspoptarget.className = "uvs-pop-cont";
+		document.documentElement.classList.remove("uvs-pop-open");
 
 		setTimeout(function () {
-			uvspoptarget.find(".uvs-pop-box").css("max-width", "");
+			if (uvspopbox) uvspopbox.style.maxWidth = "";
 		}, 300);
 	}
 }
@@ -624,6 +668,117 @@ function uvsDisplayMsg(uvsmsg, uvsmsgtitle, uvsmsgbutton, uvsmsgpopexpand) {
 }
 /***************/
 
+/*COLOR FIELDS*/
+function uvsInitColorFields() {
+	const uvcolorfields = document.querySelectorAll(".uvs-color-field");
+
+	Array.prototype.forEach.call(uvcolorfields, function (uvcolorfield) {
+		if (uvcolorfield.dataset.uvcolorready)
+			return;
+
+		uvcolorfield.dataset.uvcolorready = "1";
+
+		const uvcolorcont = document.createElement("div");
+		uvcolorcont.className = "uvs-colorpicker";
+
+		const uvcolorswatch = document.createElement("input");
+		uvcolorswatch.type = "color";
+		uvcolorswatch.className = "uvs-colorpicker-swatch";
+		uvcolorswatch.setAttribute("aria-label", "Select color");
+		uvcolorswatch.value = uvsNormalizeHex(uvcolorfield.value) || "#000000";
+
+		uvcolorfield.parentNode.insertBefore(uvcolorcont, uvcolorfield);
+		uvcolorcont.appendChild(uvcolorswatch);
+		uvcolorcont.appendChild(uvcolorfield);
+
+		//live feedback while the native picker is open
+		uvcolorswatch.addEventListener("input", function () {
+			uvcolorfield.value = uvcolorswatch.value;
+		});
+
+		//committed selection: let the field own the change event
+		uvcolorswatch.addEventListener("change", function () {
+			uvcolorfield.value = uvcolorswatch.value;
+			uvcolorfield.dispatchEvent(new Event("change", { bubbles: true }));
+		});
+
+		uvcolorfield.addEventListener("change", function () {
+			//an empty field means "no custom color", so let it through untouched
+			if (!uvcolorfield.value.trim())
+				return;
+
+			const uvcolorhex = uvsNormalizeHex(uvcolorfield.value);
+
+			//typed value is not a hex color: fall back to the last valid one
+			if (!uvcolorhex) {
+				uvcolorfield.value = uvcolorswatch.value;
+				return;
+			}
+
+			uvcolorfield.value = uvcolorhex;
+			uvcolorswatch.value = uvcolorhex;
+
+			uvsColorFieldChange.call(uvcolorfield, uvcolorhex);
+		});
+	});
+}
+
+//accepts "#abc", "abc", "#aabbcc" or "aabbcc" and returns "#aabbcc"
+function uvsNormalizeHex(uvcolorvalue) {
+	if (typeof uvcolorvalue != "string")
+		return "";
+
+	let uvcolorhex = uvcolorvalue.trim().replace("#", "");
+
+	if (/^[0-9a-fA-F]{3}$/.test(uvcolorhex))
+		uvcolorhex = uvcolorhex[0] + uvcolorhex[0] + uvcolorhex[1] + uvcolorhex[1] + uvcolorhex[2] + uvcolorhex[2];
+
+	if (!/^[0-9a-fA-F]{6}$/.test(uvcolorhex))
+		return "";
+
+	return "#" + uvcolorhex.toLowerCase();
+}
+
+function uvsColorFieldChange(uvselcolor) {
+	if (this.classList.contains("uvsjs-choosecolor")) {
+		if (uvs_popup) uvs_popup.classList.add("uvs-pop-ui");
+
+		const uvthemesellook = this.closest(".uvs-infolist-item").previousElementSibling.querySelector("select.uvsjson");
+		const uvthemesel = (uvthemesellook) ? uvthemesellook.value : this.closest("#uvs-admin-ui-color-palette").querySelector(".uvsjson").value;
+		const uvthemeloader = this.closest(".uvs-infolist-item").querySelector(".uv-loader-uvicon");
+		const uvrecom = "We highly recommend to update the <b>Theme UI</b> color to match the selected Accent Color.";
+
+		uvthemeloader.classList.add("active");
+
+		if (uvthemesel == "dark") {
+			if (uvsGetContrast(uvselcolor, "#111111") < 4.5) {
+				setTimeout(() => {
+					uvsDisplayMsg(uvrecom, "Recommendation", "OK", 400);
+				}, 1200);
+			}
+
+			setTimeout(() => {
+				uvthemeloader.classList.remove("active");
+			}, 1200);
+		} else {
+			if (uvsGetContrast(uvselcolor, "#ffffff") < 4.5) {
+				setTimeout(() => {
+					uvsDisplayMsg(uvrecom, "Recommendation", "OK", 400);
+				}, 1200);
+			}
+
+			setTimeout(() => {
+				uvthemeloader.classList.remove("active");
+			}, 1200);
+		}
+	}
+
+	setTimeout(() => {
+		uvsHidePopup(uvs_popup);
+	}, 10000);
+}
+/***************/
+
 /*** Before Leave ***/
 window.onbeforeunload = function () {
 	if (uvs_pendchanges) {
@@ -633,10 +788,41 @@ window.onbeforeunload = function () {
 	}
 };
 
+function uvsQueryAll(uvselector, uvcontext) {
+	if (!uvselector)
+		return [];
+
+	return Array.prototype.slice.call((uvcontext || document).querySelectorAll(uvselector));
+}
+
+//serializes a set of fields into an application/x-www-form-urlencoded string
+function uvsSerializeFields(uvfieldelems) {
+	const uvfieldparams = new URLSearchParams();
+
+	Array.prototype.forEach.call(uvfieldelems, function (el) {
+		if (!el.name || el.disabled)
+			return;
+
+		if (el.type == "checkbox" || el.type == "radio") {
+			if (el.checked)
+				uvfieldparams.append(el.name, el.value);
+		}
+		else if (el.tagName == "SELECT" && el.multiple) {
+			Array.prototype.forEach.call(el.selectedOptions, function (uvoption) {
+				uvfieldparams.append(el.name, uvoption.value);
+			});
+		}
+		else
+			uvfieldparams.append(el.name, el.value);
+	});
+
+	return uvfieldparams.toString();
+}
+
 function uvsClickListener(uvselector, uvhandler) {
 	document.addEventListener("click", function (e) {
 		for (var target = e.target; target && target != this; target = target.parentNode) {
-			if (target.matches(uvselector)) {
+			if (target.matches && target.matches(uvselector)) {
 				uvhandler.call(target, e);
 				break;
 			}
@@ -647,7 +833,7 @@ function uvsClickListener(uvselector, uvhandler) {
 function uvsChangeListener(uvselector, uvhandler) {
 	document.addEventListener("change", function (e) {
 		for (var target = e.target; target && target != this; target = target.parentNode) {
-			if (target.matches(uvselector)) {
+			if (target.matches && target.matches(uvselector)) {
 				uvhandler.call(target, e);
 				break;
 			}
@@ -674,3 +860,9 @@ function uvsGetContrast(uvcolor1, uvcolor2) {
 		return (uvlum2 + 0.05) / (uvlum1 + 0.05);
 	}
 }
+
+//kept at the end of the file so every delegated listener above is already registered
+if (document.readyState != "loading")
+	uvsAdminInit();
+else
+	document.addEventListener("DOMContentLoaded", uvsAdminInit);

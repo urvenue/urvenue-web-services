@@ -44,9 +44,7 @@ $urvenue_ws_initialtab = "dashboard";
 			wp_enqueue_style('urvenue-ws-system-css', $uvbaseurl . 'assets/css/system.css', array(), $urvenue_ws_assetsversion, 'all');
 			wp_enqueue_style('urvenue-ws-icons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
 
-			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), $urvenue_ws_assetsversion, true);
-			wp_enqueue_script('urvenue-ws-admin-scripts', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate', 'flatpickr'), $urvenue_ws_assetsversion, true);
+			wp_enqueue_script('urvenue-ws-admin-scripts', $uvbaseurl . 'assets/js/admin.js', array('flatpickr'), $urvenue_ws_assetsversion, true);
 			wp_enqueue_script('flatpickr', $uvbaseurl . 'assets/js/flatpickr.min.js', array(), $urvenue_ws_assetsversion, true);
 		});
 	?>

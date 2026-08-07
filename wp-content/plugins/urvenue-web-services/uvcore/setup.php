@@ -190,10 +190,8 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 			wp_enqueue_style('setup-css', $uvbaseurl . 'assets/css/setup.css', array(), $urvenue_ws_assetsversion, 'all');
 			wp_enqueue_style('urvenue-ws-icons-css', $uvbaseurl . 'assets/css/uwsicons.css', array(), $urvenue_ws_assetsversion, 'all');
 
-			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-validate', $uvbaseurl . 'assets/js/jquery.validate.min.js', array('jquery'), $urvenue_ws_assetsversion, true);
-			wp_enqueue_script('urvenue-ws-admin-scripts', $uvbaseurl . 'assets/js/admin.js', array('jquery', 'jquery-validate'), $urvenue_ws_assetsversion, true);
-			wp_enqueue_script('setup', $uvbaseurl . 'assets/js/setup.js', array('jquery', 'jquery-validate'), $urvenue_ws_assetsversion, true);
+			wp_enqueue_script('urvenue-ws-admin-scripts', $uvbaseurl . 'assets/js/admin.js', array(), $urvenue_ws_assetsversion, true);
+			wp_enqueue_script('setup', $uvbaseurl . 'assets/js/setup.js', array('urvenue-ws-admin-scripts'), $urvenue_ws_assetsversion, true);
 
 			if ( $urvenue_ws_uvurl ) {
 				$urvenue_ws_setup_inline = "var uvcoreinput = '" . esc_js( esc_url( $urvenue_ws_uvurl ) ) . "';\n";
