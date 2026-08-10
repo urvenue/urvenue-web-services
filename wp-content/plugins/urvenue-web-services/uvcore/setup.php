@@ -208,7 +208,8 @@ if(file_exists("uvcore.lib.json") and !$urvenue_ws_uvpath){
 	</div>
 
 	<div class="uvs-logo">
-		<a href="https://urvenue.com/"><img src="assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
+		<a href="https://www.urvenue.com/" target="_blank" rel="noopener"><img src="assets/images/urvenuelogo-light.svg" alt="UrVenue"></a>
+		<a class="uvs-logo-link" href="https://www.urvenue.com/" target="_blank" rel="noopener">urvenue.com</a>
 	</div>
 	
 	<div class="uvs-content">
