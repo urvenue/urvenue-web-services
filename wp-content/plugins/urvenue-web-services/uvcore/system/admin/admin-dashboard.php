@@ -2,7 +2,7 @@
 
 <div id="uvs-admin-dashboard" class="uvs-admin-opt-section <?php /* Old: echo $uvs_admin_optstabs_state['dashboard']; */ echo esc_attr( $urvenue_ws_admin_optstabs_state['dashboard'] ); ?>">
     <div class="uvs-admin-opt-title">Dashboard</div>
-    <div class="uvs-admin-opt-descr">Welcome to UrVenue Integrations, Make your configurations.</div>
+    <div class="uvs-admin-opt-descr">Welcome to UrVenue Integrations. This plugin brings the events, venues and bookable inventory from your <a href="https://www.urvenue.com/" target="_blank" rel="noopener">UrVenue</a> account into your WordPress site, so an active UrVenue service subscription is required for any of it to display. Make your configurations below.</div>
     <div class="uvs-admin-opt-space"></div>
 
     <ul class="uvs-admin-iconboxlist">

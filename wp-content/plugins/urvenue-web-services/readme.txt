@@ -9,11 +9,20 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Integrate UrVenue events and inventory into your WordPress site. Display event calendars, venue maps, and enable direct booking.
+Display UrVenue events, venue maps and bookable inventory on your site. Requires an active UrVenue service subscription.
 
 == Description ==
 
-UrVenue Web Services connects your WordPress site with the [UrVenue](https://www.urvenue.com/) platform, allowing you to display and manage hospitality events, venue maps, and bookable inventory directly on your website.
+UrVenue Web Services is the official integration between WordPress and the [UrVenue](https://www.urvenue.com/) hospitality platform. It lets you display and manage hospitality events, venue maps, and bookable inventory directly on your website.
+
+**This plugin is not a standalone product.** It is designed exclusively to integrate with UrVenue and requires an active UrVenue account and service subscription to function. All events, venues, and inventory shown by the plugin are served by the UrVenue platform, so without an active subscription the plugin has no data to display.
+
+= Requirements =
+
+* An active UrVenue account and service subscription.
+* An `API Key` and a `Microcode`, both provided by UrVenue once your account is active.
+
+Don't have an account yet? Learn more at [urvenue.com](https://www.urvenue.com/) or [request a demo](https://www.urvenue.com/request-demo/).
 
 = Features =
 

@@ -14,6 +14,16 @@ $urvenue_ws_boxpanelclass = (is_array($urvenue_ws_core_lib) and !$urvenue_ws_cor
 			<div class="uvs-adminbox-corever"><?php echo esc_html( $urvenue_ws_adm_core_version ); ?></div>
 		</div>
 
+		<div class="uvs-adminbox-servicenotice">
+			<i class="uwsicon-info-circled"></i>
+			<div class="uvs-adminbox-servicenotice-msg">
+				This plugin integrates your site exclusively with the <strong>UrVenue</strong> hospitality platform and requires an active UrVenue account and service subscription to function.
+				<a href="https://www.urvenue.com/" target="_blank" rel="noopener">Learn more at urvenue.com</a>
+				<span class="uvs-adminbox-servicenotice-sep">&middot;</span>
+				<a href="https://www.urvenue.com/request-demo/" target="_blank" rel="noopener">Request a demo</a>
+			</div>
+		</div>
+
 		<input class="uvsjson" type="hidden" name="uvsp_adminsave_nonce" value="<?php echo esc_attr( wp_create_nonce('uvsp_adminsave_action') ); ?>">
 		
 		<div class="uvs-adminbox-credentials">

@@ -3,7 +3,7 @@
 <div class="uvs-admin-apiconfigcont">
 
     <div class="uvs-admin-opt-title">UrVenue Configuration</div>
-	<div class="uvs-admin-opt-descr">Enter you <strong>API KEY</strong> and <strong>Micro Code</strong> to make your initial configuration.<br><br> If you have a UrVuenue Account and you don't have an API KEY and Micro Code, please contact: <a href='mailto:support@urvenue.com'>support@urvenue.com</a>, if you don't have a UrVenue account yet, you can <a href="https://www.urvenue.com/request-demo/" target="_blank">Request a Demo</a></div>
+	<div class="uvs-admin-opt-descr">This plugin works exclusively with the <a href="https://www.urvenue.com/" target="_blank" rel="noopener">UrVenue</a> platform and needs an active UrVenue account and service subscription before it can display anything.<br><br>Enter your <strong>API KEY</strong> and <strong>Micro Code</strong> to make your initial configuration. If you have an UrVenue account but not your API KEY and Micro Code, please contact: <a href='mailto:support@urvenue.com'>support@urvenue.com</a>. If you don't have an UrVenue account yet, you can <a href="https://www.urvenue.com/request-demo/" target="_blank" rel="noopener">Request a Demo</a>.</div>
 
     <div class="uvs-infolist-item uvs-clearfix">
 		<div class="uvsname">API KEY</div>

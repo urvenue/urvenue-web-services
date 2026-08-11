@@ -109,6 +109,20 @@
 	margin-bottom: 20px;
 }
 
+.uvs-logo .uvs-logo-link {
+	display: block;
+	margin-top: 8px;
+	color: #a8b3d1;
+	font-size: 12px;
+	line-height: 1.4;
+	text-decoration: underline;
+}
+
+.uvs-logo .uvs-logo-link:hover,
+.uvs-logo .uvs-logo-link:focus {
+	color: #ffffff;
+}
+
 .uvs-btn {
 	display: inline-block;
 	padding: 10px 25px;
@@ -318,6 +332,36 @@
 	float: right;
 	color: #bbbbbb;
 	font-size: 12px;
+}
+
+.uvs-adminbox-servicenotice {
+	display: none;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 14px 30px;
+	background-color: #eef3fb;
+	border-bottom: 1px solid #d5e0f0;
+	color: #24324a;
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.uvs-adminbox-servicenotice>i {
+	flex: 0 0 auto;
+	color: #1a73e8;
+	font-size: 16px;
+	line-height: 1.35;
+}
+
+.uvs-adminbox-servicenotice a {
+	color: #1a73e8;
+	text-decoration: underline;
+	white-space: nowrap;
+}
+
+.uvs-adminbox-servicenotice-sep {
+	color: #9aa8bd;
+	padding: 0 4px;
 }
 
 .uvs-adminbox-admcols {
@@ -1065,6 +1109,10 @@ input[readonly].uvsjs-datepicker {
 
 .uvs-boxpanel.uvapiconfig .uvs-adminbox-credentials {
 	display: block;
+}
+
+.uvs-boxpanel.uvapiconfig .uvs-adminbox-servicenotice {
+	display: flex;
 }
 
 .uvs-boxpanel.uvs-boxpanel.uvapiconfig .uvs-adminbox-admcols,
