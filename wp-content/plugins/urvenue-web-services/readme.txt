@@ -85,7 +85,19 @@ When: When a visitor opens a venue item whose reservation provider is set to Ope
 * Terms of Service: https://www.opentable.com/legal/terms-and-conditions
 * Privacy Policy: https://www.opentable.com/legal/privacy-policy
 
-= 4. Google Maps and Google Calendar (Link Generation Only) =
+= 4. Book4Time (via the UrVenue API) =
+
+Service: Book4Time - spa and activity scheduling platform (now part of Agilysys), reached through UrVenue.
+URL: https://book4time.com/
+Purpose: Display appointment availability for venue items whose reservation provider is set to Book4Time in UrVenue.
+Data sent: None is sent to Book4Time by this plugin. Availability is requested from the UrVenue API (see section 1), which holds the Book4Time configuration for the venue; the plugin sends UrVenue the item identifier, the Book4Time reference stored in UrVenue, the selected date, and the party size. The plugin also renders a "Book4Time" credit logo that links to book4time.com; no data is transmitted unless the visitor clicks it, and the logo can be turned off in the plugin settings.
+When: When a visitor opens a venue item whose reservation provider is set to Book4Time in UrVenue.
+
+* Book4Time website: https://www.agilysys.com/en/products/book4time/
+* Terms of Service: https://www.agilysys.com/en/book4time-terms-of-use/
+* Privacy Policy: https://www.agilysys.com/en/privacy-policy/
+
+= 5. Google Maps and Google Calendar (Link Generation Only) =
 
 Service: Google Maps and Google Calendar.
 URLs: https://www.google.com/maps/search/ and https://www.google.com/calendar/render
@@ -96,7 +108,20 @@ When: When a visitor clicks the "Get Directions" or "Add to Google Calendar" lin
 * Google Terms of Service: https://policies.google.com/terms
 * Google Privacy Policy: https://policies.google.com/privacy
 
-= 5. WP Engine Cache Purge API (Optional) =
+= 6. Social Sharing Links (Link Generation Only) =
+
+Service: Facebook and X (formerly Twitter) share endpoints.
+URLs: https://www.facebook.com/sharer.php and https://twitter.com/intent/tweet
+Purpose: Offer "share this event" links on event and inventory pages. This plugin makes no server-side requests to either service.
+Data sent: Only the public URL of the page being shared, passed as a URL query parameter when the visitor's browser opens the share window. Nothing is transmitted unless the visitor clicks a share button.
+When: When a visitor clicks a share button on an event or inventory item page.
+
+* Facebook Terms of Service: https://www.facebook.com/terms.php
+* Facebook Privacy Policy: https://www.facebook.com/privacy/policy/
+* X Terms of Service: https://x.com/en/tos
+* X Privacy Policy: https://x.com/en/privacy
+
+= 7. WP Engine Cache Purge API (Optional) =
 
 Service: WP Engine API — hosting platform cache management.
 URL: https://api.wpengineapi.com/
@@ -108,7 +133,7 @@ When: Only triggered by an administrator action in the plugin settings panel, or
 * Terms of Service: https://wpengine.com/legal/terms-of-service/
 * Privacy Policy: https://wpengine.com/legal/privacy/
 
-= 6. Webhook Notifications (Optional, Administrator-Configured) =
+= 8. Webhook Notifications (Optional, Administrator-Configured) =
 
 Service: User-defined webhook endpoint (e.g., Slack, Microsoft Teams, or any custom HTTP endpoint).
 URL: Configured freely by the site administrator in the plugin settings. The plugin developer has no control over or visibility into the destination.
@@ -116,7 +141,7 @@ Purpose: Send alert notifications when plugin conditions occur (e.g., an invento
 Data sent: Alert message text and optional error details or API response snippets, sent via HTTP POST to the administrator-provided URL. No visitor personal data is included.
 When: Only if notifications are enabled and a webhook URL has been configured by the site administrator; throttled to a maximum of one notification per alert type every 30 minutes.
 
-= 7. Facebook / Meta Pixel Event Tracking (Conditional) =
+= 9. Facebook / Meta Pixel Event Tracking (Conditional) =
 
 Service: Meta (Facebook) — advertising and analytics platform.
 URL: https://www.facebook.com/
@@ -126,6 +151,17 @@ When: When a visitor adds an item to the cart. This event only fires if a Facebo
 
 * Meta Terms of Service: https://www.facebook.com/legal/terms
 * Meta Privacy Policy: https://www.facebook.com/privacy/policy/
+
+= 10. Google Analytics 4 Data Layer (Conditional) =
+
+Service: Google Analytics 4 / Google Tag Manager - analytics platform.
+URL: https://analytics.google.com/
+Purpose: Push ecommerce events to a GA4 or Google Tag Manager container that the site owner has independently installed, so inventory interactions can be reported in their own analytics property.
+Data sent: The plugin writes only to the browser's window.dataLayer object; it makes no request to Google. Events pushed are view_item_list, view_item, add_to_cart and remove_from_cart, each carrying item identifier, item name, category, price, quantity, guest count, venue code and currency. No visitor personal data is included. This data reaches Google only if the site owner has installed GA4 or Google Tag Manager on the site; with no container installed, the events stay in the browser and are never transmitted.
+When: When a visitor views an inventory list or map, opens an item, or adds or removes an item from the cart.
+
+* Google Terms of Service: https://policies.google.com/terms
+* Google Privacy Policy: https://policies.google.com/privacy
 
 == Installation ==
 
