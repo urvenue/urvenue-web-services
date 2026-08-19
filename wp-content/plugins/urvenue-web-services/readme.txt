@@ -73,13 +73,13 @@ When: When a visitor clicks "Proceed to Checkout" from an inventory item or cart
 * Terms of Service: https://booketing.com/terms/
 * Privacy Policy: https://booketing.com/privacy/
 
-= 3. OpenTable Reservation Widget =
+= 3. OpenTable (via the UrVenue API) =
 
-Service: OpenTable — online restaurant reservation platform.
-URL: https://www.opentable.com/restref/client/
-Purpose: Display an embedded reservation iframe for venues that use OpenTable as their reservation provider.
-Data sent: Restaurant identifier (rid/restref), default party size, selected date and time, and display preferences (language, color scheme) — transmitted as URL parameters when the iframe loads. All reservation data entered by the visitor is submitted directly to OpenTable, not through this plugin.
-When: Only when a visitor views a venue item that has been configured by the site administrator to use OpenTable as its reservation vendor.
+Service: OpenTable — online restaurant reservation platform, reached through UrVenue.
+URL: https://www.opentable.com/
+Purpose: Display reservation availability for venue items that use OpenTable as their reservation provider in UrVenue.
+Data sent: None is sent to OpenTable by this plugin. Availability is requested from the UrVenue API (see section 1), which holds the OpenTable configuration for the venue; the plugin sends UrVenue the item identifier, the OpenTable venue reference stored in UrVenue, the selected date, and the party size. The plugin also renders an "OpenTable" credit logo that links to opentable.com; no data is transmitted unless the visitor clicks it.
+When: When a visitor opens a venue item whose reservation provider is set to OpenTable in UrVenue.
 
 * OpenTable website: https://www.opentable.com/
 * Terms of Service: https://www.opentable.com/legal/terms-and-conditions
