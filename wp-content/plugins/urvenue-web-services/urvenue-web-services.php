@@ -6,7 +6,7 @@ if (!defined('ABSPATH'))
  * Plugin Name: UrVenue Web Services
  * Plugin URI:  https://wordpress.org/plugins/urvenue-web-services/
  * Description: Displays UrVenue events, venue maps and bookable inventory on your site. Requires an active UrVenue account and service subscription.
- * Version:     1.2.7
+ * Version:     1.2.8
  * Author:      UrVenue / UWS, uvwebservices
  * Author URI:  https://www.urvenue.com/
  * License:     GPLv2 or later

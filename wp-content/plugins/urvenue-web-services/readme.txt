@@ -4,7 +4,7 @@ Contributors: UrVenue, UvWebServices
 Tags: events, booking, calendar, tickets, hospitality
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -218,6 +218,13 @@ Yes, the plugin integrates with the UrVenue inventory system, allowing visitors 
 4. Interactive venue map with zoom and pan controls.
 
 == Changelog ==
+
+= 1.2.8 =
+* Removed all jQuery dependencies: the admin panel and setup wizard now run on vanilla JavaScript, and jQuery Validate and wp-color-picker have been replaced with native equivalents.
+* Stated up front, in the plugin description and on the first admin screen, that an active UrVenue account and service subscription is required.
+* Removed the SevenRooms integration and the OpenTable widget path, neither of which could be configured from UrVenue or WordPress. OpenTable reservations configured in UrVenue are unaffected.
+* Documented Book4Time, Google Analytics 4 and the social sharing links in the External Services disclosure.
+* Fixed the admin panel losing its Flyers, Venues and Events Views action controls to wp_kses.
 
 = 1.2.7 =
 * WP Revisions about WP_DEBUG.
