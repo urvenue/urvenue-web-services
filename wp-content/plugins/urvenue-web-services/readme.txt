@@ -73,19 +73,7 @@ When: When a visitor clicks "Proceed to Checkout" from an inventory item or cart
 * Terms of Service: https://booketing.com/terms/
 * Privacy Policy: https://booketing.com/privacy/
 
-= 3. SevenRooms Reservation Widget =
-
-Service: SevenRooms — hospitality reservation and guest management platform.
-URL: https://www.sevenrooms.com/reservations/
-Purpose: Display an embedded reservation iframe for venues that use SevenRooms as their reservation provider.
-Data sent: Venue identifier (SevenRooms venue ID) and the visitor-selected reservation date, transmitted as URL parameters when the iframe loads. All reservation data entered by the visitor (name, party size, contact details) is submitted directly to SevenRooms, not through this plugin.
-When: Only when a visitor views a venue item that has been configured by the site administrator to use SevenRooms as its reservation vendor.
-
-* SevenRooms website: https://sevenrooms.com/
-* Terms of Service: https://sevenrooms.com/terms-of-service/
-* Privacy Policy: https://sevenrooms.com/privacy-policy/
-
-= 4. OpenTable Reservation Widget =
+= 3. OpenTable Reservation Widget =
 
 Service: OpenTable — online restaurant reservation platform.
 URL: https://www.opentable.com/restref/client/
@@ -97,7 +85,7 @@ When: Only when a visitor views a venue item that has been configured by the sit
 * Terms of Service: https://www.opentable.com/legal/terms-and-conditions
 * Privacy Policy: https://www.opentable.com/legal/privacy-policy
 
-= 5. Google Maps and Google Calendar (Link Generation Only) =
+= 4. Google Maps and Google Calendar (Link Generation Only) =
 
 Service: Google Maps and Google Calendar.
 URLs: https://www.google.com/maps/search/ and https://www.google.com/calendar/render
@@ -108,7 +96,7 @@ When: When a visitor clicks the "Get Directions" or "Add to Google Calendar" lin
 * Google Terms of Service: https://policies.google.com/terms
 * Google Privacy Policy: https://policies.google.com/privacy
 
-= 6. WP Engine Cache Purge API (Optional) =
+= 5. WP Engine Cache Purge API (Optional) =
 
 Service: WP Engine API — hosting platform cache management.
 URL: https://api.wpengineapi.com/
@@ -120,7 +108,7 @@ When: Only triggered by an administrator action in the plugin settings panel, or
 * Terms of Service: https://wpengine.com/legal/terms-of-service/
 * Privacy Policy: https://wpengine.com/legal/privacy/
 
-= 7. Webhook Notifications (Optional, Administrator-Configured) =
+= 6. Webhook Notifications (Optional, Administrator-Configured) =
 
 Service: User-defined webhook endpoint (e.g., Slack, Microsoft Teams, or any custom HTTP endpoint).
 URL: Configured freely by the site administrator in the plugin settings. The plugin developer has no control over or visibility into the destination.
@@ -128,7 +116,7 @@ Purpose: Send alert notifications when plugin conditions occur (e.g., an invento
 Data sent: Alert message text and optional error details or API response snippets, sent via HTTP POST to the administrator-provided URL. No visitor personal data is included.
 When: Only if notifications are enabled and a webhook URL has been configured by the site administrator; throttled to a maximum of one notification per alert type every 30 minutes.
 
-= 8. Facebook / Meta Pixel Event Tracking (Conditional) =
+= 7. Facebook / Meta Pixel Event Tracking (Conditional) =
 
 Service: Meta (Facebook) — advertising and analytics platform.
 URL: https://www.facebook.com/
